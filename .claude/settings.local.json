@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(npx tsx:*)",
+      "Bash(npm uninstall:*)",
+      "Bash(python:*)",
+      "Bash(copy:*)"
+    ]
+  }
+}
