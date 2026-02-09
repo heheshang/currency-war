@@ -1,5 +1,6 @@
 import React from "react";
 import { AbsoluteFill, useCurrentFrame, interpolate } from "remotion";
+import { CartoonCharacter } from "../characters/CartoonCharacter";
 
 /**
  * DebtSpiralScene - 债务螺旋场景
@@ -150,6 +151,28 @@ export const DebtSpiralScene: React.FC = () => {
           Global Debt
         </div>
       </div>
+
+      <CartoonCharacter
+        x={25}
+        y={70}
+        scale={0.65}
+        characterType="victim"
+        action="idle"
+        facingRight={true}
+        frame={frame}
+        clothColor="#8B4513"
+      />
+
+      <CartoonCharacter
+        x={75}
+        y={70}
+        scale={0.65}
+        characterType="victim"
+        action="think"
+        facingRight={false}
+        frame={frame + 30}
+        clothColor="#4A6741"
+      />
 
       {/* 警告文字 */}
       <div

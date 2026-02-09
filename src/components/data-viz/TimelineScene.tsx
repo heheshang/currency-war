@@ -1,5 +1,6 @@
 import React from "react";
 import { AbsoluteFill, useCurrentFrame, interpolate } from "remotion";
+import { CartoonCharacter } from "../characters/CartoonCharacter";
 
 interface TimelineEvent {
   year: number;
@@ -175,6 +176,26 @@ export const TimelineScene: React.FC = () => {
           );
         })}
       </div>
+
+      <CartoonCharacter
+        x={10}
+        y={75}
+        scale={0.6}
+        characterType="politician"
+        action="talk"
+        facingRight={true}
+        frame={frame}
+      />
+
+      <CartoonCharacter
+        x={90}
+        y={75}
+        scale={0.6}
+        characterType="banker"
+        action="think"
+        facingRight={false}
+        frame={frame + 20}
+      />
 
       {/* 进度指示器 */}
       <div

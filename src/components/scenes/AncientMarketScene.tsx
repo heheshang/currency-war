@@ -1,5 +1,12 @@
 import React from "react";
 import { AbsoluteFill, useCurrentFrame, interpolate, Sequence } from "remotion";
+import {
+  GoldCoinRain,
+  SparkleEffect,
+  FloatAnimation,
+  ElasticText,
+} from "../animations";
+import { CartoonCharacter } from "../characters/CartoonCharacter";
 
 /**
  * AncientMarketScene - 古代集市场景
@@ -34,7 +41,7 @@ interface SkeletonState {
 function calculateSkeletonState(
   frame: number,
   action: "walking" | "standing" | "trading" | "talking",
-  bodyType: "slender" | "medium" | "heavy"
+  bodyType: "slender" | "medium" | "heavy",
 ): SkeletonState {
   const speed = bodyType === "heavy" ? 0.8 : bodyType === "slender" ? 1.2 : 1;
 
@@ -179,8 +186,10 @@ const AnimatedCharacter: React.FC<AnimatedCharacterProps> = ({
   const skeleton = calculateSkeletonState(frame, action, bodyType);
 
   // 身体类型调整
-  const bodyWidth = bodyType === "slender" ? 0.85 : bodyType === "heavy" ? 1.15 : 1;
-  const bodyHeight = bodyType === "slender" ? 1.05 : bodyType === "heavy" ? 0.95 : 1;
+  const bodyWidth =
+    bodyType === "slender" ? 0.85 : bodyType === "heavy" ? 1.15 : 1;
+  const bodyHeight =
+    bodyType === "slender" ? 1.05 : bodyType === "heavy" ? 0.95 : 1;
 
   const s = scale;
   const bw = bodyWidth;
@@ -215,7 +224,13 @@ const AnimatedCharacter: React.FC<AnimatedCharacterProps> = ({
         </radialGradient>
 
         {/* 衣服渐变 */}
-        <linearGradient id={`clothGradient-${x}-${y}`} x1="0%" y1="0%" x2="100%" y2="0%">
+        <linearGradient
+          id={`clothGradient-${x}-${y}`}
+          x1="0%"
+          y1="0%"
+          x2="100%"
+          y2="0%"
+        >
           <stop offset="0%" stopColor={clothShadow} />
           <stop offset="30%" stopColor={clothColor} />
           <stop offset="70%" stopColor={clothColor} />
@@ -223,7 +238,13 @@ const AnimatedCharacter: React.FC<AnimatedCharacterProps> = ({
         </linearGradient>
 
         {/* 头发渐变 */}
-        <linearGradient id={`hairGradient-${x}-${y}`} x1="0%" y1="0%" x2="0%" y2="100%">
+        <linearGradient
+          id={`hairGradient-${x}-${y}`}
+          x1="0%"
+          y1="0%"
+          x2="0%"
+          y2="100%"
+        >
           <stop offset="0%" stopColor={adjustBrightness(hairColor, 20)} />
           <stop offset="100%" stopColor={hairColor} />
         </linearGradient>
@@ -248,7 +269,9 @@ const AnimatedCharacter: React.FC<AnimatedCharacterProps> = ({
       {/* 腿部 - 使用骨骼动画系统 */}
       <g transform={`translate(0, ${skeleton.torsoBobY * 0.3})`}>
         {/* 左腿 */}
-        <g transform={`rotate(${skeleton.leftThighRotation}, ${52 * s * bw}, ${95 * s * bh})`}>
+        <g
+          transform={`rotate(${skeleton.leftThighRotation}, ${52 * s * bw}, ${95 * s * bh})`}
+        >
           {/* 大腿 */}
           <path
             d={`
@@ -262,7 +285,9 @@ const AnimatedCharacter: React.FC<AnimatedCharacterProps> = ({
             strokeWidth={0.5}
           />
           {/* 小腿 - 带膝盖弯曲 */}
-          <g transform={`translate(${50 * s * bw}, ${140 * s}) rotate(${skeleton.leftShinRotation}, ${5 * s * bw}, 0) translate(${-50 * s * bw}, ${-140 * s})`}>
+          <g
+            transform={`translate(${50 * s * bw}, ${140 * s}) rotate(${skeleton.leftShinRotation}, ${5 * s * bw}, 0) translate(${-50 * s * bw}, ${-140 * s})`}
+          >
             <path
               d={`
                 M ${50 * s * bw} ${140 * s}
@@ -278,7 +303,9 @@ const AnimatedCharacter: React.FC<AnimatedCharacterProps> = ({
         </g>
 
         {/* 右腿 */}
-        <g transform={`rotate(${skeleton.rightThighRotation}, ${88 * s * bw}, ${95 * s * bh})`}>
+        <g
+          transform={`rotate(${skeleton.rightThighRotation}, ${88 * s * bw}, ${95 * s * bh})`}
+        >
           {/* 大腿 */}
           <path
             d={`
@@ -292,7 +319,9 @@ const AnimatedCharacter: React.FC<AnimatedCharacterProps> = ({
             strokeWidth={0.5}
           />
           {/* 小腿 - 带膝盖弯曲 */}
-          <g transform={`translate(${90 * s * bw}, ${140 * s}) rotate(${skeleton.rightShinRotation}, ${-5 * s * bw}, 0) translate(${-90 * s * bw}, ${-140 * s})`}>
+          <g
+            transform={`translate(${90 * s * bw}, ${140 * s}) rotate(${skeleton.rightShinRotation}, ${-5 * s * bw}, 0) translate(${-90 * s * bw}, ${-140 * s})`}
+          >
             <path
               d={`
                 M ${90 * s * bw} ${140 * s}
@@ -309,7 +338,9 @@ const AnimatedCharacter: React.FC<AnimatedCharacterProps> = ({
       </g>
 
       {/* 身体主体 - 使用骨骼动画系统 */}
-      <g transform={`translate(70, ${skeleton.torsoBobY + 75 * s * bh}) rotate(${skeleton.torsoRotation}, 0, 0) translate(-70, ${-skeleton.torsoBobY - 75 * s * bh})`}>
+      <g
+        transform={`translate(70, ${skeleton.torsoBobY + 75 * s * bh}) rotate(${skeleton.torsoRotation}, 0, 0) translate(-70, ${-skeleton.torsoBobY - 75 * s * bh})`}
+      >
         {/* 躯干主体 */}
         <path
           d={`
@@ -382,7 +413,9 @@ const AnimatedCharacter: React.FC<AnimatedCharacterProps> = ({
 
       {/* 左臂 - 使用骨骼动画系统 */}
       <g transform={`translate(0, ${skeleton.torsoBobY})`}>
-        <g transform={`rotate(${skeleton.leftUpperArmRotation}, ${42 * s * bw}, ${52 * s * bh})`}>
+        <g
+          transform={`rotate(${skeleton.leftUpperArmRotation}, ${42 * s * bw}, ${52 * s * bh})`}
+        >
           {/* 上臂 */}
           <path
             d={`
@@ -396,7 +429,9 @@ const AnimatedCharacter: React.FC<AnimatedCharacterProps> = ({
             strokeWidth={0.5}
           />
           {/* 前臂 - 带肘部弯曲 */}
-          <g transform={`translate(${25 * s * bw}, ${85 * s * bh}) rotate(${skeleton.leftForearmRotation}, ${5 * s * bw}, 0) translate(${-25 * s * bw}, ${-85 * s * bh})`}>
+          <g
+            transform={`translate(${25 * s * bw}, ${85 * s * bh}) rotate(${skeleton.leftForearmRotation}, ${5 * s * bw}, 0) translate(${-25 * s * bw}, ${-85 * s * bh})`}
+          >
             <path
               d={`
                 M ${25 * s * bw} ${85 * s * bh}
@@ -435,7 +470,9 @@ const AnimatedCharacter: React.FC<AnimatedCharacterProps> = ({
 
       {/* 右臂 - 使用骨骼动画系统 */}
       <g transform={`translate(0, ${skeleton.torsoBobY})`}>
-        <g transform={`rotate(${skeleton.rightUpperArmRotation}, ${98 * s * bw}, ${52 * s * bh})`}>
+        <g
+          transform={`rotate(${skeleton.rightUpperArmRotation}, ${98 * s * bw}, ${52 * s * bh})`}
+        >
           {/* 上臂 */}
           <path
             d={`
@@ -449,7 +486,9 @@ const AnimatedCharacter: React.FC<AnimatedCharacterProps> = ({
             strokeWidth={0.5}
           />
           {/* 前臂 - 带肘部弯曲 */}
-          <g transform={`translate(${115 * s * bw}, ${85 * s * bh}) rotate(${skeleton.rightForearmRotation}, ${-5 * s * bw}, 0) translate(${-115 * s * bw}, ${-85 * s * bh})`}>
+          <g
+            transform={`translate(${115 * s * bw}, ${85 * s * bh}) rotate(${skeleton.rightForearmRotation}, ${-5 * s * bw}, 0) translate(${-115 * s * bw}, ${-85 * s * bh})`}
+          >
             <path
               d={`
                 M ${115 * s * bw} ${85 * s * bh}
@@ -487,7 +526,9 @@ const AnimatedCharacter: React.FC<AnimatedCharacterProps> = ({
       </g>
 
       {/* 头部 - 使用骨骼动画系统 */}
-      <g transform={`translate(70, ${skeleton.headBobY + 25 * s}) rotate(${skeleton.headRotation}, 0, 0) translate(-70, ${-skeleton.headBobY - 25 * s})`}>
+      <g
+        transform={`translate(70, ${skeleton.headBobY + 25 * s}) rotate(${skeleton.headRotation}, 0, 0) translate(-70, ${-skeleton.headBobY - 25 * s})`}
+      >
         {/* 脖子 - 更真实的形状 */}
         <path
           d={`
@@ -684,18 +725,8 @@ const AnimatedCharacter: React.FC<AnimatedCharacterProps> = ({
           />
           {skeleton.eyeBlink < 0.5 && (
             <>
-              <circle
-                cx={55 * s}
-                cy={26 * s}
-                r={4 * s}
-                fill="#2C1810"
-              />
-              <circle
-                cx={53.5 * s}
-                cy={24.5 * s}
-                r={1.5 * s}
-                fill="white"
-              />
+              <circle cx={55 * s} cy={26 * s} r={4 * s} fill="#2C1810" />
+              <circle cx={53.5 * s} cy={24.5 * s} r={1.5 * s} fill="white" />
               <circle
                 cx={57 * s}
                 cy={27.5 * s}
@@ -718,18 +749,8 @@ const AnimatedCharacter: React.FC<AnimatedCharacterProps> = ({
           />
           {skeleton.eyeBlink < 0.5 && (
             <>
-              <circle
-                cx={85 * s}
-                cy={26 * s}
-                r={4 * s}
-                fill="#2C1810"
-              />
-              <circle
-                cx={83.5 * s}
-                cy={24.5 * s}
-                r={1.5 * s}
-                fill="white"
-              />
+              <circle cx={85 * s} cy={26 * s} r={4 * s} fill="#2C1810" />
+              <circle cx={83.5 * s} cy={24.5 * s} r={1.5 * s} fill="white" />
               <circle
                 cx={87 * s}
                 cy={27.5 * s}
@@ -826,12 +847,12 @@ const AnimatedCharacter: React.FC<AnimatedCharacterProps> = ({
  * 辅助函数：调整颜色亮度
  */
 function adjustBrightness(color: string, amount: number): string {
-  const hex = color.replace('#', '');
+  const hex = color.replace("#", "");
   const num = parseInt(hex, 16);
   const r = Math.min(255, Math.max(0, (num >> 16) + amount));
-  const g = Math.min(255, Math.max(0, ((num >> 8) & 0x00FF) + amount));
-  const b = Math.min(255, Math.max(0, (num & 0x0000FF) + amount));
-  return `#${((r << 16) | (g << 8) | b).toString(16).padStart(6, '0')}`;
+  const g = Math.min(255, Math.max(0, ((num >> 8) & 0x00ff) + amount));
+  const b = Math.min(255, Math.max(0, (num & 0x0000ff) + amount));
+  return `#${((r << 16) | (g << 8) | b).toString(16).padStart(6, "0")}`;
 }
 
 /**
@@ -901,7 +922,8 @@ const TradingScene: React.FC = () => {
             style={{
               width: 30 * coinScale,
               height: 30 * coinScale,
-              background: "radial-gradient(circle at 30% 30%, #FFD700, #DAA520)",
+              background:
+                "radial-gradient(circle at 30% 30%, #FFD700, #DAA520)",
               borderRadius: "50%",
               boxShadow: `0 0 20px rgba(255, 215, 0, 0.8)`,
               border: "3px solid #B8860B",
@@ -966,7 +988,7 @@ const WalkingMerchant: React.FC<{
   hairColor,
   hasBeard = false,
   hasHat = false,
-  bodyType = "medium"
+  bodyType = "medium",
 }) => {
   const frame = useCurrentFrame();
   const delayedFrame = Math.max(0, frame - delay);
@@ -1035,12 +1057,7 @@ const TalkingPair: React.FC<{
     hairColor?: string;
     bodyType?: "slender" | "medium" | "heavy";
   };
-}> = ({
-  x,
-  delay,
-  character1Config = {},
-  character2Config = {}
-}) => {
+}> = ({ x, delay, character1Config = {}, character2Config = {} }) => {
   const frame = useCurrentFrame();
   const delayedFrame = Math.max(0, frame - delay);
 
@@ -1086,13 +1103,15 @@ const TalkingPair: React.FC<{
             left: `${x}%`,
             top: "55%",
             transform: "translateX(-50%)",
-            background: "linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(245, 245, 245, 0.95) 100%)",
+            background:
+              "linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(245, 245, 245, 0.95) 100%)",
             padding: "10px 18px",
             borderRadius: "18px",
             fontSize: 15,
             fontWeight: 500,
             color: "#2c2c2c",
-            boxShadow: "0 4px 15px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.8)",
+            boxShadow:
+              "0 4px 15px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.8)",
             whiteSpace: "nowrap",
             border: "1px solid rgba(0, 0, 0, 0.1)",
           }}
@@ -1195,7 +1214,6 @@ export const AncientMarketScene: React.FC = () => {
         </div>
       ))}
 
-      {/* 标题 */}
       <div
         style={{
           position: "absolute",
@@ -1207,10 +1225,9 @@ export const AncientMarketScene: React.FC = () => {
           fontSize: 48,
           fontWeight: 700,
           textAlign: "center",
-          opacity: interpolate(frame, [0, 30], [0, 1]),
         }}
       >
-        Ancient Marketplace
+        <ElasticText text="Ancient Marketplace" delay={0} stagger={5} />
       </div>
 
       <div
@@ -1223,37 +1240,41 @@ export const AncientMarketScene: React.FC = () => {
           fontFamily: "Merriweather, serif",
           fontSize: 20,
           fontStyle: "italic",
-          opacity: interpolate(frame, [20, 50], [0, 1]),
         }}
       >
-        Where gold was king
+        <ElasticText text="Where gold was king" delay={10} stagger={3} />
       </div>
 
-      {/* 中央金币 */}
-      <div
-        style={{
-          position: "absolute",
-          top: "40%",
-          left: "50%",
-          transform: `translate(-50%, -50%) scale(${coinScale})`,
-        }}
-      >
+      <FloatAnimation distance={10}>
         <div
           style={{
-            width: 150,
-            height: 150,
-            background: "radial-gradient(circle at 30% 30%, #FFD700, #DAA520)",
-            borderRadius: "50%",
-            boxShadow: `
-              0 0 30px rgba(255, 215, 0, 0.8),
-              inset 0 -5px 10px rgba(0, 0, 0, 0.3),
-              inset 0 5px 10px rgba(255, 255, 255, 0.3)
-            `,
-            transform: `rotate(${coinRotation}deg)`,
-            border: "8px solid #B8860B",
+            position: "absolute",
+            top: "40%",
+            left: "50%",
+            transform: `translate(-50%, -50%) scale(${coinScale})`,
           }}
-        />
-      </div>
+        >
+          <div
+            style={{
+              width: 150,
+              height: 150,
+              background:
+                "radial-gradient(circle at 30% 30%, #FFD700, #B8860B)",
+              borderRadius: "50%",
+              boxShadow: `
+                0 0 30px rgba(255, 215, 0, 0.8),
+                inset 0 -5px 10px rgba(0, 0, 0, 0.3),
+                inset 0 5px 10px rgba(255, 255, 255, 0.3)
+              `,
+              transform: `rotate(${coinRotation}deg)`,
+              border: "8px solid #B8860B",
+            }}
+          />
+        </div>
+      </FloatAnimation>
+
+      <GoldCoinRain startFrame={30} duration={90} intensity="medium" />
+      <SparkleEffect startFrame={60} duration={30} />
 
       {/* 市场摊位背景 */}
       <div style={{ opacity: stallsOpacity }}>
@@ -1344,7 +1365,7 @@ export const AncientMarketScene: React.FC = () => {
           clothColor: "#4A6741",
           clothColorDark: "#3A5231",
           hairColor: "#3D2314",
-          bodyType: "medium"
+          bodyType: "medium",
         }}
         character2Config={{
           skinColor: "#F5DEB3",
@@ -1352,8 +1373,69 @@ export const AncientMarketScene: React.FC = () => {
           clothColor: "#6B4423",
           clothColorDark: "#4A2F17",
           hairColor: "#2C1810",
-          bodyType: "slender"
+          bodyType: "slender",
         }}
+      />
+
+      <CartoonCharacter
+        x={20}
+        y={75}
+        scale={0.8}
+        characterType="merchant"
+        action="talk"
+        facingRight={true}
+        frame={frame}
+      />
+
+      <CartoonCharacter
+        x={30}
+        y={75}
+        scale={0.8}
+        characterType="citizen"
+        action="talk"
+        facingRight={false}
+        frame={frame + 10}
+      />
+
+      <TalkingPair
+        x={75}
+        delay={60}
+        character1Config={{
+          skinColor: "#F5DEB3",
+          skinColorDark: "#E8D4B8",
+          clothColor: "#5D4E37",
+          clothColorDark: "#423729",
+          hairColor: "#4A3728",
+          bodyType: "heavy",
+        }}
+        character2Config={{
+          skinColor: "#F5DEB3",
+          skinColorDark: "#E8D4B8",
+          clothColor: "#3D5A4A",
+          clothColorDark: "#2A3F34",
+          hairColor: "#3D2817",
+          bodyType: "medium",
+        }}
+      />
+
+      <CartoonCharacter
+        x={70}
+        y={75}
+        scale={0.85}
+        characterType="merchant"
+        action="wave"
+        facingRight={true}
+        frame={frame + 20}
+      />
+
+      <CartoonCharacter
+        x={80}
+        y={75}
+        scale={0.85}
+        characterType="citizen"
+        action="wave"
+        facingRight={false}
+        frame={frame + 25}
       />
       <TalkingPair
         x={75}
@@ -1364,7 +1446,7 @@ export const AncientMarketScene: React.FC = () => {
           clothColor: "#5D4E37",
           clothColorDark: "#423729",
           hairColor: "#4A3728",
-          bodyType: "heavy"
+          bodyType: "heavy",
         }}
         character2Config={{
           skinColor: "#F5DEB3",
@@ -1372,7 +1454,7 @@ export const AncientMarketScene: React.FC = () => {
           clothColor: "#3D5A4A",
           clothColorDark: "#2A3F34",
           hairColor: "#3D2817",
-          bodyType: "medium"
+          bodyType: "medium",
         }}
       />
 

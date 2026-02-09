@@ -1,5 +1,7 @@
 import React from "react";
 import { AbsoluteFill, useCurrentFrame, interpolate } from "remotion";
+import { FadeInTransition, PulseAnimation, ElasticText } from "../animations";
+import { CartoonCharacter } from "../characters/CartoonCharacter";
 
 /**
  * MoneyEvolutionScene - 货币演变动画场景
@@ -25,22 +27,23 @@ export const MoneyEvolutionScene: React.FC = () => {
         background: "linear-gradient(180deg, #1a1a2e 0%, #0d1117 100%)",
       }}
     >
-      {/* 标题 */}
-      <div
-        style={{
-          position: "absolute",
-          top: "10%",
-          left: "50%",
-          transform: "translateX(-50%)",
-          color: "#ffd700",
-          fontFamily: "Cinzel, serif",
-          fontSize: 42,
-          fontWeight: 700,
-          textAlign: "center",
-        }}
-      >
-        The Evolution of Money
-      </div>
+      <FadeInTransition delay={0} duration={30}>
+        <div
+          style={{
+            position: "absolute",
+            top: "10%",
+            left: "50%",
+            transform: "translateX(-50%)",
+            color: "#ffd700",
+            fontFamily: "Cinzel, serif",
+            fontSize: 42,
+            fontWeight: 700,
+            textAlign: "center",
+          }}
+        >
+          <ElasticText text="The Evolution of Money" delay={0} stagger={3} />
+        </div>
+      </FadeInTransition>
 
       {/* 演变动画区域 */}
       <div
@@ -53,50 +56,55 @@ export const MoneyEvolutionScene: React.FC = () => {
           height: 400,
         }}
       >
-        {/* 阶段1: 金币 */}
-        <div
-          style={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: `translate(-50%, -50%) scale(${
-              currentStage === "Gold"
-                ? 1
-                : interpolate(transitionProgress, [0, 1], [1, 0], { extrapolateRight: "clamp" })
-            })`,
-            opacity:
-              currentStage === "Gold"
-                ? 1
-                : interpolate(transitionProgress, [0, 1], [1, 0], { extrapolateRight: "clamp" }),
-          }}
-        >
-          <div
-            style={{
-              width: 200,
-              height: 200,
-              background:
-                "radial-gradient(circle at 30% 30%, #FFD700, #B8860B)",
-              borderRadius: "50%",
-              boxShadow: "0 0 50px rgba(255, 215, 0, 0.6)",
-              border: "10px solid #DAA520",
-            }}
-          />
+        <PulseAnimation minScale={0.95} maxScale={1.05}>
           <div
             style={{
               position: "absolute",
-              bottom: -40,
+              top: "50%",
               left: "50%",
-              transform: "translateX(-50%)",
-              color: "#ffd700",
-              fontFamily: "Cinzel, serif",
-              fontSize: 24,
-              fontWeight: 600,
-              whiteSpace: "nowrap",
+              transform: `translate(-50%, -50%) scale(${
+                currentStage === "Gold"
+                  ? 1
+                  : interpolate(transitionProgress, [0, 1], [1, 0], {
+                      extrapolateRight: "clamp",
+                    })
+              })`,
+              opacity:
+                currentStage === "Gold"
+                  ? 1
+                  : interpolate(transitionProgress, [0, 1], [1, 0], {
+                      extrapolateRight: "clamp",
+                    }),
             }}
           >
-            Gold & Silver
+            <div
+              style={{
+                width: 200,
+                height: 200,
+                background:
+                  "radial-gradient(circle at 30% 30%, #FFD700, #B8860B)",
+                borderRadius: "50%",
+                boxShadow: "0 0 50px rgba(255, 215, 0, 0.6)",
+                border: "10px solid #DAA520",
+              }}
+            />
+            <div
+              style={{
+                position: "absolute",
+                bottom: -40,
+                left: "50%",
+                transform: "translateX(-50%)",
+                color: "#ffd700",
+                fontFamily: "Cinzel, serif",
+                fontSize: 24,
+                fontWeight: 600,
+                whiteSpace: "nowrap",
+              }}
+            >
+              Gold & Silver
+            </div>
           </div>
-        </div>
+        </PulseAnimation>
 
         {/* 阶段2: 纸币收据 */}
         <div
@@ -108,15 +116,23 @@ export const MoneyEvolutionScene: React.FC = () => {
               currentStage === "Paper Receipt"
                 ? 1
                 : currentStage === "Gold"
-                  ? interpolate(transitionProgress, [0, 1], [0, 1], { extrapolateRight: "clamp" })
-                  : interpolate(transitionProgress, [0, 1], [1, 0], { extrapolateRight: "clamp" })
+                  ? interpolate(transitionProgress, [0, 1], [0, 1], {
+                      extrapolateRight: "clamp",
+                    })
+                  : interpolate(transitionProgress, [0, 1], [1, 0], {
+                      extrapolateRight: "clamp",
+                    })
             })`,
             opacity:
               currentStage === "Paper Receipt"
                 ? 1
                 : currentStage === "Gold"
-                  ? interpolate(transitionProgress, [0, 1], [0, 1], { extrapolateRight: "clamp" })
-                  : interpolate(transitionProgress, [0, 1], [1, 0], { extrapolateRight: "clamp" }),
+                  ? interpolate(transitionProgress, [0, 1], [0, 1], {
+                      extrapolateRight: "clamp",
+                    })
+                  : interpolate(transitionProgress, [0, 1], [1, 0], {
+                      extrapolateRight: "clamp",
+                    }),
           }}
         >
           <div
@@ -186,12 +202,16 @@ export const MoneyEvolutionScene: React.FC = () => {
             transform: `translate(-50%, -50%) scale(${
               currentStage === "Fiat Currency"
                 ? 1
-                : interpolate(transitionProgress, [0, 1], [0, 1], { extrapolateRight: "clamp" })
+                : interpolate(transitionProgress, [0, 1], [0, 1], {
+                    extrapolateRight: "clamp",
+                  })
             })`,
             opacity:
               currentStage === "Fiat Currency"
                 ? 1
-                : interpolate(transitionProgress, [0, 1], [0, 1], { extrapolateRight: "clamp" }),
+                : interpolate(transitionProgress, [0, 1], [0, 1], {
+                    extrapolateRight: "clamp",
+                  }),
           }}
         >
           <div
@@ -291,6 +311,26 @@ export const MoneyEvolutionScene: React.FC = () => {
         {currentStage === "Fiat Currency" &&
           "Government-declared money, no gold backing"}
       </div>
+
+      <CartoonCharacter
+        x={15}
+        y={65}
+        scale={0.7}
+        characterType="banker"
+        action="point"
+        facingRight={true}
+        frame={frame}
+      />
+
+      <CartoonCharacter
+        x={85}
+        y={65}
+        scale={0.7}
+        characterType="citizen"
+        action="think"
+        facingRight={false}
+        frame={frame + 15}
+      />
     </AbsoluteFill>
   );
 };
