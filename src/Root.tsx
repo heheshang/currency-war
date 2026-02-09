@@ -2,6 +2,9 @@ import "./index.css";
 import { Composition } from "remotion";
 import { HelloWorld, myCompSchema } from "./HelloWorld";
 import { Logo, myCompSchema2 } from "./HelloWorld/Logo";
+import { Episode01 } from "./compositions/Episode01";
+import { Episode03 } from "./compositions/Episode03";
+import { Episode07 } from "./compositions/Episode07";
 
 // Each <Composition> is an entry in the sidebar!
 
@@ -41,6 +44,36 @@ export const RemotionRoot: React.FC = () => {
           logoColor1: "#91dAE2" as const,
           logoColor2: "#86A8E7" as const,
         }}
+      />
+
+      {/* Episode01 - 第1集：序幕 - 货币的本质 */}
+      <Composition
+        id="Episode01"
+        component={Episode01}
+        durationInFrames={360 * 30} // 6 minutes @ 30fps
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+
+      {/* Episode03 - 第3集：滑铁卢战役 - 信息与金钱的战争 */}
+      <Composition
+        id="Episode03"
+        component={Episode03}
+        durationInFrames={360 * 30} // 6 minutes @ 30fps
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+
+      {/* Episode07 - 第7集：美联储成立 - 哲基尔岛密谋 */}
+      <Composition
+        id="Episode07"
+        component={Episode07}
+        durationInFrames={480 * 30} // 8 minutes @ 30fps
+        fps={30}
+        width={1920}
+        height={1080}
       />
     </>
   );

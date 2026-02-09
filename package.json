@@ -23,6 +23,7 @@
     "@types/jszip": "^3.4.0",
     "@types/react": "19.2.7",
     "@types/web": "0.0.166",
+    "@types/xml2js": "^0.4.14",
     "eslint": "9.19.0",
     "prettier": "3.6.0",
     "tsx": "^4.21.0",
@@ -32,7 +33,9 @@
     "dev": "remotion studio",
     "build": "remotion bundle",
     "upgrade": "remotion upgrade",
-    "lint": "eslint src && tsc"
+    "lint": "eslint src && tsc",
+    "audio:status": "echo '=== Audio Files Status ===' && ls -lh public/assets/audio/*/*.mp3 2>/dev/null | tail -10 || echo 'No MP3 files found. See scripts/AUDIO_README.md'",
+    "audio:guide": "cat scripts/AUDIO_README.md"
   },
   "sideEffects": [
     "*.css"

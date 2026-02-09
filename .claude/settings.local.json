@@ -5,7 +5,8 @@
       "Bash(npx tsx:*)",
       "Bash(npm uninstall:*)",
       "Bash(python:*)",
-      "Bash(copy:*)"
+      "Bash(copy:*)",
+      "Bash(ls:*)"
     ]
   }
 }

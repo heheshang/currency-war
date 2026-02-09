@@ -1,0 +1,407 @@
+/* 组件样式 - Currency War Animation */
+
+/* ==================== 布局组件 ==================== */
+
+/* Frame - 通用边框 */
+.frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: var(--spacing-lg);
+  background: var(--gradient-dark);
+  border: 2px solid var(--color-primary-gold);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-2xl);
+}
+
+.frame--gold {
+  border-color: var(--color-primary-gold);
+}
+
+.frame--blue {
+  border-color: var(--color-primary-blue);
+}
+
+.frame--red {
+  border-color: var(--color-danger-red);
+}
+
+/* TitleCard - 标题卡片 */
+.title-card {
+  position: relative;
+  padding: var(--spacing-xl);
+  background: linear-gradient(
+    135deg,
+    rgba(30, 58, 90, 0.9) 0%,
+    rgba(13, 17, 23, 0.95) 100%
+  );
+  border: 3px solid var(--color-primary-gold);
+  border-radius: var(--radius-xl);
+  text-align: center;
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+}
+
+.title-card__title {
+  font-family: var(--font-title);
+  font-size: var(--text-5xl);
+  font-weight: 700;
+  color: var(--color-primary-gold);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  margin-bottom: var(--spacing-md);
+}
+
+.title-card__subtitle {
+  font-family: var(--font-english);
+  font-size: var(--text-xl);
+  font-style: italic;
+  color: var(--color-text-light);
+  opacity: 0.9;
+}
+
+/* ChapterHeader - 章节标题 */
+.chapter-header {
+  position: relative;
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+  border-left: 4px solid var(--color-primary-gold);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 215, 0, 0.1) 0%,
+    transparent 100%
+  );
+}
+
+.chapter-header__number {
+  font-family: var(--font-title);
+  font-size: var(--text-3xl);
+  color: var(--color-primary-gold);
+  margin-bottom: var(--spacing-sm);
+}
+
+.chapter-header__title {
+  font-family: var(--font-chinese);
+  font-size: var(--text-2xl);
+  color: var(--color-text-light);
+  margin-bottom: var(--spacing-xs);
+}
+
+.chapter-header__subtitle {
+  font-family: var(--font-english);
+  font-size: var(--text-lg);
+  color: var(--color-text-light);
+  opacity: 0.7;
+  font-style: italic;
+}
+
+/* ==================== 地图组件 ==================== */
+
+/* EuropeMap - 欧洲地图 */
+.europe-map {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.europe-map__svg {
+  width: 100%;
+  height: 100%;
+}
+
+.europe-map__city {
+  fill: var(--color-primary-gold);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.europe-map__city:hover {
+  fill: var(--color-warning);
+  transform: scale(1.2);
+}
+
+.europe-map__path {
+  stroke: var(--color-primary-gold);
+  stroke-width: 2;
+  stroke-dasharray: 5, 5;
+  fill: none;
+  animation: pathDraw 3s ease-in-out infinite;
+}
+
+/* ==================== 图表组件 ==================== */
+
+/* Chart - 基础图表 */
+.chart {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: var(--spacing-lg);
+  background: rgba(13, 17, 23, 0.9);
+  border-radius: var(--radius-lg);
+}
+
+.chart__title {
+  font-family: var(--font-title);
+  font-size: var(--text-xl);
+  color: var(--color-text-light);
+  margin-bottom: var(--spacing-md);
+  text-align: center;
+}
+
+.chart__legend {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-md);
+}
+
+.chart__legend-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-size: var(--text-sm);
+  color: var(--color-text-light);
+}
+
+.chart__legend-color {
+  width: 12px;
+  height: 12px;
+  border-radius: var(--radius-sm);
+}
+
+/* LineChart - 折线图 */
+.line-chart__line {
+  fill: none;
+  stroke: var(--color-primary-gold);
+  stroke-width: 2;
+}
+
+.line-chart__area {
+  fill: url(#goldGradient);
+  opacity: 0.3;
+}
+
+.line-chart__point {
+  fill: var(--color-primary-gold);
+  stroke: var(--color-dark-bg);
+  stroke-width: 2;
+  transition: all 0.3s ease;
+}
+
+.line-chart__point:hover {
+  fill: var(--color-warning);
+  transform: scale(1.5);
+}
+
+/* BarChart - 柱状图 */
+.bar-chart__bar {
+  fill: var(--color-primary-gold);
+  transition: all 0.3s ease;
+}
+
+.bar-chart__bar:hover {
+  fill: var(--color-warning);
+  transform: scaleY(1.1);
+}
+
+.bar-chart__bar--positive {
+  fill: var(--color-success);
+}
+
+.bar-chart__bar--negative {
+  fill: var(--color-error);
+}
+
+/* ==================== 字幕组件 ==================== */
+
+/* RetroBilingualSubtitle - 复古双语字幕 */
+.subtitle {
+  position: absolute;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  max-width: 1200px;
+  text-align: center;
+  z-index: 1000;
+}
+
+.subtitle__background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(222, 184, 135, 0.85) 0%,
+    rgba(210, 180, 140, 0.85) 50%,
+    rgba(222, 184, 135, 0.85) 100%
+  );
+  border-radius: var(--radius-md);
+  box-shadow:
+    0 2px 10px rgba(0, 0, 0, 0.5),
+    inset 0 0 20px rgba(139, 69, 19, 0.3);
+  filter: sepia(0.3);
+}
+
+.subtitle__zh {
+  position: relative;
+  font-family: var(--font-chinese);
+  font-size: 42px;
+  font-weight: 500;
+  color: #2c1810;
+  text-shadow:
+    1px 1px 2px rgba(255, 255, 255, 0.8),
+    2px 2px 4px rgba(0, 0, 0, 0.3);
+  padding: var(--spacing-md) var(--spacing-xl) var(--spacing-sm);
+  letter-spacing: 2px;
+  line-height: 1.4;
+}
+
+.subtitle__en {
+  position: relative;
+  font-family: var(--font-english);
+  font-size: 24px;
+  font-weight: 400;
+  color: #4a3728;
+  font-style: italic;
+  padding: var(--spacing-xs) var(--spacing-xl) var(--spacing-md);
+  line-height: 1.3;
+}
+
+/* ==================== UI组件 ==================== */
+
+/* ProgressBar - 进度条 */
+.progress-bar {
+  position: relative;
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.progress-bar__fill {
+  height: 100%;
+  background: var(--gradient-gold);
+  border-radius: var(--radius-full);
+  transition: width 0.3s ease;
+}
+
+/* Button - 按钮 */
+.button {
+  position: relative;
+  padding: var(--spacing-md) var(--spacing-xl);
+  background: var(--gradient-gold);
+  border: none;
+  border-radius: var(--radius-md);
+  font-family: var(--font-title);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--color-dark-bg);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-md);
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.button:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+.button--primary {
+  background: var(--gradient-gold);
+  color: var(--color-dark-bg);
+}
+
+.button--secondary {
+  background: var(--gradient-blue);
+  color: var(--color-text-light);
+}
+
+.button--danger {
+  background: var(--color-danger-red);
+  color: var(--color-text-light);
+}
+
+/* ==================== 特效组件 ==================== */
+
+/* ParticleSystem - 粒子系统 */
+.particle {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 50%;
+  animation: particleExpand 1s ease-out forwards;
+}
+
+.particle--gold {
+  background: var(--color-primary-gold);
+  box-shadow: 0 0 10px var(--color-primary-gold);
+}
+
+.particle--blue {
+  background: var(--color-primary-blue);
+  box-shadow: 0 0 10px var(--color-primary-blue);
+}
+
+.particle--red {
+  background: var(--color-danger-red);
+  box-shadow: 0 0 10px var(--color-danger-red);
+}
+
+/* GlitchEffect - 故障效果 */
+.glitch {
+  position: relative;
+  animation: glitch 0.3s infinite;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch::before {
+  left: 2px;
+  text-shadow: -1px 0 #ff00c1;
+  clip: rect(44px, 450px, 56px, 0);
+  animation: glitch 0.3s infinite;
+}
+
+.glitch::after {
+  left: -2px;
+  text-shadow: -1px 0 #00fff9;
+  clip: rect(44px, 450px, 56px, 0);
+  animation: glitch 0.3s infinite reverse;
+}
+
+/* ==================== 场景组件 ==================== */
+
+/* Scene - 基础场景 */
+.scene {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.scene--battle {
+  background: linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%);
+}
+
+.scene--meeting {
+  background: linear-gradient(180deg, #1e3a5a 0%, #0d1117 100%);
+}
+
+.scene--stock {
+  background: linear-gradient(180deg, #0d1117 0%, #1a1a2e 100%);
+}
