@@ -9,9 +9,140 @@ import { AbsoluteFill, useCurrentFrame, interpolate, Sequence } from "remotion";
  */
 
 /**
+ * 骨骼系统接口
+ */
+interface SkeletonState {
+  headRotation: number;
+  headBobY: number;
+  torsoRotation: number;
+  torsoBobY: number;
+  leftUpperArmRotation: number;
+  leftForearmRotation: number;
+  rightUpperArmRotation: number;
+  rightForearmRotation: number;
+  leftThighRotation: number;
+  leftShinRotation: number;
+  rightThighRotation: number;
+  rightShinRotation: number;
+  mouthOpen: number;
+  eyeBlink: number;
+}
+
+/**
+ * 计算骨骼动画状态 - 基于帧数和动作类型
+ */
+function calculateSkeletonState(
+  frame: number,
+  action: "walking" | "standing" | "trading" | "talking",
+  bodyType: "slender" | "medium" | "heavy"
+): SkeletonState {
+  const speed = bodyType === "heavy" ? 0.8 : bodyType === "slender" ? 1.2 : 1;
+
+  switch (action) {
+    case "walking": {
+      // 走路动作 - 协调的四肢摆动
+      const walkCycle = (frame * 0.25 * speed) % (Math.PI * 2);
+      const armSwing = Math.sin(walkCycle) * 30;
+      const legSwing = Math.sin(walkCycle) * 25;
+      const bodyBob = Math.abs(Math.sin(walkCycle * 2)) * 3;
+
+      return {
+        headRotation: Math.sin(walkCycle * 0.5) * 3,
+        headBobY: bodyBob + Math.sin(frame * 0.1) * 1,
+        torsoRotation: Math.sin(walkCycle * 0.5) * 2,
+        torsoBobY: bodyBob * 0.5,
+        leftUpperArmRotation: armSwing,
+        leftForearmRotation: Math.sin(walkCycle - 0.3) * 20 + 30,
+        rightUpperArmRotation: -armSwing,
+        rightForearmRotation: Math.sin(walkCycle + Math.PI - 0.3) * 20 + 30,
+        leftThighRotation: -legSwing,
+        leftShinRotation: Math.abs(Math.sin(walkCycle)) * 15,
+        rightThighRotation: legSwing,
+        rightShinRotation: Math.abs(Math.sin(walkCycle + Math.PI)) * 15,
+        mouthOpen: 0,
+        eyeBlink: Math.sin(frame * 0.02) > 0.95 ? 0.8 : 0,
+      };
+    }
+
+    case "trading": {
+      // 交易动作 - 手臂向前伸展
+      const tradeCycle = (frame * 0.15) % (Math.PI * 2);
+      const armExtension = 45 + Math.sin(tradeCycle) * 8;
+      const bodyBob = Math.sin(frame * 0.08) * 1.5;
+
+      return {
+        headRotation: Math.sin(tradeCycle * 0.5) * 5,
+        headBobY: bodyBob,
+        torsoRotation: Math.sin(tradeCycle * 0.3) * 3,
+        torsoBobY: bodyBob * 0.3,
+        leftUpperArmRotation: -armExtension,
+        leftForearmRotation: 60 + Math.sin(tradeCycle) * 10,
+        rightUpperArmRotation: armExtension,
+        rightForearmRotation: -60 - Math.sin(tradeCycle) * 10,
+        leftThighRotation: Math.sin(frame * 0.05) * 3,
+        leftShinRotation: 0,
+        rightThighRotation: -Math.sin(frame * 0.05) * 3,
+        rightShinRotation: 0,
+        mouthOpen: Math.sin(frame * 0.2) > 0.7 ? 3 : 0,
+        eyeBlink: Math.sin(frame * 0.025) > 0.92 ? 0.9 : 0,
+      };
+    }
+
+    case "talking": {
+      // 说话动作 - 头部和手部轻微移动
+      const talkCycle = (frame * 0.3) % (Math.PI * 2);
+      const headTilt = Math.sin(talkCycle) * 4;
+      const bodyBob = Math.sin(frame * 0.08) * 1.5;
+      const handGestures = Math.sin(talkCycle * 0.5) * 15;
+
+      return {
+        headRotation: headTilt,
+        headBobY: bodyBob + headTilt * 0.3,
+        torsoRotation: headTilt * 0.3,
+        torsoBobY: bodyBob * 0.3,
+        leftUpperArmRotation: -20 + handGestures,
+        leftForearmRotation: 40 + Math.sin(talkCycle * 0.7) * 10,
+        rightUpperArmRotation: 20 - handGestures,
+        rightForearmRotation: -40 + Math.sin(talkCycle * 0.7 + 1) * 10,
+        leftThighRotation: Math.sin(frame * 0.05) * 2,
+        leftShinRotation: 0,
+        rightThighRotation: -Math.sin(frame * 0.05) * 2,
+        rightShinRotation: 0,
+        mouthOpen: 2 + Math.sin(talkCycle) * 3,
+        eyeBlink: Math.sin(frame * 0.02) > 0.93 ? 0.85 : 0,
+      };
+    }
+
+    default: {
+      // 站立 - 轻微呼吸动作
+      const breatheCycle = (frame * 0.05) % (Math.PI * 2);
+      const breatheAmount = Math.sin(breatheCycle) * 2;
+
+      return {
+        headRotation: Math.sin(breatheCycle * 0.5) * 1,
+        headBobY: breatheAmount * 0.5,
+        torsoRotation: 0,
+        torsoBobY: breatheAmount,
+        leftUpperArmRotation: -10 + Math.sin(breatheCycle * 0.7) * 2,
+        leftForearmRotation: 30,
+        rightUpperArmRotation: 10 - Math.sin(breatheCycle * 0.7) * 2,
+        rightForearmRotation: -30,
+        leftThighRotation: 0,
+        leftShinRotation: 0,
+        rightThighRotation: 0,
+        rightShinRotation: 0,
+        mouthOpen: Math.sin(breatheCycle * 0.3) > 0.8 ? 1 : 0,
+        eyeBlink: Math.sin(frame * 0.015) > 0.96 ? 0.9 : 0,
+      };
+    }
+  }
+}
+
+/**
  * AnimatedCharacter - 动画人物组件
  * 支持走路、站立、交易等动作
  * 采用高度写实的风格，多层渐变和阴影
+ * 使用骨骼动画系统实现更自然的动作
  */
 interface AnimatedCharacterProps {
   x: number;
@@ -44,22 +175,8 @@ const AnimatedCharacter: React.FC<AnimatedCharacterProps> = ({
   hairColor = "#3D2314",
   bodyType = "medium",
 }) => {
-  // 更自然的身体动作
-  const bodyBob = action === "walking"
-    ? Math.sin((frame * 0.3) % (Math.PI * 2)) * 4
-    : Math.sin((frame * 0.08) % (Math.PI * 2)) * 1.5;
-
-  // 更平滑的手臂摆动
-  const armSwing = action === "walking"
-    ? Math.sin((frame * 0.3) % (Math.PI * 2)) * 25
-    : action === "trading"
-      ? Math.sin((frame * 0.2) % (Math.PI * 2)) * 8
-      : Math.sin((frame * 0.06) % (Math.PI * 2)) * 3;
-
-  // 说话时的微表情
-  const headBob = action === "talking"
-    ? Math.sin((frame * 0.25) % (Math.PI * 2)) * 1.5
-    : 0;
+  // 使用骨骼动画系统计算所有关节状态
+  const skeleton = calculateSkeletonState(frame, action, bodyType);
 
   // 身体类型调整
   const bodyWidth = bodyType === "slender" ? 0.85 : bodyType === "heavy" ? 1.15 : 1;
@@ -128,10 +245,10 @@ const AnimatedCharacter: React.FC<AnimatedCharacterProps> = ({
         filter="blur(2px)"
       />
 
-      {/* 腿部 - 更自然的形状和动态 */}
-      <g transform={`translate(0, ${bodyBob * 0.3})`}>
+      {/* 腿部 - 使用骨骼动画系统 */}
+      <g transform={`translate(0, ${skeleton.torsoBobY * 0.3})`}>
         {/* 左腿 */}
-        <g transform={action === "walking" ? `rotate(${Math.sin(frame * 0.3) * 12}, ${52 * s * bw}, ${95 * s * bh})` : ""}>
+        <g transform={`rotate(${skeleton.leftThighRotation}, ${52 * s * bw}, ${95 * s * bh})`}>
           {/* 大腿 */}
           <path
             d={`
@@ -144,22 +261,24 @@ const AnimatedCharacter: React.FC<AnimatedCharacterProps> = ({
             stroke={clothShadow}
             strokeWidth={0.5}
           />
-          {/* 小腿和脚 */}
-          <path
-            d={`
-              M ${50 * s * bw} ${140 * s}
-              Q ${48 * s * bw} ${160 * s}, ${50 * s * bw} ${180 * s}
-              L ${60 * s * bw} ${180 * s}
-              Q ${58 * s * bw} ${160 * s}, ${58 * s * bw} ${140 * s}
-            `}
-            fill={clothShadow}
-            stroke="rgba(0,0,0,0.15)"
-            strokeWidth={0.5}
-          />
+          {/* 小腿 - 带膝盖弯曲 */}
+          <g transform={`translate(${50 * s * bw}, ${140 * s}) rotate(${skeleton.leftShinRotation}, ${5 * s * bw}, 0) translate(${-50 * s * bw}, ${-140 * s})`}>
+            <path
+              d={`
+                M ${50 * s * bw} ${140 * s}
+                Q ${48 * s * bw} ${160 * s}, ${50 * s * bw} ${180 * s}
+                L ${60 * s * bw} ${180 * s}
+                Q ${58 * s * bw} ${160 * s}, ${58 * s * bw} ${140 * s}
+              `}
+              fill={clothShadow}
+              stroke="rgba(0,0,0,0.15)"
+              strokeWidth={0.5}
+            />
+          </g>
         </g>
 
         {/* 右腿 */}
-        <g transform={action === "walking" ? `rotate(${-Math.sin(frame * 0.3) * 12}, ${88 * s * bw}, ${95 * s * bh})` : ""}>
+        <g transform={`rotate(${skeleton.rightThighRotation}, ${88 * s * bw}, ${95 * s * bh})`}>
           {/* 大腿 */}
           <path
             d={`
@@ -172,23 +291,25 @@ const AnimatedCharacter: React.FC<AnimatedCharacterProps> = ({
             stroke={clothShadow}
             strokeWidth={0.5}
           />
-          {/* 小腿和脚 */}
-          <path
-            d={`
-              M ${90 * s * bw} ${140 * s}
-              Q ${92 * s * bw} ${160 * s}, ${90 * s * bw} ${180 * s}
-              L ${80 * s * bw} ${180 * s}
-              Q ${82 * s * bw} ${160 * s}, ${82 * s * bw} ${140 * s}
-            `}
-            fill={clothShadow}
-            stroke="rgba(0,0,0,0.15)"
-            strokeWidth={0.5}
-          />
+          {/* 小腿 - 带膝盖弯曲 */}
+          <g transform={`translate(${90 * s * bw}, ${140 * s}) rotate(${skeleton.rightShinRotation}, ${-5 * s * bw}, 0) translate(${-90 * s * bw}, ${-140 * s})`}>
+            <path
+              d={`
+                M ${90 * s * bw} ${140 * s}
+                Q ${92 * s * bw} ${160 * s}, ${90 * s * bw} ${180 * s}
+                L ${80 * s * bw} ${180 * s}
+                Q ${82 * s * bw} ${160 * s}, ${82 * s * bw} ${140 * s}
+              `}
+              fill={clothShadow}
+              stroke="rgba(0,0,0,0.15)"
+              strokeWidth={0.5}
+            />
+          </g>
         </g>
       </g>
 
-      {/* 身体主体 - 更真实的躯干 */}
-      <g transform={`translate(0, ${bodyBob})`}>
+      {/* 身体主体 - 使用骨骼动画系统 */}
+      <g transform={`translate(70, ${skeleton.torsoBobY + 75 * s * bh}) rotate(${skeleton.torsoRotation}, 0, 0) translate(-70, ${-skeleton.torsoBobY - 75 * s * bh})`}>
         {/* 躯干主体 */}
         <path
           d={`
@@ -259,15 +380,9 @@ const AnimatedCharacter: React.FC<AnimatedCharacterProps> = ({
         />
       </g>
 
-      {/* 左臂 - 更自然的关节 */}
-      <g transform={`translate(0, ${bodyBob})`}>
-        <g
-          transform={action === "walking" || action === "trading"
-            ? `rotate(${armSwing}, ${42 * s * bw}, ${52 * s * bh})`
-            : ""
-          }
-          style={{ transformOrigin: `${42 * s * bw}px ${52 * s * bh}px` }}
-        >
+      {/* 左臂 - 使用骨骼动画系统 */}
+      <g transform={`translate(0, ${skeleton.torsoBobY})`}>
+        <g transform={`rotate(${skeleton.leftUpperArmRotation}, ${42 * s * bw}, ${52 * s * bh})`}>
           {/* 上臂 */}
           <path
             d={`
@@ -280,51 +395,47 @@ const AnimatedCharacter: React.FC<AnimatedCharacterProps> = ({
             stroke={clothShadow}
             strokeWidth={0.5}
           />
-          {/* 前臂 */}
-          <path
-            d={`
-              M ${25 * s * bw} ${85 * s * bh}
-              Q ${22 * s * bw} ${100 * s}, ${25 * s * bw} ${115 * s}
-              L ${32 * s * bw} ${113 * s}
-              Q ${30 * s * bw} ${98 * s}, ${32 * s * bw} ${87 * s}
-            `}
-            fill={clothShadow}
-            stroke="rgba(0,0,0,0.15)"
-            strokeWidth={0.5}
-          />
-          {/* 手 - 更细致 */}
-          <ellipse
-            cx={28 * s * bw}
-            cy={120 * s}
-            rx={10 * s}
-            ry={12 * s}
-            fill={`url(#skinGradient-${x}-${y})`}
-            stroke={skinShadow}
-            strokeWidth={0.5}
-          />
-          {/* 拇指 */}
-          <ellipse
-            cx={18 * s * bw}
-            cy={112 * s}
-            rx={4 * s}
-            ry={6 * s}
-            fill={`url(#skinGradient-${x}-${y})`}
-            transform={`rotate(-30, ${18 * s * bw}, ${112 * s})`}
-            stroke={skinShadow}
-            strokeWidth={0.5}
-          />
+          {/* 前臂 - 带肘部弯曲 */}
+          <g transform={`translate(${25 * s * bw}, ${85 * s * bh}) rotate(${skeleton.leftForearmRotation}, ${5 * s * bw}, 0) translate(${-25 * s * bw}, ${-85 * s * bh})`}>
+            <path
+              d={`
+                M ${25 * s * bw} ${85 * s * bh}
+                Q ${22 * s * bw} ${100 * s}, ${25 * s * bw} ${115 * s}
+                L ${32 * s * bw} ${113 * s}
+                Q ${30 * s * bw} ${98 * s}, ${32 * s * bw} ${87 * s}
+              `}
+              fill={clothShadow}
+              stroke="rgba(0,0,0,0.15)"
+              strokeWidth={0.5}
+            />
+            {/* 手 - 更细致 */}
+            <ellipse
+              cx={28 * s * bw}
+              cy={120 * s}
+              rx={10 * s}
+              ry={12 * s}
+              fill={`url(#skinGradient-${x}-${y})`}
+              stroke={skinShadow}
+              strokeWidth={0.5}
+            />
+            {/* 拇指 */}
+            <ellipse
+              cx={18 * s * bw}
+              cy={112 * s}
+              rx={4 * s}
+              ry={6 * s}
+              fill={`url(#skinGradient-${x}-${y})`}
+              transform={`rotate(-30, ${18 * s * bw}, ${112 * s})`}
+              stroke={skinShadow}
+              strokeWidth={0.5}
+            />
+          </g>
         </g>
       </g>
 
-      {/* 右臂 */}
-      <g transform={`translate(0, ${bodyBob})`}>
-        <g
-          transform={action === "walking" || action === "trading"
-            ? `rotate(${-armSwing}, ${98 * s * bw}, ${52 * s * bh})`
-            : ""
-          }
-          style={{ transformOrigin: `${98 * s * bw}px ${52 * s * bh}px` }}
-        >
+      {/* 右臂 - 使用骨骼动画系统 */}
+      <g transform={`translate(0, ${skeleton.torsoBobY})`}>
+        <g transform={`rotate(${skeleton.rightUpperArmRotation}, ${98 * s * bw}, ${52 * s * bh})`}>
           {/* 上臂 */}
           <path
             d={`
@@ -337,44 +448,46 @@ const AnimatedCharacter: React.FC<AnimatedCharacterProps> = ({
             stroke={clothShadow}
             strokeWidth={0.5}
           />
-          {/* 前臂 */}
-          <path
-            d={`
-              M ${115 * s * bw} ${85 * s * bh}
-              Q ${118 * s * bw} ${100 * s}, ${115 * s * bw} ${115 * s}
-              L ${108 * s * bw} ${113 * s}
-              Q ${110 * s * bw} ${98 * s}, ${108 * s * bw} ${87 * s}
-            `}
-            fill={clothShadow}
-            stroke="rgba(0,0,0,0.15)"
-            strokeWidth={0.5}
-          />
-          {/* 手 */}
-          <ellipse
-            cx={112 * s * bw}
-            cy={120 * s}
-            rx={10 * s}
-            ry={12 * s}
-            fill={`url(#skinGradient-${x}-${y})`}
-            stroke={skinShadow}
-            strokeWidth={0.5}
-          />
-          {/* 拇指 */}
-          <ellipse
-            cx={122 * s * bw}
-            cy={112 * s}
-            rx={4 * s}
-            ry={6 * s}
-            fill={`url(#skinGradient-${x}-${y})`}
-            transform={`rotate(30, ${122 * s * bw}, ${112 * s})`}
-            stroke={skinShadow}
-            strokeWidth={0.5}
-          />
+          {/* 前臂 - 带肘部弯曲 */}
+          <g transform={`translate(${115 * s * bw}, ${85 * s * bh}) rotate(${skeleton.rightForearmRotation}, ${-5 * s * bw}, 0) translate(${-115 * s * bw}, ${-85 * s * bh})`}>
+            <path
+              d={`
+                M ${115 * s * bw} ${85 * s * bh}
+                Q ${118 * s * bw} ${100 * s}, ${115 * s * bw} ${115 * s}
+                L ${108 * s * bw} ${113 * s}
+                Q ${110 * s * bw} ${98 * s}, ${108 * s * bw} ${87 * s}
+              `}
+              fill={clothShadow}
+              stroke="rgba(0,0,0,0.15)"
+              strokeWidth={0.5}
+            />
+            {/* 手 */}
+            <ellipse
+              cx={112 * s * bw}
+              cy={120 * s}
+              rx={10 * s}
+              ry={12 * s}
+              fill={`url(#skinGradient-${x}-${y})`}
+              stroke={skinShadow}
+              strokeWidth={0.5}
+            />
+            {/* 拇指 */}
+            <ellipse
+              cx={122 * s * bw}
+              cy={112 * s}
+              rx={4 * s}
+              ry={6 * s}
+              fill={`url(#skinGradient-${x}-${y})`}
+              transform={`rotate(30, ${122 * s * bw}, ${112 * s})`}
+              stroke={skinShadow}
+              strokeWidth={0.5}
+            />
+          </g>
         </g>
       </g>
 
-      {/* 头部 - 更细致的面部特征 */}
-      <g transform={`translate(0, ${bodyBob + headBob})`}>
+      {/* 头部 - 使用骨骼动画系统 */}
+      <g transform={`translate(70, ${skeleton.headBobY + 25 * s}) rotate(${skeleton.headRotation}, 0, 0) translate(-70, ${-skeleton.headBobY - 25 * s})`}>
         {/* 脖子 - 更真实的形状 */}
         <path
           d={`
@@ -557,67 +670,75 @@ const AnimatedCharacter: React.FC<AnimatedCharacterProps> = ({
           strokeLinecap="round"
         />
 
-        {/* 眼睛 - 更细致 */}
+        {/* 眼睛 - 使用骨骼动画系统的眨眼效果 */}
         <g>
           {/* 左眼 */}
           <ellipse
             cx={55 * s}
             cy={25 * s}
             rx={7 * s}
-            ry={8 * s}
+            ry={8 * s * (1 - skeleton.eyeBlink * 0.7)}
             fill="white"
             stroke={skinShadow}
             strokeWidth={0.5}
           />
-          <circle
-            cx={55 * s}
-            cy={26 * s}
-            r={4 * s}
-            fill="#2C1810"
-          />
-          <circle
-            cx={53.5 * s}
-            cy={24.5 * s}
-            r={1.5 * s}
-            fill="white"
-          />
-          <circle
-            cx={57 * s}
-            cy={27.5 * s}
-            r={0.8 * s}
-            fill="white"
-            opacity={0.7}
-          />
+          {skeleton.eyeBlink < 0.5 && (
+            <>
+              <circle
+                cx={55 * s}
+                cy={26 * s}
+                r={4 * s}
+                fill="#2C1810"
+              />
+              <circle
+                cx={53.5 * s}
+                cy={24.5 * s}
+                r={1.5 * s}
+                fill="white"
+              />
+              <circle
+                cx={57 * s}
+                cy={27.5 * s}
+                r={0.8 * s}
+                fill="white"
+                opacity={0.7}
+              />
+            </>
+          )}
 
           {/* 右眼 */}
           <ellipse
             cx={85 * s}
             cy={25 * s}
             rx={7 * s}
-            ry={8 * s}
+            ry={8 * s * (1 - skeleton.eyeBlink * 0.7)}
             fill="white"
             stroke={skinShadow}
             strokeWidth={0.5}
           />
-          <circle
-            cx={85 * s}
-            cy={26 * s}
-            r={4 * s}
-            fill="#2C1810"
-          />
-          <circle
-            cx={83.5 * s}
-            cy={24.5 * s}
-            r={1.5 * s}
-            fill="white"
-          />
-          <circle
-            cx={87 * s}
-            cy={27.5 * s}
-            r={0.8 * s}
-            fill="white"
-            opacity={0.7}
-          />
+          {skeleton.eyeBlink < 0.5 && (
+            <>
+              <circle
+                cx={85 * s}
+                cy={26 * s}
+                r={4 * s}
+                fill="#2C1810"
+              />
+              <circle
+                cx={83.5 * s}
+                cy={24.5 * s}
+                r={1.5 * s}
+                fill="white"
+              />
+              <circle
+                cx={87 * s}
+                cy={27.5 * s}
+                r={0.8 * s}
+                fill="white"
+                opacity={0.7}
+              />
+            </>
+          )}
         </g>
 
         {/* 鼻子 */}
@@ -648,11 +769,11 @@ const AnimatedCharacter: React.FC<AnimatedCharacterProps> = ({
           fill={adjustBrightness(skinColor, -25)}
         />
 
-        {/* 嘴巴 - 更真实的形状和动态 */}
+        {/* 嘴巴 - 使用骨骼动画系统 */}
         <path
           d={`
             M ${60 * s} ${40 * s}
-            Q ${70 * s} ${42 * s + (action === "talking" ? Math.sin(frame * 0.3) * 3 : 0)}, ${80 * s} ${40 * s}
+            Q ${70 * s} ${42 * s + skeleton.mouthOpen}, ${80 * s} ${40 * s}
           `}
           stroke={adjustBrightness(skinColor, -30)}
           strokeWidth={2}
@@ -660,12 +781,12 @@ const AnimatedCharacter: React.FC<AnimatedCharacterProps> = ({
           strokeLinecap="round"
         />
         {/* 嘴唇内部 - 说话时显示 */}
-        {action === "talking" && Math.sin(frame * 0.3) > 0 && (
+        {skeleton.mouthOpen > 1 && (
           <ellipse
             cx={70 * s}
             cy={42 * s}
             rx={8 * s}
-            ry={4 * s + Math.sin(frame * 0.3) * 2}
+            ry={4 * s + skeleton.mouthOpen * 0.5}
             fill={adjustBrightness("#C97878", -10)}
             stroke={adjustBrightness("#C97878", -20)}
             strokeWidth={0.5}
