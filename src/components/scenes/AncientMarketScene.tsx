@@ -11,18 +11,22 @@ import { AbsoluteFill, useCurrentFrame, interpolate, Sequence } from "remotion";
 /**
  * AnimatedCharacter - 动画人物组件
  * 支持走路、站立、交易等动作
- * 采用现代扁平化卡通风格
+ * 采用高度写实的风格，多层渐变和阴影
  */
 interface AnimatedCharacterProps {
   x: number;
   y: number;
   scale: number;
   skinColor: string;
+  skinColorDark?: string; // 用于阴影区域的深色皮肤
   clothColor: string;
+  clothColorDark?: string; // 衣服阴影色
   frame: number;
   action?: "walking" | "standing" | "trading" | "talking";
   hasBeard?: boolean;
   hasHat?: boolean;
+  hairColor?: string;
+  bodyType?: "slender" | "medium" | "heavy";
 }
 
 const AnimatedCharacter: React.FC<AnimatedCharacterProps> = ({
@@ -30,312 +34,684 @@ const AnimatedCharacter: React.FC<AnimatedCharacterProps> = ({
   y,
   scale,
   skinColor,
+  skinColorDark,
   clothColor,
+  clothColorDark,
   frame,
   action = "standing",
   hasBeard = false,
   hasHat = false,
+  hairColor = "#3D2314",
+  bodyType = "medium",
 }) => {
-  // 身体上下浮动（模拟呼吸和行走）
+  // 更自然的身体动作
   const bodyBob = action === "walking"
-    ? Math.sin((frame * 0.3) % (Math.PI * 2)) * 3
-    : Math.sin((frame * 0.1) % (Math.PI * 2)) * 1;
+    ? Math.sin((frame * 0.3) % (Math.PI * 2)) * 4
+    : Math.sin((frame * 0.08) % (Math.PI * 2)) * 1.5;
 
-  // 手臂摆动
+  // 更平滑的手臂摆动
   const armSwing = action === "walking"
-    ? Math.sin((frame * 0.3) % (Math.PI * 2)) * 20
+    ? Math.sin((frame * 0.3) % (Math.PI * 2)) * 25
     : action === "trading"
-      ? Math.sin((frame * 0.15) % (Math.PI * 2)) * 5
-      : Math.sin((frame * 0.05) % (Math.PI * 2)) * 2;
+      ? Math.sin((frame * 0.2) % (Math.PI * 2)) * 8
+      : Math.sin((frame * 0.06) % (Math.PI * 2)) * 3;
 
-  // 说话时头部轻微移动
+  // 说话时的微表情
   const headBob = action === "talking"
-    ? Math.sin((frame * 0.2) % (Math.PI * 2)) * 2
+    ? Math.sin((frame * 0.25) % (Math.PI * 2)) * 1.5
     : 0;
 
-  const s = scale; // 简写
-  const centerY = bodyBob;
+  // 身体类型调整
+  const bodyWidth = bodyType === "slender" ? 0.85 : bodyType === "heavy" ? 1.15 : 1;
+  const bodyHeight = bodyType === "slender" ? 1.05 : bodyType === "heavy" ? 0.95 : 1;
+
+  const s = scale;
+  const bw = bodyWidth;
+  const bh = bodyHeight;
+
+  // 动态皮肤阴影色
+  const skinShadow = skinColorDark || adjustBrightness(skinColor, -20);
+
+  // 动态衣服阴影色
+  const clothShadow = clothColorDark || adjustBrightness(clothColor, -30);
 
   return (
     <svg
-      width={120 * s}
-      height={160 * s}
-      viewBox="0 0 120 160"
+      width={140 * s}
+      height={200 * s}
+      viewBox="0 0 140 200"
       style={{
         position: "absolute",
         left: `${x}%`,
         top: `${y}%`,
         transform: "translate(-50%, -50%)",
         overflow: "visible",
+        filter: "drop-shadow(0 4px 6px rgba(0,0,0,0.3))",
       }}
     >
-      {/* 身体阴影 */}
+      <defs>
+        {/* 皮肤渐变 - 营造立体感 */}
+        <radialGradient id={`skinGradient-${x}-${y}`}>
+          <stop offset="0%" stopColor={skinColor} />
+          <stop offset="70%" stopColor={skinColor} />
+          <stop offset="100%" stopColor={skinShadow} />
+        </radialGradient>
+
+        {/* 衣服渐变 */}
+        <linearGradient id={`clothGradient-${x}-${y}`} x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stopColor={clothShadow} />
+          <stop offset="30%" stopColor={clothColor} />
+          <stop offset="70%" stopColor={clothColor} />
+          <stop offset="100%" stopColor={clothShadow} />
+        </linearGradient>
+
+        {/* 头发渐变 */}
+        <linearGradient id={`hairGradient-${x}-${y}`} x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stopColor={adjustBrightness(hairColor, 20)} />
+          <stop offset="100%" stopColor={hairColor} />
+        </linearGradient>
+
+        {/* 眼睛高光 */}
+        <radialGradient id={`eyeHighlight-${x}-${y}`}>
+          <stop offset="0%" stopColor="rgba(255,255,255,0.8)" />
+          <stop offset="100%" stopColor="rgba(255,255,255,0)" />
+        </radialGradient>
+      </defs>
+
+      {/* 地面阴影 - 更真实的投影 */}
       <ellipse
-        cx={60}
-        cy={145}
-        rx={35 * s}
-        ry={8 * s}
-        fill="rgba(0,0,0,0.2)"
+        cx={70}
+        cy={185}
+        rx={45 * s * bw}
+        ry={12 * s}
+        fill="rgba(0,0,0,0.25)"
+        filter="blur(2px)"
       />
 
-      {/* 腿部 - 动态走路姿态 */}
-      <g transform={`translate(0, ${centerY})`}>
+      {/* 腿部 - 更自然的形状和动态 */}
+      <g transform={`translate(0, ${bodyBob * 0.3})`}>
         {/* 左腿 */}
-        <path
-          d={`
-            M ${45 * s} ${100 * s}
-            Q ${40 * s} ${120 * s}, ${42 * s} ${145 * s}
-            L ${48 * s} ${145 * s}
-            Q ${50 * s} ${120 * s}, ${45 * s} ${100 * s}
-          `}
-          fill={clothColor}
-          stroke="rgba(0,0,0,0.1)"
-          strokeWidth={1}
-          transform={action === "walking" ? `rotate(${Math.sin(frame * 0.3) * 10}, ${45 * s}, ${100 * s})` : ""}
-        />
+        <g transform={action === "walking" ? `rotate(${Math.sin(frame * 0.3) * 12}, ${52 * s * bw}, ${95 * s * bh})` : ""}>
+          {/* 大腿 */}
+          <path
+            d={`
+              M ${52 * s * bw} ${95 * s * bh}
+              Q ${48 * s * bw} ${115 * s * bh}, ${50 * s * bw} ${140 * s}
+              L ${58 * s * bw} ${140 * s}
+              Q ${60 * s * bw} ${115 * s * bh}, ${56 * s * bw} ${95 * s * bh}
+            `}
+            fill={`url(#clothGradient-${x}-${y})`}
+            stroke={clothShadow}
+            strokeWidth={0.5}
+          />
+          {/* 小腿和脚 */}
+          <path
+            d={`
+              M ${50 * s * bw} ${140 * s}
+              Q ${48 * s * bw} ${160 * s}, ${50 * s * bw} ${180 * s}
+              L ${60 * s * bw} ${180 * s}
+              Q ${58 * s * bw} ${160 * s}, ${58 * s * bw} ${140 * s}
+            `}
+            fill={clothShadow}
+            stroke="rgba(0,0,0,0.15)"
+            strokeWidth={0.5}
+          />
+        </g>
 
         {/* 右腿 */}
+        <g transform={action === "walking" ? `rotate(${-Math.sin(frame * 0.3) * 12}, ${88 * s * bw}, ${95 * s * bh})` : ""}>
+          {/* 大腿 */}
+          <path
+            d={`
+              M ${88 * s * bw} ${95 * s * bh}
+              Q ${92 * s * bw} ${115 * s * bh}, ${90 * s * bw} ${140 * s}
+              L ${82 * s * bw} ${140 * s}
+              Q ${80 * s * bw} ${115 * s * bh}, ${84 * s * bw} ${95 * s * bh}
+            `}
+            fill={`url(#clothGradient-${x}-${y})`}
+            stroke={clothShadow}
+            strokeWidth={0.5}
+          />
+          {/* 小腿和脚 */}
+          <path
+            d={`
+              M ${90 * s * bw} ${140 * s}
+              Q ${92 * s * bw} ${160 * s}, ${90 * s * bw} ${180 * s}
+              L ${80 * s * bw} ${180 * s}
+              Q ${82 * s * bw} ${160 * s}, ${82 * s * bw} ${140 * s}
+            `}
+            fill={clothShadow}
+            stroke="rgba(0,0,0,0.15)"
+            strokeWidth={0.5}
+          />
+        </g>
+      </g>
+
+      {/* 身体主体 - 更真实的躯干 */}
+      <g transform={`translate(0, ${bodyBob})`}>
+        {/* 躯干主体 */}
         <path
           d={`
-            M ${75 * s} ${100 * s}
-            Q ${80 * s} ${120 * s}, ${78 * s} ${145 * s}
-            L ${72 * s} ${145 * s}
-            Q ${70 * s} ${120 * s}, ${75 * s} ${100 * s}
+            M ${45 * s * bw} ${50 * s * bh}
+            L ${40 * s * bw} ${100 * s * bh}
+            Q ${35 * s * bw} ${115 * s * bh}, ${50 * s * bw} ${115 * s * bh}
+            L ${90 * s * bw} ${115 * s * bh}
+            Q ${105 * s * bw} ${115 * s * bh}, ${100 * s * bw} ${100 * s * bh}
+            L ${95 * s * bw} ${50 * s * bh}
+            Q ${95 * s * bw} ${35 * s * bh}, ${70 * s * bw} ${35 * s * bh}
+            L ${45 * s * bw} ${35 * s * bh}
+            Q ${30 * s * bw} ${35 * s * bh}, ${30 * s * bw} ${50 * s * bh}
+            Z
           `}
-          fill={clothColor}
-          stroke="rgba(0,0,0,0.1)"
+          fill={`url(#clothGradient-${x}-${y})`}
+          stroke={clothShadow}
           strokeWidth={1}
-          transform={action === "walking" ? `rotate(${-Math.sin(frame * 0.3) * 10}, ${75 * s}, ${100 * s})` : ""}
+        />
+
+        {/* 衣服褶皱细节 */}
+        <path
+          d={`M ${50 * s * bw} ${70 * s * bh} Q ${70 * s * bw} ${75 * s * bh}, ${90 * s * bw} ${70 * s * bh}`}
+          stroke={clothShadow}
+          strokeWidth={2}
+          fill="none"
+          opacity={0.4}
+        />
+        <path
+          d={`M ${45 * s * bw} ${85 * s * bh} Q ${70 * s * bw} ${90 * s * bh}, ${95 * s * bw} ${85 * s * bh}`}
+          stroke={clothShadow}
+          strokeWidth={2}
+          fill="none"
+          opacity={0.3}
+        />
+
+        {/* 高领/衣领 */}
+        <path
+          d={`
+            M ${50 * s * bw} ${38 * s * bh}
+            L ${90 * s * bw} ${38 * s * bh}
+            L ${70 * s * bw} ${50 * s * bh}
+            Z
+          `}
+          fill="rgba(255,255,255,0.2)"
+          stroke={clothShadow}
+          strokeWidth={0.5}
+        />
+
+        {/* 皮带 */}
+        <rect
+          x={40 * s * bw}
+          y={82 * s * bh}
+          width={60 * s * bw}
+          height={10 * s}
+          fill={adjustBrightness(clothColor, -40)}
+          rx={2}
+        />
+        {/* 皮带扣 */}
+        <rect
+          x={65 * s * bw}
+          y={82 * s * bh}
+          width={10 * s}
+          height={10 * s}
+          fill="#D4AF37"
+          stroke="#B8860B"
+          strokeWidth={1}
+          rx={1}
         />
       </g>
 
-      {/* 身体主体 */}
-      <path
-        d={`
-          M ${35 * s} ${60 * s}
-          L ${35 * s} ${110 * s}
-          Q ${35 * s} ${120 * s}, ${45 * s} ${120 * s}
-          L ${75 * s} ${120 * s}
-          Q ${85 * s} ${120 * s}, ${85 * s} ${110 * s}
-          L ${85 * s} ${60 * s}
-          Q ${85 * s} ${45 * s}, ${70 * s} ${45 * s}
-          L ${50 * s} ${45 * s}
-          Q ${35 * s} ${45 * s}, ${35 * s} ${60 * s}
-        `}
-        fill={clothColor}
-        stroke="rgba(0,0,0,0.1)"
-        strokeWidth={1}
-      />
-
-      {/* 衣服细节 - 领口 */}
-      <path
-        d={`
-          M ${50 * s} ${45 * s}
-          L ${70 * s} ${45 * s}
-          L ${60 * s} ${55 * s}
-          Z
-        `}
-        fill="rgba(255,255,255,0.3)"
-      />
-
-      {/* 腰带 */}
-      <rect
-        x={35 * s}
-        y={85 * s}
-        width={50 * s}
-        height={8 * s}
-        fill="rgba(0,0,0,0.2)"
-        rx={4}
-      />
-
-      {/* 左臂 */}
-      <g transform={`translate(0, ${centerY})`}>
-        <path
-          d={`
-            M ${35 * s} ${50 * s}
-            Q ${25 * s} ${70 * s}, ${20 * s} ${85 * s}
-            L ${22 * s} ${85 * s}
-            Q ${28 * s} ${70 * s}, ${38 * s} ${50 * s}
-          `}
-          fill={clothColor}
-          stroke="rgba(0,0,0,0.1)"
-          strokeWidth={1}
-          transform={action === "walking" || action === "trading" ? `rotate(${armSwing}, ${35 * s}, ${50 * s})` : ""}
-          style={{ transformOrigin: `${35 * s}px ${50 * s}px` }}
-        />
-        {/* 手 */}
-        <circle
-          cx={20 * s}
-          cy={87 * s}
-          r={8 * s}
-          fill={skinColor}
-          transform={`translate(0, ${centerY})`}
-        />
+      {/* 左臂 - 更自然的关节 */}
+      <g transform={`translate(0, ${bodyBob})`}>
+        <g
+          transform={action === "walking" || action === "trading"
+            ? `rotate(${armSwing}, ${42 * s * bw}, ${52 * s * bh})`
+            : ""
+          }
+          style={{ transformOrigin: `${42 * s * bw}px ${52 * s * bh}px` }}
+        >
+          {/* 上臂 */}
+          <path
+            d={`
+              M ${42 * s * bw} ${52 * s * bh}
+              Q ${28 * s * bw} ${70 * s * bh}, ${25 * s * bw} ${85 * s * bh}
+              L ${32 * s * bw} ${87 * s * bh}
+              Q ${35 * s * bw} ${72 * s * bh}, ${48 * s * bw} ${52 * s * bh}
+            `}
+            fill={`url(#clothGradient-${x}-${y})`}
+            stroke={clothShadow}
+            strokeWidth={0.5}
+          />
+          {/* 前臂 */}
+          <path
+            d={`
+              M ${25 * s * bw} ${85 * s * bh}
+              Q ${22 * s * bw} ${100 * s}, ${25 * s * bw} ${115 * s}
+              L ${32 * s * bw} ${113 * s}
+              Q ${30 * s * bw} ${98 * s}, ${32 * s * bw} ${87 * s}
+            `}
+            fill={clothShadow}
+            stroke="rgba(0,0,0,0.15)"
+            strokeWidth={0.5}
+          />
+          {/* 手 - 更细致 */}
+          <ellipse
+            cx={28 * s * bw}
+            cy={120 * s}
+            rx={10 * s}
+            ry={12 * s}
+            fill={`url(#skinGradient-${x}-${y})`}
+            stroke={skinShadow}
+            strokeWidth={0.5}
+          />
+          {/* 拇指 */}
+          <ellipse
+            cx={18 * s * bw}
+            cy={112 * s}
+            rx={4 * s}
+            ry={6 * s}
+            fill={`url(#skinGradient-${x}-${y})`}
+            transform={`rotate(-30, ${18 * s * bw}, ${112 * s})`}
+            stroke={skinShadow}
+            strokeWidth={0.5}
+          />
+        </g>
       </g>
 
       {/* 右臂 */}
-      <g transform={`translate(0, ${centerY})`}>
-        <path
-          d={`
-            M ${85 * s} ${50 * s}
-            Q ${95 * s} ${70 * s}, ${100 * s} ${85 * s}
-            L ${98 * s} ${85 * s}
-            Q ${92 * s} ${70 * s}, ${82 * s} ${50 * s}
-          `}
-          fill={clothColor}
-          stroke="rgba(0,0,0,0.1)"
-          strokeWidth={1}
-          transform={action === "walking" || action === "trading" ? `rotate(${-armSwing}, ${85 * s}, ${50 * s})` : ""}
-          style={{ transformOrigin: `${85 * s}px ${50 * s}px` }}
-        />
-        {/* 手 */}
-        <circle
-          cx={100 * s}
-          cy={87 * s}
-          r={8 * s}
-          fill={skinColor}
-        />
-      </g>
-
-      {/* 头部 */}
-      <g transform={`translate(0, ${headBob})`}>
-        {/* 脖子 */}
-        <rect
-          x={52 * s}
-          y={40 * s}
-          width={16 * s}
-          height={10 * s}
-          fill={skinColor}
-        />
-
-        {/* 头型 */}
-        <ellipse
-          cx={60 * s}
-          cy={30 * s}
-          rx={28 * s}
-          ry={30 * s}
-          fill={skinColor}
-        />
-
-        {/* 头发 */}
-        <ellipse
-          cx={60 * s}
-          cy={22 * s}
-          rx={30 * s}
-          ry={20 * s}
-          fill="#3D2314"
-        />
-        <ellipse
-          cx={60 * s}
-          cy={35 * s}
-          rx={26 * s}
-          ry={8 * s}
-          fill="#3D2314"
-        />
-
-        {/* 帽子 */}
-        {hasHat && (
-          <>
-            <ellipse
-              cx={60 * s}
-              cy={18 * s}
-              rx={32 * s}
-              ry={8 * s}
-              fill="#8B4513"
-            />
-            <rect
-              x={55 * s}
-              y={8 * s}
-              width={10 * s}
-              height={10 * s}
-              fill="#8B4513"
-            />
-          </>
-        )}
-
-        {/* 胡须 */}
-        {hasBeard && (
+      <g transform={`translate(0, ${bodyBob})`}>
+        <g
+          transform={action === "walking" || action === "trading"
+            ? `rotate(${-armSwing}, ${98 * s * bw}, ${52 * s * bh})`
+            : ""
+          }
+          style={{ transformOrigin: `${98 * s * bw}px ${52 * s * bh}px` }}
+        >
+          {/* 上臂 */}
           <path
             d={`
-              M ${45 * s} ${35 * s}
-              Q ${60 * s} ${50 * s}, ${75 * s} ${35 * s}
+              M ${98 * s * bw} ${52 * s * bh}
+              Q ${112 * s * bw} ${70 * s * bh}, ${115 * s * bw} ${85 * s * bh}
+              L ${108 * s * bw} ${87 * s * bh}
+              Q ${105 * s * bw} ${72 * s * bh}, ${92 * s * bw} ${52 * s * bh}
             `}
-            stroke="#4A3728"
-            strokeWidth={3 * s}
-            fill="none"
+            fill={`url(#clothGradient-${x}-${y})`}
+            stroke={clothShadow}
+            strokeWidth={0.5}
+          />
+          {/* 前臂 */}
+          <path
+            d={`
+              M ${115 * s * bw} ${85 * s * bh}
+              Q ${118 * s * bw} ${100 * s}, ${115 * s * bw} ${115 * s}
+              L ${108 * s * bw} ${113 * s}
+              Q ${110 * s * bw} ${98 * s}, ${108 * s * bw} ${87 * s}
+            `}
+            fill={clothShadow}
+            stroke="rgba(0,0,0,0.15)"
+            strokeWidth={0.5}
+          />
+          {/* 手 */}
+          <ellipse
+            cx={112 * s * bw}
+            cy={120 * s}
+            rx={10 * s}
+            ry={12 * s}
+            fill={`url(#skinGradient-${x}-${y})`}
+            stroke={skinShadow}
+            strokeWidth={0.5}
+          />
+          {/* 拇指 */}
+          <ellipse
+            cx={122 * s * bw}
+            cy={112 * s}
+            rx={4 * s}
+            ry={6 * s}
+            fill={`url(#skinGradient-${x}-${y})`}
+            transform={`rotate(30, ${122 * s * bw}, ${112 * s})`}
+            stroke={skinShadow}
+            strokeWidth={0.5}
+          />
+        </g>
+      </g>
+
+      {/* 头部 - 更细致的面部特征 */}
+      <g transform={`translate(0, ${bodyBob + headBob})`}>
+        {/* 脖子 - 更真实的形状 */}
+        <path
+          d={`
+            M ${62 * s} ${35 * s * bh}
+            L ${62 * s} ${45 * s * bh}
+            L ${78 * s} ${45 * s * bh}
+            L ${78 * s} ${35 * s * bh}
+            Q ${70 * s} ${32 * s}, ${62 * s} ${35 * s}
+          `}
+          fill={`url(#skinGradient-${x}-${y})`}
+          stroke={skinShadow}
+          strokeWidth={0.5}
+        />
+
+        {/* 耳朵 - 左 */}
+        <ellipse
+          cx={38 * s}
+          cy={25 * s}
+          rx={6 * s}
+          ry={10 * s}
+          fill={`url(#skinGradient-${x}-${y})`}
+          stroke={skinShadow}
+          strokeWidth={0.5}
+        />
+        <ellipse
+          cx={38 * s}
+          cy={25 * s}
+          rx={3 * s}
+          ry={5 * s}
+          fill={adjustBrightness(skinColor, -30)}
+        />
+
+        {/* 耳朵 - 右 */}
+        <ellipse
+          cx={102 * s}
+          cy={25 * s}
+          rx={6 * s}
+          ry={10 * s}
+          fill={`url(#skinGradient-${x}-${y})`}
+          stroke={skinShadow}
+          strokeWidth={0.5}
+        />
+        <ellipse
+          cx={102 * s}
+          cy={25 * s}
+          rx={3 * s}
+          ry={5 * s}
+          fill={adjustBrightness(skinColor, -30)}
+        />
+
+        {/* 头型 - 更自然的脸型 */}
+        <path
+          d={`
+            M ${45 * s} ${25 * s}
+            Q ${40 * s} ${15 * s}, ${50 * s} ${5 * s}
+            L ${90 * s} ${5 * s}
+            Q ${100 * s} ${15 * s}, ${95 * s} ${25 * s}
+            Q ${95 * s} ${40 * s}, ${85 * s} ${48 * s}
+            L ${55 * s} ${48 * s}
+            Q ${45 * s} ${40 * s}, ${45 * s} ${25 * s}
+          `}
+          fill={`url(#skinGradient-${x}-${y})`}
+          stroke={skinShadow}
+          strokeWidth={0.5}
+        />
+
+        {/* 头发 - 更丰富的层次 */}
+        <path
+          d={`
+            M ${42 * s} ${20 * s}
+            Q ${35 * s} ${10 * s}, ${45 * s} ${0 * s}
+            L ${95 * s} ${0 * s}
+            Q ${105 * s} ${10 * s}, ${98 * s} ${20 * s}
+            Q ${95 * s} ${5 * s}, ${85 * s} ${-3 * s}
+            Q ${70 * s} ${-5 * s}, ${55 * s} ${-3 * s}
+            Q ${45 * s} ${5 * s}, ${42 * s} ${20 * s}
+          `}
+          fill={`url(#hairGradient-${x}-${y})`}
+          stroke={adjustBrightness(hairColor, -30)}
+          strokeWidth={0.5}
+        />
+        {/* 头发细节 */}
+        <path
+          d={`
+            M ${48 * s} ${8 * s}
+            Q ${55 * s} ${5 * s}, ${62 * s} ${8 * s}
+            Q ${70 * s} ${5 * s}, ${78 * s} ${8 * s}
+            Q ${85 * s} ${5 * s}, ${92 * s} ${8 * s}
+          `}
+          stroke={adjustBrightness(hairColor, -20)}
+          strokeWidth={2}
+          fill="none"
+          opacity={0.6}
+        />
+
+        {/* 帽子 - 如果有 */}
+        {hasHat && (
+          <g>
+            {/* 帽檐 */}
+            <ellipse
+              cx={70 * s}
+              cy={-2 * s}
+              rx={40 * s}
+              ry={10 * s}
+              fill={adjustBrightness("#8B4513", 10)}
+              stroke={adjustBrightness("#8B4513", -30)}
+              strokeWidth={1}
+            />
+            {/* 帽顶 */}
+            <path
+              d={`
+                M ${50 * s} ${-2 * s}
+                L ${55 * s} ${-25 * s}
+                L ${85 * s} ${-25 * s}
+                L ${90 * s} ${-2 * s}
+                Q ${70 * s} ${0 * s}, ${50 * s} ${-2 * s}
+              `}
+              fill="#8B4513"
+              stroke={adjustBrightness("#8B4513", -30)}
+              strokeWidth={1}
+            />
+            {/* 帽带 */}
+            <rect
+              x={50 * s}
+              y={-5 * s}
+              width={40 * s}
+              height={5 * s}
+              fill="#D4AF37"
+            />
+          </g>
+        )}
+
+        {/* 胡须 - 更真实 */}
+        {hasBeard && (
+          <g>
+            <path
+              d={`
+                M ${50 * s} ${42 * s}
+                Q ${55 * s} ${50 * s}, ${70 * s} ${52 * s}
+                Q ${85 * s} ${50 * s}, ${90 * s} ${42 * s}
+              `}
+              fill={adjustBrightness(hairColor, -10)}
+              stroke={adjustBrightness(hairColor, -30)}
+              strokeWidth={0.5}
+            />
+            <path
+              d={`
+                M ${50 * s} ${42 * s}
+                Q ${52 * s} ${38 * s}, ${55 * s} ${42 * s}
+              `}
+              stroke={adjustBrightness(hairColor, -20)}
+              strokeWidth={2}
+              fill="none"
+            />
+            <path
+              d={`
+                M ${85 * s} ${42 * s}
+                Q ${88 * s} ${38 * s}, ${90 * s} ${42 * s}
+              `}
+              stroke={adjustBrightness(hairColor, -20)}
+              strokeWidth={2}
+              fill="none"
+            />
+          </g>
+        )}
+
+        {/* 眉毛 - 更自然 */}
+        <path
+          d={`M ${48 * s} ${18 * s} Q ${55 * s} ${15 * s}, ${62 * s} ${18 * s}`}
+          stroke={adjustBrightness(hairColor, -10)}
+          strokeWidth={2.5 * s}
+          fill="none"
+          strokeLinecap="round"
+        />
+        <path
+          d={`M ${78 * s} ${18 * s} Q ${85 * s} ${15 * s}, ${92 * s} ${18 * s}`}
+          stroke={adjustBrightness(hairColor, -10)}
+          strokeWidth={2.5 * s}
+          fill="none"
+          strokeLinecap="round"
+        />
+
+        {/* 眼睛 - 更细致 */}
+        <g>
+          {/* 左眼 */}
+          <ellipse
+            cx={55 * s}
+            cy={25 * s}
+            rx={7 * s}
+            ry={8 * s}
+            fill="white"
+            stroke={skinShadow}
+            strokeWidth={0.5}
+          />
+          <circle
+            cx={55 * s}
+            cy={26 * s}
+            r={4 * s}
+            fill="#2C1810"
+          />
+          <circle
+            cx={53.5 * s}
+            cy={24.5 * s}
+            r={1.5 * s}
+            fill="white"
+          />
+          <circle
+            cx={57 * s}
+            cy={27.5 * s}
+            r={0.8 * s}
+            fill="white"
+            opacity={0.7}
+          />
+
+          {/* 右眼 */}
+          <ellipse
+            cx={85 * s}
+            cy={25 * s}
+            rx={7 * s}
+            ry={8 * s}
+            fill="white"
+            stroke={skinShadow}
+            strokeWidth={0.5}
+          />
+          <circle
+            cx={85 * s}
+            cy={26 * s}
+            r={4 * s}
+            fill="#2C1810"
+          />
+          <circle
+            cx={83.5 * s}
+            cy={24.5 * s}
+            r={1.5 * s}
+            fill="white"
+          />
+          <circle
+            cx={87 * s}
+            cy={27.5 * s}
+            r={0.8 * s}
+            fill="white"
+            opacity={0.7}
+          />
+        </g>
+
+        {/* 鼻子 */}
+        <path
+          d={`
+            M ${70 * s} ${28 * s}
+            L ${68 * s} ${35 * s}
+            L ${72 * s} ${35 * s}
+            L ${70 * s} ${28 * s}
+          `}
+          fill={adjustBrightness(skinColor, -15)}
+          stroke={skinShadow}
+          strokeWidth={0.5}
+        />
+        {/* 鼻孔 */}
+        <ellipse
+          cx={67 * s}
+          cy={35 * s}
+          rx={1.5 * s}
+          ry={2 * s}
+          fill={adjustBrightness(skinColor, -25)}
+        />
+        <ellipse
+          cx={73 * s}
+          cy={35 * s}
+          rx={1.5 * s}
+          ry={2 * s}
+          fill={adjustBrightness(skinColor, -25)}
+        />
+
+        {/* 嘴巴 - 更真实的形状和动态 */}
+        <path
+          d={`
+            M ${60 * s} ${40 * s}
+            Q ${70 * s} ${42 * s + (action === "talking" ? Math.sin(frame * 0.3) * 3 : 0)}, ${80 * s} ${40 * s}
+          `}
+          stroke={adjustBrightness(skinColor, -30)}
+          strokeWidth={2}
+          fill="none"
+          strokeLinecap="round"
+        />
+        {/* 嘴唇内部 - 说话时显示 */}
+        {action === "talking" && Math.sin(frame * 0.3) > 0 && (
+          <ellipse
+            cx={70 * s}
+            cy={42 * s}
+            rx={8 * s}
+            ry={4 * s + Math.sin(frame * 0.3) * 2}
+            fill={adjustBrightness("#C97878", -10)}
+            stroke={adjustBrightness("#C97878", -20)}
+            strokeWidth={0.5}
           />
         )}
 
-        {/* 眼睛 */}
+        {/* 脸颊红润 - 更自然 */}
         <ellipse
-          cx={50 * s}
-          cy={28 * s}
-          rx={5 * s}
-          ry={6 * s}
-          fill="white"
+          cx={45 * s}
+          cy={33 * s}
+          rx={6 * s}
+          ry={4 * s}
+          fill="rgba(255,150,150,0.2)"
         />
+        <ellipse
+          cx={95 * s}
+          cy={33 * s}
+          rx={6 * s}
+          ry={4 * s}
+          fill="rgba(255,150,150,0.2)"
+        />
+
+        {/* 额头高光 */}
         <ellipse
           cx={70 * s}
-          cy={28 * s}
-          rx={5 * s}
-          ry={6 * s}
-          fill="white"
-        />
-        <circle
-          cx={50 * s}
-          cy={29 * s}
-          r={2.5 * s}
-          fill="#2C1810"
-        />
-        <circle
-          cx={70 * s}
-          cy={29 * s}
-          r={2.5 * s}
-          fill="#2C1810"
-        />
-
-        {/* 眉毛 */}
-        <path
-          d={`M ${42 * s} ${22 * s} Q ${50 * s} ${20 * s}, ${58 * s} ${22 * s}`}
-          stroke="#3D2314"
-          strokeWidth={2 * s}
-          fill="none"
-        />
-        <path
-          d={`M ${62 * s} ${22 * s} Q ${70 * s} ${20 * s}, ${78 * s} ${22 * s}`}
-          stroke="#3D2314"
-          strokeWidth={2 * s}
-          fill="none"
-        />
-
-        {/* 嘴巴 - 说话时张开 */}
-        <ellipse
-          cx={60 * s}
-          cy={40 * s}
-          rx={4 * s}
-          ry={action === "talking" ? 4 * s + Math.sin(frame * 0.3) * 2 : 3 * s}
-          fill="#C97878"
-        />
-
-        {/* 脸红 */}
-        <ellipse
-          cx={42 * s}
-          cy={36 * s}
-          rx={5 * s}
-          ry={3 * s}
-          fill="rgba(255,150,150,0.3)"
-        />
-        <ellipse
-          cx={78 * s}
-          cy={36 * s}
-          rx={5 * s}
-          ry={3 * s}
-          fill="rgba(255,150,150,0.3)"
+          cy={12 * s}
+          rx={15 * s}
+          ry={8 * s}
+          fill="rgba(255,255,255,0.1)"
         />
       </g>
     </svg>
   );
 };
+
+/**
+ * 辅助函数：调整颜色亮度
+ */
+function adjustBrightness(color: string, amount: number): string {
+  const hex = color.replace('#', '');
+  const num = parseInt(hex, 16);
+  const r = Math.min(255, Math.max(0, (num >> 16) + amount));
+  const g = Math.min(255, Math.max(0, ((num >> 8) & 0x00FF) + amount));
+  const b = Math.min(255, Math.max(0, (num & 0x0000FF) + amount));
+  return `#${((r << 16) | (g << 8) | b).toString(16).padStart(6, '0')}`;
+}
 
 /**
  * TradingScene - 交易场景动画
@@ -364,10 +740,14 @@ const TradingScene: React.FC = () => {
         y={50}
         scale={1.2}
         skinColor="#F5DEB3"
+        skinColorDark="#E8D4B8"
         clothColor="#8B4513"
+        clothColorDark="#6B3410"
         frame={frame}
         action={frame < 60 ? "walking" : "trading"}
         hasBeard={true}
+        hairColor="#4A3728"
+        bodyType="medium"
       />
 
       {/* 卖方 - 拿着商品 */}
@@ -376,10 +756,14 @@ const TradingScene: React.FC = () => {
         y={50}
         scale={1.2}
         skinColor="#F5DEB3"
+        skinColorDark="#E8D4B8"
         clothColor="#2F4F4F"
+        clothColorDark="#1A3333"
         frame={frame}
         action={frame < 60 ? "walking" : "trading"}
         hasHat={true}
+        hairColor="#3D2817"
+        bodyType="slender"
       />
 
       {/* 交易中的金币 */}
@@ -443,10 +827,26 @@ const WalkingMerchant: React.FC<{
   endX: number;
   delay: number;
   skinColor: string;
+  skinColorDark?: string;
   clothColor: string;
+  clothColorDark?: string;
+  hairColor?: string;
   hasBeard?: boolean;
   hasHat?: boolean;
-}> = ({ startX, endX, delay, skinColor, clothColor, hasBeard = false, hasHat = false }) => {
+  bodyType?: "slender" | "medium" | "heavy";
+}> = ({
+  startX,
+  endX,
+  delay,
+  skinColor,
+  skinColorDark,
+  clothColor,
+  clothColorDark,
+  hairColor,
+  hasBeard = false,
+  hasHat = false,
+  bodyType = "medium"
+}) => {
   const frame = useCurrentFrame();
   const delayedFrame = Math.max(0, frame - delay);
 
@@ -462,25 +862,30 @@ const WalkingMerchant: React.FC<{
         y={y}
         scale={0.9}
         skinColor={skinColor}
+        skinColorDark={skinColorDark}
         clothColor={clothColor}
+        clothColorDark={clothColorDark}
         frame={delayedFrame}
         action="walking"
         hasBeard={hasBeard}
         hasHat={hasHat}
+        hairColor={hairColor}
+        bodyType={bodyType}
       />
 
-      {/* 商人携带的包裹 */}
+      {/* 商人携带的包裹 - 更真实的细节 */}
       <div
         style={{
           position: "absolute",
           left: `${x}%`,
           top: `${y + 8}%`,
           transform: "translateX(-50%)",
-          width: 25,
-          height: 20,
-          background: "#D2691E",
+          width: 28,
+          height: 22,
+          background: "linear-gradient(135deg, #D2691E 0%, #8B4513 100%)",
           borderRadius: "5px",
-          border: "2px solid #8B4513",
+          border: "2px solid #5D3A1A",
+          boxShadow: "inset 0 0 10px rgba(0,0,0,0.3)",
         }}
       />
     </div>
@@ -490,7 +895,31 @@ const WalkingMerchant: React.FC<{
 /**
  * TalkingPair - 交谈的人群
  */
-const TalkingPair: React.FC<{ x: number; delay: number }> = ({ x, delay }) => {
+const TalkingPair: React.FC<{
+  x: number;
+  delay: number;
+  character1Config?: {
+    skinColor?: string;
+    skinColorDark?: string;
+    clothColor?: string;
+    clothColorDark?: string;
+    hairColor?: string;
+    bodyType?: "slender" | "medium" | "heavy";
+  };
+  character2Config?: {
+    skinColor?: string;
+    skinColorDark?: string;
+    clothColor?: string;
+    clothColorDark?: string;
+    hairColor?: string;
+    bodyType?: "slender" | "medium" | "heavy";
+  };
+}> = ({
+  x,
+  delay,
+  character1Config = {},
+  character2Config = {}
+}) => {
   const frame = useCurrentFrame();
   const delayedFrame = Math.max(0, frame - delay);
 
@@ -503,10 +932,14 @@ const TalkingPair: React.FC<{ x: number; delay: number }> = ({ x, delay }) => {
         x={x - 3}
         y={68}
         scale={0.8}
-        skinColor="#F5DEB3"
-        clothColor="#4A6741"
+        skinColor={character1Config.skinColor || "#F5DEB3"}
+        skinColorDark={character1Config.skinColorDark || "#E8D4B8"}
+        clothColor={character1Config.clothColor || "#4A6741"}
+        clothColorDark={character1Config.clothColorDark || "#3A5231"}
         frame={delayedFrame}
         action="talking"
+        hairColor={character1Config.hairColor || "#3D2314"}
+        bodyType={character1Config.bodyType || "medium"}
       />
 
       {/* 人物2 */}
@@ -514,13 +947,17 @@ const TalkingPair: React.FC<{ x: number; delay: number }> = ({ x, delay }) => {
         x={x + 3}
         y={68}
         scale={0.85}
-        skinColor="#F5DEB3"
-        clothColor="#6B4423"
+        skinColor={character2Config.skinColor || "#F5DEB3"}
+        skinColorDark={character2Config.skinColorDark || "#E8D4B8"}
+        clothColor={character2Config.clothColor || "#6B4423"}
+        clothColorDark={character2Config.clothColorDark || "#4A2F17"}
         frame={delayedFrame + 5} // 稍微错开的说话节奏
         action="talking"
+        hairColor={character2Config.hairColor || "#2C1810"}
+        bodyType={character2Config.bodyType || "medium"}
       />
 
-      {/* 对话气泡 */}
+      {/* 对话气泡 - 更真实的样式 */}
       {delayedFrame % 120 < 60 && (
         <div
           style={{
@@ -528,13 +965,15 @@ const TalkingPair: React.FC<{ x: number; delay: number }> = ({ x, delay }) => {
             left: `${x}%`,
             top: "55%",
             transform: "translateX(-50%)",
-            background: "rgba(255, 255, 255, 0.9)",
-            padding: "8px 15px",
-            borderRadius: "15px",
-            fontSize: 14,
-            color: "#333",
-            boxShadow: "0 2px 10px rgba(0, 0, 0, 0.2)",
+            background: "linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(245, 245, 245, 0.95) 100%)",
+            padding: "10px 18px",
+            borderRadius: "18px",
+            fontSize: 15,
+            fontWeight: 500,
+            color: "#2c2c2c",
+            boxShadow: "0 4px 15px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.8)",
             whiteSpace: "nowrap",
+            border: "1px solid rgba(0, 0, 0, 0.1)",
           }}
         >
           Gold! 💰
@@ -743,28 +1182,78 @@ export const AncientMarketScene: React.FC = () => {
         endX={100}
         delay={120}
         skinColor="#F5DEB3"
+        skinColorDark="#E8D4B8"
         clothColor="#8B4513"
+        clothColorDark="#6B3410"
+        hairColor="#4A3728"
         hasHat={true}
+        bodyType="heavy"
       />
       <WalkingMerchant
         startX={110}
         endX={0}
         delay={150}
         skinColor="#F5DEB3"
+        skinColorDark="#E8D4B8"
         clothColor="#2F4F4F"
+        clothColorDark="#1A3333"
+        hairColor="#3D2817"
         hasBeard={true}
+        bodyType="slender"
       />
       <WalkingMerchant
         startX={-10}
         endX={100}
         delay={200}
         skinColor="#F5DEB3"
+        skinColorDark="#E8D4B8"
         clothColor="#6B4423"
+        clothColorDark="#4A2F17"
+        hairColor="#2C1810"
+        bodyType="medium"
       />
 
       {/* 交谈的人群 */}
-      <TalkingPair x={25} delay={0} />
-      <TalkingPair x={75} delay={60} />
+      <TalkingPair
+        x={25}
+        delay={0}
+        character1Config={{
+          skinColor: "#F5DEB3",
+          skinColorDark: "#E8D4B8",
+          clothColor: "#4A6741",
+          clothColorDark: "#3A5231",
+          hairColor: "#3D2314",
+          bodyType: "medium"
+        }}
+        character2Config={{
+          skinColor: "#F5DEB3",
+          skinColorDark: "#E8D4B8",
+          clothColor: "#6B4423",
+          clothColorDark: "#4A2F17",
+          hairColor: "#2C1810",
+          bodyType: "slender"
+        }}
+      />
+      <TalkingPair
+        x={75}
+        delay={60}
+        character1Config={{
+          skinColor: "#F5DEB3",
+          skinColorDark: "#E8D4B8",
+          clothColor: "#5D4E37",
+          clothColorDark: "#423729",
+          hairColor: "#4A3728",
+          bodyType: "heavy"
+        }}
+        character2Config={{
+          skinColor: "#F5DEB3",
+          skinColorDark: "#E8D4B8",
+          clothColor: "#3D5A4A",
+          clothColorDark: "#2A3F34",
+          hairColor: "#3D2817",
+          bodyType: "medium"
+        }}
+      />
 
       {/* 说明文字 */}
       <div
