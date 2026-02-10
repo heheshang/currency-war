@@ -9,6 +9,16 @@ import {
 import { BattleOfWaterloo } from "../components/scenes/BattleOfWaterloo";
 import { StockExchangeScene } from "../components/scenes/StockExchangeScene";
 import { NathanRothschild } from "../components/characters/NathanRothschild";
+import {
+  ElasticText,
+  FadeInTransition,
+  SparkleEffect,
+  PulseAnimation,
+  StaggerTransition,
+  FloatAnimation,
+  SlideInTransition,
+} from "../components/animations";
+import { Subtitles, episode03Subtitles } from "../components/Subtitles";
 
 /**
  * Episode03 - 第3集：滑铁卢战役 - 信息与金钱的战争
@@ -16,13 +26,14 @@ import { NathanRothschild } from "../components/characters/NathanRothschild";
  * 总时长：6分钟（360秒）
  *
  * 场景序列：
- * 1. [0-60s] 滑铁卢战场 - 战争场面
- * 2. [60-150s] 情报传递 - 从滑铁卢到伦敦
- * 3. [150-180s] 交易所门口 - 内森入场
- * 4. [180-240s] 第一次抛售 - 股价暴跌
- * 5. [240-300s] 恐慌蔓延 - 人群骚乱
- * 6. [300-330s] 反向操作 - 内森秘密买进
- * 7. [330-360s] 20倍收益 - 史诗结局
+ * 0. [0-10s] 开场任务 - 动画标题和任务目标
+ * 1. [10-70s] 滑铁卢战场 - 战争场面
+ * 2. [70-160s] 情报传递 - 从滑铁卢到伦敦
+ * 3. [160-190s] 交易所门口 - 内森入场
+ * 4. [190-250s] 第一次抛售 - 股价暴跌
+ * 5. [250-310s] 恐慌蔓延 - 人群骚乱
+ * 6. [310-340s] 反向操作 - 内森秘密买进
+ * 7. [340-360s] 20倍收益 - 史诗结局
  */
 export const Episode03: React.FC = () => {
   const { fps } = useVideoConfig();
@@ -33,40 +44,205 @@ export const Episode03: React.FC = () => {
       {/* TODO: Add audio file to public/ folder */}
       {/* <Audio src={staticFile("audio/bgm/tension.mp3")} volume={0.5} /> */}
 
-      {/* 场景1: 滑铁卢战场 (0-60s) */}
-      <Sequence durationInFrames={60 * fps}>
+      {/* 场景0: 开场任务动画 (0-10s) */}
+      <Sequence durationInFrames={10 * fps}>
+        <OpeningMissionScene />
+      </Sequence>
+
+      {/* 场景1: 滑铁卢战场 (10-70s) */}
+      <Sequence from={10 * fps} durationInFrames={60 * fps}>
         <BattleOfWaterloo />
       </Sequence>
 
-      {/* 场景2: 情报传递路径动画 (60-150s) */}
-      <Sequence from={60 * fps} durationInFrames={90 * fps}>
+      {/* 场景2: 情报传递路径动画 (70-160s) */}
+      <Sequence from={70 * fps} durationInFrames={90 * fps}>
         <IntelligencePathScene />
       </Sequence>
 
-      {/* 场景3: 交易所门口 (150-180s) */}
-      <Sequence from={150 * fps} durationInFrames={30 * fps}>
+      {/* 场景3: 交易所门口 (160-190s) */}
+      <Sequence from={160 * fps} durationInFrames={30 * fps}>
         <ExchangeEntranceScene />
       </Sequence>
 
-      {/* 场景4: 第一次抛售 (180-240s) */}
-      <Sequence from={180 * fps} durationInFrames={60 * fps}>
+      {/* 场景4: 第一次抛售 (190-250s) */}
+      <Sequence from={190 * fps} durationInFrames={60 * fps}>
         <StockExchangeScene />
       </Sequence>
 
-      {/* 场景5: 恐慌蔓延 (240-300s) */}
-      <Sequence from={240 * fps} durationInFrames={60 * fps}>
+      {/* 场景5: 恐慌蔓延 (250-310s) */}
+      <Sequence from={250 * fps} durationInFrames={60 * fps}>
         <PanicSpreadScene />
       </Sequence>
 
-      {/* 场景6: 反向操作 (300-330s) */}
-      <Sequence from={300 * fps} durationInFrames={30 * fps}>
+      {/* 场景6: 反向操作 (310-340s) */}
+      <Sequence from={310 * fps} durationInFrames={30 * fps}>
         <ReverseOperationScene />
       </Sequence>
 
-      {/* 场景7: 20倍收益 (330-360s) */}
-      <Sequence from={330 * fps} durationInFrames={30 * fps}>
+      {/* 场景7: 20倍收益 (340-360s) */}
+      <Sequence from={340 * fps} durationInFrames={20 * fps}>
         <ProfitScene />
       </Sequence>
+
+      {/* 字幕层 - 覆盖整个视频 */}
+      <Subtitles subtitles={episode03Subtitles} />
+    </AbsoluteFill>
+  );
+};
+
+/**
+ * OpeningMissionScene - 开场任务场景
+ *
+ * 显示剧集标题和任务目标，使用动画效果
+ */
+const OpeningMissionScene: React.FC = () => {
+  const frame = useCurrentFrame();
+
+  return (
+    <AbsoluteFill
+      style={{
+        background: "radial-gradient(circle at center, #1a1a2e 0%, #0d1117 100%)",
+      }}
+    >
+      {/* 闪烁特效 */}
+      <SparkleEffect startFrame={0} duration={150} />
+
+      {/* 剧集标题 */}
+      <FadeInTransition delay={0} duration={30}>
+        <div
+          style={{
+            position: "absolute",
+            top: "15%",
+            left: "50%",
+            transform: "translateX(-50%)",
+            textAlign: "center",
+          }}
+        >
+          <div
+            style={{
+              fontSize: 20,
+              color: "#ffd700",
+              fontFamily: "Cinzel, serif",
+              fontWeight: 600,
+              marginBottom: 10,
+              opacity: interpolate(frame, [0, 30], [0, 1]),
+            }}
+          >
+            Episode 3
+          </div>
+          <FloatAnimation distance={8}>
+            <div
+              style={{
+                fontSize: 56,
+                color: "#ffd700",
+                fontFamily: "Cinzel, serif",
+                fontWeight: 700,
+                textShadow: "0 0 30px rgba(255, 215, 0, 0.6)",
+              }}
+            >
+              <ElasticText text="Waterloo" delay={0} stagger={4} />
+            </div>
+          </FloatAnimation>
+          <div
+            style={{
+              fontSize: 32,
+              color: "#e8e8e8",
+              fontFamily: "Merriweather, serif",
+              fontStyle: "italic",
+              marginTop: 10,
+            }}
+          >
+            <ElasticText text="Information & Money" delay={8} stagger={3} />
+          </div>
+        </div>
+      </FadeInTransition>
+
+      {/* 任务目标列表 */}
+      <div
+        style={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          width: "70%",
+        }}
+      >
+        <StaggerTransition staggerDelay={30} itemDelay={15}>
+          {[
+            { icon: "🎯", text: "Mission: Control the Information Flow", color: "#ffd700" },
+            { icon: "⚡", text: "Objective: Beat the News to London", color: "#ff6b6b" },
+            { icon: "💰", text: "Goal: Profit from the Chaos", color: "#4ade80" },
+            { icon: "🏆", text: "Reward: 20x Fortune Multiplier", color: "#f472b6" },
+          ].map((task, index) => (
+            <SlideInTransition
+              key={index}
+              direction="left"
+              delay={index * 15}
+              duration={20}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  marginBottom: 20,
+                  padding: "15px 25px",
+                  background: "rgba(0, 0, 0, 0.4)",
+                  borderRadius: 12,
+                  border: `2px solid ${task.color}99`,
+                  backdropFilter: "blur(10px)",
+                }}
+              >
+                <span
+                  style={{
+                    fontSize: 32,
+                    marginRight: 20,
+                    filter: "drop-shadow(0 0 10px rgba(255, 255, 255, 0.5))",
+                  }}
+                >
+                  {task.icon}
+                </span>
+                <span
+                  style={{
+                    fontSize: 24,
+                    color: task.color,
+                    fontFamily: "Merriweather, serif",
+                    fontWeight: 600,
+                    textShadow: `0 0 20px ${task.color}40`,
+                  }}
+                >
+                  {task.text}
+                </span>
+              </div>
+            </SlideInTransition>
+          ))}
+        </StaggerTransition>
+      </div>
+
+      {/* 底部提示 */}
+      <FadeInTransition delay={120} duration={30}>
+        <div
+          style={{
+            position: "absolute",
+            bottom: "10%",
+            left: "50%",
+            transform: "translateX(-50%)",
+            textAlign: "center",
+          }}
+        >
+          <PulseAnimation minScale={1} maxScale={1.05}>
+            <div
+              style={{
+                fontSize: 20,
+                color: "#9ca3af",
+                fontFamily: "Cinzel, serif",
+                letterSpacing: 3,
+              }}
+            >
+              THE BATTLE OF INFORMATION BEGINS...
+            </div>
+          </PulseAnimation>
+        </div>
+      </FadeInTransition>
     </AbsoluteFill>
   );
 };
