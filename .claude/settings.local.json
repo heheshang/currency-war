@@ -8,5 +8,6 @@
       "Bash(copy:*)",
       "Bash(ls:*)"
     ]
-  }
+  },
+  "outputStyle": "Explanatory"
 }

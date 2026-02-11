@@ -1,9 +1,22 @@
 import React from "react";
 import { AbsoluteFill, useVideoConfig, Sequence } from "remotion";
 import { BattleOfWaterloo } from "../components/scenes/BattleOfWaterloo";
-import { AncientMarketScene } from "../components/scenes/AncientMarketScene";
 import { StockExchangeScene } from "../components/scenes/StockExchangeScene";
 import { Subtitles, episode02Subtitles } from "../components/Subtitles";
+
+// Episode02 Scene Components
+import InvisibleWealthScene from "../components/scenes/episode02/InvisibleWealthScene";
+import FamilyIntroductionScene from "../components/scenes/episode02/FamilyIntroductionScene";
+import IntelligenceNetworkScene from "../components/scenes/episode02/IntelligenceNetworkScene";
+import TwentyTimesProfitScene from "../components/scenes/episode02/TwentyTimesProfitScene";
+import EuropeanEmpireScene from "../components/scenes/episode02/EuropeanEmpireScene";
+import BankOfEnglandScene from "../components/scenes/episode02/BankOfEnglandScene";
+import MayersFirstFortuneScene from "../components/scenes/episode02/MayersFirstFortuneScene";
+import NathansLondonScene from "../components/scenes/episode02/NathansLondonScene";
+import JamesConquersFranceScene from "../components/scenes/episode02/JamesConquersFranceScene";
+import SalomonInAustriaScene from "../components/scenes/episode02/SalomonInAustriaScene";
+import FinancialEmpirePeakScene from "../components/scenes/episode02/FinancialEmpirePeakScene";
+import Episode02SummaryScene from "../components/scenes/episode02/Episode02SummaryScene";
 
 /**
  * Episode02 - 第2集：罗斯柴尔德家族："大道无形"的世界首富
@@ -33,74 +46,74 @@ export const Episode02: React.FC = () => {
 
   return (
     <AbsoluteFill style={{ background: "#0d1117" }}>
-      {/* 场景1: 开场 - 大道无形的世界首富 (0-30s) */}
+      {/* Scene 1: Opening - The Invisible Wealth (0-30s) */}
       <Sequence durationInFrames={30 * fps}>
-        <AncientMarketScene />
+        <InvisibleWealthScene />
       </Sequence>
 
-      {/* 场景2: 罗斯柴尔德家族简介 (30-90s) */}
+      {/* Scene 2: Family Introduction (30-90s) */}
       <Sequence from={30 * fps} durationInFrames={60 * fps}>
-        <AncientMarketScene />
+        <FamilyIntroductionScene />
       </Sequence>
 
-      {/* 场景3: 滑铁卢战役 - 前奏 (90-150s) */}
+      {/* Scene 3: Battle of Waterloo Prelude (90-150s) */}
       <Sequence from={90 * fps} durationInFrames={60 * fps}>
         <BattleOfWaterloo />
       </Sequence>
 
-      {/* 场景4: 情报网 - 先人一步 (150-210s) */}
+      {/* Scene 4: Intelligence Network (150-210s) */}
       <Sequence from={150 * fps} durationInFrames={60 * fps}>
-        <BattleOfWaterloo />
+        <IntelligenceNetworkScene />
       </Sequence>
 
-      {/* 场景5: 交易所操盘 - 假情报 (210-270s) */}
+      {/* Scene 5: Stock Exchange Manipulation (210-270s) */}
       <Sequence from={210 * fps} durationInFrames={60 * fps}>
         <StockExchangeScene />
       </Sequence>
 
-      {/* 场景6: 20倍收益 - 真相揭晓 (270-330s) */}
+      {/* Scene 6: Twenty Times Profit (270-330s) */}
       <Sequence from={270 * fps} durationInFrames={60 * fps}>
-        <StockExchangeScene />
+        <TwentyTimesProfitScene />
       </Sequence>
 
-      {/* 场景7: 五兄弟欧洲布局 (330-390s) */}
+      {/* Scene 7: Five Brothers European Empire (330-390s) */}
       <Sequence from={330 * fps} durationInFrames={60 * fps}>
-        <AncientMarketScene />
+        <EuropeanEmpireScene />
       </Sequence>
 
-      {/* 场景8: 时代背景 - 英格兰银行 (390-450s) */}
+      {/* Scene 8: Bank of England Background (390-450s) */}
       <Sequence from={390 * fps} durationInFrames={60 * fps}>
-        <AncientMarketScene />
+        <BankOfEnglandScene />
       </Sequence>
 
-      {/* 场景9: 老罗斯柴尔德的第一桶金 (450-510s) */}
+      {/* Scene 9: Mayer's First Fortune (450-510s) */}
       <Sequence from={450 * fps} durationInFrames={60 * fps}>
-        <AncientMarketScene />
+        <MayersFirstFortuneScene />
       </Sequence>
 
-      {/* 场景10: 内森主宰伦敦金融城 (510-570s) */}
+      {/* Scene 10: Nathan Conquers London (510-570s) */}
       <Sequence from={510 * fps} durationInFrames={60 * fps}>
-        <StockExchangeScene />
+        <NathansLondonScene />
       </Sequence>
 
-      {/* 场景11: 詹姆斯征服法兰西 (570-630s) */}
+      {/* Scene 11: James Conquers France (570-630s) */}
       <Sequence from={570 * fps} durationInFrames={60 * fps}>
-        <StockExchangeScene />
+        <JamesConquersFranceScene />
       </Sequence>
 
-      {/* 场景12: 所罗门问鼎奥地利 (630-690s) */}
+      {/* Scene 12: Salomon in Austria (630-690s) */}
       <Sequence from={630 * fps} durationInFrames={60 * fps}>
-        <AncientMarketScene />
+        <SalomonInAustriaScene />
       </Sequence>
 
-      {/* 场景13: 金融帝国全盛 (690-750s) */}
+      {/* Scene 13: Financial Empire Peak (690-750s) */}
       <Sequence from={690 * fps} durationInFrames={60 * fps}>
-        <AncientMarketScene />
+        <FinancialEmpirePeakScene />
       </Sequence>
 
-      {/* 场景14: 总结 (750-780s) */}
+      {/* Scene 14: Episode Summary (750-780s) */}
       <Sequence from={750 * fps} durationInFrames={30 * fps}>
-        <AncientMarketScene />
+        <Episode02SummaryScene />
       </Sequence>
 
       {/* 字幕层 - 覆盖整个视频 */}
