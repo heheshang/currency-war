@@ -6,7 +6,6 @@ import {
   FadeInTransition,
   ElasticText,
 } from "../animations";
-import { CartoonCharacter } from "../characters/CartoonCharacter";
 
 const InflationBeast: React.FC<{
   size: number;
@@ -178,25 +177,38 @@ export const InflationScene: React.FC = () => {
         </div>
       </FadeInTransition>
 
-      <CartoonCharacter
-        x={20}
-        y={75}
-        scale={0.7}
-        characterType="victim"
-        action="idle"
-        facingRight={true}
-        frame={frame}
-      />
+      {/* 消失的财富符号 - 代表被通胀吞噬的财富 */}
+      {Array.from({ length: 6 }).map((_, i) => {
+        const angle = (i / 6) * 360 + frame * 0.5;
+        const radius = 25 + Math.sin(frame * 0.02 + i) * 5;
+        const x = Math.cos((angle * Math.PI) / 180) * radius;
+        const y = Math.sin((angle * Math.PI) / 180) * radius;
+        const opacity = 0.3 + Math.sin(frame * 0.03 + i * 0.5) * 0.2;
 
-      <CartoonCharacter
-        x={80}
-        y={75}
-        scale={0.7}
-        characterType="victim"
-        action="think"
-        facingRight={false}
-        frame={frame + 20}
-      />
+        return (
+          <div
+            key={i}
+            style={{
+              position: "absolute",
+              left: `${50 + x}%`,
+              top: `${65 + y}%`,
+              transform: "translate(-50%, -50%)",
+              opacity,
+            }}
+          >
+            <div
+              style={{
+                width: 30,
+                height: 30,
+                background: "radial-gradient(circle at 30% 30%, #FFD700, #B8860B)",
+                borderRadius: "50%",
+                boxShadow: "0 0 15px rgba(255, 215, 0, 0.4)",
+                border: "2px solid #DAA520",
+              }}
+            />
+          </div>
+        );
+      })}
     </AbsoluteFill>
   );
 };

@@ -11,29 +11,41 @@ import { AbsoluteFill, useCurrentFrame, interpolate } from "remotion";
 export const NoFedNoWarScene: React.FC = () => {
   const frame = useCurrentFrame();
 
-  const opacity = interpolate(frame, [0, 45], [0, 1], { extrapolateRight: "clamp" });
+  const opacity = interpolate(frame, [0, 45], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   // 时间线动画
-  const timelineProgress = interpolate(frame, [0, 900], [0, 1], { extrapolateRight: "clamp" });
+  const timelineProgress = interpolate(frame, [0, 900], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   // 1913年美联储成立指示器
-  const fedFoundedOpacity = interpolate(frame, [120, 240], [0, 1], { extrapolateRight: "clamp" });
+  const fedFoundedOpacity = interpolate(frame, [120, 240], [0, 1], {
+    extrapolateRight: "clamp",
+  });
   const fedFoundedPulse = Math.sin(frame * 0.1) * 0.2 + 0.8;
 
   // 1914年战争开始
-  const warStartOpacity = interpolate(frame, [300, 450], [0, 1], { extrapolateRight: "clamp" });
-  const warIconScale = interpolate(frame, [450, 540], [0, 1], { extrapolateRight: "clamp" });
+  const warStartOpacity = interpolate(frame, [300, 450], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   // 1917年美国参战
-  const usEntryOpacity = interpolate(frame, [600, 750], [0, 1], { extrapolateRight: "clamp" });
+  const usEntryOpacity = interpolate(frame, [600, 750], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   // 标题淡入
-  const titleOpacity = interpolate(frame, [60, 150], [0, 1], { extrapolateRight: "clamp" });
+  const titleOpacity = interpolate(frame, [60, 150], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   return (
     <AbsoluteFill
       style={{
-        background: "radial-gradient(circle at center, #1e1a2e 0%, #0d1117 100%)",
+        background:
+          "radial-gradient(circle at center, #1e1a2e 0%, #0d1117 100%)",
       }}
     >
       {/* 标题 */}
@@ -102,11 +114,30 @@ export const NoFedNoWarScene: React.FC = () => {
 
           {/* 1913年 - 美联储成立 */}
           <g opacity={fedFoundedOpacity}>
-            <circle cx="150" cy="100" r="12" fill="#ffd700" opacity={fedFoundedPulse} />
-            <text x="150" y="70" fontSize="16" fill="#ffd700" textAnchor="middle" fontWeight="600">
+            <circle
+              cx="150"
+              cy="100"
+              r="12"
+              fill="#ffd700"
+              opacity={fedFoundedPulse}
+            />
+            <text
+              x="150"
+              y="70"
+              fontSize="16"
+              fill="#ffd700"
+              textAnchor="middle"
+              fontWeight="600"
+            >
               1913
             </text>
-            <text x="150" y="140" fontSize="14" fill="#9ca3af" textAnchor="middle">
+            <text
+              x="150"
+              y="140"
+              fontSize="14"
+              fill="#9ca3af"
+              textAnchor="middle"
+            >
               Fed Founded
             </text>
           </g>
@@ -114,10 +145,23 @@ export const NoFedNoWarScene: React.FC = () => {
           {/* 1914年 - 战争开始 */}
           <g opacity={warStartOpacity}>
             <circle cx="300" cy="100" r="10" fill="#8b0000" />
-            <text x="300" y="70" fontSize="16" fill="#8b0000" textAnchor="middle" fontWeight="600">
+            <text
+              x="300"
+              y="70"
+              fontSize="16"
+              fill="#8b0000"
+              textAnchor="middle"
+              fontWeight="600"
+            >
               1914
             </text>
-            <text x="300" y="140" fontSize="14" fill="#9ca3af" textAnchor="middle">
+            <text
+              x="300"
+              y="140"
+              fontSize="14"
+              fill="#9ca3af"
+              textAnchor="middle"
+            >
               WWI Begins
             </text>
           </g>
@@ -125,10 +169,23 @@ export const NoFedNoWarScene: React.FC = () => {
           {/* 1917年 - 美国参战 */}
           <g opacity={usEntryOpacity}>
             <circle cx="550" cy="100" r="10" fill="#4B5320" />
-            <text x="550" y="70" fontSize="16" fill="#4B5320" textAnchor="middle" fontWeight="600">
+            <text
+              x="550"
+              y="70"
+              fontSize="16"
+              fill="#4B5320"
+              textAnchor="middle"
+              fontWeight="600"
+            >
               1917
             </text>
-            <text x="550" y="140" fontSize="14" fill="#9ca3af" textAnchor="middle">
+            <text
+              x="550"
+              y="140"
+              fontSize="14"
+              fill="#9ca3af"
+              textAnchor="middle"
+            >
               US Enters War
             </text>
           </g>
@@ -164,29 +221,88 @@ export const NoFedNoWarScene: React.FC = () => {
           />
 
           {/* 英国 */}
-          <circle cx="120" cy="90" r="15" fill="rgba(139, 0, 0, 0.3)" stroke="#8b0000" strokeWidth="2" />
-          <text x="120" y="125" fontSize="12" fill="#9ca3af" textAnchor="middle">
+          <circle
+            cx="120"
+            cy="90"
+            r="15"
+            fill="rgba(139, 0, 0, 0.3)"
+            stroke="#8b0000"
+            strokeWidth="2"
+          />
+          <text
+            x="120"
+            y="125"
+            fontSize="12"
+            fill="#9ca3af"
+            textAnchor="middle"
+          >
             Britain
           </text>
 
           {/* 法国 */}
-          <circle cx="160" cy="110" r="12" fill="rgba(139, 0, 0, 0.3)" stroke="#8b0000" strokeWidth="2" />
-          <text x="160" y="145" fontSize="12" fill="#9ca3af" textAnchor="middle">
+          <circle
+            cx="160"
+            cy="110"
+            r="12"
+            fill="rgba(139, 0, 0, 0.3)"
+            stroke="#8b0000"
+            strokeWidth="2"
+          />
+          <text
+            x="160"
+            y="145"
+            fontSize="12"
+            fill="#9ca3af"
+            textAnchor="middle"
+          >
             France
           </text>
 
           {/* 德国 */}
-          <circle cx="200" cy="95" r="15" fill="rgba(139, 0, 0, 0.3)" stroke="#8b0000" strokeWidth="2" />
-          <text x="200" y="130" fontSize="12" fill="#9ca3af" textAnchor="middle">
+          <circle
+            cx="200"
+            cy="95"
+            r="15"
+            fill="rgba(139, 0, 0, 0.3)"
+            stroke="#8b0000"
+            strokeWidth="2"
+          />
+          <text
+            x="200"
+            y="130"
+            fontSize="12"
+            fill="#9ca3af"
+            textAnchor="middle"
+          >
             Germany
           </text>
 
           {/* 美国（中立，右侧） */}
-          <circle cx="320" cy="120" r="18" fill="rgba(75, 123, 32, 0.4)" stroke="#4B5320" strokeWidth="2" />
-          <text x="320" y="160" fontSize="12" fill="#ffd700" textAnchor="middle" fontWeight="600">
+          <circle
+            cx="320"
+            cy="120"
+            r="18"
+            fill="rgba(75, 123, 32, 0.4)"
+            stroke="#4B5320"
+            strokeWidth="2"
+          />
+          <text
+            x="320"
+            y="160"
+            fontSize="12"
+            fill="#ffd700"
+            textAnchor="middle"
+            fontWeight="600"
+          >
             USA
           </text>
-          <text x="320" y="180" fontSize="10" fill="#9ca3af" textAnchor="middle">
+          <text
+            x="320"
+            y="180"
+            fontSize="10"
+            fill="#9ca3af"
+            textAnchor="middle"
+          >
             Neutral
           </text>
         </svg>

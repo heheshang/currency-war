@@ -1,6 +1,6 @@
 import React from "react";
 import { AbsoluteFill, useCurrentFrame, interpolate } from "remotion";
-import { CartoonCharacter } from "../../characters/CartoonCharacter";
+// 真实历史人物替换：秘密会议使用抽象剪影
 
 /**
  * Conspiracy1927Scene - 场景8：1927年秘密会议
@@ -12,27 +12,36 @@ import { CartoonCharacter } from "../../characters/CartoonCharacter";
 export const Conspiracy1927Scene: React.FC = () => {
   const frame = useCurrentFrame();
 
-  const opacity = interpolate(frame, [0, 45], [0, 1], { extrapolateRight: "clamp" });
-
   // 密室淡入
-  const roomOpacity = interpolate(frame, [60, 180], [0, 1], { extrapolateRight: "clamp" });
+  const roomOpacity = interpolate(frame, [60, 180], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   // 银行家角色淡入
-  const bankerOpacity = interpolate(frame, [180, 360], [0, 1], { extrapolateRight: "clamp" });
+  const bankerOpacity = interpolate(frame, [180, 360], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   // 文件淡入
-  const documentOpacity = interpolate(frame, [420, 540], [0, 1], { extrapolateRight: "clamp" });
+  const documentOpacity = interpolate(frame, [420, 540], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   // 地图显示
-  const mapOpacity = interpolate(frame, [120, 300], [0, 1], { extrapolateRight: "clamp" });
+  const mapOpacity = interpolate(frame, [120, 300], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   // 标题
-  const titleOpacity = interpolate(frame, [60, 150], [0, 1], { extrapolateRight: "clamp" });
+  const titleOpacity = interpolate(frame, [60, 150], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   return (
     <AbsoluteFill
       style={{
-        background: "radial-gradient(circle at center, #1e1a2e 0%, #0d1117 100%)",
+        background:
+          "radial-gradient(circle at center, #1e1a2e 0%, #0d1117 100%)",
       }}
     >
       {/* 标题 */}
@@ -91,20 +100,65 @@ export const Conspiracy1927Scene: React.FC = () => {
           <rect width="300" height="200" fill="url(#oceanGrad)" opacity="0.3" />
 
           {/* 英国 */}
-          <ellipse cx="60" cy="70" rx="35" ry="25" fill="rgba(75, 123, 32, 0.3)" stroke="#4B5320" strokeWidth="2" />
-          <text x="60" y="110" fontSize="14" fill="#ffd700" textAnchor="middle" fontWeight="600">
+          <ellipse
+            cx="60"
+            cy="70"
+            rx="35"
+            ry="25"
+            fill="rgba(75, 123, 32, 0.3)"
+            stroke="#4B5320"
+            strokeWidth="2"
+          />
+          <text
+            x="60"
+            y="110"
+            fontSize="14"
+            fill="#ffd700"
+            textAnchor="middle"
+            fontWeight="600"
+          >
             England
           </text>
 
           {/* 美国 */}
-          <ellipse cx="200" cy="90" rx="45" ry="30" fill="rgba(75, 123, 32, 0.3)" stroke="#4B5320" strokeWidth="2" />
-          <text x="200" y="135" fontSize="14" fill="#ffd700" textAnchor="middle" fontWeight="600">
+          <ellipse
+            cx="200"
+            cy="90"
+            rx="45"
+            ry="30"
+            fill="rgba(75, 123, 32, 0.3)"
+            stroke="#4B5320"
+            strokeWidth="2"
+          />
+          <text
+            x="200"
+            y="135"
+            fontSize="14"
+            fill="#ffd700"
+            textAnchor="middle"
+            fontWeight="600"
+          >
             USA
           </text>
 
           {/* 德国 */}
-          <ellipse cx="260" cy="80" rx="30" ry="22" fill="rgba(75, 123, 32, 0.3)" stroke="#4B5320" strokeWidth="2" />
-          <text x="260" y="115" fontSize="14" fill="#ffd700" textAnchor="middle" fontWeight="600">
+          <ellipse
+            cx="260"
+            cy="80"
+            rx="30"
+            ry="22"
+            fill="rgba(75, 123, 32, 0.3)"
+            stroke="#4B5320"
+            strokeWidth="2"
+          />
+          <text
+            x="260"
+            y="115"
+            fontSize="14"
+            fill="#ffd700"
+            textAnchor="middle"
+            fontWeight="600"
+          >
             Germany
           </text>
 
@@ -203,9 +257,7 @@ export const Conspiracy1927Scene: React.FC = () => {
               >
                 Benjamin Strong
               </div>
-              <div style={{ fontSize: 11, color: "#9ca3af" }}>
-                NY Fed
-              </div>
+              <div style={{ fontSize: 11, color: "#9ca3af" }}>NY Fed</div>
             </div>
 
             <div style={{ textAlign: "center" }}>
@@ -219,9 +271,7 @@ export const Conspiracy1927Scene: React.FC = () => {
               >
                 Hjalmar Schacht
               </div>
-              <div style={{ fontSize: 11, color: "#9ca3af" }}>
-                Reichsbank
-              </div>
+              <div style={{ fontSize: 11, color: "#9ca3af" }}>Reichsbank</div>
             </div>
           </div>
 
@@ -254,32 +304,39 @@ export const Conspiracy1927Scene: React.FC = () => {
             opacity: bankerOpacity,
           }}
         >
-          <CartoonCharacter
-            x={-100}
-            y={0}
-            scale={0.8}
-            characterType="banker"
-            action="think"
-            facingRight={true}
-            frame={frame}
+          {/* 抽象银行家剪影 */}
+          <div
+            style={{
+              position: "absolute",
+              width: 60,
+              height: 80,
+              background:
+                "linear-gradient(180deg, rgba(30, 58, 90, 0.8) 0%, rgba(139, 0, 0, 0.6) 100%)",
+              borderRadius: "50% 50% 20px 20px",
+              boxShadow: "0 10px 30px rgba(0, 0, 0, 0.5)",
+            }}
           />
-          <CartoonCharacter
-            x={0}
-            y={0}
-            scale={0.8}
-            characterType="banker"
-            action="talk"
-            facingRight={false}
-            frame={frame}
+          <div
+            style={{
+              position: "absolute",
+              width: 60,
+              height: 80,
+              background:
+                "linear-gradient(180deg, rgba(139, 0, 0, 0.7) 0%, rgba(30, 58, 90, 0.5) 100%)",
+              borderRadius: "50% 50% 20px 20px",
+              boxShadow: "0 10px 30px rgba(0, 0, 0, 0.5)",
+            }}
           />
-          <CartoonCharacter
-            x={100}
-            y={0}
-            scale={0.8}
-            characterType="banker"
-            action="point"
-            facingRight={true}
-            frame={frame}
+          <div
+            style={{
+              position: "absolute",
+              width: 60,
+              height: 80,
+              background:
+                "linear-gradient(180deg, rgba(30, 58, 90, 0.8) 0%, rgba(139, 0, 0, 0.6) 100%)",
+              borderRadius: "50% 50% 20px 20px",
+              boxShadow: "0 10px 30px rgba(0, 0, 0, 0.5)",
+            }}
           />
         </div>
       </div>
@@ -323,13 +380,18 @@ export const Conspiracy1927Scene: React.FC = () => {
             }}
           >
             <div style={{ marginBottom: 8 }}>
-              <span style={{ color: "#22c55e", fontWeight: 600 }}>Decision:</span> Lower NY Fed rates
+              <span style={{ color: "#22c55e", fontWeight: 600 }}>
+                Decision:
+              </span>{" "}
+              Lower NY Fed rates
             </div>
             <div style={{ marginBottom: 8 }}>
-              <span style={{ color: "#22c55e", fontWeight: 600 }}>Goal:</span> Stop gold flowing to America
+              <span style={{ color: "#22c55e", fontWeight: 600 }}>Goal:</span>{" "}
+              Stop gold flowing to America
             </div>
             <div style={{ marginBottom: 8 }}>
-              <span style={{ color: "#22c55e", fontWeight: 600 }}>Result:</span> Inflate US bubble
+              <span style={{ color: "#22c55e", fontWeight: 600 }}>Result:</span>{" "}
+              Inflate US bubble
             </div>
             <div style={{ color: "#f87171", fontWeight: 600 }}>
               "The policy that led to 1929"

@@ -1,6 +1,7 @@
 import React from "react";
 import { AbsoluteFill, useCurrentFrame, interpolate } from "remotion";
-import { CartoonCharacter } from "../../characters/CartoonCharacter";
+import { HistoricalFigure } from "../../characters/HistoricalFigure";
+import { getFigure } from "../../characters/historicalFigures";
 
 /**
  * Panic1907Scene - 1907年恐慌场景
@@ -10,24 +11,39 @@ import { CartoonCharacter } from "../../characters/CartoonCharacter";
 export const Panic1907Scene: React.FC = () => {
   const frame = useCurrentFrame();
 
-  const opacity = interpolate(frame, [0, 45], [0, 1], { extrapolateRight: "clamp" });
+  // 获取摩根配置
+  const morganFigure = getFigure("jp_morgan");
+  const morganPhoto = morganFigure?.photoSrc || "";
+
+  const opacity = interpolate(frame, [0, 45], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   // 股价下跌动画
-  const stockDrop = interpolate(frame, [120, 420], [0, 200], { extrapolateRight: "clamp" });
+  const stockDrop = interpolate(frame, [120, 420], [0, 200], {
+    extrapolateRight: "clamp",
+  });
 
   // 人群恐慌动画
-  const crowdOpacity = interpolate(frame, [180, 300], [0, 1], { extrapolateRight: "clamp" });
+  const crowdOpacity = interpolate(frame, [180, 300], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   // 摩根救世主淡入
-  const morganOpacity = interpolate(frame, [480, 660], [0, 1], { extrapolateRight: "clamp" });
+  const morganOpacity = interpolate(frame, [480, 660], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   // 田纳西公司淡入
-  const tennesseeOpacity = interpolate(frame, [600, 780], [0, 1], { extrapolateRight: "clamp" });
+  const tennesseeOpacity = interpolate(frame, [600, 780], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   return (
     <AbsoluteFill
       style={{
-        background: "radial-gradient(circle at center, #1a0000 0%, #0d1117 100%)",
+        background:
+          "radial-gradient(circle at center, #1a0000 0%, #0d1117 100%)",
       }}
     >
       {/* 标题 */}
@@ -83,8 +99,22 @@ export const Panic1907Scene: React.FC = () => {
           </defs>
 
           {/* 坐标轴 */}
-          <line x1="50" y1="200" x2="450" y2="200" stroke="#4b5563" strokeWidth="1" />
-          <line x1="50" y1="50" x2="50" y2="190" stroke="#4b5563" strokeWidth="1" />
+          <line
+            x1="50"
+            y1="200"
+            x2="450"
+            y2="200"
+            stroke="#4b5563"
+            strokeWidth="1"
+          />
+          <line
+            x1="50"
+            y1="50"
+            x2="50"
+            y2="190"
+            stroke="#4b5563"
+            strokeWidth="1"
+          />
 
           {/* 股价下跌曲线 - 红色 */}
           <path
@@ -97,13 +127,25 @@ export const Panic1907Scene: React.FC = () => {
           {/* 当前价格指示器 */}
           <g transform={`translate(${250 + stockDrop}, 180)`}>
             <circle r="6" fill="#8b0000" />
-            <text x="0" y="-15" fontSize="10" fill="#8b0000" textAnchor="middle">
+            <text
+              x="0"
+              y="-15"
+              fontSize="10"
+              fill="#8b0000"
+              textAnchor="middle"
+            >
               CRASH
             </text>
           </g>
 
           {/* 标签 */}
-          <text x="250" y="230" fontSize="14" fill="#9ca3af" textAnchor="middle">
+          <text
+            x="250"
+            y="230"
+            fontSize="14"
+            fill="#9ca3af"
+            textAnchor="middle"
+          >
             Stock Market Collapse
           </text>
           <text x="250" y="30" fontSize="12" fill="#6b7280" textAnchor="middle">
@@ -147,14 +189,19 @@ export const Panic1907Scene: React.FC = () => {
           opacity: morganOpacity,
         }}
       >
-        <CartoonCharacter
+        <HistoricalFigure
           x={0}
           y={0}
           scale={1.3}
-          characterType="banker"
-          action="think"
-          facingRight={false}
+          photoSrc={morganPhoto}
+          nameEn="J. P. Morgan"
+          nameCn="约翰·皮尔庞特·摩根"
+          action="talking"
+          frameStyle="gold"
+          photoFilter="grayscale"
+          showLabel={true}
           frame={frame}
+          animEffect="fadeIn"
         />
         <div
           style={{
@@ -216,13 +263,18 @@ export const Panic1907Scene: React.FC = () => {
           </div>
           <div style={{ fontSize: 14, color: "#e8e8e8", lineHeight: "1.6" }}>
             <div style={{ marginBottom: 12 }}>
-              <span style={{ color: "#22c55e", fontWeight: 600 }}>Value:</span> $1 Billion
+              <span style={{ color: "#22c55e", fontWeight: 600 }}>Value:</span>{" "}
+              $1 Billion
             </div>
             <div style={{ marginBottom: 12 }}>
-              <span style={{ color: "#d4af37", fontWeight: 600 }}>Morgan's Cost:</span> $45 Million
+              <span style={{ color: "#d4af37", fontWeight: 600 }}>
+                Morgan's Cost:
+              </span>{" "}
+              $45 Million
             </div>
             <div style={{ marginBottom: 12 }}>
-              <span style={{ color: "#ffd700", fontWeight: 600 }}>Return:</span> 2,000%
+              <span style={{ color: "#ffd700", fontWeight: 600 }}>Return:</span>{" "}
+              2,000%
             </div>
           </div>
         </div>
@@ -239,7 +291,13 @@ export const Panic1907Scene: React.FC = () => {
           height="100"
         >
           <defs>
-            <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3">
+            <marker
+              id="arrow"
+              markerWidth="10"
+              markerHeight="10"
+              refX="8"
+              refY="3"
+            >
               <path d="M 0,0 L 0,10 L 3,5 z" fill="#ffd700" />
             </marker>
           </defs>

@@ -1,6 +1,5 @@
 import React from "react";
 import { AbsoluteFill, useCurrentFrame, interpolate } from "remotion";
-import { CartoonCharacter } from "../characters/CartoonCharacter";
 
 /**
  * DebtSpiralScene - 债务螺旋场景
@@ -138,7 +137,7 @@ export const DebtSpiralScene: React.FC = () => {
             textShadow: `0 0 30px ${getColor(r, g, b)}`,
           }}
         >
-          ${debtGrowth.toFixed(1)}T
+          {debtGrowth.toFixed(1)}T
         </div>
         <div
           style={{
@@ -152,28 +151,36 @@ export const DebtSpiralScene: React.FC = () => {
         </div>
       </div>
 
-      <CartoonCharacter
-        x={25}
-        y={70}
-        scale={0.65}
-        characterType="victim"
-        action="idle"
-        facingRight={true}
-        frame={frame}
-        clothColor="#8B4513"
-      />
-
-      <CartoonCharacter
-        x={75}
-        y={70}
-        scale={0.65}
-        characterType="victim"
-        action="think"
-        facingRight={false}
-        frame={frame + 30}
-        clothColor="#4A6741"
-      />
-
+      {/* 抽象受害者剪影 - 替换卡通人物 */}
+      <div
+        style={{
+          position: "absolute",
+          display: "flex",
+          gap: "30px",
+          left: "50%",
+          transform: "translateX(-50%)",
+          bottom: "15%",
+        }}
+      >
+        <div
+          style={{
+            width: 50,
+            height: 70,
+            background: "linear-gradient(180deg, rgba(139, 0, 0, 0.7) 0%, rgba(30, 58, 90, 0.5) 100%)",
+            borderRadius: "50% 50% 20px 20px",
+            boxShadow: "0 8px 25px rgba(0, 0, 0, 0.4)",
+          }}
+        />
+        <div
+          style={{
+            width: 50,
+            height: 70,
+            background: "linear-gradient(180deg, rgba(139, 0, 0, 0.6) 0%, rgba(30, 58, 90, 0.4) 100%)",
+            borderRadius: "50% 50% 20px 20px",
+            boxShadow: "0 8px 25px rgba(0, 0, 0, 0.4)",
+          }}
+        />
+      </div>
       {/* 警告文字 */}
       <div
         style={{

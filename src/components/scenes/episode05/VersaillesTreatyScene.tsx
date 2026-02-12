@@ -11,32 +11,45 @@ import { AbsoluteFill, useCurrentFrame, interpolate } from "remotion";
 export const VersaillesTreatyScene: React.FC = () => {
   const frame = useCurrentFrame();
 
-  const opacity = interpolate(frame, [0, 45], [0, 1], { extrapolateRight: "clamp" });
-
   // 条约文件淡入
-  const documentOpacity = interpolate(frame, [60, 180], [0, 1], { extrapolateRight: "clamp" });
-  const documentScale = interpolate(frame, [60, 150], [0.8, 1], { extrapolateRight: "clamp" });
+  const documentOpacity = interpolate(frame, [60, 180], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const documentScale = interpolate(frame, [60, 150], [0.8, 1], {
+    extrapolateRight: "clamp",
+  });
 
   // 蜡封印章淡入
-  const sealOpacity = interpolate(frame, [180, 270], [0, 1], { extrapolateRight: "clamp" });
+  const sealOpacity = interpolate(frame, [180, 270], [0, 1], {
+    extrapolateRight: "clamp",
+  });
   const sealPulse = Math.sin(frame * 0.08) * 0.1 + 0.9;
 
   // 赔偿金额滚动
-  const reparationsCounter = interpolate(frame, [300, 720], [0, 320], { extrapolateRight: "clamp" });
+  const reparationsCounter = interpolate(frame, [300, 720], [0, 320], {
+    extrapolateRight: "clamp",
+  });
 
   // 地图边界变化
-  const mapOpacity = interpolate(frame, [360, 540], [0, 1], { extrapolateRight: "clamp" });
+  const mapOpacity = interpolate(frame, [360, 540], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   // 福煦名言淡入
-  const quoteOpacity = interpolate(frame, [630, 810], [0, 1], { extrapolateRight: "clamp" });
+  const quoteOpacity = interpolate(frame, [630, 810], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   // 标题
-  const titleOpacity = interpolate(frame, [60, 150], [0, 1], { extrapolateRight: "clamp" });
+  const titleOpacity = interpolate(frame, [60, 150], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   return (
     <AbsoluteFill
       style={{
-        background: "radial-gradient(circle at center, #1e1a2e 0%, #0d1117 100%)",
+        background:
+          "radial-gradient(circle at center, #1e1a2e 0%, #0d1117 100%)",
       }}
     >
       {/* 标题 */}
@@ -150,12 +163,37 @@ export const VersaillesTreatyScene: React.FC = () => {
             }}
           >
             <svg width="80" height="80" viewBox="0 0 80 80">
-              <circle cx="40" cy="40" r="35" fill="#8b0000" opacity={sealPulse} />
-              <circle cx="40" cy="40" r="30" fill="none" stroke="#ffd700" strokeWidth="2" />
-              <text x="40" y="45" fontSize="10" fill="#ffd700" textAnchor="middle">
+              <circle
+                cx="40"
+                cy="40"
+                r="35"
+                fill="#8b0000"
+                opacity={sealPulse}
+              />
+              <circle
+                cx="40"
+                cy="40"
+                r="30"
+                fill="none"
+                stroke="#ffd700"
+                strokeWidth="2"
+              />
+              <text
+                x="40"
+                y="45"
+                fontSize="10"
+                fill="#ffd700"
+                textAnchor="middle"
+              >
                 PARIS
               </text>
-              <text x="40" y="58" fontSize="8" fill="#ffd700" textAnchor="middle">
+              <text
+                x="40"
+                y="58"
+                fontSize="8"
+                fill="#ffd700"
+                textAnchor="middle"
+              >
                 1919
               </text>
             </svg>
@@ -271,7 +309,13 @@ export const VersaillesTreatyScene: React.FC = () => {
           />
 
           {/* 标签 */}
-          <text x="320" y="130" fontSize="14" fill="#9ca3af" textAnchor="middle">
+          <text
+            x="320"
+            y="130"
+            fontSize="14"
+            fill="#9ca3af"
+            textAnchor="middle"
+          >
             Territory Lost
           </text>
           <text x="300" y="50" fontSize="12" fill="#ef4444" textAnchor="middle">

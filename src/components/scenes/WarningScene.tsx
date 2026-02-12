@@ -1,7 +1,6 @@
 import React from "react";
 import { AbsoluteFill, useCurrentFrame, interpolate } from "remotion";
 import { ElasticText, ShakeAnimation, FireworksEffect } from "../animations";
-import { CartoonCharacter } from "../characters/CartoonCharacter";
 
 export const WarningScene: React.FC = () => {
   const frame = useCurrentFrame();
@@ -108,16 +107,6 @@ export const WarningScene: React.FC = () => {
           Episode 1 of 10
         </div>
       </div>
-
-      <CartoonCharacter
-        x={50}
-        y={80}
-        scale={0.8}
-        characterType="narrator"
-        action="talk"
-        facingRight={true}
-        frame={frame}
-      />
 
       <FireworksEffect startFrame={50} duration={60} />
     </AbsoluteFill>

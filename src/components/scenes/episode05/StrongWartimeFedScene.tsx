@@ -1,6 +1,7 @@
 import React from "react";
 import { AbsoluteFill, useCurrentFrame, interpolate } from "remotion";
-import { CartoonCharacter } from "../../characters/CartoonCharacter";
+import { HistoricalFigure } from "../../characters/HistoricalFigure";
+import { getFigure } from "../../characters/historicalFigures";
 
 /**
  * StrongWartimeFedScene - 场景2：斯特朗的战时美联储
@@ -12,27 +13,44 @@ import { CartoonCharacter } from "../../characters/CartoonCharacter";
 export const StrongWartimeFedScene: React.FC = () => {
   const frame = useCurrentFrame();
 
-  const opacity = interpolate(frame, [0, 45], [0, 1], { extrapolateRight: "clamp" });
+  // 获取本杰明·斯特朗配置
+  const strongFigure = getFigure("benjamin_strong");
+  const strongPhoto = strongFigure?.photoSrc || "";
+
+  const opacity = interpolate(frame, [0, 45], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   // 金币流动动画
-  const coinsFlow = interpolate(frame, [120, 540], [0, 1], { extrapolateRight: "clamp" });
+  const coinsFlow = interpolate(frame, [120, 540], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   // 国债数字增长
-  const debtCounter = interpolate(frame, [240, 720], [1, 25], { extrapolateRight: "clamp" });
+  const debtCounter = interpolate(frame, [240, 720], [1, 25], {
+    extrapolateRight: "clamp",
+  });
 
   // 斯特朗角色淡入
-  const strongOpacity = interpolate(frame, [180, 300], [0, 1], { extrapolateRight: "clamp" });
+  const strongOpacity = interpolate(frame, [180, 300], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   // 标题淡入
-  const titleOpacity = interpolate(frame, [60, 150], [0, 1], { extrapolateRight: "clamp" });
+  const titleOpacity = interpolate(frame, [60, 150], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   // 统计面板淡入
-  const statsOpacity = interpolate(frame, [360, 480], [0, 1], { extrapolateRight: "clamp" });
+  const statsOpacity = interpolate(frame, [360, 480], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   return (
     <AbsoluteFill
       style={{
-        background: "radial-gradient(circle at center, #1a2020 0%, #0d1117 100%)",
+        background:
+          "radial-gradient(circle at center, #1a2020 0%, #0d1117 100%)",
       }}
     >
       {/* 标题 */}
@@ -105,19 +123,31 @@ export const StrongWartimeFedScene: React.FC = () => {
               frame - coinFrameOffset,
               [0, 180],
               [0, 1],
-              { extrapolateRight: "clamp", extrapolateLeft: "clamp" }
+              { extrapolateRight: "clamp", extrapolateLeft: "clamp" },
             );
 
             if (coinProgress <= 0) return null;
 
             const x = interpolate(coinProgress, [0, 1], [50, 550]);
             const y = 100 + Math.sin(coinProgress * Math.PI * 2) * 15;
-            const scale = coinProgress < 0.1 || coinProgress > 0.9 ? 0 : 1;
 
             return (
               <g key={i} opacity={coinsFlow}>
-                <circle cx={x} cy={y} r="12" fill="url(#goldFlow)" stroke="#d4af37" strokeWidth="2" />
-                <text x={x} y={y + 4} fontSize="10" fill="#1a2020" textAnchor="middle">
+                <circle
+                  cx={x}
+                  cy={y}
+                  r="12"
+                  fill="url(#goldFlow)"
+                  stroke="#d4af37"
+                  strokeWidth="2"
+                />
+                <text
+                  x={x}
+                  y={y + 4}
+                  fontSize="10"
+                  fill="#1a2020"
+                  textAnchor="middle"
+                >
                   $
                 </text>
               </g>
@@ -135,44 +165,20 @@ export const StrongWartimeFedScene: React.FC = () => {
           opacity: strongOpacity,
         }}
       >
-        <CartoonCharacter
+        <HistoricalFigure
           x={0}
           y={0}
           scale={1.2}
-          characterType="banker"
-          action="point"
-          facingRight={true}
+          photoSrc={strongPhoto}
+          nameEn="Benjamin Strong"
+          nameCn="本杰明·斯特朗"
+          action="talking"
+          frameStyle="classic"
+          photoFilter="grayscale"
+          showLabel={true}
           frame={frame}
+          animEffect="slideLeft"
         />
-        <div
-          style={{
-            position: "absolute",
-            top: "-50px",
-            left: "50%",
-            transform: "translateX(-50%)",
-          }}
-        >
-          <div
-            style={{
-              fontFamily: "Cinzel, serif",
-              fontSize: 18,
-              color: "#ffd700",
-              textAlign: "center",
-              marginBottom: 4,
-            }}
-          >
-            Benjamin Strong
-          </div>
-          <div
-            style={{
-              fontSize: 14,
-              color: "#e8e8e8",
-              textAlign: "center",
-            }}
-          >
-            "Directing the flow"
-          </div>
-        </div>
       </div>
 
       {/* 国债统计 */}

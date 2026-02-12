@@ -1,6 +1,6 @@
 import React from "react";
 import { AbsoluteFill, useCurrentFrame, interpolate } from "remotion";
-import { CartoonCharacter } from "../../characters/CartoonCharacter";
+// 真实历史人物替换：通用农民角色用抽象剪影
 
 /**
  * AgriculturalDepression1921Scene - Scene 6: 1921 Agricultural Depression
@@ -12,34 +12,49 @@ import { CartoonCharacter } from "../../characters/CartoonCharacter";
 export const AgriculturalDepression1921Scene: React.FC = () => {
   const frame = useCurrentFrame();
 
-  const opacity = interpolate(frame, [0, 45], [0, 1], { extrapolateRight: "clamp" });
-
   // Farm fade-in
-  const farmOpacity = interpolate(frame, [60, 180], [0, 1], { extrapolateRight: "clamp" });
+  const farmOpacity = interpolate(frame, [60, 180], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   // Foreclosure notice fade-in
-  const noticeOpacity = interpolate(frame, [120, 270], [0, 1], { extrapolateRight: "clamp" });
+  const noticeOpacity = interpolate(frame, [120, 270], [0, 1], {
+    extrapolateRight: "clamp",
+  });
   const noticeShake = Math.sin(frame * 0.3) * 2;
 
   // Sheep fade-in
-  const sheepOpacity = interpolate(frame, [240, 390], [0, 1], { extrapolateRight: "clamp" });
+  const sheepOpacity = interpolate(frame, [240, 390], [0, 1], {
+    extrapolateRight: "clamp",
+  });
   const sheepBounce = Math.sin(frame * 0.05) * 3;
 
   // Shears animation
-  const shearsProgress = interpolate(frame, [450, 630], [0, 1], { extrapolateRight: "clamp" });
-  const shearsX = interpolate(frame, [450, 540], [30, 70], { extrapolateRight: "clamp" });
+  const shearsProgress = interpolate(frame, [450, 630], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const shearsX = interpolate(frame, [450, 540], [30, 70], {
+    extrapolateRight: "clamp",
+  });
 
   // Land acquisition chart
-  const chartOpacity = interpolate(frame, [570, 720], [0, 1], { extrapolateRight: "clamp" });
-  const chartBar = interpolate(frame, [660, 900], [0, 100], { extrapolateRight: "clamp" });
+  const chartOpacity = interpolate(frame, [570, 720], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const chartBar = interpolate(frame, [660, 900], [0, 100], {
+    extrapolateRight: "clamp",
+  });
 
   // Title
-  const titleOpacity = interpolate(frame, [60, 150], [0, 1], { extrapolateRight: "clamp" });
+  const titleOpacity = interpolate(frame, [60, 150], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   return (
     <AbsoluteFill
       style={{
-        background: "radial-gradient(circle at center, #2d1f1f 0%, #0d1117 100%)",
+        background:
+          "radial-gradient(circle at center, #2d1f1f 0%, #0d1117 100%)",
       }}
     >
       {/* Title */}
@@ -105,11 +120,46 @@ export const AgriculturalDepression1921Scene: React.FC = () => {
           <rect y="120" width="300" height="80" fill="url(#groundGrad)" />
 
           {/* Barn */}
-          <rect x="200" y="60" width="80" height="80" fill="#8B4513" opacity="0.8" />
-          <rect x="210" y="70" width="15" height="15" fill="#654321" opacity="0.5" />
-          <rect x="230" y="70" width="15" height="15" fill="#654321" opacity="0.5" />
-          <rect x="210" y="95" width="15" height="15" fill="#654321" opacity="0.5" />
-          <rect x="230" y="95" width="15" height="15" fill="#654321" opacity="0.5" />
+          <rect
+            x="200"
+            y="60"
+            width="80"
+            height="80"
+            fill="#8B4513"
+            opacity="0.8"
+          />
+          <rect
+            x="210"
+            y="70"
+            width="15"
+            height="15"
+            fill="#654321"
+            opacity="0.5"
+          />
+          <rect
+            x="230"
+            y="70"
+            width="15"
+            height="15"
+            fill="#654321"
+            opacity="0.5"
+          />
+          <rect
+            x="210"
+            y="95"
+            width="15"
+            height="15"
+            fill="#654321"
+            opacity="0.5"
+          />
+          <rect
+            x="230"
+            y="95"
+            width="15"
+            height="15"
+            fill="#654321"
+            opacity="0.5"
+          />
         </svg>
       </div>
 
@@ -186,15 +236,17 @@ export const AgriculturalDepression1921Scene: React.FC = () => {
           opacity: farmOpacity,
         }}
       >
-        <CartoonCharacter
-          x={0}
-          y={0}
-          scale={0.9}
-          characterType="victim"
-          action="idle"
-          facingRight={true}
-          frame={frame}
-          clothColor="#6B4423"
+        {/* 抽象农民剪影 */}
+        <div
+          style={{
+            position: "absolute",
+            width: 80,
+            height: 110,
+            background:
+              "linear-gradient(180deg, rgba(107, 68, 35, 0.7) 0%, rgba(62, 39, 35, 0.5) 100%)",
+            borderRadius: "50% 50% 20px 20px",
+            boxShadow: "0 12px 35px rgba(0, 0, 0, 0.5)",
+          }}
         />
         <div
           style={{
@@ -228,7 +280,15 @@ export const AgriculturalDepression1921Scene: React.FC = () => {
         <svg width="200" height="150" viewBox="0 0 200 150">
           {/* Sheep */}
           <g transform={`translate(80, ${60 + sheepBounce})`}>
-            <ellipse cx="40" cy="35" rx="30" ry="25" fill="#f5f5f4" stroke="#e5e7eb" strokeWidth="2" />
+            <ellipse
+              cx="40"
+              cy="35"
+              rx="30"
+              ry="25"
+              fill="#f5f5f4"
+              stroke="#e5e7eb"
+              strokeWidth="2"
+            />
             <circle cx="55" cy="15" r="12" fill="#1a1a1a" />
             <circle cx="28" cy="18" r="10" fill="#1a1a1a" />
             <ellipse cx="40" cy="50" rx="8" ry="5" fill="#1a1a1a" />
@@ -238,25 +298,81 @@ export const AgriculturalDepression1921Scene: React.FC = () => {
 
           {/* Shears */}
           <g transform={`translate(${shearsX}, 30)`}>
-            <ellipse cx="20" cy="40" rx="15" ry="25" fill="#c0c0c0" stroke="#ffd700" strokeWidth="2" />
+            <ellipse
+              cx="20"
+              cy="40"
+              rx="15"
+              ry="25"
+              fill="#c0c0c0"
+              stroke="#ffd700"
+              strokeWidth="2"
+            />
             <rect x="10" y="25" width="40" height="10" fill="#ffd700" />
-            <text x="20" y="60" fontSize="12" fill="#ffd700" textAnchor="middle">
+            <text
+              x="20"
+              y="60"
+              fontSize="12"
+              fill="#ffd700"
+              textAnchor="middle"
+            >
               Shearing
             </text>
-            <text x="20" y="75" fontSize="10" fill="#ffd700" textAnchor="middle">
+            <text
+              x="20"
+              y="75"
+              fontSize="10"
+              fill="#ffd700"
+              textAnchor="middle"
+            >
               Farmers
             </text>
 
             {/* Gold coins (wool) being sheared */}
             {shearsProgress > 0.3 && (
               <>
-                <circle cx="130" cy="70" r="10" fill="#ffd700" stroke="#d4af37" strokeWidth="2" opacity={shearsProgress * 0.8} />
-                <circle cx="150" cy="80" r="10" fill="#ffd700" stroke="#d4af37" strokeWidth="2" opacity={shearsProgress * 0.6} />
-                <circle cx="170" cy="70" r="10" fill="#ffd700" stroke="#d4af37" strokeWidth="2" opacity={shearsProgress * 0.4} />
-                <text x="150" y="100" fontSize="12" fill="#ffd700" textAnchor="middle">
+                <circle
+                  cx="130"
+                  cy="70"
+                  r="10"
+                  fill="#ffd700"
+                  stroke="#d4af37"
+                  strokeWidth="2"
+                  opacity={shearsProgress * 0.8}
+                />
+                <circle
+                  cx="150"
+                  cy="80"
+                  r="10"
+                  fill="#ffd700"
+                  stroke="#d4af37"
+                  strokeWidth="2"
+                  opacity={shearsProgress * 0.6}
+                />
+                <circle
+                  cx="170"
+                  cy="70"
+                  r="10"
+                  fill="#ffd700"
+                  stroke="#d4af37"
+                  strokeWidth="2"
+                  opacity={shearsProgress * 0.4}
+                />
+                <text
+                  x="150"
+                  y="100"
+                  fontSize="12"
+                  fill="#ffd700"
+                  textAnchor="middle"
+                >
                   Shearing
                 </text>
-                <text x="150" y="115" fontSize="10" fill="#ffd700" textAnchor="middle">
+                <text
+                  x="150"
+                  y="115"
+                  fontSize="10"
+                  fill="#ffd700"
+                  textAnchor="middle"
+                >
                   Farmers
                 </text>
               </>
@@ -303,32 +419,84 @@ export const AgriculturalDepression1921Scene: React.FC = () => {
             </defs>
 
             {/* Bar chart */}
-            <rect x="30" y={90 - chartBar * 0.5} width="35" height={chartBar * 0.5} fill="url(#barGrad)" />
-            <rect x="80" y={90 - chartBar * 0.7} width="35" height={chartBar * 0.7} fill="url(#barGrad)" />
-            <rect x="130" y={90 - chartBar * 0.9} width="35" height={chartBar * 0.9} fill="url(#barGrad)" />
+            <rect
+              x="30"
+              y={90 - chartBar * 0.5}
+              width="35"
+              height={chartBar * 0.5}
+              fill="url(#barGrad)"
+            />
+            <rect
+              x="80"
+              y={90 - chartBar * 0.7}
+              width="35"
+              height={chartBar * 0.7}
+              fill="url(#barGrad)"
+            />
+            <rect
+              x="130"
+              y={90 - chartBar * 0.9}
+              width="35"
+              height={chartBar * 0.9}
+              fill="url(#barGrad)"
+            />
 
             {/* Labels */}
-            <text x="47" y="110" fontSize="11" fill="#9ca3af" textAnchor="middle">
+            <text
+              x="47"
+              y="110"
+              fontSize="11"
+              fill="#9ca3af"
+              textAnchor="middle"
+            >
               1910
             </text>
-            <text x="97" y="110" fontSize="11" fill="#9ca3af" textAnchor="middle">
+            <text
+              x="97"
+              y="110"
+              fontSize="11"
+              fill="#9ca3af"
+              textAnchor="middle"
+            >
               1920
             </text>
-            <text x="147" y="110" fontSize="11" fill="#9ca3af" textAnchor="middle">
+            <text
+              x="147"
+              y="110"
+              fontSize="11"
+              fill="#9ca3af"
+              textAnchor="middle"
+            >
               1925
             </text>
 
-            <text x="65" y="30" fontSize="12" fill="#ffd700" textAnchor="middle" fontWeight="600">
+            <text
+              x="65"
+              y="30"
+              fontSize="12"
+              fill="#ffd700"
+              textAnchor="middle"
+              fontWeight="600"
+            >
               Farmers' Land Share
             </text>
           </svg>
 
-          <div style={{ fontSize: 12, color: "#e8e8e8", marginTop: 12, lineHeight: "1.6" }}>
+          <div
+            style={{
+              fontSize: 12,
+              color: "#e8e8e8",
+              marginTop: 12,
+              lineHeight: "1.6",
+            }}
+          >
             <div style={{ marginBottom: 8 }}>
-              <span style={{ color: "#ef4444" }}>1920:</span> Farm prices collapse 50%
+              <span style={{ color: "#ef4444" }}>1920:</span> Farm prices
+              collapse 50%
             </div>
             <div style={{ marginBottom: 8 }}>
-              <span style={{ color: "#ef4444" }}>1921:</span> 30% of farms face foreclosure
+              <span style={{ color: "#ef4444" }}>1921:</span> 30% of farms face
+              foreclosure
             </div>
             <div style={{ color: "#22c55e", fontWeight: 600 }}>
               Banks acquire millions of acres

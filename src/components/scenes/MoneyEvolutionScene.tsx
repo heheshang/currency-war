@@ -1,7 +1,6 @@
 import React from "react";
 import { AbsoluteFill, useCurrentFrame, interpolate } from "remotion";
 import { FadeInTransition, PulseAnimation, ElasticText } from "../animations";
-import { CartoonCharacter } from "../characters/CartoonCharacter";
 
 /**
  * MoneyEvolutionScene - 货币演变动画场景
@@ -312,25 +311,38 @@ export const MoneyEvolutionScene: React.FC = () => {
           "Government-declared money, no gold backing"}
       </div>
 
-      <CartoonCharacter
-        x={15}
-        y={65}
-        scale={0.7}
-        characterType="banker"
-        action="point"
-        facingRight={true}
-        frame={frame}
-      />
+      {/* 装饰性金币 - 增强视觉效果 */}
+      {Array.from({ length: 8 }).map((_, i) => {
+        const angle = (i / 8) * 360 + frame * 0.2;
+        const radius = 35;
+        const x = Math.cos((angle * Math.PI) / 180) * radius;
+        const y = Math.sin((angle * Math.PI) / 180) * radius;
+        const scale = 0.5 + Math.sin(frame * 0.05 + i * 0.8) * 0.2;
 
-      <CartoonCharacter
-        x={85}
-        y={65}
-        scale={0.7}
-        characterType="citizen"
-        action="think"
-        facingRight={false}
-        frame={frame + 15}
-      />
+        return (
+          <div
+            key={i}
+            style={{
+              position: "absolute",
+              left: `${50 + x}%`,
+              top: `${65 + y}%`,
+              transform: "translate(-50%, -50%)",
+              opacity: 0.4,
+            }}
+          >
+            <div
+              style={{
+                width: 20 * scale,
+                height: 20 * scale,
+                background: "radial-gradient(circle at 30% 30%, #FFD700, #B8860B)",
+                borderRadius: "50%",
+                boxShadow: "0 0 10px rgba(255, 215, 0, 0.3)",
+                border: "1px solid #DAA520",
+              }}
+            />
+          </div>
+        );
+      })}
     </AbsoluteFill>
   );
 };

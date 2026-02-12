@@ -1,6 +1,5 @@
 import React from "react";
 import { AbsoluteFill, useCurrentFrame, interpolate, spring } from "remotion";
-import { CartoonCharacter } from "../../characters/CartoonCharacter";
 import { LegalDocument } from "../../documents/CurrencyBill";
 
 /**
@@ -132,16 +131,16 @@ export const NationalBankActScene: React.FC = () => {
           opacity: explanationOpacity,
         }}
       >
-        <CartoonCharacter
-          x={0}
-          y={0}
-          scale={0.9}
-          characterType="banker"
-          action="talk"
-          facingRight={false}
-          frame={frame}
-          skinColor="#F5DEB3"
-          clothColor="#1E3A5A"
+        {/* 抽象银行家剪影 */}
+        <div
+          style={{
+            position: "absolute",
+            width: 90,
+            height: 120,
+            background: "linear-gradient(180deg, rgba(139, 0, 0, 0.7) 0%, rgba(30, 58, 90, 0.5) 100%)",
+            borderRadius: "50% 50% 20px 20px",
+            boxShadow: "0 10px 25px rgba(0, 0, 0, 0.5)",
+          }}
         />
         <div
           style={{

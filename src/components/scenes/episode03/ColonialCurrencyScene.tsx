@@ -1,6 +1,7 @@
 import React from "react";
 import { AbsoluteFill, useCurrentFrame, interpolate, spring } from "remotion";
-import { CartoonCharacter } from "../../characters/CartoonCharacter";
+import { HistoricalFigure } from "../../characters/HistoricalFigure";
+import { getFigure } from "../../characters/historicalFigures";
 import { CurrencyBill } from "../../documents/CurrencyBill";
 
 /**
@@ -12,17 +13,34 @@ import { CurrencyBill } from "../../documents/CurrencyBill";
 export const ColonialCurrencyScene: React.FC = () => {
   const frame = useCurrentFrame();
 
+  // 获取富兰克林配置
+  const franklinFigure = getFigure("benjamin_franklin");
+  const franklinPhoto = franklinFigure?.photoSrc || "";
+
   // 动画时序
-  const titleOpacity = interpolate(frame, [0, 30], [0, 1], { extrapolateRight: "clamp" });
-  const franklinEnter = spring({ frame: frame - 60, fps: 30, config: { damping: 15, stiffness: 60 } });
-  const currencyShow = interpolate(frame, [120, 180], [0, 1], { extrapolateRight: "clamp" });
-  const actShow = interpolate(frame, [300, 390], [0, 1], { extrapolateRight: "clamp" });
-  const quoteOpacity = interpolate(frame, [210, 300], [0, 1], { extrapolateRight: "clamp" });
+  const titleOpacity = interpolate(frame, [0, 30], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const franklinEnter = spring({
+    frame: frame - 60,
+    fps: 30,
+    config: { damping: 15, stiffness: 60 },
+  });
+  const currencyShow = interpolate(frame, [120, 180], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const actShow = interpolate(frame, [300, 390], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const quoteOpacity = interpolate(frame, [210, 300], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   return (
     <AbsoluteFill
       style={{
-        background: "radial-gradient(circle at center, #1a1a2e 0%, #0d1117 100%)",
+        background:
+          "radial-gradient(circle at center, #1a1a2e 0%, #0d1117 100%)",
       }}
     >
       {/* 标题 */}
@@ -69,18 +87,21 @@ export const ColonialCurrencyScene: React.FC = () => {
           transform: `translate(-50%, -50%) scale(${franklinEnter})`,
         }}
       >
-        <CartoonCharacter
+        <HistoricalFigure
           x={0}
           y={0}
-          scale={1.2}
-          characterType="politician"
-          action="talk"
-          facingRight={true}
+          scale={1.1}
+          photoSrc={franklinPhoto}
+          nameEn="Benjamin Franklin"
+          nameCn="本杰明·富兰克林"
+          action="talking"
+          frameStyle="vintage"
+          photoFilter="vintage"
+          showLabel={true}
           frame={frame}
-          skinColor="#F5DEB3"
-          clothColor="#4A6741" // 富兰克林常穿的绿色
+          animEffect="fadeIn"
         />
-        {/* 名字标签 */}
+        {/* 名字标签由组件内部显示 */}
         <div
           style={{
             position: "absolute",
@@ -151,7 +172,8 @@ export const ColonialCurrencyScene: React.FC = () => {
             fontStyle: "italic",
           }}
         >
-          "In the colonies, we issue our own money, called Colonial Script. We issue it in proper proportion to the demands of trade and industry."
+          "In the colonies, we issue our own money, called Colonial Script. We
+          issue it in proper proportion to the demands of trade and industry."
         </div>
         <div
           style={{
@@ -212,7 +234,9 @@ export const ColonialCurrencyScene: React.FC = () => {
           bottom: "5%",
           left: "50%",
           transform: "translateX(-50%)",
-          opacity: interpolate(frame, [450, 540], [0, 1], { extrapolateRight: "clamp" }),
+          opacity: interpolate(frame, [450, 540], [0, 1], {
+            extrapolateRight: "clamp",
+          }),
           textAlign: "center",
         }}
       >
@@ -223,7 +247,8 @@ export const ColonialCurrencyScene: React.FC = () => {
             color: "#9ca3af",
           }}
         >
-          <span style={{ color: "#ffd700", fontWeight: 600 }}>Result:</span> Colonial prosperity collapses. Unemployment spreads.
+          <span style={{ color: "#ffd700", fontWeight: 600 }}>Result:</span>{" "}
+          Colonial prosperity collapses. Unemployment spreads.
         </div>
         <div
           style={{

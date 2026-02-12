@@ -6,7 +6,6 @@ import {
   FloatAnimation,
   ElasticText,
 } from "../animations";
-import { CartoonCharacter } from "../characters/CartoonCharacter";
 
 /**
  * AncientMarketScene - 古代集市场景
@@ -1377,26 +1376,6 @@ export const AncientMarketScene: React.FC = () => {
         }}
       />
 
-      <CartoonCharacter
-        x={20}
-        y={75}
-        scale={0.8}
-        characterType="merchant"
-        action="talk"
-        facingRight={true}
-        frame={frame}
-      />
-
-      <CartoonCharacter
-        x={30}
-        y={75}
-        scale={0.8}
-        characterType="citizen"
-        action="talk"
-        facingRight={false}
-        frame={frame + 10}
-      />
-
       <TalkingPair
         x={75}
         delay={60}
@@ -1418,25 +1397,6 @@ export const AncientMarketScene: React.FC = () => {
         }}
       />
 
-      <CartoonCharacter
-        x={70}
-        y={75}
-        scale={0.85}
-        characterType="merchant"
-        action="wave"
-        facingRight={true}
-        frame={frame + 20}
-      />
-
-      <CartoonCharacter
-        x={80}
-        y={75}
-        scale={0.85}
-        characterType="citizen"
-        action="wave"
-        facingRight={false}
-        frame={frame + 25}
-      />
       <TalkingPair
         x={75}
         delay={60}

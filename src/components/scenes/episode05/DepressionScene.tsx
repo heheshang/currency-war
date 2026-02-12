@@ -1,5 +1,5 @@
 import React from "react";
-import { AbsoluteFill, useCurrentFrame, interpolate } from "remotion";
+import { AbsoluteFill, useCurrentFrame, interpolate, random } from "remotion";
 
 /**
  * DepressionScene - Scene 12: The Great Depression
@@ -11,8 +11,6 @@ import { AbsoluteFill, useCurrentFrame, interpolate } from "remotion";
 export const DepressionScene: React.FC = () => {
   const frame = useCurrentFrame();
 
-  const opacity = interpolate(frame, [0, 45], [0, 1], { extrapolateRight: "clamp" });
-
   // 沙尘粒子
   const dustParticles = Array.from({ length: 30 }).map((_, i) => {
     const startFrame = 60 + i * 15;
@@ -20,13 +18,13 @@ export const DepressionScene: React.FC = () => {
       frame,
       [startFrame, startFrame + 300],
       [0, 1],
-      { extrapolateRight: "clamp", extrapolateLeft: "clamp" }
+      { extrapolateRight: "clamp", extrapolateLeft: "clamp" },
     );
 
     if (progress <= 0 || progress >= 1) return null;
 
-    const x = 10 + Math.random() * 80;
-    const y = 20 + Math.random() * 60;
+    const x = 10 + random(null) * 80;
+    const y = 20 + random(null) * 60;
     const size = 2 + progress * 4;
 
     return (
@@ -47,23 +45,32 @@ export const DepressionScene: React.FC = () => {
   });
 
   // 人群剪影
-  const crowdOpacity = interpolate(frame, [120, 240], [0, 1], { extrapolateRight: "clamp" });
+  const crowdOpacity = interpolate(frame, [120, 240], [0, 1], {
+    extrapolateRight: "clamp",
+  });
   const crowdShift = Math.sin(frame * 0.02) * 2;
 
   // 止赎牌动画
-  const signCount = interpolate(frame, [240, 720], [0, 1], { extrapolateRight: "clamp" });
+  const signCount = interpolate(frame, [240, 720], [0, 1], {
+    extrapolateRight: "clamp",
+  });
   const signAppear = Math.floor(signCount * 10);
 
   // 统计淡入
-  const statsOpacity = interpolate(frame, [360, 540], [0, 1], { extrapolateRight: "clamp" });
+  const statsOpacity = interpolate(frame, [360, 540], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   // 标题
-  const titleOpacity = interpolate(frame, [60, 150], [0, 1], { extrapolateRight: "clamp" });
+  const titleOpacity = interpolate(frame, [60, 150], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   return (
     <AbsoluteFill
       style={{
-        background: "radial-gradient(circle at center, #3d2817 0%, #0d1117 100%)",
+        background:
+          "radial-gradient(circle at center, #3d2817 0%, #0d1117 100%)",
       }}
     >
       {/* 标题 */}
@@ -144,7 +151,14 @@ export const DepressionScene: React.FC = () => {
               borderRadius: "4px",
             }}
           >
-            <div style={{ fontSize: 12, color: "#d4a574", marginBottom: 8, fontWeight: 600 }}>
+            <div
+              style={{
+                fontSize: 12,
+                color: "#d4a574",
+                marginBottom: 8,
+                fontWeight: 600,
+              }}
+            >
               🍞 BREAD LINE
             </div>
             <div style={{ fontSize: 11, color: "#9ca3af" }}>
@@ -169,7 +183,7 @@ export const DepressionScene: React.FC = () => {
         {Array.from({ length: Math.min(signAppear, 10) }).map((_, i) => {
           const x = 10 + (i % 3) * 25;
           const y = 10 + Math.floor(i / 3) * 40;
-          const rotation = -5 + Math.random() * 10;
+          const rotation = -5 + random(null) * 10;
 
           return (
             <div
@@ -231,13 +245,16 @@ export const DepressionScene: React.FC = () => {
 
           <div style={{ fontSize: 13, color: "#e8e8e8", lineHeight: "1.8" }}>
             <div style={{ marginBottom: 12 }}>
-              <span style={{ color: "#ef4444" }}>Unemployment:</span> 25% of workforce
+              <span style={{ color: "#ef4444" }}>Unemployment:</span> 25% of
+              workforce
             </div>
             <div style={{ marginBottom: 12 }}>
-              <span style={{ color: "#ef4444" }}>Banks failed:</span> 8,812 in 4 years
+              <span style={{ color: "#ef4444" }}>Banks failed:</span> 8,812 in 4
+              years
             </div>
             <div style={{ marginBottom: 12 }}>
-              <span style={{ color: "#ef4444" }}>GDP fell:</span> 45% (1929-1933)
+              <span style={{ color: "#ef4444" }}>GDP fell:</span> 45%
+              (1929-1933)
             </div>
             <div style={{ marginBottom: 12 }}>
               <span style={{ color: "#22c55e", fontWeight: 600 }}>

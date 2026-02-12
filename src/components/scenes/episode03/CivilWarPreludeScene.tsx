@@ -1,7 +1,6 @@
 import React from "react";
 import { AbsoluteFill, useCurrentFrame, interpolate, spring } from "remotion";
 import EuropeanMap from "../../maps/EuropeanMap";
-import { CartoonCharacter } from "../../characters/CartoonCharacter";
 
 /**
  * CivilWarPreludeScene - 内战前奏场景
@@ -82,16 +81,16 @@ export const CivilWarPreludeScene: React.FC = () => {
           zIndex: 10,
         }}
       >
-        <CartoonCharacter
-          x={0}
-          y={0}
-          scale={1}
-          characterType="banker"
-          action="think"
-          facingRight={false}
-          frame={frame}
-          skinColor="#F5DEB3"
-          clothColor="#1E3A5A"
+        {/* 抽象银行家剪影 */}
+        <div
+          style={{
+            position: "absolute",
+            width: 100,
+            height: 140,
+            background: "linear-gradient(180deg, rgba(139, 0, 0, 0.7) 0%, rgba(30, 58, 90, 0.5) 100%)",
+            borderRadius: "50% 50% 20px 20px",
+            boxShadow: "0 10px 25px rgba(0, 0, 0, 0.5)",
+          }}
         />
         <div
           style={{

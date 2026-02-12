@@ -1,6 +1,6 @@
 import React from "react";
 import { AbsoluteFill, useCurrentFrame, interpolate } from "remotion";
-import { CartoonCharacter } from "../../characters/CartoonCharacter";
+// 真实历史人物替换：通用银行家角色用抽象剪影
 
 /**
  * FireSaleScene - 场景11：银行家廉价收购一切
@@ -12,24 +12,31 @@ import { CartoonCharacter } from "../../characters/CartoonCharacter";
 export const FireSaleScene: React.FC = () => {
   const frame = useCurrentFrame();
 
-  const opacity = interpolate(frame, [0, 45], [0, 1], { extrapolateRight: "clamp" });
-
   // 银行家角色淡入
-  const bankerOpacity = interpolate(frame, [60, 180], [0, 1], { extrapolateRight: "clamp" });
+  const bankerOpacity = interpolate(frame, [60, 180], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   // 价格标签动画
-  const priceDrop = interpolate(frame, [180, 540], [0, 100], { extrapolateRight: "clamp" });
+  const priceDrop = interpolate(frame, [180, 540], [0, 100], {
+    extrapolateRight: "clamp",
+  });
 
   // 收购项目显示
-  const itemsOpacity = interpolate(frame, [240, 420], [0, 1], { extrapolateRight: "clamp" });
+  const itemsOpacity = interpolate(frame, [240, 420], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   // 标题
-  const titleOpacity = interpolate(frame, [60, 150], [0, 1], { extrapolateRight: "clamp" });
+  const titleOpacity = interpolate(frame, [60, 150], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   return (
     <AbsoluteFill
       style={{
-        background: "radial-gradient(circle at center, #1a0d0d 0%, #0d1117 100%)",
+        background:
+          "radial-gradient(circle at center, #1a0d0d 0%, #0d1117 100%)",
       }}
     >
       {/* 标题 */}
@@ -76,14 +83,17 @@ export const FireSaleScene: React.FC = () => {
           opacity: bankerOpacity,
         }}
       >
-        <CartoonCharacter
-          x={0}
-          y={0}
-          scale={1.3}
-          characterType="banker"
-          action="point"
-          facingRight={true}
-          frame={frame}
+        {/* 抽象银行家剪影 */}
+        <div
+          style={{
+            position: "absolute",
+            width: 90,
+            height: 130,
+            background:
+              "linear-gradient(180deg, rgba(139, 0, 0, 0.8) 0%, rgba(30, 58, 90, 0.6) 100%)",
+            borderRadius: "50% 50% 25px 25px",
+            boxShadow: "0 15px 40px rgba(0, 0, 0, 0.6)",
+          }}
         />
         <div
           style={{
@@ -147,31 +157,71 @@ export const FireSaleScene: React.FC = () => {
 
           {/* 收购项目 */}
           <div style={{ fontSize: 13, color: "#e8e8e8", lineHeight: "2" }}>
-            <div style={{ marginBottom: 12, display: "flex", alignItems: "center", gap: "8px" }}>
+            <div
+              style={{
+                marginBottom: 12,
+                display: "flex",
+                alignItems: "center",
+                gap: "8px",
+              }}
+            >
               <span style={{ fontSize: 24 }}>🏦</span>
               <span>
-                <span style={{ color: "#22c55e", fontWeight: 600 }}>Banks:</span> $1.2B → $0.05B
+                <span style={{ color: "#22c55e", fontWeight: 600 }}>
+                  Banks:
+                </span>{" "}
+                $1.2B → $0.05B
               </span>
             </div>
 
-            <div style={{ marginBottom: 12, display: "flex", alignItems: "center", gap: "8px" }}>
+            <div
+              style={{
+                marginBottom: 12,
+                display: "flex",
+                alignItems: "center",
+                gap: "8px",
+              }}
+            >
               <span style={{ fontSize: 24 }}>🏭</span>
               <span>
-                <span style={{ color: "#22c55e", fontWeight: 600 }}>Factories:</span> 90% acquired
+                <span style={{ color: "#22c55e", fontWeight: 600 }}>
+                  Factories:
+                </span>{" "}
+                90% acquired
               </span>
             </div>
 
-            <div style={{ marginBottom: 12, display: "flex", alignItems: "center", gap: "8px" }}>
+            <div
+              style={{
+                marginBottom: 12,
+                display: "flex",
+                alignItems: "center",
+                gap: "8px",
+              }}
+            >
               <span style={{ fontSize: 24 }}>🌾</span>
               <span>
-                <span style={{ color: "#22c55e", fontWeight: 600 }}>Farms:</span> 50% foreclosed
+                <span style={{ color: "#22c55e", fontWeight: 600 }}>
+                  Farms:
+                </span>{" "}
+                50% foreclosed
               </span>
             </div>
 
-            <div style={{ marginBottom: 12, display: "flex", alignItems: "center", gap: "8px" }}>
+            <div
+              style={{
+                marginBottom: 12,
+                display: "flex",
+                alignItems: "center",
+                gap: "8px",
+              }}
+            >
               <span style={{ fontSize: 24 }}>🏢</span>
               <span>
-                <span style={{ color: "#22c55e", fontWeight: 600 }}>Railroads:</span> For pennies
+                <span style={{ color: "#22c55e", fontWeight: 600 }}>
+                  Railroads:
+                </span>{" "}
+                For pennies
               </span>
             </div>
           </div>
@@ -198,10 +248,25 @@ export const FireSaleScene: React.FC = () => {
           {/* 价格标签 */}
           <g transform={`translate(50, ${30 + priceDrop * 0.5})`}>
             {/* 标签 */}
-            <rect x="-30" y="-15" width="60" height="30" fill="#f5f5f4" stroke="#ef4444" strokeWidth="2" />
+            <rect
+              x="-30"
+              y="-15"
+              width="60"
+              height="30"
+              fill="#f5f5f4"
+              stroke="#ef4444"
+              strokeWidth="2"
+            />
 
             {/* 价格 */}
-            <text x="0" y="5" fontSize="20" fill="#ef4444" textAnchor="middle" fontWeight="700">
+            <text
+              x="0"
+              y="5"
+              fontSize="20"
+              fill="#ef4444"
+              textAnchor="middle"
+              fontWeight="700"
+            >
               10¢
             </text>
             <text x="0" y="25" fontSize="10" fill="#9ca3af" textAnchor="middle">
@@ -209,7 +274,14 @@ export const FireSaleScene: React.FC = () => {
             </text>
 
             {/* 删除线 */}
-            <line x1="-40" y1="0" x2="40" y2="0" stroke="#ef4444" strokeWidth="2" />
+            <line
+              x1="-40"
+              y1="0"
+              x2="40"
+              y2="0"
+              stroke="#ef4444"
+              strokeWidth="2"
+            />
             <text x="0" y="-8" fontSize="12" fill="#22c55e" textAnchor="middle">
               WAS
             </text>
@@ -225,24 +297,66 @@ export const FireSaleScene: React.FC = () => {
           />
 
           <defs>
-            <marker id="arrow" markerWidth="10" markerHeight="10" refX="5" refY="5">
+            <marker
+              id="arrow"
+              markerWidth="10"
+              markerHeight="10"
+              refX="5"
+              refY="5"
+            >
               <path d="M 0,0 L 0,10 L 5,5 z" fill="#22c55e" />
             </marker>
           </defs>
 
           {/* 摧毁资产 */}
           <g transform="translate(150, 80)" opacity={priceDrop / 100}>
-            <rect x="-40" y="-25" width="30" height="20" fill="rgba(139, 0, 0, 0.5)" stroke="#ef4444" strokeWidth="1" />
-            <text x="-25" y="-10" fontSize="10" fill="#ef4444" textAnchor="middle">
+            <rect
+              x="-40"
+              y="-25"
+              width="30"
+              height="20"
+              fill="rgba(139, 0, 0, 0.5)"
+              stroke="#ef4444"
+              strokeWidth="1"
+            />
+            <text
+              x="-25"
+              y="-10"
+              fontSize="10"
+              fill="#ef4444"
+              textAnchor="middle"
+            >
               Banks
             </text>
 
-            <rect x="5" y="-20" width="30" height="20" fill="rgba(139, 0, 0, 0.5)" stroke="#ef4444" strokeWidth="1" />
-            <text x="20" y="-5" fontSize="10" fill="#ef4444" textAnchor="middle">
+            <rect
+              x="5"
+              y="-20"
+              width="30"
+              height="20"
+              fill="rgba(139, 0, 0, 0.5)"
+              stroke="#ef4444"
+              strokeWidth="1"
+            />
+            <text
+              x="20"
+              y="-5"
+              fontSize="10"
+              fill="#ef4444"
+              textAnchor="middle"
+            >
               Farms
             </text>
 
-            <rect x="-20" y="-15" width="30" height="20" fill="rgba(139, 0, 0, 0.5)" stroke="#ef4444" strokeWidth="1" />
+            <rect
+              x="-20"
+              y="-15"
+              width="30"
+              height="20"
+              fill="rgba(139, 0, 0, 0.5)"
+              stroke="#ef4444"
+              strokeWidth="1"
+            />
             <text x="-5" y="0" fontSize="10" fill="#ef4444" textAnchor="middle">
               Factories
             </text>

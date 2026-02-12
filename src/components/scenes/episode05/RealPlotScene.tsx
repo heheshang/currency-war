@@ -11,28 +11,37 @@ import { AbsoluteFill, useCurrentFrame, interpolate } from "remotion";
 export const RealPlotScene: React.FC = () => {
   const frame = useCurrentFrame();
 
-  const opacity = interpolate(frame, [0, 45], [0, 1], { extrapolateRight: "clamp" });
-
   // Flowchart fade-in
-  const flowchartOpacity = interpolate(frame, [60, 180], [0, 1], { extrapolateRight: "clamp" });
+  const flowchartOpacity = interpolate(frame, [60, 180], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   // Flow line animation
-  const flowProgress = interpolate(frame, [180, 720], [0, 1], { extrapolateRight: "clamp" });
+  const flowProgress = interpolate(frame, [180, 720], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   // Money supply chart
-  const moneySupplyDrop = interpolate(frame, [300, 540], [0, 100], { extrapolateRight: "clamp" });
+  const moneySupplyDrop = interpolate(frame, [300, 540], [0, 100], {
+    extrapolateRight: "clamp",
+  });
 
   // Reveal flash
-  const revealOpacity = interpolate(frame, [600, 750], [0, 1], { extrapolateRight: "clamp" });
+  const revealOpacity = interpolate(frame, [600, 750], [0, 1], {
+    extrapolateRight: "clamp",
+  });
   const revealFlash = Math.sin(frame * 0.1) > 0.5 ? 1 : 0.3;
 
   // Title
-  const titleOpacity = interpolate(frame, [60, 150], [0, 1], { extrapolateRight: "clamp" });
+  const titleOpacity = interpolate(frame, [60, 150], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   return (
     <AbsoluteFill
       style={{
-        background: "radial-gradient(circle at center, #1a0d0d 0%, #0d1117 100%)",
+        background:
+          "radial-gradient(circle at center, #1a0d0d 0%, #0d1117 100%)",
       }}
     >
       {/* Title */}
@@ -91,11 +100,32 @@ export const RealPlotScene: React.FC = () => {
           {/* Flow steps */}
           {/* Step 1: Create bubble */}
           <g opacity={flowchartOpacity > 0.1 ? 1 : 0.3}>
-            <rect x="30" y="30" width="100" height="50" rx="8" fill="url(#flowGrad)" opacity="0.9" />
-            <text x="80" y="55" fontSize="12" fill="#fff" textAnchor="middle" fontWeight="600">
+            <rect
+              x="30"
+              y="30"
+              width="100"
+              height="50"
+              rx="8"
+              fill="url(#flowGrad)"
+              opacity="0.9"
+            />
+            <text
+              x="80"
+              y="55"
+              fontSize="12"
+              fill="#fff"
+              textAnchor="middle"
+              fontWeight="600"
+            >
               CREATE BUBBLE
             </text>
-            <text x="80" y="72" fontSize="10" fill="#ffd700" textAnchor="middle">
+            <text
+              x="80"
+              y="72"
+              fontSize="10"
+              fill="#ffd700"
+              textAnchor="middle"
+            >
               Easy money, low rates
             </text>
           </g>
@@ -112,11 +142,32 @@ export const RealPlotScene: React.FC = () => {
 
           {/* Step 2: Wait for peak */}
           <g opacity={flowchartOpacity > 0.3 ? 1 : 0.3}>
-            <rect x="180" y="30" width="100" height="50" rx="8" fill="url(#flowGrad)" opacity="0.9" />
-            <text x="230" y="55" fontSize="12" fill="#fff" textAnchor="middle" fontWeight="600">
+            <rect
+              x="180"
+              y="30"
+              width="100"
+              height="50"
+              rx="8"
+              fill="url(#flowGrad)"
+              opacity="0.9"
+            />
+            <text
+              x="230"
+              y="55"
+              fontSize="12"
+              fill="#fff"
+              textAnchor="middle"
+              fontWeight="600"
+            >
               WAIT FOR PEAK
             </text>
-            <text x="230" y="72" fontSize="10" fill="#ffd700" textAnchor="middle">
+            <text
+              x="230"
+              y="72"
+              fontSize="10"
+              fill="#ffd700"
+              textAnchor="middle"
+            >
               Maximal speculation
             </text>
           </g>
@@ -133,11 +184,32 @@ export const RealPlotScene: React.FC = () => {
 
           {/* Step 3: Tighten credit */}
           <g opacity={flowchartOpacity > 0.5 ? 1 : 0.3}>
-            <rect x="330" y="30" width="100" height="50" rx="8" fill="url(#flowGrad)" opacity="0.9" />
-            <text x="380" y="55" fontSize="12" fill="#fff" textAnchor="middle" fontWeight="600">
+            <rect
+              x="330"
+              y="30"
+              width="100"
+              height="50"
+              rx="8"
+              fill="url(#flowGrad)"
+              opacity="0.9"
+            />
+            <text
+              x="380"
+              y="55"
+              fontSize="12"
+              fill="#fff"
+              textAnchor="middle"
+              fontWeight="600"
+            >
               TIGHTEN CREDIT
             </text>
-            <text x="380" y="72" fontSize="10" fill="#ffd700" textAnchor="middle">
+            <text
+              x="380"
+              y="72"
+              fontSize="10"
+              fill="#ffd700"
+              textAnchor="middle"
+            >
               Pop the bubble
             </text>
           </g>
@@ -154,11 +226,32 @@ export const RealPlotScene: React.FC = () => {
 
           {/* Step 4: Buy assets */}
           <g opacity={flowchartOpacity > 0.7 ? 1 : 0.3}>
-            <rect x="430" y="100" width="100" height="50" rx="8" fill="#22c55e" opacity="0.9" />
-            <text x="480" y="125" fontSize="12" fill="#fff" textAnchor="middle" fontWeight="600">
+            <rect
+              x="430"
+              y="100"
+              width="100"
+              height="50"
+              rx="8"
+              fill="#22c55e"
+              opacity="0.9"
+            />
+            <text
+              x="480"
+              y="125"
+              fontSize="12"
+              fill="#fff"
+              textAnchor="middle"
+              fontWeight="600"
+            >
               BUY ASSETS
             </text>
-            <text x="480" y="142" fontSize="10" fill="#ffd700" textAnchor="middle">
+            <text
+              x="480"
+              y="142"
+              fontSize="10"
+              fill="#ffd700"
+              textAnchor="middle"
+            >
               Pennies on the dollar
             </text>
           </g>
@@ -214,7 +307,14 @@ export const RealPlotScene: React.FC = () => {
             </defs>
 
             {/* Axis */}
-            <line x1="40" y1="100" x2="220" y2="100" stroke="#4b5563" strokeWidth="1" />
+            <line
+              x1="40"
+              y1="100"
+              x2="220"
+              y2="100"
+              stroke="#4b5563"
+              strokeWidth="1"
+            />
 
             {/* Money supply curve */}
             <path
@@ -234,19 +334,50 @@ export const RealPlotScene: React.FC = () => {
             />
 
             {/* Labels */}
-            <text x="40" y="115" fontSize="11" fill="#9ca3af" textAnchor="middle">
+            <text
+              x="40"
+              y="115"
+              fontSize="11"
+              fill="#9ca3af"
+              textAnchor="middle"
+            >
               1929
             </text>
-            <text x="130" y="85" fontSize="11" fill="#22c55e" textAnchor="middle">
+            <text
+              x="130"
+              y="85"
+              fontSize="11"
+              fill="#22c55e"
+              textAnchor="middle"
+            >
               Before
             </text>
-            <text x="220" y="50" fontSize="11" fill="#ef4444" textAnchor="middle">
+            <text
+              x="220"
+              y="50"
+              fontSize="11"
+              fill="#ef4444"
+              textAnchor="middle"
+            >
               After
             </text>
-            <text x="130" y="115" fontSize="11" fill="#ef4444" textAnchor="middle">
+            <text
+              x="130"
+              y="115"
+              fontSize="11"
+              fill="#ef4444"
+              textAnchor="middle"
+            >
               1933
             </text>
-            <text x="130" y="30" fontSize="12" fill="#ffd700" textAnchor="middle" fontWeight="600">
+            <text
+              x="130"
+              y="30"
+              fontSize="12"
+              fill="#ffd700"
+              textAnchor="middle"
+              fontWeight="600"
+            >
               -33% Drop
             </text>
           </svg>
@@ -286,10 +417,14 @@ export const RealPlotScene: React.FC = () => {
           </div>
           <div style={{ fontSize: 14, color: "#e8e8e8", lineHeight: "1.6" }}>
             <div style={{ marginBottom: 8 }}>
-              <span style={{ color: "#ef4444" }}>The crisis was deliberate.</span>
+              <span style={{ color: "#ef4444" }}>
+                The crisis was deliberate.
+              </span>
             </div>
             <div style={{ marginBottom: 8 }}>
-              <span style={{ color: "#ef4444" }}>Economic devastation serves</span>
+              <span style={{ color: "#ef4444" }}>
+                Economic devastation serves
+              </span>
             </div>
             <div style={{ color: "#22c55e", fontWeight: 600 }}>
               banking elite

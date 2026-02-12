@@ -1,6 +1,7 @@
 import React from "react";
 import { AbsoluteFill, useCurrentFrame, interpolate, spring } from "remotion";
-import { CartoonCharacter } from "../../characters/CartoonCharacter";
+import { HistoricalFigure } from "../../characters/HistoricalFigure";
+import { getFigure } from "../../characters/historicalFigures";
 
 /**
  * IndependentTreasuryScene - 独立国库场景
@@ -11,16 +12,33 @@ import { CartoonCharacter } from "../../characters/CartoonCharacter";
 export const IndependentTreasuryScene: React.FC = () => {
   const frame = useCurrentFrame();
 
-  const titleOpacity = interpolate(frame, [0, 30], [0, 1], { extrapolateRight: "clamp" });
-  const vanBurenScale = spring({ frame: frame - 45, fps: 30, config: { damping: 15, stiffness: 60 } });
-  const buildingShow = interpolate(frame, [120, 210], [0, 1], { extrapolateRight: "clamp" });
-  const quoteOpacity = interpolate(frame, [270, 360], [0, 1], { extrapolateRight: "clamp" });
-  const resultOpacity = interpolate(frame, [450, 540], [0, 1], { extrapolateRight: "clamp" });
+  // 获取范布伦配置
+  const vanBurenFigure = getFigure("martin_van_buren");
+  const vanBurenPhoto = vanBurenFigure?.photoSrc || "";
+
+  const titleOpacity = interpolate(frame, [0, 30], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const vanBurenScale = spring({
+    frame: frame - 45,
+    fps: 30,
+    config: { damping: 15, stiffness: 60 },
+  });
+  const buildingShow = interpolate(frame, [120, 210], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const quoteOpacity = interpolate(frame, [270, 360], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const resultOpacity = interpolate(frame, [450, 540], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   return (
     <AbsoluteFill
       style={{
-        background: "radial-gradient(circle at center, #1a1a2e 0%, #0d1117 100%)",
+        background:
+          "radial-gradient(circle at center, #1a1a2e 0%, #0d1117 100%)",
       }}
     >
       {/* 标题 */}
@@ -67,32 +85,20 @@ export const IndependentTreasuryScene: React.FC = () => {
           transform: `translate(-50%, -50%) scale(${vanBurenScale})`,
         }}
       >
-        <CartoonCharacter
+        <HistoricalFigure
           x={0}
           y={0}
           scale={1.1}
-          characterType="politician"
-          action="talk"
-          facingRight={true}
+          photoSrc={vanBurenPhoto}
+          nameEn="Martin Van Buren"
+          nameCn="马丁·范布伦"
+          action="talking"
+          frameStyle="classic"
+          photoFilter="grayscale"
+          showLabel={true}
           frame={frame}
-          skinColor="#F5DEB3"
-          clothColor="#2F4F4F"
+          animEffect="fadeIn"
         />
-        <div
-          style={{
-            position: "absolute",
-            bottom: -25,
-            left: "50%",
-            transform: "translateX(-50%)",
-            fontFamily: "Cinzel, serif",
-            fontSize: 14,
-            color: "#ffd700",
-            whiteSpace: "nowrap",
-            fontWeight: 600,
-          }}
-        >
-          Martin Van Buren
-        </div>
       </div>
 
       {/* 独立国库建筑 */}
@@ -107,7 +113,13 @@ export const IndependentTreasuryScene: React.FC = () => {
       >
         <svg width={250} height={200} viewBox="0 0 250 200">
           <defs>
-            <linearGradient id="treasuryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <linearGradient
+              id="treasuryGrad"
+              x1="0%"
+              y1="0%"
+              x2="100%"
+              y2="100%"
+            >
               <stop offset="0%" stopColor="#d4af37" />
               <stop offset="100%" stopColor="#b8860b" />
             </linearGradient>

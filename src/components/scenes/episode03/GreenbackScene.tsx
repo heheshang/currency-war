@@ -1,6 +1,7 @@
 import React from "react";
 import { AbsoluteFill, useCurrentFrame, interpolate, spring } from "remotion";
-import { CartoonCharacter } from "../../characters/CartoonCharacter";
+import { HistoricalFigure } from "../../characters/HistoricalFigure";
+import { getFigure } from "../../characters/historicalFigures";
 import { CurrencyBill } from "../../documents/CurrencyBill";
 
 /**
@@ -12,13 +13,31 @@ import { CurrencyBill } from "../../documents/CurrencyBill";
 export const GreenbackScene: React.FC = () => {
   const frame = useCurrentFrame();
 
+  // 获取林肯配置
+  const lincolnFigure = getFigure("abraham_lincoln");
+  const lincolnPhoto = lincolnFigure?.photoSrc || "";
+
   // 动画时序
-  const titleOpacity = interpolate(frame, [0, 30], [0, 1], { extrapolateRight: "clamp" });
-  const lincolnScale = spring({ frame: frame - 45, fps: 30, config: { damping: 15, stiffness: 60 } });
-  const greenbillEnter = interpolate(frame, [120, 210], [0, 1], { extrapolateRight: "clamp" });
-  const quoteOpacity = interpolate(frame, [240, 330], [0, 1], { extrapolateRight: "clamp" });
-  const statsOpacity = interpolate(frame, [390, 480], [0, 1], { extrapolateRight: "clamp" });
-  const resultOpacity = interpolate(frame, [540, 630], [0, 1], { extrapolateRight: "clamp" });
+  const titleOpacity = interpolate(frame, [0, 30], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const lincolnScale = spring({
+    frame: frame - 45,
+    fps: 30,
+    config: { damping: 15, stiffness: 60 },
+  });
+  const greenbillEnter = interpolate(frame, [120, 210], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const quoteOpacity = interpolate(frame, [240, 330], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const statsOpacity = interpolate(frame, [390, 480], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const resultOpacity = interpolate(frame, [540, 630], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   // 绿钞飘落效果
   const fallingBills = Array.from({ length: 8 }).map((_, i) => {
@@ -29,19 +48,25 @@ export const GreenbackScene: React.FC = () => {
       frame,
       [120 + delay, 120 + delay + 300],
       [0, 1],
-      { extrapolateRight: "clamp" }
+      { extrapolateRight: "clamp" },
     );
     const y = startY + (endY - startY) * progress;
-    const x = 15 + (i * 10) % 70;
+    const x = 15 + ((i * 10) % 70);
     const rotation = progress * 360;
 
-    return { y, x, rotation, opacity: progress < 0.1 || progress > 0.9 ? 0 : 1 };
+    return {
+      y,
+      x,
+      rotation,
+      opacity: progress < 0.1 || progress > 0.9 ? 0 : 1,
+    };
   });
 
   return (
     <AbsoluteFill
       style={{
-        background: "radial-gradient(circle at center, #1a2e1a 0%, #0d1117 100%)",
+        background:
+          "radial-gradient(circle at center, #1a2e1a 0%, #0d1117 100%)",
       }}
     >
       {/* 标题 */}
@@ -88,32 +113,20 @@ export const GreenbackScene: React.FC = () => {
           transform: `translate(-50%, -50%) scale(${lincolnScale})`,
         }}
       >
-        <CartoonCharacter
+        <HistoricalFigure
           x={0}
           y={0}
           scale={1.2}
-          characterType="politician"
-          action="point"
-          facingRight={true}
+          photoSrc={lincolnPhoto}
+          nameEn="Abraham Lincoln"
+          nameCn="亚伯拉罕·林肯"
+          action="talking"
+          frameStyle="classic"
+          photoFilter="grayscale"
+          showLabel={true}
           frame={frame}
-          skinColor="#F5DEB3"
-          clothColor="#2F4F4F"
+          animEffect="slideLeft"
         />
-        <div
-          style={{
-            position: "absolute",
-            bottom: -25,
-            left: "50%",
-            transform: "translateX(-50%)",
-            fontFamily: "Cinzel, serif",
-            fontSize: 14,
-            color: "#ffd700",
-            whiteSpace: "nowrap",
-            fontWeight: 600,
-          }}
-        >
-          Abraham Lincoln
-        </div>
       </div>
 
       {/* 绿钞展示 - 右侧 */}
@@ -311,7 +324,8 @@ export const GreenbackScene: React.FC = () => {
             color: "#e8e8e8",
           }}
         >
-          <span style={{ color: "#228B22", fontWeight: 600 }}>Result:</span> Greenbacks funded the Union victory
+          <span style={{ color: "#228B22", fontWeight: 600 }}>Result:</span>{" "}
+          Greenbacks funded the Union victory
         </div>
         <div
           style={{

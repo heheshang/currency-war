@@ -10,16 +10,18 @@ import { AbsoluteFill, useCurrentFrame, interpolate } from "remotion";
 export const Panic1857Scene: React.FC = () => {
   const frame = useCurrentFrame();
 
-  const titleOpacity = interpolate(frame, [0, 30], [0, 1], { extrapolateRight: "clamp" });
-  const chartDrop = interpolate(frame, [60, 180], [0, 1], { extrapolateRight: "clamp" });
-  const panicOpacity = interpolate(frame, [210, 300], [0, 1], { extrapolateRight: "clamp" });
-  const aftermathOpacity = interpolate(frame, [360, 450], [0, 1], { extrapolateRight: "clamp" });
-
-  // 股价下跌曲线
-  const stockPath = interpolate(frame, [60, 180], [
-    "M 0,50 Q 50,50 100,50",
-    "M 0,50 Q 50,55 100,70 Q 150,90 200,95 Q 250,98 300,98",
-  ]);
+  const titleOpacity = interpolate(frame, [0, 30], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const chartDrop = interpolate(frame, [60, 180], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const panicOpacity = interpolate(frame, [210, 300], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const aftermathOpacity = interpolate(frame, [360, 450], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   // 抖动效果
   const shake = Math.sin(frame * 0.5) * (frame > 180 && frame < 360 ? 3 : 0);
@@ -108,19 +110,25 @@ export const Panic1857Scene: React.FC = () => {
 
           {/* 标签 */}
           <g fontSize={14} fill="#9ca3af" fontFamily="Merriweather, serif">
-            <text x={10} y={30}>Railway Stocks</text>
-            <text x={150} y={230} fill="#ef4444">-50%</text>
-            <text x={200} y={230} fill="#ef4444">-70%</text>
-            <text x={250} y={230} fill="#ef4444">-90%</text>
+            <text x={10} y={30}>
+              Railway Stocks
+            </text>
+            <text x={150} y={230} fill="#ef4444">
+              -50%
+            </text>
+            <text x={200} y={230} fill="#ef4444">
+              -70%
+            </text>
+            <text x={250} y={230} fill="#ef4444">
+              -90%
+            </text>
           </g>
 
           {/* 箭头指示下跌 */}
-          <g transform={`translate(${interpolate(frame, [60, 180], [0, 250], { extrapolateRight: "clamp" })}, 80)`}>
-            <path
-              d="M 0,0 L -10,-15 L 10,-15 Z"
-              fill="#ef4444"
-              opacity={0.8}
-            />
+          <g
+            transform={`translate(${interpolate(frame, [60, 180], [0, 250], { extrapolateRight: "clamp" })}, 80)`}
+          >
+            <path d="M 0,0 L -10,-15 L 10,-15 Z" fill="#ef4444" opacity={0.8} />
           </g>
         </svg>
       </div>
@@ -184,7 +192,7 @@ export const Panic1857Scene: React.FC = () => {
             marginBottom: 8,
           }}
         >
-        THE REAL GOAL
+          THE REAL GOAL
         </div>
         <div
           style={{

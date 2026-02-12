@@ -1,5 +1,5 @@
 import React from "react";
-import { AbsoluteFill, useCurrentFrame, interpolate } from "remotion";
+import { AbsoluteFill, useCurrentFrame, interpolate, random } from "remotion";
 
 /**
  * Crash1929Scene - 场景10：1929年崩盘
@@ -11,10 +11,14 @@ import { AbsoluteFill, useCurrentFrame, interpolate } from "remotion";
 export const Crash1929Scene: React.FC = () => {
   const frame = useCurrentFrame();
 
-  const opacity = interpolate(frame, [0, 45], [0, 1], { extrapolateRight: "clamp" });
+  const opacity = interpolate(frame, [0, 45], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   // 崩盘强度
-  const crashIntensity = interpolate(frame, [120, 300], [0, 1], { extrapolateRight: "clamp" });
+  const crashIntensity = interpolate(frame, [120, 300], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   // 红色数字瀑布
   const numbers = Array.from({ length: 15 }).map((_, i) => {
@@ -23,7 +27,7 @@ export const Crash1929Scene: React.FC = () => {
       frame,
       [startFrame, startFrame + 180],
       [0, 1],
-      { extrapolateRight: "clamp", extrapolateLeft: "clamp" }
+      { extrapolateRight: "clamp", extrapolateLeft: "clamp" },
     );
 
     if (progress <= 0) return null;
@@ -31,7 +35,7 @@ export const Crash1929Scene: React.FC = () => {
     const x = 20 + (i % 5) * 18;
     const y = -50 + progress * 350;
     const shakeAmount = Math.max(0, crashIntensity * 5);
-    const xOffset = (Math.random() - 0.5) * shakeAmount;
+    const xOffset = (random(null) - 0.5) * shakeAmount;
 
     return (
       <div
@@ -41,7 +45,7 @@ export const Crash1929Scene: React.FC = () => {
           left: `${x + xOffset}%`,
           top: `${y}%`,
           opacity: progress,
-          transform: `rotate(${-5 + Math.random() * 3}deg)`,
+          transform: `rotate(${-5 + random(null) * 3}deg)`,
         }}
       >
         <div
@@ -60,20 +64,29 @@ export const Crash1929Scene: React.FC = () => {
   });
 
   // 恐慌人群
-  const crowdOpacity = interpolate(frame, [180, 360], [0, 1], { extrapolateRight: "clamp" });
+  const crowdOpacity = interpolate(frame, [180, 360], [0, 1], {
+    extrapolateRight: "clamp",
+  });
   const crowdShake = Math.sin(frame * 0.2) * 3;
 
   // 破裂效果
-  const burstOpacity = interpolate(frame, [540, 720], [0, 1], { extrapolateRight: "clamp" });
-  const burstScale = interpolate(frame, [540, 720], [0, 2], { extrapolateRight: "clamp" });
+  const burstOpacity = interpolate(frame, [540, 720], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const burstScale = interpolate(frame, [540, 720], [0, 2], {
+    extrapolateRight: "clamp",
+  });
 
   // 标题
-  const titleOpacity = interpolate(frame, [60, 150], [0, 1], { extrapolateRight: "clamp" });
+  const titleOpacity = interpolate(frame, [60, 150], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   return (
     <AbsoluteFill
       style={{
-        background: "radial-gradient(circle at center, #1a0508 0%, #0d1117 100%)",
+        background:
+          "radial-gradient(circle at center, #1a0508 0%, #0d1117 100%)",
       }}
     >
       {/* 标题 */}
@@ -132,9 +145,29 @@ export const Crash1929Scene: React.FC = () => {
           </defs>
 
           {/* 建筑 */}
-          <rect x="100" y="50" width="200" height="150" fill="url(#buildingGrad)" />
-          <rect x="110" y="40" width="180" height="10" fill="#1f2937" opacity="0.8" />
-          <rect x="90" y="30" width="220" height="8" fill="#1f2937" opacity="0.6" />
+          <rect
+            x="100"
+            y="50"
+            width="200"
+            height="150"
+            fill="url(#buildingGrad)"
+          />
+          <rect
+            x="110"
+            y="40"
+            width="180"
+            height="10"
+            fill="#1f2937"
+            opacity="0.8"
+          />
+          <rect
+            x="90"
+            y="30"
+            width="220"
+            height="8"
+            fill="#1f2937"
+            opacity="0.6"
+          />
 
           {/* 柱子 */}
           <rect x="120" y="200" width="10" height="50" fill="#374151" />
@@ -144,7 +177,14 @@ export const Crash1929Scene: React.FC = () => {
           <rect x="100" y="195" width="200" height="5" fill="#4b5563" />
 
           {/* 纽约证券交易所标志 */}
-          <text x="200" y="120" fontSize="16" fill="#9ca3af" textAnchor="middle" opacity="0.5">
+          <text
+            x="200"
+            y="120"
+            fontSize="16"
+            fill="#9ca3af"
+            textAnchor="middle"
+            opacity="0.5"
+          >
             NYSE
           </text>
 
@@ -259,7 +299,8 @@ export const Crash1929Scene: React.FC = () => {
               <span style={{ color: "#fbbf24" }}>40% of wealth</span> evaporated
             </div>
             <div style={{ marginBottom: 8 }}>
-              <span style={{ color: "#fbbf24" }}>25 billion</span> in paper losses
+              <span style={{ color: "#fbbf24" }}>25 billion</span> in paper
+              losses
             </div>
             <div style={{ color: "#ef4444", fontWeight: 600 }}>
               "Into thin air"
@@ -282,7 +323,7 @@ export const Crash1929Scene: React.FC = () => {
           <svg width="200" height="200" viewBox="0 0 200 200">
             {Array.from({ length: 12 }).map((_, i) => {
               const angle = (i / 12) * Math.PI * 2;
-              const length = 60 + Math.random() * 40;
+              const length = 60 + random(null) * 40;
               const x = 100 + Math.cos(angle) * length;
               const y = 100 + Math.sin(angle) * length;
 

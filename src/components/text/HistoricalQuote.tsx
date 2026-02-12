@@ -45,19 +45,23 @@ const HistoricalQuote: React.FC<HistoricalQuoteProps> = ({
   // Calculate animation progress
   const getOpacity = (delayOffset: number) => {
     const startFrame = animationDelay + delayOffset;
-    return interpolate(frame, [startFrame, startFrame + fadeInDuration], [0, 1], {
-      extrapolateRight: "clamp",
-      extrapolateLeft: "clamp",
-    });
+    return interpolate(
+      frame,
+      [startFrame, startFrame + fadeInDuration],
+      [0, 1],
+      {
+        extrapolateRight: "clamp",
+        extrapolateLeft: "clamp",
+      },
+    );
   };
 
   // Subtle floating animation
-  const floatOffset = interpolate(
-    frame,
-    [0, 120],
-    [0, 8],
-    { extrapolate: "loop", easing: (t) => Math.sin(t * Math.PI * 2) }
-  );
+  const floatOffset = interpolate(frame, [0, 120], [0, 8], {
+    extrapolateLeft: "wrap",
+    extrapolateRight: "wrap",
+    easing: (t) => Math.sin(t * Math.PI * 2),
+  });
 
   const quoteOpacity = getOpacity(0);
   const authorOpacity = getOpacity(15);
@@ -121,7 +125,11 @@ const HistoricalQuote: React.FC<HistoricalQuoteProps> = ({
               fontFamily: "Georgia, serif",
               position: "absolute",
               top: "15%",
-              [layout === "left" ? "left" : layout === "right" ? "right" : "left"]: "15%",
+              [layout === "left"
+                ? "left"
+                : layout === "right"
+                  ? "right"
+                  : "left"]: "15%",
             }}
           >
             "

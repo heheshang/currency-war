@@ -1,6 +1,7 @@
 import React from "react";
 import { AbsoluteFill, useCurrentFrame, interpolate } from "remotion";
-import { CartoonCharacter } from "../../characters/CartoonCharacter";
+import { HistoricalFigure } from "../../characters/HistoricalFigure";
+import { getFigure } from "../../characters/historicalFigures";
 
 /**
  * NewDealScene - 场景14：罗斯福新政
@@ -12,25 +13,36 @@ import { CartoonCharacter } from "../../characters/CartoonCharacter";
 export const NewDealScene: React.FC = () => {
   const frame = useCurrentFrame();
 
-  const opacity = interpolate(frame, [0, 45], [0, 1], { extrapolateRight: "clamp" });
+  // 获取罗斯福配置
+  const fdrFigure = getFigure("franklin_roosevelt");
+  const fdrPhoto = fdrFigure?.photoSrc || "";
 
   // FDR角色淡入
-  const fdrOpacity = interpolate(frame, [60, 180], [0, 1], { extrapolateRight: "clamp" });
+  const fdrOpacity = interpolate(frame, [60, 180], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   // 机构列表动画
-  const agenciesAppear = interpolate(frame, [180, 720], [0, 1], { extrapolateRight: "clamp" });
+  const agenciesAppear = interpolate(frame, [180, 720], [0, 1], {
+    extrapolateRight: "clamp",
+  });
   const agencyCount = Math.floor(agenciesAppear * 15);
 
   // 黄金没收令淡入
-  const goldOrderOpacity = interpolate(frame, [540, 720], [0, 1], { extrapolateRight: "clamp" });
+  const goldOrderOpacity = interpolate(frame, [540, 720], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   // 标题
-  const titleOpacity = interpolate(frame, [60, 150], [0, 1], { extrapolateRight: "clamp" });
+  const titleOpacity = interpolate(frame, [60, 150], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   return (
     <AbsoluteFill
       style={{
-        background: "radial-gradient(circle at center, #1e3a5f 0%, #0d1117 100%)",
+        background:
+          "radial-gradient(circle at center, #1e3a5f 0%, #0d1117 100%)",
       }}
     >
       {/* 标题 */}
@@ -93,17 +105,22 @@ export const NewDealScene: React.FC = () => {
           </svg>
         </div>
 
-        <CartoonCharacter
+        <HistoricalFigure
           x={0}
           y={0}
           scale={1.1}
-          characterType="politician"
-          action="talk"
-          facingRight={true}
+          photoSrc={fdrPhoto}
+          nameEn="Franklin D. Roosevelt"
+          nameCn="富兰克林·罗斯福"
+          action="talking"
+          frameStyle="modern"
+          photoFilter="grayscale"
+          showLabel={true}
           frame={frame}
+          animEffect="fadeIn"
         />
 
-        {/* 标签 */}
+        {/* 标签由组件显示 */}
         <div
           style={{
             position: "absolute",
@@ -166,23 +183,41 @@ export const NewDealScene: React.FC = () => {
           </div>
 
           <div style={{ fontSize: 11, color: "#e8e8e8", lineHeight: "1.8" }}>
-            <div style={{ opacity: agencyCount >= 1 ? 1 : 0.3, marginBottom: 6 }}>
-              <span style={{ color: "#22c55e", fontWeight: 600 }}>AAA</span> — Agricultural Adjustment Act
+            <div
+              style={{ opacity: agencyCount >= 1 ? 1 : 0.3, marginBottom: 6 }}
+            >
+              <span style={{ color: "#22c55e", fontWeight: 600 }}>AAA</span> —
+              Agricultural Adjustment Act
             </div>
-            <div style={{ opacity: agencyCount >= 2 ? 1 : 0.3, marginBottom: 6 }}>
-              <span style={{ color: "#22c55e", fontWeight: 600 }}>CCC</span> — Civilian Conservation Corps
+            <div
+              style={{ opacity: agencyCount >= 2 ? 1 : 0.3, marginBottom: 6 }}
+            >
+              <span style={{ color: "#22c55e", fontWeight: 600 }}>CCC</span> —
+              Civilian Conservation Corps
             </div>
-            <div style={{ opacity: agencyCount >= 3 ? 1 : 0.3, marginBottom: 6 }}>
-              <span style={{ color: "#22c55e", fontWeight: 600 }}>PWA</span> — Public Works Administration
+            <div
+              style={{ opacity: agencyCount >= 3 ? 1 : 0.3, marginBottom: 6 }}
+            >
+              <span style={{ color: "#22c55e", fontWeight: 600 }}>PWA</span> —
+              Public Works Administration
             </div>
-            <div style={{ opacity: agencyCount >= 4 ? 1 : 0.3, marginBottom: 6 }}>
-              <span style={{ color: "#22c55e", fontWeight: 600 }}>FDIC</span> — Deposit Insurance Corp
+            <div
+              style={{ opacity: agencyCount >= 4 ? 1 : 0.3, marginBottom: 6 }}
+            >
+              <span style={{ color: "#22c55e", fontWeight: 600 }}>FDIC</span> —
+              Deposit Insurance Corp
             </div>
-            <div style={{ opacity: agencyCount >= 5 ? 1 : 0.3, marginBottom: 6 }}>
-              <span style={{ color: "#22c55e", fontWeight: 600 }}>SEC</span> — Securities & Exchange
+            <div
+              style={{ opacity: agencyCount >= 5 ? 1 : 0.3, marginBottom: 6 }}
+            >
+              <span style={{ color: "#22c55e", fontWeight: 600 }}>SEC</span> —
+              Securities & Exchange
             </div>
-            <div style={{ opacity: agencyCount >= 6 ? 1 : 0.3, marginBottom: 6 }}>
-              <span style={{ color: "#22c55e", fontWeight: 600 }}>TVA</span> — Tennessee Valley Auth
+            <div
+              style={{ opacity: agencyCount >= 6 ? 1 : 0.3, marginBottom: 6 }}
+            >
+              <span style={{ color: "#22c55e", fontWeight: 600 }}>TVA</span> —
+              Tennessee Valley Auth
             </div>
             <div style={{ marginTop: 12, color: "#ffd700", fontWeight: 600 }}>
               + Hundreds more
@@ -244,11 +279,12 @@ export const NewDealScene: React.FC = () => {
             }}
           >
             <div style={{ marginBottom: 8 }}>
-              <span style={{ color: "#ef4444" }}>Required:</span> All gold coins, gold bullion,
-              and gold certificates surrendered
+              <span style={{ color: "#ef4444" }}>Required:</span> All gold
+              coins, gold bullion, and gold certificates surrendered
             </div>
             <div style={{ marginBottom: 8 }}>
-              <span style={{ color: "#ef4444" }}>Penalty:</span> Up to $10,000 fine + 10 years prison
+              <span style={{ color: "#ef4444" }}>Penalty:</span> Up to $10,000
+              fine + 10 years prison
             </div>
             <div style={{ color: "#f87171", fontWeight: 600 }}>
               "Confiscation of the people's gold"
@@ -273,8 +309,22 @@ export const NewDealScene: React.FC = () => {
               <stop offset="100%" stopColor="#fbbf24" />
             </radialGradient>
           </defs>
-          <circle cx="30" cy="30" r="25" fill="url(#coinGrad)" stroke="#d4af37" strokeWidth="2" />
-          <text x="30" y="35" fontSize="12" fill="#1a1a1a" textAnchor="middle" fontWeight="700">
+          <circle
+            cx="30"
+            cy="30"
+            r="25"
+            fill="url(#coinGrad)"
+            stroke="#d4af37"
+            strokeWidth="2"
+          />
+          <text
+            x="30"
+            y="35"
+            fontSize="12"
+            fill="#1a1a1a"
+            textAnchor="middle"
+            fontWeight="700"
+          >
             $
           </text>
         </svg>

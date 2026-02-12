@@ -1,10 +1,6 @@
 import React from "react";
 import { AbsoluteFill, useCurrentFrame, interpolate } from "remotion";
-import {
-  ElasticText,
-  ShakeAnimation,
-  PulseAnimation,
-} from "../animations";
+import { ElasticText, ShakeAnimation } from "../animations";
 
 /**
  * InvisibleBattlefieldScene - 看不见的战场
@@ -113,7 +109,8 @@ const InvisibleWeapon: React.FC<{
         style={{
           width: 80 * scale,
           height: 80 * scale,
-          background: "radial-gradient(circle, rgba(239, 68, 68, 0.2) 0%, transparent 70%)",
+          background:
+            "radial-gradient(circle, rgba(239, 68, 68, 0.2) 0%, transparent 70%)",
           borderRadius: "50%",
           display: "flex",
           alignItems: "center",
@@ -252,7 +249,7 @@ const WarningMessages: React.FC<{ frame: number }> = ({ frame }) => {
           frame,
           [msg.startFrame, msg.startFrame + 30],
           [0, 1],
-          { extrapolateRight: "clamp" }
+          { extrapolateRight: "clamp" },
         );
 
         return (
@@ -354,7 +351,8 @@ export const InvisibleBattlefieldScene: React.FC = () => {
   return (
     <AbsoluteFill
       style={{
-        background: "radial-gradient(circle at 50% 50%, #1A202C 0%, #0D1117 100%)",
+        background:
+          "radial-gradient(circle at 50% 50%, #1A202C 0%, #0D1117 100%)",
       }}
     >
       {/* 背景网格 */}

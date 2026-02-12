@@ -20,20 +20,30 @@ export const BenjaminStrongScene: React.FC = () => {
   const strongPhoto = strongFigure?.photoSrc || "";
 
   // 淡入效果
-  const opacity = interpolate(frame, [0, 45], [0, 1], { extrapolateRight: "clamp" });
+  // const opacity = interpolate(frame, [0, 45], [0, 1], { extrapolateRight: "clamp" });
 
   // 聚光灯移动
-  const spotlightX = interpolate(frame, [0, 300], [30, 50], { extrapolateRight: "clamp" });
-  const spotlightIntensity = interpolate(frame, [0, 120], [0, 1], { extrapolateRight: "clamp" });
+  const spotlightX = interpolate(frame, [0, 300], [30, 50], {
+    extrapolateRight: "clamp",
+  });
+  const spotlightIntensity = interpolate(frame, [0, 120], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   // 角色淡入
-  const characterOpacity = interpolate(frame, [90, 180], [0, 1], { extrapolateRight: "clamp" });
+  const characterOpacity = interpolate(frame, [90, 180], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   // 标题淡入
-  const titleOpacity = interpolate(frame, [180, 270], [0, 1], { extrapolateRight: "clamp" });
+  const titleOpacity = interpolate(frame, [180, 270], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   // 副标题淡入
-  const subtitleOpacity = interpolate(frame, [300, 390], [0, 1], { extrapolateRight: "clamp" });
+  const subtitleOpacity = interpolate(frame, [300, 390], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   // Action based on frame
   const getAction = (): "serious" | "thinking" | "talking" => {
@@ -45,7 +55,8 @@ export const BenjaminStrongScene: React.FC = () => {
   return (
     <AbsoluteFill
       style={{
-        background: "radial-gradient(circle at center, #1a1a2e 0%, #0d1117 100%)",
+        background:
+          "radial-gradient(circle at center, #1a1a2e 0%, #0d1117 100%)",
       }}
     >
       {/* 聚光灯效果 */}
@@ -155,15 +166,21 @@ export const BenjaminStrongScene: React.FC = () => {
           </div>
           <div style={{ fontSize: 15, color: "#e8e8e8", lineHeight: "1.8" }}>
             <div style={{ marginBottom: 12 }}>
-              <span style={{ color: "#22c55e", fontWeight: 600 }}>Position:</span> Governor,
-              Federal Reserve Bank of New York
+              <span style={{ color: "#22c55e", fontWeight: 600 }}>
+                Position:
+              </span>{" "}
+              Governor, Federal Reserve Bank of New York
             </div>
             <div style={{ marginBottom: 12 }}>
-              <span style={{ color: "#22c55e", fontWeight: 600 }}>Influence:</span>{" "}
+              <span style={{ color: "#22c55e", fontWeight: 600 }}>
+                Influence:
+              </span>{" "}
               Controlled entire Fed system
             </div>
             <div style={{ marginBottom: 12 }}>
-              <span style={{ color: "#22c55e", fontWeight: 600 }}>Known as:</span>{" "}
+              <span style={{ color: "#22c55e", fontWeight: 600 }}>
+                Known as:
+              </span>{" "}
               "The Fed of Fed"
             </div>
             <div>

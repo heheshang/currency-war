@@ -1,10 +1,6 @@
 import React from "react";
-import { AbsoluteFill, useCurrentFrame, interpolate, spring } from "remotion";
-import {
-  FloatAnimation,
-  ElasticText,
-  PulseAnimation,
-} from "../animations";
+import { AbsoluteFill, useCurrentFrame, interpolate, random } from "remotion";
+import { FloatAnimation, ElasticText, PulseAnimation } from "../animations";
 
 /**
  * ChinaAircraftCarrierScene - 中国经济航母场景
@@ -26,9 +22,6 @@ const AircraftCarrierShip: React.FC<ShipProps> = ({ x, y, scale, frame }) => {
   // 船只摇摆动画
   const rockAngle = Math.sin(frame * 0.03) * 2;
   const bobY = Math.sin(frame * 0.02) * 5;
-
-  // 波浪效果
-  const waveOffset = Math.sin(frame * 0.05) * 10;
 
   return (
     <div
@@ -103,13 +96,7 @@ const AircraftCarrierShip: React.FC<ShipProps> = ({ x, y, scale, frame }) => {
         />
 
         {/* 甲板 */}
-        <rect
-          x={80}
-          y={85}
-          width={280}
-          height={10}
-          fill="url(#deckGradient)"
-        />
+        <rect x={80} y={85} width={280} height={10} fill="url(#deckGradient)" />
 
         {/* 舰岛 - 指挥塔 */}
         <path
@@ -165,7 +152,9 @@ const AircraftCarrierShip: React.FC<ShipProps> = ({ x, y, scale, frame }) => {
             />
           </g>
           {/* 飞机2 */}
-          <g transform={`translate(${150 + Math.sin(frame * 0.02 + 1) * 2}, 75)`}>
+          <g
+            transform={`translate(${150 + Math.sin(frame * 0.02 + 1) * 2}, 75)`}
+          >
             <polygon
               points="0,0 15,3 0,6"
               fill="#718096"
@@ -174,7 +163,9 @@ const AircraftCarrierShip: React.FC<ShipProps> = ({ x, y, scale, frame }) => {
             />
           </g>
           {/* 飞机3 */}
-          <g transform={`translate(${280 + Math.sin(frame * 0.02 + 2) * 2}, 75)`}>
+          <g
+            transform={`translate(${280 + Math.sin(frame * 0.02 + 2) * 2}, 75)`}
+          >
             <polygon
               points="0,0 15,3 0,6"
               fill="#718096"
@@ -305,13 +296,7 @@ const SpinningGlobe: React.FC<{ frame: number }> = ({ frame }) => {
         ))}
 
         {/* 中国高亮 */}
-        <circle
-          cx={130}
-          cy={70}
-          r={12}
-          fill="#E53E3E"
-          opacity={0.8}
-        >
+        <circle cx={130} cy={70} r={12} fill="#E53E3E" opacity={0.8}>
           <animate
             attributeName="opacity"
             values="0.8;1;0.8"
@@ -347,18 +332,12 @@ const EconomicStats: React.FC<{ frame: number }> = ({ frame }) => {
     >
       {stats.map((stat, i) => {
         const delay = i * 15;
-        const opacity = interpolate(
-          frame,
-          [delay, delay + 30],
-          [0, 1],
-          { extrapolateRight: "clamp" }
-        );
-        const x = interpolate(
-          frame,
-          [delay, delay + 30],
-          [-50, 0],
-          { extrapolateRight: "clamp" }
-        );
+        const opacity = interpolate(frame, [delay, delay + 30], [0, 1], {
+          extrapolateRight: "clamp",
+        });
+        const x = interpolate(frame, [delay, delay + 30], [-50, 0], {
+          extrapolateRight: "clamp",
+        });
 
         return (
           <div
@@ -497,19 +476,13 @@ export const ChinaAircraftCarrierScene: React.FC = () => {
   });
 
   // 海洋背景渐变
-  const oceanColors = interpolate(
-    frame,
-    [0, 60],
-    [
-      [26, 32, 44], // #1A202C
-      [15, 23, 42], // #0F172A
-    ]
-  ).map((v) => `rgb(${v.join(",")})`);
+  const t = Math.min(1, Math.max(0, frame / 60));
+  const oceanColor = `rgb(${Math.round(26 + (15 - 26) * t)}, ${Math.round(32 + (23 - 32) * t)}, ${Math.round(44 + (42 - 44) * t)})`;
 
   return (
     <AbsoluteFill
       style={{
-        background: `linear-gradient(180deg, ${oceanColors[0]} 0%, ${oceanColors[1]} 100%)`,
+        background: `linear-gradient(180deg, #1a202c 0%, ${oceanColor} 100%)`,
       }}
     >
       {/* 星空背景 */}
@@ -518,14 +491,14 @@ export const ChinaAircraftCarrierScene: React.FC = () => {
           key={i}
           style={{
             position: "absolute",
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 40}%`,
-            width: Math.random() * 3 + 1,
-            height: Math.random() * 3 + 1,
+            left: `${random(null) * 100}%`,
+            top: `${random(null) * 40}%`,
+            width: random(null) * 3 + 1,
+            height: random(null) * 3 + 1,
             background: "white",
             borderRadius: "50%",
-            opacity: Math.random() * 0.8 + 0.2,
-            animation: `twinkle ${2 + Math.random() * 3}s infinite`,
+            opacity: random(null) * 0.8 + 0.2,
+            animation: `twinkle ${2 + random(null) * 3}s infinite`,
           }}
         />
       ))}
@@ -546,7 +519,8 @@ export const ChinaAircraftCarrierScene: React.FC = () => {
           left: 0,
           right: 0,
           height: "25%",
-          background: "linear-gradient(180deg, transparent 0%, rgba(26, 32, 44, 0.8) 100%)",
+          background:
+            "linear-gradient(180deg, transparent 0%, rgba(26, 32, 44, 0.8) 100%)",
         }}
       >
         {[...Array(10)].map((_, i) => (

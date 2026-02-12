@@ -1,5 +1,5 @@
 import React from "react";
-import { useCurrentFrame, interpolate, AbsoluteFill } from "remotion";
+import { useCurrentFrame, Img } from "remotion";
 
 /**
  * HistoricalFigure - Historical Figure Photo Component
@@ -31,7 +31,13 @@ export interface HistoricalFigureProps {
   /** Artistic frame style */
   frameStyle?: "none" | "classic" | "gold" | "vintage" | "modern";
   /** Animation effect type */
-  animEffect?: "none" | "fadeIn" | "scale" | "slideLeft" | "slideRight" | "breathing";
+  animEffect?:
+    | "none"
+    | "fadeIn"
+    | "scale"
+    | "slideLeft"
+    | "slideRight"
+    | "breathing";
   /** Show name label */
   showLabel?: boolean;
   /** Label position */
@@ -69,12 +75,13 @@ export const HistoricalFigure: React.FC<HistoricalFigureProps> = ({
   mirror = false,
   frame: propFrame,
 }) => {
-  const currentFrame = propFrame ?? useCurrentFrame();
+  const internalFrame = useCurrentFrame();
+  const currentFrame = propFrame !== undefined ? propFrame : internalFrame;
   const relativeFrame = Math.max(0, currentFrame - startFrame);
 
   // Animation calculations
   const opacity = getAnimationOpacity(animEffect, relativeFrame);
-  const transform = getAnimationTransform(animEffect, relativeFrame, scale);
+  const transform = getAnimationTransform(animEffect, relativeFrame);
   const filter = getPhotoFilter(photoFilter);
 
   // Mouth animation for talking effect
@@ -133,20 +140,23 @@ export const HistoricalFigure: React.FC<HistoricalFigureProps> = ({
             {(frameStyle === "vintage" || frameStyle === "classic") && (
               <>
                 {[
-                  { pos: "top: 2%; left: 2%; rotate: 0 },
-                  { pos: "top: 2%; right: 2%; rotate: 90deg },
-                  { pos: "bottom: 2%; right: 2%; rotate: 180deg },
-                  { pos: "bottom: 2%; left: 2%; rotate: 270deg },
-                ].map((corner, i) => (
+                  { top: "2%", left: "2%", rotate: "0deg" },
+                  { top: "2%", right: "2%", rotate: "90deg" },
+                  { bottom: "2%", right: "2%", rotate: "180deg" },
+                  { bottom: "2%", left: "2%", rotate: "270deg" },
+                ].map((pos, i) => (
                   <div
                     key={i}
                     style={{
                       position: "absolute",
-                      ...JSON.parse(`{${corner.pos}}`),
+                      top: pos.top,
+                      left: pos.left,
+                      right: pos.right,
+                      bottom: pos.bottom,
                       width: 30 * scale,
                       height: 30 * scale,
                       border: `2px solid ${frameConfig.accentColor}`,
-                      transform: `rotate(${corner.rotate})`,
+                      transform: `rotate(${pos.rotate})`,
                       pointerEvents: "none",
                     }}
                   />
@@ -169,7 +179,7 @@ export const HistoricalFigure: React.FC<HistoricalFigureProps> = ({
           }}
         >
           {/* Historical figure photo */}
-          <img
+          <Img
             src={photoSrc}
             alt={nameEn}
             style={{
@@ -179,42 +189,6 @@ export const HistoricalFigure: React.FC<HistoricalFigureProps> = ({
               objectPosition: "center top",
               filter,
               transform: mirror ? "scaleX(-1)" : "none",
-            }}
-            onError={(e) => {
-              // Handle image loading errors with fallback
-              const img = e.target as HTMLImageElement;
-              const currentSrc = img.src;
-
-              console.error(`[HistoricalFigure] Image load failed: ${currentSrc}`);
-
-              // If it's a local file path that doesn't exist, try to find remote fallback
-              if (currentSrc?.startsWith('/assets/')) {
-                // Try to get fallback URL from global config
-                const configKey = Object.keys((window as any).__HISTORICAL_FIGURES__ || {})
-                  .find(key => {
-                    const fig = (window as any).__HISTORICAL_FIGURES__[key];
-                    return fig?.id === nameEn?.toLowerCase().replace(/ /g, '_') ||
-                           fig?.id === nameCn?.replace(/ /g, '_');
-                  });
-
-                const configEntry = configKey ? (window as any).__HISTORICAL_FIGURES__[configKey] : null;
-
-                if (configEntry?.sourceUrl) {
-                  console.log(`[HistoricalFigure] Local file not found, using remote URL: ${configEntry.sourceUrl}`);
-                  img.src = configEntry.sourceUrl;
-                } else {
-                  console.error(`[HistoricalFigure] No fallback URL for ${nameEn}`);
-                }
-              }
-
-              // Show placeholder with Chinese name
-              (img.parentElement as HTMLElement).innerHTML = `
-                <svg xmlns="http://www.w3.org/2000/svg" width="280" height="320">
-                  <rect fill="#1a1a2e" width="280" height="320"/>
-                  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#ffd700" font-family="serif" font-size="14">${nameCn || nameEn}</text>
-                  <text x="50%" y="60%" dominant-baseline="middle" text-anchor="middle" fill="#9ca3af" font-family="sans-serif" font-size="12">请下载照片</text>
-                </svg>
-              `;
             }}
           />
 
@@ -233,7 +207,8 @@ export const HistoricalFigure: React.FC<HistoricalFigureProps> = ({
             style={{
               position: "absolute",
               inset: 0,
-              background: "radial-gradient(circle at center, transparent 40%, rgba(0,0,0,0.4) 100%)",
+              background:
+                "radial-gradient(circle at center, transparent 40%, rgba(0,0,0,0.4) 100%)",
               pointerEvents: "none",
             }}
           />
@@ -320,7 +295,8 @@ export const HistoricalFigure: React.FC<HistoricalFigureProps> = ({
           <div
             style={{
               marginTop: labelPosition === "top" ? -40 * scale : 12 * scale,
-              marginBottom: labelPosition === "bottom" ? -40 * scale : 12 * scale,
+              marginBottom:
+                labelPosition === "bottom" ? -40 * scale : 12 * scale,
               padding: "8px 16px",
               background: "rgba(26, 26, 46, 0.9)",
               border: `1px solid ${frameConfig.borderColor}`,
@@ -368,10 +344,7 @@ export const HistoricalFigure: React.FC<HistoricalFigureProps> = ({
 /**
  * Calculate opacity based on animation effect
  */
-function getAnimationOpacity(
-  effect: string,
-  frame: number
-): number {
+function getAnimationOpacity(effect: string, frame: number): number {
   switch (effect) {
     case "fadeIn":
       return Math.min(1, frame / 30);
@@ -386,11 +359,7 @@ function getAnimationOpacity(
 /**
  * Calculate transform based on animation effect
  */
-function getAnimationTransform(
-  effect: string,
-  frame: number,
-  baseScale: number
-): string {
+function getAnimationTransform(effect: string, frame: number): string {
   const breathingScale =
     effect === "breathing"
       ? 1 + Math.sin((frame * 0.05) % (Math.PI * 2)) * 0.03
@@ -400,11 +369,15 @@ function getAnimationTransform(
     case "scale":
       return `scale(${breathingScale})`;
     case "slideLeft":
-      const slideX = frame < 20 ? -50 + (frame / 20) * 50 : 0;
+    case "slideRight": {
+      let slideX: number;
+      if (effect === "slideLeft") {
+        slideX = frame < 20 ? -50 + (frame / 20) * 50 : 0;
+      } else {
+        slideX = frame > 0 ? 50 - (frame / 20) * 50 : -50;
+      }
       return `translateX(${slideX}px)`;
-    case "slideRight":
-      const slideX = frame > 0 ? 50 - (frame / 20) * 50 : -50;
-      return `translateX(${slideX}px)`;
+    }
     default:
       return "none";
   }
@@ -466,8 +439,7 @@ function getFrameStyle(style: string, scale: number) {
         accentColor: "#ffd700",
         shadow:
           "0 8px 32px rgba(255, 215, 0, 0.4), 0 4px 16px rgba(255, 215, 0, 0.2)",
-        outerBg:
-          "linear-gradient(135deg, #3d3d2a 0%, #1a1a1a 100%)",
+        outerBg: "linear-gradient(135deg, #3d3d2a 0%, #1a1a1a 100%)",
       };
     case "vintage":
       return {
@@ -475,8 +447,7 @@ function getFrameStyle(style: string, scale: number) {
         borderColor: "#8b7355",
         accentColor: "#c9a86c",
         shadow: "0 8px 24px rgba(0,0,0,0.5)",
-        outerBg:
-          "linear-gradient(135deg, #4a4035 0%, #2a2520 100%)",
+        outerBg: "linear-gradient(135deg, #4a4035 0%, #2a2520 100%)",
       };
     case "modern":
       return {
@@ -484,8 +455,7 @@ function getFrameStyle(style: string, scale: number) {
         borderColor: "#64b5f6",
         accentColor: "#64b5f6",
         shadow: "0 4px 20px rgba(100, 181, 212, 0.3)",
-        outerBg:
-          "linear-gradient(135deg, #2a3a40 0%, #1e3a5a 100%)",
+        outerBg: "linear-gradient(135deg, #2a3a40 0%, #1e3a5a 100%)",
       };
     default:
       return baseConfig;
@@ -497,7 +467,7 @@ function getFrameStyle(style: string, scale: number) {
  */
 function getMouthAnimation(
   action: string,
-  frame: number
+  frame: number,
 ): { width: number; height: number } {
   if (action !== "talking") {
     return { width: 0, height: 0 };

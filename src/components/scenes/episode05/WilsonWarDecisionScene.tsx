@@ -1,5 +1,7 @@
 import React from "react";
 import { AbsoluteFill, useCurrentFrame, interpolate } from "remotion";
+import { HistoricalFigure } from "../../characters/HistoricalFigure";
+import { getFigure } from "../../characters/historicalFigures";
 import { CartoonCharacter } from "../../characters/CartoonCharacter";
 
 /**
@@ -12,28 +14,43 @@ import { CartoonCharacter } from "../../characters/CartoonCharacter";
 export const WilsonWarDecisionScene: React.FC = () => {
   const frame = useCurrentFrame();
 
-  const opacity = interpolate(frame, [0, 45], [0, 1], { extrapolateRight: "clamp" });
+  // 获取威尔逊配置
+  const wilsonFigure = getFigure("woodrow_wilson");
+  const wilsonPhoto = wilsonFigure?.photoSrc || "";
 
   // 威尔逊角色淡入
-  const wilsonOpacity = interpolate(frame, [60, 180], [0, 1], { extrapolateRight: "clamp" });
+  const wilsonOpacity = interpolate(frame, [60, 180], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   // 报纸标题淡入
-  const headlineOpacity = interpolate(frame, [120, 240], [0, 1], { extrapolateRight: "clamp" });
+  const headlineOpacity = interpolate(frame, [120, 240], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   // 木偶线动画
-  const puppetStringY = interpolate(frame, [240, 420], [0, 80], { extrapolateRight: "clamp" });
-  const puppetStringOpacity = interpolate(frame, [240, 300], [0, 1], { extrapolateRight: "clamp" });
+  const puppetStringY = interpolate(frame, [240, 420], [0, 80], {
+    extrapolateRight: "clamp",
+  });
+  const puppetStringOpacity = interpolate(frame, [240, 300], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   // 幕后银行家淡入
-  const bankerOpacity = interpolate(frame, [360, 480], [0, 1], { extrapolateRight: "clamp" });
+  const bankerOpacity = interpolate(frame, [360, 480], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   // 真相文字淡入
-  const truthOpacity = interpolate(frame, [540, 660], [0, 1], { extrapolateRight: "clamp" });
+  const truthOpacity = interpolate(frame, [540, 660], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   return (
     <AbsoluteFill
       style={{
-        background: "radial-gradient(circle at center, #1e293b 0%, #0d1117 100%)",
+        background:
+          "radial-gradient(circle at center, #1e293b 0%, #0d1117 100%)",
       }}
     >
       {/* 威尔逊角色 */}
@@ -45,35 +62,20 @@ export const WilsonWarDecisionScene: React.FC = () => {
           opacity: wilsonOpacity,
         }}
       >
-        <CartoonCharacter
+        <HistoricalFigure
           x={0}
           y={0}
           scale={1.3}
-          characterType="politician"
-          action="talk"
-          facingRight={true}
+          photoSrc={wilsonPhoto}
+          nameEn="Woodrow Wilson"
+          nameCn="伍德罗·威尔逊"
+          action="talking"
+          frameStyle="classic"
+          photoFilter="grayscale"
+          showLabel={true}
           frame={frame}
+          animEffect="fadeIn"
         />
-        <div
-          style={{
-            position: "absolute",
-            top: "-60px",
-            left: "50%",
-            transform: "translateX(-50%)",
-          }}
-        >
-          <div
-            style={{
-              fontFamily: "Cinzel, serif",
-              fontSize: 20,
-              color: "#e8e8e8",
-              textAlign: "center",
-              marginBottom: 4,
-            }}
-          >
-            President Woodrow Wilson
-          </div>
-        </div>
       </div>
 
       {/* 报纸标题 */}

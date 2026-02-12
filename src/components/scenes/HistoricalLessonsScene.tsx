@@ -1,6 +1,6 @@
 import React from "react";
 import { AbsoluteFill, useCurrentFrame, interpolate, Sequence } from "remotion";
-import { ElasticText, ShakeAnimation } from "../animations";
+import { ElasticText } from "../animations";
 
 /**
  * HistoricalLessonsScene - 历史的教训
@@ -385,7 +385,8 @@ const TimelineMarker: React.FC<{ frame: number }> = ({ frame }) => {
         style={{
           height: "100%",
           width: `${progress * 100}%`,
-          background: "linear-gradient(90deg, #E53E3E 0%, #D69E2E 50%, #4299E1 100%)",
+          background:
+            "linear-gradient(90deg, #E53E3E 0%, #D69E2E 50%, #4299E1 100%)",
           borderRadius: "2px",
           transition: "width 0.3s",
         }}
@@ -427,7 +428,8 @@ export const HistoricalLessonsScene: React.FC = () => {
   return (
     <AbsoluteFill
       style={{
-        background: "radial-gradient(circle at 50% 50%, #1A202C 0%, #0D1117 100%)",
+        background:
+          "radial-gradient(circle at 50% 50%, #1A202C 0%, #0D1117 100%)",
       }}
     >
       {/* 标题 */}
@@ -455,11 +457,15 @@ export const HistoricalLessonsScene: React.FC = () => {
       </div>
 
       {/* 历史事件序列 */}
-      <Sequence from={0} durationInFrames={360}>
+      <Sequence durationInFrames={360}>
         {events.map((event, i) => (
           <React.Fragment key={i}>
             <EventCard event={event} frame={frame} index={i} />
-            <CollapseEffect frame={frame} color={event.color} delay={i * 120 + 60} />
+            <CollapseEffect
+              frame={frame}
+              color={event.color}
+              delay={i * 120 + 60}
+            />
             <ShatteredSymbol
               frame={frame}
               symbol={event.icon}
@@ -480,7 +486,8 @@ export const HistoricalLessonsScene: React.FC = () => {
           position: "absolute",
           inset: 0,
           opacity: 0.05,
-          backgroundImage: "repeating-linear-gradient(45deg, #000 0, #000 1px, transparent 0, transparent 50%)",
+          backgroundImage:
+            "repeating-linear-gradient(45deg, #000 0, #000 1px, transparent 0, transparent 50%)",
           backgroundSize: "10px 10px",
         }}
       />

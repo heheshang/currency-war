@@ -1,4 +1,5 @@
 import React from "react";
+import { random } from "remotion";
 
 /**
  * CurrencyBill - 纸币组件
@@ -123,7 +124,10 @@ export const CurrencyBill: React.FC<CurrencyBillProps> = ({
             fontFamily: "JetBrains Mono, monospace",
           }}
         >
-          SERIES • {Math.floor(Math.random() * 1000000).toString().padStart(6, "0")}
+          SERIES •{" "}
+          {Math.floor(random(null) * 1000000)
+            .toString()
+            .padStart(6, "0")}
         </div>
       )}
 

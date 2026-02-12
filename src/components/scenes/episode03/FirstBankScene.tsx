@@ -1,6 +1,7 @@
 import React from "react";
 import { AbsoluteFill, useCurrentFrame, interpolate, spring } from "remotion";
-import { CartoonCharacter } from "../../characters/CartoonCharacter";
+import { HistoricalFigure } from "../../characters/HistoricalFigure";
+import { getFigure } from "../../characters/historicalFigures";
 
 /**
  * FirstBankScene - 第一银行场景
@@ -11,20 +12,43 @@ import { CartoonCharacter } from "../../characters/CartoonCharacter";
 export const FirstBankScene: React.FC = () => {
   const frame = useCurrentFrame();
 
+  // 获取历史人物配置
+  const hamiltonFigure = getFigure("alexander_hamilton");
+  const jeffersonFigure = getFigure("thomas_jefferson");
+  const hamiltonPhoto = hamiltonFigure?.photoSrc || "";
+  const jeffersonPhoto = jeffersonFigure?.photoSrc || "";
+
   // 角色进入动画
-  const hamiltonScale = spring({ frame: frame - 30, fps: 30, config: { damping: 15, stiffness: 70 } });
-  const jeffersonScale = spring({ frame: frame - 60, fps: 30, config: { damping: 15, stiffness: 70 } });
+  const hamiltonScale = spring({
+    frame: frame - 30,
+    fps: 30,
+    config: { damping: 15, stiffness: 70 },
+  });
+  const jeffersonScale = spring({
+    frame: frame - 60,
+    fps: 30,
+    config: { damping: 15, stiffness: 70 },
+  });
 
   // 文字淡入
-  const titleOpacity = interpolate(frame, [0, 30], [0, 1], { extrapolateRight: "clamp" });
-  const quoteOpacity = interpolate(frame, [120, 210], [0, 1], { extrapolateRight: "clamp" });
-  const chartOpacity = interpolate(frame, [270, 360], [0, 1], { extrapolateRight: "clamp" });
-  const resultOpacity = interpolate(frame, [480, 570], [0, 1], { extrapolateRight: "clamp" });
+  const titleOpacity = interpolate(frame, [0, 30], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const quoteOpacity = interpolate(frame, [120, 210], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const chartOpacity = interpolate(frame, [270, 360], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const resultOpacity = interpolate(frame, [480, 570], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   return (
     <AbsoluteFill
       style={{
-        background: "radial-gradient(circle at center, #1a1a2e 0%, #0d1117 100%)",
+        background:
+          "radial-gradient(circle at center, #1a1a2e 0%, #0d1117 100%)",
       }}
     >
       {/* 标题 */}
@@ -71,32 +95,21 @@ export const FirstBankScene: React.FC = () => {
           transform: `translate(-50%, -50%) scale(${hamiltonScale})`,
         }}
       >
-        <CartoonCharacter
+        <HistoricalFigure
           x={0}
           y={0}
           scale={1}
-          characterType="politician"
-          action="talk"
-          facingRight={true}
+          photoSrc={hamiltonPhoto}
+          nameEn="Alexander Hamilton"
+          nameCn="亚历山大·汉密尔顿"
+          action="talking"
+          frameStyle="classic"
+          photoFilter="vintage"
+          showLabel={true}
           frame={frame}
-          skinColor="#F5DEB3"
-          clothColor="#1E3A5A" // 深蓝色服装
+          animEffect="slideLeft"
         />
-        <div
-          style={{
-            position: "absolute",
-            bottom: -25,
-            left: "50%",
-            transform: "translateX(-50%)",
-            fontFamily: "Cinzel, serif",
-            fontSize: 14,
-            color: "#1E3A5A",
-            whiteSpace: "nowrap",
-            fontWeight: 600,
-          }}
-        >
-          Alexander Hamilton
-        </div>
+        {/* 名字由组件内部显示 */}
         {/* 汉密尔顿观点气泡 */}
         <div
           style={{
@@ -133,32 +146,21 @@ export const FirstBankScene: React.FC = () => {
           transform: `translate(50%, -50%) scale(${jeffersonScale})`,
         }}
       >
-        <CartoonCharacter
+        <HistoricalFigure
           x={0}
           y={0}
           scale={1}
-          characterType="politician"
-          action="think"
-          facingRight={false}
-          frame={frame + 15}
-          skinColor="#F5DEB3"
-          clothColor="#8B4513" // 棕色服装
+          photoSrc={jeffersonPhoto}
+          nameEn="Thomas Jefferson"
+          nameCn="托马斯·杰斐逊"
+          action="talking"
+          frameStyle="classic"
+          photoFilter="vintage"
+          showLabel={true}
+          frame={frame}
+          animEffect="slideRight"
         />
-        <div
-          style={{
-            position: "absolute",
-            bottom: -25,
-            left: "50%",
-            transform: "translateX(-50%)",
-            fontFamily: "Cinzel, serif",
-            fontSize: 14,
-            color: "#8B4513",
-            whiteSpace: "nowrap",
-            fontWeight: 600,
-          }}
-        >
-          Thomas Jefferson
-        </div>
+        {/* 名字由组件内部显示 */}
         {/* 杰斐逊警告气泡 */}
         <div
           style={{
@@ -253,21 +255,67 @@ export const FirstBankScene: React.FC = () => {
 
         {/* 图例 */}
         <div style={{ position: "absolute", right: -120, top: 30 }}>
-          <div style={{ display: "flex", alignItems: "center", marginBottom: 10 }}>
-            <div style={{ width: 20, height: 20, background: "#8b0000", marginRight: 8, borderRadius: 3 }} />
-            <span style={{ fontFamily: "Merriweather, serif", fontSize: 12, color: "#e8e8e8" }}>
+          <div
+            style={{ display: "flex", alignItems: "center", marginBottom: 10 }}
+          >
+            <div
+              style={{
+                width: 20,
+                height: 20,
+                background: "#8b0000",
+                marginRight: 8,
+                borderRadius: 3,
+              }}
+            />
+            <span
+              style={{
+                fontFamily: "Merriweather, serif",
+                fontSize: 12,
+                color: "#e8e8e8",
+              }}
+            >
               Foreign: 70%
             </span>
           </div>
-          <div style={{ display: "flex", alignItems: "center", marginBottom: 10 }}>
-            <div style={{ width: 20, height: 20, background: "#1e3a5a", marginRight: 8, borderRadius: 3 }} />
-            <span style={{ fontFamily: "Merriweather, serif", fontSize: 12, color: "#e8e8e8" }}>
+          <div
+            style={{ display: "flex", alignItems: "center", marginBottom: 10 }}
+          >
+            <div
+              style={{
+                width: 20,
+                height: 20,
+                background: "#1e3a5a",
+                marginRight: 8,
+                borderRadius: 3,
+              }}
+            />
+            <span
+              style={{
+                fontFamily: "Merriweather, serif",
+                fontSize: 12,
+                color: "#e8e8e8",
+              }}
+            >
               American: 20%
             </span>
           </div>
           <div style={{ display: "flex", alignItems: "center" }}>
-            <div style={{ width: 20, height: 20, background: "#228B22", marginRight: 8, borderRadius: 3 }} />
-            <span style={{ fontFamily: "Merriweather, serif", fontSize: 12, color: "#e8e8e8" }}>
+            <div
+              style={{
+                width: 20,
+                height: 20,
+                background: "#228B22",
+                marginRight: 8,
+                borderRadius: 3,
+              }}
+            />
+            <span
+              style={{
+                fontFamily: "Merriweather, serif",
+                fontSize: 12,
+                color: "#e8e8e8",
+              }}
+            >
               Government: 10%
             </span>
           </div>

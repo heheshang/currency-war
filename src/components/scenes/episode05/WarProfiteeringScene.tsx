@@ -1,6 +1,5 @@
 import React from "react";
 import { AbsoluteFill, useCurrentFrame, interpolate } from "remotion";
-import { CartoonCharacter } from "../../characters/CartoonCharacter";
 
 /**
  * WarProfiteeringScene - 场景4：大发战争财的银行家们
@@ -12,19 +11,25 @@ import { CartoonCharacter } from "../../characters/CartoonCharacter";
 export const WarProfiteeringScene: React.FC = () => {
   const frame = useCurrentFrame();
 
-  const opacity = interpolate(frame, [0, 45], [0, 1], { extrapolateRight: "clamp" });
-
   // 士兵剪影淡入
-  const soldiersOpacity = interpolate(frame, [60, 180], [0, 1], { extrapolateRight: "clamp" });
+  const soldiersOpacity = interpolate(frame, [60, 180], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   // 银行家淡入
-  const bankerOpacity = interpolate(frame, [120, 240], [0, 1], { extrapolateRight: "clamp" });
+  const bankerOpacity = interpolate(frame, [120, 240], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   // 金币堆增长
-  const goldStack = interpolate(frame, [180, 720], [0, 1], { extrapolateRight: "clamp" });
+  const goldStack = interpolate(frame, [180, 720], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   // 利润图表上升
-  const profitRise = interpolate(frame, [300, 600], [0, 100], { extrapolateRight: "clamp" });
+  const profitRise = interpolate(frame, [300, 600], [0, 100], {
+    extrapolateRight: "clamp",
+  });
 
   // 金币雨
   const coins = Array.from({ length: 15 }).map((_, i) => {
@@ -33,7 +38,7 @@ export const WarProfiteeringScene: React.FC = () => {
       frame,
       [startFrame, startFrame + 180],
       [0, 1],
-      { extrapolateRight: "clamp", extrapolateLeft: "clamp" }
+      { extrapolateRight: "clamp", extrapolateLeft: "clamp" },
     );
 
     if (yProgress <= 0 || yProgress >= 1) return null;
@@ -67,12 +72,15 @@ export const WarProfiteeringScene: React.FC = () => {
   });
 
   // 标题
-  const titleOpacity = interpolate(frame, [60, 150], [0, 1], { extrapolateRight: "clamp" });
+  const titleOpacity = interpolate(frame, [60, 150], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   return (
     <AbsoluteFill
       style={{
-        background: "radial-gradient(circle at center, #1a0508 0%, #0d1117 100%)",
+        background:
+          "radial-gradient(circle at center, #1a0508 0%, #0d1117 100%)",
       }}
     >
       {/* 标题 */}
@@ -175,14 +183,17 @@ export const WarProfiteeringScene: React.FC = () => {
           opacity: bankerOpacity,
         }}
       >
-        <CartoonCharacter
-          x={0}
-          y={0}
-          scale={1.2}
-          characterType="banker"
-          action="think"
-          facingRight={false}
-          frame={frame}
+        {/* 抽象银行家剪影 */}
+        <div
+          style={{
+            position: "absolute",
+            width: 90,
+            height: 130,
+            background:
+              "linear-gradient(180deg, rgba(139, 0, 0, 0.8) 0%, rgba(30, 58, 90, 0.6) 100%)",
+            borderRadius: "50% 50% 25px 25px",
+            boxShadow: "0 15px 40px rgba(0, 0, 0, 0.6)",
+          }}
         />
 
         {/* 金币堆 */}
@@ -204,13 +215,55 @@ export const WarProfiteeringScene: React.FC = () => {
           </defs>
 
           {/* 金币堆叠 */}
-          <ellipse cx="50" cy="65" rx="40" ry="10" fill="url(#goldGrad)" opacity={goldStack} />
-          <ellipse cx="50" cy="55" rx="35" ry="10" fill="url(#goldGrad)" opacity={goldStack * 0.9} />
-          <ellipse cx="50" cy="45" rx="30" ry="10" fill="url(#goldGrad)" opacity={goldStack * 0.8} />
-          <ellipse cx="50" cy="35" rx="25" ry="10" fill="url(#goldGrad)" opacity={goldStack * 0.7} />
-          <ellipse cx="50" cy="25" rx="20" ry="10" fill="url(#goldGrad)" opacity={goldStack * 0.6} />
+          <ellipse
+            cx="50"
+            cy="65"
+            rx="40"
+            ry="10"
+            fill="url(#goldGrad)"
+            opacity={goldStack}
+          />
+          <ellipse
+            cx="50"
+            cy="55"
+            rx="35"
+            ry="10"
+            fill="url(#goldGrad)"
+            opacity={goldStack * 0.9}
+          />
+          <ellipse
+            cx="50"
+            cy="45"
+            rx="30"
+            ry="10"
+            fill="url(#goldGrad)"
+            opacity={goldStack * 0.8}
+          />
+          <ellipse
+            cx="50"
+            cy="35"
+            rx="25"
+            ry="10"
+            fill="url(#goldGrad)"
+            opacity={goldStack * 0.7}
+          />
+          <ellipse
+            cx="50"
+            cy="25"
+            rx="20"
+            ry="10"
+            fill="url(#goldGrad)"
+            opacity={goldStack * 0.6}
+          />
 
-          <text x="50" y="15" fontSize="12" fill="#ffd700" textAnchor="middle" fontWeight="600">
+          <text
+            x="50"
+            y="15"
+            fontSize="12"
+            fill="#ffd700"
+            textAnchor="middle"
+            fontWeight="600"
+          >
             WAR PROFITS
           </text>
         </svg>
@@ -235,8 +288,22 @@ export const WarProfiteeringScene: React.FC = () => {
           </defs>
 
           {/* 坐标轴 */}
-          <line x1="50" y1="170" x2="350" y2="170" stroke="#4b5563" strokeWidth="1" />
-          <line x1="50" y1="30" x2="50" y2="170" stroke="#4b5563" strokeWidth="1" />
+          <line
+            x1="50"
+            y1="170"
+            x2="350"
+            y2="170"
+            stroke="#4b5563"
+            strokeWidth="1"
+          />
+          <line
+            x1="50"
+            y1="30"
+            x2="50"
+            y2="170"
+            stroke="#4b5563"
+            strokeWidth="1"
+          />
 
           {/* Y轴标签 */}
           <text x="35" y="100" fontSize="12" fill="#9ca3af" textAnchor="end">
@@ -244,22 +311,70 @@ export const WarProfiteeringScene: React.FC = () => {
           </text>
 
           {/* 利润柱状图 */}
-          <rect x="80" y={170 - profitRise * 0.8} width="40" height={profitRise * 0.8} fill="url(#chartGrad)" />
-          <rect x="150" y={170 - profitRise * 1} width="40" height={profitRise * 1} fill="url(#chartGrad)" />
-          <rect x="220" y={170 - profitRise * 1.2} width="40" height={profitRise * 1.2} fill="url(#chartGrad)" />
-          <rect x="290" y={170 - profitRise * 1.5} width="40" height={profitRise * 1.5} fill="url(#chartGrad)" />
+          <rect
+            x="80"
+            y={170 - profitRise * 0.8}
+            width="40"
+            height={profitRise * 0.8}
+            fill="url(#chartGrad)"
+          />
+          <rect
+            x="150"
+            y={170 - profitRise * 1}
+            width="40"
+            height={profitRise * 1}
+            fill="url(#chartGrad)"
+          />
+          <rect
+            x="220"
+            y={170 - profitRise * 1.2}
+            width="40"
+            height={profitRise * 1.2}
+            fill="url(#chartGrad)"
+          />
+          <rect
+            x="290"
+            y={170 - profitRise * 1.5}
+            width="40"
+            height={profitRise * 1.5}
+            fill="url(#chartGrad)"
+          />
 
           {/* X轴标签 */}
-          <text x="100" y="190" fontSize="12" fill="#9ca3af" textAnchor="middle">
+          <text
+            x="100"
+            y="190"
+            fontSize="12"
+            fill="#9ca3af"
+            textAnchor="middle"
+          >
             1914
           </text>
-          <text x="170" y="190" fontSize="12" fill="#9ca3af" textAnchor="middle">
+          <text
+            x="170"
+            y="190"
+            fontSize="12"
+            fill="#9ca3af"
+            textAnchor="middle"
+          >
             1915
           </text>
-          <text x="240" y="190" fontSize="12" fill="#9ca3af" textAnchor="middle">
+          <text
+            x="240"
+            y="190"
+            fontSize="12"
+            fill="#9ca3af"
+            textAnchor="middle"
+          >
             1916
           </text>
-          <text x="310" y="190" fontSize="12" fill="#9ca3af" textAnchor="middle">
+          <text
+            x="310"
+            y="190"
+            fontSize="12"
+            fill="#9ca3af"
+            textAnchor="middle"
+          >
             1917
           </text>
         </svg>

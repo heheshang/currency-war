@@ -1,6 +1,6 @@
 import React from "react";
-import { AbsoluteFill, useCurrentFrame, interpolate, spring } from "remotion";
-import AmericanMap, { DEFAULT_AMERICAN_CITIES } from "../../maps/AmericanMap";
+import { AbsoluteFill, useCurrentFrame, interpolate } from "remotion";
+import AmericanMap from "../../maps/AmericanMap";
 
 /**
  * RussianAllianceScene - 俄国同盟场景
@@ -12,19 +12,32 @@ import AmericanMap, { DEFAULT_AMERICAN_CITIES } from "../../maps/AmericanMap";
 export const RussianAllianceScene: React.FC = () => {
   const frame = useCurrentFrame();
 
-  const titleOpacity = interpolate(frame, [0, 30], [0, 1], { extrapolateRight: "clamp" });
-  const mapShow = interpolate(frame, [60, 150], [0, 1], { extrapolateRight: "clamp" });
-  const quoteOpacity = interpolate(frame, [210, 300], [0, 1], { extrapolateRight: "clamp" });
-  const fleetOpacity = interpolate(frame, [360, 450], [0, 1], { extrapolateRight: "clamp" });
-  const resultOpacity = interpolate(frame, [540, 630], [0, 1], { extrapolateRight: "clamp" });
+  const titleOpacity = interpolate(frame, [0, 30], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const mapShow = interpolate(frame, [60, 150], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const quoteOpacity = interpolate(frame, [210, 300], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const fleetOpacity = interpolate(frame, [360, 450], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const resultOpacity = interpolate(frame, [540, 630], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   // 舰队航行动画
-  const fleetProgress = interpolate(frame, [360, 540], [0, 1], { extrapolateRight: "clamp" });
+  const fleetProgress = interpolate(frame, [360, 540], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   return (
     <AbsoluteFill
       style={{
-        background: "radial-gradient(circle at center, #1a1a2e 0%, #0d1117 100%)",
+        background:
+          "radial-gradient(circle at center, #1a1a2e 0%, #0d1117 100%)",
       }}
     >
       {/* 美国地图背景 */}
@@ -144,10 +157,7 @@ export const RussianAllianceScene: React.FC = () => {
               strokeWidth={1}
             />
             {/* 旗帜 */}
-            <path
-              d="M 30,5 L 30,0 L 40,3 Z"
-              fill="#d4af37"
-            />
+            <path d="M 30,5 L 30,0 L 40,3 Z" fill="#d4af37" />
           </svg>
           <div
             style={{
@@ -191,10 +201,7 @@ export const RussianAllianceScene: React.FC = () => {
               strokeWidth={1}
             />
             {/* 旗帜 */}
-            <path
-              d="M 30,5 L 30,0 L 40,3 Z"
-              fill="#d4af37"
-            />
+            <path d="M 30,5 L 30,0 L 40,3 Z" fill="#d4af37" />
           </svg>
           <div
             style={{

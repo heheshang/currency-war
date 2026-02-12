@@ -16,23 +16,30 @@ export const MorganFamilyScene: React.FC = () => {
   // Get historical figure configs
   const morganFigure = getFigure("jp_morgan");
   const morganPhoto = morganFigure?.photoSrc || "";
-  const peabodyFigure = getFigure("george_peabody");
-  const peabodyPhoto = peabodyFigure?.photoSrc || "";
 
   // 场景淡入
-  const opacity = interpolate(frame, [0, 45], [0, 1], { extrapolateRight: "clamp" });
+  const opacity = interpolate(frame, [0, 45], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   // 时间线滑入
-  const timelineX = interpolate(frame, [60, 300], [-200, 50], { extrapolateRight: "clamp" });
+  const timelineX = interpolate(frame, [60, 300], [-200, 50], {
+    extrapolateRight: "clamp",
+  });
 
   // 财富条动画
-  const wealthBarWidth = interpolate(frame, [120, 900], [0, 600], { extrapolateRight: "clamp" });
+  const wealthBarWidth = interpolate(frame, [120, 900], [0, 600], {
+    extrapolateRight: "clamp",
+  });
 
   // 人物淡入
-  const characterOpacity = interpolate(frame, [180, 300], [0, 1], { extrapolateRight: "clamp" });
+  const characterOpacity = interpolate(frame, [180, 300], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   // 人物说话动画
-  const morganTalking = frame > 480 ? "talking" as const : "serious" as const;
+  const morganTalking =
+    frame > 480 ? ("talking" as const) : ("serious" as const);
 
   return (
     <AbsoluteFill
@@ -82,19 +89,60 @@ export const MorganFamilyScene: React.FC = () => {
           }}
         >
           {/* 时间线刻度 */}
-          <div style={{ position: "absolute", top: "-8px", left: "50px", fontSize: 12, color: "#9ca3af" }}>
+          <div
+            style={{
+              position: "absolute",
+              top: "-8px",
+              left: "50px",
+              fontSize: 12,
+              color: "#9ca3af",
+            }}
+          >
             1835
           </div>
-          <div style={{ position: "absolute", top: "-8px", left: "200px", fontSize: 12, color: "#9ca3af" }}>
+          <div
+            style={{
+              position: "absolute",
+              top: "-8px",
+              left: "200px",
+              fontSize: 12,
+              color: "#9ca3af",
+            }}
+          >
             1854
           </div>
-          <div style={{ position: "absolute", top: "-8px", left: "400px", fontSize: 14, color: "#ffd700", fontWeight: 600 }}>
+          <div
+            style={{
+              position: "absolute",
+              top: "-8px",
+              left: "400px",
+              fontSize: 14,
+              color: "#ffd700",
+              fontWeight: 600,
+            }}
+          >
             1857
           </div>
-          <div style={{ position: "absolute", top: "-8px", right: "100px", fontSize: 12, color: "#9ca3af" }}>
+          <div
+            style={{
+              position: "absolute",
+              top: "-8px",
+              right: "100px",
+              fontSize: 12,
+              color: "#9ca3af",
+            }}
+          >
             1869
           </div>
-          <div style={{ position: "absolute", top: "-8px", right: "50px", fontSize: 12, color: "#9ca3af" }}>
+          <div
+            style={{
+              position: "absolute",
+              top: "-8px",
+              right: "50px",
+              fontSize: 12,
+              color: "#9ca3af",
+            }}
+          >
             1899
           </div>
 
@@ -125,7 +173,9 @@ export const MorganFamilyScene: React.FC = () => {
         {/* 皮博迪时代 */}
         <div
           style={{
-            opacity: interpolate(frame, [120, 270], [0, 1], { extrapolateRight: "clamp" }),
+            opacity: interpolate(frame, [120, 270], [0, 1], {
+              extrapolateRight: "clamp",
+            }),
             marginBottom: 30,
           }}
         >
@@ -148,7 +198,9 @@ export const MorganFamilyScene: React.FC = () => {
         {/* 1857年救援 */}
         <div
           style={{
-            opacity: interpolate(frame, [330, 480], [0, 1], { extrapolateRight: "clamp" }),
+            opacity: interpolate(frame, [330, 480], [0, 1], {
+              extrapolateRight: "clamp",
+            }),
             marginBottom: 30,
           }}
         >
@@ -163,16 +215,18 @@ export const MorganFamilyScene: React.FC = () => {
             1857: The Engineered Crisis
           </div>
           <div style={{ fontSize: 14, color: "#e8e8e8", lineHeight: "1.6" }}>
-            During the panic, the Bank of England provides Peabody with
-            £80,000 "emergency credit" at the perfect moment. Peabody buys
-            distressed American bonds.
+            During the panic, the Bank of England provides Peabody with £80,000
+            "emergency credit" at the perfect moment. Peabody buys distressed
+            American bonds.
           </div>
         </div>
 
         {/* 摩根继承 */}
         <div
           style={{
-            opacity: interpolate(frame, [540, 690], [0, 1], { extrapolateRight: "clamp" }),
+            opacity: interpolate(frame, [540, 690], [0, 1], {
+              extrapolateRight: "clamp",
+            }),
           }}
         >
           <div
@@ -186,15 +240,17 @@ export const MorganFamilyScene: React.FC = () => {
             Junius Spencer Morgan Inherits It All
           </div>
           <div style={{ fontSize: 14, color: "#e8e8e8", lineHeight: "1.6" }}>
-            J.P. Morgan continues the legacy. Becomes Rothschild's chief
-            agent in America. Controls American railroads.
+            J.P. Morgan continues the legacy. Becomes Rothschild's chief agent
+            in America. Controls American railroads.
           </div>
         </div>
 
         {/* 财富增长条 */}
         <div
           style={{
-            opacity: interpolate(frame, [600, 900], [0, 1], { extrapolateRight: "clamp" }),
+            opacity: interpolate(frame, [600, 900], [0, 1], {
+              extrapolateRight: "clamp",
+            }),
           }}
         >
           <div
@@ -290,15 +346,14 @@ export const MorganFamilyScene: React.FC = () => {
             <span style={{ color: "#ffd700" }}>London</span> → Rothschild Family
           </div>
           <div style={{ marginBottom: 16 }}>
-            <span style={{ color: "#ffd700" }}>New York</span> → J.P. Morgan & Co.
+            <span style={{ color: "#ffd700" }}>New York</span> → J.P. Morgan &
+            Co.
           </div>
           <div>
             <span style={{ color: "#ffd700" }}>1899:</span> Morgan appointed as
             Rothschild's chief U.S. agent
           </div>
-          <div>
-            Forms U.S. Steel — first billion-dollar company
-          </div>
+          <div>Forms U.S. Steel — first billion-dollar company</div>
         </div>
       </div>
 
@@ -311,7 +366,8 @@ export const MorganFamilyScene: React.FC = () => {
           transform: "translateX(-50%)",
           width: "300px",
           height: "2px",
-          background: "linear-gradient(90deg, transparent, #ffd700, transparent)",
+          background:
+            "linear-gradient(90deg, transparent, #ffd700, transparent)",
           opacity: opacity,
         }}
       />
