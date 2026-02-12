@@ -7,6 +7,7 @@ import { Episode02 } from "./compositions/Episode02";
 import { Episode03 } from "./compositions/Episode03";
 import { Episode07 } from "./compositions/Episode07";
 import { Episode04 } from "./compositions/Episode04";
+import { Episode05 } from "./compositions/Episode05";
 
 // Each <Composition> is an entry in the sidebar!
 
@@ -93,6 +94,15 @@ export const RemotionRoot: React.FC = () => {
         id="Episode04"
         component={Episode04}
         durationInFrames={840 * 30} // 14 minutes @ 30fps
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+      {/* Episode05 - 第5集：一战与大衰退——国际银行家的"丰收时节" */}
+      <Composition
+        id="Episode05"
+        component={Episode05}
+        durationInFrames={900 * 30} // 15 minutes @ 30fps
         fps={30}
         width={1920}
         height={1080}
