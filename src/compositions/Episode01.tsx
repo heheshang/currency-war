@@ -10,6 +10,8 @@ import { ChinaAircraftCarrierScene } from "../components/scenes/ChinaAircraftCar
 import { InvisibleBattlefieldScene } from "../components/scenes/InvisibleBattlefieldScene";
 import { HistoricalLessonsScene } from "../components/scenes/HistoricalLessonsScene";
 import { Subtitles, episode01Subtitles } from "../components/Subtitles";
+import { Audio } from "../components/Audio";
+import { getEpisodeBGM } from "../utils/audioConfig";
 
 /**
  * Episode01 - 第1集：序言 - 起航的中国经济航母
@@ -32,8 +34,11 @@ import { Subtitles, episode01Subtitles } from "../components/Subtitles";
 export const Episode01: React.FC = () => {
   const { fps } = useVideoConfig();
 
+  const bgm = getEpisodeBGM("Episode01");
+
   return (
     <AbsoluteFill style={{ background: "#0d1117" }}>
+      {bgm && <Audio {...bgm} />}
       {/* 场景1: 古代集市 - 金币时代 (0-30s) */}
       <Sequence durationInFrames={30 * fps}>
         <AncientMarketScene />

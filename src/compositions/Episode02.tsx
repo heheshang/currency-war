@@ -3,6 +3,8 @@ import { AbsoluteFill, useVideoConfig, Sequence } from "remotion";
 import { BattleOfWaterloo } from "../components/scenes/BattleOfWaterloo";
 import { StockExchangeScene } from "../components/scenes/StockExchangeScene";
 import { Subtitles, episode02Subtitles } from "../components/Subtitles";
+import { Audio } from "../components/Audio";
+import { getEpisodeBGM } from "../utils/audioConfig";
 
 // Episode02 Scene Components
 import InvisibleWealthScene from "../components/scenes/episode02/InvisibleWealthScene";
@@ -44,8 +46,11 @@ import Episode02SummaryScene from "../components/scenes/episode02/Episode02Summa
 export const Episode02: React.FC = () => {
   const { fps } = useVideoConfig();
 
+  const bgm = getEpisodeBGM("Episode02");
+
   return (
     <AbsoluteFill style={{ background: "#0d1117" }}>
+      {bgm && <Audio {...bgm} />}
       {/* Scene 1: Opening - The Invisible Wealth (0-30s) */}
       <Sequence durationInFrames={30 * fps}>
         <InvisibleWealthScene />

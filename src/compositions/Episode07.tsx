@@ -11,6 +11,8 @@ import { NightTrainScene } from "../components/scenes/NightTrainScene";
 import { SecretMeetingScene } from "../components/scenes/SecretMeetingScene";
 import { CongressScene } from "../components/scenes/CongressScene";
 import { TruthRevealScene } from "../components/data-viz/TruthRevealScene";
+import { Audio } from "../components/Audio";
+import { getEpisodeBGM } from "../utils/audioConfig";
 
 /**
  * Episode07 - 第7集：美联储成立 - 哲基尔岛密谋
@@ -29,8 +31,11 @@ import { TruthRevealScene } from "../components/data-viz/TruthRevealScene";
 export const Episode07: React.FC = () => {
   const { fps } = useVideoConfig();
 
+  const bgm = getEpisodeBGM("Episode07");
+
   return (
     <AbsoluteFill style={{ background: "#0d1117" }}>
+      {bgm && <Audio {...bgm} />}
       {/* 场景1: 开场铺垫 (0-60s) */}
       <Sequence durationInFrames={60 * fps}>
         <OpeningScene />

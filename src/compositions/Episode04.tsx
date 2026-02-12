@@ -1,10 +1,8 @@
 import React from "react";
-import {
-  AbsoluteFill,
-  useVideoConfig,
-  Sequence,
-} from "remotion";
+import { AbsoluteFill, useVideoConfig, Sequence } from "remotion";
 import { Subtitles, episode04Subtitles } from "../components/Subtitles";
+import { Audio } from "../components/Audio";
+import { getEpisodeBGM } from "../utils/audioConfig";
 import {
   OpeningWilsonScene,
   JekyllIslandScene,
@@ -49,8 +47,11 @@ import {
 export const Episode04: React.FC = () => {
   const { fps } = useVideoConfig();
 
+  const bgm = getEpisodeBGM("Episode04");
+
   return (
     <AbsoluteFill style={{ background: "#0d1117" }}>
+      {bgm && <Audio {...bgm} />}
       {/* Scene 0: 开场 - 威尔逊的悔恨 (0-35s = 帧 0-1050) */}
       <Sequence durationInFrames={35 * fps}>
         <OpeningWilsonScene />

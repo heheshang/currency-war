@@ -1,10 +1,8 @@
 import React from "react";
-import {
-  AbsoluteFill,
-  useVideoConfig,
-  Sequence,
-} from "remotion";
+import { AbsoluteFill, useVideoConfig, Sequence } from "remotion";
 import { Subtitles, episode05Subtitles } from "../components/Subtitles";
+import { Audio } from "../components/Audio";
+import { getEpisodeBGM } from "../utils/audioConfig";
 import {
   BenjaminStrongScene,
   NoFedNoWarScene,
@@ -53,8 +51,11 @@ import {
 export const Episode05: React.FC = () => {
   const { fps } = useVideoConfig();
 
+  const bgm = getEpisodeBGM("Episode05");
+
   return (
     <AbsoluteFill style={{ background: "#0d1117" }}>
+      {bgm && <Audio {...bgm} />}
       {/* Scene 0: 开场 - 斯特朗肖像 (0-40s = 帧 0-1200) */}
       <Sequence durationInFrames={40 * fps}>
         <BenjaminStrongScene />

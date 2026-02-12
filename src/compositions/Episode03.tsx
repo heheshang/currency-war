@@ -1,10 +1,8 @@
 import React from "react";
-import {
-  AbsoluteFill,
-  useVideoConfig,
-  Sequence,
-} from "remotion";
+import { AbsoluteFill, useVideoConfig, Sequence } from "remotion";
 import { Subtitles, episode03Subtitles } from "../components/Subtitles";
+import { Audio } from "../components/Audio";
+import { getEpisodeBGM } from "../utils/audioConfig";
 import {
   OpeningLincolnScene,
   ColonialCurrencyScene,
@@ -47,8 +45,11 @@ import {
 export const Episode03: React.FC = () => {
   const { fps } = useVideoConfig();
 
+  const bgm = getEpisodeBGM("Episode03");
+
   return (
     <AbsoluteFill style={{ background: "#0d1117" }}>
+      {bgm && <Audio {...bgm} />}
       {/* 场景0: 开场 - 林肯名言 (0-30s = 帧 0-900) */}
       <Sequence durationInFrames={30 * fps}>
         <OpeningLincolnScene />
