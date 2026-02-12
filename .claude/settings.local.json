@@ -6,7 +6,11 @@
       "Bash(npm uninstall:*)",
       "Bash(python:*)",
       "Bash(copy:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(node:*)",
+      "mcp__web-search-prime__webSearchPrime",
+      "Bash(powershell:*)",
+      "Bash(git add:*)"
     ]
   },
   "outputStyle": "Explanatory"

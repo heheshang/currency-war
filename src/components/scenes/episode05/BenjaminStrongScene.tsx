@@ -1,6 +1,7 @@
 import React from "react";
 import { AbsoluteFill, useCurrentFrame, interpolate } from "remotion";
-import { CartoonCharacter } from "../../characters/CartoonCharacter";
+import { HistoricalFigure } from "../../characters/HistoricalFigure";
+import { getFigure } from "../../characters/historicalFigures";
 
 /**
  * BenjaminStrongScene - 场景0：本杰明·斯特朗肖像
@@ -8,9 +9,15 @@ import { CartoonCharacter } from "../../characters/CartoonCharacter";
  * 聚光灯效果介绍本杰明·斯特朗
  * 银行家角色（think动作）
  * 标题："控制美国货币的人"
+ *
+ * Updated to use real historical figure photo instead of cartoon character
  */
 export const BenjaminStrongScene: React.FC = () => {
   const frame = useCurrentFrame();
+
+  // Get historical figure config
+  const strongFigure = getFigure("benjamin_strong");
+  const strongPhoto = strongFigure?.photoSrc || "";
 
   // 淡入效果
   const opacity = interpolate(frame, [0, 45], [0, 1], { extrapolateRight: "clamp" });
@@ -27,6 +34,13 @@ export const BenjaminStrongScene: React.FC = () => {
 
   // 副标题淡入
   const subtitleOpacity = interpolate(frame, [300, 390], [0, 1], { extrapolateRight: "clamp" });
+
+  // Action based on frame
+  const getAction = (): "serious" | "thinking" | "talking" => {
+    if (frame > 420 && frame < 600) return "talking";
+    if (frame > 270) return "thinking";
+    return "serious";
+  };
 
   return (
     <AbsoluteFill
@@ -84,7 +98,7 @@ export const BenjaminStrongScene: React.FC = () => {
         </div>
       </div>
 
-      {/* 斯特朗角色 */}
+      {/* 斯特朗角色 - 使用真实照片 */}
       <div
         style={{
           position: "absolute",
@@ -94,18 +108,24 @@ export const BenjaminStrongScene: React.FC = () => {
           opacity: characterOpacity,
         }}
       >
-        <CartoonCharacter
+        <HistoricalFigure
           x={0}
           y={0}
-          scale={1.5}
-          characterType="banker"
-          action="think"
-          facingRight={true}
+          scale={1}
+          photoSrc={strongPhoto}
+          nameEn="Benjamin Strong Jr."
+          nameCn="本杰明·斯特朗"
+          action={getAction()}
+          frameStyle="classic"
+          photoFilter="grayscale"
+          showLabel={false}
           frame={frame}
+          startFrame={90}
+          animEffect="fadeIn"
         />
       </div>
 
-      {/* 职位描述 */}
+      {/* 单位描述 */}
       <div
         style={{
           position: "absolute",
@@ -131,7 +151,7 @@ export const BenjaminStrongScene: React.FC = () => {
               letterSpacing: 1,
             }}
           >
-            The Real Power Behind the Fed
+            The Real Power Behind Fed
           </div>
           <div style={{ fontSize: 15, color: "#e8e8e8", lineHeight: "1.8" }}>
             <div style={{ marginBottom: 12 }}>
@@ -144,7 +164,7 @@ export const BenjaminStrongScene: React.FC = () => {
             </div>
             <div style={{ marginBottom: 12 }}>
               <span style={{ color: "#22c55e", fontWeight: 600 }}>Known as:</span>{" "}
-              "The Fed of the Fed"
+              "The Fed of Fed"
             </div>
             <div>
               <span style={{ color: "#22c55e", fontWeight: 600 }}>
@@ -175,7 +195,7 @@ export const BenjaminStrongScene: React.FC = () => {
             lineHeight: "1.6",
           }}
         >
-          "The power to issue money is the supreme authority."
+          "The power to issue money is supreme authority."
         </div>
         <div
           style={{

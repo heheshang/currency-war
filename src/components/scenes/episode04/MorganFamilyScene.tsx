@@ -1,14 +1,23 @@
 import React from "react";
 import { AbsoluteFill, useCurrentFrame, interpolate } from "remotion";
-import { CartoonCharacter } from "../../characters/CartoonCharacter";
+import { HistoricalFigure } from "../../characters/HistoricalFigure";
+import { getFigure } from "../../characters/historicalFigures";
 
 /**
  * MorganFamilyScene - 摩根家族兴起场景
  *
  * 展示乔治·皮博迪从伦敦到摩根家族继承罗斯柴尔德联系的历史
+ *
+ * Updated to use real historical figure photos instead of cartoon characters
  */
 export const MorganFamilyScene: React.FC = () => {
   const frame = useCurrentFrame();
+
+  // Get historical figure configs
+  const morganFigure = getFigure("jp_morgan");
+  const morganPhoto = morganFigure?.photoSrc || "";
+  const peabodyFigure = getFigure("george_peabody");
+  const peabodyPhoto = peabodyFigure?.photoSrc || "";
 
   // 场景淡入
   const opacity = interpolate(frame, [0, 45], [0, 1], { extrapolateRight: "clamp" });
@@ -21,6 +30,9 @@ export const MorganFamilyScene: React.FC = () => {
 
   // 人物淡入
   const characterOpacity = interpolate(frame, [180, 300], [0, 1], { extrapolateRight: "clamp" });
+
+  // 人物说话动画
+  const morganTalking = frame > 480 ? "talking" as const : "serious" as const;
 
   return (
     <AbsoluteFill
@@ -171,7 +183,7 @@ export const MorganFamilyScene: React.FC = () => {
               marginBottom: 10,
             }}
           >
-            Junius Morgan Inherits It All
+            Junius Spencer Morgan Inherits It All
           </div>
           <div style={{ fontSize: 14, color: "#e8e8e8", lineHeight: "1.6" }}>
             J.P. Morgan continues the legacy. Becomes Rothschild's chief
@@ -219,7 +231,7 @@ export const MorganFamilyScene: React.FC = () => {
         </div>
       </div>
 
-      {/* 人物动画 */}
+      {/* J.P. Morgan 真实照片 */}
       <div
         style={{
           position: "absolute",
@@ -228,14 +240,21 @@ export const MorganFamilyScene: React.FC = () => {
           opacity: characterOpacity,
         }}
       >
-        <CartoonCharacter
+        <HistoricalFigure
           x={0}
           y={0}
-          scale={1.2}
-          characterType="banker"
-          action="talk"
-          facingRight={true}
+          scale={1}
+          photoSrc={morganPhoto}
+          nameEn="J. P. Morgan"
+          nameCn="约翰·皮尔庞特·摩根"
+          action={morganTalking}
+          frameStyle="gold"
+          photoFilter="grayscale"
+          showLabel={true}
+          labelPosition="bottom"
           frame={frame}
+          startFrame={180}
+          animEffect="fadeIn"
         />
       </div>
 

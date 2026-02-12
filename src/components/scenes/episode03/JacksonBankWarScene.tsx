@@ -1,6 +1,7 @@
 import React from "react";
 import { AbsoluteFill, useCurrentFrame, interpolate, spring } from "remotion";
-import { CartoonCharacter } from "../../characters/CartoonCharacter";
+import { HistoricalFigure } from "../../characters/HistoricalFigure";
+import { getFigure } from "../../characters/historicalFigures";
 
 /**
  * JacksonBankWarScene - 杰克逊银行战场景
@@ -8,9 +9,15 @@ import { CartoonCharacter } from "../../characters/CartoonCharacter";
  * 安德鲁·杰克逊与第二银行的战争
  * "The Bank wants to kill me, but I will kill it!"
  * 1832年否决，1836年银行死亡
+ *
+ * Updated to use real historical figure photos instead of cartoon characters
  */
 export const JacksonBankWarScene: React.FC = () => {
   const frame = useCurrentFrame();
+
+  // Get historical figure configs
+  const jacksonFigure = getFigure("andrew_jackson");
+  const jacksonPhoto = jacksonFigure?.photoSrc || "";
 
   // 动画时序
   const titleOpacity = interpolate(frame, [0, 30], [0, 1], { extrapolateRight: "clamp" });
@@ -23,6 +30,10 @@ export const JacksonBankWarScene: React.FC = () => {
   // 抖动效果 - 紧张时刻
   const shake = interpolate(frame, [360, 375], [0, 5], { extrapolateRight: "clamp" }) *
     Math.sin(frame * 0.5);
+
+  // Mouth animation for talking effect
+  const jacksonTalking = frame > 180 && frame < 300 ? "talking" as const : "serious" as const;
+  const biddleTalking = frame > 120 ? "talking" as const : "serious" as const;
 
   return (
     <AbsoluteFill
@@ -77,7 +88,7 @@ export const JacksonBankWarScene: React.FC = () => {
         </div>
       </div>
 
-      {/* 杰克逊 - 左侧，强势姿态 */}
+      {/* 杰克逊 - 左侧，真实照片 */}
       <div
         style={{
           position: "absolute",
@@ -86,35 +97,24 @@ export const JacksonBankWarScene: React.FC = () => {
           transform: `translate(-50%, -50%) scale(${jacksonEnter})`,
         }}
       >
-        <CartoonCharacter
+        <HistoricalFigure
           x={0}
           y={0}
-          scale={1.3}
-          characterType="politician"
-          action="point"
-          facingRight={true}
+          scale={0.9}
+          photoSrc={jacksonPhoto}
+          nameEn="Andrew Jackson"
+          nameCn="安德鲁·杰克逊"
+          action={jacksonTalking}
+          frameStyle="classic"
+          photoFilter="grayscale"
+          showLabel={false}
           frame={frame}
-          skinColor="#F5DEB3"
-          clothColor="#4A6741" // 杰克逊常穿的衣服颜色
+          startFrame={45}
+          animEffect="slideLeft"
         />
-        <div
-          style={{
-            position: "absolute",
-            bottom: -30,
-            left: "50%",
-            transform: "translateX(-50%)",
-            fontFamily: "Cinzel, serif",
-            fontSize: 16,
-            color: "#ffd700",
-            whiteSpace: "nowrap",
-            fontWeight: 700,
-          }}
-        >
-          President Andrew Jackson
-        </div>
       </div>
 
-      {/* 比德尔 - 右侧，银行家 */}
+      {/* 比德尔 - 右侧，银行家（使用通用银行家照片或插画） */}
       <div
         style={{
           position: "absolute",
@@ -123,35 +123,27 @@ export const JacksonBankWarScene: React.FC = () => {
           transform: `translate(50%, -50%) scale(${biddleEnter})`,
         }}
       >
-        <CartoonCharacter
+        {/* Using a placeholder for Nicholas Biddle - banker from the era */}
+        <HistoricalFigure
           x={0}
           y={0}
-          scale={1.1}
-          characterType="banker"
-          action="talk"
-          facingRight={false}
-          frame={frame + 10}
-          skinColor="#F5DEB3"
-          clothColor="#1E3A5A"
+          scale={0.85}
+          photoSrc="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Nicholas_Biddle_-_Brady-Handy.jpg/400px-Nicholas_Biddle_-_Brady-Handy.jpg"
+          nameEn="Nicholas Biddle"
+          nameCn="尼古拉斯·比德尔"
+          action={biddleTalking}
+          frameStyle="vintage"
+          photoFilter="vintage"
+          showLabel={true}
+          labelPosition="bottom"
+          frame={frame}
+          startFrame={90}
+          animEffect="slideRight"
         />
         <div
           style={{
             position: "absolute",
-            bottom: -30,
-            left: "50%",
-            transform: "translateX(-50%)",
-            fontFamily: "Cinzel, serif",
-            fontSize: 14,
-            color: "#8b0000",
-            whiteSpace: "nowrap",
-          }}
-        >
-          Nicholas Biddle
-        </div>
-        <div
-          style={{
-            position: "absolute",
-            top: -35,
+            top: "-8%",
             left: "50%",
             transform: "translateX(-50%)",
             fontFamily: "Merriweather, serif",
@@ -166,6 +158,28 @@ export const JacksonBankWarScene: React.FC = () => {
           }}
         >
           "If Jackson vetoes, I will veto him!"
+        </div>
+      </div>
+
+      {/* VS 标志 */}
+      <div
+        style={{
+          position: "absolute",
+          top: "42%",
+          left: "50%",
+          transform: "translateX(-50%)",
+          opacity: biddleEnter,
+        }}
+      >
+        <div
+          style={{
+            fontFamily: "Cinzel, serif",
+            fontSize: 36,
+            color: "#ef4444",
+            fontWeight: 700,
+          }}
+        >
+          ⚔
         </div>
       </div>
 
@@ -278,28 +292,6 @@ export const JacksonBankWarScene: React.FC = () => {
         <div style={{ textAlign: "center" }}>
           <div style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 14, color: "#228B22" }}>1836</div>
           <div style={{ fontFamily: "Merriweather, serif", fontSize: 11, color: "#6b7280" }}>Victory</div>
-        </div>
-      </div>
-
-      {/* VS 标志 */}
-      <div
-        style={{
-          position: "absolute",
-          top: "42%",
-          left: "50%",
-          transform: "translateX(-50%)",
-          opacity: biddleEnter,
-        }}
-      >
-        <div
-          style={{
-            fontFamily: "Cinzel, serif",
-            fontSize: 36,
-            color: "#ef4444",
-            fontWeight: 700,
-          }}
-        >
-          ⚔
         </div>
       </div>
     </AbsoluteFill>

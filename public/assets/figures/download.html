@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>历史人物照片下载 - Currency Wars</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #0d1117 100%);
+            color: #e8e8e8;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: rgba(255, 215, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .header h1 {
+            color: #ffd700;
+            font-size: 28px;
+            margin: 0;
+        }
+
+        .header p {
+            color: #9ca3af;
+            font-size: 14px;
+            margin: 5px 0 0 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .section {
+            background: rgba(26, 26, 46, 0.9);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .section h2 {
+            color: #ffd700;
+            font-size: 18px;
+            margin: 0 0 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section h2 .badge {
+            background: rgba(255, 215, 0, 0.2);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+
+        .figure-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .figure-card {
+            background: rgba(30, 58, 138, 0.5);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 8px;
+            padding: 15px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .figure-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .figure-card.downloaded {
+            border-color: #22c55e;
+            background: rgba(34, 197, 94, 0.3);
+        }
+
+        .figure-card.downloaded .status {
+            color: #22c55e;
+        }
+
+        .figure-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #ffd700;
+            margin-bottom: 8px;
+        }
+
+        .figure-name-cn {
+            font-size: 13px;
+            color: #9ca3af;
+            margin-bottom: 5px;
+        }
+
+        .download-btn {
+            display: inline-block;
+            padding: 6px 12px;
+            background: #ffd700;
+            color: #0d1117;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 13px;
+            margin-top: 10px;
+            transition: all 0.2s;
+        }
+
+        .download-btn:hover {
+            background: #e6b800;
+            transform: scale(1.05);
+        }
+
+        .tips {
+            background: rgba(139, 92, 246, 0.3);
+            border-left: 3px solid #ffd700;
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            font-size: 13px;
+            margin-top: 15px;
+        }
+
+        .tips h3 {
+            margin: 0 0 10px 0;
+            color: #ffd700;
+        }
+
+        .tips ul {
+            margin: 0;
+            padding-left: 15px;
+        }
+
+        .tips li {
+            margin-bottom: 8px;
+        }
+
+        .progress {
+            background: rgba(34, 197, 94, 0.9);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: rgba(255, 215, 0, 0.2);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ffd700, #22c55e);
+            transition: width 0.3s;
+        }
+
+        .source-link {
+            color: #64b5f6;
+            text-decoration: none;
+            font-size: 12px;
+        }
+
+        .source-link:hover {
+            text-decoration: underline;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid rgba(255, 215, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .footer a {
+            color: #ffd700;
+            text-decoration: none;
+        }
+
+        .download-all-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #ffd700 0%, #e6b800 100%);
+            color: #0d1117;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            margin-top: 20px;
+            text-align: center;
+            transition: all 0.2s;
+        }
+
+        .download-all-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>📥 历史人物照片下载助手</h1>
+        <p>《货币战争》纪录片 - 历史人物照片下载</p>
+    </div>
+
+    <div class="container">
+        <!-- Episode 02: 罗斯柴尔德家族 -->
+        <div class="section">
+            <h2>
+                <span class="badge">EP02</span>
+                罗斯柴尔德家族
+            </h2>
+            <div class="figure-grid">
+                <div class="figure-card" id="mayer_rothschild">
+                    <div class="figure-name">Mayer Amschel Rothschild</div>
+                    <div class="figure-name-cn">老梅耶·罗斯柴尔德</div>
+                    <div class="figure-id">文件名: mayer_rothschild.jpg</div>
+                    <a href="https://commons.wikimedia.org/wiki/File:Mayer_Amschel_Rothschild.jpg" target="_blank" class="download-btn">📥 维基百科下载</a>
+                    <a href="https://www.bing.com/images/search?q=Mayer+Amschel+Rothschild+portrait" target="_blank" class="download-btn">🔍 必应搜索</a>
+                </div>
+
+                <div class="figure-card" id="nathan_rothschild">
+                    <div class="figure-name">Nathan Mayer Rothschild</div>
+                    <div class="figure-name-cn">内森·梅耶·罗斯柴尔德</div>
+                    <div class="figure-id">文件名: nathan_rothschild.jpg</div>
+                    <a href="https://commons.wikimedia.org/wiki/File:Nathan_Mayer_Rothschild.jpg" target="_blank" class="download-btn">📥 维基百科下载</a>
+                    <a href="https://www.bing.com/images/search?q=Nathan+Mayer+Rothschild+portrait" target="_blank" class="download-btn">🔍 必应搜索</a>
+                </div>
+
+                <div class="figure-card" id="james_rothschild">
+                    <div class="figure-name">James de Rothschild</div>
+                    <div class="figure-name-cn">詹姆斯·罗斯柴尔德</div>
+                    <div class="figure-id">文件名: james_rothschild.jpg</div>
+                    <a href="https://commons.wikimedia.org/wiki/File:James_de_Rothschild.jpg" target="_blank" class="download-btn">📥 维基百科下载</a>
+                    <a href="https://www.bing.com/images/search?q=James+de+Rothschild+portrait" target="_blank" class="download-btn">🔍 必应搜索</a>
+                </div>
+
+                <div class="figure-card" id="salomon_rothschild">
+                    <div class="figure-name">Salomon Mayer von Rothschild</div>
+                    <div class="figure-name-cn">所罗门·梅耶·罗斯柴尔德</div>
+                    <div class="figure-id">文件名: salomon_rothschild.jpg</div>
+                    <a href="https://commons.wikimedia.org/wiki/File:Salomon_Mayer_von_Rothschild.jpg" target="_blank" class="download-btn">📥 维基百科下载</a>
+                    <a href="https://www.bing.com/images/search?q=Salomon+Mayer+Rothschild+portrait" target="_blank" class="download-btn">🔍 必应搜索</a>
+                </div>
+
+                <div class="figure-card" id="amschel_rothschild">
+                    <div class="figure-name">Amschel Mayer von Rothschild</div>
+                    <div class="figure-name-cn">阿姆谢尔·梅耶·罗斯柴尔德</div>
+                    <div class="figure-id">文件名: amschel_rothschild.jpg</div>
+                    <a href="https://commons.wikimedia.org/wiki/File:Amschel_Mayer_von_Rothschild.jpg" target="_blank" class="download-btn">📥 维基百科下载</a>
+                    <a href="https://www.bing.com/images/search?q=Amschel+Mayer+Rothschild+portrait" target="_blank" class="download-btn">🔍 必应搜索</a>
+                </div>
+
+                <div class="figure-card" id="karl_rothschild">
+                    <div class="figure-name">Carl Mayer von Rothschild</div>
+                    <div class="figure-name-cn">卡尔·梅耶·罗斯柴尔德</div>
+                    <div class="figure-id">文件名: karl_rothschild.jpg</div>
+                    <a href="https://commons.wikimedia.org/wiki/File:Carl_Mayer_von_Rothschild.jpg" target="_blank" class="download-btn">📥 维基百科下载</a>
+                    <a href="https://www.bing.com/images/search?q=Carl+Mayer+Rothschild+portrait" target="_blank" class="download-btn">🔍 必应搜索</a>
+                </div>
+            </div>
+
+        <!-- Episode 03: 历任总统 -->
+        <div class="section">
+            <h2>
+                <span class="badge">EP03</span>
+                历任总统
+            </h2>
+            <div class="figure-grid">
+                <div class="figure-card" id="alexander_hamilton">
+                    <div class="figure-name">Alexander Hamilton</div>
+                    <div class="figure-name-cn">亚历山大·汉密尔顿</div>
+                    <div class="figure-id">文件名: alexander_hamilton.jpg</div>
+                    <a href="https://commons.wikimedia.org/wiki/File:Alexander_Hamilton_portrait_by_John_Trumbull_1806.jpg" target="_blank" class="download-btn">📥 维基百科下载</a>
+                    <a href="https://www.bing.com/images/search?q=Alexander+Hamilton+portrait" target="_blank" class="download-btn">🔍 必应搜索</a>
+                </div>
+
+                <div class="figure-card" id="thomas_jefferson">
+                    <div class="figure-name">Thomas Jefferson</div>
+                    <div class="figure-name-cn">托马斯·杰斐逊</div>
+                    <div class="figure-id">文件名: thomas_jefferson.jpg</div>
+                    <a href="https://commons.wikimedia.org/wiki/File:Tjefferson.jpg" target="_blank" class="download-btn">📥 维基百科下载</a>
+                    <a href="https://www.bing.com/images/search?q=Thomas+Jefferson+portrait" target="_blank" class="download-btn">🔍 必应搜索</a>
+                </div>
+
+                <div class="figure-card" id="andrew_jackson">
+                    <div class="figure-name">Andrew Jackson</div>
+                    <div class="figure-name-cn">安德鲁·杰克逊</div>
+                    <div class="figure-id">文件名: andrew_jackson.jpg</div>
+                    <a href="https://commons.wikimedia.org/wiki/File:Andrew_Jackson-head.jpg" target="_blank" class="download-btn">📥 维基百科下载</a>
+                    <a href="https://www.bing.com/images/search?q=Andrew+Jackson+portrait" target="_blank" class="download-btn">🔍 必应搜索</a>
+                </div>
+
+                <div class="figure-card" id="abraham_lincoln">
+                    <div class="figure-name">Abraham Lincoln</div>
+                    <div class="figure-name-cn">亚伯拉罕·林肯</div>
+                    <div class="figure-id">文件名: abraham_lincoln.jpg</div>
+                    <a href="https://commons.wikimedia.org/wiki/File:Abraham_Lincoln_O-77_matte_collodion_print.jpg" target="_blank" class="download-btn">📥 维基百科下载</a>
+                    <a href="https://www.bing.com/images/search?q=Abraham+Lincoln+portrait" target="_blank" class="download-btn">🔍 必应搜索</a>
+                </div>
+            </div>
+
+        <!-- Episode 04: 美联储创始人 -->
+        <div class="section">
+            <h2>
+                <span class="badge">EP04</span>
+                美联储创始人
+            </h2>
+            <div class="figure-grid">
+                <div class="figure-card" id="woodrow_wilson">
+                    <div class="figure-name">Woodrow Wilson</div>
+                    <div class="figure-name-cn">伍德罗·威尔逊</div>
+                    <div class="figure-id">文件名: woodrow_wilson.jpg</div>
+                    <a href="https://commons.wikimedia.org/wiki/File:Woodrow_Wilson_1919.jpg" target="_blank" class="download-btn">📥 维基百科下载</a>
+                    <a href="https://www.bing.com/images/search?q=Woodrow+Wilson+portrait" target="_blank" class="download-btn">🔍 必应搜索</a>
+                </div>
+
+                <div class="figure-card" id="jp_morgan">
+                    <div class="figure-name">J. P. Morgan</div>
+                    <div class="figure-name-cn">约翰·皮尔庞特·摩根</div>
+                    <div class="figure-id">文件名: jp_morgan.jpg</div>
+                    <a href="https://commons.wikimedia.org/wiki/File:John_Pierpont_Morgan.jpg" target="_blank" class="download-btn">📥 维基百科下载</a>
+                    <a href="https://www.bing.com/images/search?q=J.P.+Morgan+portrait" target="_blank" class="download-btn">🔍 必应搜索</a>
+                </div>
+
+                <div class="figure-card" id="john_d_rockefeller">
+                    <div class="figure-name">John D. Rockefeller</div>
+                    <div class="figure-name-cn">约翰·洛克菲勒</div>
+                    <div class="figure-id">文件名: john_d_rockefeller.jpg</div>
+                    <a href="https://commons.wikimedia.org/wiki/File:John_D._Rockefeller_1885.jpg" target="_blank" class="download-btn">📥 维基百科下载</a>
+                    <a href="https://www.bing.com/images/search?q=John+Rockefeller+portrait" target="_blank" class="download-btn">🔍 必应搜索</a>
+                </div>
+
+                <div class="figure-card" id="benjamin_strong">
+                    <div class="figure-name">Benjamin Strong Jr.</div>
+                    <div class="figure-name-cn">本杰明·斯特朗</div>
+                    <div class="figure-id">文件名: benjamin_strong.jpg</div>
+                    <a href="https://commons.wikimedia.org/wiki/File:Benjamin_Strong_Jr.jpg" target="_blank" class="download-btn">📥 维基百科下载</a>
+                    <a href="https://www.bing.com/images/search?q=Benjamin+Strong+portrait" target="_blank" class="download-btn">🔍 必应搜索</a>
+                </div>
+
+                <div class="figure-card" id="franklin_roosevelt">
+                    <div class="figure-name">Franklin D. Roosevelt</div>
+                    <div class="figure-name-cn">富兰克林·罗斯福</div>
+                    <div class="figure-id">文件名: franklin_roosevelt.jpg</div>
+                    <a href="https://commons.wikimedia.org/wiki/File:FDR_in_1933.jpg" target="_blank" class="download-btn">📥 维基百科下载</a>
+                    <a href="https://www.bing.com/images/search?q=Franklin+Roosevelt+portrait" target="_blank" class="download-btn">🔍 必应搜索</a>
+                </div>
+            </div>
+
+        <!-- 下载说明 -->
+        <div class="tips">
+            <h3>📥 下载说明</h3>
+            <ul>
+                <li><strong>维基百科下载</strong>: 点击"维基百科下载"按钮，在打开的页面中右键图片并选择"另存为"</li>
+                <li><strong>必应搜索</strong>: 点击"必应搜索"按钮，在必应图片中选择合适的照片，右键"另存为"</li>
+                <li><strong>保存位置</strong>: 将照片保存到 <code>public/assets/figures/</code> 目录</li>
+                <li><strong>文件命名</strong>: 使用表格中显示的文件名（如 <code>nathan_rothschild.jpg</code>）</li>
+            </ul>
+        </div>
+
+        <!-- 下载进度 -->
+        <div class="progress">
+            <div style="margin-bottom: 10px;">下载进度</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+            <div style="text-align: center; margin-top: 10px; font-size: 14px;" id="progress-text">0 / 21 完成</div>
+        </div>
+
+        <div class="footer">
+            <a href="https://github.com/anthropics/claude-code" target="_blank">Claude Code</a>
+            <span style="color: #6b7280;"> • </span>
+            <span style="color: #9ca3af;">Currency Wars Documentary Project</span>
+        </div>
+    </div>
+
+    <script>
+        // Check download status and update progress
+        const figuresDir = 'public/assets/figures/';
+        const expectedFiles = [
+            'mayer_rothschild.jpg',
+            'nathan_rothschild.jpg',
+            'james_rothschild.jpg',
+            'salomon_rothschild.jpg',
+            'amschel_rothschild.jpg',
+            'karl_rothschild.jpg',
+            'alexander_hamilton.jpg',
+            'thomas_jefferson.jpg',
+            'andrew_jackson.jpg',
+            'abraham_lincoln.jpg',
+            'woodrow_wilson.jpg',
+            'jp_morgan.jpg',
+            'john_d_rockefeller.jpg',
+            'benjamin_strong.jpg',
+            'franklin_roosevelt.jpg'
+        ];
+
+        // Update progress when file is downloaded
+        window.updateProgress = function(fileName) {
+            const downloadedCount = expectedFiles.filter(f =>
+                localStorage.getItem('fig_' + f)
+            ).length;
+
+            const percentage = Math.round((downloadedCount / expectedFiles.length) * 100);
+
+            document.getElementById('progress-fill').style.width = percentage + '%';
+            document.getElementById('progress-text').textContent =
+                downloadedCount + ' / ' + expectedFiles.length + ' 完成 (' + percentage + '%)';
+
+            // Mark card as downloaded
+            const cardId = fileName.replace('.jpg', '');
+            const card = document.getElementById(cardId);
+            if (card) {
+                card.classList.add('downloaded');
+                const status = card.querySelector('.status');
+                if (status) status.textContent = '✅ 已下载';
+            }
+
+            localStorage.setItem('fig_' + fileName, 'downloaded');
+        };
+
+        // Check status on load
+        window.addEventListener('load', function() {
+            expectedFiles.forEach(fileName => {
+                if (localStorage.getItem('fig_' + fileName)) {
+                    window.updateProgress(fileName);
+                }
+            });
+        });
+
+        // Track clicks on download buttons
+        document.querySelectorAll('.download-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                const card = this.closest('.figure-card');
+                const fileName = card.querySelector('.figure-id').textContent.replace('文件名: ', '');
+
+                // Open download link in new tab
+                const href = this.getAttribute('href');
+                window.open(href, '_blank');
+
+                // Simulate download completion after user saves
+                // In real usage, user would save and we'd detect it
+                console.log('请手动保存文件:', fileName);
+            });
+        });
+    </script>
+</body>
+</html>

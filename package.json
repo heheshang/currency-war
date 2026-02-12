@@ -40,7 +40,9 @@
     "upgrade": "remotion upgrade",
     "lint": "eslint src && tsc",
     "audio:status": "echo '=== Audio Files Status ===' && ls -lh public/assets/audio/*/*.mp3 2>/dev/null | tail -10 || echo 'No MP3 files found. See scripts/AUDIO_README.md'",
-    "audio:guide": "cat scripts/AUDIO_README.md"
+    "audio:guide": "cat scripts/AUDIO_README.md",
+    "figures:status": "echo '=== Historical Figures Status ===' && ls -lh public/assets/figures/*.jpg 2>/dev/null | tail -5 || echo 'No figure photos found. Run npm run figures:guide for download instructions.'",
+    "figures:guide": "node scripts/downloadFiguresGuide.js"
   },
   "sideEffects": [
     "*.css"
