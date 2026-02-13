@@ -61,6 +61,10 @@ export const AUDIO_CONFIG: Record<string, EpisodeAudioConfig> = {
       volume: 0.12,
       loop: true,
     },
+    voiceover: {
+      src: "/assets/audio/voiceover/episode02/episode02_merged.m4a",
+      volume: 0.8,
+    },
     scenes: {
       BankOfEnglandScene: {
         bgm: {
@@ -84,6 +88,10 @@ export const AUDIO_CONFIG: Record<string, EpisodeAudioConfig> = {
       src: "/assets/audio/bgm/dramatic-trailer.mp3",
       volume: 0.15,
       loop: true,
+    },
+    voiceover: {
+      src: "/assets/audio/voiceover/episode03/episode03_merged.m4a",
+      volume: 0.8,
     },
     scenes: {
       FedCreationScene: {
@@ -109,6 +117,10 @@ export const AUDIO_CONFIG: Record<string, EpisodeAudioConfig> = {
       volume: 0.15,
       loop: true,
     },
+    voiceover: {
+      src: "/assets/audio/voiceover/episode04/episode04_merged.m4a",
+      volume: 0.8,
+    },
     scenes: {
       WeimarInflationScene: {
         bgm: {
@@ -129,11 +141,14 @@ export const AUDIO_CONFIG: Record<string, EpisodeAudioConfig> = {
   },
 
   Episode05: {
-    // 一战与大衰退 - Historical/Dramatic 风格
     bgm: {
       src: "/assets/audio/bgm/dramatic-01.mp3",
       volume: 0.12,
       loop: true,
+    },
+    voiceover: {
+      src: "/assets/audio/voiceover/episode05/episode05_merged.m4a",
+      volume: 0.8,
     },
     scenes: {
       StrongWartimeFedScene: {
@@ -166,6 +181,10 @@ export const AUDIO_CONFIG: Record<string, EpisodeAudioConfig> = {
       volume: 0.12,
       loop: true,
     },
+    voiceover: {
+      src: "/assets/audio/voiceover/episode06/episode06_merged.m4a",
+      volume: 0.8,
+    },
     scenes: {
       NixonShockScene: {
         bgm: {
@@ -190,6 +209,10 @@ export const AUDIO_CONFIG: Record<string, EpisodeAudioConfig> = {
       volume: 0.15,
       loop: true,
     },
+    voiceover: {
+      src: "/assets/audio/voiceover/episode07/episode07_merged.m4a",
+      volume: 0.8,
+    },
     scenes: {
       DebtSpiralScene: {
         bgm: {
@@ -207,6 +230,10 @@ export const AUDIO_CONFIG: Record<string, EpisodeAudioConfig> = {
       volume: 0.12,
       loop: true,
     },
+    voiceover: {
+      src: "/assets/audio/voiceover/episode08/episode08_merged.m4a",
+      volume: 0.8,
+    },
     scenes: {
       FinancialCrisis2008: {
         bgm: {
@@ -219,11 +246,14 @@ export const AUDIO_CONFIG: Record<string, EpisodeAudioConfig> = {
   },
 
   Episode09: {
-    // 数字化货币/未来 - Epic/Cinematic 风格
     bgm: {
       src: "/assets/audio/bgm/dramatic-01.mp3",
       volume: 0.15,
       loop: true,
+    },
+    voiceover: {
+      src: "/assets/audio/voiceover/episode09/episode09_merged.m4a",
+      volume: 0.8,
     },
     scenes: {
       DigitalCurrencyScene: {
@@ -242,6 +272,10 @@ export const AUDIO_CONFIG: Record<string, EpisodeAudioConfig> = {
       volume: 0.15,
       loop: true,
     },
+    voiceover: {
+      src: "/assets/audio/voiceover/episode10/episode10_merged.m4a",
+      volume: 0.8,
+    },
     scenes: {
       FinaleScene: {
         bgm: {
@@ -258,6 +292,10 @@ export const AUDIO_CONFIG: Record<string, EpisodeAudioConfig> = {
       src: "/assets/audio/bgm/dramatic-trailer.mp3",
       volume: 0.15,
       loop: true,
+    },
+    voiceover: {
+      src: "/assets/audio/voiceover/episode11/episode11_merged.m4a",
+      volume: 0.8,
     },
   },
 
