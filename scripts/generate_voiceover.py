@@ -39,7 +39,10 @@ OUTPUT_DIR = PROJECT_ROOT / "public" / "assets" / "audio" / "voiceover"
 
 def get_subtitle_texts(episode: str) -> List[Dict]:
     """Extract subtitle texts with timing from episode subtitle file."""
-    subtitle_file = PROJECT_ROOT / "src" / "subtitles" / f"episode{episode}.ts"
+    if episode.lower() == "trailer":
+        subtitle_file = PROJECT_ROOT / "src" / "subtitles" / "trailer.ts"
+    else:
+        subtitle_file = PROJECT_ROOT / "src" / "subtitles" / f"episode{episode}.ts"
     
     if not subtitle_file.exists():
         print(f"Error: Subtitle file not found: {subtitle_file}")

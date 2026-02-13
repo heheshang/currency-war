@@ -260,6 +260,18 @@ export const AUDIO_CONFIG: Record<string, EpisodeAudioConfig> = {
       loop: true,
     },
   },
+
+  Trailer: {
+    bgm: {
+      src: "/assets/audio/bgm/dramatic-trailer.mp3",
+      volume: 0.1,
+      loop: true,
+    },
+    voiceover: {
+      src: "/assets/audio/voiceover/trailer/trailer_merged.m4a",
+      volume: 0.8,
+    },
+  },
 };
 
 /**
