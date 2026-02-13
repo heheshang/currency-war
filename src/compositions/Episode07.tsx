@@ -9,7 +9,40 @@ import {
 } from "remotion";
 import { Subtitles } from "../components/Subtitles";
 import { Audio } from "../components/Audio";
+import { Voiceover } from "../components/Voiceover";
 import { getEpisodeBGM } from "../utils/audioConfig";
+
+const VOICE_DIR = "/assets/audio/voiceover/episode07/";
+
+function buildVoiceoverEntries() {
+  const entries: { src: string; startFrame: number; durationFrames: number }[] =
+    [];
+  let fileIndex = 0;
+  const fps = 30;
+
+  const sceneOffsets = [
+    { subs: openingSubs, offset: 0 },
+    { subs: brettonWoodsSubs, offset: 60 * fps },
+    { subs: houseColonelSubs, offset: 120 * fps },
+    { subs: cfrEliteSubs, offset: 180 * fps },
+    { subs: bisSubs, offset: 240 * fps },
+    { subs: bilderbergSubs, offset: 300 * fps },
+    { subs: trilateralSubs, offset: 360 * fps },
+  ];
+
+  for (const scene of sceneOffsets) {
+    for (const sub of scene.subs) {
+      entries.push({
+        src: `${VOICE_DIR}voice_${String(fileIndex).padStart(4, "0")}.m4a`,
+        startFrame: scene.offset + sub.startFrame,
+        durationFrames: sub.endFrame - sub.startFrame,
+      });
+      fileIndex++;
+    }
+  }
+
+  return entries;
+}
 
 // Import per-scene subtitles
 import {
@@ -42,10 +75,18 @@ export const Episode07: React.FC = () => {
   const { fps } = useVideoConfig();
 
   const bgm = getEpisodeBGM("Episode07");
+  const voiceoverEntries = buildVoiceoverEntries();
 
   return (
     <AbsoluteFill style={{ background: "#0d1117" }}>
       {bgm && <Audio {...bgm} />}
+
+      <Voiceover
+        voiceoverSrc={VOICE_DIR}
+        entries={voiceoverEntries}
+        volume={0.8}
+      />
+
       {/* 场景1: 开场 - 新世界秩序 (0-60s) */}
       <Sequence durationInFrames={60 * fps}>
         <OpeningScene />
@@ -108,7 +149,7 @@ const TypewriterText: React.FC<{
     frame,
     [startFrame, startFrame + text.length * speed],
     [0, text.length],
-    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" },
   );
 
   return (
@@ -129,12 +170,25 @@ const AnimatedCounter: React.FC<{
   suffix?: string;
   className?: string;
   style?: React.CSSProperties;
-}> = ({ value, startFrame, duration = 60, prefix = "", suffix = "", className, style }) => {
+}> = ({
+  value,
+  startFrame,
+  duration = 60,
+  prefix = "",
+  suffix = "",
+  className,
+  style,
+}) => {
   const frame = useCurrentFrame();
-  const progress = interpolate(frame, [startFrame, startFrame + duration], [0, 1], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-  });
+  const progress = interpolate(
+    frame,
+    [startFrame, startFrame + duration],
+    [0, 1],
+    {
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+    },
+  );
   const currentValue = Math.floor(progress * value);
 
   return (
@@ -160,8 +214,8 @@ const Particles: React.FC<{ count?: number; color?: string }> = ({
     const seed = (i * 137.5) % 360;
     const x = (Math.sin(seed + frame * 0.01) * 50 + 50 + i * 2) % 100;
     const y = (Math.cos(seed + frame * 0.02) * 50 + 50 + i * 3) % 100;
-    const size = (Math.sin(seed + frame * 0.03) * 2 + 3);
-    const opacity = (Math.sin(seed + frame * 0.05) * 0.3 + 0.4);
+    const size = Math.sin(seed + frame * 0.03) * 2 + 3;
+    const opacity = Math.sin(seed + frame * 0.05) * 0.3 + 0.4;
 
     particles.push(
       <div
@@ -176,7 +230,7 @@ const Particles: React.FC<{ count?: number; color?: string }> = ({
           backgroundColor: color,
           opacity,
         }}
-      />
+      />,
     );
   }
 
@@ -196,7 +250,7 @@ const PulseEffect: React.FC<{
     frame,
     [startFrame, startFrame + duration, startFrame + duration * 2],
     [1, 1.05, 1],
-    { extrapolateRight: "clamp" }
+    { extrapolateRight: "clamp" },
   );
 
   return (
@@ -225,7 +279,7 @@ const GlitchText: React.FC<{
     frame,
     [startFrame, startFrame + 15, startFrame + 30],
     [0, 8, 0],
-    { extrapolateRight: "clamp" }
+    { extrapolateRight: "clamp" },
   );
 
   // Use deterministic offsets based on frame number instead of Math.random()
@@ -258,7 +312,7 @@ const ShakeText: React.FC<{
     frame,
     [startFrame, startFrame + 10, startFrame + 20, startFrame + 30],
     [0, intensity, -intensity, 0],
-    { extrapolateRight: "clamp" }
+    { extrapolateRight: "clamp" },
   );
 
   return (
@@ -283,9 +337,14 @@ const TimelineNode: React.FC<{
 }> = ({ position, isActive, label, year }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const opacity = interpolate(frame, [position * 10, position * 10 + 20], [0, 1], {
-    extrapolateLeft: "clamp",
-  });
+  const opacity = interpolate(
+    frame,
+    [position * 10, position * 10 + 20],
+    [0, 1],
+    {
+      extrapolateLeft: "clamp",
+    },
+  );
   const nodeScale = spring({
     frame: frame - position * 10,
     fps,
@@ -358,12 +417,14 @@ const DataBar: React.FC<{
     frame,
     [startFrame + index * 15, startFrame + index * 15 + 40],
     [0, (value / maxValue) * 60],
-    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" },
   );
 
   return (
     <div style={{ marginBottom: 12 }}>
-      <div style={{ color: "#9ca3af", fontSize: 14, marginBottom: 4 }}>{label}</div>
+      <div style={{ color: "#9ca3af", fontSize: 14, marginBottom: 4 }}>
+        {label}
+      </div>
       <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
         <div
           style={{
@@ -374,7 +435,17 @@ const DataBar: React.FC<{
             position: "relative",
           }}
         >
-          <span style={{ position: "absolute", right: 5, top: "50%", transform: "translateY(-50%)", color: "#0d1117", fontSize: 10, fontWeight: 600 }}>
+          <span
+            style={{
+              position: "absolute",
+              right: 5,
+              top: "50%",
+              transform: "translateY(-50%)",
+              color: "#0d1117",
+              fontSize: 10,
+              fontWeight: 600,
+            }}
+          >
             {value}
           </span>
         </div>
@@ -409,7 +480,7 @@ const ConnectionLines: React.FC<{
           frame,
           [startFrame + i * 20, startFrame + i * 20 + 30],
           [0, 1],
-          { extrapolateLeft: "clamp" }
+          { extrapolateLeft: "clamp" },
         );
 
         return (
@@ -474,12 +545,9 @@ const OpeningScene: React.FC = () => {
   const { fps } = useVideoConfig();
 
   // Background gradient animation
-  const bgGradient = interpolate(
-    frame,
-    [0, 60, 120],
-    [0, 1, 0],
-    { extrapolateRight: "clamp" }
-  );
+  const bgGradient = interpolate(frame, [0, 60, 120], [0, 1, 0], {
+    extrapolateRight: "clamp",
+  });
 
   // Title scale animation
   const titleScale = spring({
@@ -495,7 +563,7 @@ const OpeningScene: React.FC = () => {
     frame,
     [30, 35, 40, 45, 50],
     [0.5, 1, 0.5, 1, 0.5],
-    { extrapolateRight: "clamp" }
+    { extrapolateRight: "clamp" },
   );
 
   return (
@@ -569,7 +637,10 @@ const OpeningScene: React.FC = () => {
               textShadow: "0 0 20px rgba(239, 68, 68, 0.8)",
             }}
           >
-            <GlitchText text="And China knows very little about it." startFrame={60} />
+            <GlitchText
+              text="And China knows very little about it."
+              startFrame={60}
+            />
           </div>
         </ShakeText>
       </PulseEffect>
@@ -701,10 +772,30 @@ const BrettonWoodsScene: React.FC = () => {
             backgroundColor: "#4a4a4a",
           }}
         />
-        <TimelineNode position={0} isActive={true} label="Conference" year="1944" />
-        <TimelineNode position={1} isActive={frame > 100} label="IMF Created" year="1945" />
-        <TimelineNode position={2} isActive={frame > 120} label="World Bank" year="1946" />
-        <TimelineNode position={3} isActive={frame > 140} label="System Active" year="1947" />
+        <TimelineNode
+          position={0}
+          isActive={true}
+          label="Conference"
+          year="1944"
+        />
+        <TimelineNode
+          position={1}
+          isActive={frame > 100}
+          label="IMF Created"
+          year="1945"
+        />
+        <TimelineNode
+          position={2}
+          isActive={frame > 120}
+          label="World Bank"
+          year="1946"
+        />
+        <TimelineNode
+          position={3}
+          isActive={frame > 140}
+          label="System Active"
+          year="1947"
+        />
       </div>
 
       {/* Key achievements with animated counters */}
@@ -720,13 +811,17 @@ const BrettonWoodsScene: React.FC = () => {
         }}
       >
         <div style={{ textAlign: "center" }}>
-          <div style={{ color: "#ffd700", fontSize: 14, marginBottom: 4 }}>Countries</div>
+          <div style={{ color: "#ffd700", fontSize: 14, marginBottom: 4 }}>
+            Countries
+          </div>
           <div style={{ color: "#e8e8e8", fontSize: 28, fontWeight: 700 }}>
             <AnimatedCounter value={44} startFrame={110} suffix="+" />
           </div>
         </div>
         <div style={{ textAlign: "center" }}>
-          <div style={{ color: "#ffd700", fontSize: 14, marginBottom: 4 }}>IMF Members</div>
+          <div style={{ color: "#ffd700", fontSize: 14, marginBottom: 4 }}>
+            IMF Members
+          </div>
           <div style={{ color: "#e8e8e8", fontSize: 28, fontWeight: 700 }}>
             <AnimatedCounter value={190} startFrame={120} />
           </div>
@@ -784,7 +879,8 @@ const HouseColonelScene: React.FC = () => {
           width: 600,
           height: 600,
           transform: `translate(-50%, -50%) rotate(${lightRotate}deg)`,
-          background: "radial-gradient(ellipse, rgba(255, 215, 0, 0.05) 0%, transparent 70%)",
+          background:
+            "radial-gradient(ellipse, rgba(255, 215, 0, 0.05) 0%, transparent 70%)",
           pointerEvents: "none",
         }}
       />
@@ -850,9 +946,12 @@ const HouseColonelScene: React.FC = () => {
           opacity: interpolate(frame, [25, 55], [0, 1]),
         }}
       >
-        <span style={{ color: "#ffd700" }}>The "Spiritual Godfather"</span> of American elites
+        <span style={{ color: "#ffd700" }}>The "Spiritual Godfather"</span> of
+        American elites
         <br />
-        <span style={{ color: "#9ca3af" }}>From a wealthy Texas banking family</span>
+        <span style={{ color: "#9ca3af" }}>
+          From a wealthy Texas banking family
+        </span>
       </div>
 
       {/* Quote box */}
@@ -951,7 +1050,8 @@ const CFREliteScene: React.FC = () => {
   return (
     <AbsoluteFill
       style={{
-        background: "radial-gradient(circle at 50% 30%, #1a2a3a 0%, #0d0d0d 100%)",
+        background:
+          "radial-gradient(circle at 50% 30%, #1a2a3a 0%, #0d0d0d 100%)",
       }}
     >
       {/* Grid background */}
@@ -1016,7 +1116,7 @@ const CFREliteScene: React.FC = () => {
         }}
       >
         <ConnectionLines
-          points={nodes.map(n => ({ x: n.x, y: n.y }))}
+          points={nodes.map((n) => ({ x: n.x, y: n.y }))}
           startFrame={40}
         />
         {nodes.map((node, i) => {
@@ -1131,20 +1231,31 @@ const CFREliteScene: React.FC = () => {
             fontWeight: 500,
           }}
         >
-          {["CBS", "ABC", "NBC", "NYT", "Washington Post", "Time", "Newsweek"].map(
-            (media, i) => (
-              <span
-                key={media}
-                style={{
-                  opacity: interpolate(frame, [100 + i * 5, 120 + i * 5], [0, 1], {
+          {[
+            "CBS",
+            "ABC",
+            "NBC",
+            "NYT",
+            "Washington Post",
+            "Time",
+            "Newsweek",
+          ].map((media, i) => (
+            <span
+              key={media}
+              style={{
+                opacity: interpolate(
+                  frame,
+                  [100 + i * 5, 120 + i * 5],
+                  [0, 1],
+                  {
                     extrapolateLeft: "clamp",
-                  }),
-                }}
-              >
-                {media}
-              </span>
-            )
-          )}
+                  },
+                ),
+              }}
+            >
+              {media}
+            </span>
+          ))}
         </div>
       </div>
     </AbsoluteFill>
@@ -1260,10 +1371,38 @@ const BISScene: React.FC = () => {
             opacity={0.4}
           />
           {/* Gold bars inside */}
-          <rect x="70" y="45" width="25" height="8" fill="#ffd700" opacity={0.7} />
-          <rect x="98" y="45" width="25" height="8" fill="#ffd700" opacity={0.7} />
-          <rect x="82" y="55" width="25" height="8" fill="#ffd700" opacity={0.7} />
-          <rect x="82" y="65" width="25" height="8" fill="#ffd700" opacity={0.5} />
+          <rect
+            x="70"
+            y="45"
+            width="25"
+            height="8"
+            fill="#ffd700"
+            opacity={0.7}
+          />
+          <rect
+            x="98"
+            y="45"
+            width="25"
+            height="8"
+            fill="#ffd700"
+            opacity={0.7}
+          />
+          <rect
+            x="82"
+            y="55"
+            width="25"
+            height="8"
+            fill="#ffd700"
+            opacity={0.7}
+          />
+          <rect
+            x="82"
+            y="65"
+            width="25"
+            height="8"
+            fill="#ffd700"
+            opacity={0.5}
+          />
         </svg>
       </div>
 
@@ -1293,7 +1432,9 @@ const BISScene: React.FC = () => {
               fontFamily: "JetBrains Mono, monospace",
             }}
           />
-          <div style={{ color: "#9ca3af", fontSize: 12, marginTop: 4 }}>Cash & Bonds</div>
+          <div style={{ color: "#9ca3af", fontSize: 12, marginTop: 4 }}>
+            Cash & Bonds
+          </div>
         </div>
         <div style={{ textAlign: "center" }}>
           <AnimatedCounter
@@ -1308,7 +1449,9 @@ const BISScene: React.FC = () => {
               fontFamily: "JetBrains Mono, monospace",
             }}
           />
-          <div style={{ color: "#9ca3af", fontSize: 12, marginTop: 4 }}>World Gold</div>
+          <div style={{ color: "#9ca3af", fontSize: 12, marginTop: 4 }}>
+            World Gold
+          </div>
         </div>
       </div>
 
@@ -1351,7 +1494,8 @@ const BISScene: React.FC = () => {
           opacity: interpolate(frame, [90, 120], [0, 1]),
         }}
       >
-        <span style={{ color: "#9ca3af" }}>During WWII,</span> American & British bankers used BIS
+        <span style={{ color: "#9ca3af" }}>During WWII,</span> American &
+        British bankers used BIS
         <br />
         <span style={{ color: "#ef4444" }}>to fund Nazi Germany</span>
       </div>
@@ -1441,9 +1585,12 @@ const BilderbergScene: React.FC = () => {
           opacity: interpolate(frame, [30, 60], [0, 1]),
         }}
       >
-        Founded <span style={{ color: "#ffd700" }}>1954</span> — Named after hotel in Netherlands
+        Founded <span style={{ color: "#ffd700" }}>1954</span> — Named after
+        hotel in Netherlands
         <br />
-        <span style={{ color: "#9ca3af" }}>Europe's and America's most powerful figures</span>
+        <span style={{ color: "#9ca3af" }}>
+          Europe's and America's most powerful figures
+        </span>
         <br />
         <span style={{ color: "#ef4444", fontStyle: "italic" }}>
           Meet annually in secret. No press. No records.
@@ -1574,8 +1721,8 @@ const BilderbergScene: React.FC = () => {
           opacity: interpolate(frame, [140, 170], [0, 1]),
         }}
       >
-        <span style={{ color: "#ffd700" }}>Pattern recognition:</span> What they discuss →
-        What happens globally
+        <span style={{ color: "#ffd700" }}>Pattern recognition:</span> What they
+        discuss → What happens globally
       </div>
     </AbsoluteFill>
   );
@@ -1606,7 +1753,8 @@ const TrilateralScene: React.FC = () => {
   return (
     <AbsoluteFill
       style={{
-        background: "radial-gradient(circle at 50% 40%, #2d1f1f 0%, #0d0d0d 100%)",
+        background:
+          "radial-gradient(circle at 50% 40%, #2d1f1f 0%, #0d0d0d 100%)",
       }}
     >
       {/* Expanding network background */}
@@ -1792,13 +1940,34 @@ const TrilateralScene: React.FC = () => {
           opacity: interpolate(frame, [40, 70], [0, 1]),
         }}
       >
-        <div style={{ color: "#9ca3af", fontSize: 13, textAlign: "center", marginBottom: 8 }}>
+        <div
+          style={{
+            color: "#9ca3af",
+            fontSize: 13,
+            textAlign: "center",
+            marginBottom: 8,
+          }}
+        >
           Case Study: Jimmy Carter
         </div>
-        <div style={{ color: "#ef4444", fontSize: 15, textAlign: "center", fontWeight: 600 }}>
+        <div
+          style={{
+            color: "#ef4444",
+            fontSize: 15,
+            textAlign: "center",
+            fontWeight: 600,
+          }}
+        >
           Vetted by Trilateral Commission
         </div>
-        <div style={{ color: "#e8e8e8", fontSize: 13, textAlign: "center", marginTop: 8 }}>
+        <div
+          style={{
+            color: "#e8e8e8",
+            fontSize: 13,
+            textAlign: "center",
+            marginTop: 8,
+          }}
+        >
           He appointed{" "}
           <span style={{ color: "#ffd700", fontWeight: 700 }}>
             <AnimatedCounter value={14} startFrame={55} />
@@ -1840,7 +2009,9 @@ const TrilateralScene: React.FC = () => {
           }}
         >
           is the first step to{" "}
-          <span style={{ color: "#ef4444", fontWeight: 600 }}>financial independence</span>
+          <span style={{ color: "#ef4444", fontWeight: 600 }}>
+            financial independence
+          </span>
         </div>
       </div>
 

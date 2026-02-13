@@ -2,7 +2,44 @@ import React from "react";
 import { AbsoluteFill, useVideoConfig, Sequence } from "remotion";
 import { Subtitles } from "../components/Subtitles";
 import { Audio } from "../components/Audio";
+import { Voiceover } from "../components/Voiceover";
 import { getEpisodeBGM } from "../utils/audioConfig";
+
+const VOICE_DIR = "/assets/audio/voiceover/episode03/";
+
+function buildVoiceoverEntries() {
+  const entries: { src: string; startFrame: number; durationFrames: number }[] =
+    [];
+  let fileIndex = 0;
+  const fps = 30;
+
+  const sceneOffsets = [
+    { subs: openingLincolnSubs, offset: 0 },
+    { subs: colonialCurrencySubs, offset: 15 * fps },
+    { subs: firstBankSubs, offset: 45 * fps },
+    { subs: charterExpirationSubs, offset: 75 * fps },
+    { subs: jacksonBankWarSubs, offset: 105 * fps },
+    { subs: civilWarPreludeSubs, offset: 135 * fps },
+    { subs: greenbackSubs, offset: 165 * fps },
+    { subs: russianAllianceSubs, offset: 195 * fps },
+    { subs: assassinationSubs, offset: 225 * fps },
+    { subs: nationalBankActSubs, offset: 255 * fps },
+    { subs: summarySubs, offset: 285 * fps },
+  ];
+
+  for (const scene of sceneOffsets) {
+    for (const sub of scene.subs) {
+      entries.push({
+        src: `${VOICE_DIR}voice_${String(fileIndex).padStart(4, "0")}.m4a`,
+        startFrame: scene.offset + sub.startFrame,
+        durationFrames: sub.endFrame - sub.startFrame,
+      });
+      fileIndex++;
+    }
+  }
+
+  return entries;
+}
 import {
   OpeningLincolnScene,
   ColonialCurrencyScene,
@@ -43,10 +80,17 @@ import {
 export const Episode03: React.FC = () => {
   const { fps } = useVideoConfig();
   const bgm = getEpisodeBGM("Episode03");
+  const voiceoverEntries = buildVoiceoverEntries();
 
   return (
     <AbsoluteFill style={{ background: "#0d1117" }}>
       {bgm && <Audio {...bgm} />}
+
+      <Voiceover
+        voiceoverSrc={VOICE_DIR}
+        entries={voiceoverEntries}
+        volume={0.8}
+      />
 
       {/* 场景0: 开场 - 林肯名言 (15s = 450帧) */}
       <Sequence durationInFrames={15 * fps}>

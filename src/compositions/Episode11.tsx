@@ -2,7 +2,42 @@ import React from "react";
 import { AbsoluteFill, useVideoConfig, Sequence } from "remotion";
 import { Audio } from "../components/Audio";
 import { Subtitles } from "../components/Subtitles";
+import { Voiceover } from "../components/Voiceover";
 import { getEpisodeBGM } from "../utils/audioConfig";
+
+const VOICE_DIR = "/assets/audio/voiceover/episode11/";
+
+function buildVoiceoverEntries() {
+  const entries: { src: string; startFrame: number; durationFrames: number }[] =
+    [];
+  let fileIndex = 0;
+  const fps = 30;
+
+  const sceneOffsets = [
+    { subs: openingSubs, offset: 0 },
+    { subs: monetaryStandardSubs, offset: 30 * fps },
+    { subs: goldSilverSubs, offset: 90 * fps },
+    { subs: debtObesitySubs, offset: 150 * fps },
+    { subs: financialAirForceSubs, offset: 210 * fps },
+    { subs: strategySubs, offset: 270 * fps },
+    { subs: worldReserveSubs, offset: 330 * fps },
+    { subs: financialRiskSubs, offset: 390 * fps },
+    { subs: endingSubs, offset: 450 * fps },
+  ];
+
+  for (const scene of sceneOffsets) {
+    for (const sub of scene.subs) {
+      entries.push({
+        src: `${VOICE_DIR}voice_${String(fileIndex).padStart(4, "0")}.m4a`,
+        startFrame: scene.offset + sub.startFrame,
+        durationFrames: sub.endFrame - sub.startFrame,
+      });
+      fileIndex++;
+    }
+  }
+
+  return entries;
+}
 
 // Scene components
 import {
@@ -39,10 +74,17 @@ import {
 export const Episode11: React.FC = () => {
   const { fps } = useVideoConfig();
   const bgm = getEpisodeBGM("Episode11");
+  const voiceoverEntries = buildVoiceoverEntries();
 
   return (
     <AbsoluteFill style={{ background: "#0d1117" }}>
       {bgm && <Audio {...bgm} />}
+
+      <Voiceover
+        voiceoverSrc={VOICE_DIR}
+        entries={voiceoverEntries}
+        volume={0.8}
+      />
 
       {/* Scene 1: Opening (30s = 900帧) */}
       <Sequence durationInFrames={30 * fps}>

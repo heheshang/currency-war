@@ -2,7 +2,47 @@ import React from "react";
 import { AbsoluteFill, useVideoConfig, Sequence } from "remotion";
 import { Subtitles } from "../components/Subtitles";
 import { Audio } from "../components/Audio";
+import { Voiceover } from "../components/Voiceover";
 import { getEpisodeBGM } from "../utils/audioConfig";
+
+const VOICE_DIR = "/assets/audio/voiceover/episode04/";
+
+function buildVoiceoverEntries() {
+  const entries: { src: string; startFrame: number; durationFrames: number }[] =
+    [];
+  let fileIndex = 0;
+  const fps = 30;
+
+  const sceneOffsets = [
+    { subs: OpeningSceneSubtitles, offset: 0 },
+    { subs: JekyllIslandSceneSubtitles, offset: 35 * fps },
+    { subs: WallStreetTycoonsSceneSubtitles, offset: 95 * fps },
+    { subs: MorganRiseSceneSubtitles, offset: 170 * fps },
+    { subs: RockefellerEmpireSceneSubtitles, offset: 240 * fps },
+    { subs: Panic1907SceneSubtitles, offset: 310 * fps },
+    { subs: GoldToFiatSceneSubtitles, offset: 370 * fps },
+    { subs: Election1912SceneSubtitles, offset: 430 * fps },
+    { subs: PlanBSceneSubtitles, offset: 490 * fps },
+    { subs: ActPassesSceneSubtitles, offset: 550 * fps },
+    { subs: WhoOwnsFedSceneSubtitles, offset: 630 * fps },
+    { subs: HiddenControlSceneSubtitles, offset: 700 * fps },
+    { subs: WilsonRealizationSceneSubtitles, offset: 760 * fps },
+    { subs: SummarySceneSubtitles, offset: 810 * fps },
+  ];
+
+  for (const scene of sceneOffsets) {
+    for (const sub of scene.subs) {
+      entries.push({
+        src: `${VOICE_DIR}voice_${String(fileIndex).padStart(4, "0")}.m4a`,
+        startFrame: scene.offset + sub.startFrame,
+        durationFrames: sub.endFrame - sub.startFrame,
+      });
+      fileIndex++;
+    }
+  }
+
+  return entries;
+}
 import {
   OpeningWilsonScene,
   JekyllIslandScene,
@@ -64,10 +104,18 @@ export const Episode04: React.FC = () => {
   const { fps } = useVideoConfig();
 
   const bgm = getEpisodeBGM("Episode04");
+  const voiceoverEntries = buildVoiceoverEntries();
 
   return (
     <AbsoluteFill style={{ background: "#0d1117" }}>
       {bgm && <Audio {...bgm} />}
+
+      <Voiceover
+        voiceoverSrc={VOICE_DIR}
+        entries={voiceoverEntries}
+        volume={0.8}
+      />
+
       {/* Scene 0: 开场 - 威尔逊的悔恨 (0-35s = 帧 0-1050) */}
       <Sequence durationInFrames={35 * fps}>
         <OpeningWilsonScene />

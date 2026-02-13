@@ -4,7 +4,47 @@ import { BattleOfWaterloo } from "../components/scenes/BattleOfWaterloo";
 import { StockExchangeScene } from "../components/scenes/StockExchangeScene";
 import { Subtitles } from "../components/Subtitles";
 import { Audio } from "../components/Audio";
+import { Voiceover } from "../components/Voiceover";
 import { getEpisodeBGM } from "../utils/audioConfig";
+
+const VOICE_DIR = "/assets/audio/voiceover/episode02/";
+
+function buildVoiceoverEntries() {
+  const entries: { src: string; startFrame: number; durationFrames: number }[] =
+    [];
+  let fileIndex = 0;
+  const fps = 30;
+
+  const sceneOffsets = [
+    { subs: openingSubs, offset: 0 },
+    { subs: rothschildIntroSubs, offset: 30 * fps },
+    { subs: waterlooPreludeSubs, offset: 90 * fps },
+    { subs: intelligenceNetworkSubs, offset: 150 * fps },
+    { subs: tradingManipulationSubs, offset: 210 * fps },
+    { subs: twentyTimesProfitSubs, offset: 270 * fps },
+    { subs: fiveBrothersSubs, offset: 330 * fps },
+    { subs: bankOfEnglandSubs, offset: 390 * fps },
+    { subs: mayerRothschildSubs, offset: 450 * fps },
+    { subs: nathanLondonSubs, offset: 510 * fps },
+    { subs: jamesParisSubs, offset: 570 * fps },
+    { subs: salomonViennaSubs, offset: 630 * fps },
+    { subs: empirePeakSubs, offset: 690 * fps },
+    { subs: summarySubs, offset: 750 * fps },
+  ];
+
+  for (const scene of sceneOffsets) {
+    for (const sub of scene.subs) {
+      entries.push({
+        src: `${VOICE_DIR}voice_${String(fileIndex).padStart(4, "0")}.m4a`,
+        startFrame: scene.offset + sub.startFrame,
+        durationFrames: sub.endFrame - sub.startFrame,
+      });
+      fileIndex++;
+    }
+  }
+
+  return entries;
+}
 
 // Import scene-separated subtitles from episode02
 import {
@@ -65,10 +105,18 @@ export const Episode02: React.FC = () => {
   const { fps } = useVideoConfig();
 
   const bgm = getEpisodeBGM("Episode02");
+  const voiceoverEntries = buildVoiceoverEntries();
 
   return (
     <AbsoluteFill style={{ background: "#0d1117" }}>
       {bgm && <Audio {...bgm} />}
+
+      <Voiceover
+        voiceoverSrc={VOICE_DIR}
+        entries={voiceoverEntries}
+        volume={0.8}
+      />
+
       {/* Scene 1: Opening - The Invisible Wealth (0-30s) */}
       <Sequence durationInFrames={30 * fps}>
         <InvisibleWealthScene />

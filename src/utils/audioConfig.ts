@@ -29,7 +29,7 @@ export const AUDIO_CONFIG: Record<string, EpisodeAudioConfig> = {
   Episode01: {
     bgm: {
       src: "/assets/audio/bgm/dramatic-trailer.mp3",
-      volume: 0.08,
+      volume: 0.04,
       loop: true,
     },
     voiceover: {
@@ -58,7 +58,7 @@ export const AUDIO_CONFIG: Record<string, EpisodeAudioConfig> = {
   Episode02: {
     bgm: {
       src: "/assets/audio/bgm/suspense-dark.mp3",
-      volume: 0.12,
+      volume: 0.04,
       loop: true,
     },
     voiceover: {
@@ -86,7 +86,7 @@ export const AUDIO_CONFIG: Record<string, EpisodeAudioConfig> = {
   Episode03: {
     bgm: {
       src: "/assets/audio/bgm/dramatic-trailer.mp3",
-      volume: 0.15,
+      volume: 0.04,
       loop: true,
     },
     voiceover: {
@@ -114,7 +114,7 @@ export const AUDIO_CONFIG: Record<string, EpisodeAudioConfig> = {
   Episode04: {
     bgm: {
       src: "/assets/audio/bgm/tension-crisis.mp3",
-      volume: 0.15,
+      volume: 0.04,
       loop: true,
     },
     voiceover: {
@@ -143,7 +143,7 @@ export const AUDIO_CONFIG: Record<string, EpisodeAudioConfig> = {
   Episode05: {
     bgm: {
       src: "/assets/audio/bgm/dramatic-01.mp3",
-      volume: 0.12,
+      volume: 0.04,
       loop: true,
     },
     voiceover: {
@@ -178,7 +178,7 @@ export const AUDIO_CONFIG: Record<string, EpisodeAudioConfig> = {
   Episode06: {
     bgm: {
       src: "/assets/audio/bgm/tension-crisis.mp3",
-      volume: 0.12,
+      volume: 0.04,
       loop: true,
     },
     voiceover: {
@@ -206,7 +206,7 @@ export const AUDIO_CONFIG: Record<string, EpisodeAudioConfig> = {
   Episode07: {
     bgm: {
       src: "/assets/audio/bgm/tension-crisis.mp3",
-      volume: 0.15,
+      volume: 0.04,
       loop: true,
     },
     voiceover: {
@@ -227,7 +227,7 @@ export const AUDIO_CONFIG: Record<string, EpisodeAudioConfig> = {
   Episode08: {
     bgm: {
       src: "/assets/audio/bgm/tension-crisis.mp3",
-      volume: 0.12,
+      volume: 0.04,
       loop: true,
     },
     voiceover: {
@@ -248,7 +248,7 @@ export const AUDIO_CONFIG: Record<string, EpisodeAudioConfig> = {
   Episode09: {
     bgm: {
       src: "/assets/audio/bgm/dramatic-01.mp3",
-      volume: 0.15,
+      volume: 0.04,
       loop: true,
     },
     voiceover: {
@@ -269,7 +269,7 @@ export const AUDIO_CONFIG: Record<string, EpisodeAudioConfig> = {
   Episode10: {
     bgm: {
       src: "/assets/audio/bgm/dramatic-trailer.mp3",
-      volume: 0.15,
+      volume: 0.04,
       loop: true,
     },
     voiceover: {
@@ -290,7 +290,7 @@ export const AUDIO_CONFIG: Record<string, EpisodeAudioConfig> = {
   Episode11: {
     bgm: {
       src: "/assets/audio/bgm/dramatic-trailer.mp3",
-      volume: 0.15,
+      volume: 0.04,
       loop: true,
     },
     voiceover: {
@@ -302,7 +302,7 @@ export const AUDIO_CONFIG: Record<string, EpisodeAudioConfig> = {
   Trailer: {
     bgm: {
       src: "/assets/audio/bgm/dramatic-trailer.mp3",
-      volume: 0.1,
+      volume: 0.04,
       loop: true,
     },
     voiceover: {

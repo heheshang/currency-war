@@ -8,7 +8,45 @@ import {
 } from "remotion";
 import { Audio } from "../components/Audio";
 import { Subtitles } from "../components/Subtitles";
+import { Voiceover } from "../components/Voiceover";
 import { getEpisodeBGM } from "../utils/audioConfig";
+
+const VOICE_DIR = "/assets/audio/voiceover/episode08/";
+
+function buildVoiceoverEntries() {
+  const entries: { src: string; startFrame: number; durationFrames: number }[] =
+    [];
+  let fileIndex = 0;
+  const fps = 30;
+
+  const sceneOffsets = [
+    { subs: openingSubs, offset: 0 },
+    { subs: kennedyAssassinationSubs, offset: 30 * fps },
+    { subs: motivationSubs, offset: 90 * fps },
+    { subs: silverHistorySubs, offset: 150 * fps },
+    { subs: silverStandardEndSubs, offset: 210 * fps },
+    { subs: kennedyDeathSubs, offset: 270 * fps },
+    { subs: goldPoolSubs, offset: 330 * fps },
+    { subs: sdrSubs, offset: 390 * fps },
+    { subs: nixonGoldSubs, offset: 450 * fps },
+    { subs: petrodollarSubs, offset: 510 * fps },
+    { subs: reaganSubs, offset: 570 * fps },
+    { subs: summarySubs, offset: 630 * fps },
+  ];
+
+  for (const scene of sceneOffsets) {
+    for (const sub of scene.subs) {
+      entries.push({
+        src: `${VOICE_DIR}voice_${String(fileIndex).padStart(4, "0")}.m4a`,
+        startFrame: scene.offset + sub.startFrame,
+        durationFrames: sub.endFrame - sub.startFrame,
+      });
+      fileIndex++;
+    }
+  }
+
+  return entries;
+}
 
 // 按Scene分离的字幕
 import {
@@ -76,7 +114,13 @@ const AnimatedNumber: React.FC<{
   });
   const displayValue = Math.round(value * progress);
 
-  return <span style={style}>{prefix}{displayValue.toLocaleString()}{suffix}</span>;
+  return (
+    <span style={style}>
+      {prefix}
+      {displayValue.toLocaleString()}
+      {suffix}
+    </span>
+  );
 };
 
 /**
@@ -93,7 +137,7 @@ const PulsingText: React.FC<{
     frame,
     [delay, delay + 30, delay + 60],
     [0.7, 1, 0.7],
-    { extrapolateRight: "clamp" }
+    { extrapolateRight: "clamp" },
   );
 
   return <span style={{ ...style, opacity }}>{children}</span>;
@@ -141,10 +185,10 @@ const BackgroundParticles: React.FC<{
   // 创建多个粒子
   const particles = Array.from({ length: intensity }, (_, i) => {
     const seed = i * 137.5; // 黄金角度
-    const x = (Math.sin(seed) * 50 + 50 + (frame * 0.1 * (i % 3 + 1))) % 100;
-    const y = (Math.cos(seed) * 50 + 50 + (frame * 0.05 * (i % 2 + 1))) % 100;
+    const x = (Math.sin(seed) * 50 + 50 + frame * 0.1 * ((i % 3) + 1)) % 100;
+    const y = (Math.cos(seed) * 50 + 50 + frame * 0.05 * ((i % 2) + 1)) % 100;
     const size = 2 + (i % 3);
-    const opacity = (Math.sin(frame * 0.05 + i) + 1) / 2 * 0.5;
+    const opacity = ((Math.sin(frame * 0.05 + i) + 1) / 2) * 0.5;
 
     return { x, y, size, opacity };
   });
@@ -154,7 +198,14 @@ const BackgroundParticles: React.FC<{
   });
 
   return (
-    <div style={{ position: "absolute", inset: 0, overflow: "hidden", opacity: progress }}>
+    <div
+      style={{
+        position: "absolute",
+        inset: 0,
+        overflow: "hidden",
+        opacity: progress,
+      }}
+    >
       {particles.map((p, i) => (
         <div
           key={i}
@@ -207,7 +258,8 @@ const VignetteEffect: React.FC = () => {
       style={{
         position: "absolute",
         inset: 0,
-        background: "radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.6) 100%)",
+        background:
+          "radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.6) 100%)",
         pointerEvents: "none",
       }}
     />
@@ -262,7 +314,8 @@ const TimelineConnector: React.FC<{
         top: "30%",
         bottom: "30%",
         width: 2,
-        background: "linear-gradient(180deg, transparent, #ffd700, transparent)",
+        background:
+          "linear-gradient(180deg, transparent, #ffd700, transparent)",
         opacity: progress * 0.5,
         transform: "translateX(-50%)",
       }}
@@ -310,10 +363,17 @@ export const Episode08: React.FC = () => {
   const { fps } = useVideoConfig();
 
   const bgm = getEpisodeBGM("Episode08");
+  const voiceoverEntries = buildVoiceoverEntries();
 
   return (
     <AbsoluteFill style={{ background: "#0d1117" }}>
       {bgm && <Audio {...bgm} />}
+
+      <Voiceover
+        voiceoverSrc={VOICE_DIR}
+        entries={voiceoverEntries}
+        volume={0.8}
+      />
 
       {/* Scene 1: Opening (30s = 900帧) */}
       <Sequence durationInFrames={30 * fps}>
@@ -452,9 +512,7 @@ const OpeningScene: React.FC = () => {
           opacity: interpolate(frame, [20, 50], [0, 1]),
         }}
       >
-        <ShimmerText delay={20}>
-          The Last Stand of Honest Money
-        </ShimmerText>
+        <ShimmerText delay={20}>The Last Stand of Honest Money</ShimmerText>
       </div>
 
       <div
@@ -470,11 +528,7 @@ const OpeningScene: React.FC = () => {
           opacity: interpolate(frame, [40, 70], [0, 1]),
         }}
       >
-        <TypewriterText
-          text="诚实货币的最后抗争"
-          delay={40}
-          charDuration={4}
-        />
+        <TypewriterText text="诚实货币的最后抗争" delay={40} charDuration={4} />
       </div>
 
       {/* 关键信息 - 脉动效果 */}
@@ -642,9 +696,7 @@ const KennedyAssassinationScene: React.FC = () => {
           opacity: interpolate(frame, [120, 180], [0, 1]),
         }}
       >
-        <ShimmerText delay={120}>
-          Probability: 10万万亿分之一
-        </ShimmerText>
+        <ShimmerText delay={120}>Probability: 10万万亿分之一</ShimmerText>
       </div>
     </AbsoluteFill>
   );
@@ -660,7 +712,10 @@ const MotivationScene: React.FC = () => {
   return (
     <AbsoluteFill style={{ background: "#0d1117" }}>
       <BackgroundParticles intensity={12} color="#ffd700" delay={0} />
-      <GradientOverlay colors={["#0d1117", "#1a1a2e", "#0d1117"]} speed={0.01} />
+      <GradientOverlay
+        colors={["#0d1117", "#1a1a2e", "#0d1117"]}
+        speed={0.01}
+      />
 
       <div
         style={{
@@ -681,7 +736,11 @@ const MotivationScene: React.FC = () => {
             opacity: interpolate(frame, [0, 30], [0, 1]),
           }}
         >
-          <TypewriterText text="Executive Order 11110" delay={0} charDuration={3} />
+          <TypewriterText
+            text="Executive Order 11110"
+            delay={0}
+            charDuration={3}
+          />
         </div>
         <div
           style={{
@@ -780,9 +839,7 @@ const SilverHistoryScene: React.FC = () => {
           opacity: interpolate(frame, [0, 30], [0, 1]),
         }}
       >
-        <ShimmerText delay={0}>
-          The History of Silver
-        </ShimmerText>
+        <ShimmerText delay={0}>The History of Silver</ShimmerText>
       </div>
 
       {/* 1792 - 从左侧滑入 */}
@@ -854,10 +911,10 @@ const SilverStandardEndScene: React.FC = () => {
   // 银色粒子
   const silverParticles = Array.from({ length: 20 }, (_, i) => {
     const seed = i * 137.5;
-    const x = (Math.sin(seed) * 40 + 50 + (frame * 0.2 * (i % 3 + 1))) % 100;
-    const y = (Math.cos(seed) * 40 + 50 + (frame * 0.1 * (i % 2 + 1))) % 100;
+    const x = (Math.sin(seed) * 40 + 50 + frame * 0.2 * ((i % 3) + 1)) % 100;
+    const y = (Math.cos(seed) * 40 + 50 + frame * 0.1 * ((i % 2) + 1)) % 100;
 
-    return { x, y, opacity: (Math.sin(frame * 0.05 + i) + 1) / 2 * 0.6 };
+    return { x, y, opacity: ((Math.sin(frame * 0.05 + i) + 1) / 2) * 0.6 };
   });
 
   return (
@@ -1047,9 +1104,7 @@ const GoldPoolScene: React.FC = () => {
           opacity: interpolate(frame, [0, 30], [0, 1]),
         }}
       >
-        <ShimmerText delay={0}>
-          The London Gold Pool
-        </ShimmerText>
+        <ShimmerText delay={0}>The London Gold Pool</ShimmerText>
       </div>
 
       <div
@@ -1061,20 +1116,41 @@ const GoldPoolScene: React.FC = () => {
           textAlign: "center",
         }}
       >
-        <div style={{ fontSize: 18, color: "#9ca3af", opacity: interpolate(frame, [30, 60], [0, 1]) }}>
+        <div
+          style={{
+            fontSize: 18,
+            color: "#9ca3af",
+            opacity: interpolate(frame, [30, 60], [0, 1]),
+          }}
+        >
           1961 - Created to suppress gold prices
         </div>
-        <div style={{
-          fontSize: 48,
-          color: "#ef4444",
-          fontWeight: 700,
-          marginTop: 20,
-          opacity: interpolate(frame, [60, 90], [0, 1]),
-          textShadow: "0 0 20px rgba(239, 68, 68, 0.5)"
-        }}>
-          $<AnimatedNumber value={35.2 * 10} delay={60} duration={40} suffix="" />
+        <div
+          style={{
+            fontSize: 48,
+            color: "#ef4444",
+            fontWeight: 700,
+            marginTop: 20,
+            opacity: interpolate(frame, [60, 90], [0, 1]),
+            textShadow: "0 0 20px rgba(239, 68, 68, 0.5)",
+          }}
+        >
+          $
+          <AnimatedNumber
+            value={35.2 * 10}
+            delay={60}
+            duration={40}
+            suffix=""
+          />
         </div>
-        <div style={{ fontSize: 16, color: "#e8e8e8", marginTop: 10, opacity: interpolate(frame, [90, 120], [0, 1]) }}>
+        <div
+          style={{
+            fontSize: 16,
+            color: "#e8e8e8",
+            marginTop: 10,
+            opacity: interpolate(frame, [90, 120], [0, 1]),
+          }}
+        >
           Target price per ounce
         </div>
       </div>
@@ -1091,7 +1167,13 @@ const GoldPoolScene: React.FC = () => {
         }}
       >
         <div style={{ fontSize: 36, color: "#ef4444", fontWeight: 700 }}>
-          $<AnimatedNumber value={1} delay={120} duration={60} suffix=" Billion" />
+          $
+          <AnimatedNumber
+            value={1}
+            delay={120}
+            duration={60}
+            suffix=" Billion"
+          />
         </div>
         <div style={{ fontSize: 16, color: "#9ca3af", marginTop: 10 }}>
           lost by 1967
@@ -1111,10 +1193,10 @@ const SDRScene: React.FC = () => {
   // 蓝色粒子营造神秘感
   const blueParticles = Array.from({ length: 15 }, (_, i) => {
     const seed = i * 137.5;
-    const x = (Math.sin(seed) * 45 + 50 + (frame * 0.15 * (i % 2 + 1))) % 100;
-    const y = (Math.cos(seed) * 45 + 50 + (frame * 0.1 * (i % 3 + 1))) % 100;
+    const x = (Math.sin(seed) * 45 + 50 + frame * 0.15 * ((i % 2) + 1)) % 100;
+    const y = (Math.cos(seed) * 45 + 50 + frame * 0.1 * ((i % 3) + 1)) % 100;
 
-    return { x, y, opacity: (Math.sin(frame * 0.04 + i) + 1) / 2 * 0.5 };
+    return { x, y, opacity: ((Math.sin(frame * 0.04 + i) + 1) / 2) * 0.5 };
   });
 
   return (
@@ -1152,7 +1234,11 @@ const SDRScene: React.FC = () => {
           opacity: interpolate(frame, [0, 30], [0, 1]),
         }}
       >
-        <TypewriterText text="Special Drawing Rights (SDR)" delay={0} charDuration={3} />
+        <TypewriterText
+          text="Special Drawing Rights (SDR)"
+          delay={0}
+          charDuration={3}
+        />
       </div>
 
       <div
@@ -1253,9 +1339,7 @@ const NixonGoldScene: React.FC = () => {
         }}
       >
         <div style={{ fontSize: 28, color: "#ffd700", fontWeight: 600 }}>
-          <ShimmerText delay={60}>
-            America's Second Default
-          </ShimmerText>
+          <ShimmerText delay={60}>America's Second Default</ShimmerText>
         </div>
         <div style={{ fontSize: 16, color: "#9ca3af", marginTop: 15 }}>
           The entire world enters the era of fiat currency
@@ -1275,8 +1359,16 @@ const NixonGoldScene: React.FC = () => {
           opacity: interpolate(frame, [120, 180], [0, 1]),
         }}
       >
-        Total US Debt: $<AnimatedNumber value={44} delay={120} duration={60} suffix=" Trillion" />
-        <span style={{ fontSize: 14, color: "#9ca3af", marginLeft: 10 }}>by 2006</span>
+        Total US Debt: $
+        <AnimatedNumber
+          value={44}
+          delay={120}
+          duration={60}
+          suffix=" Trillion"
+        />
+        <span style={{ fontSize: 14, color: "#9ca3af", marginLeft: 10 }}>
+          by 2006
+        </span>
       </div>
 
       {/* 震动波效果 */}
@@ -1310,9 +1402,7 @@ const PetrodollarScene: React.FC = () => {
           opacity: interpolate(frame, [0, 30], [0, 1]),
         }}
       >
-        <ShimmerText delay={0}>
-          The Petrodollar System
-        </ShimmerText>
+        <ShimmerText delay={0}>The Petrodollar System</ShimmerText>
       </div>
 
       <div
@@ -1324,7 +1414,13 @@ const PetrodollarScene: React.FC = () => {
           textAlign: "center",
         }}
       >
-        <div style={{ fontSize: 18, color: "#9ca3af", opacity: interpolate(frame, [30, 60], [0, 1]) }}>
+        <div
+          style={{
+            fontSize: 18,
+            color: "#9ca3af",
+            opacity: interpolate(frame, [30, 60], [0, 1]),
+          }}
+        >
           October 6, 1973
         </div>
 
@@ -1344,7 +1440,7 @@ const PetrodollarScene: React.FC = () => {
               frame,
               [60 + i * 10, 90 + i * 10],
               [0, 30 + i * 20],
-              { extrapolateRight: "clamp" }
+              { extrapolateRight: "clamp" },
             );
             return (
               <div
@@ -1353,30 +1449,39 @@ const PetrodollarScene: React.FC = () => {
                   width: 20,
                   height: barHeight,
                   background: `linear-gradient(180deg, #ef4444 0%, #ffd700 100%)`,
-                  opacity: interpolate(frame, [60 + i * 10, 90 + i * 10], [0, 1], {
-                    extrapolateRight: "clamp",
-                  }),
+                  opacity: interpolate(
+                    frame,
+                    [60 + i * 10, 90 + i * 10],
+                    [0, 1],
+                    {
+                      extrapolateRight: "clamp",
+                    },
+                  ),
                 }}
               />
             );
           })}
         </div>
 
-        <div style={{
-          fontSize: 28,
-          color: "#ef4444",
-          fontWeight: 700,
-          marginTop: 15,
-          opacity: interpolate(frame, [60, 90], [0, 1]),
-        }}>
+        <div
+          style={{
+            fontSize: 28,
+            color: "#ef4444",
+            fontWeight: 700,
+            marginTop: 15,
+            opacity: interpolate(frame, [60, 90], [0, 1]),
+          }}
+        >
           Oil Prices +<AnimatedNumber value={400} delay={60} duration={60} />%
         </div>
-        <div style={{
-          fontSize: 16,
-          color: "#e8e8e8",
-          marginTop: 15,
-          opacity: interpolate(frame, [90, 120], [0, 1])
-        }}>
+        <div
+          style={{
+            fontSize: 16,
+            color: "#e8e8e8",
+            marginTop: 15,
+            opacity: interpolate(frame, [90, 120], [0, 1]),
+          }}
+        >
           The dollar found a new refuge: Oil
         </div>
       </div>
@@ -1508,9 +1613,7 @@ const SummaryScene: React.FC = () => {
           textShadow: "0 0 20px rgba(255, 215, 0, 0.5)",
         }}
       >
-        <ShimmerText delay={0}>
-          Summary
-        </ShimmerText>
+        <ShimmerText delay={0}>Summary</ShimmerText>
       </div>
 
       {/* 列表项 - 依次显示 */}
