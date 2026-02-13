@@ -1,5 +1,10 @@
 import React from "react";
-import { AbsoluteFill, useCurrentFrame, interpolate, interpolateColor } from "remotion";
+import {
+  AbsoluteFill,
+  useCurrentFrame,
+  interpolate,
+  interpolateColors,
+} from "remotion";
 
 // Static star positions
 const STAR_POSITIONS = [
@@ -35,9 +40,14 @@ const TypewriterText: React.FC<{
   style?: React.CSSProperties;
 }> = ({ text, delay, duration = 30, style }) => {
   const frame = useCurrentFrame();
-  const progress = interpolate(frame, [delay, delay + duration * 5], [0, text.length], {
-    extrapolateRight: "clamp",
-  });
+  const progress = interpolate(
+    frame,
+    [delay, delay + duration * 5],
+    [0, text.length],
+    {
+      extrapolateRight: "clamp",
+    },
+  );
   const displayText = text.slice(0, Math.floor(progress));
 
   return (
@@ -53,13 +63,13 @@ const TypewriterText: React.FC<{
 /**
  * TwinklingStar - 闪烁星星组件
  */
-const TwinklingStar: React.FC<{ left: number; top: number; size: number; baseOpacity: number; delay: number }> = ({
-  left,
-  top,
-  size,
-  baseOpacity,
-  delay,
-}) => {
+const TwinklingStar: React.FC<{
+  left: number;
+  top: number;
+  size: number;
+  baseOpacity: number;
+  delay: number;
+}> = ({ left, top, size, baseOpacity, delay }) => {
   const frame = useCurrentFrame();
   const twinkle = Math.sin((frame + delay) * 0.15) * 0.5 + 0.5;
   const opacity = baseOpacity * (0.5 + twinkle * 0.5);
@@ -97,7 +107,7 @@ const FloatingParticle: React.FC<{ index: number }> = ({ index }) => {
     <div
       style={{
         position: "absolute",
-        left: `${10 + (index * 8) % 80}%`,
+        left: `${10 + ((index * 8) % 80)}%`,
         top: `${y}%`,
         transform: `translateX(${x}px)`,
         width: 3,
@@ -151,9 +161,9 @@ export const OpeningScene: React.FC = () => {
   // Background gradient animation
   const gradientProgress = interpolate(frame % 300, [0, 300], [0, 1]);
   const bgGradient = `linear-gradient(180deg,
-    ${interpolateColor(gradientProgress, [0, 1], ["#0d1117", "#1a1a2e"])} 0%,
-    ${interpolateColor(gradientProgress, [0, 1], ["#1a1a2e", "#0d1117"])} 50%,
-    ${interpolateColor(gradientProgress, [0, 1], ["#0d1117", "#1a1a2e"])} 100%)`;
+    ${interpolateColors(gradientProgress, [0, 1], ["#0d1117", "#1a1a2e"])} 0%,
+    ${interpolateColors(gradientProgress, [0, 1], ["#1a1a2e", "#0d1117"])} 50%,
+    ${interpolateColors(gradientProgress, [0, 1], ["#0d1117", "#1a1a2e"])} 100%)`;
 
   return (
     <AbsoluteFill style={{ background: bgGradient }}>
