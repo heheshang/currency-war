@@ -70,11 +70,6 @@ export const Trailer: React.FC = () => {
         volume={0.8}
       />
 
-      <Voiceover
-        voiceoverSrc={VOICE_DIR}
-        entries={voiceoverEntries}
-        volume={0.8}
-      />
 
       {/* 场景1: 开场 (0-15s) */}
       <Sequence durationInFrames={15 * fps}>
