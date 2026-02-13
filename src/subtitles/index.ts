@@ -19,6 +19,7 @@ export { episode03Subtitles } from "./episode03";
 export { episode04Subtitles } from "./episode04";
 export { episode05Subtitles } from "./episode05";
 export { episode06Subtitles } from "./episode06";
+export { episode07Subtitles } from "./episode07";
 export { episode08Subtitles } from "./episode08";
 export { episode09Subtitles } from "./episode09";
 export { episode10Subtitles } from "./episode10";

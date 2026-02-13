@@ -265,3 +265,5 @@ export const ColonialCurrencyScene: React.FC = () => {
     </AbsoluteFill>
   );
 };
+
+export default ColonialCurrencyScene;

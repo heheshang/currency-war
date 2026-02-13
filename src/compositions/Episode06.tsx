@@ -1,6 +1,6 @@
 import React from "react";
 import { AbsoluteFill, useVideoConfig, Sequence } from "remotion";
-import { Subtitles, episode06Subtitles } from "../components/Subtitles";
+import { Subtitles } from "../components/Subtitles";
 import { Audio } from "../components/Audio";
 import { getEpisodeBGM } from "../utils/audioConfig";
 import {
@@ -13,6 +13,17 @@ import {
   TrilateralCommissionScene,
   Episode06SummaryScene,
 } from "../components/scenes/episode06";
+// 按Scene分离的字幕
+import {
+  scene00Subtitles,
+  scene01Subtitles,
+  scene02Subtitles,
+  scene03Subtitles,
+  scene04Subtitles,
+  scene05Subtitles,
+  scene06Subtitles,
+  scene07Subtitles,
+} from "../subtitles/episode06";
 
 /**
  * Episode06 - 第6集：统治世界的精英俱乐部
@@ -44,45 +55,50 @@ export const Episode06: React.FC = () => {
       {/* Scene 0: 开场 - 精英俱乐部介绍 (0-40s = 帧 0-1200) */}
       <Sequence durationInFrames={40 * fps}>
         <Episode06OpeningScene />
+        <Subtitles subtitles={scene00Subtitles} />
       </Sequence>
 
       {/* Scene 1: 豪斯上校 (40-100s = 帧 1200-3000) */}
       <Sequence from={40 * fps} durationInFrames={60 * fps}>
         <HouseColonelScene />
+        <Subtitles subtitles={scene01Subtitles} />
       </Sequence>
 
       {/* Scene 2: 外交协会 (100-170s = 帧 3000-5100) */}
       <Sequence from={100 * fps} durationInFrames={70 * fps}>
         <CouncilForeignRelationsScene />
+        <Subtitles subtitles={scene02Subtitles} />
       </Sequence>
 
       {/* Scene 3: 国际清算银行 (170-240s = 帧 5100-7200) */}
       <Sequence from={170 * fps} durationInFrames={70 * fps}>
         <BISScene />
+        <Subtitles subtitles={scene03Subtitles} />
       </Sequence>
 
       {/* Scene 4: IMF与世界银行 (240-310s = 帧 7200-9300) */}
       <Sequence from={240 * fps} durationInFrames={70 * fps}>
         <IMFWorldBankScene />
+        <Subtitles subtitles={scene04Subtitles} />
       </Sequence>
 
       {/* Scene 5: 彼尔德伯格俱乐部 (310-370s = 帧 9300-11100) */}
       <Sequence from={310 * fps} durationInFrames={60 * fps}>
         <BilderbergScene />
+        <Subtitles subtitles={scene05Subtitles} />
       </Sequence>
 
       {/* Scene 6: 三边委员会 (370-430s = 帧 11100-12900) */}
       <Sequence from={370 * fps} durationInFrames={60 * fps}>
         <TrilateralCommissionScene />
+        <Subtitles subtitles={scene06Subtitles} />
       </Sequence>
 
       {/* Scene 7: 总结与警示 (430-480s = 帧 12900-14400) */}
       <Sequence from={430 * fps} durationInFrames={50 * fps}>
         <Episode06SummaryScene />
+        <Subtitles subtitles={scene07Subtitles} />
       </Sequence>
-
-      {/* 字幕层 - 覆盖整个视频 */}
-      <Subtitles subtitles={episode06Subtitles} />
     </AbsoluteFill>
   );
 };

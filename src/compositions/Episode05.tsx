@@ -1,6 +1,6 @@
 import React from "react";
 import { AbsoluteFill, useVideoConfig, Sequence } from "remotion";
-import { Subtitles, episode05Subtitles } from "../components/Subtitles";
+import { Subtitles } from "../components/Subtitles";
 import { Audio } from "../components/Audio";
 import { getEpisodeBGM } from "../utils/audioConfig";
 import {
@@ -21,126 +21,137 @@ import {
   NewDealScene,
   Episode05SummaryScene,
 } from "../components/scenes/episode05";
+// 按Scene分离的字幕
+import {
+  benjaminStrongSubs,
+  noFedNoWarSubs,
+  strongWartimeFedSubs,
+  wilsonWarDecisionSubs,
+  warProfiteeringSubs,
+  versaillesTreatySubs,
+  agriculturalDepressionSubs,
+  roaringTwentiesSubs,
+  conspiracy1927Subs,
+  bubbleInflationSubs,
+  crash1929Subs,
+  fireSaleSubs,
+  depressionSubs,
+  realPlotSubs,
+  newDealSubs,
+  episode05SummarySubs,
+} from "../subtitles/episode05";
 
 /**
- * Episode05 - 第5集：一战与大衰退——国际银行家的"丰收时节"
+ * Episode05 - 第5集：一战与大衰退
  *
- * 基于《货币战争》第四章内容
- * 1914-1939：从战争到新政的金融秘史
- *
- * 总时长：15分钟（900秒 = 27,000帧 @ 30fps）
- *
- * 场景序列：
- * 0. [0-40s] 开场 - 斯特朗肖像 (1,200帧)
- * 1. [40-100s] 没有美联储，就没有一战 (3,000帧)
- * 2. [100-160s] 斯特朗的战时美联储 (1,800帧)
- * 3. [160-220s] 威尔逊的战争决策 (1,800帧)
- * 4. [220-280s] 大发战争财的银行家们 (1,800帧)
- * 5. [280-340s] 凡尔赛和约 (1,800帧)
- * 6. [340-410s] 1921年农业衰退 (2,100帧)
- * 7. [410-470s] 咆哮的二十年代 (1,800帧)
- * 8. [470-530s] 1927年秘密会议 (1,800帧)
- * 9. [530-600s] 泡沫膨胀 (2,100帧)
- * 10. [600-680s] 1929年崩盘 (2,400帧)
- * 11. [680-750s] 银行家廉价收购一切 (2,100帧)
- * 12. [750-820s] 大萧条加深 (2,100帧)
- * 13. [820-880s] 真正的图谋揭露 (1,800帧)
- * 14. [880-940s] 罗斯福新政 (1,800帧)
- * 15. [940-900s] 总结与警示 (1,800帧)
+ * 场景字幕设计：
+ * - 每个Scene有自己的字幕，从第0帧开始
  */
 export const Episode05: React.FC = () => {
   const { fps } = useVideoConfig();
-
   const bgm = getEpisodeBGM("Episode05");
 
   return (
     <AbsoluteFill style={{ background: "#0d1117" }}>
       {bgm && <Audio {...bgm} />}
-      {/* Scene 0: 开场 - 斯特朗肖像 (0-40s = 帧 0-1200) */}
+
+      {/* Scene 0: BenjaminStrongScene (40s = 1200帧) */}
       <Sequence durationInFrames={40 * fps}>
         <BenjaminStrongScene />
+        <Subtitles subtitles={benjaminStrongSubs} />
       </Sequence>
 
-      {/* Scene 1: 没有美联储，就没有一战 (40-100s = 帧 1200-3000) */}
+      {/* Scene 1: NoFedNoWarScene (60s = 1800帧) */}
       <Sequence from={40 * fps} durationInFrames={60 * fps}>
         <NoFedNoWarScene />
+        <Subtitles subtitles={noFedNoWarSubs} />
       </Sequence>
 
-      {/* Scene 2: 斯特朗的战时美联储 (100-160s = 帧 3000-4800) */}
+      {/* Scene 2: StrongWartimeFedScene (60s = 1800帧) */}
       <Sequence from={100 * fps} durationInFrames={60 * fps}>
         <StrongWartimeFedScene />
+        <Subtitles subtitles={strongWartimeFedSubs} />
       </Sequence>
 
-      {/* Scene 3: 威尔逊的战争决策 (160-220s = 帧 4800-6600) */}
+      {/* Scene 3: WilsonWarDecisionScene (60s = 1800帧) */}
       <Sequence from={160 * fps} durationInFrames={60 * fps}>
         <WilsonWarDecisionScene />
+        <Subtitles subtitles={wilsonWarDecisionSubs} />
       </Sequence>
 
-      {/* Scene 4: 大发战争财的银行家们 (220-280s = 帧 6600-8400) */}
+      {/* Scene 4: WarProfiteeringScene (60s = 1800帧) */}
       <Sequence from={220 * fps} durationInFrames={60 * fps}>
         <WarProfiteeringScene />
+        <Subtitles subtitles={warProfiteeringSubs} />
       </Sequence>
 
-      {/* Scene 5: 凡尔赛和约 (280-340s = 帧 8400-10200) */}
+      {/* Scene 5: VersaillesTreatyScene (60s = 1800帧) */}
       <Sequence from={280 * fps} durationInFrames={60 * fps}>
         <VersaillesTreatyScene />
+        <Subtitles subtitles={versaillesTreatySubs} />
       </Sequence>
 
-      {/* Scene 6: 1921年农业衰退 (340-410s = 帧 10200-12300) */}
+      {/* Scene 6: AgriculturalDepressionScene (70s = 2100帧) */}
       <Sequence from={340 * fps} durationInFrames={70 * fps}>
         <AgriculturalDepression1921Scene />
+        <Subtitles subtitles={agriculturalDepressionSubs} />
       </Sequence>
 
-      {/* Scene 7: 咆哮的二十年代 (410-470s = 帧 12300-14100) */}
+      {/* Scene 7: RoaringTwentiesScene (60s = 1800帧) */}
       <Sequence from={410 * fps} durationInFrames={60 * fps}>
         <RoaringTwentiesScene />
+        <Subtitles subtitles={roaringTwentiesSubs} />
       </Sequence>
 
-      {/* Scene 8: 1927年秘密会议 (470-530s = 帧 14100-15900) */}
+      {/* Scene 8: Conspiracy1927Scene (60s = 1800帧) */}
       <Sequence from={470 * fps} durationInFrames={60 * fps}>
         <Conspiracy1927Scene />
+        <Subtitles subtitles={conspiracy1927Subs} />
       </Sequence>
 
-      {/* Scene 9: 泡沫膨胀 (530-600s = 帧 15900-18000) */}
+      {/* Scene 9: BubbleInflationScene (70s = 2100帧) */}
       <Sequence from={530 * fps} durationInFrames={70 * fps}>
         <BubbleInflationScene />
+        <Subtitles subtitles={bubbleInflationSubs} />
       </Sequence>
 
-      {/* Scene 10: 1929年崩盘 (600-680s = 帧 18000-20400) */}
+      {/* Scene 10: Crash1929Scene (80s = 2400帧) */}
       <Sequence from={600 * fps} durationInFrames={80 * fps}>
         <Crash1929Scene />
+        <Subtitles subtitles={crash1929Subs} />
       </Sequence>
 
-      {/* Scene 11: 银行家廉价收购一切 (680-750s = 帧 20400-22500) */}
+      {/* Scene 11: FireSaleScene (70s = 2100帧) */}
       <Sequence from={680 * fps} durationInFrames={70 * fps}>
         <FireSaleScene />
+        <Subtitles subtitles={fireSaleSubs} />
       </Sequence>
 
-      {/* Scene 12: 大萧条加深 (750-820s = 帧 22500-24600) */}
+      {/* Scene 12: DepressionScene (70s = 2100帧) */}
       <Sequence from={750 * fps} durationInFrames={70 * fps}>
         <DepressionScene />
+        <Subtitles subtitles={depressionSubs} />
       </Sequence>
 
-      {/* Scene 13: 真正的图谋揭露 (820-880s = 帧 24600-26400) */}
+      {/* Scene 13: RealPlotScene (60s = 1800帧) */}
       <Sequence from={820 * fps} durationInFrames={60 * fps}>
         <RealPlotScene />
+        <Subtitles subtitles={realPlotSubs} />
       </Sequence>
 
-      {/* Scene 14: 罗斯福新政 (880-940s = 帧 26400-28200) */}
+      {/* Scene 14: NewDealScene (60s = 1800帧) */}
       <Sequence from={880 * fps} durationInFrames={60 * fps}>
         <NewDealScene />
+        <Subtitles subtitles={newDealSubs} />
       </Sequence>
 
-      {/* Scene 15: 总结与警示 (940-900s = 帧 28200-27000) */}
+      {/* Scene 15: SummaryScene (60s = 1800帧) */}
       <Sequence from={940 * fps} durationInFrames={60 * fps}>
         <Episode05SummaryScene />
+        <Subtitles subtitles={episode05SummarySubs} />
       </Sequence>
-
-      {/* 字幕层 - 覆盖整个视频 */}
-      <Subtitles subtitles={episode05Subtitles} />
     </AbsoluteFill>
   );
 };
 
-// 默认导出
 export default Episode05;

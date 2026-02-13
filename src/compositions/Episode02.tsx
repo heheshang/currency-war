@@ -2,9 +2,27 @@ import React from "react";
 import { AbsoluteFill, useVideoConfig, Sequence } from "remotion";
 import { BattleOfWaterloo } from "../components/scenes/BattleOfWaterloo";
 import { StockExchangeScene } from "../components/scenes/StockExchangeScene";
-import { Subtitles, episode02Subtitles } from "../components/Subtitles";
+import { Subtitles } from "../components/Subtitles";
 import { Audio } from "../components/Audio";
 import { getEpisodeBGM } from "../utils/audioConfig";
+
+// Import scene-separated subtitles from episode02
+import {
+  openingSubs,
+  rothschildIntroSubs,
+  waterlooPreludeSubs,
+  intelligenceNetworkSubs,
+  tradingManipulationSubs,
+  twentyTimesProfitSubs,
+  fiveBrothersSubs,
+  bankOfEnglandSubs,
+  mayerRothschildSubs,
+  nathanLondonSubs,
+  jamesParisSubs,
+  salomonViennaSubs,
+  empirePeakSubs,
+  summarySubs,
+} from "../subtitles/episode02";
 
 // Episode02 Scene Components
 import InvisibleWealthScene from "../components/scenes/episode02/InvisibleWealthScene";
@@ -54,75 +72,86 @@ export const Episode02: React.FC = () => {
       {/* Scene 1: Opening - The Invisible Wealth (0-30s) */}
       <Sequence durationInFrames={30 * fps}>
         <InvisibleWealthScene />
+        <Subtitles subtitles={openingSubs} />
       </Sequence>
 
       {/* Scene 2: Family Introduction (30-90s) */}
       <Sequence from={30 * fps} durationInFrames={60 * fps}>
         <FamilyIntroductionScene />
+        <Subtitles subtitles={rothschildIntroSubs} />
       </Sequence>
 
       {/* Scene 3: Battle of Waterloo Prelude (90-150s) */}
       <Sequence from={90 * fps} durationInFrames={60 * fps}>
         <BattleOfWaterloo />
+        <Subtitles subtitles={waterlooPreludeSubs} />
       </Sequence>
 
       {/* Scene 4: Intelligence Network (150-210s) */}
       <Sequence from={150 * fps} durationInFrames={60 * fps}>
         <IntelligenceNetworkScene />
+        <Subtitles subtitles={intelligenceNetworkSubs} />
       </Sequence>
 
       {/* Scene 5: Stock Exchange Manipulation (210-270s) */}
       <Sequence from={210 * fps} durationInFrames={60 * fps}>
         <StockExchangeScene />
+        <Subtitles subtitles={tradingManipulationSubs} />
       </Sequence>
 
       {/* Scene 6: Twenty Times Profit (270-330s) */}
       <Sequence from={270 * fps} durationInFrames={60 * fps}>
         <TwentyTimesProfitScene />
+        <Subtitles subtitles={twentyTimesProfitSubs} />
       </Sequence>
 
       {/* Scene 7: Five Brothers European Empire (330-390s) */}
       <Sequence from={330 * fps} durationInFrames={60 * fps}>
         <EuropeanEmpireScene />
+        <Subtitles subtitles={fiveBrothersSubs} />
       </Sequence>
 
       {/* Scene 8: Bank of England Background (390-450s) */}
       <Sequence from={390 * fps} durationInFrames={60 * fps}>
         <BankOfEnglandScene />
+        <Subtitles subtitles={bankOfEnglandSubs} />
       </Sequence>
 
       {/* Scene 9: Mayer's First Fortune (450-510s) */}
       <Sequence from={450 * fps} durationInFrames={60 * fps}>
         <MayersFirstFortuneScene />
+        <Subtitles subtitles={mayerRothschildSubs} />
       </Sequence>
 
       {/* Scene 10: Nathan Conquers London (510-570s) */}
       <Sequence from={510 * fps} durationInFrames={60 * fps}>
         <NathansLondonScene />
+        <Subtitles subtitles={nathanLondonSubs} />
       </Sequence>
 
       {/* Scene 11: James Conquers France (570-630s) */}
       <Sequence from={570 * fps} durationInFrames={60 * fps}>
         <JamesConquersFranceScene />
+        <Subtitles subtitles={jamesParisSubs} />
       </Sequence>
 
       {/* Scene 12: Salomon in Austria (630-690s) */}
       <Sequence from={630 * fps} durationInFrames={60 * fps}>
         <SalomonInAustriaScene />
+        <Subtitles subtitles={salomonViennaSubs} />
       </Sequence>
 
       {/* Scene 13: Financial Empire Peak (690-750s) */}
       <Sequence from={690 * fps} durationInFrames={60 * fps}>
         <FinancialEmpirePeakScene />
+        <Subtitles subtitles={empirePeakSubs} />
       </Sequence>
 
       {/* Scene 14: Episode Summary (750-780s) */}
       <Sequence from={750 * fps} durationInFrames={30 * fps}>
         <Episode02SummaryScene />
+        <Subtitles subtitles={summarySubs} />
       </Sequence>
-
-      {/* 字幕层 - 覆盖整个视频 */}
-      <Subtitles subtitles={episode02Subtitles} />
     </AbsoluteFill>
   );
 };

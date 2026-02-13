@@ -1,11 +1,8 @@
 import React from "react";
 import { AbsoluteFill, useVideoConfig, Sequence } from "remotion";
-import { Audio } from "../components/Audio";
 import { Subtitles } from "../components/Subtitles";
+import { Audio } from "../components/Audio";
 import { getEpisodeBGM } from "../utils/audioConfig";
-import { episode09Subtitles } from "../subtitles/episode09";
-
-// Scene components
 import {
   OpeningScene,
   BilderbergScene,
@@ -19,90 +16,100 @@ import {
   AsiaCrisisScene,
   SummaryScene,
 } from "../components/scenes/episode09";
+// 按Scene分离的字幕
+import {
+  openingSubs,
+  bilderbergSubs,
+  oilCrisisSubs,
+  volckerSubs,
+  highRatesSubs,
+  imfSubs,
+  envBankSubs,
+  japanBubbleSubs,
+  sorosSubs,
+  asiaCrisisSubs,
+  summarySubs,
+} from "../subtitles/episode09";
 
 /**
  * Episode09 - 第9集：不宣而战的货币战争
  *
- * 总时长：11分钟（660秒 = 19800帧 @30fps）
- *
- * 场景序列：
- * 1. [0-30s] 开场 - 货币战争定义
- * 2. [30-90s] 彼尔德伯格俱乐部密谋
- * 3. [90-150s] 石油危机
- * 4. [150-210s] 保罗·沃尔克
- * 5. [210-270s] 高利率战争
- * 6. [270-330s] IMF债务
- * 7. [330-390s] 世界环保银行
- * 8. [390-450s] 日本泡沫
- * 9. [450-510s] 索罗斯
- * 10. [510-570s] 亚洲金融危机
- * 11. [570-630s] 总结
+ * 场景字幕设计：
+ * - 每个Scene有自己的字幕，从第0帧开始
  */
 export const Episode09: React.FC = () => {
   const { fps } = useVideoConfig();
-
   const bgm = getEpisodeBGM("Episode09");
 
   return (
     <AbsoluteFill style={{ background: "#0d1117" }}>
       {bgm && <Audio {...bgm} />}
 
-      {/* 场景1: 开场 (0-30s) */}
+      {/* Scene 1: Opening (30s = 900帧) */}
       <Sequence durationInFrames={30 * fps}>
         <OpeningScene />
+        <Subtitles subtitles={openingSubs} />
       </Sequence>
 
-      {/* 场景2: 彼尔德伯格俱乐部 (30-90s) */}
+      {/* Scene 2: Bilderberg (60s = 1800帧) */}
       <Sequence from={30 * fps} durationInFrames={60 * fps}>
         <BilderbergScene />
+        <Subtitles subtitles={bilderbergSubs} />
       </Sequence>
 
-      {/* 场景3: 石油危机 (90-150s) */}
+      {/* Scene 3: Oil Crisis (60s = 1800帧) */}
       <Sequence from={90 * fps} durationInFrames={60 * fps}>
         <OilCrisisScene />
+        <Subtitles subtitles={oilCrisisSubs} />
       </Sequence>
 
-      {/* 场景4: 保罗·沃尔克 (150-210s) */}
+      {/* Scene 4: Volcker (60s = 1800帧) */}
       <Sequence from={150 * fps} durationInFrames={60 * fps}>
         <VolckerScene />
+        <Subtitles subtitles={volckerSubs} />
       </Sequence>
 
-      {/* 场景5: 高利率战争 (210-270s) */}
+      {/* Scene 5: High Rates (60s = 1800帧) */}
       <Sequence from={210 * fps} durationInFrames={60 * fps}>
         <HighRatesScene />
+        <Subtitles subtitles={highRatesSubs} />
       </Sequence>
 
-      {/* 场景6: IMF (270-330s) */}
+      {/* Scene 6: IMF (60s = 1800帧) */}
       <Sequence from={270 * fps} durationInFrames={60 * fps}>
         <IMFScene />
+        <Subtitles subtitles={imfSubs} />
       </Sequence>
 
-      {/* 场景7: 世界环保银行 (330-390s) */}
+      {/* Scene 7: Env Bank (60s = 1800帧) */}
       <Sequence from={330 * fps} durationInFrames={60 * fps}>
         <EnvBankScene />
+        <Subtitles subtitles={envBankSubs} />
       </Sequence>
 
-      {/* 场景8: 日本泡沫 (390-450s) */}
+      {/* Scene 8: Japan Bubble (60s = 1800帧) */}
       <Sequence from={390 * fps} durationInFrames={60 * fps}>
         <JapanBubbleScene />
+        <Subtitles subtitles={japanBubbleSubs} />
       </Sequence>
 
-      {/* 场景9: 索罗斯 (450-510s) */}
+      {/* Scene 9: Soros (60s = 1800帧) */}
       <Sequence from={450 * fps} durationInFrames={60 * fps}>
         <SorosScene />
+        <Subtitles subtitles={sorosSubs} />
       </Sequence>
 
-      {/* 场景10: 亚洲金融危机 (510-570s) */}
+      {/* Scene 10: Asia Crisis (60s = 1800帧) */}
       <Sequence from={510 * fps} durationInFrames={60 * fps}>
         <AsiaCrisisScene />
+        <Subtitles subtitles={asiaCrisisSubs} />
       </Sequence>
 
-      {/* 场景11: 总结 (570-600s) */}
+      {/* Scene 11: Summary (30s = 900帧) */}
       <Sequence from={570 * fps} durationInFrames={30 * fps}>
         <SummaryScene />
+        <Subtitles subtitles={summarySubs} />
       </Sequence>
-
-      <Subtitles subtitles={episode09Subtitles} />
     </AbsoluteFill>
   );
 };

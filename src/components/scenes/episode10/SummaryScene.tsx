@@ -1,8 +1,185 @@
-import React from "react";
-import { AbsoluteFill, useCurrentFrame, interpolate } from "remotion";
+import React, { useMemo } from "react";
+import { AbsoluteFill, useCurrentFrame, interpolate, spring } from "remotion";
+
+// Animated number counter with spring
+const AnimatedCounter: React.FC<{
+  value: number;
+  startFrame: number;
+  duration?: number;
+  prefix?: string;
+  suffix?: string;
+  decimals?: number;
+  style?: React.CSSProperties;
+}> = ({ value, startFrame, duration = 60, prefix = "", suffix = "", decimals = 0, style }) => {
+  const frame = useCurrentFrame();
+  const progress = Math.max(0, Math.min(1, (frame - startFrame) / duration));
+  const animatedValue = spring({ value: progress * value, fps: 30, damping: 15 });
+
+  return (
+    <span style={style}>
+      {prefix}{animatedValue.toFixed(decimals)}{suffix}
+    </span>
+  );
+};
+
+// Typewriter text component
+const TypewriterText: React.FC<{
+  text: string;
+  startFrame: number;
+  speed?: number;
+  style?: React.CSSProperties;
+}> = ({ text, startFrame, speed = 3, style }) => {
+  const frame = useCurrentFrame();
+  const charCount = Math.max(0, Math.floor((frame - startFrame) / speed));
+
+  return (
+    <span style={style}>
+      {text.slice(0, charCount)}
+      {charCount < text.length && (
+        <span style={{ animation: "blink 1s infinite" }}>|</span>
+      )}
+    </span>
+  );
+};
+
+// Summary item card
+const SummaryItem: React.FC<{
+  icon: string;
+  text: string;
+  color: string;
+  delay: number;
+}> = ({ icon, text, color, delay }) => {
+  const frame = useCurrentFrame();
+  const opacity = interpolate(frame, [delay, delay + 30], [0, 1]);
+  const x = interpolate(frame, [delay, delay + 30], [50, 0]);
+
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        marginBottom: 18,
+        padding: "12px 25px",
+        background: "rgba(255, 255, 255, 0.05)",
+        borderRadius: 10,
+        borderLeft: `4px solid ${color}`,
+        opacity,
+        transform: `translateX(${x}px)`,
+        boxShadow: `0 5px 20px ${color}22`,
+      }}
+    >
+      <span style={{ fontSize: 26, marginRight: 15 }}>{icon}</span>
+      <span style={{ fontSize: 18, color }}>{text}</span>
+    </div>
+  );
+};
+
+// Floating particles
+const FloatingParticles: React.FC = () => {
+  const frame = useCurrentFrame();
+
+  const particles = useMemo(() => {
+    return Array.from({ length: 20 }, (_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      size: 2 + Math.random() * 3,
+      speed: 0.1 + Math.random() * 0.3,
+    }));
+  }, []);
+
+  return (
+    <div style={{ position: "absolute", inset: 0, overflow: "hidden", pointerEvents: "none" }}>
+      {particles.map((p) => {
+        const y = ((frame * p.speed) % 120) - 10;
+        const opacity = Math.sin(frame * 0.05 + p.id) * 0.3 + 0.5;
+        return (
+          <div
+            key={p.id}
+            style={{
+              position: "absolute",
+              left: `${p.x}%`,
+              top: `${y}%`,
+              width: p.size,
+              height: p.size,
+              background: "#ffd700",
+              borderRadius: "50%",
+              opacity,
+              boxShadow: `0 0 ${p.size * 2}px rgba(255, 215, 0, 0.5)`,
+            }}
+          />
+        );
+      })}
+    </div>
+  );
+};
+
+// Animated title
+const AnimatedTitle: React.FC = () => {
+  const frame = useCurrentFrame();
+
+  const opacity = interpolate(frame, [0, 20], [0, 1]);
+  const scale = interpolate(frame, [0, 20], [0.8, 1]);
+  const glow = Math.sin(frame * 0.05) * 10 + 20;
+
+  return (
+    <div
+      style={{
+        opacity,
+        transform: `scale(${scale})`,
+        textShadow: `0 0 ${glow}px rgba(255, 215, 0, 0.5)`,
+      }}
+    >
+      <div style={{ fontSize: 42, color: "#ffd700", fontWeight: 700 }}>Summary</div>
+    </div>
+  );
+};
+
+// Footer with animation
+const AnimatedFooter: React.FC = () => {
+  const frame = useCurrentFrame();
+  const opacity = interpolate(frame, [80, 120], [0, 1]);
+  const float = Math.sin(frame * 0.05) * 3;
+
+  return (
+    <div
+      style={{
+        opacity,
+        transform: `translateY(${float}px)`,
+        textAlign: "center",
+      }}
+    >
+      <div style={{ fontSize: 34, color: "#ffd700", fontWeight: 700 }}>Currency War</div>
+      <div style={{ fontSize: 16, color: "#9ca3af", marginTop: 5 }}>Episode 10 of 11</div>
+    </div>
+  );
+};
+
+// Pulsing highlight
+const PulsingHighlight: React.FC<{
+  startFrame?: number;
+  children: React.ReactNode;
+}> = ({ startFrame = 70, children }) => {
+  const frame = useCurrentFrame();
+  const opacity = interpolate(frame, [startFrame, startFrame + 20], [0, 1]);
+  const pulse = Math.sin((frame - startFrame) * 0.08) * 0.05 + 1;
+
+  return (
+    <div
+      style={{
+        opacity,
+        transform: `scale(${pulse})`,
+        boxShadow: "0 0 30px rgba(255, 215, 0, 0.3)",
+      }}
+    >
+      {children}
+    </div>
+  );
+};
 
 /**
  * Episode10 Summary Scene - 总结
+ * Enhanced with richer animations
  */
 export const SummaryScene: React.FC = () => {
   const frame = useCurrentFrame();
@@ -11,55 +188,61 @@ export const SummaryScene: React.FC = () => {
   const contentOpacity = interpolate(frame, [20, 60], [0, 1]);
   const footerOpacity = interpolate(frame, [80, 120], [0, 1]);
 
+  // Animated background
+  const bgPulse = Math.sin(frame * 0.03) * 0.03 + 1;
+
+  const summaryItems = [
+    { icon: "🏦", text: "部分储备金 + 债务货币 = 通货膨胀", color: "#ffd700" },
+    { icon: "📈", text: "债务永远无法偿还，利率必然越来越低", color: "#fbbf24" },
+    { icon: "⚠️", text: "中国美国陷入金融恐怖平衡", color: "#ef4444" },
+    { icon: "🥇", text: "黄金是唯一解决方案", color: "#4ade80" },
+  ];
+
   return (
     <AbsoluteFill style={{ background: "radial-gradient(circle at center, #2d1f1f 0%, #0d0d0d 100%)" }}>
+      {/* Animated background */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          background: `radial-gradient(circle at 50% 50%, rgba(255, 215, 0, ${0.05 * bgPulse}) 0%, transparent 50%)`,
+        }}
+      />
+
+      {/* Floating particles */}
+      <FloatingParticles />
+
       {/* Title */}
       <div
         style={{
           position: "absolute",
-          top: "10%",
+          top: "8%",
           left: "50%",
           transform: "translateX(-50%)",
-          color: "#ffd700",
-          fontSize: 42,
-          fontWeight: 700,
-          opacity: titleOpacity,
         }}
       >
-        Summary
+        <AnimatedTitle />
       </div>
 
       {/* Content */}
       <div
         style={{
           position: "absolute",
-          top: "35%",
+          top: "30%",
           left: "50%",
           transform: "translate(-50%, -50%)",
           width: "80%",
           opacity: contentOpacity,
         }}
       >
-        {[
-          { icon: "🏦", text: "部分储备金 + 债务货币 = 通货膨胀", color: "#ffd700" },
-          { icon: "📈", text: "债务永远无法偿还，利率必然越来越低", color: "#fbbf24" },
-          { icon: "⚠️", text: "中国美国陷入金融恐怖平衡", color: "#ef4444" },
-          { icon: "🥇", text: "黄金是唯一解决方案", color: "#4ade80" },
-        ].map((item, i) => (
-          <div
+        {summaryItems.map((item, i) => (
+          <SummaryItem
             key={i}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              marginBottom: 18,
-              padding: "10px 20px",
-              background: "rgba(255, 255, 255, 0.05)",
-              borderRadius: 8,
-            }}
-          >
-            <span style={{ fontSize: 24, marginRight: 15 }}>{item.icon}</span>
-            <span style={{ fontSize: 18, color: item.color }}>{item.text}</span>
-          </div>
+            icon={item.icon}
+            text={item.text}
+            color={item.color}
+            delay={25 + i * 20}
+          />
         ))}
       </div>
 
@@ -70,13 +253,18 @@ export const SummaryScene: React.FC = () => {
           bottom: "8%",
           left: "50%",
           transform: "translateX(-50%)",
-          textAlign: "center",
-          opacity: footerOpacity,
         }}
       >
-        <div style={{ fontSize: 32, color: "#ffd700", fontWeight: 700 }}>Currency War</div>
-        <div style={{ fontSize: 16, color: "#9ca3af", marginTop: 5 }}>Episode 10 of 11</div>
+        <AnimatedFooter />
       </div>
+
+      {/* CSS */}
+      <style>{`
+        @keyframes blink {
+          0%, 50% { opacity: 1; }
+          51%, 100% { opacity: 0; }
+        }
+      `}</style>
     </AbsoluteFill>
   );
 };

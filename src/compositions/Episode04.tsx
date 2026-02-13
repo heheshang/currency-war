@@ -1,6 +1,6 @@
 import React from "react";
 import { AbsoluteFill, useVideoConfig, Sequence } from "remotion";
-import { Subtitles, episode04Subtitles } from "../components/Subtitles";
+import { Subtitles } from "../components/Subtitles";
 import { Audio } from "../components/Audio";
 import { getEpisodeBGM } from "../utils/audioConfig";
 import {
@@ -19,6 +19,22 @@ import {
   WilsonRealizationScene,
   SummaryScene,
 } from "../components/scenes/episode04";
+import {
+  OpeningSceneSubtitles,
+  JekyllIslandSceneSubtitles,
+  WallStreetTycoonsSceneSubtitles,
+  MorganRiseSceneSubtitles,
+  RockefellerEmpireSceneSubtitles,
+  Panic1907SceneSubtitles,
+  GoldToFiatSceneSubtitles,
+  Election1912SceneSubtitles,
+  PlanBSceneSubtitles,
+  ActPassesSceneSubtitles,
+  WhoOwnsFedSceneSubtitles,
+  HiddenControlSceneSubtitles,
+  WilsonRealizationSceneSubtitles,
+  SummarySceneSubtitles,
+} from "../subtitles/episode04";
 
 /**
  * Episode04 - 第4集：美联储——私有的中央银行
@@ -55,75 +71,86 @@ export const Episode04: React.FC = () => {
       {/* Scene 0: 开场 - 威尔逊的悔恨 (0-35s = 帧 0-1050) */}
       <Sequence durationInFrames={35 * fps}>
         <OpeningWilsonScene />
+        <Subtitles subtitles={OpeningSceneSubtitles} />
       </Sequence>
 
       {/* Scene 1: 哲基尔岛秘密会议 (35-95s = 帧 1050-2850) */}
       <Sequence from={35 * fps} durationInFrames={60 * fps}>
         <JekyllIslandScene />
+        <Subtitles subtitles={JekyllIslandSceneSubtitles} />
       </Sequence>
 
       {/* Scene 2: 华尔街7巨头 (95-170s = 帧 2850-5100) */}
       <Sequence from={95 * fps} durationInFrames={75 * fps}>
         <SevenTycoonsScene />
+        <Subtitles subtitles={WallStreetTycoonsSceneSubtitles} />
       </Sequence>
 
       {/* Scene 3: 摩根家族兴起 (170-240s = 帧 5100-7200) */}
       <Sequence from={170 * fps} durationInFrames={70 * fps}>
         <MorganFamilyScene />
+        <Subtitles subtitles={MorganRiseSceneSubtitles} />
       </Sequence>
 
       {/* Scene 4: 洛克菲勒帝国 (240-310s = 帧 7200-9300) */}
       <Sequence from={240 * fps} durationInFrames={70 * fps}>
         <RockefellerScene />
+        <Subtitles subtitles={RockefellerEmpireSceneSubtitles} />
       </Sequence>
 
       {/* Scene 5: 1907年恐慌 - 前奏 (310-370s = 帧 9300-11100) */}
       <Sequence from={310 * fps} durationInFrames={60 * fps}>
         <Panic1907Scene />
+        <Subtitles subtitles={Panic1907SceneSubtitles} />
       </Sequence>
 
       {/* Scene 6: 金本位到法定货币 (370-430s = 帧 11100-12900) */}
       <Sequence from={370 * fps} durationInFrames={60 * fps}>
         <GoldToFiatScene />
+        <Subtitles subtitles={GoldToFiatSceneSubtitles} />
       </Sequence>
 
       {/* Scene 7: 1912年大选 (430-490s = 帧 12900-14700) */}
       <Sequence from={430 * fps} durationInFrames={60 * fps}>
         <Election1912Scene />
+        <Subtitles subtitles={Election1912SceneSubtitles} />
       </Sequence>
 
       {/* Scene 8: B计划 - 两套方案 (490-550s = 帧 14700-16500) */}
       <Sequence from={490 * fps} durationInFrames={60 * fps}>
         <PlanBScene />
+        <Subtitles subtitles={PlanBSceneSubtitles} />
       </Sequence>
 
       {/* Scene 9: 法案通过 (550-630s = 帧 16500-18900) */}
       <Sequence from={550 * fps} durationInFrames={80 * fps}>
         <ActPassesScene />
+        <Subtitles subtitles={ActPassesSceneSubtitles} />
       </Sequence>
 
       {/* Scene 10: 谁拥有美联储 (630-700s = 帧 18900-21000) */}
       <Sequence from={630 * fps} durationInFrames={70 * fps}>
         <WhoOwnsFedScene />
+        <Subtitles subtitles={WhoOwnsFedSceneSubtitles} />
       </Sequence>
 
       {/* Scene 11: 隐藏的控制 (700-760s = 帧 21000-22800) */}
       <Sequence from={700 * fps} durationInFrames={60 * fps}>
         <HiddenControlScene />
+        <Subtitles subtitles={HiddenControlSceneSubtitles} />
       </Sequence>
 
       {/* Scene 12: 威尔逊的醒悟 (760-810s = 帧 22800-24300) */}
       <Sequence from={760 * fps} durationInFrames={50 * fps}>
         <WilsonRealizationScene />
+        <Subtitles subtitles={WilsonRealizationSceneSubtitles} />
       </Sequence>
 
       {/* Scene 13: 总结 (810-840s = 帧 24300-25200) */}
       <Sequence from={810 * fps} durationInFrames={30 * fps}>
         <SummaryScene />
+        <Subtitles subtitles={SummarySceneSubtitles} />
       </Sequence>
-
-      {/* 字幕层 - 覆盖整个视频 */}
-      <Subtitles subtitles={episode04Subtitles} />
     </AbsoluteFill>
   );
 };

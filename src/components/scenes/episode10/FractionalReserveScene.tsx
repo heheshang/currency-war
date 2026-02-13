@@ -1,8 +1,170 @@
-import React from "react";
-import { AbsoluteFill, useCurrentFrame, interpolate } from "remotion";
+import React, { useMemo } from "react";
+import { AbsoluteFill, useCurrentFrame, interpolate, spring } from "remotion";
+
+// Animated number counter
+const AnimatedNumber: React.FC<{
+  value: number;
+  startFrame: number;
+  duration?: number;
+  prefix?: string;
+  suffix?: string;
+  decimals?: number;
+  style?: React.CSSProperties;
+}> = ({ value, startFrame, duration = 60, prefix = "", suffix = "", decimals = 0, style }) => {
+  const frame = useCurrentFrame();
+  const progress = Math.max(0, Math.min(1, (frame - startFrame) / duration));
+  const animatedValue = spring({ value: progress * value, fps: 30, damping: 15 });
+
+  return (
+    <span style={style}>
+      {prefix}{animatedValue.toFixed(decimals)}{suffix}
+    </span>
+  );
+};
+
+// Typewriter text component
+const TypewriterText: React.FC<{
+  text: string;
+  startFrame: number;
+  speed?: number;
+  style?: React.CSSProperties;
+}> = ({ text, startFrame, speed = 3, style }) => {
+  const frame = useCurrentFrame();
+  const charCount = Math.max(0, Math.floor((frame - startFrame) / speed));
+
+  return (
+    <span style={style}>
+      {text.slice(0, charCount)}
+      {charCount < text.length && (
+        <span style={{ animation: "blink 1s infinite" }}>|</span>
+      )}
+    </span>
+  );
+};
+
+// Pulsing circle effect
+const PulsingCircle: React.FC<{
+  size?: number;
+  color?: string;
+  delay?: number;
+}> = ({ size = 80, color = "#fbbf24", delay = 0 }) => {
+  const frame = useCurrentFrame();
+  const pulse = Math.sin((frame + delay) * 0.08) * 0.15 + 1;
+
+  return (
+    <div
+      style={{
+        width: size,
+        height: size,
+        borderRadius: "50%",
+        background: `linear-gradient(135deg, ${color}, ${color}88)`,
+        transform: `scale(${pulse})`,
+        boxShadow: `0 0 ${size * 0.4}px ${color}66`,
+      }}
+    />
+  );
+};
+
+// Flowing money particles
+const MoneyFlow: React.FC<{ direction?: "left" | "right" }> = ({ direction = "right" }) => {
+  const frame = useCurrentFrame();
+  const particles = useMemo(() => {
+    return Array.from({ length: 15 }, (_, i) => ({
+      id: i,
+      y: 35 + (i % 5) * 10,
+      delay: i * 8,
+      speed: 0.3 + Math.random() * 0.3,
+    }));
+  }, []);
+
+  return (
+    <div style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, overflow: "hidden", pointerEvents: "none" }}>
+      {particles.map((p) => {
+        const x = ((frame * p.speed * (direction === "right" ? 1 : -1) + p.delay) % 120) - 10;
+        const opacity = Math.max(0, 1 - Math.abs(x - 50) / 60);
+        return (
+          <div
+            key={p.id}
+            style={{
+              position: "absolute",
+              left: direction === "right" ? `${x}%` : `${100 - x}%`,
+              top: `${p.y}%`,
+              fontSize: 14,
+              opacity: opacity * 0.6,
+            }}
+          >
+            💵
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+// Bank multiplier visualization
+const MultiplierBars: React.FC = () => {
+  const frame = useCurrentFrame();
+  const bars = [1, 3, 5, 7, 10];
+
+  return (
+    <div style={{ display: "flex", gap: 8, alignItems: "flex-end", justifyContent: "center", height: 100 }}>
+      {bars.map((val, i) => {
+        const height = interpolate(frame, [30 + i * 10, 60 + i * 10], [0, val * 8], {
+          extrapolateRight: "clamp",
+        });
+        const opacity = interpolate(frame, [30 + i * 10, 50 + i * 10], [0, 1]);
+        return (
+          <div
+            key={i}
+            style={{
+              width: 30,
+              height: height,
+              background: val === 10 ? "linear-gradient(180deg, #ef4444, #b91c1c)" : "linear-gradient(180deg, #3b82f6, #1d4ed8)",
+              borderRadius: 4,
+              opacity,
+              display: "flex",
+              alignItems: "flex-end",
+              justifyContent: "center",
+              paddingBottom: 5,
+            }}
+          >
+            <span style={{ color: "#fff", fontSize: 10, fontWeight: 600 }}>{val}x</span>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+// Glowing warning box
+const WarningBox: React.FC<{
+  children: React.ReactNode;
+  startFrame?: number;
+}> = ({ children, startFrame = 70 }) => {
+  const frame = useCurrentFrame();
+  const pulse = Math.sin((frame - startFrame) * 0.1) * 0.2 + 1;
+  const opacity = interpolate(frame, [startFrame, startFrame + 20], [0, 1]);
+
+  return (
+    <div
+      style={{
+        transform: `scale(${pulse})`,
+        opacity,
+        padding: "15px 25px",
+        background: "rgba(239, 68, 68, 0.15)",
+        borderRadius: 8,
+        border: "2px solid #ef4444",
+        boxShadow: "0 0 20px rgba(239, 68, 68, 0.3)",
+      }}
+    >
+      {children}
+    </div>
+  );
+};
 
 /**
  * Fractional Reserve Scene - 部分储备金体系
+ * Enhanced with richer animations
  */
 export const FractionalReserveScene: React.FC = () => {
   const frame = useCurrentFrame();
@@ -15,29 +177,51 @@ export const FractionalReserveScene: React.FC = () => {
   const goldScale = interpolate(frame, [20, 50], [0, 1]);
   const receiptScale = interpolate(frame, [40, 70], [0, 1]);
 
+  // Floating animation for elements
+  const float1 = Math.sin(frame * 0.05) * 5;
+  const float2 = Math.sin(frame * 0.05 + 1) * 5;
+  const float3 = Math.sin(frame * 0.05 + 2) * 5;
+
   return (
     <AbsoluteFill style={{ background: "linear-gradient(180deg, #1a1a2e 0%, #0d1117 100%)" }}>
+      {/* Animated background gradient */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          background: `radial-gradient(circle at ${50 + Math.sin(frame * 0.02) * 10}% ${50 + Math.cos(frame * 0.02) * 10}%, rgba(255,215,0,0.05) 0%, transparent 50%)`,
+        }}
+      />
+
+      {/* Money flow animation */}
+      <MoneyFlow direction="right" />
+
       {/* Title */}
       <div
         style={{
           position: "absolute",
-          top: "8%",
+          top: "5%",
           left: "50%",
           transform: "translateX(-50%)",
           color: "#ffd700",
           fontSize: 42,
           fontWeight: 700,
           opacity: titleOpacity,
+          textShadow: "0 0 20px rgba(255, 215, 0, 0.5)",
         }}
       >
-        Fractional Reserve Banking
+        <TypewriterText
+          text="Fractional Reserve Banking"
+          startFrame={0}
+          speed={5}
+        />
       </div>
 
       {/* Step 1: Gold deposit */}
       <div
         style={{
           position: "absolute",
-          top: "25%",
+          top: `calc(25% + ${float1}px)`,
           left: "25%",
           width: "22%",
           textAlign: "center",
@@ -55,7 +239,7 @@ export const FractionalReserveScene: React.FC = () => {
             alignItems: "center",
             justifyContent: "center",
             transform: `scale(${goldScale})`,
-            boxShadow: "0 0 20px rgba(251, 191, 36, 0.4)",
+            boxShadow: "0 0 30px rgba(251, 191, 36, 0.6)",
           }}
         >
           <span style={{ fontSize: 32, color: "#1a1a2e" }}>💰</span>
@@ -74,6 +258,7 @@ export const FractionalReserveScene: React.FC = () => {
           fontSize: 32,
           color: "#ffd700",
           opacity: goldOpacity,
+          animation: "pulse 1s infinite",
         }}
       >
         →
@@ -83,7 +268,7 @@ export const FractionalReserveScene: React.FC = () => {
       <div
         style={{
           position: "absolute",
-          top: "25%",
+          top: `calc(25% + ${float2}px)`,
           left: "50%",
           width: "22%",
           textAlign: "center",
@@ -101,7 +286,7 @@ export const FractionalReserveScene: React.FC = () => {
             alignItems: "center",
             justifyContent: "center",
             transform: `scale(${receiptScale})`,
-            boxShadow: "0 0 15px rgba(254, 252, 232, 0.3)",
+            boxShadow: "0 0 20px rgba(254, 252, 232, 0.5)",
           }}
         >
           <span style={{ fontSize: 14, color: "#1a1a2e" }}>Receipt</span>
@@ -129,7 +314,7 @@ export const FractionalReserveScene: React.FC = () => {
       <div
         style={{
           position: "absolute",
-          top: "25%",
+          top: `calc(25% + ${float3}px)`,
           left: "75%",
           width: "22%",
           textAlign: "center",
@@ -146,31 +331,53 @@ export const FractionalReserveScene: React.FC = () => {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
+            boxShadow: "0 0 30px rgba(239, 68, 68, 0.6)",
+            animation: "pulse 0.5s infinite",
           }}
         >
-          <span style={{ fontSize: 28, color: "#fff" }}>×10</span>
+          <span style={{ fontSize: 28, color: "#fff", fontWeight: 700 }}>×10</span>
         </div>
         <div style={{ fontSize: 14, color: "#e8e8e8", fontWeight: 600 }}>Step 3</div>
         <div style={{ fontSize: 12, color: "#ef4444" }}>Banks lend 10x!</div>
         <div style={{ fontSize: 11, color: "#6b7280", marginTop: 5 }}>银行借出10倍</div>
       </div>
 
-      {/* Key point */}
+      {/* Multiplier visualization */}
+      <div style={{ position: "absolute", top: "55%", left: "50%", transform: "translateX(-50%)", width: "60%" }}>
+        <MultiplierBars />
+      </div>
+
+      {/* Key point with animation */}
       <div
         style={{
           position: "absolute",
-          bottom: "10%",
+          bottom: "8%",
           left: "50%",
           transform: "translateX(-50%)",
           textAlign: "center",
-          opacity: interpolate(frame, [70, 100], [0, 1]),
         }}
       >
-        <div style={{ fontSize: 20, color: "#ffd700", fontWeight: 700 }}>Banks Create Money from Nothing!</div>
-        <div style={{ fontSize: 14, color: "#9ca3af", marginTop: 5 }}>
-          只要不多发得太过份，一般不会引起储户怀疑
-        </div>
+        <WarningBox>
+          <div style={{ fontSize: 22, color: "#ffd700", fontWeight: 700 }}>
+            Banks Create Money from Nothing!
+          </div>
+          <div style={{ fontSize: 14, color: "#9ca3af", marginTop: 8 }}>
+            只要不多发得太过份，一般不会引起储户怀疑
+          </div>
+        </WarningBox>
       </div>
+
+      {/* CSS animations */}
+      <style>{`
+        @keyframes pulse {
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50% { opacity: 0.7; transform: scale(1.1); }
+        }
+        @keyframes blink {
+          0%, 50% { opacity: 1; }
+          51%, 100% { opacity: 0; }
+        }
+      `}</style>
     </AbsoluteFill>
   );
 };

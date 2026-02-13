@@ -9,27 +9,28 @@ import { WarningScene } from "../components/scenes/WarningScene";
 import { ChinaAircraftCarrierScene } from "../components/scenes/ChinaAircraftCarrierScene";
 import { InvisibleBattlefieldScene } from "../components/scenes/InvisibleBattlefieldScene";
 import { HistoricalLessonsScene } from "../components/scenes/HistoricalLessonsScene";
-import { Subtitles, episode01Subtitles } from "../components/Subtitles";
+import { Subtitles } from "../components/Subtitles";
 import { Audio } from "../components/Audio";
 import { getEpisodeBGM } from "../utils/audioConfig";
+
+// 按Scene分离的字幕
+import {
+  ancientMarketSubs,
+  chinaRiseSubs,
+  invisibleBattlefieldSubs,
+  historicalLessonsSubs,
+  moneyEvolutionSubs,
+  historicalTimelineSubs,
+  debtSpiralSubs,
+  inflationSubs,
+  endingSubs,
+} from "../subtitles/episode01";
 
 /**
  * Episode01 - 第1集：序言 - 起航的中国经济航母
  *
- * 总时长：8分钟（480秒）
- *
- * 基于《货币战争》序言内容重新设计
- *
- * 场景序列：
- * 1. [0-30s] 开场 - 金币在阳光下，古代集市
- * 2. [30-90s] 中国崛起 - 经济航母起航
- * 3. [90-150s] 看不见的战场 - 金融战争的威胁
- * 4. [150-210s] 历史教训 - 苏联/亚洲/日本的案例
- * 5. [210-270s] 货币演变 - 金银→纸币收据→法币
- * 6. [270-330s] 时间线 - 标注关键年份
- * 7. [330-390s] 债务锁链 - 国债缠绕货币
- * 8. [390-450s] 通货膨胀 - 财像吞噬财富
- * 9. [450-480s] 结尾 - 对未来的警示与思考
+ * 场景字幕设计：
+ * - 每个Scene有自己的字幕，从第0帧开始
  */
 export const Episode01: React.FC = () => {
   const { fps } = useVideoConfig();
@@ -39,53 +40,60 @@ export const Episode01: React.FC = () => {
   return (
     <AbsoluteFill style={{ background: "#0d1117" }}>
       {bgm && <Audio {...bgm} />}
-      {/* 场景1: 古代集市 - 金币时代 (0-30s) */}
+
+      {/* Scene 1: Ancient Market (30s = 900帧) */}
       <Sequence durationInFrames={30 * fps}>
         <AncientMarketScene />
+        <Subtitles subtitles={ancientMarketSubs} />
       </Sequence>
 
-      {/* 场景2: 中国崛起 - 经济航母 (30-90s) */}
+      {/* Scene 2: China Rise (60s = 1800帧) */}
       <Sequence from={30 * fps} durationInFrames={60 * fps}>
         <ChinaAircraftCarrierScene />
+        <Subtitles subtitles={chinaRiseSubs} />
       </Sequence>
 
-      {/* 场景3: 看不见的战场 (90-150s) */}
+      {/* Scene 3: Invisible Battlefield (60s = 1800帧) */}
       <Sequence from={90 * fps} durationInFrames={60 * fps}>
         <InvisibleBattlefieldScene />
+        <Subtitles subtitles={invisibleBattlefieldSubs} />
       </Sequence>
 
-      {/* 场景4: 历史教训 (150-210s) */}
+      {/* Scene 4: Historical Lessons (60s = 1800帧) */}
       <Sequence from={150 * fps} durationInFrames={60 * fps}>
         <HistoricalLessonsScene />
+        <Subtitles subtitles={historicalLessonsSubs} />
       </Sequence>
 
-      {/* 场景5: 货币演变 (210-270s) */}
+      {/* Scene 5: Money Evolution (60s = 1800帧) */}
       <Sequence from={210 * fps} durationInFrames={60 * fps}>
         <MoneyEvolutionScene />
+        <Subtitles subtitles={moneyEvolutionSubs} />
       </Sequence>
 
-      {/* 场景6: 历史时间线 (270-330s) */}
+      {/* Scene 6: Historical Timeline (60s = 1800帧) */}
       <Sequence from={270 * fps} durationInFrames={60 * fps}>
         <TimelineScene />
+        <Subtitles subtitles={historicalTimelineSubs} />
       </Sequence>
 
-      {/* 场景7: 债务螺旋 (330-390s) */}
+      {/* Scene 7: Debt Spiral (60s = 1800帧) */}
       <Sequence from={330 * fps} durationInFrames={60 * fps}>
         <DebtSpiralScene />
+        <Subtitles subtitles={debtSpiralSubs} />
       </Sequence>
 
-      {/* 场景8: 通货膨胀 (390-450s) */}
+      {/* Scene 8: Inflation (60s = 1800帧) */}
       <Sequence from={390 * fps} durationInFrames={60 * fps}>
         <InflationScene />
+        <Subtitles subtitles={inflationSubs} />
       </Sequence>
 
-      {/* 场景9: 结尾警示 (450-480s) */}
+      {/* Scene 9: Ending (30s = 900帧) */}
       <Sequence from={450 * fps} durationInFrames={30 * fps}>
         <WarningScene />
+        <Subtitles subtitles={endingSubs} />
       </Sequence>
-
-      {/* 字幕层 - 覆盖整个视频 */}
-      <Subtitles subtitles={episode01Subtitles} />
     </AbsoluteFill>
   );
 };
