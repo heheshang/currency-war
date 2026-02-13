@@ -13,7 +13,12 @@ import { AbsoluteFill, useCurrentFrame, interpolate, spring } from "remotion";
  */
 
 // Typewriter effect
-const getVisibleText = (text: string, frame: number, startFrame: number, speed: number = 2): string => {
+const getVisibleText = (
+  text: string,
+  frame: number,
+  startFrame: number,
+  speed: number = 2,
+): string => {
   const progress = Math.max(0, frame - startFrame) / speed;
   const charCount = Math.floor(progress);
   return text.slice(0, charCount);
@@ -22,7 +27,12 @@ const getVisibleText = (text: string, frame: number, startFrame: number, speed: 
 // NEW: Tree roots spreading effect
 const TreeRoots: React.FC<{ frame: number }> = ({ frame }) => {
   const roots = Array.from({ length: 5 }).map((_, i) => {
-    const length = interpolate(frame, [30 + i * 10, 70 + i * 10], [0, 30 + i * 10], { extrapolateRight: "clamp" });
+    const length = interpolate(
+      frame,
+      [30 + i * 10, 70 + i * 10],
+      [0, 30 + i * 10],
+      { extrapolateRight: "clamp" },
+    );
     const opacity = interpolate(frame, [30 + i * 10, 50 + i * 10], [0, 0.4]);
     return { length, opacity, angle: -30 + i * 15 };
   });
@@ -48,7 +58,8 @@ const TreeRoots: React.FC<{ frame: number }> = ({ frame }) => {
             left: "50%",
             width: 3,
             height: r.length,
-            background: "linear-gradient(180deg, rgba(34, 197, 94, 0.5), rgba(21, 128, 61, 0.3))",
+            background:
+              "linear-gradient(180deg, rgba(34, 197, 94, 0.5), rgba(21, 128, 61, 0.3))",
             transformOrigin: "bottom center",
             transform: `translateX(-50%) rotate(${r.angle}deg)`,
             opacity: r.opacity,
@@ -78,9 +89,30 @@ const LeafRadar: React.FC<{ frame: number }> = ({ frame }) => {
       }}
     >
       <svg width="200" height="200" viewBox="0 0 200 200">
-        <circle cx="100" cy="100" r="90" fill="none" stroke="rgba(34, 197, 94, 0.1)" strokeWidth="1" />
-        <circle cx="100" cy="100" r="60" fill="none" stroke="rgba(34, 197, 94, 0.1)" strokeWidth="1" />
-        <circle cx="100" cy="100" r="30" fill="none" stroke="rgba(34, 197, 94, 0.1)" strokeWidth="1" />
+        <circle
+          cx="100"
+          cy="100"
+          r="90"
+          fill="none"
+          stroke="rgba(34, 197, 94, 0.1)"
+          strokeWidth="1"
+        />
+        <circle
+          cx="100"
+          cy="100"
+          r="60"
+          fill="none"
+          stroke="rgba(34, 197, 94, 0.1)"
+          strokeWidth="1"
+        />
+        <circle
+          cx="100"
+          cy="100"
+          r="30"
+          fill="none"
+          stroke="rgba(34, 197, 94, 0.1)"
+          strokeWidth="1"
+        />
         <line
           x1="100"
           y1="100"
@@ -97,13 +129,22 @@ const LeafRadar: React.FC<{ frame: number }> = ({ frame }) => {
 // NEW: Nature reclaiming effect
 const NatureReclaim: React.FC<{ frame: number }> = ({ frame }) => {
   const cracks = Array.from({ length: 6 }).map((_, i) => {
-    const progress = interpolate(frame, [40 + i * 8, 80 + i * 8], [0, 100], { extrapolateRight: "clamp" });
+    const progress = interpolate(frame, [40 + i * 8, 80 + i * 8], [0, 100], {
+      extrapolateRight: "clamp",
+    });
     const opacity = interpolate(frame, [50 + i * 8, 70 + i * 8], [0, 0.3, 0]);
     return { progress, opacity };
   });
 
   return (
-    <div style={{ position: "absolute", inset: 0, overflow: "hidden", opacity: 0.4 }}>
+    <div
+      style={{
+        position: "absolute",
+        inset: 0,
+        overflow: "hidden",
+        opacity: 0.4,
+      }}
+    >
       {cracks.map((c, i) => (
         <div
           key={i}
@@ -113,7 +154,8 @@ const NatureReclaim: React.FC<{ frame: number }> = ({ frame }) => {
             left: `${10 + i * 15}%`,
             width: 2,
             height: `${c.progress}%`,
-            background: "linear-gradient(180deg, transparent, rgba(34, 197, 94, 0.3))",
+            background:
+              "linear-gradient(180deg, transparent, rgba(34, 197, 94, 0.3))",
             opacity: c.opacity,
           }}
         />
@@ -125,20 +167,36 @@ const NatureReclaim: React.FC<{ frame: number }> = ({ frame }) => {
 export const EnvBankScene: React.FC = () => {
   const frame = useCurrentFrame();
 
-  const titleOpacity = interpolate(frame, [0, 20], [0, 1], { extrapolateRight: "clamp" });
-  const earthOpacity = interpolate(frame, [15, 45], [0, 1], { extrapolateRight: "clamp" });
-  const conceptOpacity = interpolate(frame, [30, 70], [0, 1], { extrapolateRight: "clamp" });
-  const targetOpacity = interpolate(frame, [50, 90], [0, 1], { extrapolateRight: "clamp" });
+  const titleOpacity = interpolate(frame, [0, 20], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const earthOpacity = interpolate(frame, [15, 45], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const conceptOpacity = interpolate(frame, [30, 70], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const targetOpacity = interpolate(frame, [50, 90], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   // Spring animations
-  const earthScale = spring({ frame, from: 0, to: 1, damping: 12 });
+  const earthScale = spring({
+    frame,
+    fps: 30,
+    from: 0,
+    to: 1,
+    config: { damping: 12 },
+  });
   const earthRotate = interpolate(frame, [15, 60], [0, 360]);
 
   // Glow pulse
   const glowPulse = interpolate(Math.sin(frame * 0.08), [-1, 1], [0.5, 1]);
 
   // Target counter animation
-  const targetValue = interpolate(frame, [55, 85], [0, 50], { extrapolateRight: "clamp" });
+  const targetValue = interpolate(frame, [55, 85], [0, 50], {
+    extrapolateRight: "clamp",
+  });
 
   // Leaf particles floating
   const leaves = Array.from({ length: 8 }).map((_, i) => {
@@ -148,7 +206,11 @@ export const EnvBankScene: React.FC = () => {
   });
 
   return (
-    <AbsoluteFill style={{ background: "linear-gradient(180deg, #1a2f1a 0%, #0d1117 100%)" }}>
+    <AbsoluteFill
+      style={{
+        background: "linear-gradient(180deg, #1a2f1a 0%, #0d1117 100%)",
+      }}
+    >
       {/* NEW: Tree roots */}
       <TreeRoots frame={frame} />
 
@@ -168,7 +230,8 @@ export const EnvBankScene: React.FC = () => {
             left: `${10 + i * 12}%`,
             width: 20,
             height: 20,
-            background: i % 2 === 0 ? "rgba(34, 197, 94, 0.2)" : "rgba(21, 128, 61, 0.2)",
+            background:
+              i % 2 === 0 ? "rgba(34, 197, 94, 0.2)" : "rgba(21, 128, 61, 0.2)",
             borderRadius: "50% 0 50% 0",
             transform: `rotate(${leaf.rotation}deg)`,
             opacity: earthOpacity * 0.5,
@@ -265,7 +328,9 @@ export const EnvBankScene: React.FC = () => {
           opacity: targetOpacity,
         }}
       >
-        <div style={{ fontSize: 16, color: "#9ca3af", marginBottom: 10 }}>Target Areas:</div>
+        <div style={{ fontSize: 16, color: "#9ca3af", marginBottom: 10 }}>
+          Target Areas:
+        </div>
         <div
           style={{
             fontSize: 48,

@@ -109,10 +109,6 @@ export const EndingScene: React.FC = () => {
   const titleOpacity = interpolate(frame, [0, 20], [0, 1]);
   const titleScale = interpolate(frame, [0, 20], [0.8, 1]);
 
-  // Divider animation
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const dividerOpacity = interpolate(frame, [15, 35], [0, 1]);
-
   // Content items (staggered)
   const contentOpacity = interpolate(frame, [20, 50], [0, 1]);
 

@@ -1,26 +1,5 @@
 import React, { useMemo } from "react";
-import { AbsoluteFill, useCurrentFrame, interpolate, spring } from "remotion";
-
-// Animated number counter with spring
-const AnimatedCounter: React.FC<{
-  value: number;
-  startFrame: number;
-  duration?: number;
-  prefix?: string;
-  suffix?: string;
-  decimals?: number;
-  style?: React.CSSProperties;
-}> = ({ value, startFrame, duration = 60, prefix = "", suffix = "", decimals = 0, style }) => {
-  const frame = useCurrentFrame();
-  const progress = Math.max(0, Math.min(1, (frame - startFrame) / duration));
-  const animatedValue = spring({ value: progress * value, fps: 30, damping: 15 });
-
-  return (
-    <span style={style}>
-      {prefix}{animatedValue.toFixed(decimals)}{suffix}
-    </span>
-  );
-};
+import { AbsoluteFill, useCurrentFrame, interpolate } from "remotion";
 
 // Typewriter text component
 const TypewriterText: React.FC<{
@@ -47,7 +26,9 @@ const DebtRisingRiver: React.FC = () => {
   const frame = useCurrentFrame();
 
   // River rises from 0 to full
-  const riverHeight = interpolate(frame, [30, 90], [0, 350], { extrapolateRight: "clamp" });
+  const riverHeight = interpolate(frame, [30, 90], [0, 350], {
+    extrapolateRight: "clamp",
+  });
 
   // Wave animation
   const waveOffset = frame * 0.5;
@@ -60,7 +41,15 @@ const DebtRisingRiver: React.FC = () => {
   ];
 
   return (
-    <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "70%" }}>
+    <div
+      style={{
+        position: "absolute",
+        bottom: 0,
+        left: 0,
+        right: 0,
+        height: "70%",
+      }}
+    >
       {/* Water body */}
       <div
         style={{
@@ -70,7 +59,8 @@ const DebtRisingRiver: React.FC = () => {
           transform: `translateX(-50%)`,
           width: "70%",
           height: riverHeight,
-          background: "linear-gradient(180deg, #dc2626 0%, #7f1d1d 50%, #450a0a 100%)",
+          background:
+            "linear-gradient(180deg, #dc2626 0%, #7f1d1d 50%, #450a0a 100%)",
           borderTopLeftRadius: 30,
           borderTopRightRadius: 30,
           overflow: "hidden",
@@ -111,7 +101,9 @@ const DebtRisingRiver: React.FC = () => {
             opacity: riverHeight > m.level ? 1 : 0,
           }}
         >
-          <span style={{ color: m.color, fontSize: 12, fontWeight: 600 }}>{m.label}</span>
+          <span style={{ color: m.color, fontSize: 12, fontWeight: 600 }}>
+            {m.label}
+          </span>
         </div>
       ))}
     </div>
@@ -121,7 +113,8 @@ const DebtRisingRiver: React.FC = () => {
 // Pulsing warning
 const PulsingWarning: React.FC<{
   startFrame?: number;
-}> = ({ startFrame = 50 }) => {
+  children: React.ReactNode;
+}> = ({ startFrame = 50, children }) => {
   const frame = useCurrentFrame();
   const opacity = interpolate(frame, [startFrame, startFrame + 20], [0, 1]);
   const pulse = Math.sin((frame - startFrame) * 0.15) * 0.2 + 1;
@@ -157,16 +150,29 @@ const CountUpNumber: React.FC<{
   duration?: number;
   color?: string;
   fontSize?: number;
-}> = ({ targetValue, prefix = "", suffix = "", startFrame, duration = 60, color = "#fff", fontSize = 36 }) => {
+}> = ({
+  targetValue,
+  prefix = "",
+  suffix = "",
+  startFrame,
+  duration = 60,
+  color = "#fff",
+  fontSize = 36,
+}) => {
   const frame = useCurrentFrame();
 
-  const displayValue = Math.min(targetValue, interpolate(frame, [startFrame, startFrame + duration], [0, targetValue], {
-    extrapolateRight: "clamp",
-  }));
+  const displayValue = Math.min(
+    targetValue,
+    interpolate(frame, [startFrame, startFrame + duration], [0, targetValue], {
+      extrapolateRight: "clamp",
+    }),
+  );
 
   return (
     <span style={{ color, fontSize, fontWeight: 700 }}>
-      {prefix}{displayValue.toFixed(0)}{suffix}
+      {prefix}
+      {displayValue.toFixed(0)}
+      {suffix}
     </span>
   );
 };
@@ -185,7 +191,14 @@ const DebtParticles: React.FC = () => {
   }, []);
 
   return (
-    <div style={{ position: "absolute", inset: 0, overflow: "hidden", pointerEvents: "none" }}>
+    <div
+      style={{
+        position: "absolute",
+        inset: 0,
+        overflow: "hidden",
+        pointerEvents: "none",
+      }}
+    >
       {particles.map((p) => {
         const y = ((frame * p.speed) % 120) - 10;
         const opacity = Math.sin(frame * 0.05 + p.id) * 0.3 + 0.5;
@@ -222,7 +235,11 @@ export const DebtRiverScene: React.FC = () => {
   const shake = frame > 80 ? Math.sin(frame * 0.5) * 3 : 0;
 
   return (
-    <AbsoluteFill style={{ background: "linear-gradient(180deg, #1f1f1f 0%, #0d0d0d 100%)" }}>
+    <AbsoluteFill
+      style={{
+        background: "linear-gradient(180deg, #1f1f1f 0%, #0d0d0d 100%)",
+      }}
+    >
       {/* Floating particles */}
       <DebtParticles />
 
@@ -271,12 +288,14 @@ export const DebtRiverScene: React.FC = () => {
           zIndex: 10,
         }}
       >
-        <div style={{
-          fontSize: 48,
-          color: "#fff",
-          fontWeight: 700,
-          textShadow: "0 0 30px rgba(220, 38, 38, 0.8)",
-        }}>
+        <div
+          style={{
+            fontSize: 48,
+            color: "#fff",
+            fontWeight: 700,
+            textShadow: "0 0 30px rgba(220, 38, 38, 0.8)",
+          }}
+        >
           <CountUpNumber
             targetValue={44}
             prefix="$"
@@ -287,7 +306,9 @@ export const DebtRiverScene: React.FC = () => {
             fontSize={48}
           />
         </div>
-        <div style={{ fontSize: 14, color: "rgba(255,255,255,0.8)", marginTop: 5 }}>
+        <div
+          style={{ fontSize: 14, color: "rgba(255,255,255,0.8)", marginTop: 5 }}
+        >
           Total US Debt by 2006
         </div>
       </div>
@@ -314,7 +335,9 @@ export const DebtRiverScene: React.FC = () => {
             fontSize={28}
           />
         </div>
-        <div style={{ fontSize: 14, color: "#9ca3af", marginTop: 5 }}>每个美国人承担</div>
+        <div style={{ fontSize: 14, color: "#9ca3af", marginTop: 5 }}>
+          每个美国人承担
+        </div>
       </div>
 
       {/* Warning - appears later */}
@@ -327,7 +350,9 @@ export const DebtRiverScene: React.FC = () => {
         }}
       >
         <PulsingWarning startFrame={80}>
-          <div style={{ fontSize: 20, color: "#ef4444", fontWeight: 700 }}>Debt Can Never Be Repaid!</div>
+          <div style={{ fontSize: 20, color: "#ef4444", fontWeight: 700 }}>
+            Debt Can Never Be Repaid!
+          </div>
           <div style={{ fontSize: 14, color: "#9ca3af", marginTop: 8 }}>
             债务永远无法偿还！因为还债需要更多债务
           </div>

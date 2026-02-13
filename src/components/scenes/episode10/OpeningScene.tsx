@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { AbsoluteFill, useCurrentFrame, interpolate, spring } from "remotion";
+import { AbsoluteFill, useCurrentFrame, interpolate } from "remotion";
 
 // Static star positions with animation delay
 const STAR_POSITIONS = [
@@ -43,27 +43,6 @@ const TypewriterText: React.FC<{
   );
 };
 
-// Animated number counter
-const AnimatedNumber: React.FC<{
-  value: number;
-  startFrame: number;
-  duration?: number;
-  prefix?: string;
-  suffix?: string;
-  decimals?: number;
-  style?: React.CSSProperties;
-}> = ({ value, startFrame, duration = 60, prefix = "", suffix = "", decimals = 0, style }) => {
-  const frame = useCurrentFrame();
-  const progress = Math.max(0, Math.min(1, (frame - startFrame) / duration));
-  const animatedValue = spring({ value: progress * value, fps: 30, damping: 15 });
-
-  return (
-    <span style={style}>
-      {prefix}{animatedValue.toFixed(decimals)}{suffix}
-    </span>
-  );
-};
-
 // Gold particle effect
 const GoldParticles: React.FC<{ count?: number }> = ({ count = 20 }) => {
   const frame = useCurrentFrame();
@@ -82,7 +61,7 @@ const GoldParticles: React.FC<{ count?: number }> = ({ count = 20 }) => {
   return (
     <div style={{ position: "absolute", inset: 0, overflow: "hidden" }}>
       {particles.map((p) => {
-        const y = ((frame * p.speed + p.delay) % 100);
+        const y = (frame * p.speed + p.delay) % 100;
         const opacity = Math.sin((frame + p.delay) * 0.1) * 0.3 + 0.4;
         return (
           <div
@@ -137,11 +116,7 @@ const ShakingText: React.FC<{
   const frame = useCurrentFrame();
   const shake = frame > startFrame ? Math.sin(frame * 0.5) * intensity : 0;
 
-  return (
-    <div style={{ transform: `translateX(${shake}px)` }}>
-      {children}
-    </div>
-  );
+  return <div style={{ transform: `translateX(${shake}px)` }}>{children}</div>;
 };
 
 // Floating animation
@@ -153,11 +128,7 @@ const FloatingElement: React.FC<{
   const frame = useCurrentFrame();
   const offset = Math.sin(frame * speed) * amplitude;
 
-  return (
-    <div style={{ transform: `translateY(${offset}px)` }}>
-      {children}
-    </div>
-  );
+  return <div style={{ transform: `translateY(${offset}px)` }}>{children}</div>;
 };
 
 /**
@@ -168,11 +139,7 @@ export const OpeningScene: React.FC = () => {
   const frame = useCurrentFrame();
 
   // Background gradient animation
-  const gradientShift = interpolate(
-    Math.sin(frame * 0.02),
-    [-1, 1],
-    [0, 30]
-  );
+  const gradientShift = interpolate(Math.sin(frame * 0.02), [-1, 1], [0, 30]);
 
   const titleOpacity = interpolate(frame, [0, 30], [0, 1]);
   const subtitleOpacity = interpolate(frame, [20, 50], [0, 1]);
@@ -183,14 +150,16 @@ export const OpeningScene: React.FC = () => {
   const titleShake = frame > 60 ? Math.sin(frame * 0.3) * 2 : 0;
 
   return (
-    <AbsoluteFill style={{
-      background: `linear-gradient(180deg,
+    <AbsoluteFill
+      style={{
+        background: `linear-gradient(180deg,
         #0d1117 0%,
         #1a1a2e ${20 + gradientShift}%,
         #0d1117 50%,
         #1a1a2e ${80 - gradientShift}%,
-        #0d1117 100%)`
-    }}>
+        #0d1117 100%)`,
+      }}
+    >
       {/* Background gold particles */}
       <GoldParticles count={25} />
 
@@ -229,7 +198,8 @@ export const OpeningScene: React.FC = () => {
           fontSize: 56,
           fontWeight: 700,
           opacity: titleOpacity,
-          textShadow: "0 0 30px rgba(255, 215, 0, 0.5), 0 0 60px rgba(255, 215, 0, 0.3)",
+          textShadow:
+            "0 0 30px rgba(255, 215, 0, 0.5), 0 0 60px rgba(255, 215, 0, 0.3)",
         }}
       >
         <PulsingGlow color="#ffd700" intensity={1.2}>
@@ -296,12 +266,12 @@ export const OpeningScene: React.FC = () => {
         </div>
         <div style={{ marginBottom: 15 }}>
           <ShakingText intensity={frame > 100 ? 2 : 0} startFrame={100}>
-            <span style={{ color: "#ef4444" }}>美元在债务产生的同时被创造出来，在债务偿还的同时被销毁。</span>
+            <span style={{ color: "#ef4444" }}>
+              美元在债务产生的同时被创造出来，在债务偿还的同时被销毁。
+            </span>
           </ShakingText>
         </div>
-        <div>
-          流通中的每一个美元，都是一张债务欠条。
-        </div>
+        <div>流通中的每一个美元，都是一张债务欠条。</div>
       </div>
 
       {/* Footer */}

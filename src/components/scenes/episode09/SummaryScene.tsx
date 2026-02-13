@@ -33,7 +33,14 @@ const ClockTicking: React.FC<{ frame: number }> = ({ frame }) => {
     >
       <svg width="60" height="60" viewBox="0 0 60 60">
         {/* Clock face */}
-        <circle cx="30" cy="30" r="25" fill="none" stroke="rgba(255, 215, 0, 0.2)" strokeWidth="1" />
+        <circle
+          cx="30"
+          cy="30"
+          r="25"
+          fill="none"
+          stroke="rgba(255, 215, 0, 0.2)"
+          strokeWidth="1"
+        />
         {/* Hour hand */}
         <line
           x1="30"
@@ -102,7 +109,11 @@ const EchoRings: React.FC<{ frame: number }> = ({ frame }) => {
   const rings = [0, 1, 2].map((i) => {
     const delay = i * 20;
     const scale = interpolate((frame + delay) % 100, [0, 100], [0.5, 2]);
-    const opacity = interpolate((frame + delay) % 100, [0, 50, 100], [0, 0.2, 0]);
+    const opacity = interpolate(
+      (frame + delay) % 100,
+      [0, 50, 100],
+      [0, 0.2, 0],
+    );
 
     return { scale, opacity };
   });
@@ -138,25 +149,55 @@ const EchoRings: React.FC<{ frame: number }> = ({ frame }) => {
 };
 
 const SUMMARY_ITEMS = [
-  { icon: "$", text: "美元通过1973年石油危机起死回生", color: "#ffd700", en: "USD revived via 1973 oil crisis" },
-  { icon: "!", text: "'有控制的解体'策略重创第三世界", color: "#ef4444", en: "'Controlled Disintegration' devastated Third World" },
-  { icon: "!", text: "日本泡沫经济被蓄意刺破", color: "#fbbf24", en: "Japan bubble deliberately burst" },
-  { icon: "!", text: "亚洲金融危机全面爆发", color: "#ef4444", en: "Asian Financial Crisis erupted" },
+  {
+    icon: "$",
+    text: "美元通过1973年石油危机起死回生",
+    color: "#ffd700",
+    en: "USD revived via 1973 oil crisis",
+  },
+  {
+    icon: "!",
+    text: "'有控制的解体'策略重创第三世界",
+    color: "#ef4444",
+    en: "'Controlled Disintegration' devastated Third World",
+  },
+  {
+    icon: "!",
+    text: "日本泡沫经济被蓄意刺破",
+    color: "#fbbf24",
+    en: "Japan bubble deliberately burst",
+  },
+  {
+    icon: "!",
+    text: "亚洲金融危机全面爆发",
+    color: "#ef4444",
+    en: "Asian Financial Crisis erupted",
+  },
 ];
 
 export const SummaryScene: React.FC = () => {
   const frame = useCurrentFrame();
 
-  const titleOpacity = interpolate(frame, [0, 20], [0, 1], { extrapolateRight: "clamp" });
-  const itemsOpacity = interpolate(frame, [15, 60], [0, 1], { extrapolateRight: "clamp" });
-  const footerOpacity = interpolate(frame, [70, 110], [0, 1], { extrapolateRight: "clamp" });
-  const reflectionOpacity = interpolate(frame, [90, 120], [0, 1], { extrapolateRight: "clamp" });
+  const titleOpacity = interpolate(frame, [0, 20], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const itemsOpacity = interpolate(frame, [15, 60], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const footerOpacity = interpolate(frame, [70, 110], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const reflectionOpacity = interpolate(frame, [90, 120], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   // Item stagger animation
   const getItemAnimation = (index: number) => {
     const startFrame = 20 + index * 15;
     return {
-      opacity: interpolate(frame, [startFrame, startFrame + 20], [0, 1], { extrapolateRight: "clamp" }),
+      opacity: interpolate(frame, [startFrame, startFrame + 20], [0, 1], {
+        extrapolateRight: "clamp",
+      }),
       slide: interpolate(frame, [startFrame, startFrame + 20], [30, 0]),
     };
   };
@@ -165,10 +206,21 @@ export const SummaryScene: React.FC = () => {
   const pulse = interpolate(Math.sin(frame * 0.08), [-1, 1], [0.95, 1.05]);
 
   // Title scale
-  const titleScale = spring({ frame, from: 0.8, to: 1, damping: 15 });
+  const titleScale = spring({
+    frame,
+    fps: 30,
+    from: 0.8,
+    to: 1,
+    config: { damping: 15 },
+  });
 
   return (
-    <AbsoluteFill style={{ background: "radial-gradient(circle at center, #2d1f1f 0%, #0d0d0d 100%)" }}>
+    <AbsoluteFill
+      style={{
+        background:
+          "radial-gradient(circle at center, #2d1f1f 0%, #0d0d0d 100%)",
+      }}
+    >
       {/* NEW: Clock ticking */}
       <ClockTicking frame={frame} />
 
@@ -184,7 +236,8 @@ export const SummaryScene: React.FC = () => {
           position: "absolute",
           inset: 0,
           transform: `scale(${pulse})`,
-          background: "radial-gradient(ellipse at center, rgba(255, 215, 0, 0.03) 0%, transparent 60%)",
+          background:
+            "radial-gradient(ellipse at center, rgba(255, 215, 0, 0.03) 0%, transparent 60%)",
         }}
       />
 
@@ -196,7 +249,8 @@ export const SummaryScene: React.FC = () => {
           left: "15%",
           width: "70%",
           height: 2,
-          background: "linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), transparent)",
+          background:
+            "linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), transparent)",
           opacity: itemsOpacity * 0.5,
         }}
       />
@@ -256,7 +310,9 @@ export const SummaryScene: React.FC = () => {
               >
                 {item.icon}
               </span>
-              <span style={{ fontSize: 16, color: item.color }}>{item.text}</span>
+              <span style={{ fontSize: 16, color: item.color }}>
+                {item.text}
+              </span>
             </div>
           );
         })}
@@ -273,8 +329,12 @@ export const SummaryScene: React.FC = () => {
           opacity: footerOpacity,
         }}
       >
-        <div style={{ fontSize: 32, color: "#ffd700", fontWeight: 700 }}>Currency War</div>
-        <div style={{ fontSize: 16, color: "#9ca3af", marginTop: 5 }}>Episode 9 of 11</div>
+        <div style={{ fontSize: 32, color: "#ffd700", fontWeight: 700 }}>
+          Currency War
+        </div>
+        <div style={{ fontSize: 16, color: "#9ca3af", marginTop: 5 }}>
+          Episode 9 of 11
+        </div>
       </div>
 
       {/* Reflection/ThoughtProvoking */}

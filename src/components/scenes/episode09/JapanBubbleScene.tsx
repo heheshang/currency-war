@@ -13,14 +13,24 @@ import { AbsoluteFill, useCurrentFrame, interpolate, spring } from "remotion";
  */
 
 // Typewriter effect
-const getVisibleText = (text: string, frame: number, startFrame: number, speed: number = 2): string => {
+const getVisibleText = (
+  text: string,
+  frame: number,
+  startFrame: number,
+  speed: number = 2,
+): string => {
   const progress = Math.max(0, frame - startFrame) / speed;
   const charCount = Math.floor(progress);
   return text.slice(0, charCount);
 };
 
 // Number counter
-const useCounterAnimation = (target: number, frame: number, startFrame: number, duration: number = 25): string => {
+const useCounterAnimation = (
+  target: number,
+  frame: number,
+  startFrame: number,
+  duration: number = 25,
+): string => {
   const progress = Math.max(0, Math.min(1, (frame - startFrame) / duration));
   const eased = 1 - Math.pow(1 - progress, 3);
   return Math.floor(target * eased).toString();
@@ -29,13 +39,23 @@ const useCounterAnimation = (target: number, frame: number, startFrame: number, 
 // NEW: Crack spreading effect
 const BubbleCracks: React.FC<{ frame: number }> = ({ frame }) => {
   const cracks = Array.from({ length: 8 }).map((_, i) => {
-    const progress = interpolate(frame, [60 + i * 5, 90], [0, 100], { extrapolateRight: "clamp" });
+    const progress = interpolate(frame, [60 + i * 5, 90], [0, 100], {
+      extrapolateRight: "clamp",
+    });
     const opacity = interpolate(frame, [60 + i * 5, 75], [0, 0.6, 0]);
     return { progress, opacity, angle: i * 45 };
   });
 
   return (
-    <div style={{ position: "absolute", top: "45%", left: "50%", transform: "translate(-50%, -50%)", pointerEvents: "none" }}>
+    <div
+      style={{
+        position: "absolute",
+        top: "45%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+        pointerEvents: "none",
+      }}
+    >
       {cracks.map((c, i) => (
         <div
           key={i}
@@ -60,13 +80,24 @@ const BubbleCracks: React.FC<{ frame: number }> = ({ frame }) => {
 const FallingParticles: React.FC<{ frame: number }> = ({ frame }) => {
   const particles = Array.from({ length: 12 }).map((_, i) => {
     const y = interpolate((frame + i * 10) % 80, [0, 80], [0, 40]);
-    const x = 20 + (i * 7) % 60;
-    const opacity = interpolate((frame + i * 10) % 80, [0, 40, 80], [0, 0.5, 0]);
+    const x = 20 + ((i * 7) % 60);
+    const opacity = interpolate(
+      (frame + i * 10) % 80,
+      [0, 40, 80],
+      [0, 0.5, 0],
+    );
     return { y, x, opacity };
   });
 
   return (
-    <div style={{ position: "absolute", inset: 0, overflow: "hidden", opacity: 0.5 }}>
+    <div
+      style={{
+        position: "absolute",
+        inset: 0,
+        overflow: "hidden",
+        opacity: 0.5,
+      }}
+    >
       {particles.map((p, i) => (
         <div
           key={i}
@@ -76,7 +107,8 @@ const FallingParticles: React.FC<{ frame: number }> = ({ frame }) => {
             left: `${p.x}%`,
             width: 3,
             height: 8,
-            background: i % 2 === 0 ? "rgba(255, 215, 0, 0.4)" : "rgba(239, 68, 68, 0.4)",
+            background:
+              i % 2 === 0 ? "rgba(255, 215, 0, 0.4)" : "rgba(239, 68, 68, 0.4)",
             transform: "rotate(15deg)",
             opacity: p.opacity,
           }}
@@ -131,7 +163,10 @@ const TokyoSkyline: React.FC<{ frame: number }> = ({ frame }) => {
                 left: "20%",
                 width: "60%",
                 height: 4,
-                background: j % 3 === 0 ? "rgba(255, 215, 0, 0.3)" : "rgba(100, 100, 150, 0.2)",
+                background:
+                  j % 3 === 0
+                    ? "rgba(255, 215, 0, 0.3)"
+                    : "rgba(100, 100, 150, 0.2)",
               }}
             />
           ))}
@@ -144,14 +179,32 @@ const TokyoSkyline: React.FC<{ frame: number }> = ({ frame }) => {
 export const JapanBubbleScene: React.FC = () => {
   const frame = useCurrentFrame();
 
-  const titleOpacity = interpolate(frame, [0, 20], [0, 1], { extrapolateRight: "clamp" });
-  const plazaOpacity = interpolate(frame, [15, 45], [0, 1], { extrapolateRight: "clamp" });
-  const bubbleOpacity = interpolate(frame, [30, 70], [0, 1], { extrapolateRight: "clamp" });
-  const numbersOpacity = interpolate(frame, [50, 90], [0, 1], { extrapolateRight: "clamp" });
+  const titleOpacity = interpolate(frame, [0, 20], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const plazaOpacity = interpolate(frame, [15, 45], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const bubbleOpacity = interpolate(frame, [30, 70], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const numbersOpacity = interpolate(frame, [50, 90], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   // Spring animations
-  const bubbleScale = spring({ frame: frame - 30, from: 0, to: 1.5, damping: 10 });
-  const bubbleWobble = interpolate(Math.sin(frame * 0.15), [-1, 1], [-0.05, 0.05]);
+  const bubbleScale = spring({
+    frame: frame - 30,
+    fps: 30,
+    from: 0,
+    to: 1.5,
+    config: { damping: 10 },
+  });
+  const bubbleWobble = interpolate(
+    Math.sin(frame * 0.15),
+    [-1, 1],
+    [-0.05, 0.05],
+  );
 
   // Counter animations
   const stockValue = useCounterAnimation(300, frame, 55, 20);
@@ -167,7 +220,11 @@ export const JapanBubbleScene: React.FC = () => {
   });
 
   return (
-    <AbsoluteFill style={{ background: "linear-gradient(180deg, #0d1117 0%, #1a1a2e 100%)" }}>
+    <AbsoluteFill
+      style={{
+        background: "linear-gradient(180deg, #0d1117 0%, #1a1a2e 100%)",
+      }}
+    >
       {/* NEW: Falling particles */}
       <FallingParticles frame={frame} />
 

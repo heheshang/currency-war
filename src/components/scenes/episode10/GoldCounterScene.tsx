@@ -10,14 +10,28 @@ const AnimatedCounter: React.FC<{
   suffix?: string;
   decimals?: number;
   style?: React.CSSProperties;
-}> = ({ value, startFrame, duration = 60, prefix = "", suffix = "", decimals = 0, style }) => {
+}> = ({
+  value,
+  startFrame,
+  duration = 60,
+  prefix = "",
+  suffix = "",
+  decimals = 0,
+  style,
+}) => {
   const frame = useCurrentFrame();
   const progress = Math.max(0, Math.min(1, (frame - startFrame) / duration));
-  const animatedValue = spring({ value: progress * value, fps: 30, damping: 15 });
+  const animatedValue = spring({
+    frame: progress * 60,
+    fps: 30,
+    config: { damping: 15 },
+  });
 
   return (
     <span style={style}>
-      {prefix}{animatedValue.toFixed(decimals)}{suffix}
+      {prefix}
+      {animatedValue.toFixed(decimals)}
+      {suffix}
     </span>
   );
 };
@@ -50,14 +64,19 @@ const FlowingArrows: React.FC<{
   const frame = useCurrentFrame();
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+    <div
+      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+    >
       {Array.from({ length: count }, (_, i) => (
         <div
           key={i}
           style={{
             fontSize: 20,
             color: direction === "down" ? "#ef4444" : "#4ade80",
-            opacity: Math.max(0, 1 - Math.abs((frame * 0.1 + i) % count) / count),
+            opacity: Math.max(
+              0,
+              1 - Math.abs((frame * 0.1 + i) % count) / count,
+            ),
             transform: `translateY(${direction === "down" ? 10 : -10}px)`,
           }}
         >
@@ -98,7 +117,9 @@ const StrategyCard: React.FC<{
     >
       <div style={{ fontSize: 28, marginBottom: 8 }}>{icon}</div>
       <div style={{ fontSize: 18, color, fontWeight: 600 }}>{title}</div>
-      <div style={{ fontSize: 13, color: "#9ca3af", marginTop: 5 }}>{subtitle}</div>
+      <div style={{ fontSize: 13, color: "#9ca3af", marginTop: 5 }}>
+        {subtitle}
+      </div>
     </div>
   );
 };
@@ -118,12 +139,7 @@ const ProfitCounter: React.FC = () => {
       }}
     >
       <div style={{ fontSize: 52, color: "#4ade80", fontWeight: 700 }}>
-        <AnimatedCounter
-          value={4}
-          startFrame={55}
-          duration={40}
-          suffix="%"
-        />
+        <AnimatedCounter value={4} startFrame={55} duration={40} suffix="%" />
       </div>
     </div>
   );
@@ -167,9 +183,16 @@ const GoldCoinFlow: React.FC = () => {
   }, []);
 
   return (
-    <div style={{ position: "absolute", left: "50%", top: "30%", transform: "translateX(-50%)" }}>
+    <div
+      style={{
+        position: "absolute",
+        left: "50%",
+        top: "30%",
+        transform: "translateX(-50%)",
+      }}
+    >
       {coins.map((c) => {
-        const y = ((frame * 2 + c.delay) % 150);
+        const y = (frame * 2 + c.delay) % 150;
         const opacity = Math.max(0, 1 - Math.abs(y - 75) / 75);
 
         return (
@@ -177,7 +200,7 @@ const GoldCoinFlow: React.FC = () => {
             key={c.id}
             style={{
               position: "absolute",
-              left: (c.id % 2 === 0 ? -20 : 20),
+              left: c.id % 2 === 0 ? -20 : 20,
               top: y,
               fontSize: 20,
               opacity,
@@ -200,13 +223,16 @@ export const GoldCounterScene: React.FC = () => {
 
   const titleOpacity = interpolate(frame, [0, 20], [0, 1]);
   const strategyOpacity = interpolate(frame, [20, 60], [0, 1]);
-  const profitOpacity = interpolate(frame, [50, 90], [0, 1]);
 
   // Animated background
   const bgPulse = Math.sin(frame * 0.03) * 0.03 + 1;
 
   return (
-    <AbsoluteFill style={{ background: "linear-gradient(180deg, #0d1117 0%, #1a1a2e 100%)" }}>
+    <AbsoluteFill
+      style={{
+        background: "linear-gradient(180deg, #0d1117 0%, #1a1a2e 100%)",
+      }}
+    >
       {/* Animated background */}
       <div
         style={{
@@ -233,11 +259,7 @@ export const GoldCounterScene: React.FC = () => {
           textShadow: "0 0 20px rgba(255, 215, 0, 0.5)",
         }}
       >
-        <TypewriterText
-          text="Gold Counter-Attack"
-          startFrame={0}
-          speed={4}
-        />
+        <TypewriterText text="Gold Counter-Attack" startFrame={0} speed={4} />
       </div>
 
       {/* Strategy */}
@@ -252,7 +274,9 @@ export const GoldCounterScene: React.FC = () => {
           opacity: strategyOpacity,
         }}
       >
-        <div style={{ fontSize: 18, color: "#e8e8e8", marginBottom: 25 }}>Central Banks' Strategy:</div>
+        <div style={{ fontSize: 18, color: "#e8e8e8", marginBottom: 25 }}>
+          Central Banks' Strategy:
+        </div>
 
         {/* Step 1 */}
         <StrategyCard
@@ -274,7 +298,7 @@ export const GoldCounterScene: React.FC = () => {
         <StrategyCard
           step={2}
           title="2. Sell Gold, Buy US Bonds at 5%"
-          subtitle={'出售黄金，买入5%收益的美国债券'}
+          subtitle={"出售黄金，买入5%收益的美国债券"}
           color="#ef4444"
           bgColor="rgba(239, 68, 68, 0.15)"
           delay={55}
@@ -294,7 +318,9 @@ export const GoldCounterScene: React.FC = () => {
       >
         <HighlightBox startFrame={70}>
           <ProfitCounter />
-          <div style={{ fontSize: 16, color: "#9ca3af", marginTop: 10 }}>4%的利差收益！</div>
+          <div style={{ fontSize: 16, color: "#9ca3af", marginTop: 10 }}>
+            4%的利差收益！
+          </div>
           <div style={{ fontSize: 14, color: "#6b7280", marginTop: 5 }}>
             这是无本万利的生意
           </div>

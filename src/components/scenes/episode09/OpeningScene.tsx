@@ -46,7 +46,12 @@ const PARTICLES = Array.from({ length: 15 }).map((_, i) => ({
 }));
 
 // Typewriter effect helper
-const getVisibleText = (text: string, frame: number, startFrame: number, speed: number = 2): string => {
+const getVisibleText = (
+  text: string,
+  frame: number,
+  startFrame: number,
+  speed: number = 2,
+): string => {
   const progress = Math.max(0, frame - startFrame) / speed;
   const charCount = Math.floor(progress);
   return text.slice(0, charCount);
@@ -65,7 +70,8 @@ const ScanningLine: React.FC<{ frame: number }> = ({ frame }) => {
         left: 0,
         right: 0,
         height: 2,
-        background: "linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.5), transparent)",
+        background:
+          "linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.5), transparent)",
         opacity: scanOpacity * 0.6,
       }}
     />
@@ -117,18 +123,38 @@ export const OpeningScene: React.FC = () => {
   const frame = useCurrentFrame();
 
   // Title animations with spring physics
-  const titleOpacity = interpolate(frame, [0, 30], [0, 1], { extrapolateRight: "clamp" });
-  const subtitleOpacity = interpolate(frame, [20, 50], [0, 1], { extrapolateRight: "clamp" });
-  const quoteOpacity = interpolate(frame, [40, 70], [0, 1], { extrapolateRight: "clamp" });
-  const descOpacity = interpolate(frame, [60, 90], [0, 1], { extrapolateRight: "clamp" });
-  const footerOpacity = interpolate(frame, [100, 130], [0, 1], { extrapolateRight: "clamp" });
+  const titleOpacity = interpolate(frame, [0, 30], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const subtitleOpacity = interpolate(frame, [20, 50], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const quoteOpacity = interpolate(frame, [40, 70], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const descOpacity = interpolate(frame, [60, 90], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const footerOpacity = interpolate(frame, [100, 130], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
-  const titleScale = spring({ frame, from: 0.8, to: 1, damping: 15 });
+  const titleScale = spring({
+    frame,
+    fps: 30,
+    from: 0.8,
+    to: 1,
+    config: { damping: 15 },
+  });
   const subtitleY = interpolate(frame, [20, 50], [20, 0]);
 
   // Star twinkle and parallax
   const stars = STAR_POSITIONS.map((star, i) => {
-    const twinkle = interpolate(Math.sin(frame * 0.05 * star.speed + i), [-1, 1], [0.3, 1]);
+    const twinkle = interpolate(
+      Math.sin(frame * 0.05 * star.speed + i),
+      [-1, 1],
+      [0.3, 1],
+    );
     const parallax = interpolate(frame * 0.02 * star.speed, [0, 50], [0, 3]);
     return { ...star, twinkle, parallax };
   });
@@ -136,7 +162,11 @@ export const OpeningScene: React.FC = () => {
   // NEW: Particle animations
   const particles = PARTICLES.map((p) => {
     const y = interpolate((frame * p.speed + p.delay) % 100, [0, 100], [0, 30]);
-    const opacity = interpolate((frame * p.speed + p.delay) % 60, [0, 30, 60], [0, 0.4, 0]);
+    const opacity = interpolate(
+      (frame * p.speed + p.delay) % 60,
+      [0, 30, 60],
+      [0, 0.4, 0],
+    );
     return { ...p, y, opacity };
   });
 
@@ -145,7 +175,12 @@ export const OpeningScene: React.FC = () => {
   const gridOffset = interpolate(frame * 0.5, [0, 100], [0, 20]);
 
   return (
-    <AbsoluteFill style={{ background: "linear-gradient(180deg, #0d1117 0%, #1a1a2e 50%, #0d1117 100%)" }}>
+    <AbsoluteFill
+      style={{
+        background:
+          "linear-gradient(180deg, #0d1117 0%, #1a1a2e 50%, #0d1117 100%)",
+      }}
+    >
       {/* NEW: Subtle grid background */}
       <div
         style={{
@@ -208,7 +243,10 @@ export const OpeningScene: React.FC = () => {
               background: star.opacity > 0.4 ? "#ffd700" : "#fff",
               borderRadius: "50%",
               opacity: star.opacity * star.twinkle,
-              boxShadow: star.opacity > 0.4 ? `0 0 ${star.size * 2}px rgba(255, 215, 0, 0.5)` : "none",
+              boxShadow:
+                star.opacity > 0.4
+                  ? `0 0 ${star.size * 2}px rgba(255, 215, 0, 0.5)`
+                  : "none",
             }}
           />
         ))}
@@ -281,17 +319,42 @@ export const OpeningScene: React.FC = () => {
           opacity: descOpacity,
         }}
       >
-        <div style={{ marginBottom: 8, opacity: interpolate(frame, [60, 80], [0, 1]) }}>
-          {getVisibleText("谁能垄断某种商品的供应，谁就能实现超级利润。", frame, 55, 2)}
+        <div
+          style={{
+            marginBottom: 8,
+            opacity: interpolate(frame, [60, 80], [0, 1]),
+          }}
+        >
+          {getVisibleText(
+            "谁能垄断某种商品的供应，谁就能实现超级利润。",
+            frame,
+            55,
+            2,
+          )}
         </div>
-        <div style={{ marginBottom: 8, opacity: interpolate(frame, [70, 90], [0, 1]) }}>
+        <div
+          style={{
+            marginBottom: 8,
+            opacity: interpolate(frame, [70, 90], [0, 1]),
+          }}
+        >
           {getVisibleText("货币乃是一种人人都需要的商品，", frame, 65, 2)}
         </div>
-        <div style={{ marginBottom: 8, opacity: interpolate(frame, [80, 100], [0, 1]) }}>
+        <div
+          style={{
+            marginBottom: 8,
+            opacity: interpolate(frame, [80, 100], [0, 1]),
+          }}
+        >
           {getVisibleText("如果谁能垄断一国的货币发行，", frame, 75, 2)}
         </div>
         <div style={{ opacity: interpolate(frame, [90, 110], [0, 1]) }}>
-          {getVisibleText("谁就拥有无法限量的赚取超级利润的手段。", frame, 85, 2)}
+          {getVisibleText(
+            "谁就拥有无法限量的赚取超级利润的手段。",
+            frame,
+            85,
+            2,
+          )}
         </div>
       </div>
 
@@ -307,9 +370,11 @@ export const OpeningScene: React.FC = () => {
           opacity: footerOpacity,
         }}
       >
-        <span style={{
-          animation: "pulse 2s ease-in-out infinite",
-        }}>
+        <span
+          style={{
+            animation: "pulse 2s ease-in-out infinite",
+          }}
+        >
           国际银行家从70年代起发动的货币战争
         </span>
       </div>

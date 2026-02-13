@@ -10,14 +10,28 @@ const AnimatedCounter: React.FC<{
   suffix?: string;
   decimals?: number;
   style?: React.CSSProperties;
-}> = ({ value, startFrame, duration = 60, prefix = "", suffix = "", decimals = 0, style }) => {
+}> = ({
+  value,
+  startFrame,
+  duration = 60,
+  prefix = "",
+  suffix = "",
+  decimals = 0,
+  style,
+}) => {
   const frame = useCurrentFrame();
   const progress = Math.max(0, Math.min(1, (frame - startFrame) / duration));
-  const animatedValue = spring({ value: progress * value, fps: 30, damping: 15 });
+  const animatedValue = spring({
+    frame: progress * 60,
+    fps: 30,
+    config: { damping: 15 },
+  });
 
   return (
     <span style={style}>
-      {prefix}{animatedValue.toFixed(decimals)}{suffix}
+      {prefix}
+      {animatedValue.toFixed(decimals)}
+      {suffix}
     </span>
   );
 };
@@ -57,7 +71,14 @@ const DangerBubbles: React.FC = () => {
   }, []);
 
   return (
-    <div style={{ position: "absolute", inset: 0, overflow: "hidden", pointerEvents: "none" }}>
+    <div
+      style={{
+        position: "absolute",
+        inset: 0,
+        overflow: "hidden",
+        pointerEvents: "none",
+      }}
+    >
       {bubbles.map((b) => {
         const scale = interpolate(frame, [b.delay, b.delay + 60], [0, 1.5], {
           extrapolateRight: "clamp",
@@ -96,9 +117,26 @@ const ComparisonBars: React.FC = () => {
   const gdpHeight = interpolate(frame, [50, 90], [0, 30]);
 
   return (
-    <div style={{ position: "absolute", bottom: "25%", left: "50%", transform: "translateX(-50%)", display: "flex", gap: 40, alignItems: "flex-end", height: 220 }}>
+    <div
+      style={{
+        position: "absolute",
+        bottom: "25%",
+        left: "50%",
+        transform: "translateX(-50%)",
+        display: "flex",
+        gap: 40,
+        alignItems: "flex-end",
+        height: 220,
+      }}
+    >
       {/* Derivatives bar */}
-      <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
         <div
           style={{
             width: 80,
@@ -112,16 +150,26 @@ const ComparisonBars: React.FC = () => {
             boxShadow: "0 0 20px rgba(239, 68, 68, 0.5)",
           }}
         >
-          <span style={{ color: "#fff", fontWeight: 700, fontSize: 14 }}>$370T</span>
+          <span style={{ color: "#fff", fontWeight: 700, fontSize: 14 }}>
+            $370T
+          </span>
         </div>
-        <span style={{ color: "#ef4444", fontSize: 12, marginTop: 10 }}>Derivatives</span>
+        <span style={{ color: "#ef4444", fontSize: 12, marginTop: 10 }}>
+          Derivatives
+        </span>
       </div>
 
       {/* VS */}
       <div style={{ fontSize: 24, color: "#ffd700", marginBottom: 80 }}>vs</div>
 
       {/* GDP bar */}
-      <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
         <div
           style={{
             width: 80,
@@ -135,9 +183,13 @@ const ComparisonBars: React.FC = () => {
             boxShadow: "0 0 20px rgba(59, 130, 246, 0.5)",
           }}
         >
-          <span style={{ color: "#fff", fontWeight: 700, fontSize: 12 }}>$45T</span>
+          <span style={{ color: "#fff", fontWeight: 700, fontSize: 12 }}>
+            $45T
+          </span>
         </div>
-        <span style={{ color: "#3b82f6", fontSize: 12, marginTop: 10 }}>Global GDP</span>
+        <span style={{ color: "#3b82f6", fontSize: 12, marginTop: 10 }}>
+          Global GDP
+        </span>
       </div>
     </div>
   );
@@ -202,12 +254,15 @@ export const DerivativesScene: React.FC = () => {
 
   const titleOpacity = interpolate(frame, [0, 20], [0, 1]);
   const numberOpacity = interpolate(frame, [20, 60], [0, 1]);
-  const dangerOpacity = interpolate(frame, [50, 90], [0, 1]);
 
   const bubbleScale = interpolate(frame, [30, 60], [0, 1.2]);
 
   return (
-    <AbsoluteFill style={{ background: "linear-gradient(180deg, #1a1a2e 0%, #0d1117 100%)" }}>
+    <AbsoluteFill
+      style={{
+        background: "linear-gradient(180deg, #1a1a2e 0%, #0d1117 100%)",
+      }}
+    >
       {/* Animated background */}
       <div
         style={{
@@ -239,11 +294,7 @@ export const DerivativesScene: React.FC = () => {
           textShadow: "0 0 20px rgba(255, 215, 0, 0.5)",
         }}
       >
-        <TypewriterText
-          text="Financial Derivatives"
-          startFrame={0}
-          speed={4}
-        />
+        <TypewriterText text="Financial Derivatives" startFrame={0} speed={4} />
       </div>
 
       {/* Central bubble visualization */}
@@ -256,7 +307,8 @@ export const DerivativesScene: React.FC = () => {
           width: 280,
           height: 280,
           borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(239, 68, 68, 0.4), rgba(239, 68, 68, 0.1))",
+          background:
+            "radial-gradient(circle, rgba(239, 68, 68, 0.4), rgba(239, 68, 68, 0.1))",
           border: "4px dashed #ef4444",
           opacity: numberOpacity,
           animation: "rotate 20s linear infinite",

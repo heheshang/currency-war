@@ -13,7 +13,12 @@ import { AbsoluteFill, useCurrentFrame, interpolate, spring } from "remotion";
  */
 
 // Animated counter for numbers
-const useCounterAnimation = (target: number, frame: number, startFrame: number, duration: number = 30): string => {
+const useCounterAnimation = (
+  target: number,
+  frame: number,
+  startFrame: number,
+  duration: number = 30,
+): string => {
   const progress = Math.max(0, Math.min(1, (frame - startFrame) / duration));
   // Easing function for smoother animation
   const eased = 1 - Math.pow(1 - progress, 3);
@@ -21,7 +26,10 @@ const useCounterAnimation = (target: number, frame: number, startFrame: number, 
 };
 
 // NEW: Oil drop falling animation
-const OilDrop: React.FC<{ frame: number; delay: number }> = ({ frame, delay }) => {
+const OilDrop: React.FC<{ frame: number; delay: number }> = ({
+  frame,
+  delay,
+}) => {
   const progress = Math.max(0, (frame - delay) / 60);
   const y = interpolate(progress, [0, 1], [0, 80]);
   const opacity = interpolate(progress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
@@ -97,7 +105,9 @@ const CrisisRadar: React.FC<{ frame: number }> = ({ frame }) => {
 
 // NEW: Shaking screen effect
 const ShakingScreen: React.FC<{ frame: number }> = ({ frame }) => {
-  const shake = interpolate(frame, [15, 35], [0, 1], { extrapolateRight: "clamp" });
+  const shake = interpolate(frame, [15, 35], [0, 1], {
+    extrapolateRight: "clamp",
+  });
   const x = shake * Math.sin(frame * 0.5) * 3;
   const y = shake * Math.cos(frame * 0.5) * 2;
 
@@ -116,15 +126,37 @@ const ShakingScreen: React.FC<{ frame: number }> = ({ frame }) => {
 export const OilCrisisScene: React.FC = () => {
   const frame = useCurrentFrame();
 
-  const dateOpacity = interpolate(frame, [0, 20], [0, 1], { extrapolateRight: "clamp" });
-  const subtitleOpacity = interpolate(frame, [10, 30], [0, 1], { extrapolateRight: "clamp" });
-  const oilPriceOpacity = interpolate(frame, [20, 50], [0, 1], { extrapolateRight: "clamp" });
-  const priceReveal = interpolate(frame, [20, 60], [0, 1], { extrapolateRight: "clamp" });
-  const impactOpacity = interpolate(frame, [50, 90], [0, 1], { extrapolateRight: "clamp" });
+  const dateOpacity = interpolate(frame, [0, 20], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const subtitleOpacity = interpolate(frame, [10, 30], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const oilPriceOpacity = interpolate(frame, [20, 50], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const priceReveal = interpolate(frame, [20, 60], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const impactOpacity = interpolate(frame, [50, 90], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   // Spring animations
-  const priceScale = spring({ frame, from: 0, to: 1, damping: 10, config: { stiffness: 80 } });
-  const percentScale = spring({ frame: frame - 20, from: 0, to: 1, damping: 8 });
+  const priceScale = spring({
+    frame,
+    fps: 30,
+    from: 0,
+    to: 1,
+    config: { damping: 10, stiffness: 80 },
+  });
+  const percentScale = spring({
+    frame: frame - 20,
+    fps: 30,
+    from: 0,
+    to: 1,
+    config: { damping: 8 },
+  });
 
   // Counter animations
   const price3Value = interpolate(priceReveal, [0, 0.3], [0, 3]);
@@ -133,8 +165,12 @@ export const OilCrisisScene: React.FC = () => {
   const deficit350Value = useCounterAnimation(350, frame, 65, 25);
 
   // Explosion ripple effect
-  const rippleRadius = interpolate(frame, [15, 40], [0, 300], { extrapolateRight: "clamp" });
-  const rippleOpacity = interpolate(frame, [15, 40], [0.8, 0], { extrapolateRight: "clamp" });
+  const rippleRadius = interpolate(frame, [15, 40], [0, 300], {
+    extrapolateRight: "clamp",
+  });
+  const rippleOpacity = interpolate(frame, [15, 40], [0.8, 0], {
+    extrapolateRight: "clamp",
+  });
 
   // Background pulse
   const bgPulse = interpolate(Math.sin(frame * 0.08), [-1, 1], [0.95, 1.05]);
@@ -146,7 +182,11 @@ export const OilCrisisScene: React.FC = () => {
   const oilDrops = Array.from({ length: 6 }).map((_, i) => i * 10);
 
   return (
-    <AbsoluteFill style={{ background: "linear-gradient(180deg, #1f1f1f 0%, #0d0d0d 100%)" }}>
+    <AbsoluteFill
+      style={{
+        background: "linear-gradient(180deg, #1f1f1f 0%, #0d0d0d 100%)",
+      }}
+    >
       {/* NEW: Crisis radar */}
       <CrisisRadar frame={frame} />
 
@@ -239,13 +279,32 @@ export const OilCrisisScene: React.FC = () => {
           opacity: oilPriceOpacity,
         }}
       >
-        <div style={{ fontSize: 18, color: "#9ca3af", marginBottom: 10 }}>World Oil Prices</div>
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 40 }}>
+        <div style={{ fontSize: 18, color: "#9ca3af", marginBottom: 10 }}>
+          World Oil Prices
+        </div>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 40,
+          }}
+        >
           <div>
-            <div style={{ fontSize: 36, color: "#9ca3af" }}>${Math.floor(price3Value)}</div>
+            <div style={{ fontSize: 36, color: "#9ca3af" }}>
+              ${Math.floor(price3Value)}
+            </div>
             <div style={{ fontSize: 14, color: "#6b7280" }}>Before 1973</div>
           </div>
-          <div style={{ fontSize: 48, color: "#ffd700", transform: `scale(${arrowPulse})` }}>→</div>
+          <div
+            style={{
+              fontSize: 48,
+              color: "#ffd700",
+              transform: `scale(${arrowPulse})`,
+            }}
+          >
+            →
+          </div>
           <div>
             <div
               style={{
@@ -294,12 +353,20 @@ export const OilCrisisScene: React.FC = () => {
         </div>
         <div style={{ display: "flex", justifyContent: "center", gap: 40 }}>
           <div>
-            <div style={{ fontSize: 28, color: "#ef4444", fontWeight: 700 }}>${deficit13Value}B</div>
-            <div style={{ fontSize: 12, color: "#9ca3af" }}>1973 Trade Deficit</div>
+            <div style={{ fontSize: 28, color: "#ef4444", fontWeight: 700 }}>
+              ${deficit13Value}B
+            </div>
+            <div style={{ fontSize: 12, color: "#9ca3af" }}>
+              1973 Trade Deficit
+            </div>
           </div>
           <div>
-            <div style={{ fontSize: 28, color: "#ef4444", fontWeight: 700 }}>${deficit350Value}B</div>
-            <div style={{ fontSize: 12, color: "#ef4444" }}>1974 Trade Deficit</div>
+            <div style={{ fontSize: 28, color: "#ef4444", fontWeight: 700 }}>
+              ${deficit350Value}B
+            </div>
+            <div style={{ fontSize: 12, color: "#ef4444" }}>
+              1974 Trade Deficit
+            </div>
           </div>
         </div>
       </div>

@@ -13,7 +13,12 @@ import { AbsoluteFill, useCurrentFrame, interpolate, spring } from "remotion";
  */
 
 // Typewriter helper
-const getVisibleText = (text: string, frame: number, startFrame: number, speed: number = 2): string => {
+const getVisibleText = (
+  text: string,
+  frame: number,
+  startFrame: number,
+  speed: number = 2,
+): string => {
   const progress = Math.max(0, frame - startFrame) / speed;
   const charCount = Math.floor(progress);
   return text.slice(0, charCount);
@@ -64,8 +69,12 @@ const WatchingEye: React.FC<{ frame: number }> = ({ frame }) => {
 // NEW: Shadow conspiracy network - connecting lines
 const ShadowNetwork: React.FC<{ frame: number }> = ({ frame }) => {
   const nodes = [
-    { x: 15, y: 30 }, { x: 30, y: 20 }, { x: 45, y: 35 },
-    { x: 60, y: 25 }, { x: 75, y: 40 }, { x: 85, y: 30 },
+    { x: 15, y: 30 },
+    { x: 30, y: 20 },
+    { x: 45, y: 35 },
+    { x: 60, y: 25 },
+    { x: 75, y: 40 },
+    { x: 85, y: 30 },
   ];
 
   const lines = nodes.map((node, i) => {
@@ -89,7 +98,13 @@ const ShadowNetwork: React.FC<{ frame: number }> = ({ frame }) => {
   });
 
   return (
-    <div style={{ position: "absolute", inset: 0, opacity: interpolate(frame, [30, 60], [0, 0.4]) }}>
+    <div
+      style={{
+        position: "absolute",
+        inset: 0,
+        opacity: interpolate(frame, [30, 60], [0, 0.4]),
+      }}
+    >
       {lines}
       {nodes.map((node, i) => (
         <div
@@ -113,8 +128,16 @@ const ShadowNetwork: React.FC<{ frame: number }> = ({ frame }) => {
 // NEW: Floating document chain
 const DocumentChain: React.FC<{ frame: number }> = ({ frame }) => {
   const docs = Array.from({ length: 4 }).map((_, i) => {
-    const yOffset = interpolate(frame * 0.03 + i * 20, [0, 50], [0, 15 + i * 5]);
-    const rotation = interpolate(frame * 0.02 + i * 15, [0, 50], [0, (i % 2 === 0 ? 5 : -5)]);
+    const yOffset = interpolate(
+      frame * 0.03 + i * 20,
+      [0, 50],
+      [0, 15 + i * 5],
+    );
+    const rotation = interpolate(
+      frame * 0.02 + i * 15,
+      [0, 50],
+      [0, i % 2 === 0 ? 5 : -5],
+    );
     const opacity = interpolate(frame, [30 + i * 10, 50 + i * 10], [0, 0.2]);
     return { yOffset, rotation, opacity };
   });
@@ -145,17 +168,31 @@ const DocumentChain: React.FC<{ frame: number }> = ({ frame }) => {
 export const BilderbergScene: React.FC = () => {
   const frame = useCurrentFrame();
 
-  const dateOpacity = interpolate(frame, [0, 30], [0, 1], { extrapolateRight: "clamp" });
-  const titleOpacity = interpolate(frame, [15, 45], [0, 1], { extrapolateRight: "clamp" });
-  const contentOpacity = interpolate(frame, [30, 70], [0, 1], { extrapolateRight: "clamp" });
+  const dateOpacity = interpolate(frame, [0, 30], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const titleOpacity = interpolate(frame, [15, 45], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const contentOpacity = interpolate(frame, [30, 70], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   // Spring animations for dramatic effect
-  const rockefellerScale = spring({ frame, from: 0, to: 1, damping: 12, config: { stiffness: 100 } });
+  const rockefellerScale = spring({
+    frame,
+    fps: 30,
+    from: 0,
+    to: 1,
+    config: { damping: 12, stiffness: 100 },
+  });
   const rockefellerRotate = interpolate(frame, [0, 30], [-15, 0]);
 
   // Pulsing glow effect for the plan
   const pulseIntensity = interpolate(Math.sin(frame * 0.1), [-1, 1], [0.5, 1]);
-  const glowIntensity = interpolate(frame, [60, 120], [0, 1], { extrapolateRight: "clamp" });
+  const glowIntensity = interpolate(frame, [60, 120], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   // Secret document floating
   const docFloat = interpolate(Math.sin(frame * 0.05), [-1, 1], [-5, 5]);
@@ -164,7 +201,11 @@ export const BilderbergScene: React.FC = () => {
   const alertPulse = interpolate(Math.sin(frame * 0.08), [-1, 1], [0.95, 1.05]);
 
   return (
-    <AbsoluteFill style={{ background: "linear-gradient(135deg, #1a1a2e 0%, #0d1117 100%)" }}>
+    <AbsoluteFill
+      style={{
+        background: "linear-gradient(135deg, #1a1a2e 0%, #0d1117 100%)",
+      }}
+    >
       {/* NEW: Shadow conspiracy network */}
       <ShadowNetwork frame={frame} />
 
@@ -208,8 +249,16 @@ export const BilderbergScene: React.FC = () => {
           opacity: contentOpacity,
         }}
       >
-        <div style={{ padding: 10, fontSize: 8, color: "#4b5563", fontFamily: "monospace" }}>
-          {getVisibleText("CONFIDENTIAL", frame, 40, 3)}<br />
+        <div
+          style={{
+            padding: 10,
+            fontSize: 8,
+            color: "#4b5563",
+            fontFamily: "monospace",
+          }}
+        >
+          {getVisibleText("CONFIDENTIAL", frame, 40, 3)}
+          <br />
           {getVisibleText("EYES ONLY", frame, 50, 3)}
         </div>
       </div>
@@ -260,7 +309,12 @@ export const BilderbergScene: React.FC = () => {
         }}
       >
         <div style={{ fontSize: 18, color: "#e8e8e8", marginBottom: 15 }}>
-          {getVisibleText("84位国际银行家、跨国公司巨头和被选中的政客", frame, 30, 3)}
+          {getVisibleText(
+            "84位国际银行家、跨国公司巨头和被选中的政客",
+            frame,
+            30,
+            3,
+          )}
         </div>
         <div style={{ fontSize: 16, color: "#9ca3af", marginBottom: 20 }}>
           {getVisibleText("秘密汇聚于彼尔德伯格俱乐部", frame, 40, 3)}
@@ -288,10 +342,14 @@ export const BilderbergScene: React.FC = () => {
               boxShadow: `0 0 ${30 + pulseIntensity * 20}px rgba(255, 215, 0, ${0.3 + pulseIntensity * 0.4})`,
             }}
           >
-            <span style={{ fontSize: 32, fontWeight: 700, color: "#1a1a2e" }}>R</span>
+            <span style={{ fontSize: 32, fontWeight: 700, color: "#1a1a2e" }}>
+              R
+            </span>
           </div>
           <div style={{ marginLeft: 20, textAlign: "left" }}>
-            <div style={{ fontSize: 20, color: "#ffd700", fontWeight: 600 }}>David Rockefeller</div>
+            <div style={{ fontSize: 20, color: "#ffd700", fontWeight: 600 }}>
+              David Rockefeller
+            </div>
             <div style={{ fontSize: 14, color: "#9ca3af" }}>戴维·洛克菲勒</div>
           </div>
         </div>
@@ -311,7 +369,9 @@ export const BilderbergScene: React.FC = () => {
             boxShadow: `0 0 ${20 * glowIntensity}px rgba(239, 68, 68, ${0.3 * glowIntensity})`,
           }}
         >
-          <div style={{ fontSize: 24, color: "#ef4444", fontWeight: 700 }}>THE PLAN:</div>
+          <div style={{ fontSize: 24, color: "#ef4444", fontWeight: 700 }}>
+            THE PLAN:
+          </div>
           <div style={{ fontSize: 20, color: "#ffd700", marginTop: 8 }}>
             Raise Oil Prices by 400%
           </div>

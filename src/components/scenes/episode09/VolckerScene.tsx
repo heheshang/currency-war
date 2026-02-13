@@ -13,14 +13,24 @@ import { AbsoluteFill, useCurrentFrame, interpolate, spring } from "remotion";
  */
 
 // Typewriter effect
-const getVisibleText = (text: string, frame: number, startFrame: number, speed: number = 2): string => {
+const getVisibleText = (
+  text: string,
+  frame: number,
+  startFrame: number,
+  speed: number = 2,
+): string => {
   const progress = Math.max(0, frame - startFrame) / speed;
   const charCount = Math.floor(progress);
   return text.slice(0, charCount);
 };
 
 // Number counter
-const useCounterAnimation = (target: number, frame: number, startFrame: number, duration: number = 25): string => {
+const useCounterAnimation = (
+  target: number,
+  frame: number,
+  startFrame: number,
+  duration: number = 25,
+): string => {
   const progress = Math.max(0, Math.min(1, (frame - startFrame) / duration));
   const eased = 1 - Math.pow(1 - progress, 3);
   return Math.floor(target * eased).toString();
@@ -69,7 +79,11 @@ const PowerCircle: React.FC<{ frame: number }> = ({ frame }) => {
 // NEW: Chain of control visualization
 const ChainOfControl: React.FC<{ frame: number }> = ({ frame }) => {
   const links = Array.from({ length: 5 }).map((_, i) => {
-    const offset = interpolate(frame * 0.5 + i * 15, [0, 50], [0, (i % 2 === 0 ? 10 : -10)]);
+    const offset = interpolate(
+      frame * 0.5 + i * 15,
+      [0, 50],
+      [0, i % 2 === 0 ? 10 : -10],
+    );
     const opacity = interpolate(frame, [30 + i * 10, 50 + i * 10], [0, 0.3]);
     return { offset, opacity };
   });
@@ -110,7 +124,10 @@ const ChainOfControl: React.FC<{ frame: number }> = ({ frame }) => {
 const VitalSign: React.FC<{ frame: number }> = ({ frame }) => {
   const linePoints = Array.from({ length: 100 }).map((_, i) => {
     const x = (i / 100) * 100;
-    const y = 50 + Math.sin((i + frame * 2) * 0.3) * 15 + Math.sin((i + frame * 3) * 0.1) * 10;
+    const y =
+      50 +
+      Math.sin((i + frame * 2) * 0.3) * 15 +
+      Math.sin((i + frame * 3) * 0.1) * 10;
     return { x, y };
   });
 
@@ -133,7 +150,9 @@ const VitalSign: React.FC<{ frame: number }> = ({ frame }) => {
           strokeWidth="1"
         />
       </svg>
-      <div style={{ fontSize: 8, color: "#6b7280", marginTop: 2 }}>Global Economy Vital Signs</div>
+      <div style={{ fontSize: 8, color: "#6b7280", marginTop: 2 }}>
+        Global Economy Vital Signs
+      </div>
     </div>
   );
 };
@@ -141,14 +160,30 @@ const VitalSign: React.FC<{ frame: number }> = ({ frame }) => {
 export const VolckerScene: React.FC = () => {
   const frame = useCurrentFrame();
 
-  const titleOpacity = interpolate(frame, [0, 20], [0, 1], { extrapolateRight: "clamp" });
-  const subtitleOpacity = interpolate(frame, [10, 30], [0, 1], { extrapolateRight: "clamp" });
-  const fedOpacity = interpolate(frame, [15, 45], [0, 1], { extrapolateRight: "clamp" });
-  const quoteOpacity = interpolate(frame, [30, 70], [0, 1], { extrapolateRight: "clamp" });
-  const ratesOpacity = interpolate(frame, [50, 90], [0, 1], { extrapolateRight: "clamp" });
+  const titleOpacity = interpolate(frame, [0, 20], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const subtitleOpacity = interpolate(frame, [10, 30], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const fedOpacity = interpolate(frame, [15, 45], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const quoteOpacity = interpolate(frame, [30, 70], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const ratesOpacity = interpolate(frame, [50, 90], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   // Spring animations
-  const fedScale = spring({ frame, from: 0, to: 1, damping: 12 });
+  const fedScale = spring({
+    frame,
+    fps: 30,
+    from: 0,
+    to: 1,
+    config: { damping: 12 },
+  });
   const fedRotate = interpolate(frame, [15, 45], [-180, 0]);
 
   // Interest rate counter
@@ -159,13 +194,23 @@ export const VolckerScene: React.FC = () => {
   const glowPulse = interpolate(Math.sin(frame * 0.1), [-1, 1], [0.3, 1]);
 
   // Quote highlight
-  const quoteHighlight = interpolate(frame, [40, 90], [0, 1], { extrapolateRight: "clamp" });
+  const quoteHighlight = interpolate(frame, [40, 90], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   // NEW: Warning red overlay
-  const warningPulse = interpolate(Math.sin(frame * 0.05), [-1, 1], [0.02, 0.05]);
+  const warningPulse = interpolate(
+    Math.sin(frame * 0.05),
+    [-1, 1],
+    [0.02, 0.05],
+  );
 
   return (
-    <AbsoluteFill style={{ background: "linear-gradient(180deg, #0d1117 0%, #1a1a2e 100%)" }}>
+    <AbsoluteFill
+      style={{
+        background: "linear-gradient(180deg, #0d1117 0%, #1a1a2e 100%)",
+      }}
+    >
       {/* NEW: Warning pulse overlay */}
       <div
         style={{
@@ -195,7 +240,8 @@ export const VolckerScene: React.FC = () => {
           height: 300,
           transform: "translate(-50%, -50%)",
           borderRadius: "50%",
-          background: "conic-gradient(from 0deg, transparent, rgba(255, 215, 0, 0.03), transparent)",
+          background:
+            "conic-gradient(from 0deg, transparent, rgba(255, 215, 0, 0.03), transparent)",
           animation: "spin 20s linear infinite",
         }}
       />
@@ -250,7 +296,9 @@ export const VolckerScene: React.FC = () => {
           boxShadow: `0 0 ${20 + glowPulse * 30}px rgba(255, 215, 0, ${0.2 + glowPulse * 0.3})`,
         }}
       >
-        <span style={{ fontSize: 36, fontWeight: 700, color: "#ffd700" }}>FED</span>
+        <span style={{ fontSize: 36, fontWeight: 700, color: "#ffd700" }}>
+          FED
+        </span>
       </div>
 
       {/* Quote with typewriter */}
@@ -269,10 +317,15 @@ export const VolckerScene: React.FC = () => {
           {getVisibleText('"A controlled disintegration', frame, 30, 2)}
         </div>
         <div style={{ fontSize: 16, color: "#e8e8e8", fontStyle: "italic" }}>
-          {getVisibleText("of the world economy\"", frame, 45, 2)}
+          {getVisibleText('of the world economy"', frame, 45, 2)}
         </div>
         <div style={{ fontSize: 14, color: "#9ca3af", marginTop: 10 }}>
-          {getVisibleText("would be a reasonable goal for the 1980s", frame, 55, 2)}
+          {getVisibleText(
+            "would be a reasonable goal for the 1980s",
+            frame,
+            55,
+            2,
+          )}
         </div>
 
         {/* Highlighted dangerous quote */}

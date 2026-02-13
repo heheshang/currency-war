@@ -8,7 +8,7 @@ const StrategyCard: React.FC<{
   icon: string;
   title: string;
   subtitle: string;
-  desc: string;
+  desc: React.ReactNode;
   delay: number;
   color: string;
   bgColor: string;
@@ -52,7 +52,9 @@ const StrategyCard: React.FC<{
         {title}
       </div>
       <div style={{ fontSize: 14, color: "#9ca3af" }}>{subtitle}</div>
-      <div style={{ fontSize: 12, color: "#6b7280", marginTop: 10 }}>{desc}</div>
+      <div style={{ fontSize: 12, color: "#6b7280", marginTop: 10 }}>
+        {desc}
+      </div>
     </div>
   );
 };
@@ -109,7 +111,11 @@ export const StrategyScene: React.FC = () => {
   const shimmer = interpolate(frame % 200, [0, 100, 200], [0, 0.02, 0]);
 
   return (
-    <AbsoluteFill style={{ background: "linear-gradient(180deg, #1a1a2e 0%, #0d1117 100%)" }}>
+    <AbsoluteFill
+      style={{
+        background: "linear-gradient(180deg, #1a1a2e 0%, #0d1117 100%)",
+      }}
+    >
       {/* Background shimmer */}
       <div
         style={{

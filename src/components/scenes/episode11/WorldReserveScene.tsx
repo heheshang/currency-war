@@ -52,11 +52,15 @@ const RotatingCoin: React.FC<{
           margin: "0 auto 15px",
         }}
       >
-        <span style={{ fontSize: size * 0.25, color: "#1a1a2e", fontWeight: 700 }}>
+        <span
+          style={{ fontSize: size * 0.25, color: "#1a1a2e", fontWeight: 700 }}
+        >
           {label}
         </span>
       </div>
-      <div style={{ fontSize: 20, color: labelColor, fontWeight: 600 }}>{label}</div>
+      <div style={{ fontSize: 20, color: labelColor, fontWeight: 600 }}>
+        {label}
+      </div>
     </div>
   );
 };
@@ -70,8 +74,6 @@ const FloatingParticles: React.FC<{ color: string }> = ({ color }) => {
   return (
     <>
       {[...Array(6)].map((_, i) => {
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const x = interpolate((frame + i * 20) % 150, [0, 150], [0, 100]);
         const y = interpolate((frame + i * 20) % 100, [0, 100], [0, -50]);
         const opacity = interpolate(frame % 100, [0, 50, 100], [0, 0.5, 0]);
 
@@ -112,10 +114,6 @@ export const WorldReserveScene: React.FC = () => {
   const titleOpacity = interpolate(frame, [0, 20], [0, 1]);
   const titleSlide = interpolate(frame, [0, 20], [-30, 0]);
 
-  // Content fade in (kept for potential use)
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const contentOpacity = interpolate(frame, [20, 50], [0, 1]);
-
   // Future section
   const futureOpacity = interpolate(frame, [60, 90], [0, 1]);
   const futureSlide = interpolate(frame, [60, 90], [20, 0]);
@@ -124,7 +122,11 @@ export const WorldReserveScene: React.FC = () => {
   const shimmer = interpolate(frame % 200, [0, 100, 200], [0, 0.03, 0]);
 
   return (
-    <AbsoluteFill style={{ background: "linear-gradient(180deg, #0d1117 0%, #1a1a2e 100%)" }}>
+    <AbsoluteFill
+      style={{
+        background: "linear-gradient(180deg, #0d1117 0%, #1a1a2e 100%)",
+      }}
+    >
       {/* Background shimmer */}
       <div
         style={{

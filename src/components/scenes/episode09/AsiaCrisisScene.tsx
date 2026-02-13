@@ -13,14 +13,24 @@ import { AbsoluteFill, useCurrentFrame, interpolate, spring } from "remotion";
  */
 
 // Typewriter effect
-const getVisibleText = (text: string, frame: number, startFrame: number, speed: number = 2): string => {
+const getVisibleText = (
+  text: string,
+  frame: number,
+  startFrame: number,
+  speed: number = 2,
+): string => {
   const progress = Math.max(0, frame - startFrame) / speed;
   const charCount = Math.floor(progress);
   return text.slice(0, charCount);
 };
 
 // Number counter
-const useCounterAnimation = (target: number, frame: number, startFrame: number, duration: number = 25): string => {
+const useCounterAnimation = (
+  target: number,
+  frame: number,
+  startFrame: number,
+  duration: number = 25,
+): string => {
   const progress = Math.max(0, Math.min(1, (frame - startFrame) / duration));
   const eased = 1 - Math.pow(1 - progress, 3);
   return Math.floor(target * eased).toString();
@@ -39,13 +49,26 @@ const Flames: React.FC<{ frame: number }> = ({ frame }) => {
     const y = interpolate((frame + i * 10) % 60, [0, 60], [0, 30]);
     const x = 10 + i * 12;
     const height = 20 + Math.sin(frame * 0.2 + i) * 10;
-    const opacity = interpolate((frame + i * 10) % 60, [0, 30, 60], [0, 0.4, 0]);
+    const opacity = interpolate(
+      (frame + i * 10) % 60,
+      [0, 30, 60],
+      [0, 0.4, 0],
+    );
 
     return { y, x, height, opacity };
   });
 
   return (
-    <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "25%", overflow: "hidden" }}>
+    <div
+      style={{
+        position: "absolute",
+        bottom: 0,
+        left: 0,
+        right: 0,
+        height: "25%",
+        overflow: "hidden",
+      }}
+    >
       {flames.map((f, i) => (
         <div
           key={i}
@@ -69,15 +92,26 @@ const Flames: React.FC<{ frame: number }> = ({ frame }) => {
 const FallingDebris: React.FC<{ frame: number }> = ({ frame }) => {
   const debris = Array.from({ length: 10 }).map((_, i) => {
     const y = interpolate((frame + i * 8) % 100, [0, 100], [0, 80]);
-    const x = 15 + (i * 8) % 70;
+    const x = 15 + ((i * 8) % 70);
     const rotation = (frame + i * 15) * 2;
-    const opacity = interpolate((frame + i * 8) % 100, [0, 50, 100], [0, 0.4, 0]);
+    const opacity = interpolate(
+      (frame + i * 8) % 100,
+      [0, 50, 100],
+      [0, 0.4, 0],
+    );
 
     return { y, x, rotation, opacity };
   });
 
   return (
-    <div style={{ position: "absolute", inset: 0, overflow: "hidden", pointerEvents: "none" }}>
+    <div
+      style={{
+        position: "absolute",
+        inset: 0,
+        overflow: "hidden",
+        pointerEvents: "none",
+      }}
+    >
       {debris.map((d, i) => (
         <div
           key={i}
@@ -120,15 +154,29 @@ const EmergencyLight: React.FC<{ frame: number }> = ({ frame }) => {
 export const AsiaCrisisScene: React.FC = () => {
   const frame = useCurrentFrame();
 
-  const titleOpacity = interpolate(frame, [0, 20], [0, 1], { extrapolateRight: "clamp" });
-  const countriesOpacity = interpolate(frame, [15, 50], [0, 1], { extrapolateRight: "clamp" });
-  const currencyOpacity = interpolate(frame, [35, 80], [0, 1], { extrapolateRight: "clamp" });
-  const summaryOpacity = interpolate(frame, [60, 100], [0, 1], { extrapolateRight: "clamp" });
+  const titleOpacity = interpolate(frame, [0, 20], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const countriesOpacity = interpolate(frame, [15, 50], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const currencyOpacity = interpolate(frame, [35, 80], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const summaryOpacity = interpolate(frame, [60, 100], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   // Country fall animation
   const getCountryFall = (index: number) => {
     const delay = index * 10;
-    return spring({ frame: frame - delay, from: 0, to: 1, damping: 15 });
+    return spring({
+      frame: frame - delay,
+      fps: 30,
+      from: 0,
+      to: 1,
+      config: { damping: 15 },
+    });
   };
 
   // Currency counters
@@ -140,7 +188,11 @@ export const AsiaCrisisScene: React.FC = () => {
   const crisisPulse = interpolate(Math.sin(frame * 0.15), [-1, 1], [0.9, 1.1]);
 
   return (
-    <AbsoluteFill style={{ background: "linear-gradient(180deg, #0d1117 0%, #1f1f1f 100%)" }}>
+    <AbsoluteFill
+      style={{
+        background: "linear-gradient(180deg, #0d1117 0%, #1f1f1f 100%)",
+      }}
+    >
       {/* NEW: Flames at bottom */}
       <Flames frame={frame} />
 
@@ -204,8 +256,14 @@ export const AsiaCrisisScene: React.FC = () => {
                 opacity: 1 - offset / 30,
               }}
             >
-              <div style={{ fontSize: 24, fontWeight: 700, color: country.color }}>{country.flag}</div>
-              <div style={{ fontSize: 14, color: "#e8e8e8", marginTop: 5 }}>{country.name}</div>
+              <div
+                style={{ fontSize: 24, fontWeight: 700, color: country.color }}
+              >
+                {country.flag}
+              </div>
+              <div style={{ fontSize: 14, color: "#e8e8e8", marginTop: 5 }}>
+                {country.name}
+              </div>
             </div>
           );
         })}
@@ -223,18 +281,28 @@ export const AsiaCrisisScene: React.FC = () => {
           opacity: currencyOpacity,
         }}
       >
-        <div style={{ fontSize: 18, color: "#9ca3af", marginBottom: 15 }}>Currency Collapse Rates</div>
+        <div style={{ fontSize: 18, color: "#9ca3af", marginBottom: 15 }}>
+          Currency Collapse Rates
+        </div>
         <div style={{ display: "flex", justifyContent: "center", gap: 30 }}>
           <div>
-            <div style={{ fontSize: 28, color: "#ef4444", fontWeight: 700 }}>-{thaiValue}%</div>
+            <div style={{ fontSize: 28, color: "#ef4444", fontWeight: 700 }}>
+              -{thaiValue}%
+            </div>
             <div style={{ fontSize: 12, color: "#9ca3af" }}>Thai Baht</div>
           </div>
           <div>
-            <div style={{ fontSize: 28, color: "#ef4444", fontWeight: 700 }}>-{indonesiaValue}%</div>
-            <div style={{ fontSize: 12, color: "#9ca3af" }}>Indonesia Rupiah</div>
+            <div style={{ fontSize: 28, color: "#ef4444", fontWeight: 700 }}>
+              -{indonesiaValue}%
+            </div>
+            <div style={{ fontSize: 12, color: "#9ca3af" }}>
+              Indonesia Rupiah
+            </div>
           </div>
           <div>
-            <div style={{ fontSize: 28, color: "#ef4444", fontWeight: 700 }}>-{koreaValue}%</div>
+            <div style={{ fontSize: 28, color: "#ef4444", fontWeight: 700 }}>
+              -{koreaValue}%
+            </div>
             <div style={{ fontSize: 12, color: "#9ca3af" }}>Korean Won</div>
           </div>
         </div>
@@ -251,7 +319,14 @@ export const AsiaCrisisScene: React.FC = () => {
           opacity: summaryOpacity,
         }}
       >
-        <div style={{ fontSize: 20, color: "#ffd700", fontWeight: 600, marginBottom: 10 }}>
+        <div
+          style={{
+            fontSize: 20,
+            color: "#ffd700",
+            fontWeight: 600,
+            marginBottom: 10,
+          }}
+        >
           {getVisibleText("The Cycle Continues", frame, 70, 3)}
         </div>
         <div style={{ fontSize: 14, color: "#9ca3af" }}>

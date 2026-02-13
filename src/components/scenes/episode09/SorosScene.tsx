@@ -13,14 +13,24 @@ import { AbsoluteFill, useCurrentFrame, interpolate, spring } from "remotion";
  */
 
 // Typewriter effect
-const getVisibleText = (text: string, frame: number, startFrame: number, speed: number = 2): string => {
+const getVisibleText = (
+  text: string,
+  frame: number,
+  startFrame: number,
+  speed: number = 2,
+): string => {
   const progress = Math.max(0, frame - startFrame) / speed;
   const charCount = Math.floor(progress);
   return text.slice(0, charCount);
 };
 
 // Number counter
-const useCounterAnimation = (target: number, frame: number, startFrame: number, duration: number = 25): string => {
+const useCounterAnimation = (
+  target: number,
+  frame: number,
+  startFrame: number,
+  duration: number = 25,
+): string => {
   const progress = Math.max(0, Math.min(1, (frame - startFrame) / duration));
   const eased = 1 - Math.pow(1 - progress, 3);
   return Math.floor(target * eased).toString();
@@ -45,18 +55,75 @@ const TargetCrosshair: React.FC<{ frame: number }> = ({ frame }) => {
     >
       <svg width="150" height="150" viewBox="0 0 150 150">
         {/* Outer ring */}
-        <circle cx="75" cy="75" r="70" fill="none" stroke="rgba(99, 102, 241, 0.3)" strokeWidth="1" strokeDasharray="5,5" />
+        <circle
+          cx="75"
+          cy="75"
+          r="70"
+          fill="none"
+          stroke="rgba(99, 102, 241, 0.3)"
+          strokeWidth="1"
+          strokeDasharray="5,5"
+        />
         {/* Inner ring */}
-        <circle cx="75" cy="75" r="50" fill="none" stroke="rgba(99, 102, 241, 0.4)" strokeWidth="1" />
+        <circle
+          cx="75"
+          cy="75"
+          r="50"
+          fill="none"
+          stroke="rgba(99, 102, 241, 0.4)"
+          strokeWidth="1"
+        />
         {/* Cross lines */}
-        <line x1="75" y1="5" x2="75" y2="145" stroke="rgba(99, 102, 241, 0.3)" strokeWidth="1" />
-        <line x1="5" y1="75" x2="145" y2="75" stroke="rgba(99, 102, 241, 0.3)" strokeWidth="1" />
+        <line
+          x1="75"
+          y1="5"
+          x2="75"
+          y2="145"
+          stroke="rgba(99, 102, 241, 0.3)"
+          strokeWidth="1"
+        />
+        <line
+          x1="5"
+          y1="75"
+          x2="145"
+          y2="75"
+          stroke="rgba(99, 102, 241, 0.3)"
+          strokeWidth="1"
+        />
         {/* Rotating element */}
         <g transform={`rotate(${rotation}, 75, 75)`}>
-          <line x1="75" y1="10" x2="75" y2="30" stroke="rgba(99, 102, 241, 0.6)" strokeWidth="2" />
-          <line x1="75" y1="120" x2="75" y2="140" stroke="rgba(99, 102, 241, 0.6)" strokeWidth="2" />
-          <line x1="10" y1="75" x2="30" y2="75" stroke="rgba(99, 102, 241, 0.6)" strokeWidth="2" />
-          <line x1="120" y1="75" x2="140" y2="75" stroke="rgba(99, 102, 241, 0.6)" strokeWidth="2" />
+          <line
+            x1="75"
+            y1="10"
+            x2="75"
+            y2="30"
+            stroke="rgba(99, 102, 241, 0.6)"
+            strokeWidth="2"
+          />
+          <line
+            x1="75"
+            y1="120"
+            x2="75"
+            y2="140"
+            stroke="rgba(99, 102, 241, 0.6)"
+            strokeWidth="2"
+          />
+          <line
+            x1="10"
+            y1="75"
+            x2="30"
+            y2="75"
+            stroke="rgba(99, 102, 241, 0.6)"
+            strokeWidth="2"
+          />
+          <line
+            x1="120"
+            y1="75"
+            x2="140"
+            y2="75"
+            stroke="rgba(99, 102, 241, 0.6)"
+            strokeWidth="2"
+          />
         </g>
       </svg>
     </div>
@@ -68,12 +135,25 @@ const MoneyTrail: React.FC<{ frame: number }> = ({ frame }) => {
   const bills = Array.from({ length: 6 }).map((_, i) => {
     const x = interpolate((frame + i * 15) % 80, [0, 80], [20, 80]);
     const y = 30 + Math.sin((frame + i * 20) * 0.1) * 10;
-    const opacity = interpolate((frame + i * 15) % 80, [0, 40, 80], [0, 0.5, 0]);
+    const opacity = interpolate(
+      (frame + i * 15) % 80,
+      [0, 40, 80],
+      [0, 0.5, 0],
+    );
     return { x, y, opacity };
   });
 
   return (
-    <div style={{ position: "absolute", top: "40%", left: 0, right: 0, height: "30%", overflow: "hidden" }}>
+    <div
+      style={{
+        position: "absolute",
+        top: "40%",
+        left: 0,
+        right: 0,
+        height: "30%",
+        overflow: "hidden",
+      }}
+    >
       {bills.map((b, i) => (
         <div
           key={i}
@@ -128,13 +208,27 @@ const WolfEyes: React.FC<{ frame: number }> = ({ frame }) => {
 export const SorosScene: React.FC = () => {
   const frame = useCurrentFrame();
 
-  const titleOpacity = interpolate(frame, [0, 20], [0, 1], { extrapolateRight: "clamp" });
-  const sorosOpacity = interpolate(frame, [15, 45], [0, 1], { extrapolateRight: "clamp" });
-  const quoteOpacity = interpolate(frame, [30, 70], [0, 1], { extrapolateRight: "clamp" });
-  const profitOpacity = interpolate(frame, [50, 90], [0, 1], { extrapolateRight: "clamp" });
+  const titleOpacity = interpolate(frame, [0, 20], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const sorosOpacity = interpolate(frame, [15, 45], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const quoteOpacity = interpolate(frame, [30, 70], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const profitOpacity = interpolate(frame, [50, 90], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   // Spring animations
-  const sorosScale = spring({ frame, from: 0, to: 1, damping: 12 });
+  const sorosScale = spring({
+    frame,
+    fps: 30,
+    from: 0,
+    to: 1,
+    config: { damping: 12 },
+  });
   const sorosRotate = interpolate(frame, [15, 45], [-30, 0]);
 
   // Glow pulse
@@ -150,7 +244,11 @@ export const SorosScene: React.FC = () => {
   const shadowOffset = interpolate(frame, [30, 70], [20, 5]);
 
   return (
-    <AbsoluteFill style={{ background: "linear-gradient(180deg, #1a1a2e 0%, #0d1117 100%)" }}>
+    <AbsoluteFill
+      style={{
+        background: "linear-gradient(180deg, #1a1a2e 0%, #0d1117 100%)",
+      }}
+    >
       {/* NEW: Target crosshair */}
       <TargetCrosshair frame={frame} />
 

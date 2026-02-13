@@ -1,26 +1,5 @@
 import React, { useMemo } from "react";
-import { AbsoluteFill, useCurrentFrame, interpolate, spring } from "remotion";
-
-// Animated number counter
-const AnimatedNumber: React.FC<{
-  value: number;
-  startFrame: number;
-  duration?: number;
-  prefix?: string;
-  suffix?: string;
-  decimals?: number;
-  style?: React.CSSProperties;
-}> = ({ value, startFrame, duration = 60, prefix = "", suffix = "", decimals = 0, style }) => {
-  const frame = useCurrentFrame();
-  const progress = Math.max(0, Math.min(1, (frame - startFrame) / duration));
-  const animatedValue = spring({ value: progress * value, fps: 30, damping: 15 });
-
-  return (
-    <span style={style}>
-      {prefix}{animatedValue.toFixed(decimals)}{suffix}
-    </span>
-  );
-};
+import { AbsoluteFill, useCurrentFrame, interpolate } from "remotion";
 
 // Typewriter text component
 const TypewriterText: React.FC<{
@@ -42,31 +21,10 @@ const TypewriterText: React.FC<{
   );
 };
 
-// Pulsing circle effect
-const PulsingCircle: React.FC<{
-  size?: number;
-  color?: string;
-  delay?: number;
-}> = ({ size = 80, color = "#fbbf24", delay = 0 }) => {
-  const frame = useCurrentFrame();
-  const pulse = Math.sin((frame + delay) * 0.08) * 0.15 + 1;
-
-  return (
-    <div
-      style={{
-        width: size,
-        height: size,
-        borderRadius: "50%",
-        background: `linear-gradient(135deg, ${color}, ${color}88)`,
-        transform: `scale(${pulse})`,
-        boxShadow: `0 0 ${size * 0.4}px ${color}66`,
-      }}
-    />
-  );
-};
-
 // Flowing money particles
-const MoneyFlow: React.FC<{ direction?: "left" | "right" }> = ({ direction = "right" }) => {
+const MoneyFlow: React.FC<{ direction?: "left" | "right" }> = ({
+  direction = "right",
+}) => {
   const frame = useCurrentFrame();
   const particles = useMemo(() => {
     return Array.from({ length: 15 }, (_, i) => ({
@@ -78,9 +36,22 @@ const MoneyFlow: React.FC<{ direction?: "left" | "right" }> = ({ direction = "ri
   }, []);
 
   return (
-    <div style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, overflow: "hidden", pointerEvents: "none" }}>
+    <div
+      style={{
+        position: "absolute",
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        overflow: "hidden",
+        pointerEvents: "none",
+      }}
+    >
       {particles.map((p) => {
-        const x = ((frame * p.speed * (direction === "right" ? 1 : -1) + p.delay) % 120) - 10;
+        const x =
+          ((frame * p.speed * (direction === "right" ? 1 : -1) + p.delay) %
+            120) -
+          10;
         const opacity = Math.max(0, 1 - Math.abs(x - 50) / 60);
         return (
           <div
@@ -107,11 +78,24 @@ const MultiplierBars: React.FC = () => {
   const bars = [1, 3, 5, 7, 10];
 
   return (
-    <div style={{ display: "flex", gap: 8, alignItems: "flex-end", justifyContent: "center", height: 100 }}>
+    <div
+      style={{
+        display: "flex",
+        gap: 8,
+        alignItems: "flex-end",
+        justifyContent: "center",
+        height: 100,
+      }}
+    >
       {bars.map((val, i) => {
-        const height = interpolate(frame, [30 + i * 10, 60 + i * 10], [0, val * 8], {
-          extrapolateRight: "clamp",
-        });
+        const height = interpolate(
+          frame,
+          [30 + i * 10, 60 + i * 10],
+          [0, val * 8],
+          {
+            extrapolateRight: "clamp",
+          },
+        );
         const opacity = interpolate(frame, [30 + i * 10, 50 + i * 10], [0, 1]);
         return (
           <div
@@ -119,7 +103,10 @@ const MultiplierBars: React.FC = () => {
             style={{
               width: 30,
               height: height,
-              background: val === 10 ? "linear-gradient(180deg, #ef4444, #b91c1c)" : "linear-gradient(180deg, #3b82f6, #1d4ed8)",
+              background:
+                val === 10
+                  ? "linear-gradient(180deg, #ef4444, #b91c1c)"
+                  : "linear-gradient(180deg, #3b82f6, #1d4ed8)",
               borderRadius: 4,
               opacity,
               display: "flex",
@@ -128,7 +115,9 @@ const MultiplierBars: React.FC = () => {
               paddingBottom: 5,
             }}
           >
-            <span style={{ color: "#fff", fontSize: 10, fontWeight: 600 }}>{val}x</span>
+            <span style={{ color: "#fff", fontSize: 10, fontWeight: 600 }}>
+              {val}x
+            </span>
           </div>
         );
       })}
@@ -183,7 +172,11 @@ export const FractionalReserveScene: React.FC = () => {
   const float3 = Math.sin(frame * 0.05 + 2) * 5;
 
   return (
-    <AbsoluteFill style={{ background: "linear-gradient(180deg, #1a1a2e 0%, #0d1117 100%)" }}>
+    <AbsoluteFill
+      style={{
+        background: "linear-gradient(180deg, #1a1a2e 0%, #0d1117 100%)",
+      }}
+    >
       {/* Animated background gradient */}
       <div
         style={{
@@ -244,9 +237,15 @@ export const FractionalReserveScene: React.FC = () => {
         >
           <span style={{ fontSize: 32, color: "#1a1a2e" }}>💰</span>
         </div>
-        <div style={{ fontSize: 14, color: "#e8e8e8", fontWeight: 600 }}>Step 1</div>
-        <div style={{ fontSize: 12, color: "#9ca3af" }}>Depositors store gold</div>
-        <div style={{ fontSize: 11, color: "#6b7280", marginTop: 5 }}>储户存放金币</div>
+        <div style={{ fontSize: 14, color: "#e8e8e8", fontWeight: 600 }}>
+          Step 1
+        </div>
+        <div style={{ fontSize: 12, color: "#9ca3af" }}>
+          Depositors store gold
+        </div>
+        <div style={{ fontSize: 11, color: "#6b7280", marginTop: 5 }}>
+          储户存放金币
+        </div>
       </div>
 
       {/* Arrow 1 */}
@@ -291,9 +290,15 @@ export const FractionalReserveScene: React.FC = () => {
         >
           <span style={{ fontSize: 14, color: "#1a1a2e" }}>Receipt</span>
         </div>
-        <div style={{ fontSize: 14, color: "#e8e8e8", fontWeight: 600 }}>Step 2</div>
-        <div style={{ fontSize: 12, color: "#9ca3af" }}>Bank issues receipts</div>
-        <div style={{ fontSize: 11, color: "#6b7280", marginTop: 5 }}>银行发行收据(货币)</div>
+        <div style={{ fontSize: 14, color: "#e8e8e8", fontWeight: 600 }}>
+          Step 2
+        </div>
+        <div style={{ fontSize: 12, color: "#9ca3af" }}>
+          Bank issues receipts
+        </div>
+        <div style={{ fontSize: 11, color: "#6b7280", marginTop: 5 }}>
+          银行发行收据(货币)
+        </div>
       </div>
 
       {/* Arrow 2 */}
@@ -335,15 +340,29 @@ export const FractionalReserveScene: React.FC = () => {
             animation: "pulse 0.5s infinite",
           }}
         >
-          <span style={{ fontSize: 28, color: "#fff", fontWeight: 700 }}>×10</span>
+          <span style={{ fontSize: 28, color: "#fff", fontWeight: 700 }}>
+            ×10
+          </span>
         </div>
-        <div style={{ fontSize: 14, color: "#e8e8e8", fontWeight: 600 }}>Step 3</div>
+        <div style={{ fontSize: 14, color: "#e8e8e8", fontWeight: 600 }}>
+          Step 3
+        </div>
         <div style={{ fontSize: 12, color: "#ef4444" }}>Banks lend 10x!</div>
-        <div style={{ fontSize: 11, color: "#6b7280", marginTop: 5 }}>银行借出10倍</div>
+        <div style={{ fontSize: 11, color: "#6b7280", marginTop: 5 }}>
+          银行借出10倍
+        </div>
       </div>
 
       {/* Multiplier visualization */}
-      <div style={{ position: "absolute", top: "55%", left: "50%", transform: "translateX(-50%)", width: "60%" }}>
+      <div
+        style={{
+          position: "absolute",
+          top: "55%",
+          left: "50%",
+          transform: "translateX(-50%)",
+          width: "60%",
+        }}
+      >
         <MultiplierBars />
       </div>
 

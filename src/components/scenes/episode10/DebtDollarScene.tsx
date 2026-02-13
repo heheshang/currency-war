@@ -1,5 +1,5 @@
 import React from "react";
-import { AbsoluteFill, useCurrentFrame, interpolate, spring } from "remotion";
+import { AbsoluteFill, useCurrentFrame, interpolate } from "remotion";
 
 // Typewriter text component
 const TypewriterText: React.FC<{
@@ -24,7 +24,14 @@ const TypewriterText: React.FC<{
 // Flowing arrows
 const FlowingArrows: React.FC = () => {
   return (
-    <div style={{ position: "absolute", inset: 0, overflow: "hidden", pointerEvents: "none" }}>
+    <div
+      style={{
+        position: "absolute",
+        inset: 0,
+        overflow: "hidden",
+        pointerEvents: "none",
+      }}
+    >
       {[0, 1, 2].map((i) => (
         <div
           key={i}
@@ -99,7 +106,9 @@ const AnimatedStepCard: React.FC<{
         {icon}
       </div>
       <div style={{ flex: 1 }}>
-        <div style={{ fontSize: 16, color: "#e8e8e8", fontWeight: 600 }}>{title}</div>
+        <div style={{ fontSize: 16, color: "#e8e8e8", fontWeight: 600 }}>
+          {title}
+        </div>
         <div style={{ fontSize: 12, color: "#9ca3af" }}>{subtitle}</div>
       </div>
     </div>
@@ -113,14 +122,23 @@ const MoneyCreationFlow: React.FC = () => {
   const moneyCount = Math.min(100, Math.floor(frame / 5));
 
   return (
-    <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "30%", overflow: "hidden" }}>
+    <div
+      style={{
+        position: "absolute",
+        bottom: 0,
+        left: 0,
+        right: 0,
+        height: "30%",
+        overflow: "hidden",
+      }}
+    >
       {Array.from({ length: moneyCount }, (_, i) => (
         <div
           key={i}
           style={{
             position: "absolute",
             left: `${10 + (i % 8) * 12}%`,
-            bottom: `${(Math.floor(i / 8) * 15)}%`,
+            bottom: `${Math.floor(i / 8) * 15}%`,
             fontSize: 12,
             opacity: Math.min(1, (frame - i * 5) / 30),
             transform: `scale(${0.5 + Math.min(1, (frame - i * 5) / 30) * 0.5})`,
@@ -144,12 +162,14 @@ const HighlightedText: React.FC<{
   const glow = Math.sin(frame * 0.1) * 5 + 10;
 
   return (
-    <span style={{
-      opacity,
-      color,
-      textShadow: `0 0 ${glow}px ${color}`,
-      fontWeight: 700,
-    }}>
+    <span
+      style={{
+        opacity,
+        color,
+        textShadow: `0 0 ${glow}px ${color}`,
+        fontWeight: 700,
+      }}
+    >
       {children}
     </span>
   );
@@ -169,7 +189,11 @@ export const DebtDollarScene: React.FC = () => {
   const bgPulse = Math.sin(frame * 0.03) * 0.03 + 1;
 
   return (
-    <AbsoluteFill style={{ background: "linear-gradient(180deg, #0d1117 0%, #1a1a2e 100%)" }}>
+    <AbsoluteFill
+      style={{
+        background: "linear-gradient(180deg, #0d1117 0%, #1a1a2e 100%)",
+      }}
+    >
       {/* Animated background gradient */}
       <div
         style={{
@@ -229,13 +253,15 @@ export const DebtDollarScene: React.FC = () => {
         />
 
         {/* Arrow */}
-        <div style={{
-          textAlign: "center",
-          fontSize: 24,
-          color: "#ffd700",
-          marginBottom: 20,
-          animation: "bounce 1s infinite"
-        }}>
+        <div
+          style={{
+            textAlign: "center",
+            fontSize: 24,
+            color: "#ffd700",
+            marginBottom: 20,
+            animation: "bounce 1s infinite",
+          }}
+        >
           ↓
         </div>
 
@@ -251,13 +277,15 @@ export const DebtDollarScene: React.FC = () => {
         />
 
         {/* Arrow */}
-        <div style={{
-          textAlign: "center",
-          fontSize: 24,
-          color: "#3b82f6",
-          marginBottom: 20,
-          animation: "bounce 1s infinite"
-        }}>
+        <div
+          style={{
+            textAlign: "center",
+            fontSize: 24,
+            color: "#3b82f6",
+            marginBottom: 20,
+            animation: "bounce 1s infinite",
+          }}
+        >
           ↓
         </div>
 
@@ -283,18 +311,18 @@ export const DebtDollarScene: React.FC = () => {
           textAlign: "center",
         }}
       >
-        <div style={{
-          fontSize: 28,
-          fontWeight: 700,
-          padding: "15px 30px",
-          background: "rgba(239, 68, 68, 0.15)",
-          borderRadius: 12,
-          border: "2px solid #ef4444",
-          boxShadow: "0 0 30px rgba(239, 68, 68, 0.3)",
-        }}>
-          <HighlightedText color="#ef4444">
-            Every Dollar = Debt
-          </HighlightedText>
+        <div
+          style={{
+            fontSize: 28,
+            fontWeight: 700,
+            padding: "15px 30px",
+            background: "rgba(239, 68, 68, 0.15)",
+            borderRadius: 12,
+            border: "2px solid #ef4444",
+            boxShadow: "0 0 30px rgba(239, 68, 68, 0.3)",
+          }}
+        >
+          <HighlightedText color="#ef4444">Every Dollar = Debt</HighlightedText>
         </div>
         <div style={{ fontSize: 14, color: "#9ca3af", marginTop: 10 }}>
           每一个美元都是债务

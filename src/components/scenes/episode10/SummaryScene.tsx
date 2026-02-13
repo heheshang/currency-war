@@ -1,46 +1,5 @@
 import React, { useMemo } from "react";
-import { AbsoluteFill, useCurrentFrame, interpolate, spring } from "remotion";
-
-// Animated number counter with spring
-const AnimatedCounter: React.FC<{
-  value: number;
-  startFrame: number;
-  duration?: number;
-  prefix?: string;
-  suffix?: string;
-  decimals?: number;
-  style?: React.CSSProperties;
-}> = ({ value, startFrame, duration = 60, prefix = "", suffix = "", decimals = 0, style }) => {
-  const frame = useCurrentFrame();
-  const progress = Math.max(0, Math.min(1, (frame - startFrame) / duration));
-  const animatedValue = spring({ value: progress * value, fps: 30, damping: 15 });
-
-  return (
-    <span style={style}>
-      {prefix}{animatedValue.toFixed(decimals)}{suffix}
-    </span>
-  );
-};
-
-// Typewriter text component
-const TypewriterText: React.FC<{
-  text: string;
-  startFrame: number;
-  speed?: number;
-  style?: React.CSSProperties;
-}> = ({ text, startFrame, speed = 3, style }) => {
-  const frame = useCurrentFrame();
-  const charCount = Math.max(0, Math.floor((frame - startFrame) / speed));
-
-  return (
-    <span style={style}>
-      {text.slice(0, charCount)}
-      {charCount < text.length && (
-        <span style={{ animation: "blink 1s infinite" }}>|</span>
-      )}
-    </span>
-  );
-};
+import { AbsoluteFill, useCurrentFrame, interpolate } from "remotion";
 
 // Summary item card
 const SummaryItem: React.FC<{
@@ -89,7 +48,14 @@ const FloatingParticles: React.FC = () => {
   }, []);
 
   return (
-    <div style={{ position: "absolute", inset: 0, overflow: "hidden", pointerEvents: "none" }}>
+    <div
+      style={{
+        position: "absolute",
+        inset: 0,
+        overflow: "hidden",
+        pointerEvents: "none",
+      }}
+    >
       {particles.map((p) => {
         const y = ((frame * p.speed) % 120) - 10;
         const opacity = Math.sin(frame * 0.05 + p.id) * 0.3 + 0.5;
@@ -130,7 +96,9 @@ const AnimatedTitle: React.FC = () => {
         textShadow: `0 0 ${glow}px rgba(255, 215, 0, 0.5)`,
       }}
     >
-      <div style={{ fontSize: 42, color: "#ffd700", fontWeight: 700 }}>Summary</div>
+      <div style={{ fontSize: 42, color: "#ffd700", fontWeight: 700 }}>
+        Summary
+      </div>
     </div>
   );
 };
@@ -149,30 +117,12 @@ const AnimatedFooter: React.FC = () => {
         textAlign: "center",
       }}
     >
-      <div style={{ fontSize: 34, color: "#ffd700", fontWeight: 700 }}>Currency War</div>
-      <div style={{ fontSize: 16, color: "#9ca3af", marginTop: 5 }}>Episode 10 of 11</div>
-    </div>
-  );
-};
-
-// Pulsing highlight
-const PulsingHighlight: React.FC<{
-  startFrame?: number;
-  children: React.ReactNode;
-}> = ({ startFrame = 70, children }) => {
-  const frame = useCurrentFrame();
-  const opacity = interpolate(frame, [startFrame, startFrame + 20], [0, 1]);
-  const pulse = Math.sin((frame - startFrame) * 0.08) * 0.05 + 1;
-
-  return (
-    <div
-      style={{
-        opacity,
-        transform: `scale(${pulse})`,
-        boxShadow: "0 0 30px rgba(255, 215, 0, 0.3)",
-      }}
-    >
-      {children}
+      <div style={{ fontSize: 34, color: "#ffd700", fontWeight: 700 }}>
+        Currency War
+      </div>
+      <div style={{ fontSize: 16, color: "#9ca3af", marginTop: 5 }}>
+        Episode 10 of 11
+      </div>
     </div>
   );
 };
@@ -184,22 +134,29 @@ const PulsingHighlight: React.FC<{
 export const SummaryScene: React.FC = () => {
   const frame = useCurrentFrame();
 
-  const titleOpacity = interpolate(frame, [0, 20], [0, 1]);
   const contentOpacity = interpolate(frame, [20, 60], [0, 1]);
-  const footerOpacity = interpolate(frame, [80, 120], [0, 1]);
 
   // Animated background
   const bgPulse = Math.sin(frame * 0.03) * 0.03 + 1;
 
   const summaryItems = [
     { icon: "🏦", text: "部分储备金 + 债务货币 = 通货膨胀", color: "#ffd700" },
-    { icon: "📈", text: "债务永远无法偿还，利率必然越来越低", color: "#fbbf24" },
+    {
+      icon: "📈",
+      text: "债务永远无法偿还，利率必然越来越低",
+      color: "#fbbf24",
+    },
     { icon: "⚠️", text: "中国美国陷入金融恐怖平衡", color: "#ef4444" },
     { icon: "🥇", text: "黄金是唯一解决方案", color: "#4ade80" },
   ];
 
   return (
-    <AbsoluteFill style={{ background: "radial-gradient(circle at center, #2d1f1f 0%, #0d0d0d 100%)" }}>
+    <AbsoluteFill
+      style={{
+        background:
+          "radial-gradient(circle at center, #2d1f1f 0%, #0d0d0d 100%)",
+      }}
+    >
       {/* Animated background */}
       <div
         style={{

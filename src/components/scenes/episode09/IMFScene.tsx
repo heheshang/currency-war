@@ -13,14 +13,24 @@ import { AbsoluteFill, useCurrentFrame, interpolate, spring } from "remotion";
  */
 
 // Typewriter effect
-const getVisibleText = (text: string, frame: number, startFrame: number, speed: number = 2): string => {
+const getVisibleText = (
+  text: string,
+  frame: number,
+  startFrame: number,
+  speed: number = 2,
+): string => {
   const progress = Math.max(0, frame - startFrame) / speed;
   const charCount = Math.floor(progress);
   return text.slice(0, charCount);
 };
 
 // Number counter
-const useCounterAnimation = (target: number, frame: number, startFrame: number, duration: number = 25): string => {
+const useCounterAnimation = (
+  target: number,
+  frame: number,
+  startFrame: number,
+  duration: number = 25,
+): string => {
   const progress = Math.max(0, Math.min(1, (frame - startFrame) / duration));
   const eased = 1 - Math.pow(1 - progress, 3);
   return Math.floor(target * eased).toString();
@@ -38,12 +48,21 @@ const CONDITIONS = [
 // NEW: Prison bars effect
 const PrisonBars: React.FC<{ frame: number }> = ({ frame }) => {
   const bars = Array.from({ length: 8 }).map((_, i) => {
-    const height = interpolate(frame, [20 + i * 5, 50 + i * 5], [0, 100], { extrapolateRight: "clamp" });
+    const height = interpolate(frame, [20 + i * 5, 50 + i * 5], [0, 100], {
+      extrapolateRight: "clamp",
+    });
     return height;
   });
 
   return (
-    <div style={{ position: "absolute", inset: 0, overflow: "hidden", opacity: 0.15 }}>
+    <div
+      style={{
+        position: "absolute",
+        inset: 0,
+        overflow: "hidden",
+        opacity: 0.15,
+      }}
+    >
       {bars.map((h, i) => (
         <div
           key={i}
@@ -66,7 +85,11 @@ const PrisonBars: React.FC<{ frame: number }> = ({ frame }) => {
 const MoneyDrain: React.FC<{ frame: number }> = ({ frame }) => {
   const drops = Array.from({ length: 6 }).map((_, i) => {
     const y = interpolate((frame + i * 20) % 80, [0, 80], [0, 60]);
-    const opacity = interpolate((frame + i * 20) % 80, [0, 40, 80], [0, 0.6, 0]);
+    const opacity = interpolate(
+      (frame + i * 20) % 80,
+      [0, 40, 80],
+      [0, 0.6, 0],
+    );
     return { y, opacity };
   });
 
@@ -113,7 +136,13 @@ const MoneyDrain: React.FC<{ frame: number }> = ({ frame }) => {
 
 // NEW: Contract signature effect
 const ContractSeal: React.FC<{ frame: number }> = ({ frame }) => {
-  const scale = spring({ frame: frame - 70, from: 0, to: 1, damping: 10 });
+  const scale = spring({
+    frame: frame - 70,
+    fps: 30,
+    from: 0,
+    to: 1,
+    config: { damping: 10 },
+  });
   const rotation = interpolate(frame, [70, 90], [-20, 0]);
 
   return (
@@ -134,7 +163,9 @@ const ContractSeal: React.FC<{ frame: number }> = ({ frame }) => {
         opacity: interpolate(frame, [70, 90], [0, 0.5]),
       }}
     >
-      <span style={{ fontSize: 10, color: "#ef4444", fontWeight: 700 }}>SEALED</span>
+      <span style={{ fontSize: 10, color: "#ef4444", fontWeight: 700 }}>
+        SEALED
+      </span>
     </div>
   );
 };
@@ -142,13 +173,27 @@ const ContractSeal: React.FC<{ frame: number }> = ({ frame }) => {
 export const IMFScene: React.FC = () => {
   const frame = useCurrentFrame();
 
-  const titleOpacity = interpolate(frame, [0, 20], [0, 1], { extrapolateRight: "clamp" });
-  const imfOpacity = interpolate(frame, [15, 45], [0, 1], { extrapolateRight: "clamp" });
-  const conditionsOpacity = interpolate(frame, [25, 60], [0, 1], { extrapolateRight: "clamp" });
-  const paymentsOpacity = interpolate(frame, [50, 90], [0, 1], { extrapolateRight: "clamp" });
+  const titleOpacity = interpolate(frame, [0, 20], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const imfOpacity = interpolate(frame, [15, 45], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const conditionsOpacity = interpolate(frame, [25, 60], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const paymentsOpacity = interpolate(frame, [50, 90], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   // Spring animations
-  const imfScale = spring({ frame, from: 0, to: 1, damping: 12 });
+  const imfScale = spring({
+    frame,
+    fps: 30,
+    from: 0,
+    to: 1,
+    config: { damping: 12 },
+  });
 
   // Counter animations
   const interestValue = useCounterAnimation(326, frame, 55, 25);
@@ -164,11 +209,17 @@ export const IMFScene: React.FC = () => {
 
   // Conditions stagger
   const getConditionOpacity = (index: number) => {
-    return interpolate(frame, [30 + index * 8, 50 + index * 8], [0, 1], { extrapolateRight: "clamp" });
+    return interpolate(frame, [30 + index * 8, 50 + index * 8], [0, 1], {
+      extrapolateRight: "clamp",
+    });
   };
 
   return (
-    <AbsoluteFill style={{ background: "linear-gradient(180deg, #0d1117 0%, #1a1a2e 100%)" }}>
+    <AbsoluteFill
+      style={{
+        background: "linear-gradient(180deg, #0d1117 0%, #1a1a2e 100%)",
+      }}
+    >
       {/* NEW: Prison bars */}
       <PrisonBars frame={frame} />
 
@@ -184,7 +235,8 @@ export const IMFScene: React.FC = () => {
           position: "absolute",
           inset: 0,
           transform: `scale(${bgPulse})`,
-          background: "radial-gradient(ellipse at center, rgba(255, 215, 0, 0.03) 0%, transparent 70%)",
+          background:
+            "radial-gradient(ellipse at center, rgba(255, 215, 0, 0.03) 0%, transparent 70%)",
         }}
       />
 
@@ -224,7 +276,9 @@ export const IMFScene: React.FC = () => {
           boxShadow: "0 0 30px rgba(255, 215, 0, 0.3)",
         }}
       >
-        <span style={{ fontSize: 24, fontWeight: 700, color: "#ffd700" }}>IMF</span>
+        <span style={{ fontSize: 24, fontWeight: 700, color: "#ffd700" }}>
+          IMF
+        </span>
       </div>
 
       {/* Chain links around IMF */}
@@ -258,9 +312,16 @@ export const IMFScene: React.FC = () => {
         }}
       >
         <div style={{ fontSize: 16, color: "#e8e8e8", marginBottom: 15 }}>
-          {getVisibleText("IMF \"Special Conditions\":", frame, 25, 3)}
+          {getVisibleText('IMF "Special Conditions":', frame, 25, 3)}
         </div>
-        <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 10 }}>
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            gap: 10,
+          }}
+        >
           {CONDITIONS.map((item, i) => (
             <div
               key={i}
@@ -298,18 +359,36 @@ export const IMFScene: React.FC = () => {
         </div>
         <div style={{ display: "flex", justifyContent: "center", gap: 30 }}>
           <div>
-            <div style={{ fontSize: 32, color: "#ef4444", fontWeight: 700 }}>${interestValue}B</div>
+            <div style={{ fontSize: 32, color: "#ef4444", fontWeight: 700 }}>
+              ${interestValue}B
+            </div>
             <div style={{ fontSize: 12, color: "#9ca3af" }}>Interest</div>
           </div>
           <div>
-            <div style={{ fontSize: 32, color: "#ef4444", fontWeight: 700 }}>${principalValue}B</div>
+            <div style={{ fontSize: 32, color: "#ef4444", fontWeight: 700 }}>
+              ${principalValue}B
+            </div>
             <div style={{ fontSize: 12, color: "#9ca3af" }}>Principal</div>
           </div>
         </div>
-        <div style={{ fontSize: 24, color: "#ffd700", fontWeight: 700, marginTop: 15 }}>
+        <div
+          style={{
+            fontSize: 24,
+            color: "#ffd700",
+            fontWeight: 700,
+            marginTop: 15,
+          }}
+        >
           Total: ${totalPaidValue}B for $430B Debt
         </div>
-        <div style={{ fontSize: 14, color: "#ef4444", marginTop: 5, fontWeight: 600 }}>
+        <div
+          style={{
+            fontSize: 14,
+            color: "#ef4444",
+            marginTop: 5,
+            fontWeight: 600,
+          }}
+        >
           Still Owe ${stillOweValue}B!
         </div>
       </div>

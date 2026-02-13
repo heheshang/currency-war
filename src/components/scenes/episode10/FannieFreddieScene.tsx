@@ -10,14 +10,28 @@ const AnimatedCounter: React.FC<{
   suffix?: string;
   decimals?: number;
   style?: React.CSSProperties;
-}> = ({ value, startFrame, duration = 60, prefix = "", suffix = "", decimals = 0, style }) => {
+}> = ({
+  value,
+  startFrame,
+  duration = 60,
+  prefix = "",
+  suffix = "",
+  decimals = 0,
+  style,
+}) => {
   const frame = useCurrentFrame();
   const progress = Math.max(0, Math.min(1, (frame - startFrame) / duration));
-  const animatedValue = spring({ value: progress * value, fps: 30, damping: 15 });
+  const animatedValue = spring({
+    frame: progress * 60,
+    fps: 30,
+    config: { damping: 15 },
+  });
 
   return (
     <span style={style}>
-      {prefix}{animatedValue.toFixed(decimals)}{suffix}
+      {prefix}
+      {animatedValue.toFixed(decimals)}
+      {suffix}
     </span>
   );
 };
@@ -56,7 +70,14 @@ const FloatingHouses: React.FC = () => {
   }, []);
 
   return (
-    <div style={{ position: "absolute", inset: 0, overflow: "hidden", pointerEvents: "none" }}>
+    <div
+      style={{
+        position: "absolute",
+        inset: 0,
+        overflow: "hidden",
+        pointerEvents: "none",
+      }}
+    >
       {houses.map((h) => {
         const y = ((frame * 0.5 + h.delay) % 60) - 10;
         const opacity = Math.sin(frame * 0.05 + h.id) * 0.3 + 0.5;
@@ -109,7 +130,11 @@ const AnimatedHouseCard: React.FC<{
       }}
     >
       <span style={{ fontSize: 32 }}>🏠</span>
-      <span style={{ fontSize: 13, color: "#fff", marginTop: 8, fontWeight: 600 }}>{name}</span>
+      <span
+        style={{ fontSize: 13, color: "#fff", marginTop: 8, fontWeight: 600 }}
+      >
+        {name}
+      </span>
     </div>
   );
 };
@@ -121,7 +146,14 @@ const ConnectionLines: React.FC = () => {
 
   return (
     <svg
-      style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", pointerEvents: "none" }}
+      style={{
+        position: "absolute",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
+        pointerEvents: "none",
+      }}
       viewBox="0 0 1920 1080"
     >
       <line
@@ -175,10 +207,12 @@ export const FannieFreddieScene: React.FC = () => {
   const titleOpacity = interpolate(frame, [0, 20], [0, 1]);
   const contentOpacity = interpolate(frame, [20, 60], [0, 1]);
 
-  const houseScale = interpolate(frame, [30, 60], [0, 1]);
-
   return (
-    <AbsoluteFill style={{ background: "linear-gradient(180deg, #0d1117 0%, #1a1a2e 100%)" }}>
+    <AbsoluteFill
+      style={{
+        background: "linear-gradient(180deg, #0d1117 0%, #1a1a2e 100%)",
+      }}
+    >
       {/* Animated background */}
       <div
         style={{
@@ -243,11 +277,22 @@ export const FannieFreddieScene: React.FC = () => {
           opacity: contentOpacity,
         }}
       >
-        <div style={{ fontSize: 20, color: "#e8e8e8", marginBottom: 15, fontWeight: 600 }}>
+        <div
+          style={{
+            fontSize: 20,
+            color: "#e8e8e8",
+            marginBottom: 15,
+            fontWeight: 600,
+          }}
+        >
           "The Second Federal Reserve"
         </div>
-        <div style={{ fontSize: 14, color: "#9ca3af", marginBottom: 5 }}>政府发起机构 (GSE)</div>
-        <div style={{ fontSize: 14, color: "#9ca3af" }}>持有或担保美国近一半的房屋贷款</div>
+        <div style={{ fontSize: 14, color: "#9ca3af", marginBottom: 5 }}>
+          政府发起机构 (GSE)
+        </div>
+        <div style={{ fontSize: 14, color: "#9ca3af" }}>
+          持有或担保美国近一半的房屋贷款
+        </div>
       </div>
 
       {/* Numbers */}
@@ -270,8 +315,12 @@ export const FannieFreddieScene: React.FC = () => {
               suffix=" Trillion"
             />
           </div>
-          <div style={{ fontSize: 14, color: "#9ca3af", marginTop: 8 }}>in Mortgage Bonds / 抵押债券</div>
-          <div style={{ fontSize: 14, color: "#6b7280", marginTop: 5 }}>2008金融危机导火索</div>
+          <div style={{ fontSize: 14, color: "#9ca3af", marginTop: 8 }}>
+            in Mortgage Bonds / 抵押债券
+          </div>
+          <div style={{ fontSize: 14, color: "#6b7280", marginTop: 5 }}>
+            2008金融危机导火索
+          </div>
         </InfoBox>
       </div>
 

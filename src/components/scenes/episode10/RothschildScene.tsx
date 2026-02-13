@@ -1,26 +1,5 @@
 import React, { useMemo } from "react";
-import { AbsoluteFill, useCurrentFrame, interpolate, spring } from "remotion";
-
-// Animated number counter with spring
-const AnimatedCounter: React.FC<{
-  value: number;
-  startFrame: number;
-  duration?: number;
-  prefix?: string;
-  suffix?: string;
-  decimals?: number;
-  style?: React.CSSProperties;
-}> = ({ value, startFrame, duration = 60, prefix = "", suffix = "", decimals = 0, style }) => {
-  const frame = useCurrentFrame();
-  const progress = Math.max(0, Math.min(1, (frame - startFrame) / duration));
-  const animatedValue = spring({ value: progress * value, fps: 30, damping: 15 });
-
-  return (
-    <span style={style}>
-      {prefix}{animatedValue.toFixed(decimals)}{suffix}
-    </span>
-  );
-};
+import { AbsoluteFill, useCurrentFrame, interpolate } from "remotion";
 
 // Typewriter text component
 const TypewriterText: React.FC<{
@@ -84,12 +63,28 @@ const PulsingSignal: React.FC = () => {
   }, []);
 
   return (
-    <div style={{ position: "absolute", top: "60%", left: "50%", transform: "translateX(-50%)" }}>
+    <div
+      style={{
+        position: "absolute",
+        top: "60%",
+        left: "50%",
+        transform: "translateX(-50%)",
+      }}
+    >
       {signals.map((s) => {
-        const opacity = interpolate(frame, [s.delay + 50, s.delay + 80], [0, 1 - s.id * 0.2], {
-          extrapolateRight: "clamp",
-        });
-        const scale = interpolate(frame, [s.delay + 50, s.delay + 80], [0.5, 1 + s.id * 0.3]);
+        const opacity = interpolate(
+          frame,
+          [s.delay + 50, s.delay + 80],
+          [0, 1 - s.id * 0.2],
+          {
+            extrapolateRight: "clamp",
+          },
+        );
+        const scale = interpolate(
+          frame,
+          [s.delay + 50, s.delay + 80],
+          [0.5, 1 + s.id * 0.3],
+        );
 
         return (
           <div
@@ -179,7 +174,14 @@ const BackgroundParticles: React.FC = () => {
   }, []);
 
   return (
-    <div style={{ position: "absolute", inset: 0, overflow: "hidden", pointerEvents: "none" }}>
+    <div
+      style={{
+        position: "absolute",
+        inset: 0,
+        overflow: "hidden",
+        pointerEvents: "none",
+      }}
+    >
       {particles.map((p) => {
         const y = ((frame * p.speed) % 120) - 10;
         const opacity = Math.sin(frame * 0.05 + p.id) * 0.3 + 0.5;
@@ -211,17 +213,17 @@ const BackgroundParticles: React.FC = () => {
 export const RothschildScene: React.FC = () => {
   const frame = useCurrentFrame();
 
-  const dateOpacity = interpolate(frame, [0, 20], [0, 1]);
   const rothschildOpacity = interpolate(frame, [20, 60], [0, 1]);
-  const meaningOpacity = interpolate(frame, [50, 90], [0, 1]);
-
-  const crestScale = interpolate(frame, [30, 60], [0, 1]);
 
   // Animated background
   const bgPulse = Math.sin(frame * 0.03) * 0.03 + 1;
 
   return (
-    <AbsoluteFill style={{ background: "linear-gradient(180deg, #1a1a2e 0%, #0d1117 100%)" }}>
+    <AbsoluteFill
+      style={{
+        background: "linear-gradient(180deg, #1a1a2e 0%, #0d1117 100%)",
+      }}
+    >
       {/* Animated background */}
       <div
         style={{
@@ -273,7 +275,14 @@ export const RothschildScene: React.FC = () => {
           opacity: rothschildOpacity,
         }}
       >
-        <div style={{ fontSize: 30, color: "#ffd700", fontWeight: 700, marginBottom: 10 }}>
+        <div
+          style={{
+            fontSize: 30,
+            color: "#ffd700",
+            fontWeight: 700,
+            marginBottom: 10,
+          }}
+        >
           <TypewriterText
             text="Rothschild Exits Gold"
             startFrame={35}

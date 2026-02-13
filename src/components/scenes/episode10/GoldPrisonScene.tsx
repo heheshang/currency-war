@@ -1,26 +1,5 @@
 import React, { useMemo } from "react";
-import { AbsoluteFill, useCurrentFrame, interpolate, spring } from "remotion";
-
-// Animated number counter with spring
-const AnimatedCounter: React.FC<{
-  value: number;
-  startFrame: number;
-  duration?: number;
-  prefix?: string;
-  suffix?: string;
-  decimals?: number;
-  style?: React.CSSProperties;
-}> = ({ value, startFrame, duration = 60, prefix = "", suffix = "", decimals = 0, style }) => {
-  const frame = useCurrentFrame();
-  const progress = Math.max(0, Math.min(1, (frame - startFrame) / duration));
-  const animatedValue = spring({ value: progress * value, fps: 30, damping: 15 });
-
-  return (
-    <span style={style}>
-      {prefix}{animatedValue.toFixed(decimals)}{suffix}
-    </span>
-  );
-};
+import { AbsoluteFill, useCurrentFrame, interpolate } from "remotion";
 
 // Typewriter text component
 const TypewriterText: React.FC<{
@@ -55,7 +34,16 @@ const GoldBarStack: React.FC = () => {
   }, []);
 
   return (
-    <div style={{ position: "absolute", top: "25%", left: "50%", transform: "translateX(-50%)", display: "flex", gap: 8 }}>
+    <div
+      style={{
+        position: "absolute",
+        top: "25%",
+        left: "50%",
+        transform: "translateX(-50%)",
+        display: "flex",
+        gap: 8,
+      }}
+    >
       {bars.map((b, i) => {
         const opacity = interpolate(frame, [b.delay, b.delay + 20], [0, 1]);
         const y = interpolate(frame, [b.delay, b.delay + 30], [50, 0]);
@@ -76,54 +64,12 @@ const GoldBarStack: React.FC = () => {
               justifyContent: "center",
             }}
           >
-            <span style={{ fontSize: 12, color: "#1a1a2e", fontWeight: 700 }}>Gold</span>
+            <span style={{ fontSize: 12, color: "#1a1a2e", fontWeight: 700 }}>
+              Gold
+            </span>
           </div>
         );
       })}
-    </div>
-  );
-};
-
-// Caged gold visualization
-const CagedGold: React.FC = () => {
-  const frame = useCurrentFrame();
-
-  return (
-    <div style={{ position: "absolute", top: "25%", left: "50%", transform: "translate(-50%, -50%)" }}>
-      {/* Gold bars */}
-      <div style={{ display: "flex", gap: 10, justifyContent: "center", marginBottom: 20 }}>
-        {[1, 2, 3].map((i) => (
-          <div
-            key={i}
-            style={{
-              width: 60,
-              height: 30,
-              background: "linear-gradient(135deg, #fbbf24, #d97706)",
-              borderRadius: 2,
-              boxShadow: "0 5px 15px rgba(251, 191, 36, 0.3)",
-            }}
-          />
-        ))}
-      </div>
-
-      {/* Cage bars */}
-      <svg width="200" height="80" style={{ position: "absolute", top: -10, left: -10 }}>
-        {Array.from({ length: 6 }, (_, i) => (
-          <line
-            key={i}
-            x1={20 + i * 30}
-            y1="0"
-            x2={20 + i * 30}
-            y2="60"
-            stroke="#6b7280"
-            strokeWidth="3"
-            opacity={0.7}
-          />
-        ))}
-        <line x1="0" y1="0" x2="170" y2="0" stroke="#6b7280" strokeWidth="3" />
-        <line x1="0" y1="30" x2="170" y2="30" stroke="#6b7280" strokeWidth="3" />
-        <line x1="0" y1="60" x2="170" y2="60" stroke="#6b7280" strokeWidth="3" />
-      </svg>
     </div>
   );
 };
@@ -135,7 +81,13 @@ const PulsingPrice: React.FC<{
   suffix?: string;
   startFrame: number;
   color?: string;
-}> = ({ targetValue, prefix = "", suffix = "", startFrame, color = "#ef4444" }) => {
+}> = ({
+  targetValue,
+  prefix = "",
+  suffix = "",
+  startFrame,
+  color = "#ef4444",
+}) => {
   const frame = useCurrentFrame();
   const progress = Math.max(0, Math.min(1, (frame - startFrame) / 60));
   const value = progress * targetValue;
@@ -144,7 +96,9 @@ const PulsingPrice: React.FC<{
   return (
     <div style={{ transform: `scale(${pulse})` }}>
       <span style={{ fontSize: 56, color, fontWeight: 700 }}>
-        {prefix}{value.toFixed(0)}{suffix}
+        {prefix}
+        {value.toFixed(0)}
+        {suffix}
       </span>
     </div>
   );
@@ -178,10 +132,17 @@ const EventBox: React.FC<{
 
 // Downward arrow animation
 const DownwardArrow: React.FC = () => {
-  const frame = useCurrentFrame();
-
   return (
-    <div style={{ position: "absolute", top: "45%", left: "50%", transform: "translateX(-50%)", fontSize: 40, color: "#ef4444" }}>
+    <div
+      style={{
+        position: "absolute",
+        top: "45%",
+        left: "50%",
+        transform: "translateX(-50%)",
+        fontSize: 40,
+        color: "#ef4444",
+      }}
+    >
       <div style={{ animation: "fall 1s infinite" }}>↓</div>
       <style>{`
         @keyframes fall {
@@ -210,7 +171,11 @@ export const GoldPrisonScene: React.FC = () => {
   const bgPulse = Math.sin(frame * 0.03) * 0.03 + 1;
 
   return (
-    <AbsoluteFill style={{ background: "linear-gradient(180deg, #1f1f1f 0%, #0d0d0d 100%)" }}>
+    <AbsoluteFill
+      style={{
+        background: "linear-gradient(180deg, #1f1f1f 0%, #0d0d0d 100%)",
+      }}
+    >
       {/* Animated background */}
       <div
         style={{
@@ -237,11 +202,7 @@ export const GoldPrisonScene: React.FC = () => {
           textShadow: "0 0 20px rgba(251, 191, 36, 0.5)",
         }}
       >
-        <TypewriterText
-          text="Gold Imprisoned"
-          startFrame={0}
-          speed={4}
-        />
+        <TypewriterText text="Gold Imprisoned" startFrame={0} speed={4} />
       </div>
 
       {/* Caged gold */}
@@ -296,7 +257,14 @@ export const GoldPrisonScene: React.FC = () => {
           />
         ))}
         <line x1="0" y1="0" x2="200" y2="0" stroke="#6b7280" strokeWidth="3" />
-        <line x1="0" y1="50" x2="200" y2="50" stroke="#6b7280" strokeWidth="3" />
+        <line
+          x1="0"
+          y1="50"
+          x2="200"
+          y2="50"
+          stroke="#6b7280"
+          strokeWidth="3"
+        />
       </svg>
 
       {/* 1999 event */}
@@ -341,7 +309,9 @@ export const GoldPrisonScene: React.FC = () => {
           startFrame={60}
           color="#ef4444"
         />
-        <div style={{ fontSize: 16, color: "#9ca3af", marginTop: 10 }}>Near Historic Lows / 接近历史低点</div>
+        <div style={{ fontSize: 16, color: "#9ca3af", marginTop: 10 }}>
+          Near Historic Lows / 接近历史低点
+        </div>
         <div style={{ fontSize: 14, color: "#6b7280", marginTop: 10 }}>
           国际银行家刻意压低金价
         </div>

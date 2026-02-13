@@ -13,14 +13,24 @@ import { AbsoluteFill, useCurrentFrame, interpolate, spring } from "remotion";
  */
 
 // Number counter with easing
-const useCounterAnimation = (target: number, frame: number, startFrame: number, duration: number = 30): string => {
+const useCounterAnimation = (
+  target: number,
+  frame: number,
+  startFrame: number,
+  duration: number = 30,
+): string => {
   const progress = Math.max(0, Math.min(1, (frame - startFrame) / duration));
   const eased = 1 - Math.pow(1 - progress, 3);
   return Math.floor(target * eased).toString();
 };
 
 // Typewriter effect
-const getVisibleText = (text: string, frame: number, startFrame: number, speed: number = 2): string => {
+const getVisibleText = (
+  text: string,
+  frame: number,
+  startFrame: number,
+  speed: number = 2,
+): string => {
   const progress = Math.max(0, frame - startFrame) / speed;
   const charCount = Math.floor(progress);
   return text.slice(0, charCount);
@@ -30,9 +40,13 @@ const getVisibleText = (text: string, frame: number, startFrame: number, speed: 
 const DrowningBubbles: React.FC<{ frame: number }> = ({ frame }) => {
   const bubbles = Array.from({ length: 8 }).map((_, i) => {
     const y = interpolate((frame + i * 15) % 100, [0, 100], [80, 20]);
-    const x = 20 + (i * 10) % 60;
+    const x = 20 + ((i * 10) % 60);
     const size = 3 + (i % 3) * 2;
-    const opacity = interpolate((frame + i * 15) % 100, [0, 50, 100], [0, 0.4, 0]);
+    const opacity = interpolate(
+      (frame + i * 15) % 100,
+      [0, 50, 100],
+      [0, 0.4, 0],
+    );
 
     return { y, x, size, opacity };
   });
@@ -60,7 +74,9 @@ const DrowningBubbles: React.FC<{ frame: number }> = ({ frame }) => {
 
 // NEW: Hand reaching up effect
 const ReachingHand: React.FC<{ frame: number }> = ({ frame }) => {
-  const armOpacity = interpolate(frame, [30, 50], [0, 0.5], { extrapolateRight: "clamp" });
+  const armOpacity = interpolate(frame, [30, 50], [0, 0.5], {
+    extrapolateRight: "clamp",
+  });
 
   return (
     <div
@@ -74,7 +90,13 @@ const ReachingHand: React.FC<{ frame: number }> = ({ frame }) => {
     >
       <svg width="60" height="80" viewBox="0 0 60 80">
         {/* Arm */}
-        <rect x="25" y="40" width="10" height="40" fill="rgba(255, 255, 255, 0.3)" />
+        <rect
+          x="25"
+          y="40"
+          width="10"
+          height="40"
+          fill="rgba(255, 255, 255, 0.3)"
+        />
         {/* Hand */}
         <circle cx="30" cy="35" r="15" fill="rgba(255, 255, 255, 0.2)" />
         {/* Fingers */}
@@ -95,7 +117,9 @@ const ReachingHand: React.FC<{ frame: number }> = ({ frame }) => {
 
 // NEW: Debt gauge meter
 const DebtGauge: React.FC<{ frame: number }> = ({ frame }) => {
-  const value = interpolate(frame, [20, 70], [0, 100], { extrapolateRight: "clamp" });
+  const value = interpolate(frame, [20, 70], [0, 100], {
+    extrapolateRight: "clamp",
+  });
   const rotation = interpolate(value, [0, 100], [-90, 90]);
 
   return (
@@ -137,7 +161,16 @@ const DebtGauge: React.FC<{ frame: number }> = ({ frame }) => {
           strokeWidth="2"
         />
       </svg>
-      <div style={{ fontSize: 10, color: "#6b7280", textAlign: "center", marginTop: 5 }}>DEBT LEVEL</div>
+      <div
+        style={{
+          fontSize: 10,
+          color: "#6b7280",
+          textAlign: "center",
+          marginTop: 5,
+        }}
+      >
+        DEBT LEVEL
+      </div>
     </div>
   );
 };
@@ -145,19 +178,33 @@ const DebtGauge: React.FC<{ frame: number }> = ({ frame }) => {
 export const HighRatesScene: React.FC = () => {
   const frame = useCurrentFrame();
 
-  const titleOpacity = interpolate(frame, [0, 20], [0, 1], { extrapolateRight: "clamp" });
-  const debtOpacity = interpolate(frame, [15, 50], [0, 1], { extrapolateRight: "clamp" });
-  const trapOpacity = interpolate(frame, [45, 90], [0, 1], { extrapolateRight: "clamp" });
+  const titleOpacity = interpolate(frame, [0, 20], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const debtOpacity = interpolate(frame, [15, 50], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const trapOpacity = interpolate(frame, [45, 90], [0, 1], {
+    extrapolateRight: "clamp",
+  });
 
   // Spring animations
-  const titleScale = spring({ frame, from: 0.8, to: 1, damping: 12 });
+  const titleScale = spring({
+    frame,
+    fps: 30,
+    from: 0.8,
+    to: 1,
+    config: { damping: 12 },
+  });
 
   // Counter animations
   const debt130Value = useCounterAnimation(130, frame, 20, 25);
   const debt1300Value = useCounterAnimation(1300, frame, 35, 30);
 
   // Water rising effect
-  const waterLevel = interpolate(frame, [20, 80], [0, 100], { extrapolateRight: "clamp" });
+  const waterLevel = interpolate(frame, [20, 80], [0, 100], {
+    extrapolateRight: "clamp",
+  });
 
   // Trap pulse
   const trapPulse = interpolate(Math.sin(frame * 0.12), [-1, 1], [0.9, 1.1]);
@@ -169,7 +216,11 @@ export const HighRatesScene: React.FC = () => {
   const waveOffset = frame * 2;
 
   return (
-    <AbsoluteFill style={{ background: "linear-gradient(180deg, #1a1a2e 0%, #0d1117 100%)" }}>
+    <AbsoluteFill
+      style={{
+        background: "linear-gradient(180deg, #1a1a2e 0%, #0d1117 100%)",
+      }}
+    >
       {/* NEW: Drowning bubbles */}
       <DrowningBubbles frame={frame} />
 
@@ -187,7 +238,8 @@ export const HighRatesScene: React.FC = () => {
           left: 0,
           right: 0,
           height: `${waterLevel}%`,
-          background: "linear-gradient(180deg, rgba(239, 68, 68, 0.1) 0%, rgba(239, 68, 68, 0.2) 100%)",
+          background:
+            "linear-gradient(180deg, rgba(239, 68, 68, 0.1) 0%, rgba(239, 68, 68, 0.2) 100%)",
           opacity: debtOpacity * 0.5,
         }}
       />
@@ -200,7 +252,8 @@ export const HighRatesScene: React.FC = () => {
           left: 0,
           right: 0,
           height: 20,
-          background: "linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent)",
+          background:
+            "linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent)",
           transform: `translateX(${waveOffset}px)`,
           opacity: waterLevel > 20 ? 1 : 0,
         }}
@@ -234,13 +287,32 @@ export const HighRatesScene: React.FC = () => {
           opacity: debtOpacity,
         }}
       >
-        <div style={{ fontSize: 18, color: "#9ca3af", marginBottom: 20 }}>Developing Nations Debt</div>
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 40 }}>
+        <div style={{ fontSize: 18, color: "#9ca3af", marginBottom: 20 }}>
+          Developing Nations Debt
+        </div>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 40,
+          }}
+        >
           <div>
-            <div style={{ fontSize: 36, color: "#9ca3af" }}>${debt130Value}B</div>
+            <div style={{ fontSize: 36, color: "#9ca3af" }}>
+              ${debt130Value}B
+            </div>
             <div style={{ fontSize: 12, color: "#6b7280" }}>1970</div>
           </div>
-          <div style={{ fontSize: 36, color: "#ffd700", transform: `scale(${arrowPulse})` }}>→</div>
+          <div
+            style={{
+              fontSize: 36,
+              color: "#ffd700",
+              transform: `scale(${arrowPulse})`,
+            }}
+          >
+            →
+          </div>
           <div>
             <div
               style={{
@@ -296,7 +368,12 @@ export const HighRatesScene: React.FC = () => {
             {getVisibleText("The Debt Trap", frame, 65, 3)}
           </div>
           <div style={{ fontSize: 14, color: "#9ca3af", marginTop: 10 }}>
-            {getVisibleText("发展中国家成为国际银行家刀板上的鱼肉", frame, 75, 2)}
+            {getVisibleText(
+              "发展中国家成为国际银行家刀板上的鱼肉",
+              frame,
+              75,
+              2,
+            )}
           </div>
         </div>
       </div>
