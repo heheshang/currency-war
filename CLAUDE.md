@@ -12,20 +12,20 @@ This is an animated documentary video series based on the book "货币战争" (C
 
 ```bash
 # Development
-npm run dev              # Start Remotion Studio (development preview)
+bun run dev              # Start Remotion Studio (development preview)
 
 # Building
-npm run build            # Bundle the project for production
+bun run build            # Bundle the project for production
 
 # Linting / Type Checking
-npm run lint             # Run ESLint and TypeScript type checking
+bun run lint             # Run ESLint and TypeScript type checking
 
 # Upgrade
-npm run upgrade          # Upgrade Remotion to latest version
+bun run upgrade          # Upgrade Remotion to latest version
 
 # Audio utilities
-npm run audio:status     # Check audio files status
-npm run audio:guide      # Display audio download guide
+bun run audio:status     # Check audio files status
+bun run audio:guide      # Display audio download guide
 
 # Render videos
 npx remotion render HelloWorld out/video.mp4
@@ -96,7 +96,7 @@ src/
 4. Create subtitle arrays with frame timing in `Subtitles.tsx`
 5. Build scene components using reusable animations
 6. Assemble episodes using `Sequence` components
-7. Preview in Remotion Studio (`npm run dev`)
+7. Preview in Remotion Studio (`bun run dev`)
 8. Render final video (`npx remotion render`)
 
 ## Character System
@@ -125,6 +125,7 @@ The project uses a **skeletal animation system** for cartoon-style SVG character
 ## Audio
 
 Audio files are stored in `public/assets/audio/`:
+
 - `bgm/` - Background music
 - `sfx/` - Sound effects
 
@@ -133,6 +134,7 @@ See `scripts/AUDIO_README.md` for detailed download guide (FreePD, Pixabay, Inco
 ## Available Skills
 
 The project includes Remotion best practices skills at `.cursor/skills/remotion-best-practices/` covering:
+
 - 3D content, animations, assets, audio
 - Charts, compositions, fonts, images
 - Lottie, measuring, sequencing, timing

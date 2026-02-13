@@ -27,7 +27,7 @@ All linting errors have been resolved:
 - CongressScene.tsx: Fixed typo "Cechinzel" → "Cinzel"
 - All call sites updated
 
-Verification: `npm run lint` passes with zero errors.
+Verification: `bun run lint` passes with zero errors.
 
 ## 2025-02-09 - Audio Files Status
 

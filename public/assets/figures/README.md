@@ -68,51 +68,51 @@ nathan_rothschild: {
 
 ### Episode 02 - 罗斯柴尔德家族
 
-| ID | 英文名 | 中文名 | 文件名 |
-|---|---|---|---|
-| mayer_rothschild | Mayer Amschel Rothschild | 老梅耶·罗斯柴尔德 |
-| nathan_rothschild | Nathan Mayer Rothschild | 内森·梅耶·罗斯柴尔德 |
-| james_rothschild | James de Rothschild | 詹姆斯·罗斯柴尔德 |
-| salomon_rothschild | Salomon Mayer von Rothschild | 所罗门·梅耶·罗斯柴尔德 |
+| ID                 | 英文名                       | 中文名                   | 文件名 |
+| ------------------ | ---------------------------- | ------------------------ | ------ |
+| mayer_rothschild   | Mayer Amschel Rothschild     | 老梅耶·罗斯柴尔德        |
+| nathan_rothschild  | Nathan Mayer Rothschild      | 内森·梅耶·罗斯柴尔德     |
+| james_rothschild   | James de Rothschild          | 詹姆斯·罗斯柴尔德        |
+| salomon_rothschild | Salomon Mayer von Rothschild | 所罗门·梅耶·罗斯柴尔德   |
 | amschel_rothschild | Amschel Mayer von Rothschild | 阿姆谢尔·梅耶·罗斯柴尔德 |
-| karl_rothschild | Carl Mayer von Rothschild | 卡尔·梅耶·罗斯柴尔德 |
+| karl_rothschild    | Carl Mayer von Rothschild    | 卡尔·梅耶·罗斯柴尔德     |
 
 ### Episode 03 - 历任总统
 
-| ID | 英文名 | 中文名 | 文件名 |
-|---|---|---|---|
+| ID                 | 英文名             | 中文名            | 文件名 |
+| ------------------ | ------------------ | ----------------- | ------ |
 | alexander_hamilton | Alexander Hamilton | 亚历山大·汉密尔顿 |
-| thomas_jefferson | Thomas Jefferson | 托马斯·杰斐逊 |
-| andrew_jackson | Andrew Jackson | 安德鲁·杰克逊 |
-| abraham_lincoln | Abraham Lincoln | 亚伯拉罕·林肯 |
+| thomas_jefferson   | Thomas Jefferson   | 托马斯·杰斐逊     |
+| andrew_jackson     | Andrew Jackson     | 安德鲁·杰克逊     |
+| abraham_lincoln    | Abraham Lincoln    | 亚伯拉罕·林肯     |
 
 ### Episode 04 - 美联储创始人
 
-| ID | 英文名 | 中文名 | 文件名 |
-|---|---|---|---|
-| woodrow_wilson | Woodrow Wilson | 伍德罗·威尔逊 |
-| jp_morgan | J. P. Morgan | 约翰·皮尔庞特·摩根 |
-| john_d_rockefeller | John D. Rockefeller | 约翰·洛克菲勒 |
-| nelson_aldrich | Nelson W. Aldrich | 纳尔逊·奥尔德里奇 |
-| frank_vanderlip | Frank A. Vanderlip | 弗兰克·范德利普 |
-| henry_davison | Henry P. Davison | 亨利·戴维森 |
-| benjamin_strong | Benjamin Strong Jr. | 本杰明·斯特朗 |
-| paul_warburg | Paul Warburg | 保罗·沃伯格 |
+| ID                 | 英文名              | 中文名             | 文件名 |
+| ------------------ | ------------------- | ------------------ | ------ |
+| woodrow_wilson     | Woodrow Wilson      | 伍德罗·威尔逊      |
+| jp_morgan          | J. P. Morgan        | 约翰·皮尔庞特·摩根 |
+| john_d_rockefeller | John D. Rockefeller | 约翰·洛克菲勒      |
+| nelson_aldrich     | Nelson W. Aldrich   | 纳尔逊·奥尔德里奇  |
+| frank_vanderlip    | Frank A. Vanderlip  | 弗兰克·范德利普    |
+| henry_davison      | Henry P. Davison    | 亨利·戴维森        |
+| benjamin_strong    | Benjamin Strong Jr. | 本杰明·斯特朗      |
+| paul_warburg       | Paul Warburg        | 保罗·沃伯格        |
 
 ### Episode 05 - 大萧条时期
 
-| ID | 英文名 | 中文名 | 文件名 |
-|---|---|---|---|
+| ID                 | 英文名                | 中文名          | 文件名 |
+| ------------------ | --------------------- | --------------- | ------ |
 | franklin_roosevelt | Franklin D. Roosevelt | 富兰克林·罗斯福 |
-| herbert_hoover | Herbert Hoover | 赫伯特·胡佛 |
+| herbert_hoover     | Herbert Hoover        | 赫伯特·胡佛     |
 
 ### 其他人物
 
-| ID | 英文名 | 中文名 | 文件名 |
-|---|---|---|---|
+| ID              | 英文名          | 中文名          | 文件名 |
+| --------------- | --------------- | --------------- | ------ |
 | nicholas_biddle | Nicholas Biddle | 尼古拉斯·比德尔 |
-| george_peabody | George Peabody | 乔治·皮博迪 |
-| john_law | John Law | 约翰·劳 |
+| george_peabody  | George Peabody  | 乔治·皮博迪     |
+| john_law        | John Law        | 约翰·劳         |
 
 ## 使用方法
 
@@ -131,7 +131,7 @@ import { getFigure } from "@/components/characters/historicalFigures";
   photoFilter="vintage"
   action="talking"
   frame={frame}
-/>
+/>;
 ```
 
 ### 框架样式
@@ -163,5 +163,5 @@ import { getFigure } from "@/components/characters/historicalFigures";
 
 1. 选择一个人物，使用必应图片下载其照片
 2. 保存到 `public/assets/figures/[人物ID].jpg`
-3. 运行 `npm run dev` 预览效果
+3. 运行 `bun run dev` 预览效果
 4. 如果照片加载失败，组件会显示"请下载照片"提示

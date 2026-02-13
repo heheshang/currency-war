@@ -171,21 +171,21 @@ cd currency-war-animation
 **初始化npm项目**:
 
 ```bash
-npm init -y
+bun init -y
 ```
 
 **安装Remotion**:
 
 ```bash
-npm install remotion@^4.0.0 @remotion/cli@^4.0.0
-npm install react@^18.2.0 react-dom@^18.2.0
+bun install remotion@^4.0.0 @remotion/cli@^4.0.0
+bun install react@^18.2.0 react-dom@^18.2.0
 ```
 
 **安装开发依赖**:
 
 ```bash
-npm install --save-dev vite@^5.0.0 typescript@^5.0.0
-npm install --save-dev @types/react@^18.2.0 @types/react-dom@^18.2.0
+bun install --save-dev vite@^5.0.0 typescript@^5.0.0
+bun install --save-dev @types/react@^18.2.0 @types/react-dom@^18.2.0
 ```
 
 ---
@@ -875,7 +875,7 @@ import { Audio } from "remotion";
 **启动Remotion预览**:
 
 ```bash
-npm run dev
+bun run dev
 ```
 
 **或使用**:

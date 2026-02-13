@@ -190,7 +190,7 @@ if ($success -gt 0) {
     Write-Host "✅ Download completed! Files are in: public\assets\figures\" -ForegroundColor Green
     Write-Host ""
     Write-Host "Next steps:" -ForegroundColor Yellow
-    Write-Host "  1. Run: npm run dev" -ForegroundColor White
+    Write-Host "  1. Run: bun run dev" -ForegroundColor White
     Write-Host "  2. Open Remotion Studio to preview the videos" -ForegroundColor White
 }
 else {

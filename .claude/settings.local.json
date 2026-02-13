@@ -1,9 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npm install:*)",
+      "Bash(bun install:*)",
       "Bash(npx tsx:*)",
-      "Bash(npm uninstall:*)",
+      "Bash(bun uninstall:*)",
       "Bash(python:*)",
       "Bash(copy:*)",
       "Bash(ls:*)",

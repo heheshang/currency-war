@@ -16,13 +16,13 @@ Welcome to your Remotion project!
 **Install Dependencies**
 
 ```console
-npm i
+bun i
 ```
 
 **Start Preview**
 
 ```console
-npm run dev
+bun run dev
 ```
 
 **Render video**

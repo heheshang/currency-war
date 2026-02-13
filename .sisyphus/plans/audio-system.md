@@ -79,7 +79,7 @@
 - [ ] 所有剧集有背景音乐配置
 - [ ] 音量可在 0.3-0.5 范围内调整
 - [ ] 背景音乐支持循环播放
-- [ ] 运行 `npm run lint` 无错误
+- [ ] 运行 `bun run lint` 无错误
 
 ### 必须包含 (Guardrails)
 
@@ -191,11 +191,11 @@
 ### Phase 6: 测试集成
 
 - [ ] 6.1 运行 lint 检查
-  - **命令**: `npm run lint`
+  - **命令**: `bun run lint`
   - **验证**: 无错误
 
 - [ ] 6.2 启动开发服务器
-  - **命令**: `npm run dev`
+  - **命令**: `bun run dev`
   - **验证**: Remotion Studio 正常启动
 
 ---
@@ -315,8 +315,8 @@ export const Episode01: React.FC = () => {
 ### 验证命令
 
 ```bash
-npm run lint  # 无错误
-npm run dev   # 启动成功
+bun run lint  # 无错误
+bun run dev   # 启动成功
 ```
 
 ### 最终检查清单

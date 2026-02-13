@@ -23,7 +23,7 @@
 **Verification Command**:
 
 ```bash
-npm run lint
+bun run lint
 ```
 
 **Result**: ✅ Zero errors, zero warnings
@@ -49,7 +49,7 @@ All code compiles successfully with TypeScript 5.9.3. Type safety is maintained 
 - ✅ Episode03 - Battle of Waterloo (6 minutes @ 30fps)
 - ✅ Episode07 - Federal Reserve: Jekyll Island Conspiracy (8 minutes @ 30fps)
 
-**Dev Server**: ✅ Starts successfully with `npm run dev`
+**Dev Server**: ✅ Starts successfully with `bun run dev`
 
 **Dimensions**: 1920x1080 (Full HD)
 
@@ -122,7 +122,7 @@ currency-war/
 1. **Start Remotion Studio**:
 
    ```bash
-   npm run dev
+   bun run dev
    ```
 
    Opens in browser at http://localhost:3000
@@ -179,7 +179,7 @@ currency-war/
 
 **Issue**: Remotion Studio won't start
 
-- **Solution**: Check port 3000 is available, run `npm run dev`
+- **Solution**: Check port 3000 is available, run `bun run dev`
 
 **Issue**: Audio not playing
 
@@ -187,7 +187,7 @@ currency-war/
 
 **Issue**: TypeScript errors
 
-- **Solution**: Run `npm run lint` to identify issues
+- **Solution**: Run `bun run lint` to identify issues
 
 ---
 
