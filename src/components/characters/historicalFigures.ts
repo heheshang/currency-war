@@ -363,6 +363,67 @@ export const HISTORICAL_FIGURES: Record<string, HistoricalFigureConfig> = {
     defaultScale: 1,
   },
 
+  // ========== EPISODE 06: Ruling Elite Clubs ==========
+  edward_house: {
+    id: "edward_house",
+    nameEn: "Colonel Edward House",
+    nameCn: "爱德华·豪斯上校",
+    photoSrc:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Edward_Mandell_House.jpg/400px-Edward_Mandell_House.jpg",
+    sourceUrl:
+      "https://commons.wikimedia.org/wiki/File:Edward_Mandell_House.jpg",
+    years: "1858–1944",
+    frameStyle: "classic",
+    photoFilter: "grayscale",
+    era: "early_20th_century",
+    defaultScale: 1,
+  },
+
+  david_rockefeller: {
+    id: "david_rockefeller",
+    nameEn: "David Rockefeller",
+    nameCn: "戴维·洛克菲勒",
+    photoSrc:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/David_Rockefeller_1977.jpg/400px-David_Rockefeller_1977.jpg",
+    sourceUrl:
+      "https://commons.wikimedia.org/wiki/File:David_Rockefeller_1977.jpg",
+    years: "1915–2017",
+    frameStyle: "modern",
+    photoFilter: "none",
+    era: "modern",
+    defaultScale: 1,
+  },
+
+  zbigniew_brzezinski: {
+    id: "zbigniew_brzezinski",
+    nameEn: "Zbigniew Brzezinski",
+    nameCn: "兹比格涅夫·布热津斯基",
+    photoSrc:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Zbigniew_Brzezinski.jpg/400px-Zbigniew_Brzezinski.jpg",
+    sourceUrl:
+      "https://commons.wikimedia.org/wiki/File:Zbigniew_Brzezinski.jpg",
+    years: "1928–2017",
+    frameStyle: "modern",
+    photoFilter: "none",
+    era: "modern",
+    defaultScale: 1,
+  },
+
+  henry_kissinger: {
+    id: "henry_kissinger",
+    nameEn: "Henry Kissinger",
+    nameCn: "亨利·基辛格",
+    photoSrc:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Kissinger_1973.jpg/400px-Kissinger_1973.jpg",
+    sourceUrl:
+      "https://commons.wikimedia.org/wiki/File:Kissinger_1973.jpg",
+    years: "1923–2023",
+    frameStyle: "modern",
+    photoFilter: "none",
+    era: "modern",
+    defaultScale: 1,
+  },
+
   // ========== Additional Figures ==========
   john_law: {
     id: "john_law",
@@ -455,7 +516,12 @@ export function getFiguresForEpisode(
       "franklin_roosevelt",
       "herbert_hoover",
     ],
-    6: [],
+    6: [
+      "edward_house",
+      "david_rockefeller",
+      "zbigniew_brzezinski",
+      "henry_kissinger",
+    ],
     7: [
       "nelson_aldrich",
       "frank_vanderlip",

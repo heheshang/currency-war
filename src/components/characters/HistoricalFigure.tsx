@@ -11,6 +11,12 @@ import { useCurrentFrame, Img } from "remotion";
  * - Prioritizes local file paths (/assets/figures/)
  * - Falls back to remote URL if local file not found
  * - Shows helpful placeholder with download instructions
+ *
+ * Enhanced with:
+ * - Eye blinking animation
+ * - Glow/pulse effects
+ * - Enhanced breathing animation
+ * - Shadow animation
  */
 
 export interface HistoricalFigureProps {
@@ -37,7 +43,10 @@ export interface HistoricalFigureProps {
     | "scale"
     | "slideLeft"
     | "slideRight"
-    | "breathing";
+    | "breathing"
+    | "pulse"
+    | "float"
+    | " entrance";
   /** Show name label */
   showLabel?: boolean;
   /** Label position */
@@ -52,6 +61,10 @@ export interface HistoricalFigureProps {
   mirror?: boolean;
   /** Frame number for animation calculations */
   frame?: number;
+  /** Enable glow effect */
+  glowEffect?: boolean;
+  /** Glow color (default: gold) */
+  glowColor?: string;
 }
 
 /**
@@ -74,6 +87,8 @@ export const HistoricalFigure: React.FC<HistoricalFigureProps> = ({
   startFrame = 0,
   mirror = false,
   frame: propFrame,
+  glowEffect = false,
+  glowColor = "#ffd700",
 }) => {
   const internalFrame = useCurrentFrame();
   const currentFrame = propFrame !== undefined ? propFrame : internalFrame;
@@ -87,6 +102,16 @@ export const HistoricalFigure: React.FC<HistoricalFigureProps> = ({
   // Mouth animation for talking effect
   const mouthAnimation = getMouthAnimation(action, currentFrame);
 
+  // Eye blinking animation (available for future use)
+  // Note: Currently not applied to photo - can be used for overlay effects
+  getEyeBlinkAnimation(currentFrame);
+
+  // Glow/pulse animation
+  const glowAnimation = getGlowAnimation(currentFrame, glowEffect);
+
+  // Breathing shadow animation
+  const shadowAnimation = getShadowAnimation(currentFrame, animEffect);
+
   // Frame style config
   const frameConfig = getFrameStyle(frameStyle, scale);
 
@@ -99,6 +124,8 @@ export const HistoricalFigure: React.FC<HistoricalFigureProps> = ({
         transform: `translate(-50%, -50%) ${transform}`,
         opacity,
         zIndex: 10,
+        filter: glowEffect ? `drop-shadow(0 0 ${glowAnimation}px ${glowColor})` : "none",
+        transition: "filter 0.1s ease-out",
       }}
     >
       {/* Outer decorative frame */}
@@ -175,7 +202,7 @@ export const HistoricalFigure: React.FC<HistoricalFigureProps> = ({
             overflow: "hidden",
             borderRadius: borderRadius * scale,
             background: "#1a1a1a",
-            boxShadow: "inset 0 0 30px rgba(0,0,0,0.5)",
+            boxShadow: `inset 0 0 30px rgba(0,0,0,0.5), 0 ${10 + shadowAnimation}px ${30 + shadowAnimation * 2}px rgba(0,0,${0.3 + shadowAnimation * 0.05})`,
           }}
         >
           {/* Historical figure photo */}
@@ -360,14 +387,45 @@ function getAnimationOpacity(effect: string, frame: number): number {
  * Calculate transform based on animation effect
  */
 function getAnimationTransform(effect: string, frame: number): string {
+  // Enhanced breathing animation with subtle movement
   const breathingScale =
     effect === "breathing"
       ? 1 + Math.sin((frame * 0.05) % (Math.PI * 2)) * 0.03
       : 1;
 
+  // Pulse effect - rhythmic scaling
+  const pulseScale =
+    effect === "pulse"
+      ? 1 + Math.sin((frame * 0.08) % (Math.PI * 2)) * 0.025
+      : 1;
+
+  // Float effect - gentle up and down movement
+  const floatY =
+    effect === "float"
+      ? Math.sin((frame * 0.04) % (Math.PI * 2)) * 8
+      : 0;
+
+  // Entrance effect - scale up with bounce
+  let entranceScale = 1;
+  if (effect === "entrance") {
+    const progress = Math.min(frame / 45, 1);
+    // Elastic ease out
+    const c4 = (2 * Math.PI) / 3;
+    entranceScale = progress === 0 ? 0 : progress === 1 ? 1 :
+      Math.pow(2, -10 * progress) * Math.sin((progress * 10 - 0.75) * c4) + 1;
+  }
+
+  const finalScale = breathingScale * pulseScale * entranceScale;
+
   switch (effect) {
     case "scale":
-      return `scale(${breathingScale})`;
+    case "pulse":
+    case "entrance":
+      return `scale(${finalScale}) translateY(${floatY}px)`;
+    case "breathing":
+      return `scale(${breathingScale}) translateY(${floatY}px)`;
+    case "float":
+      return `translateY(${floatY}px)`;
     case "slideLeft":
     case "slideRight": {
       let slideX: number;
@@ -482,4 +540,38 @@ function getMouthAnimation(
   const height = 6 + openAmount * 5 + quickOpen * 2;
 
   return { width, height };
+}
+
+/**
+ * Get eye blinking animation
+ * Returns 1 for open eyes, 0 for closed eyes
+ */
+function getEyeBlinkAnimation(frame: number): number {
+  // Blink every 150-200 frames (5-6 seconds at 30fps)
+  const blinkCycle = frame % 180;
+  if (blinkCycle < 8) {
+    // Quick blink in 8 frames
+    return blinkCycle < 4 ? blinkCycle / 4 : 1 - (blinkCycle - 4) / 4;
+  }
+  return 1;
+}
+
+/**
+ * Get glow/pulse animation intensity
+ */
+function getGlowAnimation(frame: number, enabled: boolean): number {
+  if (!enabled) return 0;
+  // Pulsing glow between 5-20px
+  return 5 + Math.sin((frame * 0.06) % (Math.PI * 2)) * 7.5;
+}
+
+/**
+ * Get breathing shadow animation
+ */
+function getShadowAnimation(frame: number, effect: string): number {
+  if (effect === "breathing" || effect === "pulse" || effect === "float") {
+    // Subtle shadow movement
+    return Math.sin((frame * 0.04) % (Math.PI * 2)) * 3;
+  }
+  return 0;
 }

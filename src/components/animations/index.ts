@@ -28,3 +28,30 @@ export {
   FloatAnimation,
   RotateAnimation,
 } from "./SpringAnimation";
+
+// Animation hooks
+export {
+  useFadeIn,
+  useScaleIn,
+  useSlideIn,
+  useBreathing,
+  useFloat,
+  useSpotlight,
+  useStagger,
+  useReveal,
+  useShimmer,
+  useTyping,
+  useCounter,
+} from "./useAnimation";
+
+// UI Animation components
+export {
+  AnimatedTitle,
+  AnimatedCard,
+  AnimatedList,
+  AnimatedStat,
+  AnimatedDivider,
+  AnimatedQuote,
+  PulsingDot,
+  RotatingBorder,
+} from "./UIAnimations";

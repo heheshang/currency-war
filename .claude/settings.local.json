@@ -10,7 +10,8 @@
       "Bash(node:*)",
       "mcp__web-search-prime__webSearchPrime",
       "Bash(powershell:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(bun:*)"
     ]
   },
   "outputStyle": "Explanatory"

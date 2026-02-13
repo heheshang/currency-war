@@ -8,6 +8,7 @@ import { Episode03 } from "./compositions/Episode03";
 import { Episode07 } from "./compositions/Episode07";
 import { Episode04 } from "./compositions/Episode04";
 import { Episode05 } from "./compositions/Episode05";
+import { Episode06 } from "./compositions/Episode06";
 
 // Each <Composition> is an entry in the sidebar!
 
@@ -103,6 +104,16 @@ export const RemotionRoot: React.FC = () => {
         id="Episode05"
         component={Episode05}
         durationInFrames={900 * 30} // 15 minutes @ 30fps
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+
+      {/* Episode06 - 第6集：统治世界的精英俱乐部 */}
+      <Composition
+        id="Episode06"
+        component={Episode06}
+        durationInFrames={480 * 30} // 8 minutes @ 30fps
         fps={30}
         width={1920}
         height={1080}
