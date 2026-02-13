@@ -245,6 +245,14 @@ export const AUDIO_CONFIG: Record<string, EpisodeAudioConfig> = {
       },
     },
   },
+
+  Episode11: {
+    bgm: {
+      src: "/assets/audio/bgm/epic-conclusion.mp3",
+      volume: 0.15,
+      loop: true,
+    },
+  },
 };
 
 /**

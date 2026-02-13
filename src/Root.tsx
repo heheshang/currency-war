@@ -9,6 +9,11 @@ import { Episode07 } from "./compositions/Episode07";
 import { Episode04 } from "./compositions/Episode04";
 import { Episode05 } from "./compositions/Episode05";
 import { Episode06 } from "./compositions/Episode06";
+import { Episode08 } from "./compositions/Episode08";
+import { Episode09 } from "./compositions/Episode09";
+import { Episode10 } from "./compositions/Episode10";
+import { Episode11 } from "./compositions/Episode11";
+import { Trailer } from "./compositions/Trailer";
 
 // Each <Composition> is an entry in the sidebar!
 
@@ -114,6 +119,56 @@ export const RemotionRoot: React.FC = () => {
         id="Episode06"
         component={Episode06}
         durationInFrames={480 * 30} // 8 minutes @ 30fps
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+
+      {/* Episode08 - 第8集：诚实货币的最后抗争 */}
+      <Composition
+        id="Episode08"
+        component={Episode08}
+        durationInFrames={660 * 30} // 11 minutes @ 30fps
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+
+      {/* Episode09 - 第9集：不宣而战的货币战争 */}
+      <Composition
+        id="Episode09"
+        component={Episode09}
+        durationInFrames={660 * 30} // 11 minutes @ 30fps
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+
+      {/* Episode10 - 第10集：美元死穴与黄金一阳指 */}
+      <Composition
+        id="Episode10"
+        component={Episode10}
+        durationInFrames={600 * 30} // 10 minutes @ 30fps
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+
+      {/* Episode11 - 第11集：谋万世者 */}
+      <Composition
+        id="Episode11"
+        component={Episode11}
+        durationInFrames={600 * 30} // 10 minutes @ 30fps
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+
+      {/* Trailer - 货币战争预告片 */}
+      <Composition
+        id="Trailer"
+        component={Trailer}
+        durationInFrames={75 * 30} // 75 seconds @ 30fps
         fps={30}
         width={1920}
         height={1080}
