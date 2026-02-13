@@ -13,6 +13,7 @@ export type AudioAsset = {
 
 export type EpisodeAudioConfig = {
   bgm?: AudioAsset; // Background music for entire episode
+  voiceover?: AudioAsset; // AI voiceover audio
   scenes?: {
     [sceneName: string]: {
       bgm?: AudioAsset; // Scene-specific BGM
@@ -27,9 +28,13 @@ export type EpisodeAudioConfig = {
 export const AUDIO_CONFIG: Record<string, EpisodeAudioConfig> = {
   Episode01: {
     bgm: {
-      src: "/assets/audio/bgm/mysterious-01.mp3",
-      volume: 0.15,
+      src: "/assets/audio/bgm/dramatic-trailer.mp3",
+      volume: 0.08,
       loop: true,
+    },
+    voiceover: {
+      src: "/assets/audio/voiceover/episode01/episode01_merged.m4a",
+      volume: 0.8,
     },
     scenes: {
       AncientMarketScene: {
@@ -76,7 +81,7 @@ export const AUDIO_CONFIG: Record<string, EpisodeAudioConfig> = {
 
   Episode03: {
     bgm: {
-      src: "/assets/audio/bgm/mysterious-01.mp3",
+      src: "/assets/audio/bgm/dramatic-trailer.mp3",
       volume: 0.15,
       loop: true,
     },
@@ -124,8 +129,9 @@ export const AUDIO_CONFIG: Record<string, EpisodeAudioConfig> = {
   },
 
   Episode05: {
+    // 一战与大衰退 - Historical/Dramatic 风格
     bgm: {
-      src: "/assets/audio/bgm/dramatic-trailer.mp3",
+      src: "/assets/audio/bgm/dramatic-01.mp3",
       volume: 0.12,
       loop: true,
     },
@@ -213,8 +219,9 @@ export const AUDIO_CONFIG: Record<string, EpisodeAudioConfig> = {
   },
 
   Episode09: {
+    // 数字化货币/未来 - Epic/Cinematic 风格
     bgm: {
-      src: "/assets/audio/bgm/mysterious-01.mp3",
+      src: "/assets/audio/bgm/dramatic-01.mp3",
       volume: 0.15,
       loop: true,
     },
@@ -281,6 +288,15 @@ export function getAudioConfig(
  */
 export function getEpisodeBGM(episodeName: string): AudioAsset | undefined {
   return AUDIO_CONFIG[episodeName]?.bgm;
+}
+
+/**
+ * Get voiceover for an episode
+ */
+export function getEpisodeVoiceover(
+  episodeName: string,
+): AudioAsset | undefined {
+  return AUDIO_CONFIG[episodeName]?.voiceover;
 }
 
 /**
