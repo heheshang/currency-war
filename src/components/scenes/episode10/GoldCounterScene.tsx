@@ -258,7 +258,7 @@ export const GoldCounterScene: React.FC = () => {
         <StrategyCard
           step={1}
           title="1. 'Rent' Gold at 1% Interest"
-          subtitle="以1%利息"租借"黄金"
+          subtitle={'以1%利息"租借"黄金'}
           color="#fbbf24"
           bgColor="rgba(251, 191, 36, 0.15)"
           delay={25}
@@ -274,7 +274,7 @@ export const GoldCounterScene: React.FC = () => {
         <StrategyCard
           step={2}
           title="2. Sell Gold, Buy US Bonds at 5%"
-          subtitle="出售黄金，买入5%收益的美国债券"
+          subtitle={'出售黄金，买入5%收益的美国债券'}
           color="#ef4444"
           bgColor="rgba(239, 68, 68, 0.15)"
           delay={55}
