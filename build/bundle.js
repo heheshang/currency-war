@@ -1,7 +1,7 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 6164
+/***/ 3907
 (__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -57,316 +57,104 @@ var update = injectStylesIntoStyleTag_default()(cjs_js_src/* default */.A, optio
 
        /* harmony default export */ const src = (cjs_js_src/* default */.A && cjs_js_src/* default */.A.locals ? cjs_js_src/* default */.A.locals : undefined);
 
-// EXTERNAL MODULE: ./node_modules/react/index.js
-var react = __webpack_require__(6540);
-;// ./src/HelloWorld/Arc.tsx
+;// ./src/components/Subtitles.tsx
+/* unused harmony import specifier */ var jsx;
+/* unused harmony import specifier */ var useCurrentFrame;
 
 
 
 
-const getCircumferenceOfArc = (rx2, ry2) => {
-  return Math.PI * 2 * Math.sqrt((rx2 * rx2 + ry2 * ry2) / 2);
-};
-const rx = 135;
-const ry = 300;
-const cx = 960;
-const cy = 540;
-const arcLength = getCircumferenceOfArc(rx, ry);
-const strokeWidth = 30;
-const Arc = ({ progress, rotation, rotateProgress, color1, color2 }) => {
-  const { width, height } = (0,esm.useVideoConfig)();
-  const [gradientId] = (0,react.useState)(() => String((0,esm.random)(null)));
-  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-    "svg",
-    {
-      viewBox: `0 0 ${width} ${height}`,
-      style: {
-        position: "absolute",
-        transform: `rotate(${rotation * rotateProgress}deg)`
-      },
-      children: [
-        /* @__PURE__ */ (0,jsx_runtime.jsx)("defs", { children: /* @__PURE__ */ (0,jsx_runtime.jsxs)("linearGradient", { id: gradientId, x1: "0%", y1: "0%", x2: "0%", y2: "100%", children: [
-          /* @__PURE__ */ (0,jsx_runtime.jsx)("stop", { offset: "0%", stopColor: color1 }),
-          /* @__PURE__ */ (0,jsx_runtime.jsx)("stop", { offset: "100%", stopColor: color2 })
-        ] }) }),
-        /* @__PURE__ */ (0,jsx_runtime.jsx)(
-          "ellipse",
-          {
-            cx,
-            cy,
-            rx,
-            ry,
-            fill: "none",
-            stroke: `url(#${gradientId})`,
-            strokeDasharray: arcLength,
-            strokeDashoffset: arcLength - arcLength * progress,
-            strokeLinecap: "round",
-            strokeWidth
-          }
-        )
-      ]
-    }
-  );
-};
-
-;// ./src/HelloWorld/Atom.tsx
-
-
-
-
-const Atom = ({ scale, color1, color2 }) => {
-  const config = (0,esm.useVideoConfig)();
-  const [gradientId] = (0,react.useState)(() => String((0,esm.random)(null)));
-  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-    "svg",
-    {
-      viewBox: `0 0 ${config.width} ${config.height}`,
-      style: {
-        position: "absolute",
-        transform: `scale(${scale})`
-      },
-      children: [
-        /* @__PURE__ */ (0,jsx_runtime.jsx)("defs", { children: /* @__PURE__ */ (0,jsx_runtime.jsxs)("linearGradient", { id: gradientId, x1: "0%", y1: "0%", x2: "100%", y2: "0%", children: [
-          /* @__PURE__ */ (0,jsx_runtime.jsx)("stop", { offset: "0%", stopColor: color1 }),
-          /* @__PURE__ */ (0,jsx_runtime.jsx)("stop", { offset: "100%", stopColor: color2 })
-        ] }) }),
-        /* @__PURE__ */ (0,jsx_runtime.jsx)(
-          "circle",
-          {
-            r: 70,
-            cx: config.width / 2,
-            cy: config.height / 2,
-            fill: `url(#${gradientId})`
-          }
-        )
-      ]
-    }
-  );
-};
-
-// EXTERNAL MODULE: ./node_modules/zod/lib/index.mjs
-var lib = __webpack_require__(4476);
-// EXTERNAL MODULE: ./node_modules/@remotion/zod-types/dist/esm/index.mjs
-var dist_esm = __webpack_require__(761);
-;// ./src/HelloWorld/Logo.tsx
-
-
-
-
-
-
-
-const myCompSchema2 = lib.z.object({
-  logoColor1: (0,dist_esm.zColor)(),
-  logoColor2: (0,dist_esm.zColor)()
-});
-const Logo = ({
-  logoColor1: color1,
-  logoColor2: color2
-}) => {
-  const videoConfig = (0,esm.useVideoConfig)();
-  const frame = (0,esm.useCurrentFrame)();
-  const development = (0,esm.spring)({
-    config: {
-      damping: 100,
-      mass: 0.5
-    },
-    fps: videoConfig.fps,
-    frame
-  });
-  const rotationDevelopment = (0,esm.spring)({
-    config: {
-      damping: 100,
-      mass: 0.5
-    },
-    fps: videoConfig.fps,
-    frame
-  });
-  const scale = (0,esm.spring)({
-    frame,
-    config: {
-      mass: 0.5
-    },
-    fps: videoConfig.fps
-  });
-  const logoRotation = (0,esm.interpolate)(
-    frame,
-    [0, videoConfig.durationInFrames],
-    [0, 360]
-  );
-  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-    esm.AbsoluteFill,
-    {
-      style: {
-        transform: `scale(${scale}) rotate(${logoRotation}deg)`
-      },
-      children: [
-        /* @__PURE__ */ (0,jsx_runtime.jsx)(
-          Arc,
-          {
-            rotateProgress: rotationDevelopment,
-            progress: development,
-            rotation: 30,
-            color1,
-            color2
-          }
-        ),
-        /* @__PURE__ */ (0,jsx_runtime.jsx)(
-          Arc,
-          {
-            rotateProgress: rotationDevelopment,
-            rotation: 90,
-            progress: development,
-            color1,
-            color2
-          }
-        ),
-        /* @__PURE__ */ (0,jsx_runtime.jsx)(
-          Arc,
-          {
-            rotateProgress: rotationDevelopment,
-            rotation: -30,
-            progress: development,
-            color1,
-            color2
-          }
-        ),
-        /* @__PURE__ */ (0,jsx_runtime.jsx)(Atom, { scale: rotationDevelopment, color1, color2 })
-      ]
-    }
-  );
-};
-
-;// ./src/HelloWorld/constants.ts
-
-const COLOR_1 = "#86A8E7";
-const FONT_FAMILY = "SF Pro Text, Helvetica, Arial, sans-serif";
-
-;// ./src/HelloWorld/Subtitle.tsx
-
-
-
-
-const subtitle = {
-  fontFamily: FONT_FAMILY,
-  fontSize: 40,
+const subtitleStyle = {
+  fontFamily: "'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif",
+  fontSize: 32,
   textAlign: "center",
   position: "absolute",
-  bottom: 140,
-  width: "100%"
+  bottom: 80,
+  width: "100%",
+  color: "#ffffff",
+  textShadow: "2px 2px 4px rgba(0, 0, 0, 0.9), 0 0 20px rgba(0, 0, 0, 0.7)",
+  padding: "0 40px",
+  boxSizing: "border-box"
 };
-const codeStyle = {
-  color: COLOR_1
+const translationStyle = {
+  ...subtitleStyle,
+  fontSize: 24,
+  bottom: 40,
+  color: "#d1d5db",
+  fontStyle: "italic"
 };
-const Subtitle = () => {
+const Subtitles = ({
+  subtitles,
+  offset = 0,
+  fadeInDuration = 15,
+  fadeOutDuration = 15
+}) => {
   const frame = (0,esm.useCurrentFrame)();
-  const opacity = (0,esm.interpolate)(frame, [0, 30], [0, 1]);
-  return /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { ...subtitle, opacity }, children: [
-    "Edit ",
-    /* @__PURE__ */ (0,jsx_runtime.jsx)("code", { style: codeStyle, children: "src/Root.tsx" }),
-    " and save to reload."
+  const actualFrame = frame + offset;
+  const currentSubtitle = subtitles.find(
+    (sub) => actualFrame >= sub.startFrame && actualFrame < sub.endFrame
+  );
+  if (!currentSubtitle) {
+    return null;
+  }
+  const duration = currentSubtitle.endFrame - currentSubtitle.startFrame;
+  const timeInSubtitle = actualFrame - currentSubtitle.startFrame;
+  let opacity = 1;
+  if (timeInSubtitle < fadeInDuration) {
+    opacity = (0,esm.interpolate)(timeInSubtitle, [0, fadeInDuration], [0, 1]);
+  } else if (timeInSubtitle > duration - fadeOutDuration) {
+    opacity = (0,esm.interpolate)(
+      timeInSubtitle,
+      [duration - fadeOutDuration, duration],
+      [1, 0]
+    );
+  }
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(jsx_runtime.Fragment, { children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { ...subtitleStyle, opacity }, children: currentSubtitle.text }),
+    currentSubtitle.translation && /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { ...translationStyle, opacity }, children: currentSubtitle.translation })
   ] });
 };
-
-;// ./src/HelloWorld/Title.tsx
-
-
-
-
-const title = {
-  fontFamily: FONT_FAMILY,
-  fontWeight: "bold",
-  fontSize: 100,
-  textAlign: "center",
-  position: "absolute",
-  bottom: 160,
-  width: "100%"
-};
-const word = {
-  marginLeft: 10,
-  marginRight: 10,
-  display: "inline-block"
-};
-const Title = ({ titleText, titleColor }) => {
-  const videoConfig = (0,esm.useVideoConfig)();
-  const frame = (0,esm.useCurrentFrame)();
-  const words = titleText.split(" ");
-  return /* @__PURE__ */ (0,jsx_runtime.jsx)("h1", { style: title, children: words.map((t, i) => {
-    const delay = i * 5;
-    const scale = (0,esm.spring)({
-      fps: videoConfig.fps,
-      frame: frame - delay,
-      config: {
-        damping: 200
-      }
-    });
-    return /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      "span",
-      {
-        style: {
-          ...word,
-          color: titleColor,
-          transform: `scale(${scale})`
-        },
-        children: t
-      },
-      t
-    );
-  }) });
-};
-
-;// ./src/HelloWorld.tsx
-
-
-
-
-
-
-
-
-
-const myCompSchema = lib.z.object({
-  titleText: lib.z.string(),
-  titleColor: (0,dist_esm.zColor)(),
-  logoColor1: (0,dist_esm.zColor)(),
-  logoColor2: (0,dist_esm.zColor)()
-});
-const HelloWorld = ({
-  titleText: propOne,
-  titleColor: propTwo,
-  logoColor1,
-  logoColor2
+const SubtitleIndicator = ({
+  subtitles,
+  position = "top",
+  height = 4
 }) => {
-  const frame = (0,esm.useCurrentFrame)();
-  const { durationInFrames, fps } = (0,esm.useVideoConfig)();
-  const logoTranslationProgress = (0,esm.spring)({
-    frame: frame - 25,
-    fps,
-    config: {
-      damping: 100
-    }
-  });
-  const logoTranslation = (0,esm.interpolate)(
-    logoTranslationProgress,
-    [0, 1],
-    [0, -150]
+  const frame = useCurrentFrame();
+  const totalSubtitles = subtitles.length;
+  if (totalSubtitles === 0) return null;
+  const currentIndex = subtitles.findIndex(
+    (sub) => frame >= sub.startFrame && frame < sub.endFrame
   );
-  const opacity = (0,esm.interpolate)(
-    frame,
-    [durationInFrames - 25, durationInFrames - 15],
-    [1, 0],
+  return /* @__PURE__ */ jsx(
+    "div",
     {
-      extrapolateLeft: "clamp",
-      extrapolateRight: "clamp"
+      style: {
+        position: "absolute",
+        [position]: 0,
+        left: 0,
+        right: 0,
+        height,
+        background: "rgba(0, 0, 0, 0.3)",
+        display: "flex",
+        zIndex: 100
+      },
+      children: subtitles.map((_, index) => /* @__PURE__ */ jsx(
+        "div",
+        {
+          style: {
+            flex: 1,
+            background: index < currentIndex ? "#48BB78" : index === currentIndex ? "#ECC94B" : "rgba(255, 255, 255, 0.2)",
+            borderRight: "1px solid rgba(0, 0, 0, 0.3)"
+          }
+        },
+        index
+      ))
     }
   );
-  return /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.AbsoluteFill, { style: { backgroundColor: "white" }, children: /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { opacity }, children: [
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.AbsoluteFill, { style: { transform: `translateY(${logoTranslation}px)` }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(Logo, { logoColor1, logoColor2 }) }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Sequence, { from: 35, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(Title, { titleText: propOne, titleColor: propTwo }) }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Sequence, { from: 75, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitle, {}) })
-  ] }) });
 };
 
+// EXTERNAL MODULE: ./node_modules/react/index.js
+var react = __webpack_require__(6540);
 // EXTERNAL MODULE: ./node_modules/mediabunny/dist/modules/src/input.js
 var src_input = __webpack_require__(2030);
 // EXTERNAL MODULE: ./node_modules/mediabunny/dist/modules/src/source.js
@@ -5250,127 +5038,13 @@ const Audio_Audio = ({
   loop = false
 }) => {
   if (!src) {
-    console.error("Audio component requires a src prop");
     return null;
   }
-  if (volume < 0 || volume > 1) {
-    console.warn(
-      `Audio volume ${volume} is out of range [0.0, 1.0]. Clamping to valid range.`
-    );
-    volume = Math.max(0, Math.min(1, volume));
-  }
+  const clampedVolume = Math.max(0, Math.min(1, volume));
   const audioSrc = src.startsWith("/") ? (0,esm.staticFile)(src.slice(1)) : src;
-  return /* @__PURE__ */ (0,jsx_runtime.jsx)(Audio, { src: audioSrc, volume, loop });
+  return /* @__PURE__ */ (0,jsx_runtime.jsx)(Audio, { src: audioSrc, volume: clampedVolume, loop });
 };
 /* harmony default export */ const components_Audio = ((/* unused pure expression or super */ null && (Audio_Audio)));
-
-;// ./src/components/Subtitles.tsx
-/* unused harmony import specifier */ var jsx;
-/* unused harmony import specifier */ var useCurrentFrame;
-/* unused harmony import specifier */ var useSubtitleSync;
-
-
-
-
-
-const subtitleStyle = {
-  fontFamily: "'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif",
-  fontSize: 32,
-  textAlign: "center",
-  position: "absolute",
-  bottom: 80,
-  width: "100%",
-  color: "#ffffff",
-  textShadow: "2px 2px 4px rgba(0, 0, 0, 0.9), 0 0 20px rgba(0, 0, 0, 0.7)",
-  padding: "0 40px",
-  boxSizing: "border-box"
-};
-const translationStyle = {
-  ...subtitleStyle,
-  fontSize: 24,
-  bottom: 40,
-  color: "#d1d5db",
-  fontStyle: "italic"
-};
-const Subtitles = ({
-  subtitles,
-  offset = 0,
-  fadeInDuration = 15,
-  fadeOutDuration = 15
-}) => {
-  const frame = (0,esm.useCurrentFrame)();
-  const actualFrame = frame + offset;
-  const currentSubtitle = subtitles.find(
-    (sub) => actualFrame >= sub.startFrame && actualFrame < sub.endFrame
-  );
-  if (!currentSubtitle) {
-    return null;
-  }
-  const duration = currentSubtitle.endFrame - currentSubtitle.startFrame;
-  const timeInSubtitle = actualFrame - currentSubtitle.startFrame;
-  let opacity = 1;
-  if (timeInSubtitle < fadeInDuration) {
-    opacity = (0,esm.interpolate)(timeInSubtitle, [0, fadeInDuration], [0, 1]);
-  } else if (timeInSubtitle > duration - fadeOutDuration) {
-    opacity = (0,esm.interpolate)(
-      timeInSubtitle,
-      [duration - fadeOutDuration, duration],
-      [1, 0]
-    );
-  }
-  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(jsx_runtime.Fragment, { children: [
-    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { ...subtitleStyle, opacity }, children: currentSubtitle.text }),
-    currentSubtitle.translation && /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { ...translationStyle, opacity }, children: currentSubtitle.translation })
-  ] });
-};
-const SubtitleIndicator = ({
-  subtitles,
-  position = "top",
-  height = 4
-}) => {
-  const frame = useCurrentFrame();
-  const totalSubtitles = subtitles.length;
-  if (totalSubtitles === 0) return null;
-  const currentIndex = subtitles.findIndex(
-    (sub) => frame >= sub.startFrame && frame < sub.endFrame
-  );
-  return /* @__PURE__ */ jsx(
-    "div",
-    {
-      style: {
-        position: "absolute",
-        [position]: 0,
-        left: 0,
-        right: 0,
-        height,
-        background: "rgba(0, 0, 0, 0.3)",
-        display: "flex",
-        zIndex: 100
-      },
-      children: subtitles.map((_, index) => /* @__PURE__ */ jsx(
-        "div",
-        {
-          style: {
-            flex: 1,
-            background: index < currentIndex ? "#48BB78" : index === currentIndex ? "#ECC94B" : "rgba(255, 255, 255, 0.2)",
-            borderRight: "1px solid rgba(0, 0, 0, 0.3)"
-          }
-        },
-        index
-      ))
-    }
-  );
-};
-const SyncedSubtitle = ({
-  subtitles,
-  children
-}) => {
-  const { currentSubtitle, fadeOpacity } = useSubtitleSync({ subtitles });
-  if (!currentSubtitle) {
-    return null;
-  }
-  return /* @__PURE__ */ jsx("div", { style: { opacity: fadeOpacity }, children });
-};
 
 ;// ./src/components/Voiceover.tsx
 
@@ -5706,465 +5380,6 @@ function getSceneAudio(episodeName, sceneName) {
   var _a, _b;
   return (_b = (_a = AUDIO_CONFIG[episodeName]) == null ? void 0 : _a.scenes) == null ? void 0 : _b[sceneName];
 }
-
-;// ./src/subtitles/trailer.ts
-
-const SCENE_FRAMES = [
-  365,
-  // Scene 0: 开场 12.2s
-  603,
-  // Scene 1: 问题 20.1s
-  449,
-  // Scene 2: 危机 15.0s
-  356,
-  // Scene 3: 中国 11.9s
-  336
-  // Scene 4: 预告 11.2s
-];
-const SCENE_OFFSETS = SCENE_FRAMES.reduce((acc, frames, i) => {
-  acc.push(i === 0 ? 0 : acc[i - 1] + SCENE_FRAMES[i - 1]);
-  return acc;
-}, []);
-const scene01Subs = [
-  {
-    startFrame: 0,
-    endFrame: 48,
-    // 1.6s
-    text: "\u8D27\u5E01\u6218\u4E89\u3002"
-  },
-  {
-    startFrame: 48,
-    endFrame: 151,
-    // 5.0s
-    text: "\u6218\u4E89\u5DF2\u7ECF\u5F00\u59CB\uFF0C\u867D\u7136\u770B\u4E0D\u89C1\u785D\u70DF\u3002"
-  },
-  {
-    startFrame: 151,
-    endFrame: 252,
-    // 8.4s
-    text: "\u8FD9\u573A\u6218\u4E89\uFF0C\u5173\u4E4E\u6BCF\u4E00\u4E2A\u4EBA\u7684\u8D22\u5BCC\u3002"
-  },
-  {
-    startFrame: 252,
-    endFrame: 365,
-    // 12.2s
-    text: "\u8FD9\u4E0D\u662F\u9884\u8A00\uFF0C\u800C\u662F\u6B63\u5728\u53D1\u751F\u7684\u73B0\u5B9E\u3002"
-  }
-];
-const scene02Subs = [
-  {
-    startFrame: 0,
-    endFrame: 151,
-    // 5.0s
-    text: "\u4E3A\u4EC0\u4E48\u4E16\u754C\u4F1A\u91C7\u53D6\u8FD9\u79CD\u5FC5\u7136\u5BFC\u81F4\u5371\u673A\u7684\u503A\u52A1\u8D27\u5E01\u5236\u5EA6\uFF1F"
-  },
-  {
-    startFrame: 151,
-    endFrame: 317,
-    // 10.6s
-    text: "\u5230\u5E95\u662F\u4EC0\u4E48\u6837\u7684\u7279\u6B8A\u5229\u76CA\u96C6\u56E2\u5DE6\u53F3\u7740\u8D27\u5E01\u5236\u5EA6\u7684\u5EFA\u7ACB\u548C\u6F14\u5316\uFF1F"
-  },
-  {
-    startFrame: 317,
-    endFrame: 457,
-    // 15.2s
-    text: "\u4ED6\u4EEC\u53C8\u662F\u5982\u4F55\u4ECE\u653F\u5E9C\u624B\u4E2D\u593A\u53D6\u4E86\u8D27\u5E01\u53D1\u884C\u5927\u6743\uFF1F"
-  },
-  {
-    startFrame: 457,
-    endFrame: 603,
-    // 20.1s
-    text: "\u8FD9\u4E9B\u95EE\u9898\u7684\u7B54\u6848\uFF0C\u5C06\u63ED\u793A\u4E16\u754C\u7ECF\u6D4E\u7684\u771F\u6B63\u8FD0\u884C\u903B\u8F91\u3002"
-  }
-];
-const scene03Subs = [
-  {
-    startFrame: 0,
-    endFrame: 103,
-    // 3.4s
-    text: "2008\u5E74\u5E2D\u5377\u5168\u7403\u7684\u91D1\u878D\u5371\u673A\uFF0C"
-  },
-  {
-    startFrame: 103,
-    endFrame: 267,
-    // 8.9s
-    text: "\u6839\u6E90\u5728\u4E8E\u5168\u4E16\u754C\u7684\u8D27\u5E01\u5927\u53A6\u5EFA\u7ACB\u5728\u7F8E\u56FD\u7684\u503A\u52A1\u6C99\u6EE9\u4E4B\u4E0A\u3002"
-  },
-  {
-    startFrame: 267,
-    endFrame: 350,
-    // 11.7s
-    text: "\u7F8E\u5143\u5371\u673A\u6CE2\u53CA\u6574\u4E2A\u4E16\u754C\uFF0C"
-  },
-  {
-    startFrame: 350,
-    endFrame: 449,
-    // 15.0s
-    text: "\u800C\u66F4\u5927\u7684\u5371\u673A\u8FD8\u5728\u915D\u917F\u4E4B\u4E2D\u3002"
-  }
-];
-const scene04Subs = [
-  {
-    startFrame: 0,
-    endFrame: 74,
-    // 2.5s
-    text: "\u8D77\u822A\u7684\u4E2D\u56FD\u7ECF\u6D4E\u822A\u6BCD\uFF0C"
-  },
-  {
-    startFrame: 74,
-    endFrame: 131,
-    // 4.4s
-    text: "\u4F1A\u4E00\u5E06\u98CE\u987A\u5417\uFF1F"
-  },
-  {
-    startFrame: 131,
-    endFrame: 249,
-    // 8.3s
-    text: "\u770B\u4E0D\u89C1\u785D\u70DF\u7684\u91D1\u878D\u6218\u4E89\u5A01\u80C1\u65E5\u76CA\u52A0\u5267\u3002"
-  },
-  {
-    startFrame: 249,
-    endFrame: 356,
-    // 11.9s
-    text: "\u4E2D\u56FD\u5C06\u5982\u4F55\u5E94\u5BF9\u8FD9\u573A\u65E0\u5F62\u7684\u6218\u4E89\uFF1F"
-  }
-];
-const scene05Subs = [
-  {
-    startFrame: 0,
-    endFrame: 84,
-    // 2.8s
-    text: "11\u96C6\u8282\u76EE\u4E3A\u4F60\u63ED\u793A\u771F\u76F8\u3002"
-  },
-  {
-    startFrame: 84,
-    endFrame: 175,
-    // 5.8s
-    text: "\u4ECE\u7F57\u65AF\u67F4\u5C14\u5FB7\u5230\u7F8E\u8054\u50A8\uFF0C"
-  },
-  {
-    startFrame: 175,
-    endFrame: 257,
-    // 8.6s
-    text: "\u4ECE\u4E00\u6218\u5230\u4E9A\u6D32\u91D1\u878D\u5371\u673A\uFF0C"
-  },
-  {
-    startFrame: 257,
-    endFrame: 336,
-    // 11.2s
-    text: "\u8D27\u5E01\u6218\u4E89\uFF0C\u656C\u8BF7\u671F\u5F85\u3002"
-  }
-];
-const trailerSubtitles = [
-  ...scene01Subs.map((s) => ({
-    ...s,
-    startFrame: s.startFrame + SCENE_OFFSETS[0],
-    endFrame: s.endFrame + SCENE_OFFSETS[0]
-  })),
-  ...scene02Subs.map((s) => ({
-    ...s,
-    startFrame: s.startFrame + SCENE_OFFSETS[1],
-    endFrame: s.endFrame + SCENE_OFFSETS[1]
-  })),
-  ...scene03Subs.map((s) => ({
-    ...s,
-    startFrame: s.startFrame + SCENE_OFFSETS[2],
-    endFrame: s.endFrame + SCENE_OFFSETS[2]
-  })),
-  ...scene04Subs.map((s) => ({
-    ...s,
-    startFrame: s.startFrame + SCENE_OFFSETS[3],
-    endFrame: s.endFrame + SCENE_OFFSETS[3]
-  })),
-  ...scene05Subs.map((s) => ({
-    ...s,
-    startFrame: s.startFrame + SCENE_OFFSETS[4],
-    endFrame: s.endFrame + SCENE_OFFSETS[4]
-  }))
-];
-/* harmony default export */ const trailer = ((/* unused pure expression or super */ null && (trailerSubtitles)));
-
-;// ./src/compositions/Trailer.tsx
-
-
-
-
-
-
-
-
-const VOICE_DIR = "/assets/audio/voiceover/trailer/";
-function buildTrailerVoiceoverEntries() {
-  const entries = [];
-  const subtitleTimings = [
-    { start: 0, end: 90 },
-    { start: 90, end: 210 },
-    { start: 210, end: 330 },
-    { start: 450, end: 570 },
-    { start: 570, end: 690 },
-    { start: 690, end: 810 },
-    { start: 900, end: 1020 },
-    { start: 1020, end: 1140 },
-    { start: 1140, end: 1260 },
-    { start: 1350, end: 1470 },
-    { start: 1470, end: 1590 },
-    { start: 1590, end: 1710 },
-    { start: 1800, end: 1920 },
-    { start: 1920, end: 2040 },
-    { start: 2040, end: 2160 },
-    { start: 2160, end: 2250 }
-  ];
-  for (let i = 0; i < subtitleTimings.length; i++) {
-    const timing = subtitleTimings[i];
-    entries.push({
-      src: `${VOICE_DIR}voice_${String(i).padStart(4, "0")}.m4a`,
-      startFrame: timing.start,
-      durationFrames: timing.end - timing.start
-    });
-  }
-  return entries;
-}
-const Trailer = () => {
-  const { fps } = (0,esm.useVideoConfig)();
-  const bgm = getEpisodeBGM("Trailer");
-  const voiceoverEntries = buildTrailerVoiceoverEntries();
-  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { background: "#0d1117" }, children: [
-    bgm && /* @__PURE__ */ (0,jsx_runtime.jsx)(Audio_Audio, { ...bgm }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      Voiceover,
-      {
-        voiceoverSrc: VOICE_DIR,
-        entries: voiceoverEntries,
-        volume: 0.8
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Sequence, { durationInFrames: 15 * fps, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(OpeningScene, {}) }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Sequence, { from: 15 * fps, durationInFrames: 15 * fps, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(QuestionScene, {}) }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Sequence, { from: 30 * fps, durationInFrames: 15 * fps, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(CrisisScene, {}) }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Sequence, { from: 45 * fps, durationInFrames: 15 * fps, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(ChinaScene, {}) }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.Sequence, { from: 60 * fps, durationInFrames: 15 * fps, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(ComingSoonScene, {}) }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: trailerSubtitles })
-  ] });
-};
-const OpeningScene = () => {
-  const frame = (0,esm.useCurrentFrame)();
-  const opacity = (0,esm.interpolate)(frame, [0, 30], [0, 1]);
-  return /* @__PURE__ */ (0,jsx_runtime.jsx)(
-    esm.AbsoluteFill,
-    {
-      style: {
-        background: "linear-gradient(180deg, #0d1117 0%, #1a1a2e 100%)"
-      },
-      children: /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-        "div",
-        {
-          style: {
-            position: "absolute",
-            top: "35%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            textAlign: "center",
-            opacity
-          },
-          children: [
-            /* @__PURE__ */ (0,jsx_runtime.jsx)(
-              "div",
-              {
-                style: {
-                  fontSize: 72,
-                  fontWeight: 700,
-                  color: "#ffd700",
-                  textShadow: "0 0 30px rgba(255,215,0,0.5)"
-                },
-                children: "Currency Wars"
-              }
-            ),
-            /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontSize: 36, color: "#e8e8e8", marginTop: 20 }, children: "\u8D27\u5E01\u6218\u4E89" }),
-            /* @__PURE__ */ (0,jsx_runtime.jsx)(
-              "div",
-              {
-                style: {
-                  fontSize: 24,
-                  color: "#ef4444",
-                  marginTop: 40,
-                  fontStyle: "italic"
-                },
-                children: '"\u6218\u4E89\u5DF2\u7ECF\u5F00\u59CB\uFF0C\u867D\u7136\u770B\u4E0D\u89C1\u785D\u70DF"'
-              }
-            )
-          ]
-        }
-      )
-    }
-  );
-};
-const QuestionScene = () => {
-  const frame = (0,esm.useCurrentFrame)();
-  const opacity = (0,esm.interpolate)(frame, [0, 30], [0, 1]);
-  return /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.AbsoluteFill, { style: { background: "#0d1117" }, children: /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-    "div",
-    {
-      style: {
-        position: "absolute",
-        top: "30%",
-        left: "50%",
-        transform: "translate(-50%, -50%)",
-        width: "80%",
-        textAlign: "center",
-        opacity
-      },
-      children: [
-        /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontSize: 28, color: "#ffd700", marginBottom: 30 }, children: "\u4E3A\u4EC0\u4E48\u4E16\u754C\u4F1A\u91C7\u53D6\u503A\u52A1\u8D27\u5E01\u5236\u5EA6\uFF1F" }),
-        /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontSize: 20, color: "#9ca3af", marginBottom: 20 }, children: "\u4EC0\u4E48\u6837\u7684\u7279\u6B8A\u5229\u76CA\u96C6\u56E2\u5DE6\u53F3\u7740\u8D27\u5E01\u5236\u5EA6\uFF1F" }),
-        /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontSize: 20, color: "#9ca3af" }, children: "\u4ED6\u4EEC\u5982\u4F55\u4ECE\u653F\u5E9C\u624B\u4E2D\u593A\u53D6\u4E86\u8D27\u5E01\u53D1\u884C\u5927\u6743\uFF1F" })
-      ]
-    }
-  ) });
-};
-const CrisisScene = () => {
-  const frame = (0,esm.useCurrentFrame)();
-  const opacity = (0,esm.interpolate)(frame, [0, 30], [0, 1]);
-  return /* @__PURE__ */ (0,jsx_runtime.jsx)(
-    esm.AbsoluteFill,
-    {
-      style: {
-        background: "linear-gradient(180deg, #1f1f1f 0%, #0d0d0d 100%)"
-      },
-      children: /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-        "div",
-        {
-          style: {
-            position: "absolute",
-            top: "25%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            width: "80%",
-            textAlign: "center",
-            opacity
-          },
-          children: [
-            /* @__PURE__ */ (0,jsx_runtime.jsx)(
-              "div",
-              {
-                style: {
-                  fontSize: 48,
-                  color: "#ef4444",
-                  fontWeight: 700,
-                  marginBottom: 20
-                },
-                children: "2008 Global Financial Crisis"
-              }
-            ),
-            /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontSize: 24, color: "#e8e8e8", marginBottom: 15 }, children: "\u5371\u673A\u7684\u6839\u6E90\uFF1A\u503A\u52A1\u8D27\u5E01\u4F53\u7CFB" }),
-            /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontSize: 24, color: "#e8e8e8", marginBottom: 15 }, children: "\u8D27\u5E01\u5927\u53A6\u5EFA\u7ACB\u5728\u503A\u52A1\u6C99\u6EE9\u4E4B\u4E0A" }),
-            /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontSize: 20, color: "#9ca3af" }, children: "\u7F8E\u5143\u5371\u673A\u6CE2\u53CA\u6574\u4E2A\u4E16\u754C" })
-          ]
-        }
-      )
-    }
-  );
-};
-const ChinaScene = () => {
-  const frame = (0,esm.useCurrentFrame)();
-  const opacity = (0,esm.interpolate)(frame, [0, 30], [0, 1]);
-  return /* @__PURE__ */ (0,jsx_runtime.jsx)(
-    esm.AbsoluteFill,
-    {
-      style: {
-        background: "linear-gradient(180deg, #0d1117 0%, #1a2f1a 100%)"
-      },
-      children: /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-        "div",
-        {
-          style: {
-            position: "absolute",
-            top: "30%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            width: "80%",
-            textAlign: "center",
-            opacity
-          },
-          children: [
-            /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontSize: 36, color: "#ffd700", marginBottom: 30 }, children: "\u4E2D\u56FD\u7ECF\u6D4E\u822A\u6BCD\u5DF2\u7ECF\u8D77\u822A" }),
-            /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontSize: 28, color: "#e8e8e8", marginBottom: 20 }, children: "\u4F1A\u4E00\u5E06\u98CE\u987A\u5417\uFF1F" }),
-            /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontSize: 20, color: "#ef4444", marginTop: 30 }, children: "\u770B\u4E0D\u89C1\u785D\u70DF\u7684\u91D1\u878D\u6218\u4E89\u5A01\u80C1\u65E5\u76CA\u52A0\u5267" })
-          ]
-        }
-      )
-    }
-  );
-};
-const ComingSoonScene = () => {
-  const frame = (0,esm.useCurrentFrame)();
-  const opacity = (0,esm.interpolate)(frame, [0, 30], [0, 1]);
-  const footerOpacity = (0,esm.interpolate)(frame, [60, 90], [0, 1]);
-  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { background: "#0d1117" }, children: [
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-      "div",
-      {
-        style: {
-          position: "absolute",
-          top: "25%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          width: "80%",
-          textAlign: "center",
-          opacity
-        },
-        children: [
-          /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontSize: 32, color: "#e8e8e8", marginBottom: 30 }, children: "11\u96C6\u8282\u76EE\u4E3A\u4F60\u63ED\u793A\u771F\u76F8" }),
-          /* @__PURE__ */ (0,jsx_runtime.jsx)(
-            "div",
-            {
-              style: {
-                display: "flex",
-                justifyContent: "center",
-                gap: 20,
-                flexWrap: "wrap"
-              },
-              children: ["\u7F57\u65AF\u67F4\u5C14\u5FB7", "\u7F8E\u8054\u50A8", "\u4E00\u6218", "\u91D1\u878D\u5371\u673A", "\u4E9A\u6D32\u5371\u673A"].map(
-                (item, i) => /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                  "div",
-                  {
-                    style: {
-                      padding: "10px 20px",
-                      background: "rgba(255,215,0,0.15)",
-                      borderRadius: 8,
-                      border: "1px solid #ffd700",
-                      color: "#ffd700",
-                      fontSize: 16
-                    },
-                    children: item
-                  },
-                  i
-                )
-              )
-            }
-          )
-        ]
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-      "div",
-      {
-        style: {
-          position: "absolute",
-          bottom: "20%",
-          left: "50%",
-          transform: "translateX(-50%)",
-          textAlign: "center",
-          opacity: footerOpacity
-        },
-        children: [
-          /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontSize: 48, color: "#ffd700", fontWeight: 700 }, children: "Coming Soon" }),
-          /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontSize: 24, color: "#9ca3af", marginTop: 10 }, children: "\u656C\u8BF7\u671F\u5F85" })
-        ]
-      }
-    )
-  ] });
-};
-/* harmony default export */ const compositions_Trailer = ((/* unused pure expression or super */ null && (Trailer)));
 
 ;// ./src/components/animations/UIAnimations.tsx
 /* unused harmony import specifier */ var UIAnimations_jsx;
@@ -7895,7 +7110,6 @@ const PullFocus = ({
 
 
 
-
 const filterPresets = {
   none: "none",
   grayscale: "grayscale(100%)",
@@ -7920,15 +7134,6 @@ const ImageLayer = ({
   const frame = (0,esm.useCurrentFrame)();
   const localFrame = frame - startFrame;
   const imageSrc = src.startsWith("http") || src.startsWith("//") ? src : (0,esm.staticFile)(src.replace(/^\//, ""));
-  react.useEffect(() => {
-    console.log("[ImageLayer] Loading image:", { src, imageSrc, opacity: layer.opacity });
-  }, [src, imageSrc, layer.opacity]);
-  const handleImageError = (e) => {
-    console.error("[ImageLayer] Failed to load image:", { src, imageSrc, error: e });
-  };
-  const handleImageLoad = () => {
-    console.log("[ImageLayer] Successfully loaded:", imageSrc);
-  };
   const intensity = kenBurnsIntensityMap[kenBurns.intensity || "moderate"];
   const progress = Math.min(
     1,
@@ -8002,8 +7207,6 @@ const ImageLayer = ({
         esm.Img,
         {
           src: imageSrc,
-          onError: handleImageError,
-          onLoad: handleImageLoad,
           style: {
             width: "100%",
             height: "100%",
@@ -13068,6 +12271,8 @@ const RotateAnimation = ({ children, speed = 1, delay = 0 }) => {
 /* unused harmony import specifier */ var Episode01DocumentaryScenes_AbsoluteFill;
 /* unused harmony import specifier */ var Episode01DocumentaryScenes_ImageLayer;
 /* unused harmony import specifier */ var Episode01DocumentaryScenes_Vignette;
+/* unused harmony import specifier */ var Episode01DocumentaryScenes_FilmGrain;
+/* unused harmony import specifier */ var Episode01DocumentaryScenes_CinematicText;
 /* unused harmony import specifier */ var Episode01DocumentaryScenes_DocumentaryOverlay;
 /* unused harmony import specifier */ var Episode01DocumentaryScenes_IMAGE_BASE;
 
@@ -13138,21 +12343,21 @@ const ChinaRiseDocumentary = ({ durationFrames }) => {
   ] });
 };
 const FinancialWarDocumentary = ({ durationFrames }) => {
-  const frame = (0,esm.useCurrentFrame)();
-  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { background: "#0a0a0a" }, children: [
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      ImageLayer,
+  const frame = Episode01DocumentaryScenes_useCurrentFrame();
+  return /* @__PURE__ */ Episode01DocumentaryScenes_jsxs(Episode01DocumentaryScenes_AbsoluteFill, { style: { background: "#0a0a0a" }, children: [
+    /* @__PURE__ */ Episode01DocumentaryScenes_jsx(
+      Episode01DocumentaryScenes_ImageLayer,
       {
-        src: `${IMAGE_BASE}/ep01/financial-war.jpg`,
+        src: `${Episode01DocumentaryScenes_IMAGE_BASE}/ep01/financial-war.jpg`,
         kenBurns: { panDirection: "zoom-out", intensity: "moderate" },
         layer: { filter: "dramatic", opacity: 0.9 },
         durationFrames
       }
     ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(Vignette, { intensity: 0.7 }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(FilmGrain, { opacity: 0.08 }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      CinematicText,
+    /* @__PURE__ */ Episode01DocumentaryScenes_jsx(Episode01DocumentaryScenes_Vignette, { intensity: 0.7 }),
+    /* @__PURE__ */ Episode01DocumentaryScenes_jsx(Episode01DocumentaryScenes_FilmGrain, { opacity: 0.08 }),
+    /* @__PURE__ */ Episode01DocumentaryScenes_jsx(
+      Episode01DocumentaryScenes_CinematicText,
       {
         text: "The Invisible Battlefield",
         fontSize: 48,
@@ -13662,10 +12867,542 @@ const InflationDocumentary = ({ durationFrames }) => {
     )
   ] });
 };
+const AuthorWarningDocumentary = ({ durationFrames }) => {
+  const frame = (0,esm.useCurrentFrame)();
+  const yearPulse = Math.sin(frame * 0.05) * 0.1 + 0.9;
+  const bgOpacity = (0,esm.interpolate)(frame, [0, 45], [0, 1], {
+    extrapolateRight: "clamp"
+  });
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { background: "#0a0a0a" }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(
+      ImageLayer,
+      {
+        src: `${IMAGE_BASE}/ep01/ep01-financial-crisis-2008.jpg`,
+        kenBurns: { panDirection: "zoom-out", intensity: "subtle" },
+        layer: { filter: "dramatic", opacity: 0.4 },
+        durationFrames
+      }
+    ),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(
+      "div",
+      {
+        style: {
+          position: "absolute",
+          inset: 0,
+          background: "radial-gradient(circle at 50% 30%, rgba(30,41,59,0.6) 0%, rgba(10,10,10,0.8) 100%)"
+        }
+      }
+    ),
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+      "div",
+      {
+        style: {
+          position: "absolute",
+          top: "25%",
+          left: "50%",
+          transform: "translateX(-50%)",
+          textAlign: "center"
+        },
+        children: [
+          /* @__PURE__ */ (0,jsx_runtime.jsx)(
+            "div",
+            {
+              style: {
+                fontSize: 120,
+                color: "#ECC94B",
+                fontFamily: "Cinzel, serif",
+                fontWeight: 700,
+                opacity: bgOpacity * yearPulse,
+                textShadow: "0 0 40px rgba(236, 201, 75, 0.3)"
+              },
+              children: "2006"
+            }
+          ),
+          /* @__PURE__ */ (0,jsx_runtime.jsx)(
+            "div",
+            {
+              style: {
+                fontSize: 24,
+                color: "#94A3B8",
+                fontFamily: "Merriweather, serif",
+                fontStyle: "italic",
+                opacity: (0,esm.interpolate)(frame, [60, 100], [0, 1], {
+                  extrapolateRight: "clamp"
+                })
+              },
+              children: "The Summer Before the Storm"
+            }
+          )
+        ]
+      }
+    ),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(
+      "div",
+      {
+        style: {
+          position: "absolute",
+          bottom: "25%",
+          left: "50%",
+          transform: "translateX(-50%)",
+          maxWidth: "70%",
+          opacity: (0,esm.interpolate)(frame, [90, 130], [0, 1], {
+            extrapolateRight: "clamp"
+          })
+        },
+        children: /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+          "div",
+          {
+            style: {
+              background: "rgba(0,0,0,0.6)",
+              padding: "24px 32px",
+              borderRadius: 8,
+              borderLeft: "4px solid #ECC94B"
+            },
+            children: [
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    fontSize: 18,
+                    color: "#E2E8F0",
+                    fontFamily: "Merriweather, serif",
+                    lineHeight: 1.8,
+                    fontStyle: "italic"
+                  },
+                  children: '"The currency edifice is built on the sand of American debt."'
+                }
+              ),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    fontSize: 14,
+                    color: "#94A3B8",
+                    fontFamily: "Cinzel, serif",
+                    marginTop: 12
+                  },
+                  children: "\u2014 Song Hongbing, Currency Wars"
+                }
+              )
+            ]
+          }
+        )
+      }
+    ),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(Vignette, { intensity: 0.5 }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(FilmGrain, { opacity: 0.04 })
+  ] });
+};
+const PaperMoneyEvolutionDocumentary = ({ durationFrames }) => {
+  const frame = (0,esm.useCurrentFrame)();
+  const timeline = [
+    { year: "Ancient", label: "Gold & Silver", icon: "\u{1FA99}" },
+    { year: "1694", label: "Bank of England", icon: "\u{1F3E6}" },
+    { year: "1913", label: "Federal Reserve", icon: "\u{1F4B5}" },
+    { year: "1971", label: "Nixon Shock", icon: "\u26A1" }
+  ];
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { background: "#0a0a0a" }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(
+      ImageLayer,
+      {
+        src: `${IMAGE_BASE}/ep01/gold-coins-roman.jpg`,
+        kenBurns: { panDirection: "left", intensity: "subtle" },
+        layer: { filter: "vintage", opacity: 0.35 },
+        durationFrames
+      }
+    ),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(
+      "div",
+      {
+        style: {
+          position: "absolute",
+          inset: 0,
+          background: "linear-gradient(180deg, rgba(75,0,130,0.2) 0%, rgba(10,10,10,0.7) 100%)"
+        }
+      }
+    ),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(
+      DocumentaryOverlay,
+      {
+        title: "The Evolution of Money",
+        subtitle: "From gold receipts to debt instruments",
+        frame,
+        fadeInDuration: 40
+      }
+    ),
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+      "div",
+      {
+        style: {
+          position: "absolute",
+          top: "40%",
+          left: "10%",
+          right: "10%"
+        },
+        children: [
+          /* @__PURE__ */ (0,jsx_runtime.jsx)(
+            "div",
+            {
+              style: {
+                position: "absolute",
+                top: 30,
+                left: 40,
+                right: 40,
+                height: 2,
+                background: "linear-gradient(90deg, #FFD700, #9F7AEA, #4B0082, #E53E3E)",
+                opacity: (0,esm.interpolate)(frame, [0, 60], [0, 0.6], {
+                  extrapolateRight: "clamp"
+                })
+              }
+            }
+          ),
+          /* @__PURE__ */ (0,jsx_runtime.jsx)(
+            "div",
+            {
+              style: {
+                display: "flex",
+                justifyContent: "space-between"
+              },
+              children: timeline.map((item, i) => {
+                const delay = i * 30;
+                const opacity = (0,esm.interpolate)(frame, [delay, delay + 30], [0, 1], {
+                  extrapolateRight: "clamp"
+                });
+                const scale = (0,esm.interpolate)(frame, [delay, delay + 20], [0.5, 1], {
+                  extrapolateRight: "clamp"
+                });
+                const isHighlight = i === 3;
+                return /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+                  "div",
+                  {
+                    style: {
+                      textAlign: "center",
+                      opacity,
+                      transform: `scale(${scale})`
+                    },
+                    children: [
+                      /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                        "div",
+                        {
+                          style: {
+                            fontSize: 36,
+                            marginBottom: 8
+                          },
+                          children: item.icon
+                        }
+                      ),
+                      /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                        "div",
+                        {
+                          style: {
+                            width: 60,
+                            height: 60,
+                            borderRadius: "50%",
+                            background: isHighlight ? "#E53E3E" : "rgba(255,215,0,0.2)",
+                            border: isHighlight ? "3px solid #E53E3E" : "2px solid #FFD700",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            margin: "0 auto",
+                            boxShadow: isHighlight ? "0 0 20px rgba(229,62,62,0.5)" : "none"
+                          },
+                          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                            "div",
+                            {
+                              style: {
+                                width: 12,
+                                height: 12,
+                                borderRadius: "50%",
+                                background: isHighlight ? "#fff" : "#FFD700"
+                              }
+                            }
+                          )
+                        }
+                      ),
+                      /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                        "div",
+                        {
+                          style: {
+                            fontSize: 16,
+                            color: isHighlight ? "#E53E3E" : "#ECC94B",
+                            fontFamily: "Cinzel, serif",
+                            marginTop: 12,
+                            fontWeight: isHighlight ? 700 : 400
+                          },
+                          children: item.year
+                        }
+                      ),
+                      /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                        "div",
+                        {
+                          style: {
+                            fontSize: 12,
+                            color: "#94A3B8",
+                            fontFamily: "Merriweather, serif",
+                            marginTop: 4,
+                            maxWidth: 80
+                          },
+                          children: item.label
+                        }
+                      )
+                    ]
+                  },
+                  i
+                );
+              })
+            }
+          )
+        ]
+      }
+    ),
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+      "div",
+      {
+        style: {
+          position: "absolute",
+          bottom: "20%",
+          left: "50%",
+          transform: "translateX(-50%)",
+          opacity: (0,esm.interpolate)(frame, [120, 160], [0, 1], {
+            extrapolateRight: "clamp"
+          })
+        },
+        children: [
+          /* @__PURE__ */ (0,jsx_runtime.jsx)(
+            "div",
+            {
+              style: {
+                fontSize: 20,
+                color: "#E53E3E",
+                fontFamily: "Merriweather, serif",
+                textAlign: "center"
+              },
+              children: '"August 15, 1971: The dollar divorced gold."'
+            }
+          ),
+          /* @__PURE__ */ (0,jsx_runtime.jsx)(
+            "div",
+            {
+              style: {
+                fontSize: 14,
+                color: "#94A3B8",
+                textAlign: "center",
+                marginTop: 8
+              },
+              children: "Money became pure debt."
+            }
+          )
+        ]
+      }
+    ),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(Vignette, { intensity: 0.6 }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(FilmGrain, { opacity: 0.05 })
+  ] });
+};
+const ChinaFinancialRiskDocumentary = ({ durationFrames }) => {
+  const frame = (0,esm.useCurrentFrame)();
+  const radarAngle = (0,esm.interpolate)(frame, [0, 180], [0, 360]);
+  const alertPulse = Math.sin(frame * 0.08) * 0.2 + 0.8;
+  const risks = [
+    { label: "Capital Flow", value: 85 },
+    { label: "Exchange Rate", value: 72 },
+    { label: "Derivatives", value: 91 },
+    { label: "Shadow Banking", value: 68 }
+  ];
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { background: "#0a0a0a" }, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(
+      ImageLayer,
+      {
+        src: `${IMAGE_BASE}/ep01/china-economic-rise.jpg`,
+        kenBurns: { panDirection: "right", intensity: "subtle" },
+        layer: { filter: "dramatic", opacity: 0.3 },
+        durationFrames
+      }
+    ),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(
+      "div",
+      {
+        style: {
+          position: "absolute",
+          inset: 0,
+          background: "radial-gradient(circle at 70% 50%, rgba(139,0,0,0.3) 0%, rgba(10,10,10,0.7) 100%)"
+        }
+      }
+    ),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(
+      DocumentaryOverlay,
+      {
+        year: "2006+",
+        title: "Hidden Dangers",
+        subtitle: "The aircraft carrier sails into uncertain waters",
+        frame,
+        fadeInDuration: 40
+      }
+    ),
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+      "div",
+      {
+        style: {
+          position: "absolute",
+          top: "30%",
+          left: "50%",
+          transform: "translateX(-50%)",
+          width: 300,
+          height: 300
+        },
+        children: [
+          /* @__PURE__ */ (0,jsx_runtime.jsxs)("svg", { width: 300, height: 300, viewBox: "0 0 300 300", children: [
+            /* @__PURE__ */ (0,jsx_runtime.jsx)("defs", { children: /* @__PURE__ */ (0,jsx_runtime.jsxs)("linearGradient", { id: "radarGrad", x1: "0%", y1: "0%", x2: "100%", y2: "100%", children: [
+              /* @__PURE__ */ (0,jsx_runtime.jsx)("stop", { offset: "0%", stopColor: "#E53E3E", stopOpacity: 0.3 }),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)("stop", { offset: "100%", stopColor: "#8B0000", stopOpacity: 0.1 })
+            ] }) }),
+            [1, 2, 3].map((r) => /* @__PURE__ */ (0,jsx_runtime.jsx)(
+              "circle",
+              {
+                cx: 150,
+                cy: 150,
+                r: r * 45,
+                fill: "none",
+                stroke: "#E53E3E",
+                strokeWidth: 1,
+                opacity: 0.3,
+                strokeDasharray: "4 4"
+              },
+              r
+            )),
+            /* @__PURE__ */ (0,jsx_runtime.jsx)(
+              "line",
+              {
+                x1: 150,
+                y1: 150,
+                x2: 150 + Math.cos(radarAngle * Math.PI / 180) * 135,
+                y2: 150 + Math.sin(radarAngle * Math.PI / 180) * 135,
+                stroke: "#E53E3E",
+                strokeWidth: 2,
+                opacity: 0.6
+              }
+            ),
+            /* @__PURE__ */ (0,jsx_runtime.jsx)("circle", { cx: 150, cy: 150, r: 8, fill: "#E53E3E", opacity: alertPulse })
+          ] }),
+          /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+            "div",
+            {
+              style: {
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                textAlign: "center"
+              },
+              children: [
+                /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                  "div",
+                  {
+                    style: {
+                      fontSize: 14,
+                      color: "#E53E3E",
+                      fontFamily: "Cinzel, serif",
+                      letterSpacing: 2
+                    },
+                    children: "FINANCIAL WAR"
+                  }
+                ),
+                /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                  "div",
+                  {
+                    style: {
+                      fontSize: 12,
+                      color: "#94A3B8",
+                      marginTop: 4
+                    },
+                    children: "Threat Level: HIGH"
+                  }
+                )
+              ]
+            }
+          )
+        ]
+      }
+    ),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(
+      "div",
+      {
+        style: {
+          position: "absolute",
+          bottom: "20%",
+          left: "15%",
+          right: "15%",
+          opacity: (0,esm.interpolate)(frame, [90, 130], [0, 1], {
+            extrapolateRight: "clamp"
+          })
+        },
+        children: risks.map((risk, i) => {
+          const barWidth = (0,esm.interpolate)(
+            frame,
+            [130 + i * 20, 130 + i * 20 + 30],
+            [0, risk.value],
+            { extrapolateRight: "clamp" }
+          );
+          return /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+            "div",
+            {
+              style: {
+                display: "flex",
+                alignItems: "center",
+                marginBottom: 12,
+                gap: 12
+              },
+              children: [
+                /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                  "div",
+                  {
+                    style: {
+                      width: 100,
+                      fontSize: 11,
+                      color: "#94A3B8",
+                      fontFamily: "JetBrains Mono, monospace"
+                    },
+                    children: risk.label
+                  }
+                ),
+                /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                  "div",
+                  {
+                    style: {
+                      flex: 1,
+                      height: 8,
+                      background: "rgba(255,255,255,0.1)",
+                      borderRadius: 4,
+                      overflow: "hidden"
+                    },
+                    children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                      "div",
+                      {
+                        style: {
+                          width: `${barWidth}%`,
+                          height: "100%",
+                          background: risk.value > 80 ? "linear-gradient(90deg, #E53E3E, #C53030)" : "linear-gradient(90deg, #ECC94B, #D69E2E)",
+                          borderRadius: 4
+                        }
+                      }
+                    )
+                  }
+                )
+              ]
+            },
+            i
+          );
+        })
+      }
+    ),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(Vignette, { intensity: 0.6 }),
+    /* @__PURE__ */ (0,jsx_runtime.jsx)(FilmGrain, { opacity: 0.05 })
+  ] });
+};
 
 ;// ./src/subtitles/episode01.ts
 
-const episode01_SCENE_FRAMES = [
+const SCENE_FRAMES = [
   1204,
   // Scene 0: 40.1s
   1428,
@@ -13685,11 +13422,11 @@ const episode01_SCENE_FRAMES = [
   507
   // Scene 8: 16.9s
 ];
-const episode01_SCENE_OFFSETS = episode01_SCENE_FRAMES.reduce((acc, frames, i) => {
-  acc.push(i === 0 ? 0 : acc[i - 1] + episode01_SCENE_FRAMES[i - 1]);
+const SCENE_OFFSETS = SCENE_FRAMES.reduce((acc, frames, i) => {
+  acc.push(i === 0 ? 0 : acc[i - 1] + SCENE_FRAMES[i - 1]);
   return acc;
 }, []);
-const episode01_scene01Subs = [
+const scene01Subs = [
   {
     "startFrame": 0,
     "endFrame": 251,
@@ -13711,7 +13448,7 @@ const episode01_scene01Subs = [
     "text": "\u800C\u7F8E\u5143\u7684\u503A\u52A1\u672C\u4F4D\u65E2\u4E0D\u53EF\u80FD\u7A33\u5B9A\uFF0C\u4E5F\u4E0D\u53EF\u80FD\u6301\u7EED\uFF0C\u968F\u7740\u4E16\u754C\u7ECF\u6D4E\u603B\u5428\u4F4D\u7684\u589E\u957F\uFF0C\u7F8E\u5143\u5730\u57FA\u5DF2\u5728\u6C89\u9677\uFF0C\u968F\u4E4B\u800C\u6765\u7684\u5C31\u662F\u5927\u53A6\u5C06\u503E\u7684\u5371\u673A\u3002"
   }
 ];
-const episode01_scene02Subs = [
+const scene02Subs = [
   {
     "startFrame": 0,
     "endFrame": 227,
@@ -13733,7 +13470,7 @@ const episode01_scene02Subs = [
     "text": "\u65E0\u8BBA\u54EA\u4E2A\u5730\u533A\uFF0C\u65E0\u8BBA\u4EC0\u4E48\u6587\u660E\uFF0C\u65E0\u8BBA\u4F55\u79CD\u5B97\u6559\uFF0C\u91D1\u94F6\u4F5C\u4E3A\u6700\u5E7F\u6CDB\u88AB\u63A5\u53D7\u7684\u8D22\u5BCC\u5F62\u5F0F\u800C\u5F62\u6210\u4E86\u8D27\u5E01\u3002\u6B64\u65F6\u7684\u91D1\u94F6\uFF0C\u65E2\u662F\u8D22\u5BCC\u7684\u7D22\u53D6\u6743\uFF0C\u540C\u65F6\u53C8\u662F\u8D22\u5BCC\u672C\u8EAB\u3002"
   }
 ];
-const episode01_scene03Subs = [
+const scene03Subs = [
   {
     "startFrame": 0,
     "endFrame": 162,
@@ -13755,7 +13492,7 @@ const episode01_scene03Subs = [
     "text": "\u4E45\u800C\u4E45\u4E4B\uFF0C\u4EBA\u4EEC\u751A\u81F3\u5FD8\u8BB0\u4E86\u7F8E\u5143\u4EC5\u4EC5\u662F\u4E00\u79CD\u8D22\u5BCC\u7684\u6536\u636E\uFF0C\u800C\u7EDD\u975E\u8D22\u5BCC\u672C\u8EAB\uFF0C\u800C\u7F8E\u5143\u9010\u6E10\u88AB\u63CF\u8FF0\u6210\u662F\u4E0E\u9EC4\u91D1\u4E00\u6837\u7F8E\u597D\u7684\u7EC8\u6781\u8D22\u5BCC\u3002"
   }
 ];
-const episode01_scene04Subs = [
+const scene04Subs = [
   {
     "startFrame": 0,
     "endFrame": 491,
@@ -13782,7 +13519,7 @@ const episode01_scene04Subs = [
     "text": "\u4E3A\u4F7F\u7528\u516C\u5171\u8D27\u5E01\u800C\u5411\u5C11\u6570\u4EBA\u652F\u4ED8\u5229\u606F\u6210\u672C\uFF0C\u5C06\u56FD\u5BB6\u503A\u52A1\u4E0E\u8D27\u5E01\u6B7B\u9501\u5728\u4E00\u8D77\uFF0C\u8FD9\u662F\u4E00\u4E2A\u4ECE\u57FA\u56E0\u91CC\u5C31\u5B58\u5728\u7740'\u764C\u53D8'\u4FE1\u606F\u7684\u8D27\u5E01\u7CFB\u7EDF\u3002"
   }
 ];
-const episode01_scene05Subs = [
+const scene05Subs = [
   {
     "startFrame": 0,
     "endFrame": 341,
@@ -13868,58 +13605,58 @@ const scene09Subs = [
   }
 ];
 const episode01Subtitles = [
-  ...episode01_scene01Subs.map((s) => ({
+  ...scene01Subs.map((s) => ({
     ...s,
-    startFrame: s.startFrame + episode01_SCENE_OFFSETS[0],
-    endFrame: s.endFrame + episode01_SCENE_OFFSETS[0]
+    startFrame: s.startFrame + SCENE_OFFSETS[0],
+    endFrame: s.endFrame + SCENE_OFFSETS[0]
   })),
-  ...episode01_scene02Subs.map((s) => ({
+  ...scene02Subs.map((s) => ({
     ...s,
-    startFrame: s.startFrame + episode01_SCENE_OFFSETS[1],
-    endFrame: s.endFrame + episode01_SCENE_OFFSETS[1]
+    startFrame: s.startFrame + SCENE_OFFSETS[1],
+    endFrame: s.endFrame + SCENE_OFFSETS[1]
   })),
-  ...episode01_scene03Subs.map((s) => ({
+  ...scene03Subs.map((s) => ({
     ...s,
-    startFrame: s.startFrame + episode01_SCENE_OFFSETS[2],
-    endFrame: s.endFrame + episode01_SCENE_OFFSETS[2]
+    startFrame: s.startFrame + SCENE_OFFSETS[2],
+    endFrame: s.endFrame + SCENE_OFFSETS[2]
   })),
-  ...episode01_scene04Subs.map((s) => ({
+  ...scene04Subs.map((s) => ({
     ...s,
-    startFrame: s.startFrame + episode01_SCENE_OFFSETS[3],
-    endFrame: s.endFrame + episode01_SCENE_OFFSETS[3]
+    startFrame: s.startFrame + SCENE_OFFSETS[3],
+    endFrame: s.endFrame + SCENE_OFFSETS[3]
   })),
-  ...episode01_scene05Subs.map((s) => ({
+  ...scene05Subs.map((s) => ({
     ...s,
-    startFrame: s.startFrame + episode01_SCENE_OFFSETS[4],
-    endFrame: s.endFrame + episode01_SCENE_OFFSETS[4]
+    startFrame: s.startFrame + SCENE_OFFSETS[4],
+    endFrame: s.endFrame + SCENE_OFFSETS[4]
   })),
   ...scene06Subs.map((s) => ({
     ...s,
-    startFrame: s.startFrame + episode01_SCENE_OFFSETS[5],
-    endFrame: s.endFrame + episode01_SCENE_OFFSETS[5]
+    startFrame: s.startFrame + SCENE_OFFSETS[5],
+    endFrame: s.endFrame + SCENE_OFFSETS[5]
   })),
   ...scene07Subs.map((s) => ({
     ...s,
-    startFrame: s.startFrame + episode01_SCENE_OFFSETS[6],
-    endFrame: s.endFrame + episode01_SCENE_OFFSETS[6]
+    startFrame: s.startFrame + SCENE_OFFSETS[6],
+    endFrame: s.endFrame + SCENE_OFFSETS[6]
   })),
   ...scene08Subs.map((s) => ({
     ...s,
-    startFrame: s.startFrame + episode01_SCENE_OFFSETS[7],
-    endFrame: s.endFrame + episode01_SCENE_OFFSETS[7]
+    startFrame: s.startFrame + SCENE_OFFSETS[7],
+    endFrame: s.endFrame + SCENE_OFFSETS[7]
   })),
   ...scene09Subs.map((s) => ({
     ...s,
-    startFrame: s.startFrame + episode01_SCENE_OFFSETS[8],
-    endFrame: s.endFrame + episode01_SCENE_OFFSETS[8]
+    startFrame: s.startFrame + SCENE_OFFSETS[8],
+    endFrame: s.endFrame + SCENE_OFFSETS[8]
   }))
 ];
 /* harmony default export */ const episode01 = ((/* unused pure expression or super */ null && (episode01Subtitles)));
-const ancientMarketSubs = (/* unused pure expression or super */ null && (episode01_scene01Subs));
-const chinaRiseSubs = (/* unused pure expression or super */ null && (episode01_scene02Subs));
-const invisibleBattlefieldSubs = (/* unused pure expression or super */ null && (episode01_scene03Subs));
-const historicalLessonsSubs = (/* unused pure expression or super */ null && (episode01_scene04Subs));
-const moneyEvolutionSubs = (/* unused pure expression or super */ null && (episode01_scene05Subs));
+const ancientMarketSubs = (/* unused pure expression or super */ null && (scene01Subs));
+const chinaRiseSubs = (/* unused pure expression or super */ null && (scene02Subs));
+const invisibleBattlefieldSubs = (/* unused pure expression or super */ null && (scene03Subs));
+const historicalLessonsSubs = (/* unused pure expression or super */ null && (scene04Subs));
+const moneyEvolutionSubs = (/* unused pure expression or super */ null && (scene05Subs));
 const historicalTimelineSubs = (/* unused pure expression or super */ null && (scene06Subs));
 const debtSpiralSubs = (/* unused pure expression or super */ null && (scene07Subs));
 const inflationSubs = (/* unused pure expression or super */ null && (scene08Subs));
@@ -13937,22 +13674,22 @@ const endingSubs = (/* unused pure expression or super */ null && (scene09Subs))
 
 
 
-const Episode01Documentary_VOICE_DIR = "/assets/audio/voiceover/episode01/";
+const VOICE_DIR = "/assets/audio/voiceover/episode01/";
 const SCENE_THEMES = [
-  "tragedy",
-  // Scene 0: 货币大厦的危机
+  "revelation",
+  // Scene 0: 作者2006年的忧虑与预言
   "ancient",
   // Scene 1: 黄金白银的终极地位
   "conspiracy",
-  // Scene 2: 纸币与美元体系
+  // Scene 2: 纸币演变与1971年转折
   "mystery",
   // Scene 3: 债务货币的陷阱
   "revelation",
-  // Scene 4: 金融危机推论
+  // Scene 4: 金融危机推论成真
   "finance",
   // Scene 5: 中国经济航母起航
-  "mystery",
-  // Scene 6: 看不见硝烟的战场
+  "war",
+  // Scene 6: 中国面临的金融战争风险
   "tragedy",
   // Scene 7: 历史的警示
   "triumph"
@@ -13961,21 +13698,21 @@ const SCENE_THEMES = [
 function buildVoiceoverEntries() {
   const entries = [];
   const sceneSubs = [
-    { subs: episode01_scene01Subs, offset: episode01_SCENE_OFFSETS[0] },
-    { subs: episode01_scene02Subs, offset: episode01_SCENE_OFFSETS[1] },
-    { subs: episode01_scene03Subs, offset: episode01_SCENE_OFFSETS[2] },
-    { subs: episode01_scene04Subs, offset: episode01_SCENE_OFFSETS[3] },
-    { subs: episode01_scene05Subs, offset: episode01_SCENE_OFFSETS[4] },
-    { subs: scene06Subs, offset: episode01_SCENE_OFFSETS[5] },
-    { subs: scene07Subs, offset: episode01_SCENE_OFFSETS[6] },
-    { subs: scene08Subs, offset: episode01_SCENE_OFFSETS[7] },
-    { subs: scene09Subs, offset: episode01_SCENE_OFFSETS[8] }
+    { subs: scene01Subs, offset: SCENE_OFFSETS[0] },
+    { subs: scene02Subs, offset: SCENE_OFFSETS[1] },
+    { subs: scene03Subs, offset: SCENE_OFFSETS[2] },
+    { subs: scene04Subs, offset: SCENE_OFFSETS[3] },
+    { subs: scene05Subs, offset: SCENE_OFFSETS[4] },
+    { subs: scene06Subs, offset: SCENE_OFFSETS[5] },
+    { subs: scene07Subs, offset: SCENE_OFFSETS[6] },
+    { subs: scene08Subs, offset: SCENE_OFFSETS[7] },
+    { subs: scene09Subs, offset: SCENE_OFFSETS[8] }
   ];
   let globalIndex = 0;
   for (const scene of sceneSubs) {
     for (const sub of scene.subs) {
       entries.push({
-        src: `${Episode01Documentary_VOICE_DIR}voice_${String(globalIndex).padStart(4, "0")}.mp3`,
+        src: `${VOICE_DIR}voice_${String(globalIndex).padStart(4, "0")}.mp3`,
         startFrame: scene.offset + sub.startFrame,
         durationFrames: sub.endFrame - sub.startFrame
       });
@@ -13992,110 +13729,110 @@ const Episode01Documentary = () => {
     /* @__PURE__ */ (0,jsx_runtime.jsx)(VignetteOverlay, { intensity: 0.25, duration: 15 }),
     bgm && /* @__PURE__ */ (0,jsx_runtime.jsx)(Audio_Audio, { ...bgm }),
     /* @__PURE__ */ (0,jsx_runtime.jsx)(Voiceover, { entries: voiceoverEntries, volume: 0.8 }),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { durationInFrames: episode01_SCENE_FRAMES[0], children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { durationInFrames: SCENE_FRAMES[0], children: [
       /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: SCENE_THEMES[0], type: "enter", duration: 45, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
         DramaticRevealShot,
         {
-          revealMethod: "zoom",
+          revealMethod: "lightBurst",
           revealDuration: 60,
-          accentColor: "#FFD700",
-          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(FinancialWarDocumentary, { durationFrames: episode01_SCENE_FRAMES[0] })
+          accentColor: "#ECC94B",
+          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(AuthorWarningDocumentary, { durationFrames: SCENE_FRAMES[0] })
         }
       ) }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: episode01_scene01Subs })
+      /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: scene01Subs })
     ] }),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: episode01_SCENE_OFFSETS[1], durationInFrames: episode01_SCENE_FRAMES[1], children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: SCENE_OFFSETS[1], durationInFrames: SCENE_FRAMES[1], children: [
       /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: SCENE_THEMES[1], type: "enter", duration: 30, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
         CloseUpShot,
         {
           type: "object",
           intensity: "subtle",
           focusPosition: { x: 50, y: 40 },
-          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(AncientMarketDocumentary, { durationFrames: episode01_SCENE_FRAMES[1] })
+          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(AncientMarketDocumentary, { durationFrames: SCENE_FRAMES[1] })
         }
       ) }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: episode01_scene02Subs })
+      /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: scene02Subs })
     ] }),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: episode01_SCENE_OFFSETS[2], durationInFrames: episode01_SCENE_FRAMES[2], children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: SCENE_OFFSETS[2], durationInFrames: SCENE_FRAMES[2], children: [
       /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: SCENE_THEMES[2], type: "enter", duration: 35, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
         DramaticRevealShot,
         {
-          revealMethod: "shatter",
-          revealDuration: 45,
+          revealMethod: "dissolve",
+          revealDuration: 50,
           accentColor: "#4B0082",
-          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(FinancialWarDocumentary, { durationFrames: episode01_SCENE_FRAMES[2] })
+          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(PaperMoneyEvolutionDocumentary, { durationFrames: SCENE_FRAMES[2] })
         }
       ) }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: episode01_scene03Subs })
+      /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: scene03Subs })
     ] }),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: episode01_SCENE_OFFSETS[3], durationInFrames: episode01_SCENE_FRAMES[3], children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: SCENE_OFFSETS[3], durationInFrames: SCENE_FRAMES[3], children: [
       /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: SCENE_THEMES[3], type: "enter", duration: 40, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
         DramaticRevealShot,
         {
           revealMethod: "shatter",
           revealDuration: 50,
           accentColor: "#8B0000",
-          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(DebtTrapDocumentary, { durationFrames: episode01_SCENE_FRAMES[3] })
+          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(DebtTrapDocumentary, { durationFrames: SCENE_FRAMES[3] })
         }
       ) }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: episode01_scene04Subs })
+      /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: scene04Subs })
     ] }),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: episode01_SCENE_OFFSETS[4], durationInFrames: episode01_SCENE_FRAMES[4], children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: SCENE_OFFSETS[4], durationInFrames: SCENE_FRAMES[4], children: [
       /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: SCENE_THEMES[4], type: "enter", duration: 30, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
         DramaticRevealShot,
         {
           revealMethod: "lightBurst",
           revealDuration: 45,
           accentColor: "#E53E3E",
-          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(ProphecyDocumentary, { durationFrames: episode01_SCENE_FRAMES[4] })
+          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(ProphecyDocumentary, { durationFrames: SCENE_FRAMES[4] })
         }
       ) }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: episode01_scene05Subs })
+      /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: scene05Subs })
     ] }),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: episode01_SCENE_OFFSETS[5], durationInFrames: episode01_SCENE_FRAMES[5], children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: SCENE_OFFSETS[5], durationInFrames: SCENE_FRAMES[5], children: [
       /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: SCENE_THEMES[5], type: "enter", duration: 35, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
         DramaticRevealShot,
         {
           revealMethod: "lightBurst",
           revealDuration: 50,
           accentColor: "#FFD700",
-          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(ChinaRiseDocumentary, { durationFrames: episode01_SCENE_FRAMES[5] })
+          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(ChinaRiseDocumentary, { durationFrames: SCENE_FRAMES[5] })
         }
       ) }),
       /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: scene06Subs })
     ] }),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: episode01_SCENE_OFFSETS[6], durationInFrames: episode01_SCENE_FRAMES[6], children: [
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: SCENE_THEMES[6], type: "enter", duration: 30, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: SCENE_OFFSETS[6], durationInFrames: SCENE_FRAMES[6], children: [
+      /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: SCENE_THEMES[6], type: "enter", duration: 40, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
         DramaticRevealShot,
         {
-          revealMethod: "dissolve",
-          revealDuration: 45,
-          accentColor: "#2F4F4F",
-          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(FinancialWarDocumentary, { durationFrames: episode01_SCENE_FRAMES[6] })
+          revealMethod: "shatter",
+          revealDuration: 50,
+          accentColor: "#E53E3E",
+          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(ChinaFinancialRiskDocumentary, { durationFrames: SCENE_FRAMES[6] })
         }
       ) }),
       /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: scene07Subs })
     ] }),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: episode01_SCENE_OFFSETS[7], durationInFrames: episode01_SCENE_FRAMES[7], children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: SCENE_OFFSETS[7], durationInFrames: SCENE_FRAMES[7], children: [
       /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: SCENE_THEMES[7], type: "enter", duration: 35, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
         DramaticRevealShot,
         {
           revealMethod: "shatter",
           revealDuration: 55,
           accentColor: "#E53E3E",
-          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(HistoryWarningDocumentary, { durationFrames: episode01_SCENE_FRAMES[7] })
+          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(HistoryWarningDocumentary, { durationFrames: SCENE_FRAMES[7] })
         }
       ) }),
       /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: scene08Subs })
     ] }),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: episode01_SCENE_OFFSETS[8], durationInFrames: episode01_SCENE_FRAMES[8], children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: SCENE_OFFSETS[8], durationInFrames: SCENE_FRAMES[8], children: [
       /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: SCENE_THEMES[8], type: "enter", duration: 35, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
         DramaticRevealShot,
         {
           revealMethod: "zoom",
           revealDuration: 55,
           accentColor: "#8B0000",
-          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(WarBeginsDocumentary, { durationFrames: episode01_SCENE_FRAMES[8] })
+          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(WarBeginsDocumentary, { durationFrames: SCENE_FRAMES[8] })
         }
       ) }),
       /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: scene09Subs })
@@ -18762,6 +18499,1628 @@ const ColonialAmericaDocumentaryScene = () => {
 };
 /* harmony default export */ const documentary_ColonialAmericaDocumentaryScene = ((/* unused pure expression or super */ null && (ColonialAmericaDocumentaryScene)));
 
+;// ./src/components/characters/HistoricalFigure.tsx
+
+
+
+const HistoricalFigure = ({
+  x,
+  y,
+  scale = 1,
+  photoSrc,
+  nameEn,
+  nameCn,
+  action = "idle",
+  frameStyle = "classic",
+  animEffect = "none",
+  showLabel = true,
+  labelPosition = "bottom",
+  borderRadius = 8,
+  photoFilter = "none",
+  startFrame = 0,
+  mirror = false,
+  frame: propFrame,
+  glowEffect = false,
+  glowColor = "#ffd700"
+}) => {
+  const internalFrame = (0,esm.useCurrentFrame)();
+  const currentFrame = propFrame !== void 0 ? propFrame : internalFrame;
+  const relativeFrame = Math.max(0, currentFrame - startFrame);
+  const opacity = getAnimationOpacity(animEffect, relativeFrame);
+  const transform = getAnimationTransform(animEffect, relativeFrame);
+  const filter = getPhotoFilter(photoFilter);
+  const mouthAnimation = getMouthAnimation(action, currentFrame);
+  getEyeBlinkAnimation(currentFrame);
+  const glowAnimation = getGlowAnimation(currentFrame, glowEffect);
+  const shadowAnimation = getShadowAnimation(currentFrame, animEffect);
+  const frameConfig = getFrameStyle(frameStyle, scale);
+  return /* @__PURE__ */ (0,jsx_runtime.jsx)(
+    "div",
+    {
+      style: {
+        position: "absolute",
+        left: `${x}%`,
+        top: `${y}%`,
+        transform: `translate(-50%, -50%) ${transform}`,
+        opacity,
+        zIndex: 10,
+        filter: glowEffect ? `drop-shadow(0 0 ${glowAnimation}px ${glowColor})` : "none",
+        transition: "filter 0.1s ease-out"
+      },
+      children: /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+        "div",
+        {
+          style: {
+            position: "relative",
+            width: 280 * scale,
+            height: 350 * scale,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center"
+          },
+          children: [
+            frameStyle !== "none" && /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+              "div",
+              {
+                style: {
+                  position: "absolute",
+                  inset: -12 * scale,
+                  borderRadius: frameConfig.outerRadius * scale,
+                  background: frameConfig.outerBg,
+                  boxShadow: frameConfig.shadow,
+                  pointerEvents: "none"
+                },
+                children: [
+                  /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                    "div",
+                    {
+                      style: {
+                        position: "absolute",
+                        inset: -6 * scale,
+                        borderRadius: frameConfig.innerRadius * scale,
+                        border: `${3 * scale}px solid ${frameConfig.borderColor}`,
+                        pointerEvents: "none"
+                      }
+                    }
+                  ),
+                  (frameStyle === "vintage" || frameStyle === "classic") && /* @__PURE__ */ (0,jsx_runtime.jsx)(jsx_runtime.Fragment, { children: [
+                    { top: "2%", left: "2%", rotate: "0deg" },
+                    { top: "2%", right: "2%", rotate: "90deg" },
+                    { bottom: "2%", right: "2%", rotate: "180deg" },
+                    { bottom: "2%", left: "2%", rotate: "270deg" }
+                  ].map((pos, i) => /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                    "div",
+                    {
+                      style: {
+                        position: "absolute",
+                        top: pos.top,
+                        left: pos.left,
+                        right: pos.right,
+                        bottom: pos.bottom,
+                        width: 30 * scale,
+                        height: 30 * scale,
+                        border: `2px solid ${frameConfig.accentColor}`,
+                        transform: `rotate(${pos.rotate})`,
+                        pointerEvents: "none"
+                      }
+                    },
+                    i
+                  )) })
+                ]
+              }
+            ),
+            /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+              "div",
+              {
+                style: {
+                  position: "relative",
+                  width: 280 * scale,
+                  height: 320 * scale,
+                  overflow: "hidden",
+                  borderRadius: borderRadius * scale,
+                  background: "#1a1a1a",
+                  boxShadow: `inset 0 0 30px rgba(0,0,0,0.5), 0 ${10 + shadowAnimation}px ${30 + shadowAnimation * 2}px rgba(0,0,${0.3 + shadowAnimation * 0.05})`
+                },
+                children: [
+                  /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                    esm.Img,
+                    {
+                      src: photoSrc,
+                      alt: nameEn,
+                      style: {
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                        objectPosition: "center top",
+                        filter,
+                        transform: mirror ? "scaleX(-1)" : "none"
+                      }
+                    }
+                  ),
+                  /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                    "div",
+                    {
+                      style: {
+                        position: "absolute",
+                        inset: 0,
+                        background: getOverlayGradient(photoFilter),
+                        pointerEvents: "none"
+                      }
+                    }
+                  ),
+                  /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                    "div",
+                    {
+                      style: {
+                        position: "absolute",
+                        inset: 0,
+                        background: "radial-gradient(circle at center, transparent 40%, rgba(0,0,0,0.4) 100%)",
+                        pointerEvents: "none"
+                      }
+                    }
+                  ),
+                  action === "talking" && /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                    "div",
+                    {
+                      style: {
+                        position: "absolute",
+                        bottom: "28%",
+                        left: "50%",
+                        transform: "translateX(-50%)",
+                        width: 60 * scale,
+                        height: 30 * scale,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center"
+                      },
+                      children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                        "div",
+                        {
+                          style: {
+                            width: mouthAnimation.width * scale,
+                            height: mouthAnimation.height * scale,
+                            background: "rgba(0, 0, 0, 0.6)",
+                            borderRadius: "50%",
+                            boxShadow: "0 0 20px rgba(0,0,0,0.8)",
+                            transition: "all 0.1s ease-out"
+                          }
+                        }
+                      )
+                    }
+                  ),
+                  action === "thinking" && /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+                    "div",
+                    {
+                      style: {
+                        position: "absolute",
+                        top: "5%",
+                        right: "5%",
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        gap: 4 * scale
+                      },
+                      children: [
+                        /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                          "div",
+                          {
+                            style: {
+                              width: 30 * scale,
+                              height: 30 * scale,
+                              borderRadius: "50%",
+                              background: "rgba(255,255,255,0.9)",
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              fontSize: 20 * scale,
+                              boxShadow: "0 2px 10px rgba(0,0,0,0.3)"
+                            },
+                            children: "?"
+                          }
+                        ),
+                        /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                          "div",
+                          {
+                            style: {
+                              width: 8 * scale,
+                              height: 8 * scale,
+                              borderRadius: "50%",
+                              background: "rgba(255,255,255,0.7)"
+                            }
+                          }
+                        ),
+                        /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                          "div",
+                          {
+                            style: {
+                              width: 16 * scale,
+                              height: 16 * scale,
+                              borderRadius: "50%",
+                              background: "rgba(255,255,255,0.7)"
+                            }
+                          }
+                        )
+                      ]
+                    }
+                  )
+                ]
+              }
+            ),
+            showLabel && labelPosition !== "hidden" && /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+              "div",
+              {
+                style: {
+                  marginTop: labelPosition === "top" ? -40 * scale : 12 * scale,
+                  marginBottom: labelPosition === "bottom" ? -40 * scale : 12 * scale,
+                  padding: "8px 16px",
+                  background: "rgba(26, 26, 46, 0.9)",
+                  border: `1px solid ${frameConfig.borderColor}`,
+                  borderRadius: `${8 * scale}px`,
+                  backdropFilter: "blur(4px)",
+                  zIndex: 20
+                },
+                children: [
+                  /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                    "div",
+                    {
+                      style: {
+                        fontFamily: "Cinzel, serif",
+                        fontSize: 18 * scale,
+                        color: frameConfig.labelColor,
+                        fontWeight: 700,
+                        textAlign: "center",
+                        marginBottom: 4 * scale,
+                        letterSpacing: 0.5,
+                        textShadow: "2px 2px 4px rgba(0,0,0,0.3)"
+                      },
+                      children: nameEn
+                    }
+                  ),
+                  nameCn && /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                    "div",
+                    {
+                      style: {
+                        fontFamily: "Noto Serif SC, serif",
+                        fontSize: 16 * scale,
+                        color: frameConfig.labelColor,
+                        fontWeight: 500,
+                        textAlign: "center",
+                        marginTop: 2 * scale,
+                        opacity: 0.9
+                      },
+                      children: nameCn
+                    }
+                  )
+                ]
+              }
+            )
+          ]
+        }
+      )
+    }
+  );
+};
+function getAnimationOpacity(effect, frame) {
+  switch (effect) {
+    case "fadeIn":
+      return Math.min(1, frame / 30);
+    case "slideLeft":
+    case "slideRight":
+      return frame < 20 ? 0 : Math.min(1, frame / 20);
+    default:
+      return 1;
+  }
+}
+function getAnimationTransform(effect, frame) {
+  const breathingScale = effect === "breathing" ? 1 + Math.sin(frame * 0.05 % (Math.PI * 2)) * 0.03 : 1;
+  const pulseScale = effect === "pulse" ? 1 + Math.sin(frame * 0.08 % (Math.PI * 2)) * 0.025 : 1;
+  const floatY = effect === "float" ? Math.sin(frame * 0.04 % (Math.PI * 2)) * 8 : 0;
+  let entranceScale = 1;
+  if (effect === "entrance") {
+    const progress = Math.min(frame / 45, 1);
+    const c4 = 2 * Math.PI / 3;
+    entranceScale = progress === 0 ? 0 : progress === 1 ? 1 : Math.pow(2, -10 * progress) * Math.sin((progress * 10 - 0.75) * c4) + 1;
+  }
+  const finalScale = breathingScale * pulseScale * entranceScale;
+  switch (effect) {
+    case "scale":
+    case "pulse":
+    case "entrance":
+      return `scale(${finalScale}) translateY(${floatY}px)`;
+    case "breathing":
+      return `scale(${breathingScale}) translateY(${floatY}px)`;
+    case "float":
+      return `translateY(${floatY}px)`;
+    case "slideLeft":
+    case "slideRight": {
+      let slideX;
+      if (effect === "slideLeft") {
+        slideX = frame < 20 ? -50 + frame / 20 * 50 : 0;
+      } else {
+        slideX = frame > 0 ? 50 - frame / 20 * 50 : -50;
+      }
+      return `translateX(${slideX}px)`;
+    }
+    default:
+      return "none";
+  }
+}
+function getPhotoFilter(filter) {
+  switch (filter) {
+    case "sepia":
+      return "sepia(0.6) contrast(1.1)";
+    case "grayscale":
+      return "grayscale(1) contrast(1.2)";
+    case "vintage":
+      return "sepia(0.3) contrast(1.1)";
+    case "dramatic":
+      return "contrast(1.3) saturate(0.8)";
+    default:
+      return "none";
+  }
+}
+function getOverlayGradient(filter) {
+  switch (filter) {
+    case "sepia":
+      return "linear-gradient(180deg, rgba(112, 66, 20, 0.1) 0%, rgba(60, 40, 20, 0.15) 100%)";
+    case "vintage":
+      return "linear-gradient(180deg, rgba(139, 90, 60, 0.1) 0%, rgba(100, 80, 50, 0.15) 100%)";
+    case "dramatic":
+      return "linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.3) 100%)";
+    default:
+      return "none";
+  }
+}
+function getFrameStyle(style, scale) {
+  const baseConfig = {
+    outerRadius: 16 * scale,
+    innerRadius: 12 * scale,
+    borderColor: "#ffd700",
+    accentColor: "#ffd700",
+    shadow: "0 8px 32px rgba(0,0,0,0.3)",
+    outerBg: "linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%)",
+    labelColor: "#ffffff"
+  };
+  switch (style) {
+    case "gold":
+      return {
+        ...baseConfig,
+        borderColor: "#ffd700",
+        accentColor: "#ffd700",
+        shadow: "0 8px 32px rgba(255, 215, 0, 0.4), 0 4px 16px rgba(255, 215, 0, 0.2)",
+        outerBg: "linear-gradient(135deg, #3d3d2a 0%, #1a1a1a 100%)"
+      };
+    case "vintage":
+      return {
+        ...baseConfig,
+        borderColor: "#8b7355",
+        accentColor: "#c9a86c",
+        shadow: "0 8px 24px rgba(0,0,0,0.5)",
+        outerBg: "linear-gradient(135deg, #4a4035 0%, #2a2520 100%)"
+      };
+    case "modern":
+      return {
+        ...baseConfig,
+        borderColor: "#64b5f6",
+        accentColor: "#64b5f6",
+        shadow: "0 4px 20px rgba(100, 181, 212, 0.3)",
+        outerBg: "linear-gradient(135deg, #2a3a40 0%, #1e3a5a 100%)"
+      };
+    default:
+      return baseConfig;
+  }
+}
+function getMouthAnimation(action, frame) {
+  if (action !== "talking") {
+    return { width: 0, height: 0 };
+  }
+  const talkCycle = frame * 0.4 % (Math.PI * 2);
+  const openAmount = Math.sin(talkCycle) * 0.5 + 0.5;
+  const quickOpen = Math.sin(talkCycle * 3) * 0.3;
+  const width = 15 + openAmount * 8;
+  const height = 6 + openAmount * 5 + quickOpen * 2;
+  return { width, height };
+}
+function getEyeBlinkAnimation(frame) {
+  const blinkCycle = frame % 180;
+  if (blinkCycle < 8) {
+    return blinkCycle < 4 ? blinkCycle / 4 : 1 - (blinkCycle - 4) / 4;
+  }
+  return 1;
+}
+function getGlowAnimation(frame, enabled) {
+  if (!enabled) return 0;
+  return 5 + Math.sin(frame * 0.06 % (Math.PI * 2)) * 7.5;
+}
+function getShadowAnimation(frame, effect) {
+  if (effect === "breathing" || effect === "pulse" || effect === "float") {
+    return Math.sin(frame * 0.04 % (Math.PI * 2)) * 3;
+  }
+  return 0;
+}
+
+;// ./src/components/characters/historicalFigures.ts
+
+const HISTORICAL_FIGURES = {
+  // ========== EPISODE 02: Rothschild Family ==========
+  mayer_rothschild: {
+    id: "mayer_rothschild",
+    nameEn: "Mayer Amschel Rothschild",
+    nameCn: "\u8001\u6885\u8036\xB7\u7F57\u65AF\u67F4\u5C14\u5FB7",
+    photoSrc: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Mayer_Amschel_Rothschild.jpg/400px-Mayer_Amschel_Rothschild.jpg",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Mayer_Amschel_Rothschild.jpg",
+    years: "1744\u20131812",
+    frameStyle: "vintage",
+    photoFilter: "vintage",
+    era: "18th_century",
+    defaultScale: 1
+  },
+  nathan_rothschild: {
+    id: "nathan_rothschild",
+    nameEn: "Nathan Mayer Rothschild",
+    nameCn: "\u5185\u68EE\xB7\u6885\u8036\xB7\u7F57\u65AF\u67F4\u5C14\u5FB7",
+    photoSrc: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Nathan_Mayer_Rothschild.jpg/400px-Nathan_Mayer_Rothschild.jpg",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Nathan_Mayer_Rothschild.jpg",
+    years: "1777\u20131836",
+    frameStyle: "gold",
+    photoFilter: "vintage",
+    era: "19th_century",
+    defaultScale: 1
+  },
+  james_rothschild: {
+    id: "james_rothschild",
+    nameEn: "James de Rothschild",
+    nameCn: "\u8A79\u59C6\u65AF\xB7\u7F57\u65AF\u67F4\u5C14\u5FB7",
+    photoSrc: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/James_de_Rothschild.jpg/400px-James_de_Rothschild.jpg",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:James_de_Rothschild.jpg",
+    years: "1792\u20131868",
+    frameStyle: "vintage",
+    photoFilter: "vintage",
+    era: "19th_century",
+    defaultScale: 1
+  },
+  salomon_rothschild: {
+    id: "salomon_rothschild",
+    nameEn: "Salomon Mayer von Rothschild",
+    nameCn: "\u6240\u7F57\u95E8\xB7\u6885\u8036\xB7\u7F57\u65AF\u67F4\u5C14\u5FB7",
+    photoSrc: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Salomon_Mayer_von_Rothschild.jpg/400px-Salomon_Mayer_von_Rothschild.jpg",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Salomon_Mayer_von_Rothschild.jpg",
+    years: "1774\u20131855",
+    frameStyle: "vintage",
+    photoFilter: "vintage",
+    era: "19th_century",
+    defaultScale: 1
+  },
+  amschel_rothschild: {
+    id: "amschel_rothschild",
+    nameEn: "Amschel Mayer von Rothschild",
+    nameCn: "\u963F\u59C6\u8C22\u5C14\xB7\u6885\u8036\xB7\u7F57\u65AF\u67F4\u5C14\u5FB7",
+    photoSrc: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Amschel_Mayer_von_Rothschild.jpg/400px-Amschel_Mayer_von_Rothschild.jpg",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Amschel_Mayer_von_Rothschild.jpg",
+    years: "1773\u20131855",
+    frameStyle: "vintage",
+    photoFilter: "vintage",
+    era: "19th_century",
+    defaultScale: 1
+  },
+  karl_rothschild: {
+    id: "karl_rothschild",
+    nameEn: "Carl Mayer von Rothschild",
+    nameCn: "\u5361\u5C14\xB7\u6885\u8036\xB7\u7F57\u65AF\u67F4\u5C14\u5FB7",
+    photoSrc: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Carl_Mayer_von_Rothschild.jpg/400px-Carl_Mayer_von_Rothschild.jpg",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Carl_Mayer_von_Rothschild.jpg",
+    years: "1788\u20131855",
+    frameStyle: "vintage",
+    photoFilter: "vintage",
+    era: "19th_century",
+    defaultScale: 1
+  },
+  // ========== EPISODE 03: Presidents & Bankers ==========
+  benjamin_franklin: {
+    id: "benjamin_franklin",
+    nameEn: "Benjamin Franklin",
+    nameCn: "\u672C\u6770\u660E\xB7\u5BCC\u5170\u514B\u6797",
+    photoSrc: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Benjamin_Franklin_by_Joseph_Siffrein_Duplessis_1778.jpg/400px-Benjamin_Franklin_by_Joseph_Siffrein_Duplessis_1778.jpg",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Benjamin_Franklin_by_Joseph_Siffrein_Duplessis_1778.jpg",
+    years: "1706\u20131790",
+    frameStyle: "vintage",
+    photoFilter: "vintage",
+    era: "18th_century",
+    defaultScale: 1
+  },
+  alexander_hamilton: {
+    id: "alexander_hamilton",
+    nameEn: "Alexander Hamilton",
+    nameCn: "\u4E9A\u5386\u5C71\u5927\xB7\u6C49\u5BC6\u5C14\u987F",
+    photoSrc: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Alexander_Hamilton_portrait_by_John_Trumbull_1806.jpg/400px-Alexander_Hamilton_portrait_by_John_Trumbull_1806.jpg",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Alexander_Hamilton_portrait_by_John_Trumbull_1806.jpg",
+    years: "1755\u20131804",
+    frameStyle: "classic",
+    photoFilter: "vintage",
+    era: "18th_century",
+    defaultScale: 1
+  },
+  thomas_jefferson: {
+    id: "thomas_jefferson",
+    nameEn: "Thomas Jefferson",
+    nameCn: "\u6258\u9A6C\u65AF\xB7\u6770\u6590\u900A",
+    photoSrc: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Tjefferson.jpg/400px-Tjefferson.jpg",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Tjefferson.jpg",
+    years: "1743\u20131826",
+    frameStyle: "classic",
+    photoFilter: "vintage",
+    era: "18th_century",
+    defaultScale: 1
+  },
+  andrew_jackson: {
+    id: "andrew_jackson",
+    nameEn: "Andrew Jackson",
+    nameCn: "\u5B89\u5FB7\u9C81\xB7\u6770\u514B\u900A",
+    photoSrc: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Andrew_Jackson-head.jpg/400px-Andrew_Jackson-head.jpg",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Andrew_Jackson-head.jpg",
+    years: "1767\u20131845",
+    frameStyle: "classic",
+    photoFilter: "grayscale",
+    era: "19th_century",
+    defaultScale: 1
+  },
+  abraham_lincoln: {
+    id: "abraham_lincoln",
+    nameEn: "Abraham Lincoln",
+    nameCn: "\u4E9A\u4F2F\u62C9\u7F55\xB7\u6797\u80AF",
+    photoSrc: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Abraham_Lincoln_O-77_matte_collodion_print.jpg/400px-Abraham_Lincoln_O-77_matte_collodion_print.jpg",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Abraham_Lincoln_O-77_matte_collodion_print.jpg",
+    years: "1809\u20131865",
+    frameStyle: "classic",
+    photoFilter: "grayscale",
+    era: "19th_century",
+    defaultScale: 1
+  },
+  martin_van_buren: {
+    id: "martin_van_buren",
+    nameEn: "Martin Van Buren",
+    nameCn: "\u9A6C\u4E01\xB7\u8303\u5E03\u4F26",
+    photoSrc: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Martin_Van_Buren_-_Brady-Handy.jpg/400px-Martin_Van_Buren_-_Brady-Handy.jpg",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Martin_Van_Buren_-_Brady-Handy.jpg",
+    years: "1782\u20131862",
+    frameStyle: "classic",
+    photoFilter: "grayscale",
+    era: "19th_century",
+    defaultScale: 1
+  },
+  // ========== EPISODE 04: Federal Reserve Founders ==========
+  woodrow_wilson: {
+    id: "woodrow_wilson",
+    nameEn: "Woodrow Wilson",
+    nameCn: "\u4F0D\u5FB7\u7F57\xB7\u5A01\u5C14\u900A",
+    photoSrc: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Woodrow_Wilson_1919.jpg/400px-Woodrow_Wilson_1919.jpg",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Woodrow_Wilson_1919.jpg",
+    years: "1856\u20131924",
+    frameStyle: "classic",
+    photoFilter: "grayscale",
+    era: "early_20th_century",
+    defaultScale: 1
+  },
+  jp_morgan: {
+    id: "jp_morgan",
+    nameEn: "J. P. Morgan",
+    nameCn: "\u7EA6\u7FF0\xB7\u76AE\u5C14\u5E9E\u7279\xB7\u6469\u6839",
+    photoSrc: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/John_Pierpont_Morgan.jpg/400px-John_Pierpont_Morgan.jpg",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:John_Pierpont_Morgan.jpg",
+    years: "1837\u20131913",
+    frameStyle: "gold",
+    photoFilter: "grayscale",
+    era: "19th_century",
+    defaultScale: 1
+  },
+  john_d_rockefeller: {
+    id: "john_d_rockefeller",
+    nameEn: "John D. Rockefeller",
+    nameCn: "\u7EA6\u7FF0\xB7\u6D1B\u514B\u83F2\u52D2",
+    photoSrc: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/John_D._Rockefeller_1885.jpg/400px-John_D._Rockefeller_1885.jpg",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:John_D._Rockefeller_1885.jpg",
+    years: "1839\u20131937",
+    frameStyle: "gold",
+    photoFilter: "grayscale",
+    era: "19th_century",
+    defaultScale: 1
+  },
+  nelson_aldrich: {
+    id: "nelson_aldrich",
+    nameEn: "Nelson W. Aldrich",
+    nameCn: "\u7EB3\u5C14\u900A\xB7\u5965\u5C14\u5FB7\u91CC\u5947",
+    photoSrc: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Nelson_Wilmarth_Aldrich_-_Brady-Handy.jpg/400px-Nelson_Wilmarth_Aldrich_-_Brady-Handy.jpg",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Nelson_Wilmarth_Aldrich_-_Brady-Handy.jpg",
+    years: "1841\u20131915",
+    frameStyle: "classic",
+    photoFilter: "grayscale",
+    era: "early_20th_century",
+    defaultScale: 1
+  },
+  frank_vanderlip: {
+    id: "frank_vanderlip",
+    nameEn: "Frank A. Vanderlip",
+    nameCn: "\u5F17\u5170\u514B\xB7\u8303\u5FB7\u5229\u666E",
+    photoSrc: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Frank_A._Vanderlip.jpg/400px-Frank_A._Vanderlip.jpg",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Frank_A._Vanderlip.jpg",
+    years: "1864\u20131937",
+    frameStyle: "classic",
+    photoFilter: "grayscale",
+    era: "early_20th_century",
+    defaultScale: 1
+  },
+  henry_davison: {
+    id: "henry_davison",
+    nameEn: "Henry P. Davison",
+    nameCn: "\u4EA8\u5229\xB7\u6234\u7EF4\u68EE",
+    photoSrc: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Henry_Pomeroy_Davison.jpg/400px-Henry_Pomeroy_Davison.jpg",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Henry_Pomeroy_Davison.jpg",
+    years: "1867\u20131922",
+    frameStyle: "classic",
+    photoFilter: "grayscale",
+    era: "early_20th_century",
+    defaultScale: 1
+  },
+  benjamin_strong: {
+    id: "benjamin_strong",
+    nameEn: "Benjamin Strong Jr.",
+    nameCn: "\u672C\u6770\u660E\xB7\u65AF\u7279\u6717",
+    photoSrc: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Benjamin_Strong_Jr.jpg/400px-Benjamin_Strong_Jr.jpg",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Benjamin_Strong_Jr.jpg",
+    years: "1872\u20131928",
+    frameStyle: "classic",
+    photoFilter: "grayscale",
+    era: "early_20th_century",
+    defaultScale: 1
+  },
+  paul_warburg: {
+    id: "paul_warburg",
+    nameEn: "Paul Warburg",
+    nameCn: "\u4FDD\u7F57\xB7\u6C83\u4F2F\u683C",
+    photoSrc: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Paul_Warburg.jpg/400px-Paul_Warburg.jpg",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Paul_Warburg.jpg",
+    years: "1868\u20131932",
+    frameStyle: "classic",
+    photoFilter: "grayscale",
+    era: "early_20th_century",
+    defaultScale: 1
+  },
+  // ========== EPISODE 05: WWI & Depression ==========
+  franklin_roosevelt: {
+    id: "franklin_roosevelt",
+    nameEn: "Franklin D. Roosevelt",
+    nameCn: "\u5BCC\u5170\u514B\u6797\xB7\u7F57\u65AF\u798F",
+    photoSrc: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/FDR_in_1933.jpg/400px-FDR_in_1933.jpg",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:FDR_in_1933.jpg",
+    years: "1882\u20131945",
+    frameStyle: "modern",
+    photoFilter: "grayscale",
+    era: "modern",
+    defaultScale: 1
+  },
+  herbert_hoover: {
+    id: "herbert_hoover",
+    nameEn: "Herbert Hoover",
+    nameCn: "\u8D6B\u4F2F\u7279\xB7\u80E1\u4F5B",
+    photoSrc: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Herbert_Hoover_1928.jpg/400px-Herbert_Hoover_1928.jpg",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Herbert_Hoover_1928.jpg",
+    years: "1874\u20131964",
+    frameStyle: "classic",
+    photoFilter: "grayscale",
+    era: "early_20th_century",
+    defaultScale: 1
+  },
+  // ========== EPISODE 06: Ruling Elite Clubs ==========
+  edward_house: {
+    id: "edward_house",
+    nameEn: "Colonel Edward House",
+    nameCn: "\u7231\u5FB7\u534E\xB7\u8C6A\u65AF\u4E0A\u6821",
+    photoSrc: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Edward_Mandell_House.jpg/400px-Edward_Mandell_House.jpg",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Edward_Mandell_House.jpg",
+    years: "1858\u20131944",
+    frameStyle: "classic",
+    photoFilter: "grayscale",
+    era: "early_20th_century",
+    defaultScale: 1
+  },
+  david_rockefeller: {
+    id: "david_rockefeller",
+    nameEn: "David Rockefeller",
+    nameCn: "\u6234\u7EF4\xB7\u6D1B\u514B\u83F2\u52D2",
+    photoSrc: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/David_Rockefeller_1977.jpg/400px-David_Rockefeller_1977.jpg",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:David_Rockefeller_1977.jpg",
+    years: "1915\u20132017",
+    frameStyle: "modern",
+    photoFilter: "none",
+    era: "modern",
+    defaultScale: 1
+  },
+  zbigniew_brzezinski: {
+    id: "zbigniew_brzezinski",
+    nameEn: "Zbigniew Brzezinski",
+    nameCn: "\u5179\u6BD4\u683C\u6D85\u592B\xB7\u5E03\u70ED\u6D25\u65AF\u57FA",
+    photoSrc: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Zbigniew_Brzezinski.jpg/400px-Zbigniew_Brzezinski.jpg",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Zbigniew_Brzezinski.jpg",
+    years: "1928\u20132017",
+    frameStyle: "modern",
+    photoFilter: "none",
+    era: "modern",
+    defaultScale: 1
+  },
+  henry_kissinger: {
+    id: "henry_kissinger",
+    nameEn: "Henry Kissinger",
+    nameCn: "\u4EA8\u5229\xB7\u57FA\u8F9B\u683C",
+    photoSrc: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Kissinger_1973.jpg/400px-Kissinger_1973.jpg",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Kissinger_1973.jpg",
+    years: "1923\u20132023",
+    frameStyle: "modern",
+    photoFilter: "none",
+    era: "modern",
+    defaultScale: 1
+  },
+  // ========== Additional Figures ==========
+  john_law: {
+    id: "john_law",
+    nameEn: "John Law",
+    nameCn: "\u7EA6\u7FF0\xB7\u52B3",
+    photoSrc: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/John_Law_%28economist%29.jpg/400px-John_Law_%28economist%29.jpg",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:John_Law_(economist).jpg",
+    years: "1671\u20131729",
+    frameStyle: "vintage",
+    photoFilter: "vintage",
+    era: "18th_century",
+    defaultScale: 1
+  },
+  nicholas_biddle: {
+    id: "nicholas_biddle",
+    nameEn: "Nicholas Biddle",
+    nameCn: "\u5C3C\u53E4\u62C9\u65AF\xB7\u6BD4\u5FB7\u5C14",
+    photoSrc: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Nicholas_Biddle_-_Brady-Handy.jpg/400px-Nicholas_Biddle_-_Brady-Handy.jpg",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Nicholas_Biddle_-_Brady-Handy.jpg",
+    years: "1786\u20131844",
+    frameStyle: "vintage",
+    photoFilter: "vintage",
+    era: "19th_century",
+    defaultScale: 1
+  },
+  george_peabody: {
+    id: "george_peabody",
+    nameEn: "George Peabody",
+    nameCn: "\u4E54\u6CBB\xB7\u76AE\u535A\u8FEA",
+    photoSrc: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/George_Peabody.jpg/400px-George_Peabody.jpg",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:George_Peabody.jpg",
+    years: "1795\u20131869",
+    frameStyle: "vintage",
+    photoFilter: "vintage",
+    era: "19th_century",
+    defaultScale: 1
+  }
+};
+function getFigure(id) {
+  return HISTORICAL_FIGURES[id];
+}
+function getFiguresForEpisode(episodeNum) {
+  const episodeFigures = {
+    1: [],
+    2: [
+      "benjamin_franklin",
+      "mayer_rothschild",
+      "nathan_rothschild",
+      "james_rothschild",
+      "salomon_rothschild",
+      "amschel_rothschild",
+      "karl_rothschild"
+    ],
+    3: [
+      "alexander_hamilton",
+      "thomas_jefferson",
+      "andrew_jackson",
+      "abraham_lincoln"
+    ],
+    4: [
+      "woodrow_wilson",
+      "jp_morgan",
+      "john_d_rockefeller",
+      "nelson_aldrich",
+      "frank_vanderlip",
+      "henry_davison",
+      "benjamin_strong",
+      "paul_warburg"
+    ],
+    5: [
+      "woodrow_wilson",
+      "benjamin_strong",
+      "franklin_roosevelt",
+      "herbert_hoover"
+    ],
+    6: [
+      "edward_house",
+      "david_rockefeller",
+      "zbigniew_brzezinski",
+      "henry_kissinger"
+    ],
+    7: [
+      "nelson_aldrich",
+      "frank_vanderlip",
+      "henry_davison",
+      "benjamin_strong",
+      "paul_warburg"
+    ]
+  };
+  const figureIds = episodeFigures[episodeNum] || [];
+  return figureIds.map((id) => HISTORICAL_FIGURES[id]).filter(Boolean);
+}
+function getLocalPhotoPath(figureId) {
+  return `/assets/figures/${figureId}.jpg`;
+}
+
+;// ./src/components/scenes/episode03/FirstBankScene.tsx
+
+
+
+
+
+const FirstBankScene = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const hamiltonFigure = getFigure("alexander_hamilton");
+  const jeffersonFigure = getFigure("thomas_jefferson");
+  const hamiltonPhoto = (hamiltonFigure == null ? void 0 : hamiltonFigure.photoSrc) || "";
+  const jeffersonPhoto = (jeffersonFigure == null ? void 0 : jeffersonFigure.photoSrc) || "";
+  const hamiltonScale = (0,esm.spring)({
+    frame: frame - 30,
+    fps: 30,
+    config: { damping: 15, stiffness: 70 }
+  });
+  const jeffersonScale = (0,esm.spring)({
+    frame: frame - 60,
+    fps: 30,
+    config: { damping: 15, stiffness: 70 }
+  });
+  const titleOpacity = (0,esm.interpolate)(frame, [0, 30], [0, 1], {
+    extrapolateRight: "clamp"
+  });
+  const quoteOpacity = (0,esm.interpolate)(frame, [120, 210], [0, 1], {
+    extrapolateRight: "clamp"
+  });
+  const chartOpacity = (0,esm.interpolate)(frame, [270, 360], [0, 1], {
+    extrapolateRight: "clamp"
+  });
+  const resultOpacity = (0,esm.interpolate)(frame, [480, 570], [0, 1], {
+    extrapolateRight: "clamp"
+  });
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+    esm.AbsoluteFill,
+    {
+      style: {
+        background: "radial-gradient(circle at center, #1a1a2e 0%, #0d1117 100%)"
+      },
+      children: [
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              top: "6%",
+              left: "50%",
+              transform: "translateX(-50%)",
+              opacity: titleOpacity
+            },
+            children: [
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    fontFamily: "Cinzel, serif",
+                    fontSize: 32,
+                    color: "#ffd700",
+                    fontWeight: 700,
+                    textAlign: "center",
+                    letterSpacing: 2
+                  },
+                  children: "The First Bank of the United States"
+                }
+              ),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    fontFamily: "Merriweather, serif",
+                    fontSize: 16,
+                    color: "#9ca3af",
+                    textAlign: "center",
+                    marginTop: 6
+                  },
+                  children: "1791 \u2014 Alexander Hamilton vs Thomas Jefferson"
+                }
+              )
+            ]
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              left: "25%",
+              top: "45%",
+              transform: `translate(-50%, -50%) scale(${hamiltonScale})`
+            },
+            children: [
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                HistoricalFigure,
+                {
+                  x: 0,
+                  y: 0,
+                  scale: 1,
+                  photoSrc: hamiltonPhoto,
+                  nameEn: "Alexander Hamilton",
+                  nameCn: "\u4E9A\u5386\u5C71\u5927\xB7\u6C49\u5BC6\u5C14\u987F",
+                  action: "talking",
+                  frameStyle: "classic",
+                  photoFilter: "vintage",
+                  showLabel: true,
+                  frame,
+                  animEffect: "slideLeft"
+                }
+              ),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    position: "absolute",
+                    top: -40,
+                    right: -100,
+                    background: "rgba(30, 58, 90, 0.9)",
+                    padding: "10px 15px",
+                    borderRadius: 8,
+                    border: "1px solid #1E3A5A",
+                    opacity: quoteOpacity
+                  },
+                  children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                    "div",
+                    {
+                      style: {
+                        fontFamily: "Merriweather, serif",
+                        fontSize: 12,
+                        color: "#e8e8e8",
+                        fontStyle: "italic",
+                        maxWidth: 150
+                      },
+                      children: '"A central bank is essential for national prosperity"'
+                    }
+                  )
+                }
+              )
+            ]
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              right: "25%",
+              top: "45%",
+              transform: `translate(50%, -50%) scale(${jeffersonScale})`
+            },
+            children: [
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                HistoricalFigure,
+                {
+                  x: 0,
+                  y: 0,
+                  scale: 1,
+                  photoSrc: jeffersonPhoto,
+                  nameEn: "Thomas Jefferson",
+                  nameCn: "\u6258\u9A6C\u65AF\xB7\u6770\u6590\u900A",
+                  action: "talking",
+                  frameStyle: "classic",
+                  photoFilter: "vintage",
+                  showLabel: true,
+                  frame,
+                  animEffect: "slideRight"
+                }
+              ),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    position: "absolute",
+                    top: -40,
+                    left: -100,
+                    background: "rgba(139, 69, 19, 0.9)",
+                    padding: "10px 15px",
+                    borderRadius: 8,
+                    border: "1px solid #8B4513",
+                    opacity: quoteOpacity
+                  },
+                  children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                    "div",
+                    {
+                      style: {
+                        fontFamily: "Merriweather, serif",
+                        fontSize: 11,
+                        color: "#e8e8e8",
+                        fontStyle: "italic",
+                        maxWidth: 150
+                      },
+                      children: '"Banking institutions are more dangerous than standing armies"'
+                    }
+                  )
+                }
+              )
+            ]
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              bottom: "22%",
+              left: "50%",
+              transform: "translateX(-50%)",
+              opacity: chartOpacity
+            },
+            children: [
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    fontFamily: "Cinzel, serif",
+                    fontSize: 14,
+                    color: "#9ca3af",
+                    textAlign: "center",
+                    marginBottom: 15,
+                    letterSpacing: 1
+                  },
+                  children: "OWNERSHIP OF FIRST BANK"
+                }
+              ),
+              /* @__PURE__ */ (0,jsx_runtime.jsxs)("svg", { width: 200, height: 200, viewBox: "0 0 200 200", children: [
+                /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                  "circle",
+                  {
+                    cx: 100,
+                    cy: 100,
+                    r: 80,
+                    fill: "none",
+                    stroke: "#8b0000",
+                    strokeWidth: 30,
+                    strokeDasharray: `${2 * Math.PI * 80 * 0.7} ${2 * Math.PI * 80 * 0.3}`,
+                    transform: "rotate(-90 100 100)",
+                    opacity: 0.9
+                  }
+                ),
+                /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                  "circle",
+                  {
+                    cx: 100,
+                    cy: 100,
+                    r: 80,
+                    fill: "none",
+                    stroke: "#1e3a5a",
+                    strokeWidth: 30,
+                    strokeDasharray: `${2 * Math.PI * 80 * 0.2} ${2 * Math.PI * 80 * 0.8}`,
+                    strokeDashoffset: -2 * Math.PI * 80 * 0.7,
+                    transform: "rotate(-90 100 100)",
+                    opacity: 0.9
+                  }
+                ),
+                /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                  "circle",
+                  {
+                    cx: 100,
+                    cy: 100,
+                    r: 80,
+                    fill: "none",
+                    stroke: "#228B22",
+                    strokeWidth: 30,
+                    strokeDasharray: `${2 * Math.PI * 80 * 0.1} ${2 * Math.PI * 80 * 0.9}`,
+                    strokeDashoffset: -2 * Math.PI * 80 * 0.9,
+                    transform: "rotate(-90 100 100)",
+                    opacity: 0.9
+                  }
+                )
+              ] }),
+              /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { position: "absolute", right: -120, top: 30 }, children: [
+                /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+                  "div",
+                  {
+                    style: { display: "flex", alignItems: "center", marginBottom: 10 },
+                    children: [
+                      /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                        "div",
+                        {
+                          style: {
+                            width: 20,
+                            height: 20,
+                            background: "#8b0000",
+                            marginRight: 8,
+                            borderRadius: 3
+                          }
+                        }
+                      ),
+                      /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                        "span",
+                        {
+                          style: {
+                            fontFamily: "Merriweather, serif",
+                            fontSize: 12,
+                            color: "#e8e8e8"
+                          },
+                          children: "Foreign: 70%"
+                        }
+                      )
+                    ]
+                  }
+                ),
+                /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+                  "div",
+                  {
+                    style: { display: "flex", alignItems: "center", marginBottom: 10 },
+                    children: [
+                      /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                        "div",
+                        {
+                          style: {
+                            width: 20,
+                            height: 20,
+                            background: "#1e3a5a",
+                            marginRight: 8,
+                            borderRadius: 3
+                          }
+                        }
+                      ),
+                      /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                        "span",
+                        {
+                          style: {
+                            fontFamily: "Merriweather, serif",
+                            fontSize: 12,
+                            color: "#e8e8e8"
+                          },
+                          children: "American: 20%"
+                        }
+                      )
+                    ]
+                  }
+                ),
+                /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { display: "flex", alignItems: "center" }, children: [
+                  /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                    "div",
+                    {
+                      style: {
+                        width: 20,
+                        height: 20,
+                        background: "#228B22",
+                        marginRight: 8,
+                        borderRadius: 3
+                      }
+                    }
+                  ),
+                  /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                    "span",
+                    {
+                      style: {
+                        fontFamily: "Merriweather, serif",
+                        fontSize: 12,
+                        color: "#e8e8e8"
+                      },
+                      children: "Government: 10%"
+                    }
+                  )
+                ] })
+              ] })
+            ]
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              bottom: "5%",
+              left: "50%",
+              transform: "translateX(-50%)",
+              width: "70%",
+              opacity: resultOpacity,
+              textAlign: "center"
+            },
+            children: [
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    fontFamily: "Cinzel, serif",
+                    fontSize: 18,
+                    color: "#ffd700",
+                    marginBottom: 8
+                  },
+                  children: "February 25, 1791: 20-year charter granted"
+                }
+              ),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    fontFamily: "Merriweather, serif",
+                    fontSize: 14,
+                    color: "#9ca3af"
+                  },
+                  children: "By 1811, English bankers and Rothschilds owned 70% of the bank"
+                }
+              )
+            ]
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsx)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              top: "38%",
+              left: "50%",
+              transform: "translateX(-50%)",
+              opacity: quoteOpacity
+            },
+            children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
+              "div",
+              {
+                style: {
+                  fontFamily: "Cinzel, serif",
+                  fontSize: 48,
+                  color: "#6b7280",
+                  fontWeight: 700
+                },
+                children: "VS"
+              }
+            )
+          }
+        )
+      ]
+    }
+  );
+};
+
+;// ./src/components/scenes/episode03/documentary/FirstBankDocumentaryScene.tsx
+
+
+
+const FirstBankDocumentaryScene = () => {
+  return /* @__PURE__ */ (0,jsx_runtime.jsx)(FirstBankScene, {});
+};
+
+;// ./src/components/scenes/episode03/JacksonBankWarScene.tsx
+
+
+
+
+
+const JacksonBankWarScene = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const jacksonFigure = getFigure("andrew_jackson");
+  const jacksonPhoto = (jacksonFigure == null ? void 0 : jacksonFigure.photoSrc) || "";
+  const titleOpacity = (0,esm.interpolate)(frame, [0, 30], [0, 1], { extrapolateRight: "clamp" });
+  const jacksonEnter = (0,esm.spring)({ frame: frame - 45, fps: 30, config: { damping: 12, stiffness: 80 } });
+  const biddleEnter = (0,esm.spring)({ frame: frame - 90, fps: 30, config: { damping: 12, stiffness: 80 } });
+  const quoteOpacity = (0,esm.interpolate)(frame, [150, 240], [0, 1], { extrapolateRight: "clamp" });
+  const vetoOpacity = (0,esm.interpolate)(frame, [300, 390], [0, 1], { extrapolateRight: "clamp" });
+  const victoryOpacity = (0,esm.interpolate)(frame, [510, 600], [0, 1], { extrapolateRight: "clamp" });
+  const shake = (0,esm.interpolate)(frame, [360, 375], [0, 5], { extrapolateRight: "clamp" }) * Math.sin(frame * 0.5);
+  const jacksonTalking = frame > 180 && frame < 300 ? "talking" : "serious";
+  const biddleTalking = frame > 120 ? "talking" : "serious";
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+    esm.AbsoluteFill,
+    {
+      style: {
+        background: "radial-gradient(circle at center, #1a1a2e 0%, #0d1117 100%)"
+      },
+      children: [
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              top: "6%",
+              left: "50%",
+              transform: `translateX(-50%, ${shake}px)`,
+              opacity: titleOpacity
+            },
+            children: [
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    fontFamily: "Cinzel, serif",
+                    fontSize: 32,
+                    color: "#ffd700",
+                    fontWeight: 700,
+                    textAlign: "center",
+                    letterSpacing: 2
+                  },
+                  children: '"The Bank wants to kill me..."'
+                }
+              ),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    fontFamily: "Cinzel, serif",
+                    fontSize: 36,
+                    color: "#ef4444",
+                    fontWeight: 700,
+                    textAlign: "center",
+                    marginTop: 5
+                  },
+                  children: '"...but I will kill it!"'
+                }
+              ),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    fontFamily: "Merriweather, serif",
+                    fontSize: 14,
+                    color: "#9ca3af",
+                    textAlign: "center",
+                    marginTop: 8
+                  },
+                  children: "Andrew Jackson vs The Second Bank \u2014 1832"
+                }
+              )
+            ]
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsx)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              left: "30%",
+              top: "50%",
+              transform: `translate(-50%, -50%) scale(${jacksonEnter})`
+            },
+            children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
+              HistoricalFigure,
+              {
+                x: 0,
+                y: 0,
+                scale: 0.9,
+                photoSrc: jacksonPhoto,
+                nameEn: "Andrew Jackson",
+                nameCn: "\u5B89\u5FB7\u9C81\xB7\u6770\u514B\u900A",
+                action: jacksonTalking,
+                frameStyle: "classic",
+                photoFilter: "grayscale",
+                showLabel: false,
+                frame,
+                startFrame: 45,
+                animEffect: "slideLeft"
+              }
+            )
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              right: "25%",
+              top: "50%",
+              transform: `translate(50%, -50%) scale(${biddleEnter})`
+            },
+            children: [
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                HistoricalFigure,
+                {
+                  x: 0,
+                  y: 0,
+                  scale: 0.85,
+                  photoSrc: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Nicholas_Biddle_-_Brady-Handy.jpg/400px-Nicholas_Biddle_-_Brady-Handy.jpg",
+                  nameEn: "Nicholas Biddle",
+                  nameCn: "\u5C3C\u53E4\u62C9\u65AF\xB7\u6BD4\u5FB7\u5C14",
+                  action: biddleTalking,
+                  frameStyle: "vintage",
+                  photoFilter: "vintage",
+                  showLabel: true,
+                  labelPosition: "bottom",
+                  frame,
+                  startFrame: 90,
+                  animEffect: "slideRight"
+                }
+              ),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    position: "absolute",
+                    top: "-8%",
+                    left: "50%",
+                    transform: "translateX(-50%)",
+                    fontFamily: "Merriweather, serif",
+                    fontSize: 11,
+                    color: "#e8e8e8",
+                    fontStyle: "italic",
+                    whiteSpace: "nowrap",
+                    background: "rgba(139, 0, 0, 0.8)",
+                    padding: "5px 10px",
+                    borderRadius: 4,
+                    opacity: quoteOpacity
+                  },
+                  children: '"If Jackson vetoes, I will veto him!"'
+                }
+              )
+            ]
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsx)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              top: "42%",
+              left: "50%",
+              transform: "translateX(-50%)",
+              opacity: biddleEnter
+            },
+            children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
+              "div",
+              {
+                style: {
+                  fontFamily: "Cinzel, serif",
+                  fontSize: 36,
+                  color: "#ef4444",
+                  fontWeight: 700
+                },
+                children: "\u2694"
+              }
+            )
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              bottom: "28%",
+              left: "50%",
+              transform: "translateX(-50%)",
+              opacity: vetoOpacity,
+              padding: "15px 30px",
+              background: "rgba(255, 215, 0, 0.1)",
+              border: "2px solid #ffd700",
+              borderRadius: 8
+            },
+            children: [
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    fontFamily: "Cinzel, serif",
+                    fontSize: 16,
+                    color: "#ffd700",
+                    textAlign: "center",
+                    letterSpacing: 1
+                  },
+                  children: "1832: Jackson Vetoes Bank Renewal"
+                }
+              ),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    fontFamily: "Merriweather, serif",
+                    fontSize: 13,
+                    color: "#e8e8e8",
+                    textAlign: "center",
+                    marginTop: 6
+                  },
+                  children: '"The Constitution authorizes Congress to coin money\u2014 not to delegate that power to private banks"'
+                }
+              )
+            ]
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              bottom: "12%",
+              left: "50%",
+              transform: "translateX(-50%)",
+              opacity: victoryOpacity,
+              textAlign: "center"
+            },
+            children: [
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    fontFamily: "Cinzel, serif",
+                    fontSize: 20,
+                    color: "#228B22",
+                    fontWeight: 700,
+                    marginBottom: 8
+                  },
+                  children: "1835: National Debt Reduced to ZERO"
+                }
+              ),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    fontFamily: "Merriweather, serif",
+                    fontSize: 16,
+                    color: "#e8e8e8",
+                    marginBottom: 8
+                  },
+                  children: "1836: The Second Bank Dies"
+                }
+              ),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    fontFamily: "Merriweather, serif",
+                    fontSize: 14,
+                    color: "#9ca3af",
+                    fontStyle: "italic"
+                  },
+                  children: `Jackson's tombstone: "I killed the bank"`
+                }
+              )
+            ]
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              bottom: "3%",
+              left: "50%",
+              transform: "translateX(-50%)",
+              display: "flex",
+              gap: 40,
+              opacity: victoryOpacity
+            },
+            children: [
+              /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { textAlign: "center" }, children: [
+                /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontFamily: "JetBrains Mono, monospace", fontSize: 14, color: "#ffd700" }, children: "1828" }),
+                /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontFamily: "Merriweather, serif", fontSize: 11, color: "#6b7280" }, children: "Elected" })
+              ] }),
+              /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { textAlign: "center" }, children: [
+                /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontFamily: "JetBrains Mono, monospace", fontSize: 14, color: "#ffd700" }, children: "1832" }),
+                /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontFamily: "Merriweather, serif", fontSize: 11, color: "#6b7280" }, children: "Veto" })
+              ] }),
+              /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { textAlign: "center" }, children: [
+                /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontFamily: "JetBrains Mono, monospace", fontSize: 14, color: "#228B22" }, children: "1835" }),
+                /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontFamily: "Merriweather, serif", fontSize: 11, color: "#6b7280" }, children: "Debt Free" })
+              ] }),
+              /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { textAlign: "center" }, children: [
+                /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontFamily: "JetBrains Mono, monospace", fontSize: 14, color: "#228B22" }, children: "1836" }),
+                /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontFamily: "Merriweather, serif", fontSize: 11, color: "#6b7280" }, children: "Victory" })
+              ] })
+            ]
+          }
+        )
+      ]
+    }
+  );
+};
+
+;// ./src/components/scenes/episode03/documentary/JacksonBankWarDocumentaryScene.tsx
+
+
+
+const JacksonBankWarDocumentaryScene = () => {
+  return /* @__PURE__ */ (0,jsx_runtime.jsx)(JacksonBankWarScene, {});
+};
+
 ;// ./src/components/scenes/episode03/documentary/CivilWarDocumentaryScene.tsx
 
 
@@ -19077,6 +20436,2102 @@ const CivilWarDocumentaryScene = () => {
   ] });
 };
 /* harmony default export */ const documentary_CivilWarDocumentaryScene = ((/* unused pure expression or super */ null && (CivilWarDocumentaryScene)));
+
+;// ./src/components/documents/CurrencyBill.tsx
+
+
+
+const CurrencyBill = ({
+  denomination,
+  currencyName,
+  year,
+  color = "#228B22",
+  scale = 1,
+  showDetails = true
+}) => {
+  const width = 300 * scale;
+  const height = 120 * scale;
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+    "div",
+    {
+      style: {
+        width,
+        height,
+        background: `linear-gradient(135deg, ${color} 0%, ${adjustColor(color, -30)} 100%)`,
+        borderRadius: `${8 * scale}px`,
+        border: `${3 * scale}px solid ${adjustColor(color, -50)}`,
+        boxShadow: `0 ${10 * scale}px ${30 * scale}px rgba(0, 0, 0, 0.3)`,
+        position: "relative",
+        overflow: "hidden",
+        fontFamily: "Cinzel, serif"
+      },
+      children: [
+        /* @__PURE__ */ (0,jsx_runtime.jsx)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              inset: `${8 * scale}px`,
+              border: `${2 * scale}px solid ${adjustColor(color, 20)}`,
+              borderRadius: `${4 * scale}px`,
+              opacity: 0.5
+            }
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsx)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              top: `${12 * scale}px`,
+              left: `${12 * scale}px`,
+              fontSize: `${14 * scale}px`,
+              color: "rgba(255,255,255,0.6)",
+              fontWeight: 700
+            },
+            children: currencyName
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              textAlign: "center"
+            },
+            children: [
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    fontSize: `${48 * scale}px`,
+                    color: "#fff",
+                    fontWeight: 700,
+                    textShadow: `0 ${2 * scale}px ${10 * scale}px rgba(0,0,0,0.3)`,
+                    lineHeight: 1
+                  },
+                  children: denomination
+                }
+              ),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    fontSize: `${12 * scale}px`,
+                    color: "rgba(255,255,255,0.8)",
+                    marginTop: `${5 * scale}px`
+                  },
+                  children: showDetails && "LEGAL TENDER"
+                }
+              )
+            ]
+          }
+        ),
+        year && /* @__PURE__ */ (0,jsx_runtime.jsx)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              bottom: `${12 * scale}px`,
+              right: `${12 * scale}px`,
+              fontSize: `${12 * scale}px`,
+              color: "rgba(255,255,255,0.6)"
+            },
+            children: year
+          }
+        ),
+        showDetails && /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              bottom: `${12 * scale}px`,
+              left: `${12 * scale}px`,
+              fontSize: `${10 * scale}px`,
+              color: "rgba(255,255,255,0.5)",
+              fontFamily: "JetBrains Mono, monospace"
+            },
+            children: [
+              "SERIES \u2022",
+              " ",
+              Math.floor((0,esm.random)(null) * 1e6).toString().padStart(6, "0")
+            ]
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsx)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              inset: 0,
+              background: `repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 2px,
+            rgba(255,255,255,0.03) 2px,
+            rgba(255,255,255,0.03) 4px
+          )`,
+              opacity: 0.5
+            }
+          }
+        )
+      ]
+    }
+  );
+};
+const LegalDocument = ({
+  title,
+  year,
+  content,
+  scale = 1,
+  seal = true
+}) => {
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+    "div",
+    {
+      style: {
+        width: 400 * scale,
+        background: "linear-gradient(to bottom, #f5e6d3 0%, #e8d5c4 100%)",
+        borderRadius: `${4 * scale}px`,
+        boxShadow: `0 ${15 * scale}px ${40 * scale}px rgba(0, 0, 0, 0.4)`,
+        position: "relative",
+        overflow: "hidden",
+        fontFamily: "Merriweather, serif"
+      },
+      children: [
+        /* @__PURE__ */ (0,jsx_runtime.jsx)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              inset: 0,
+              background: `repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 1px,
+            rgba(139, 90, 43, 0.05) 1px,
+            rgba(139, 90, 43, 0.05) 2px
+          )`,
+              opacity: 0.6
+            }
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsx)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              inset: `${10 * scale}px`,
+              border: `${3 * scale}px double #8b5a2b`,
+              borderRadius: `${2 * scale}px`
+            }
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+          "div",
+          {
+            style: {
+              padding: `${30 * scale}px ${40 * scale}px ${20 * scale}px`,
+              textAlign: "center",
+              position: "relative",
+              zIndex: 1
+            },
+            children: [
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    fontSize: `${14 * scale}px`,
+                    color: "#8b5a2b",
+                    textTransform: "uppercase",
+                    letterSpacing: 2,
+                    marginBottom: `${10 * scale}px`
+                  },
+                  children: "An Act of Congress"
+                }
+              ),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    fontSize: `${24 * scale}px`,
+                    color: "#2c1810",
+                    fontWeight: 700,
+                    marginBottom: `${5 * scale}px`
+                  },
+                  children: title
+                }
+              ),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    fontSize: `${16 * scale}px`,
+                    color: "#5c4033",
+                    fontStyle: "italic"
+                  },
+                  children: year
+                }
+              )
+            ]
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsx)(
+          "div",
+          {
+            style: {
+              height: `${2 * scale}px`,
+              background: "#8b5a2b",
+              margin: `0 ${40 * scale}px ${20 * scale}px`,
+              opacity: 0.5
+            }
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsx)(
+          "div",
+          {
+            style: {
+              padding: `0 ${40 * scale}px ${30 * scale}px`,
+              position: "relative",
+              zIndex: 1
+            },
+            children: content.map((line, index) => /* @__PURE__ */ (0,jsx_runtime.jsx)(
+              "div",
+              {
+                style: {
+                  fontSize: `${13 * scale}px`,
+                  color: "#3d2817",
+                  lineHeight: "1.6",
+                  textAlign: "justify",
+                  marginBottom: `${8 * scale}px`,
+                  fontStyle: index === 0 ? "italic" : "normal"
+                },
+                children: line
+              },
+              index
+            ))
+          }
+        ),
+        seal && /* @__PURE__ */ (0,jsx_runtime.jsx)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              bottom: `${30 * scale}px`,
+              right: `${30 * scale}px`,
+              width: `${80 * scale}px`,
+              height: `${80 * scale}px`,
+              borderRadius: "50%",
+              background: `radial-gradient(circle at 30% 30%, #c41e3a, #8b0000)`,
+              boxShadow: `0 ${4 * scale}px ${12 * scale}px rgba(0,0,0,0.3)`,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              opacity: 0.9
+            },
+            children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
+              "div",
+              {
+                style: {
+                  width: `${60 * scale}px`,
+                  height: `${60 * scale}px`,
+                  borderRadius: "50%",
+                  border: `${3 * scale}px solid rgba(255,255,255,0.3)`,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontSize: `${10 * scale}px`,
+                  color: "rgba(255,255,255,0.9)",
+                  textAlign: "center",
+                  fontWeight: 700
+                },
+                children: "OFFICIAL"
+              }
+            )
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              bottom: `${30 * scale}px`,
+              left: `${40 * scale}px`,
+              right: seal ? `${120 * scale}px` : `${30 * scale}px`
+            },
+            children: [
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    height: `${1 * scale}px`,
+                    background: "#5c4033",
+                    marginBottom: `${8 * scale}px`
+                  }
+                }
+              ),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    fontSize: `${11 * scale}px`,
+                    color: "#5c4033",
+                    fontStyle: "italic"
+                  },
+                  children: "Approved"
+                }
+              )
+            ]
+          }
+        )
+      ]
+    }
+  );
+};
+function adjustColor(color, amount) {
+  const hex = color.replace("#", "");
+  const num = parseInt(hex, 16);
+  const r = Math.min(255, Math.max(0, (num >> 16) + amount));
+  const g = Math.min(255, Math.max(0, (num >> 8 & 255) + amount));
+  const b = Math.min(255, Math.max(0, (num & 255) + amount));
+  return `#${(r << 16 | g << 8 | b).toString(16).padStart(6, "0")}`;
+}
+
+;// ./src/components/scenes/episode03/GreenbackScene.tsx
+
+
+
+
+
+
+const GreenbackScene = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const lincolnFigure = getFigure("abraham_lincoln");
+  const lincolnPhoto = (lincolnFigure == null ? void 0 : lincolnFigure.photoSrc) || "";
+  const titleOpacity = (0,esm.interpolate)(frame, [0, 30], [0, 1], {
+    extrapolateRight: "clamp"
+  });
+  const lincolnScale = (0,esm.spring)({
+    frame: frame - 45,
+    fps: 30,
+    config: { damping: 15, stiffness: 60 }
+  });
+  const greenbillEnter = (0,esm.interpolate)(frame, [120, 210], [0, 1], {
+    extrapolateRight: "clamp"
+  });
+  const quoteOpacity = (0,esm.interpolate)(frame, [240, 330], [0, 1], {
+    extrapolateRight: "clamp"
+  });
+  const statsOpacity = (0,esm.interpolate)(frame, [390, 480], [0, 1], {
+    extrapolateRight: "clamp"
+  });
+  const resultOpacity = (0,esm.interpolate)(frame, [540, 630], [0, 1], {
+    extrapolateRight: "clamp"
+  });
+  const fallingBills = Array.from({ length: 8 }).map((_, i) => {
+    const startY = -100 - i * 80;
+    const endY = 900;
+    const delay = i * 30;
+    const progress = (0,esm.interpolate)(
+      frame,
+      [120 + delay, 120 + delay + 300],
+      [0, 1],
+      { extrapolateRight: "clamp" }
+    );
+    const y = startY + (endY - startY) * progress;
+    const x = 15 + i * 10 % 70;
+    const rotation = progress * 360;
+    return {
+      y,
+      x,
+      rotation,
+      opacity: progress < 0.1 || progress > 0.9 ? 0 : 1
+    };
+  });
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+    esm.AbsoluteFill,
+    {
+      style: {
+        background: "radial-gradient(circle at center, #1a2e1a 0%, #0d1117 100%)"
+      },
+      children: [
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              top: "6%",
+              left: "50%",
+              transform: "translateX(-50%)",
+              opacity: titleOpacity
+            },
+            children: [
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    fontFamily: "Cinzel, serif",
+                    fontSize: 36,
+                    color: "#228B22",
+                    fontWeight: 700,
+                    textAlign: "center",
+                    letterSpacing: 2
+                  },
+                  children: "Lincoln's Greenback"
+                }
+              ),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    fontFamily: "Merriweather, serif",
+                    fontSize: 16,
+                    color: "#9ca3af",
+                    textAlign: "center",
+                    marginTop: 6
+                  },
+                  children: "Debt-Free Money for the People \u2014 1862"
+                }
+              )
+            ]
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsx)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              left: "22%",
+              top: "50%",
+              transform: `translate(-50%, -50%) scale(${lincolnScale})`
+            },
+            children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
+              HistoricalFigure,
+              {
+                x: 0,
+                y: 0,
+                scale: 1.2,
+                photoSrc: lincolnPhoto,
+                nameEn: "Abraham Lincoln",
+                nameCn: "\u4E9A\u4F2F\u62C9\u7F55\xB7\u6797\u80AF",
+                action: "talking",
+                frameStyle: "classic",
+                photoFilter: "grayscale",
+                showLabel: true,
+                frame,
+                animEffect: "slideLeft"
+              }
+            )
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              right: "15%",
+              top: "35%",
+              opacity: greenbillEnter,
+              transform: `scale(${(0,esm.spring)({ frame: frame - 150, fps: 30, config: { damping: 12, stiffness: 80 } })})`
+            },
+            children: [
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                CurrencyBill,
+                {
+                  denomination: "$100",
+                  currencyName: "UNITED STATES NOTE",
+                  year: "1862",
+                  color: "#228B22",
+                  scale: 1,
+                  showDetails: true
+                }
+              ),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    fontFamily: "Merriweather, serif",
+                    fontSize: 12,
+                    color: "#228B22",
+                    textAlign: "center",
+                    marginTop: 10,
+                    fontWeight: 600
+                  },
+                  children: "GREENBACK"
+                }
+              ),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    fontFamily: "Merriweather, serif",
+                    fontSize: 11,
+                    color: "#9ca3af",
+                    textAlign: "center",
+                    marginTop: 5,
+                    fontStyle: "italic"
+                  },
+                  children: "Debt-free. Interest-free. Constitutional."
+                }
+              )
+            ]
+          }
+        ),
+        fallingBills.map((bill, i) => /* @__PURE__ */ (0,jsx_runtime.jsx)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              left: `${bill.x}%`,
+              top: `${bill.y}px`,
+              transform: `rotate(${bill.rotation}deg)`,
+              opacity: bill.opacity * 0.15,
+              pointerEvents: "none"
+            },
+            children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
+              CurrencyBill,
+              {
+                denomination: "$10",
+                currencyName: "GREENBACK",
+                color: "#228B22",
+                scale: 0.3,
+                showDetails: false
+              }
+            )
+          },
+          i
+        )),
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              bottom: "32%",
+              left: "50%",
+              transform: "translateX(-50%)",
+              width: "65%",
+              opacity: quoteOpacity
+            },
+            children: [
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    fontFamily: "Cinzel, serif",
+                    fontSize: 14,
+                    color: "#9ca3af",
+                    textAlign: "center",
+                    marginBottom: 10,
+                    letterSpacing: 2
+                  },
+                  children: "LEGAL TENDER ACT \u2014 1862"
+                }
+              ),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    fontFamily: "Merriweather, serif",
+                    fontSize: 18,
+                    color: "#e8e8e8",
+                    textAlign: "center",
+                    lineHeight: "1.6",
+                    fontStyle: "italic"
+                  },
+                  children: '"The power to coin money belongs to the people"'
+                }
+              ),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    fontFamily: "Merriweather, serif",
+                    fontSize: 16,
+                    color: "#228B22",
+                    textAlign: "center",
+                    marginTop: 8
+                  },
+                  children: "\u2014 U.S. Constitution, Article I, Section 8"
+                }
+              )
+            ]
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              bottom: "15%",
+              left: "50%",
+              transform: "translateX(-50%)",
+              display: "flex",
+              gap: 60,
+              opacity: statsOpacity
+            },
+            children: [
+              /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { textAlign: "center" }, children: [
+                /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                  "div",
+                  {
+                    style: {
+                      fontFamily: "JetBrains Mono, monospace",
+                      fontSize: 36,
+                      color: "#228B22",
+                      fontWeight: 700
+                    },
+                    children: "$450M"
+                  }
+                ),
+                /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                  "div",
+                  {
+                    style: {
+                      fontFamily: "Merriweather, serif",
+                      fontSize: 13,
+                      color: "#9ca3af",
+                      marginTop: 5
+                    },
+                    children: "Issued during Civil War"
+                  }
+                )
+              ] }),
+              /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { textAlign: "center" }, children: [
+                /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                  "div",
+                  {
+                    style: {
+                      fontFamily: "JetBrains Mono, monospace",
+                      fontSize: 36,
+                      color: "#ffd700",
+                      fontWeight: 700
+                    },
+                    children: "$40B"
+                  }
+                ),
+                /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                  "div",
+                  {
+                    style: {
+                      fontFamily: "Merriweather, serif",
+                      fontSize: 13,
+                      color: "#9ca3af",
+                      marginTop: 5
+                    },
+                    children: "Interest saved for taxpayers"
+                  }
+                )
+              ] })
+            ]
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              bottom: "4%",
+              left: "50%",
+              transform: "translateX(-50%)",
+              opacity: resultOpacity,
+              textAlign: "center",
+              padding: "12px 25px",
+              background: "rgba(34, 139, 34, 0.15)",
+              border: "1px solid #228B22",
+              borderRadius: 6
+            },
+            children: [
+              /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+                "div",
+                {
+                  style: {
+                    fontFamily: "Merriweather, serif",
+                    fontSize: 14,
+                    color: "#e8e8e8"
+                  },
+                  children: [
+                    /* @__PURE__ */ (0,jsx_runtime.jsx)("span", { style: { color: "#228B22", fontWeight: 600 }, children: "Result:" }),
+                    " ",
+                    "Greenbacks funded the Union victory"
+                  ]
+                }
+              ),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    fontFamily: "Merriweather, serif",
+                    fontSize: 12,
+                    color: "#6b7280",
+                    marginTop: 4,
+                    fontStyle: "italic"
+                  },
+                  children: "Without borrowing from foreign banks"
+                }
+              )
+            ]
+          }
+        )
+      ]
+    }
+  );
+};
+
+;// ./src/components/scenes/episode03/documentary/GreenbackDocumentaryScene.tsx
+
+
+
+const GreenbackDocumentaryScene = () => {
+  return /* @__PURE__ */ (0,jsx_runtime.jsx)(GreenbackScene, {});
+};
+
+;// ./src/components/maps/AmericanMap.tsx
+
+
+
+
+const DEFAULT_AMERICAN_CITIES = [
+  { id: "boston", name: "\u6CE2\u58EB\u987F", x: 82, y: 22 },
+  { id: "nyc", name: "\u7EBD\u7EA6", x: 80, y: 30 },
+  { id: "philadelphia", name: "\u8D39\u57CE", x: 77, y: 32 },
+  { id: "washington", name: "\u534E\u76DB\u987F", x: 75, y: 38 },
+  { id: "richmond", name: "\u91CC\u58EB\u6EE1", x: 73, y: 40 },
+  { id: "charleston", name: "\u67E5\u5C14\u65AF\u987F", x: 68, y: 52 },
+  { id: "neworleans", name: "\u65B0\u5965\u5C14\u826F", x: 48, y: 65 },
+  { id: "stlouis", name: "\u5723\u8DEF\u6613\u65AF", x: 52, y: 40 },
+  { id: "chicago", name: "\u829D\u52A0\u54E5", x: 62, y: 25 }
+];
+const AmericanMap_THEMES = {
+  documentary: {
+    background: "#0d1117",
+    land: "#1a1a2e",
+    water: "#0a0e17",
+    border: "#2d3748",
+    north: "#1e3a5a",
+    south: "#8b0000",
+    marker: "#ffd700",
+    markerBorder: "#b8860b",
+    text: "#e8e8e8",
+    divider: "#ef4444"
+  },
+  historical: {
+    background: "#1a1612",
+    land: "#2d2520",
+    water: "#0f0c0a",
+    border: "#4a3c32",
+    north: "#3d5a4a",
+    south: "#5a3d3d",
+    marker: "#d4af37",
+    markerBorder: "#f0e68c",
+    text: "#e8dcc8",
+    divider: "#8b4513"
+  },
+  dramatic: {
+    background: "#0a0a0a",
+    land: "#1f1f1f",
+    water: "#050505",
+    border: "#333",
+    north: "#1a3a5a",
+    south: "#8b0000",
+    marker: "#ffd700",
+    markerBorder: "#ff4500",
+    text: "#fff",
+    divider: "#ff0000"
+  }
+};
+const AmericanMap = (props) => {
+  const {
+    cities = DEFAULT_AMERICAN_CITIES,
+    visibleCityIds = [],
+    showLabels = true,
+    showNorthSouth = false,
+    markerSize = 12,
+    animationDelay = 0,
+    animationDuration = 60,
+    theme = "documentary"
+  } = props;
+  const frame = (0,esm.useCurrentFrame)();
+  const colors = AmericanMap_THEMES[theme];
+  const visibleCities = (0,react.useMemo)(() => {
+    if (visibleCityIds.length === 0) return cities;
+    return cities.filter((city) => visibleCityIds.includes(city.id));
+  }, [cities, visibleCityIds]);
+  const animationProgress = Math.min(
+    Math.max((frame - animationDelay) / animationDuration, 0),
+    1
+  );
+  const getCityOpacity = (index) => {
+    const cityDelay = animationDelay + index * animationDuration / cities.length;
+    return (0,esm.interpolate)(frame, [cityDelay, cityDelay + 30], [0, 1], {
+      extrapolateRight: "clamp"
+    });
+  };
+  const getCityScale = (index) => {
+    const cityDelay = animationDelay + index * animationDuration / cities.length;
+    return (0,esm.spring)({
+      frame: frame - cityDelay,
+      fps: 30,
+      config: { damping: 12, stiffness: 80 }
+    });
+  };
+  return /* @__PURE__ */ (0,jsx_runtime.jsx)(esm.AbsoluteFill, { style: { background: colors.background }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
+    "div",
+    {
+      style: {
+        position: "absolute",
+        inset: 0,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center"
+      },
+      children: /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+        "svg",
+        {
+          viewBox: "0 0 100 55",
+          preserveAspectRatio: "xMidYMid meet",
+          style: {
+            width: "85%",
+            height: "85%",
+            maxWidth: "1200px"
+          },
+          children: [
+            /* @__PURE__ */ (0,jsx_runtime.jsxs)("defs", { children: [
+              /* @__PURE__ */ (0,jsx_runtime.jsxs)("linearGradient", { id: "usLandGrad", x1: "0%", y1: "0%", x2: "100%", y2: "100%", children: [
+                /* @__PURE__ */ (0,jsx_runtime.jsx)("stop", { offset: "0%", stopColor: colors.land }),
+                /* @__PURE__ */ (0,jsx_runtime.jsx)("stop", { offset: "100%", stopColor: colors.border })
+              ] }),
+              /* @__PURE__ */ (0,jsx_runtime.jsxs)("filter", { id: "glow", children: [
+                /* @__PURE__ */ (0,jsx_runtime.jsx)("feGaussianBlur", { stdDeviation: "0.5", result: "coloredBlur" }),
+                /* @__PURE__ */ (0,jsx_runtime.jsxs)("feMerge", { children: [
+                  /* @__PURE__ */ (0,jsx_runtime.jsx)("feMergeNode", { in: "coloredBlur" }),
+                  /* @__PURE__ */ (0,jsx_runtime.jsx)("feMergeNode", { in: "SourceGraphic" })
+                ] })
+              ] })
+            ] }),
+            /* @__PURE__ */ (0,jsx_runtime.jsxs)("g", { opacity: animationProgress, children: [
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "path",
+                {
+                  d: "M 75,15 L 80,18 L 82,22 L 85,25 L 83,28 L 82,32 L 80,35 L 78,38 L 75,42 L 72,45 L 70,48 L 65,50 L 60,52 L 55,50 L 52,48 L 50,45",
+                  fill: showNorthSouth ? colors.north : "url(#usLandGrad)",
+                  stroke: colors.border,
+                  strokeWidth: "0.4"
+                }
+              ),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "path",
+                {
+                  d: "M 70,48 L 72,45 L 75,42 L 78,45 L 80,50 L 78,52 L 72,52 L 68,50 Z",
+                  fill: showNorthSouth ? colors.south : "url(#usLandGrad)",
+                  stroke: colors.border,
+                  strokeWidth: "0.4"
+                }
+              ),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "path",
+                {
+                  d: "M 50,45 L 52,48 L 55,50 L 50,52 L 45,50 L 42,48 L 40,45 L 42,42 L 45,40 L 48,42 Z",
+                  fill: showNorthSouth ? colors.south : "url(#usLandGrad)",
+                  stroke: colors.border,
+                  strokeWidth: "0.4"
+                }
+              ),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "path",
+                {
+                  d: "M 50,45 L 48,42 L 45,40 L 42,38 L 40,35 L 38,32 L 35,30 L 32,28 L 30,25 L 28,22 L 25,20 L 22,18 L 20,15 L 18,12 L 15,10 L 12,8 L 10,5 L 8,8 L 10,12 L 12,15 L 15,18 L 18,20 L 20,22 L 22,25 L 25,28 L 28,30 L 30,32 L 32,35 L 35,38 L 38,40 L 42,42 L 45,45",
+                  fill: showNorthSouth ? colors.north : "url(#usLandGrad)",
+                  stroke: colors.border,
+                  strokeWidth: "0.4"
+                }
+              ),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "path",
+                {
+                  d: "M 25,20 L 22,18 L 20,15 L 18,12 L 15,10 L 12,8 L 10,10 L 8,15 L 10,20 L 12,25 L 15,30 L 18,35 L 20,40 L 22,45 L 25,50 L 30,48 L 28,45 L 25,40 L 22,35 L 20,30 L 18,25 L 18,20 L 20,15 L 22,12 Z",
+                  fill: showNorthSouth ? colors.south : "url(#usLandGrad)",
+                  stroke: colors.border,
+                  strokeWidth: "0.4"
+                }
+              )
+            ] }),
+            showNorthSouth && /* @__PURE__ */ (0,jsx_runtime.jsx)("g", { opacity: (0,esm.interpolate)(frame, [animationDelay + 30, animationDelay + 60], [0, 0.6], {
+              extrapolateRight: "clamp"
+            }), children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
+              "line",
+              {
+                x1: "15",
+                y1: "36",
+                x2: "75",
+                y2: "36",
+                stroke: colors.divider,
+                strokeWidth: "0.5",
+                strokeDasharray: "2,1",
+                opacity: 0.8
+              }
+            ) }),
+            visibleCities.map((city, index) => {
+              const opacity = getCityOpacity(index);
+              const scale = getCityScale(index);
+              if (opacity <= 0) return null;
+              return /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+                "g",
+                {
+                  transform: `translate(${city.x}, ${city.y}) scale(${scale})`,
+                  opacity,
+                  children: [
+                    /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+                      "circle",
+                      {
+                        r: markerSize / 3,
+                        fill: "none",
+                        stroke: colors.marker,
+                        strokeWidth: "0.2",
+                        opacity: 0.4,
+                        children: [
+                          /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                            "animate",
+                            {
+                              attributeName: "r",
+                              values: `${markerSize / 3};${markerSize / 1.5};${markerSize / 3}`,
+                              dur: "2s",
+                              repeatCount: "indefinite"
+                            }
+                          ),
+                          /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                            "animate",
+                            {
+                              attributeName: "opacity",
+                              values: "0.4;0;0.4",
+                              dur: "2s",
+                              repeatCount: "indefinite"
+                            }
+                          )
+                        ]
+                      }
+                    ),
+                    /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                      "circle",
+                      {
+                        r: markerSize / 5,
+                        fill: colors.marker,
+                        stroke: colors.markerBorder,
+                        strokeWidth: "0.15",
+                        filter: "url(#glow)"
+                      }
+                    ),
+                    /* @__PURE__ */ (0,jsx_runtime.jsx)("circle", { r: markerSize / 15, fill: colors.background }),
+                    showLabels && scale > 0.8 && /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                      "g",
+                      {
+                        transform: `translate(${city.x > 50 ? -3 : 3}, ${city.y > 27 ? -2 : 2})`,
+                        children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                          "text",
+                          {
+                            x: 0,
+                            y: 0,
+                            fill: colors.text,
+                            fontSize: "1.8",
+                            fontWeight: "600",
+                            textAnchor: city.x > 50 ? "end" : "start",
+                            style: { fontFamily: "Cinzel, serif" },
+                            children: city.name
+                          }
+                        )
+                      }
+                    )
+                  ]
+                },
+                city.id
+              );
+            })
+          ]
+        }
+      )
+    }
+  ) });
+};
+/* harmony default export */ const maps_AmericanMap = (AmericanMap);
+
+;// ./src/components/scenes/episode03/RussianAllianceScene.tsx
+
+
+
+
+const RussianAllianceScene = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const titleOpacity = (0,esm.interpolate)(frame, [0, 30], [0, 1], {
+    extrapolateRight: "clamp"
+  });
+  const mapShow = (0,esm.interpolate)(frame, [60, 150], [0, 1], {
+    extrapolateRight: "clamp"
+  });
+  const quoteOpacity = (0,esm.interpolate)(frame, [210, 300], [0, 1], {
+    extrapolateRight: "clamp"
+  });
+  const fleetOpacity = (0,esm.interpolate)(frame, [360, 450], [0, 1], {
+    extrapolateRight: "clamp"
+  });
+  const resultOpacity = (0,esm.interpolate)(frame, [540, 630], [0, 1], {
+    extrapolateRight: "clamp"
+  });
+  const fleetProgress = (0,esm.interpolate)(frame, [360, 540], [0, 1], {
+    extrapolateRight: "clamp"
+  });
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+    esm.AbsoluteFill,
+    {
+      style: {
+        background: "radial-gradient(circle at center, #1a1a2e 0%, #0d1117 100%)"
+      },
+      children: [
+        /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { opacity: mapShow }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
+          maps_AmericanMap,
+          {
+            visibleCityIds: ["nyc", "washington", "neworleans"],
+            showLabels: true,
+            showNorthSouth: true,
+            theme: "documentary",
+            animationDelay: 0,
+            animationDuration: 90
+          }
+        ) }),
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              top: "6%",
+              left: "50%",
+              transform: "translateX(-50%)",
+              opacity: titleOpacity,
+              zIndex: 10
+            },
+            children: [
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    fontFamily: "Cinzel, serif",
+                    fontSize: 32,
+                    color: "#ffd700",
+                    fontWeight: 700,
+                    textAlign: "center",
+                    letterSpacing: 2
+                  },
+                  children: "The Russian Alliance"
+                }
+              ),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    fontFamily: "Merriweather, serif",
+                    fontSize: 16,
+                    color: "#9ca3af",
+                    textAlign: "center",
+                    marginTop: 6
+                  },
+                  children: "Tsar Alexander II \u2014 Lincoln's Unlikely Ally"
+                }
+              )
+            ]
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              top: "20%",
+              left: "50%",
+              transform: "translateX(-50%)",
+              width: "70%",
+              opacity: quoteOpacity,
+              zIndex: 10,
+              textAlign: "center",
+              padding: "20px 30px",
+              background: "rgba(212, 175, 55, 0.1)",
+              border: "2px solid #d4af37",
+              borderRadius: 8
+            },
+            children: [
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    fontFamily: "Cinzel, serif",
+                    fontSize: 12,
+                    color: "#d4af37",
+                    letterSpacing: 2,
+                    marginBottom: 10
+                  },
+                  children: "TSAR ALEXANDER II"
+                }
+              ),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    fontFamily: "Merriweather, serif",
+                    fontSize: 16,
+                    color: "#e8e8e8",
+                    fontStyle: "italic",
+                    lineHeight: "1.6"
+                  },
+                  children: '"I will agree to whatever he asks before I even read his letter"'
+                }
+              )
+            ]
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { position: "absolute", inset: 0, zIndex: 10 }, children: [
+          /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+            "div",
+            {
+              style: {
+                position: "absolute",
+                left: `${(0,esm.interpolate)(fleetProgress, [0, 1], [15, 78], { extrapolateRight: "clamp" })}%`,
+                top: `${(0,esm.interpolate)(fleetProgress, [0, 1], [20, 28], { extrapolateRight: "clamp" })}%`,
+                opacity: fleetOpacity,
+                transform: "translate(-50%, -50%)"
+              },
+              children: [
+                /* @__PURE__ */ (0,jsx_runtime.jsxs)("svg", { width: 60, height: 40, viewBox: "0 0 60 40", children: [
+                  /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                    "path",
+                    {
+                      d: "M 5,25 Q 30,35 55,25 L 55,20 Q 30,25 5,20 Z",
+                      fill: "#1e3a5a",
+                      stroke: "#d4af37",
+                      strokeWidth: 1
+                    }
+                  ),
+                  /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                    "path",
+                    {
+                      d: "M 30,18 L 30,5 L 45,15 Z",
+                      fill: "#f5e6d3",
+                      stroke: "#8b5a2b",
+                      strokeWidth: 1
+                    }
+                  ),
+                  /* @__PURE__ */ (0,jsx_runtime.jsx)("path", { d: "M 30,5 L 30,0 L 40,3 Z", fill: "#d4af37" })
+                ] }),
+                /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                  "div",
+                  {
+                    style: {
+                      position: "absolute",
+                      bottom: -20,
+                      left: "50%",
+                      transform: "translateX(-50%)",
+                      fontFamily: "Merriweather, serif",
+                      fontSize: 10,
+                      color: "#d4af37",
+                      whiteSpace: "nowrap"
+                    },
+                    children: "Russian Fleet"
+                  }
+                )
+              ]
+            }
+          ),
+          /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+            "div",
+            {
+              style: {
+                position: "absolute",
+                left: `${(0,esm.interpolate)(fleetProgress, [0, 1], [5, 18], { extrapolateRight: "clamp" })}%`,
+                top: `${(0,esm.interpolate)(fleetProgress, [0, 1], [15, 42], { extrapolateRight: "clamp" })}%`,
+                opacity: fleetOpacity,
+                transform: "translate(-50%, -50%)"
+              },
+              children: [
+                /* @__PURE__ */ (0,jsx_runtime.jsxs)("svg", { width: 60, height: 40, viewBox: "0 0 60 40", children: [
+                  /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                    "path",
+                    {
+                      d: "M 5,25 Q 30,35 55,25 L 55,20 Q 30,25 5,20 Z",
+                      fill: "#1e3a5a",
+                      stroke: "#d4af37",
+                      strokeWidth: 1
+                    }
+                  ),
+                  /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                    "path",
+                    {
+                      d: "M 30,18 L 30,5 L 45,15 Z",
+                      fill: "#f5e6d3",
+                      stroke: "#8b5a2b",
+                      strokeWidth: 1
+                    }
+                  ),
+                  /* @__PURE__ */ (0,jsx_runtime.jsx)("path", { d: "M 30,5 L 30,0 L 40,3 Z", fill: "#d4af37" })
+                ] }),
+                /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                  "div",
+                  {
+                    style: {
+                      position: "absolute",
+                      bottom: -20,
+                      left: "50%",
+                      transform: "translateX(-50%)",
+                      fontFamily: "Merriweather, serif",
+                      fontSize: 10,
+                      color: "#d4af37",
+                      whiteSpace: "nowrap"
+                    },
+                    children: "Pacific Fleet"
+                  }
+                )
+              ]
+            }
+          )
+        ] }),
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              bottom: "32%",
+              left: "50%",
+              transform: "translateX(-50%)",
+              opacity: fleetOpacity,
+              zIndex: 10,
+              textAlign: "center"
+            },
+            children: [
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    fontFamily: "Cinzel, serif",
+                    fontSize: 14,
+                    color: "#d4af37",
+                    letterSpacing: 2,
+                    marginBottom: 10
+                  },
+                  children: "SEPTEMBER \u2014 OCTOBER 1863"
+                }
+              ),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    fontFamily: "Merriweather, serif",
+                    fontSize: 14,
+                    color: "#e8e8e8",
+                    lineHeight: "1.6"
+                  },
+                  children: "Russian fleet arrives in New York and San Francisco"
+                }
+              )
+            ]
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              bottom: "15%",
+              left: "50%",
+              transform: "translateX(-50%)",
+              width: "75%",
+              opacity: resultOpacity,
+              zIndex: 10,
+              textAlign: "center",
+              padding: "15px 25px",
+              background: "rgba(34, 139, 34, 0.15)",
+              border: "1px solid #228B22",
+              borderRadius: 8
+            },
+            children: [
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    fontFamily: "Cinzel, serif",
+                    fontSize: 14,
+                    color: "#228B22",
+                    marginBottom: 8
+                  },
+                  children: "THE RESULT"
+                }
+              ),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    fontFamily: "Merriweather, serif",
+                    fontSize: 14,
+                    color: "#e8e8e8",
+                    lineHeight: "1.5"
+                  },
+                  children: "European powers hesitate to intervene"
+                }
+              ),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    fontFamily: "Merriweather, serif",
+                    fontSize: 13,
+                    color: "#9ca3af",
+                    marginTop: 8,
+                    fontStyle: "italic"
+                  },
+                  children: "Lincoln gains crucial time to turn the tide of war"
+                }
+              )
+            ]
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsx)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              bottom: "4%",
+              left: "50%",
+              transform: "translateX(-50%)",
+              opacity: resultOpacity,
+              zIndex: 10
+            },
+            children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
+              "div",
+              {
+                style: {
+                  fontFamily: "Merriweather, serif",
+                  fontSize: 12,
+                  color: "#6b7280",
+                  fontStyle: "italic"
+                },
+                children: "1867: America purchases Alaska to pay for Russia's war assistance"
+              }
+            )
+          }
+        )
+      ]
+    }
+  );
+};
+
+;// ./src/components/scenes/episode03/documentary/RussianAllianceDocumentaryScene.tsx
+
+
+
+const RussianAllianceDocumentaryScene = () => {
+  return /* @__PURE__ */ (0,jsx_runtime.jsx)(RussianAllianceScene, {});
+};
+
+;// ./src/components/scenes/episode03/AssassinationScene.tsx
+
+
+
+const AssassinationScene = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const titleOpacity = (0,esm.interpolate)(frame, [0, 60], [0, 1], { extrapolateRight: "clamp" });
+  const theaterOpacity = (0,esm.interpolate)(frame, [90, 180], [0, 1], { extrapolateRight: "clamp" });
+  const dateOpacity = (0,esm.interpolate)(frame, [120, 210], [0, 1], { extrapolateRight: "clamp" });
+  const questionOpacity = (0,esm.interpolate)(frame, [270, 360], [0, 1], { extrapolateRight: "clamp" });
+  const connectionOpacity = (0,esm.interpolate)(frame, [420, 510], [0, 1], { extrapolateRight: "clamp" });
+  const aftermathOpacity = (0,esm.interpolate)(frame, [570, 660], [0, 1], { extrapolateRight: "clamp" });
+  const redPulse = (0,esm.interpolate)(
+    frame % 60,
+    [0, 30, 60],
+    [0, 0.1, 0],
+    { extrapolateRight: "clamp" }
+  );
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+    esm.AbsoluteFill,
+    {
+      style: {
+        background: `radial-gradient(circle at center, #1a0a0a 0%, #0d1117 100%)`
+      },
+      children: [
+        /* @__PURE__ */ (0,jsx_runtime.jsx)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              inset: 0,
+              background: `rgba(139, 0, 0, ${redPulse})`,
+              pointerEvents: "none"
+            }
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              top: "8%",
+              left: "50%",
+              transform: "translateX(-50%)",
+              opacity: titleOpacity,
+              textAlign: "center"
+            },
+            children: [
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    fontFamily: "Cinzel, serif",
+                    fontSize: 42,
+                    color: "#8b0000",
+                    fontWeight: 700,
+                    letterSpacing: 3
+                  },
+                  children: "ASSASSINATION"
+                }
+              ),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    fontFamily: "Merriweather, serif",
+                    fontSize: 18,
+                    color: "#9ca3af",
+                    marginTop: 8
+                  },
+                  children: "April 14, 1865 \u2014 Ford's Theatre"
+                }
+              )
+            ]
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              opacity: theaterOpacity
+            },
+            children: [
+              /* @__PURE__ */ (0,jsx_runtime.jsxs)("svg", { width: 500, height: 350, viewBox: "0 0 500 350", children: [
+                /* @__PURE__ */ (0,jsx_runtime.jsx)("defs", { children: /* @__PURE__ */ (0,jsx_runtime.jsxs)("linearGradient", { id: "theaterGrad", x1: "0%", y1: "0%", x2: "100%", y2: "100%", children: [
+                  /* @__PURE__ */ (0,jsx_runtime.jsx)("stop", { offset: "0%", stopColor: "#2d3748" }),
+                  /* @__PURE__ */ (0,jsx_runtime.jsx)("stop", { offset: "100%", stopColor: "#1a202c" })
+                ] }) }),
+                /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                  "path",
+                  {
+                    d: "M 50 300 L 50 150 L 100 100 L 150 100 L 150 80 L 200 80 L 200 100 L 300 100 L 300 80 L 350 80 L 350 100 L 400 100 L 450 150 L 450 300 Z",
+                    fill: "url(#theaterGrad)",
+                    stroke: "#4a5568",
+                    strokeWidth: 2
+                  }
+                ),
+                /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                  "ellipse",
+                  {
+                    cx: 250,
+                    cy: 80,
+                    rx: 100,
+                    ry: 30,
+                    fill: "#1a202c",
+                    stroke: "#4a5568",
+                    strokeWidth: 2
+                  }
+                ),
+                /* @__PURE__ */ (0,jsx_runtime.jsxs)("g", { fill: "#2d3748", stroke: "#4a5568", strokeWidth: 1, children: [
+                  /* @__PURE__ */ (0,jsx_runtime.jsx)("rect", { x: 120, y: 150, width: 15, height: 150 }),
+                  /* @__PURE__ */ (0,jsx_runtime.jsx)("rect", { x: 180, y: 150, width: 15, height: 150 }),
+                  /* @__PURE__ */ (0,jsx_runtime.jsx)("rect", { x: 240, y: 150, width: 15, height: 150 }),
+                  /* @__PURE__ */ (0,jsx_runtime.jsx)("rect", { x: 300, y: 150, width: 15, height: 150 }),
+                  /* @__PURE__ */ (0,jsx_runtime.jsx)("rect", { x: 360, y: 150, width: 15, height: 150 })
+                ] }),
+                /* @__PURE__ */ (0,jsx_runtime.jsxs)("g", { fill: "#0a0e17", stroke: "#4a5568", strokeWidth: 1, children: [
+                  /* @__PURE__ */ (0,jsx_runtime.jsx)("rect", { x: 130, y: 170, width: 30, height: 50 }),
+                  /* @__PURE__ */ (0,jsx_runtime.jsx)("rect", { x: 190, y: 170, width: 30, height: 50 }),
+                  /* @__PURE__ */ (0,jsx_runtime.jsx)("rect", { x: 250, y: 170, width: 30, height: 50 }),
+                  /* @__PURE__ */ (0,jsx_runtime.jsx)("rect", { x: 310, y: 170, width: 30, height: 50 }),
+                  /* @__PURE__ */ (0,jsx_runtime.jsx)("rect", { x: 370, y: 170, width: 30, height: 50 })
+                ] }),
+                /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                  "rect",
+                  {
+                    x: 340,
+                    y: 100,
+                    width: 80,
+                    height: 60,
+                    fill: "#8b0000",
+                    stroke: "#ffd700",
+                    strokeWidth: 2,
+                    opacity: 0.8
+                  }
+                )
+              ] }),
+              frame > 210 && frame < 270 && /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    position: "absolute",
+                    top: "35%",
+                    left: "75%",
+                    width: 60,
+                    height: 60,
+                    background: "radial-gradient(circle, rgba(255,255,0,0.8) 0%, transparent 70%)",
+                    borderRadius: "50%",
+                    animation: "flash 0.5s ease-out"
+                  }
+                }
+              )
+            ]
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              bottom: "35%",
+              left: "50%",
+              transform: "translateX(-50%)",
+              opacity: dateOpacity,
+              textAlign: "center"
+            },
+            children: [
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    fontFamily: "JetBrains Mono, monospace",
+                    fontSize: 24,
+                    color: "#ffd700",
+                    fontWeight: 700
+                  },
+                  children: "April 14, 1865"
+                }
+              ),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    fontFamily: "Merriweather, serif",
+                    fontSize: 16,
+                    color: "#9ca3af",
+                    marginTop: 8
+                  },
+                  children: "10:15 PM \u2014 Ford's Theatre, Washington"
+                }
+              )
+            ]
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              bottom: "22%",
+              left: "50%",
+              transform: "translateX(-50%)",
+              width: "70%",
+              opacity: questionOpacity,
+              textAlign: "center"
+            },
+            children: [
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    fontFamily: "Merriweather, serif",
+                    fontSize: 18,
+                    color: "#e8e8e8",
+                    lineHeight: "1.6",
+                    fontStyle: "italic"
+                  },
+                  children: "Official story: Revenge for the South"
+                }
+              ),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    fontFamily: "Merriweather, serif",
+                    fontSize: 20,
+                    color: "#ffd700",
+                    marginTop: 12,
+                    fontWeight: 600
+                  },
+                  children: "But who really benefited?"
+                }
+              )
+            ]
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              bottom: "12%",
+              left: "50%",
+              transform: "translateX(-50%)",
+              width: "75%",
+              opacity: connectionOpacity,
+              textAlign: "center",
+              padding: "15px 25px",
+              background: "rgba(139, 0, 0, 0.15)",
+              border: "1px solid #8b0000",
+              borderRadius: 8
+            },
+            children: [
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    fontFamily: "Cinzel, serif",
+                    fontSize: 14,
+                    color: "#8b0000",
+                    letterSpacing: 2,
+                    marginBottom: 8
+                  },
+                  children: "THE CONNECTION"
+                }
+              ),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    fontFamily: "Merriweather, serif",
+                    fontSize: 15,
+                    color: "#e8e8e8",
+                    lineHeight: "1.5"
+                  },
+                  children: "Lincoln's Greenbacks threatened the banking establishment"
+                }
+              ),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    fontFamily: "Merriweather, serif",
+                    fontSize: 14,
+                    color: "#9ca3af",
+                    marginTop: 8,
+                    fontStyle: "italic"
+                  },
+                  children: "41 days after his second inauguration \u2014 he was dead"
+                }
+              )
+            ]
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsx)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              bottom: "3%",
+              left: "50%",
+              transform: "translateX(-50%)",
+              opacity: aftermathOpacity,
+              textAlign: "center"
+            },
+            children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
+              "div",
+              {
+                style: {
+                  fontFamily: "Merriweather, serif",
+                  fontSize: 14,
+                  color: "#6b7280"
+                },
+                children: "Greenbacks were soon withdrawn \u2022 National Bank Act became permanent"
+              }
+            )
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsx)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              top: "15%",
+              right: "10%",
+              opacity: aftermathOpacity
+            },
+            children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
+              "div",
+              {
+                style: {
+                  fontFamily: "Cinzel, serif",
+                  fontSize: 72,
+                  color: "rgba(139, 0, 0, 0.15)"
+                },
+                children: "\u2020"
+              }
+            )
+          }
+        )
+      ]
+    }
+  );
+};
+
+;// ./src/components/scenes/episode03/documentary/AssassinationDocumentaryScene.tsx
+
+
+
+const AssassinationDocumentaryScene = () => {
+  return /* @__PURE__ */ (0,jsx_runtime.jsx)(AssassinationScene, {});
+};
+
+;// ./src/components/scenes/episode03/NationalBankActScene.tsx
+
+
+
+
+const NationalBankActScene = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const titleOpacity = (0,esm.interpolate)(frame, [0, 30], [0, 1], { extrapolateRight: "clamp" });
+  const documentShow = (0,esm.spring)({ frame: frame - 60, fps: 30, config: { damping: 15, stiffness: 60 } });
+  const quoteOpacity = (0,esm.interpolate)(frame, [180, 270], [0, 1], { extrapolateRight: "clamp" });
+  const explanationOpacity = (0,esm.interpolate)(frame, [330, 420], [0, 1], { extrapolateRight: "clamp" });
+  const resultOpacity = (0,esm.interpolate)(frame, [510, 600], [0, 1], { extrapolateRight: "clamp" });
+  const chainOpacity = (0,esm.interpolate)(frame, [390, 480], [0, 1], { extrapolateRight: "clamp" });
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+    esm.AbsoluteFill,
+    {
+      style: {
+        background: "radial-gradient(circle at center, #1a0a0a 0%, #0d1117 100%)"
+      },
+      children: [
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              top: "6%",
+              left: "50%",
+              transform: "translateX(-50%)",
+              opacity: titleOpacity
+            },
+            children: [
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    fontFamily: "Cinzel, serif",
+                    fontSize: 32,
+                    color: "#8b0000",
+                    fontWeight: 700,
+                    textAlign: "center",
+                    letterSpacing: 2
+                  },
+                  children: "The Fatal Compromise"
+                }
+              ),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    fontFamily: "Merriweather, serif",
+                    fontSize: 16,
+                    color: "#9ca3af",
+                    textAlign: "center",
+                    marginTop: 6
+                  },
+                  children: "National Bank Act of 1863"
+                }
+              )
+            ]
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsx)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              left: "10%",
+              top: "50%",
+              transform: `translateY(-50%) scale(${documentShow})`
+            },
+            children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
+              LegalDocument,
+              {
+                title: "NATIONAL BANK ACT",
+                year: 1863,
+                content: [
+                  "Private banks authorized to issue",
+                  "national currency",
+                  "",
+                  "Currency backed by",
+                  "government debt",
+                  "",
+                  "Money permanently tied",
+                  "to debt obligations"
+                ],
+                scale: 0.65,
+                seal: true
+              }
+            )
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              top: "25%",
+              right: "10%",
+              opacity: quoteOpacity,
+              width: "35%"
+            },
+            children: [
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    fontFamily: "Cinzel, serif",
+                    fontSize: 12,
+                    color: "#9ca3af",
+                    marginBottom: 10,
+                    letterSpacing: 1
+                  },
+                  children: "SALMON CHASE \u2014 Lincoln's Treasury Secretary"
+                }
+              ),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    fontFamily: "Merriweather, serif",
+                    fontSize: 14,
+                    color: "#e8e8e8",
+                    fontStyle: "italic",
+                    lineHeight: "1.5"
+                  },
+                  children: '"This is my greatest financial error. The monopoly it creates will affect every aspect of this nation."'
+                }
+              )
+            ]
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              right: "25%",
+              bottom: "30%",
+              opacity: explanationOpacity
+            },
+            children: [
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    position: "absolute",
+                    width: 90,
+                    height: 120,
+                    background: "linear-gradient(180deg, rgba(139, 0, 0, 0.7) 0%, rgba(30, 58, 90, 0.5) 100%)",
+                    borderRadius: "50% 50% 20px 20px",
+                    boxShadow: "0 10px 25px rgba(0, 0, 0, 0.5)"
+                  }
+                }
+              ),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    position: "absolute",
+                    bottom: -20,
+                    left: "50%",
+                    transform: "translateX(-50%)",
+                    fontFamily: "Merriweather, serif",
+                    fontSize: 11,
+                    color: "#8b0000",
+                    whiteSpace: "nowrap"
+                  },
+                  children: "Private Bankers"
+                }
+              )
+            ]
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsx)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              bottom: "35%",
+              left: "50%",
+              transform: "translateX(-50%)",
+              opacity: chainOpacity,
+              textAlign: "center"
+            },
+            children: /* @__PURE__ */ (0,jsx_runtime.jsxs)("svg", { width: 300, height: 100, viewBox: "0 0 300 100", children: [
+              /* @__PURE__ */ (0,jsx_runtime.jsxs)("g", { transform: "translate(30, 50)", children: [
+                /* @__PURE__ */ (0,jsx_runtime.jsx)("circle", { r: 30, fill: "#228B22", opacity: 0.8 }),
+                /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                  "text",
+                  {
+                    x: 0,
+                    y: 5,
+                    fontSize: 14,
+                    fill: "#fff",
+                    fontWeight: 700,
+                    textAnchor: "middle",
+                    fontFamily: "Cinzel, serif",
+                    children: "MONEY"
+                  }
+                )
+              ] }),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)("g", { opacity: 0.7, children: [0, 1, 2, 3, 4].map((i) => /* @__PURE__ */ (0,jsx_runtime.jsx)("g", { transform: `translate(${80 + i * 35}, 50)`, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "ellipse",
+                {
+                  rx: 15,
+                  ry: 10,
+                  fill: "none",
+                  stroke: "#8b4513",
+                  strokeWidth: 3
+                }
+              ) }, i)) }),
+              /* @__PURE__ */ (0,jsx_runtime.jsxs)("g", { transform: "translate(270, 50)", children: [
+                /* @__PURE__ */ (0,jsx_runtime.jsx)("circle", { r: 30, fill: "#8b0000", opacity: 0.8 }),
+                /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                  "text",
+                  {
+                    x: 0,
+                    y: 5,
+                    fontSize: 14,
+                    fill: "#fff",
+                    fontWeight: 700,
+                    textAnchor: "middle",
+                    fontFamily: "Cinzel, serif",
+                    children: "DEBT"
+                  }
+                )
+              ] }),
+              /* @__PURE__ */ (0,jsx_runtime.jsxs)("g", { transform: "translate(150, 50)", children: [
+                /* @__PURE__ */ (0,jsx_runtime.jsx)("rect", { x: -10, y: -15, width: 20, height: 30, fill: "#ffd700", opacity: 0.8 }),
+                /* @__PURE__ */ (0,jsx_runtime.jsx)("circle", { r: 8, fill: "none", stroke: "#ffd700", strokeWidth: 2 })
+              ] })
+            ] })
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              bottom: "18%",
+              left: "50%",
+              transform: "translateX(-50%)",
+              width: "70%",
+              opacity: explanationOpacity,
+              textAlign: "center"
+            },
+            children: [
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    fontFamily: "Cinzel, serif",
+                    fontSize: 14,
+                    color: "#8b0000",
+                    letterSpacing: 2,
+                    marginBottom: 10
+                  },
+                  children: "THE TRAP"
+                }
+              ),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    fontFamily: "Merriweather, serif",
+                    fontSize: 15,
+                    color: "#e8e8e8",
+                    lineHeight: "1.6"
+                  },
+                  children: "Paying off debt would destroy the money supply"
+                }
+              ),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    fontFamily: "Merriweather, serif",
+                    fontSize: 14,
+                    color: "#9ca3af",
+                    marginTop: 8
+                  },
+                  children: "The government can NEVER be debt-free"
+                }
+              )
+            ]
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              bottom: "5%",
+              left: "50%",
+              transform: "translateX(-50%)",
+              width: "75%",
+              opacity: resultOpacity,
+              textAlign: "center",
+              padding: "12px 25px",
+              background: "rgba(139, 0, 0, 0.2)",
+              border: "1px solid #8b0000",
+              borderRadius: 6
+            },
+            children: [
+              /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+                "div",
+                {
+                  style: {
+                    fontFamily: "Merriweather, serif",
+                    fontSize: 13,
+                    color: "#e8e8e8"
+                  },
+                  children: [
+                    /* @__PURE__ */ (0,jsx_runtime.jsx)("span", { style: { color: "#8b0000", fontWeight: 600 }, children: "Result:" }),
+                    " By 2006, US national debt exceeded $8 trillion \u2014"
+                  ]
+                }
+              ),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)(
+                "div",
+                {
+                  style: {
+                    fontFamily: "Merriweather, serif",
+                    fontSize: 12,
+                    color: "#6b7280",
+                    marginTop: 4,
+                    fontStyle: "italic"
+                  },
+                  children: "All because of this compromise made in 1863"
+                }
+              )
+            ]
+          }
+        )
+      ]
+    }
+  );
+};
+
+;// ./src/components/scenes/episode03/documentary/NationalBankActDocumentaryScene.tsx
+
+
+
+const NationalBankActDocumentaryScene = () => {
+  return /* @__PURE__ */ (0,jsx_runtime.jsx)(NationalBankActScene, {});
+};
 
 ;// ./src/subtitles/episode03.ts
 
@@ -19440,7 +22895,7 @@ const Episode03Documentary = () => {
           type: "object",
           intensity: "subtle",
           focusPosition: { x: 50, y: 40 },
-          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(ColonialAmericaDocumentaryScene, {})
+          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(FirstBankDocumentaryScene, {})
         }
       ) }),
       /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: episode03_scene03Subs })
@@ -19452,7 +22907,7 @@ const Episode03Documentary = () => {
           revealMethod: "shatter",
           revealDuration: 45,
           accentColor: "#FFD700",
-          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(LincolnDocumentaryScene, {})
+          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(JacksonBankWarDocumentaryScene, {})
         }
       ) }),
       /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: episode03_scene04Subs })
@@ -19463,12 +22918,12 @@ const Episode03Documentary = () => {
     ] }),
     /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: episode03_SCENE_OFFSETS[5], durationInFrames: episode03_SCENE_FRAMES[5], children: [
       /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: Episode03Documentary_SCENE_THEMES[5], type: "enter", duration: 35, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
-        CloseUpShot,
+        DramaticRevealShot,
         {
-          type: "object",
-          intensity: "medium",
-          focusPosition: { x: 50, y: 45 },
-          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(CivilWarDocumentaryScene, {})
+          revealMethod: "lightBurst",
+          revealDuration: 50,
+          accentColor: "#228B22",
+          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(GreenbackDocumentaryScene, {})
         }
       ) }),
       /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: episode03_scene06Subs })
@@ -19480,7 +22935,7 @@ const Episode03Documentary = () => {
           revealMethod: "dissolve",
           revealDuration: 40,
           accentColor: "#4169E1",
-          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(CivilWarDocumentaryScene, {})
+          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(RussianAllianceDocumentaryScene, {})
         }
       ) }),
       /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: episode03_scene07Subs })
@@ -19491,8 +22946,8 @@ const Episode03Documentary = () => {
         {
           revealMethod: "dissolve",
           revealDuration: 50,
-          accentColor: "#2F2F2F",
-          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(LincolnDocumentaryScene, {})
+          accentColor: "#8B0000",
+          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(AssassinationDocumentaryScene, {})
         }
       ) }),
       /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: episode03_scene08Subs })
@@ -19503,9 +22958,9 @@ const Episode03Documentary = () => {
         {
           revealMethod: "lightBurst",
           revealDuration: 50,
-          accentColor: "#FFFFFF",
+          accentColor: "#C0C0C0",
           lightRays: true,
-          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(ColonialAmericaDocumentaryScene, {})
+          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(NationalBankActDocumentaryScene, {})
         }
       ) }),
       /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: episode03_scene09Subs })
@@ -23485,307 +26940,115 @@ const SummaryDocumentaryScene = () => {
 ;// ./src/subtitles/episode04.ts
 
 const episode04_SCENE_FRAMES = [
-  960,
-  // Scene 0: 32s - 开场：威尔逊的忏悔
+  971,
+  // Scene 0: 32.4s
   2220,
-  // Scene 1: 74s - 美联储真相揭示
-  1980,
-  // Scene 2: 66s - 华尔街七大巨头
-  1650,
-  // Scene 3: 55s - 摩根家族崛起
-  1380,
-  // Scene 4: 46s - 洛克菲勒帝国
-  1680,
-  // Scene 5: 56s - 1907年银行危机
-  1950,
-  // Scene 6: 65s - 从金本位到法定货币
-  1380,
-  // Scene 7: 46s - 1912年大选
-  1590,
-  // Scene 8: 53s - B计划
-  1410,
-  // Scene 9: 47s - 法案通过
-  1230,
-  // Scene 10: 41s - 谁拥有美联储
-  1050,
-  // Scene 11: 35s - 隐形控制
-  870,
-  // Scene 12: 29s - 威尔逊的觉醒
-  510
-  // Scene 13: 17s - 总结
+  // Scene 1: 74.0s
+  1992,
+  // Scene 2: 66.4s
+  1643,
+  // Scene 3: 54.8s
+  1390,
+  // Scene 4: 46.3s
+  1677,
+  // Scene 5: 55.9s
+  1458,
+  // Scene 6: 48.6s
+  1884,
+  // Scene 7: 62.8s
+  1583,
+  // Scene 8: 52.8s
+  1583,
+  // Scene 9: 52.8s
+  1379,
+  // Scene 10: 46.0s
+  1104,
+  // Scene 11: 36.8s
+  985,
+  // Scene 12: 32.8s
+  719
+  // Scene 13: 24.0s
 ];
 const episode04_SCENE_OFFSETS = episode04_SCENE_FRAMES.reduce((acc, frames, i) => {
   acc.push(i === 0 ? 0 : acc[i - 1] + episode04_SCENE_FRAMES[i - 1]);
   return acc;
 }, []);
 const episode04_scene01Subs = [
-  {
-    startFrame: 0,
-    endFrame: 360,
-    text: "\u4E00\u4E2A\u4F1F\u5927\u7684\u5DE5\u4E1A\u56FD\u5BB6\u88AB\u4FE1\u7528\u7CFB\u7EDF\u7262\u7262\u5730\u63A7\u5236\u7740\uFF0C\u8FD9\u4E2A\u4FE1\u7528\u7CFB\u7EDF\u9AD8\u5EA6\u5730\u96C6\u4E2D\u3002\u8FD9\u4E2A\u56FD\u5BB6\u7684\u53D1\u5C55\u548C\u6211\u4EEC\u6240\u6709\u7684\u7ECF\u6D4E\u6D3B\u52A8\u5B8C\u5168\u638C\u63E1\u5728\u5C11\u6570\u4EBA\u624B\u4E2D\u3002"
-  },
-  {
-    startFrame: 360,
-    endFrame: 720,
-    text: "\u6211\u4EEC\u5DF2\u7ECF\u9677\u4E8E\u6700\u7CDF\u7CD5\u7684\u7EDF\u6CBB\u4E4B\u4E0B\uFF0C\u4E00\u79CD\u4E16\u754C\u4E0A\u6700\u5B8C\u5168\u3001\u6700\u5F7B\u5E95\u7684\u63A7\u5236\u3002\u653F\u5E9C\u4E0D\u518D\u6709\u81EA\u7531\u7684\u610F\u89C1\uFF0C\u4E0D\u518D\u62E5\u6709\u53F8\u6CD5\u5B9A\u7F6A\u6743\uFF0C\u800C\u662F\u5728\u6781\u5C11\u6570\u62E5\u6709\u652F\u914D\u6743\u7684\u4EBA\u7684\u610F\u89C1\u548C\u5F3A\u8FEB\u4E4B\u4E0B\u8FD0\u4F5C\u7684\u653F\u5E9C\u3002"
-  },
-  { startFrame: 720, endFrame: 960, text: "\u2014\u2014\u4F0D\u5FB7\u7F57\xB7\u5A01\u5C14\u900A\uFF0C\u7F8E\u56FD\u7B2C28\u4EFB\u603B\u7EDF" }
+  { startFrame: 0, endFrame: 377, text: "\u4E00\u4E2A\u4F1F\u5927\u7684\u5DE5\u4E1A\u56FD\u5BB6\u88AB\u4FE1\u7528\u7CFB\u7EDF\u7262\u7262\u5730\u63A7\u5236\u7740\uFF0C\u8FD9\u4E2A\u4FE1\u7528\u7CFB\u7EDF\u9AD8\u5EA6\u5730\u96C6\u4E2D\u3002\u8FD9\u4E2A\u56FD\u5BB6\u7684\u53D1\u5C55\u548C\u6211\u4EEC\u6240\u6709\u7684\u7ECF\u6D4E\u6D3B\u52A8\u5B8C\u5168\u638C\u63E1\u5728\u5C11\u6570\u4EBA\u624B\u4E2D\u3002" },
+  { startFrame: 377, endFrame: 854, text: "\u6211\u4EEC\u5DF2\u7ECF\u9677\u4E8E\u6700\u7CDF\u7CD5\u7684\u7EDF\u6CBB\u4E4B\u4E0B\uFF0C\u4E00\u79CD\u4E16\u754C\u4E0A\u6700\u5B8C\u5168\u3001\u6700\u5F7B\u5E95\u7684\u63A7\u5236\u3002\u653F\u5E9C\u4E0D\u518D\u6709\u81EA\u7531\u7684\u610F\u89C1\uFF0C\u4E0D\u518D\u62E5\u6709\u53F8\u6CD5\u5B9A\u7F6A\u6743\uFF0C\u800C\u662F\u5728\u6781\u5C11\u6570\u62E5\u6709\u652F\u914D\u6743\u7684\u4EBA\u7684\u610F\u89C1\u548C\u5F3A\u8FEB\u4E4B\u4E0B\u8FD0\u4F5C\u7684\u653F\u5E9C\u3002" },
+  { startFrame: 854, endFrame: 971, text: "\u2014\u2014\u4F0D\u5FB7\u7F57\xB7\u5A01\u5C14\u900A\uFF0C\u7F8E\u56FD\u7B2C28\u4EFB\u603B\u7EDF" }
 ];
 const episode04_scene02Subs = [
-  {
-    startFrame: 0,
-    endFrame: 300,
-    text: "\u4E0D\u7B97\u5938\u5F20\u5730\u8BF4\uFF0C\u76F4\u5230\u4ECA\u5929\uFF0C\u4E2D\u56FD\u53EF\u80FD\u4E5F\u6CA1\u6709\u51E0\u4E2A\u7ECF\u6D4E\u5B66\u5BB6\u77E5\u9053\u7F8E\u8054\u50A8\u5176\u5B9E\u662F\u79C1\u6709\u7684\u4E2D\u592E\u94F6\u884C\u3002\u6240\u8C13'\u8054\u90A6\u50A8\u5907\u94F6\u884C'\uFF0C\u5176\u5B9E\u65E2\u4E0D\u662F'\u8054\u90A6'\uFF0C\u66F4\u6CA1\u6709'\u50A8\u5907'\uFF0C\u4E5F\u7B97\u4E0D\u4E0A'\u94F6\u884C'\u3002"
-  },
-  {
-    startFrame: 300,
-    endFrame: 660,
-    text: "\u7F8E\u56FD\u653F\u5E9C\u6839\u672C\u6CA1\u6709\u8D27\u5E01\u53D1\u884C\u6743\uFF01\u7F8E\u56FD\u653F\u5E9C\u8981\u60F3\u5F97\u5230\u7F8E\u5143\uFF0C\u5C31\u5FC5\u987B\u5C06\u7F8E\u56FD\u4EBA\u6C11\u7684\u672A\u6765\u7A0E\u6536\u62B5\u62BC\u7ED9\u79C1\u6709\u7684\u7F8E\u8054\u50A8\uFF0C\u7531\u7F8E\u8054\u50A8\u6765\u53D1\u884C'\u7F8E\u8054\u50A8\u5238'\uFF0C\u8FD9\u5C31\u662F'\u7F8E\u5143'\u3002"
-  },
-  {
-    startFrame: 660,
-    endFrame: 1020,
-    text: "1910\u5E7411\u670822\u65E5\u591C\uFF0C\u7EBD\u7EA6\u57CE\u5916\u4E00\u8282\u5B8C\u5168\u5BC6\u5C01\u7684\u706B\u8F66\u8F66\u53A2\u91CC\uFF0C\u6240\u6709\u7684\u8F66\u7A97\u5168\u90E8\u88AB\u7A97\u5E18\u4E25\u5BC6\u5730\u906E\u6321\u4F4F\uFF0C\u5217\u8F66\u7F13\u7F13\u5411\u5357\u9A76\u53BB\u3002\u8F66\u53A2\u91CC\u5750\u7740\u7684\u5168\u662F\u7F8E\u56FD\u6700\u91CD\u8981\u7684\u94F6\u884C\u5BB6\u3002"
-  },
-  {
-    startFrame: 1020,
-    endFrame: 1500,
-    text: "\u4F50\u6CBB\u4E9A\u5DDE\u7684\u54F2\u57FA\u5C14\u5C9B\u662F\u4E00\u7FA4\u7F8E\u56FD\u8D85\u7EA7\u5BCC\u8C6A\u62E5\u6709\u7684\u51AC\u5B63\u5EA6\u5047\u80DC\u5730\u3002\u4EE5J. P. \u6469\u6839\u4E3A\u9996\u7684\u5927\u8155\u4EEC\u6210\u7ACB\u4E86\u4E00\u4E2A\u6253\u730E\u4FF1\u4E50\u90E8\uFF0C\u5730\u7403\u4E0A1/6\u7684\u8D22\u5BCC\u805A\u96C6\u5728\u8FD9\u4E2A\u4FF1\u4E50\u90E8\u4F1A\u5458\u7684\u624B\u4E2D\u3002"
-  },
-  {
-    startFrame: 1500,
-    endFrame: 2220,
-    text: "\u8FD9\u4E9B\u91CD\u8981\u4EBA\u7269\u6765\u5230\u8FD9\u4E2A\u504F\u50FB\u7684\u5C0F\u5C9B\uFF0C\u4ED6\u4EEC\u7684\u4E3B\u8981\u4EFB\u52A1\u662F\u8D77\u8349\u4E00\u4EFD\u91CD\u8981\u7684\u6587\u4EF6\uFF1A\u300A\u8054\u90A6\u50A8\u5907\u6CD5\u6848\u300B\u3002\u4FDD\u7F57\xB7\u6C83\u4F2F\u683C\u662F\u94F6\u884C\u8FD0\u4F5C\u65B9\u9762\u7684\u9AD8\u624B\uFF0C\u81EA\u7136\u6210\u4E3A\u6587\u4EF6\u7684\u4E3B\u8981\u8D77\u8349\u8005\u3002"
-  }
+  { startFrame: 0, endFrame: 436, text: "\u4E0D\u7B97\u5938\u5F20\u5730\u8BF4\uFF0C\u76F4\u5230\u4ECA\u5929\uFF0C\u4E2D\u56FD\u53EF\u80FD\u4E5F\u6CA1\u6709\u51E0\u4E2A\u7ECF\u6D4E\u5B66\u5BB6\u77E5\u9053\u7F8E\u8054\u50A8\u5176\u5B9E\u662F\u79C1\u6709\u7684\u4E2D\u592E\u94F6\u884C\u3002\u6240\u8C13'\u8054\u90A6\u50A8\u5907\u94F6\u884C'\uFF0C\u5176\u5B9E\u65E2\u4E0D\u662F'\u8054\u90A6'\uFF0C\u66F4\u6CA1\u6709'\u50A8\u5907'\uFF0C\u4E5F\u7B97\u4E0D\u4E0A'\u94F6\u884C'\u3002" },
+  { startFrame: 436, endFrame: 847, text: "\u7F8E\u56FD\u653F\u5E9C\u6839\u672C\u6CA1\u6709\u8D27\u5E01\u53D1\u884C\u6743\uFF01\u7F8E\u56FD\u653F\u5E9C\u8981\u60F3\u5F97\u5230\u7F8E\u5143\uFF0C\u5C31\u5FC5\u987B\u5C06\u7F8E\u56FD\u4EBA\u6C11\u7684\u672A\u6765\u7A0E\u6536\u62B5\u62BC\u7ED9\u79C1\u6709\u7684\u7F8E\u8054\u50A8\uFF0C\u7531\u7F8E\u8054\u50A8\u6765\u53D1\u884C'\u7F8E\u8054\u50A8\u5238'\uFF0C\u8FD9\u5C31\u662F'\u7F8E\u5143'\u3002" },
+  { startFrame: 847, endFrame: 1316, text: "1910\u5E7411\u670822\u65E5\u591C\uFF0C\u7EBD\u7EA6\u57CE\u5916\u4E00\u8282\u5B8C\u5168\u5BC6\u5C01\u7684\u706B\u8F66\u8F66\u53A2\u91CC\uFF0C\u6240\u6709\u7684\u8F66\u7A97\u5168\u90E8\u88AB\u7A97\u5E18\u4E25\u5BC6\u5730\u906E\u6321\u4F4F\uFF0C\u5217\u8F66\u7F13\u7F13\u5411\u5357\u9A76\u53BB\u3002\u8F66\u53A2\u91CC\u5750\u7740\u7684\u5168\u662F\u7F8E\u56FD\u6700\u91CD\u8981\u7684\u94F6\u884C\u5BB6\u3002" },
+  { startFrame: 1316, endFrame: 1783, text: "\u4F50\u6CBB\u4E9A\u5DDE\u7684\u54F2\u57FA\u5C14\u5C9B\u662F\u4E00\u7FA4\u7F8E\u56FD\u8D85\u7EA7\u5BCC\u8C6A\u62E5\u6709\u7684\u51AC\u5B63\u5EA6\u5047\u80DC\u5730\u3002\u4EE5J. P. \u6469\u6839\u4E3A\u9996\u7684\u5927\u8155\u4EEC\u6210\u7ACB\u4E86\u4E00\u4E2A\u6253\u730E\u4FF1\u4E50\u90E8\uFF0C\u5730\u7403\u4E0A1/6\u7684\u8D22\u5BCC\u805A\u96C6\u5728\u8FD9\u4E2A\u4FF1\u4E50\u90E8\u4F1A\u5458\u7684\u624B\u4E2D\u3002" },
+  { startFrame: 1783, endFrame: 2220, text: "\u8FD9\u4E9B\u91CD\u8981\u4EBA\u7269\u6765\u5230\u8FD9\u4E2A\u504F\u50FB\u7684\u5C0F\u5C9B\uFF0C\u4ED6\u4EEC\u7684\u4E3B\u8981\u4EFB\u52A1\u662F\u8D77\u8349\u4E00\u4EFD\u91CD\u8981\u7684\u6587\u4EF6\uFF1A\u300A\u8054\u90A6\u50A8\u5907\u6CD5\u6848\u300B\u3002\u4FDD\u7F57\xB7\u6C83\u4F2F\u683C\u662F\u94F6\u884C\u8FD0\u4F5C\u65B9\u9762\u7684\u9AD8\u624B\uFF0C\u81EA\u7136\u6210\u4E3A\u6587\u4EF6\u7684\u4E3B\u8981\u8D77\u8349\u8005\u3002" }
 ];
 const episode04_scene03Subs = [
-  {
-    startFrame: 0,
-    endFrame: 360,
-    text: "\u534E\u5C14\u8857\u76847\u4E2A\u4EBA\u73B0\u5728\u63A7\u5236\u4E86\u7F8E\u56FD\u5927\u90E8\u5206\u57FA\u7840\u5DE5\u4E1A\u548C\u8D44\u6E90\u3002\u5176\u4E2DJ. P. \u6469\u6839\u3001\u8A79\u59C6\u65AF\xB7\u5E0C\u5C14\u3001\u4E54\u6CBB\xB7\u8D1D\u514B\u5C5E\u4E8E\u6469\u6839\u96C6\u56E2\uFF1B\u7EA6\u7FF0\xB7\u6D1B\u514B\u83F2\u52D2\u3001\u5A01\u5EC9\xB7\u6D1B\u514B\u83F2\u52D2\u5C5E\u4E8E\u6807\u51C6\u77F3\u6CB9\u57CE\u5E02\u94F6\u884C\u96C6\u56E2\u3002"
-  },
-  {
-    startFrame: 360,
-    endFrame: 720,
-    text: "\u6469\u6839\u94F6\u884C\u7684\u524D\u8EAB\u662F\u82F1\u56FD\u4E54\u6CBB\xB7\u76AE\u535A\u8FEA\u516C\u53F8\u3002\u4E54\u6CBB\xB7\u76AE\u535A\u8FEA\u88AB\u5185\u68EE\xB7\u7F57\u65AF\u67F4\u5C14\u5FB7\u9080\u8BF7\u505A\u79D8\u5BC6\u516C\u5173\u4EE3\u7406\u4EBA\u3002\u5728\u7F57\u65AF\u67F4\u5C14\u5FB7\u5BB6\u65CF\u7B56\u52A8\u76841857\u5E74\u7ECF\u6D4E\u5371\u673A\u4E2D\uFF0C\u4E54\u6CBB\xB7\u76AE\u535A\u8FEA\u4E00\u4E3E\u6210\u4E3A\u8D85\u7EA7\u5BCC\u8C6A\u3002"
-  },
-  {
-    startFrame: 720,
-    endFrame: 1260,
-    text: "\u8001\u7EA6\u7FF0\xB7\u6D1B\u514B\u83F2\u52D2\u5728\u7F8E\u56FD\u5386\u53F2\u4E0A\u662F\u4E00\u4E2A\u9887\u6709\u4E89\u8BAE\u7684\u4EBA\u7269\u3002\u81EA\u4ECE\u5F97\u5230\u514B\u91CC\u592B\u5170\u56FD\u5BB6\u57CE\u5E02\u94F6\u884C\u7684\u4E00\u6279\u79CD\u5B50\u8D37\u6B3E\u540E\uFF0C\u4ED6\u6BEB\u4E0D\u7559\u60C5\u5730\u6D88\u706D\u7ADE\u4E89\u5BF9\u624B\uFF0C\u6700\u7EC8\u5B8C\u5168\u5784\u65AD\u4E86\u7F8E\u56FD\u77F3\u6CB9\u884C\u4E1A\u3002"
-  },
-  {
-    startFrame: 1260,
-    endFrame: 1980,
-    text: "\u7F57\u65AF\u67F4\u5C14\u5FB7\u5BB6\u65CF\u6D3E\u51FA\u4ED6\u4EEC\u5728\u7F8E\u56FD\u6700\u91CD\u8981\u7684\u91D1\u878D\u6218\u7565\u5BB6\u96C5\u5404\u5E03\xB7\u5E0C\u592B\u3002\u5E0C\u592B\u5E26\u6765\u4E86\u6D1B\u514B\u83F2\u52D2\u60F3\u90FD\u4E0D\u6562\u60F3\u7684\u7A7A\u524D\u652F\u6301\uFF0C\u6D1B\u514B\u83F2\u52D2\u5F88\u5FEB\u5C31\u6210\u4E86\u540D\u526F\u5176\u5B9E\u7684'\u77F3\u6CB9\u5927\u738B'\u3002"
-  }
+  { startFrame: 0, endFrame: 548, text: "\u534E\u5C14\u8857\u76847\u4E2A\u4EBA\u73B0\u5728\u63A7\u5236\u4E86\u7F8E\u56FD\u5927\u90E8\u5206\u57FA\u7840\u5DE5\u4E1A\u548C\u8D44\u6E90\u3002\u5176\u4E2DJ. P. \u6469\u6839\u3001\u8A79\u59C6\u65AF\xB7\u5E0C\u5C14\u3001\u4E54\u6CBB\xB7\u8D1D\u514B\u5C5E\u4E8E\u6469\u6839\u96C6\u56E2\uFF1B\u7EA6\u7FF0\xB7\u6D1B\u514B\u83F2\u52D2\u3001\u5A01\u5EC9\xB7\u6D1B\u514B\u83F2\u52D2\u5C5E\u4E8E\u6807\u51C6\u77F3\u6CB9\u57CE\u5E02\u94F6\u884C\u96C6\u56E2\u3002" },
+  { startFrame: 548, endFrame: 1097, text: "\u6469\u6839\u94F6\u884C\u7684\u524D\u8EAB\u662F\u82F1\u56FD\u4E54\u6CBB\xB7\u76AE\u535A\u8FEA\u516C\u53F8\u3002\u4E54\u6CBB\xB7\u76AE\u535A\u8FEA\u88AB\u5185\u68EE\xB7\u7F57\u65AF\u67F4\u5C14\u5FB7\u9080\u8BF7\u505A\u79D8\u5BC6\u516C\u5173\u4EE3\u7406\u4EBA\u3002\u5728\u7F57\u65AF\u67F4\u5C14\u5FB7\u5BB6\u65CF\u7B56\u52A8\u76841857\u5E74\u7ECF\u6D4E\u5371\u673A\u4E2D\uFF0C\u4E54\u6CBB\xB7\u76AE\u535A\u8FEA\u4E00\u4E3E\u6210\u4E3A\u8D85\u7EA7\u5BCC\u8C6A\u3002" },
+  { startFrame: 1097, endFrame: 1561, text: "\u8001\u7EA6\u7FF0\xB7\u6D1B\u514B\u83F2\u52D2\u5728\u7F8E\u56FD\u5386\u53F2\u4E0A\u662F\u4E00\u4E2A\u9887\u6709\u4E89\u8BAE\u7684\u4EBA\u7269\u3002\u81EA\u4ECE\u5F97\u5230\u514B\u91CC\u592B\u5170\u56FD\u5BB6\u57CE\u5E02\u94F6\u884C\u7684\u4E00\u6279\u79CD\u5B50\u8D37\u6B3E\u540E\uFF0C\u4ED6\u6BEB\u4E0D\u7559\u60C5\u5730\u6D88\u706D\u7ADE\u4E89\u5BF9\u624B\uFF0C\u6700\u7EC8\u5B8C\u5168\u5784\u65AD\u4E86\u7F8E\u56FD\u77F3\u6CB9\u884C\u4E1A\u3002" },
+  { startFrame: 1561, endFrame: 1992, text: "\u7F57\u65AF\u67F4\u5C14\u5FB7\u5BB6\u65CF\u6D3E\u51FA\u4ED6\u4EEC\u5728\u7F8E\u56FD\u6700\u91CD\u8981\u7684\u91D1\u878D\u6218\u7565\u5BB6\u96C5\u5404\u5E03\xB7\u5E0C\u592B\u3002\u5E0C\u592B\u5E26\u6765\u4E86\u6D1B\u514B\u83F2\u52D2\u60F3\u90FD\u4E0D\u6562\u60F3\u7684\u7A7A\u524D\u652F\u6301\uFF0C\u6D1B\u514B\u83F2\u52D2\u5F88\u5FEB\u5C31\u6210\u4E86\u540D\u526F\u5176\u5B9E\u7684'\u77F3\u6CB9\u5927\u738B'\u3002" }
 ];
 const episode04_scene04Subs = [
-  {
-    startFrame: 0,
-    endFrame: 390,
-    text: "\u6469\u6839\u94F6\u884C\u7684\u524D\u8EAB\u662F\u82F1\u56FD\u4E54\u6CBB\xB7\u76AE\u535A\u8FEA\u516C\u53F8\u3002\u4E54\u6CBB\xB7\u76AE\u535A\u8FEA\u539F\u662F\u7F8E\u56FD\u5DF4\u5C14\u7684\u6469\u7684\u4E00\u4E2A\u5E72\u8D27\u5546\uFF0C\u5728\u53D1\u4E86\u4E00\u4E9B\u5C0F\u8D22\u4E4B\u540E\uFF0C\u4E8E1835\u5E74\u6765\u5230\u82F1\u56FD\u4F26\u6566\u95EF\u4E16\u754C\u3002"
-  },
-  {
-    startFrame: 390,
-    endFrame: 780,
-    text: "\u4E54\u6CBB\xB7\u76AE\u535A\u8FEA\u4E00\u751F\u6CA1\u6709\u5B50\u55E3\uFF0C\u5E9E\u5927\u7684\u4EA7\u4E1A\u65E0\u4EBA\u7EE7\u627F\u3002\u540E\u6765\uFF0C\u6731\u5C3C\u5384\u65AF\u7684\u513F\u5B50J. P. \u6469\u6839\u63A5\u638C\u4E86\u516C\u53F8\uFF0C\u4ED6\u5C06\u7F8E\u56FD\u7684\u5206\u652F\u6539\u540D\u4E3AJ. P. \u6469\u6839\u516C\u53F8\u3002"
-  },
-  {
-    startFrame: 780,
-    endFrame: 1140,
-    text: "1901\u5E74\uFF0CJ. P. \u6469\u6839\u4EE55\u4EBF\u7F8E\u5143\u7684\u5929\u4EF7\u6536\u8D2D\u4E86\u5361\u5185\u57FA\u7684\u94A2\u94C1\u516C\u53F8\uFF0C\u5E76\u7EC4\u5EFA\u4E86\u4E16\u754C\u4E0A\u7B2C\u4E00\u5BB6\u5E02\u503C\u8D85\u8FC710\u4EBF\u7F8E\u5143\u7684\u5DE8\u65E0\u9738\u2014\u2014\u7F8E\u56FD\u94A2\u94C1\u516C\u53F8\u3002"
-  },
-  {
-    startFrame: 1140,
-    endFrame: 1650,
-    text: "1899\u5E74\uFF0CJ. P. \u6469\u6839\u5DF2\u7ECF\u88AB\u6307\u6D3E\u4E3A\u7F57\u65AF\u67F4\u5C14\u5FB7\u5BB6\u65CF\u5728\u7F8E\u56FD\u5229\u76CA\u7684\u9996\u5E2D\u4EE3\u7406\u4EBA\u3002"
-  }
+  { startFrame: 0, endFrame: 374, text: "\u6469\u6839\u94F6\u884C\u7684\u524D\u8EAB\u662F\u82F1\u56FD\u4E54\u6CBB\xB7\u76AE\u535A\u8FEA\u516C\u53F8\u3002\u4E54\u6CBB\xB7\u76AE\u535A\u8FEA\u539F\u662F\u7F8E\u56FD\u5DF4\u5C14\u7684\u6469\u7684\u4E00\u4E2A\u5E72\u8D27\u5546\uFF0C\u5728\u53D1\u4E86\u4E00\u4E9B\u5C0F\u8D22\u4E4B\u540E\uFF0C\u4E8E1835\u5E74\u6765\u5230\u82F1\u56FD\u4F26\u6566\u95EF\u4E16\u754C\u3002" },
+  { startFrame: 374, endFrame: 743, text: "\u4E54\u6CBB\xB7\u76AE\u535A\u8FEA\u4E00\u751F\u6CA1\u6709\u5B50\u55E3\uFF0C\u5E9E\u5927\u7684\u4EA7\u4E1A\u65E0\u4EBA\u7EE7\u627F\u3002\u540E\u6765\uFF0C\u6731\u5C3C\u5384\u65AF\u7684\u513F\u5B50J. P. \u6469\u6839\u63A5\u638C\u4E86\u516C\u53F8\uFF0C\u4ED6\u5C06\u7F8E\u56FD\u7684\u5206\u652F\u6539\u540D\u4E3AJ. P. \u6469\u6839\u516C\u53F8\u3002" },
+  { startFrame: 743, endFrame: 1187, text: "1901\u5E74\uFF0CJ. P. \u6469\u6839\u4EE55\u4EBF\u7F8E\u5143\u7684\u5929\u4EF7\u6536\u8D2D\u4E86\u5361\u5185\u57FA\u7684\u94A2\u94C1\u516C\u53F8\uFF0C\u5E76\u7EC4\u5EFA\u4E86\u4E16\u754C\u4E0A\u7B2C\u4E00\u5BB6\u5E02\u503C\u8D85\u8FC710\u4EBF\u7F8E\u5143\u7684\u5DE8\u65E0\u9738\u2014\u2014\u7F8E\u56FD\u94A2\u94C1\u516C\u53F8\u3002" },
+  { startFrame: 1187, endFrame: 1643, text: "1899\u5E74\uFF0CJ. P. \u6469\u6839\u5DF2\u7ECF\u88AB\u6307\u6D3E\u4E3A\u7F57\u65AF\u67F4\u5C14\u5FB7\u5BB6\u65CF\u5728\u7F8E\u56FD\u5229\u76CA\u7684\u9996\u5E2D\u4EE3\u7406\u4EBA\u3002" }
 ];
 const episode04_scene05Subs = [
-  {
-    startFrame: 0,
-    endFrame: 360,
-    text: "\u8001\u7EA6\u7FF0\xB7\u6D1B\u514B\u83F2\u52D2\u5728\u7F8E\u56FD\u5386\u53F2\u4E0A\u662F\u4E00\u4E2A\u9887\u6709\u4E89\u8BAE\u7684\u4EBA\u7269\uFF0C\u88AB\u4EBA\u4EEC\u51A0\u4EE5'\u6700\u51B7\u9177\u65E0\u60C5\u7684\u4EBA'\u3002\u4ED6\u7684\u540D\u5B57\u81EA\u7136\u548C\u5927\u540D\u9F0E\u9F0E\u7684\u6807\u51C6\u77F3\u6CB9\u516C\u53F8\u5BC6\u4E0D\u53EF\u5206\u3002"
-  },
-  {
-    startFrame: 360,
-    endFrame: 840,
-    text: "\u81EA\u4ECE\u5F97\u5230\u514B\u91CC\u592B\u5170\u56FD\u5BB6\u57CE\u5E02\u94F6\u884C\u7684\u4E00\u6279\u79CD\u5B50\u8D37\u6B3E\u540E\uFF0C\u4ED6\u597D\u50CF\u4E00\u4E0B\u5B50\u627E\u5230\u4E86\u611F\u89C9\uFF0C\u5C24\u5176\u662F\u5728\u6076\u610F\u7ADE\u4E89\u65B9\u9762\u5C55\u73B0\u51FA\u8D85\u4E4E\u5E38\u4EBA\u7684\u60F3\u8C61\u529B\u3002\u4ED6\u6BEB\u4E0D\u7559\u60C5\u5730\u6D88\u706D\u7ADE\u4E89\u5BF9\u624B\uFF0C\u6700\u7EC8\u5B8C\u5168\u5784\u65AD\u4E86\u7F8E\u56FD\u77F3\u6CB9\u884C\u4E1A\u3002"
-  },
-  {
-    startFrame: 840,
-    endFrame: 1380,
-    text: "\u7F57\u65AF\u67F4\u5C14\u5FB7\u5BB6\u65CF\u4E00\u76F4\u715E\u8D39\u82E6\u5FC3\u60F3\u63A7\u5236\u65E5\u76CA\u5F3A\u5927\u7684\u7F8E\u56FD\u3002\u6D1B\u514B\u83F2\u52D2\u7684\u6240\u4F5C\u6240\u4E3A\uFF0C\u8BA9\u7F57\u65AF\u67F4\u5C14\u5FB7\u5BB6\u65CF\u773C\u524D\u4E00\u4EAE\u3002"
-  }
+  { startFrame: 0, endFrame: 390, text: "\u8001\u7EA6\u7FF0\xB7\u6D1B\u514B\u83F2\u52D2\u5728\u7F8E\u56FD\u5386\u53F2\u4E0A\u662F\u4E00\u4E2A\u9887\u6709\u4E89\u8BAE\u7684\u4EBA\u7269\uFF0C\u88AB\u4EBA\u4EEC\u51A0\u4EE5'\u6700\u51B7\u9177\u65E0\u60C5\u7684\u4EBA'\u3002\u4ED6\u7684\u540D\u5B57\u81EA\u7136\u548C\u5927\u540D\u9F0E\u9F0E\u7684\u6807\u51C6\u77F3\u6CB9\u516C\u53F8\u5BC6\u4E0D\u53EF\u5206\u3002" },
+  { startFrame: 390, endFrame: 974, text: "\u81EA\u4ECE\u5F97\u5230\u514B\u91CC\u592B\u5170\u56FD\u5BB6\u57CE\u5E02\u94F6\u884C\u7684\u4E00\u6279\u79CD\u5B50\u8D37\u6B3E\u540E\uFF0C\u4ED6\u597D\u50CF\u4E00\u4E0B\u5B50\u627E\u5230\u4E86\u611F\u89C9\uFF0C\u5C24\u5176\u662F\u5728\u6076\u610F\u7ADE\u4E89\u65B9\u9762\u5C55\u73B0\u51FA\u8D85\u4E4E\u5E38\u4EBA\u7684\u60F3\u8C61\u529B\u3002\u4ED6\u6BEB\u4E0D\u7559\u60C5\u5730\u6D88\u706D\u7ADE\u4E89\u5BF9\u624B\uFF0C\u6700\u7EC8\u5B8C\u5168\u5784\u65AD\u4E86\u7F8E\u56FD\u77F3\u6CB9\u884C\u4E1A\u3002" },
+  { startFrame: 974, endFrame: 1390, text: "\u7F57\u65AF\u67F4\u5C14\u5FB7\u5BB6\u65CF\u4E00\u76F4\u715E\u8D39\u82E6\u5FC3\u60F3\u63A7\u5236\u65E5\u76CA\u5F3A\u5927\u7684\u7F8E\u56FD\u3002\u6D1B\u514B\u83F2\u52D2\u7684\u6240\u4F5C\u6240\u4E3A\uFF0C\u8BA9\u7F57\u65AF\u67F4\u5C14\u5FB7\u5BB6\u65CF\u773C\u524D\u4E00\u4EAE\u3002" }
 ];
 const episode04_scene06Subs = [
-  {
-    startFrame: 0,
-    endFrame: 360,
-    text: "\u4E3A\u4E86\u626D\u8F6C\u5BF9\u7F8E\u56FD\u94F6\u884C\u5BB6\u4E0D\u5229\u7684\u6001\u52BF\uFF0C\u4E00\u573A\u5DE8\u5927\u7684\u91D1\u878D\u5371\u673A\u5F00\u59CB\u88AB\u6784\u60F3\u51FA\u6765\u30021907\u5E741\u6708\uFF0C\u4FDD\u7F57\u53D1\u8868\u4E86\u9898\u4E3A'\u6211\u4EEC\u94F6\u884C\u7CFB\u7EDF\u7684\u7F3A\u70B9\u548C\u9700\u8981'\u7684\u6587\u7AE0\u3002"
-  },
-  {
-    startFrame: 360,
-    endFrame: 720,
-    text: "\u96C5\u5404\u5E03\xB7\u5E0C\u592B\u5728\u7EBD\u7EA6\u5546\u4F1A\u5BA3\u79F0\uFF1A\u9664\u975E\u6211\u4EEC\u62E5\u6709\u4E00\u4E2A\u8DB3\u4EE5\u63A7\u5236\u4FE1\u7528\u8D44\u6E90\u7684\u4E2D\u592E\u94F6\u884C\uFF0C\u5426\u5219\u6211\u4EEC\u5C06\u7ECF\u5386\u4E00\u573A\u524D\u6240\u672A\u6709\u800C\u4E14\u5F71\u54CD\u6DF1\u8FDC\u7684\u91D1\u878D\u5371\u673A\u3002"
-  },
-  {
-    startFrame: 720,
-    endFrame: 1140,
-    text: "1907\u5E7410\u6708\uFF0C\u7EBD\u7EA6\u7A81\u7136\u5F00\u59CB\u5E7F\u6CDB\u4F20\u8A00\u7F8E\u56FD\u7B2C\u4E09\u5927\u4FE1\u6258\u516C\u53F8\u5C3C\u514B\u4F2F\u514B\u5373\u5C06\u7834\u4EA7\u3002\u60CA\u6050\u4E07\u72B6\u7684\u5B58\u6B3E\u5E02\u6C11\u5728\u5404\u4E2A\u4FE1\u6258\u516C\u53F8\u95E8\u53E3\u5F7B\u591C\u6392\u961F\u7B49\u5019\u53D6\u51FA\u4ED6\u4EEC\u7684\u5B58\u6B3E\u3002"
-  },
-  {
-    startFrame: 1140,
-    endFrame: 1680,
-    text: "\u6469\u6839\u6B64\u65F6\u4EE5\u6551\u4E16\u4E3B\u7684\u9762\u76EE\u51FA\u73B0\u3002\u4ED6\u75284500\u4E07\u7F8E\u5143\u7684\u8D85\u4F4E\u4EF7\u5403\u4E0B\u7530\u7EB3\u897F\u77FF\u4E1A\u548C\u5236\u94C1\u516C\u53F8\uFF0C\u800C\u8BE5\u516C\u53F8\u7684\u6F5C\u5728\u4EF7\u503C\u6309\u7167\u7EA6\u7FF0\xB7\u7A46\u8FEA\u7684\u8BC4\u4F30\uFF0C\u81F3\u5C11\u572810\u4EBF\u7F8E\u5143\u5DE6\u53F3\u3002"
-  }
+  { startFrame: 0, endFrame: 428, text: "\u4E3A\u4E86\u626D\u8F6C\u5BF9\u7F8E\u56FD\u94F6\u884C\u5BB6\u4E0D\u5229\u7684\u6001\u52BF\uFF0C\u4E00\u573A\u5DE8\u5927\u7684\u91D1\u878D\u5371\u673A\u5F00\u59CB\u88AB\u6784\u60F3\u51FA\u6765\u30021907\u5E741\u6708\uFF0C\u4FDD\u7F57\u53D1\u8868\u4E86\u9898\u4E3A'\u6211\u4EEC\u94F6\u884C\u7CFB\u7EDF\u7684\u7F3A\u70B9\u548C\u9700\u8981'\u7684\u6587\u7AE0\u3002" },
+  { startFrame: 428, endFrame: 834, text: "\u96C5\u5404\u5E03\xB7\u5E0C\u592B\u5728\u7EBD\u7EA6\u5546\u4F1A\u5BA3\u79F0\uFF1A\u9664\u975E\u6211\u4EEC\u62E5\u6709\u4E00\u4E2A\u8DB3\u4EE5\u63A7\u5236\u4FE1\u7528\u8D44\u6E90\u7684\u4E2D\u592E\u94F6\u884C\uFF0C\u5426\u5219\u6211\u4EEC\u5C06\u7ECF\u5386\u4E00\u573A\u524D\u6240\u672A\u6709\u800C\u4E14\u5F71\u54CD\u6DF1\u8FDC\u7684\u91D1\u878D\u5371\u673A\u3002" },
+  { startFrame: 834, endFrame: 1260, text: "1907\u5E7410\u6708\uFF0C\u7EBD\u7EA6\u7A81\u7136\u5F00\u59CB\u5E7F\u6CDB\u4F20\u8A00\u7F8E\u56FD\u7B2C\u4E09\u5927\u4FE1\u6258\u516C\u53F8\u5C3C\u514B\u4F2F\u514B\u5373\u5C06\u7834\u4EA7\u3002\u60CA\u6050\u4E07\u72B6\u7684\u5B58\u6B3E\u5E02\u6C11\u5728\u5404\u4E2A\u4FE1\u6258\u516C\u53F8\u95E8\u53E3\u5F7B\u591C\u6392\u961F\u7B49\u5019\u53D6\u51FA\u4ED6\u4EEC\u7684\u5B58\u6B3E\u3002" },
+  { startFrame: 1260, endFrame: 1677, text: "\u6469\u6839\u6B64\u65F6\u4EE5\u6551\u4E16\u4E3B\u7684\u9762\u76EE\u51FA\u73B0\u3002\u4ED6\u75284500\u4E07\u7F8E\u5143\u7684\u8D85\u4F4E\u4EF7\u5403\u4E0B\u7530\u7EB3\u897F\u77FF\u4E1A\u548C\u5236\u94C1\u516C\u53F8\uFF0C\u800C\u8BE5\u516C\u53F8\u7684\u6F5C\u5728\u4EF7\u503C\u6309\u7167\u7EA6\u7FF0\xB7\u7A46\u8FEA\u7684\u8BC4\u4F30\uFF0C\u81F3\u5C11\u572810\u4EBF\u7F8E\u5143\u5DE6\u53F3\u3002" }
 ];
 const episode04_scene07Subs = [
-  {
-    startFrame: 0,
-    endFrame: 420,
-    text: "19\u4E16\u7EAA\u672B\u4EE5\u6765\uFF0C\u56FD\u9645\u94F6\u884C\u5BB6\u5BF9\u91D1\u94B1\u7684\u8BA4\u8BC6\u518D\u4E00\u6B21\u5B9E\u73B0\u91CD\u5927\u98DE\u8DC3\u3002\u539F\u6709\u7684\u82F1\u683C\u5170\u94F6\u884C\u6A21\u5F0F\uFF0C\u5373\u4EE5\u56FD\u503A\u4F5C\u4E3A\u62B5\u62BC\u6765\u53D1\u884C\u8D27\u5E01\uFF0C\u8D22\u5BCC\u79EF\u7D2F\u5F97\u592A\u6162\u3002"
-  },
-  {
-    startFrame: 420,
-    endFrame: 960,
-    text: "\u6CD5\u5B9A\u8D27\u5E01\u5F7B\u5E95\u6446\u8131\u4E86\u9EC4\u91D1\u548C\u767D\u94F6\u5BF9\u8D37\u6B3E\u603B\u91CF\u7684\u521A\u6027\u5236\u7EA6\u3002\u5F53\u94F6\u884C\u5BB6\u9010\u6E10\u660E\u767D\u901A\u8FC7\u65E0\u9650\u5236\u5730\u589E\u52A0\u8D27\u5E01\u4F9B\u5E94\u6765\u83B7\u5F97\u7684\u6536\u76CA\u8FDC\u6BD4\u901A\u8D27\u81A8\u80C0\u5E26\u6765\u7684\u8D37\u6B3E\u5229\u606F\u635F\u5931\u8981\u5927\u5F97\u591A\u65F6\uFF0C\u4ED6\u4EEC\u968F\u5373\u6210\u4E3A\u6CD5\u5B9A\u8D27\u5E01\u6700\u70ED\u70C8\u7684\u62E5\u62A4\u8005\u3002"
-  },
-  {
-    startFrame: 960,
-    endFrame: 1950,
-    text: "\u51EF\u6069\u65AF\u5C31\u901A\u8D27\u81A8\u80C0\u7684\u8BC4\u4EF7\u53EF\u8C13\u4E00\u9488\u89C1\u8840\uFF1A\u7528\u8FD9\u4E2A\u529E\u6CD5\uFF0C\u653F\u5E9C\u53EF\u4EE5\u79D8\u5BC6\u548C\u96BE\u4EE5\u5BDF\u89C9\u5730\u6CA1\u6536\u4EBA\u6C11\u7684\u8D22\u5BCC\uFF0C100\u4E07\u4EBA\u4E2D\u4E5F\u5F88\u96BE\u6709\u4E00\u4E2A\u4EBA\u80FD\u591F\u53D1\u73B0\u8FD9\u79CD\u5077\u7A83\u884C\u4E3A\u3002"
-  }
+  { startFrame: 0, endFrame: 471, text: "19\u4E16\u7EAA\u672B\u4EE5\u6765\uFF0C\u56FD\u9645\u94F6\u884C\u5BB6\u5BF9\u91D1\u94B1\u7684\u8BA4\u8BC6\u518D\u4E00\u6B21\u5B9E\u73B0\u91CD\u5927\u98DE\u8DC3\u3002\u539F\u6709\u7684\u82F1\u683C\u5170\u94F6\u884C\u6A21\u5F0F\uFF0C\u5373\u4EE5\u56FD\u503A\u4F5C\u4E3A\u62B5\u62BC\u6765\u53D1\u884C\u8D27\u5E01\uFF0C\u8D22\u5BCC\u79EF\u7D2F\u5F97\u592A\u6162\u3002" },
+  { startFrame: 471, endFrame: 977, text: "\u6CD5\u5B9A\u8D27\u5E01\u5F7B\u5E95\u6446\u8131\u4E86\u9EC4\u91D1\u548C\u767D\u94F6\u5BF9\u8D37\u6B3E\u603B\u91CF\u7684\u521A\u6027\u5236\u7EA6\u3002\u5F53\u94F6\u884C\u5BB6\u9010\u6E10\u660E\u767D\u901A\u8FC7\u65E0\u9650\u5236\u5730\u589E\u52A0\u8D27\u5E01\u4F9B\u5E94\u6765\u83B7\u5F97\u7684\u6536\u76CA\u8FDC\u6BD4\u901A\u8D27\u81A8\u80C0\u5E26\u6765\u7684\u8D37\u6B3E\u5229\u606F\u635F\u5931\u8981\u5927\u5F97\u591A\u65F6\uFF0C\u4ED6\u4EEC\u968F\u5373\u6210\u4E3A\u6CD5\u5B9A\u8D27\u5E01\u6700\u70ED\u70C8\u7684\u62E5\u62A4\u8005\u3002" },
+  { startFrame: 977, endFrame: 1458, text: "\u51EF\u6069\u65AF\u5C31\u901A\u8D27\u81A8\u80C0\u7684\u8BC4\u4EF7\u53EF\u8C13\u4E00\u9488\u89C1\u8840\uFF1A\u7528\u8FD9\u4E2A\u529E\u6CD5\uFF0C\u653F\u5E9C\u53EF\u4EE5\u79D8\u5BC6\u548C\u96BE\u4EE5\u5BDF\u89C9\u5730\u6CA1\u6536\u4EBA\u6C11\u7684\u8D22\u5BCC\uFF0C100\u4E07\u4EBA\u4E2D\u4E5F\u5F88\u96BE\u6709\u4E00\u4E2A\u4EBA\u80FD\u591F\u53D1\u73B0\u8FD9\u79CD\u5077\u7A83\u884C\u4E3A\u3002" }
 ];
 const episode04_scene08Subs = [
-  {
-    startFrame: 0,
-    endFrame: 360,
-    text: "\u666E\u6797\u65AF\u987F\u5927\u5B66\u6821\u957F\u4F0D\u5FB7\u7F57\xB7\u5A01\u5C14\u900A\u662F\u4E00\u4F4D\u8457\u540D\u7684\u53CD\u5BF9\u91D1\u878D\u5784\u65AD\u7684\u6D3B\u8DC3\u5206\u5B50\u3002\u94F6\u884C\u5BB6\u4EEC\u6B63\u662F\u770B\u4E2D\u4E86\u5A01\u5C14\u900A\u7684\u5355\u7EAF\u800C\u5BB9\u6613\u88AB\u5229\u7528\u7684\u7279\u70B9\uFF0C\u51C6\u5907\u5728\u4ED6\u8EAB\u4E0A\u6295\u4E0B\u91CD\u91D1\u3002"
-  },
-  {
-    startFrame: 360,
-    endFrame: 720,
-    text: "\u7EBD\u7EA6\u56FD\u5BB6\u57CE\u5E02\u94F6\u884C\u7684\u8463\u4E8B\u514B\u91CC\u592B\u5170\xB7\u9053\u5947\u662F\u5A01\u5C14\u900A\u5728\u666E\u6797\u65AF\u987F\u7684\u5927\u5B66\u540C\u5B66\u3002\u5728\u534E\u5C14\u8857\u5927\u4F6C\u4EEC\u7684\u6276\u6301\u4E0B\uFF0C\u5A01\u5C14\u900A\u4E8E1910\u5E74\u5F53\u9009\u65B0\u6CFD\u897F\u5DDE\u7684\u5DDE\u957F\u3002"
-  },
-  {
-    startFrame: 720,
-    endFrame: 1080,
-    text: "\u5A01\u5C14\u900A\u6311\u6218\u7684\u662F\u65F6\u4EFB\u603B\u7EDF\u5854\u592B\u7279\u3002\u6B63\u5F53\u8E0C\u8E87\u6EE1\u5FD7\u51C6\u5907\u8FDE\u4EFB\u7684\u5854\u592B\u7279\u8868\u793A\u4E0D\u51C6\u5907\u5BF9\u5965\u5C14\u5FB7\u91CC\u5947\u6CD5\u6848\u5F00\u7EFF\u706F\u65F6\uFF0C\u8001\u7F57\u65AF\u798F\u7A81\u7136\u6A2A\u5200\u6740\u51FA\uFF0C\u4E25\u91CD\u4FB5\u8680\u5854\u592B\u7279\u7684\u9009\u7968\u3002"
-  },
-  {
-    startFrame: 1080,
-    endFrame: 1380,
-    text: "\u4E09\u4E2A\u7ADE\u9009\u4EBA\u80CC\u540E\u5168\u90FD\u662F\u94F6\u884C\u5BB6\u5728\u652F\u6301\uFF0C\u53EA\u4E0D\u8FC7\u94F6\u884C\u5BB6\u5728\u4E09\u4E2A\u4EBA\u4E2D\u95F4\u6697\u5730\u504F\u5411\u6700\u5177\u53EF\u63A7\u5236\u6027\u7684\u5A01\u5C14\u900A\u3002\u8001\u7F57\u65AF\u798F\u679C\u7136\u91CD\u521B\u5854\u592B\u7279\uFF0C\u5A01\u5C14\u900A\u987A\u5229\u5F53\u9009\u3002"
-  }
+  { startFrame: 0, endFrame: 505, text: "\u666E\u6797\u65AF\u987F\u5927\u5B66\u6821\u957F\u4F0D\u5FB7\u7F57\xB7\u5A01\u5C14\u900A\u662F\u4E00\u4F4D\u8457\u540D\u7684\u53CD\u5BF9\u91D1\u878D\u5784\u65AD\u7684\u6D3B\u8DC3\u5206\u5B50\u3002\u94F6\u884C\u5BB6\u4EEC\u6B63\u662F\u770B\u4E2D\u4E86\u5A01\u5C14\u900A\u7684\u5355\u7EAF\u800C\u5BB9\u6613\u88AB\u5229\u7528\u7684\u7279\u70B9\uFF0C\u51C6\u5907\u5728\u4ED6\u8EAB\u4E0A\u6295\u4E0B\u91CD\u91D1\u3002" },
+  { startFrame: 505, endFrame: 985, text: "\u7EBD\u7EA6\u56FD\u5BB6\u57CE\u5E02\u94F6\u884C\u7684\u8463\u4E8B\u514B\u91CC\u592B\u5170\xB7\u9053\u5947\u662F\u5A01\u5C14\u900A\u5728\u666E\u6797\u65AF\u987F\u7684\u5927\u5B66\u540C\u5B66\u3002\u5728\u534E\u5C14\u8857\u5927\u4F6C\u4EEC\u7684\u6276\u6301\u4E0B\uFF0C\u5A01\u5C14\u900A\u4E8E1910\u5E74\u5F53\u9009\u65B0\u6CFD\u897F\u5DDE\u7684\u5DDE\u957F\u3002" },
+  { startFrame: 985, endFrame: 1416, text: "\u5A01\u5C14\u900A\u6311\u6218\u7684\u662F\u65F6\u4EFB\u603B\u7EDF\u5854\u592B\u7279\u3002\u6B63\u5F53\u8E0C\u8E87\u6EE1\u5FD7\u51C6\u5907\u8FDE\u4EFB\u7684\u5854\u592B\u7279\u8868\u793A\u4E0D\u51C6\u5907\u5BF9\u5965\u5C14\u5FB7\u91CC\u5947\u6CD5\u6848\u5F00\u7EFF\u706F\u65F6\uFF0C\u8001\u7F57\u65AF\u798F\u7A81\u7136\u6A2A\u5200\u6740\u51FA\uFF0C\u4E25\u91CD\u4FB5\u8680\u5854\u592B\u7279\u7684\u9009\u7968\u3002" },
+  { startFrame: 1416, endFrame: 1884, text: "\u4E09\u4E2A\u7ADE\u9009\u4EBA\u80CC\u540E\u5168\u90FD\u662F\u94F6\u884C\u5BB6\u5728\u652F\u6301\uFF0C\u53EA\u4E0D\u8FC7\u94F6\u884C\u5BB6\u5728\u4E09\u4E2A\u4EBA\u4E2D\u95F4\u6697\u5730\u504F\u5411\u6700\u5177\u53EF\u63A7\u5236\u6027\u7684\u5A01\u5C14\u900A\u3002\u8001\u7F57\u65AF\u798F\u679C\u7136\u91CD\u521B\u5854\u592B\u7279\uFF0C\u5A01\u5C14\u900A\u987A\u5229\u5F53\u9009\u3002" }
 ];
 const episode04_scene09Subs = [
-  {
-    startFrame: 0,
-    endFrame: 360,
-    text: "\u94F6\u884C\u5DE8\u5934\u4EEC\u5728\u54F2\u57FA\u5C14\u5C9B\u7684\u7B56\u5212\u5341\u5206\u673A\u5BC6\uFF0C\u4ED6\u4EEC\u51C6\u5907\u4E86\u4E24\u4EFD\u8BA1\u5212\u3002\u7B2C\u4E00\u4EFD\u7531\u5965\u5C14\u5FB7\u91CC\u5947\u53C2\u8BAE\u5458\u4E3B\u6301\uFF0C\u8D1F\u8D23\u4F6F\u653B\u3002\u53E6\u4E00\u4EFDB\u8BA1\u5212\u624D\u662F\u771F\u6B63\u7684\u4E3B\u653B\u65B9\u5411\uFF0C\u8FD9\u5C31\u662F\u540E\u6765\u7684\u300A\u7F8E\u8054\u50A8\u6CD5\u6848\u300B\u3002"
-  },
-  {
-    startFrame: 360,
-    endFrame: 720,
-    text: "1913\u5E7412\u670820\u65E5\u661F\u671F\u516D\u7684\u665A\u4E0A\uFF0C\u53C2\u4F17\u4E24\u9662\u53EC\u5F00\u8054\u5E2D\u4F1A\u8BAE\u3002\u4FDD\u7F57\xB7\u6C83\u4F2F\u683C\u77A7\u51C6\u4E86\u8FD9\u4E00\u5343\u8F7D\u96BE\u9022\u7684\u65F6\u673A\uFF0C\u53D1\u52A8\u4E86\u4E00\u573A\u95EA\u7535\u6218\u300221\u65E5\u661F\u671F\u5929\u5168\u5929\u7EE7\u7EED\u5F00\u4F1A\uFF0C\u4E0D\u89E3\u51B3\u95EE\u9898\u51B3\u4E0D\u4F11\u4F1A\u3002"
-  },
-  {
-    startFrame: 720,
-    endFrame: 1080,
-    text: "22\u65E5\u51CC\u66684\u70B930\u5206\uFF0C\u6700\u540E\u6587\u4EF6\u88AB\u9001\u4EA4\u6253\u5370\u3002\u4E0B\u53482\u70B9\uFF0C\u6253\u5370\u597D\u7684\u6587\u4EF6\u653E\u5728\u4E86\u8BAE\u5458\u7684\u529E\u516C\u684C\u4E0A\u3002\u4E0B\u53486\u70B9\uFF0C\u6700\u540E\u8054\u5E2D\u4F1A\u8BAE\u62A5\u544A\u63D0\u4EA4\uFF0C\u6B64\u65F6\u5927\u591A\u6570\u8BAE\u5458\u5DF2\u7ECF\u53BB\u5403\u665A\u996D\u4E86\u3002"
-  },
-  {
-    startFrame: 1080,
-    endFrame: 1590,
-    text: "23\u65E5\uFF0C\u5723\u8BDE\u8282\u524D\u4E24\u5929\uFF0C\u53C2\u8BAE\u9662\u8868\u51B3\u4EE543\u5BF925\u7968\u901A\u8FC7\u4E86\u300A\u7F8E\u8054\u50A8\u6CD5\u6848\u300B\u3002\u5A01\u5C14\u900A\u603B\u7EDF\u5728\u53C2\u8BAE\u9662\u901A\u8FC7\u6CD5\u6848\u4EC5\u4E00\u5C0F\u65F6\uFF0C\u5C31\u6B63\u5F0F\u7B7E\u7F72\u4E86\u8BE5\u6CD5\u6848\u3002\u534E\u5C14\u8857\u548C\u4F26\u6566\u91D1\u878D\u57CE\u987F\u65F6\u4E00\u7247\u6B22\u817E\u3002"
-  }
+  { startFrame: 0, endFrame: 391, text: "\u94F6\u884C\u5DE8\u5934\u4EEC\u5728\u54F2\u57FA\u5C14\u5C9B\u7684\u7B56\u5212\u5341\u5206\u673A\u5BC6\uFF0C\u4ED6\u4EEC\u51C6\u5907\u4E86\u4E24\u4EFD\u8BA1\u5212\u3002\u7B2C\u4E00\u4EFD\u7531\u5965\u5C14\u5FB7\u91CC\u5947\u53C2\u8BAE\u5458\u4E3B\u6301\uFF0C\u8D1F\u8D23\u4F6F\u653B\u3002\u53E6\u4E00\u4EFDB\u8BA1\u5212\u624D\u662F\u771F\u6B63\u7684\u4E3B\u653B\u65B9\u5411\uFF0C\u8FD9\u5C31\u662F\u540E\u6765\u7684\u300A\u7F8E\u8054\u50A8\u6CD5\u6848\u300B\u3002" },
+  { startFrame: 391, endFrame: 812, text: "1913\u5E7412\u670820\u65E5\u661F\u671F\u516D\u7684\u665A\u4E0A\uFF0C\u53C2\u4F17\u4E24\u9662\u53EC\u5F00\u8054\u5E2D\u4F1A\u8BAE\u3002\u4FDD\u7F57\xB7\u6C83\u4F2F\u683C\u77A7\u51C6\u4E86\u8FD9\u4E00\u5343\u8F7D\u96BE\u9022\u7684\u65F6\u673A\uFF0C\u53D1\u52A8\u4E86\u4E00\u573A\u95EA\u7535\u6218\u300221\u65E5\u661F\u671F\u5929\u5168\u5929\u7EE7\u7EED\u5F00\u4F1A\uFF0C\u4E0D\u89E3\u51B3\u95EE\u9898\u51B3\u4E0D\u4F11\u4F1A\u3002" },
+  { startFrame: 812, endFrame: 1216, text: "22\u65E5\u51CC\u66684\u70B930\u5206\uFF0C\u6700\u540E\u6587\u4EF6\u88AB\u9001\u4EA4\u6253\u5370\u3002\u4E0B\u53482\u70B9\uFF0C\u6253\u5370\u597D\u7684\u6587\u4EF6\u653E\u5728\u4E86\u8BAE\u5458\u7684\u529E\u516C\u684C\u4E0A\u3002\u4E0B\u53486\u70B9\uFF0C\u6700\u540E\u8054\u5E2D\u4F1A\u8BAE\u62A5\u544A\u63D0\u4EA4\uFF0C\u6B64\u65F6\u5927\u591A\u6570\u8BAE\u5458\u5DF2\u7ECF\u53BB\u5403\u665A\u996D\u4E86\u3002" },
+  { startFrame: 1216, endFrame: 1583, text: "23\u65E5\uFF0C\u5723\u8BDE\u8282\u524D\u4E24\u5929\uFF0C\u53C2\u8BAE\u9662\u8868\u51B3\u4EE543\u5BF925\u7968\u901A\u8FC7\u4E86\u300A\u7F8E\u8054\u50A8\u6CD5\u6848\u300B\u3002\u5A01\u5C14\u900A\u603B\u7EDF\u5728\u53C2\u8BAE\u9662\u901A\u8FC7\u6CD5\u6848\u4EC5\u4E00\u5C0F\u65F6\uFF0C\u5C31\u6B63\u5F0F\u7B7E\u7F72\u4E86\u8BE5\u6CD5\u6848\u3002\u534E\u5C14\u8857\u548C\u4F26\u6566\u91D1\u878D\u57CE\u987F\u65F6\u4E00\u7247\u6B22\u817E\u3002" }
 ];
 const scene10Subs = [
-  {
-    startFrame: 0,
-    endFrame: 360,
-    text: "\u6797\u5FB7\u4F2F\u683C\u8BAE\u5458\u5728\u8FD9\u4E00\u5929\u5BF9\u4F17\u8BAE\u9662\u53D1\u8868\u6F14\u8BB2\uFF1A\u8FD9\u4E2A\u6CD5\u6848\u6388\u6743\u4E86\u5730\u7403\u4E0A\u6700\u5927\u7684\u4FE1\u7528\u3002\u5F53\u603B\u7EDF\u7B7E\u7F72\u8FD9\u4E2A\u6CD5\u6848\u540E\uFF0C\u91D1\u94B1\u6743\u529B\u8FD9\u4E2A\u770B\u4E0D\u89C1\u7684\u653F\u5E9C\u5C06\u88AB\u5408\u6CD5\u5316\u3002"
-  },
-  {
-    startFrame: 360,
-    endFrame: 720,
-    text: "\u8FD9\u4E2A\u91D1\u94B1\u6743\u529B\u5C06\u80FD\u591F\u6700\u7EC8\u63A7\u5236\u56FD\u4F1A\u3002\u56FD\u4F1A\u6700\u5927\u7684\u72AF\u7F6A\u5C31\u662F\u5B83\u7684\u8D27\u5E01\u7CFB\u7EDF\u6CD5\u6848\u3002\u4E24\u515A\u7684\u5934\u5934\u548C\u79D8\u5BC6\u4F1A\u8BAE\u518D\u4E00\u6B21\u5265\u593A\u4E86\u4EBA\u6C11\u4ECE\u81EA\u5DF1\u7684\u653F\u5E9C\u5F97\u5230\u76CA\u5904\u7684\u673A\u4F1A\u3002"
-  },
-  {
-    startFrame: 720,
-    endFrame: 1080,
-    text: "\u7ECF\u8FC7\u4E0E\u7F8E\u56FD\u653F\u5E9C100\u591A\u5E74\u7684\u6FC0\u70C8\u8F83\u91CF\uFF0C\u56FD\u9645\u94F6\u884C\u5BB6\u7EC8\u4E8E\u8FBE\u5230\u4E86\u4ED6\u4EEC\u7684\u76EE\u7684\uFF0C\u5F7B\u5E95\u63A7\u5236\u4E86\u7F8E\u56FD\u7684\u56FD\u5BB6\u8D27\u5E01\u53D1\u884C\u6743\uFF0C\u82F1\u683C\u5170\u94F6\u884C\u7684\u6A21\u5F0F\u7EC8\u4E8E\u5728\u7F8E\u56FD\u88AB\u590D\u5236\u6210\u529F\u4E86\u3002"
-  },
-  {
-    startFrame: 1080,
-    endFrame: 1410,
-    text: "1913\u5E7412\u670823\u65E5\uFF0C\u7F8E\u56FD\u6C11\u9009\u653F\u5E9C\u7EC8\u4E8E\u88AB\u91D1\u94B1\u6743\u529B\u6240\u98A0\u8986\u3002\u4E00\u4E2A\u66F4\u52A0\u9690\u853D\u3001\u66F4\u52A0\u590D\u6742\u7684\u91D1\u878D\u5E1D\u56FD\uFF0C\u4ECE\u6B64\u5F00\u59CB\u4E3B\u5BB0\u7F8E\u56FD\u7684\u547D\u8FD0\u3002"
-  }
+  { startFrame: 0, endFrame: 391, text: "\u6797\u5FB7\u4F2F\u683C\u8BAE\u5458\u5728\u8FD9\u4E00\u5929\u5BF9\u4F17\u8BAE\u9662\u53D1\u8868\u6F14\u8BB2\uFF1A\u8FD9\u4E2A\u6CD5\u6848\u6388\u6743\u4E86\u5730\u7403\u4E0A\u6700\u5927\u7684\u4FE1\u7528\u3002\u5F53\u603B\u7EDF\u7B7E\u7F72\u8FD9\u4E2A\u6CD5\u6848\u540E\uFF0C\u91D1\u94B1\u6743\u529B\u8FD9\u4E2A\u770B\u4E0D\u89C1\u7684\u653F\u5E9C\u5C06\u88AB\u5408\u6CD5\u5316\u3002" },
+  { startFrame: 391, endFrame: 812, text: "\u8FD9\u4E2A\u91D1\u94B1\u6743\u529B\u5C06\u80FD\u591F\u6700\u7EC8\u63A7\u5236\u56FD\u4F1A\u3002\u56FD\u4F1A\u6700\u5927\u7684\u72AF\u7F6A\u5C31\u662F\u5B83\u7684\u8D27\u5E01\u7CFB\u7EDF\u6CD5\u6848\u3002\u4E24\u515A\u7684\u5934\u5934\u548C\u79D8\u5BC6\u4F1A\u8BAE\u518D\u4E00\u6B21\u5265\u593A\u4E86\u4EBA\u6C11\u4ECE\u81EA\u5DF1\u7684\u653F\u5E9C\u5F97\u5230\u76CA\u5904\u7684\u673A\u4F1A\u3002" },
+  { startFrame: 812, endFrame: 1216, text: "\u7ECF\u8FC7\u4E0E\u7F8E\u56FD\u653F\u5E9C100\u591A\u5E74\u7684\u6FC0\u70C8\u8F83\u91CF\uFF0C\u56FD\u9645\u94F6\u884C\u5BB6\u7EC8\u4E8E\u8FBE\u5230\u4E86\u4ED6\u4EEC\u7684\u76EE\u7684\uFF0C\u5F7B\u5E95\u63A7\u5236\u4E86\u7F8E\u56FD\u7684\u56FD\u5BB6\u8D27\u5E01\u53D1\u884C\u6743\uFF0C\u82F1\u683C\u5170\u94F6\u884C\u7684\u6A21\u5F0F\u7EC8\u4E8E\u5728\u7F8E\u56FD\u88AB\u590D\u5236\u6210\u529F\u4E86\u3002" },
+  { startFrame: 1216, endFrame: 1583, text: "1913\u5E7412\u670823\u65E5\uFF0C\u7F8E\u56FD\u6C11\u9009\u653F\u5E9C\u7EC8\u4E8E\u88AB\u91D1\u94B1\u6743\u529B\u6240\u98A0\u8986\u3002\u4E00\u4E2A\u66F4\u52A0\u9690\u853D\u3001\u66F4\u52A0\u590D\u6742\u7684\u91D1\u878D\u5E1D\u56FD\uFF0C\u4ECE\u6B64\u5F00\u59CB\u4E3B\u5BB0\u7F8E\u56FD\u7684\u547D\u8FD0\u3002" }
 ];
 const scene11Subs = [
-  {
-    startFrame: 0,
-    endFrame: 390,
-    text: "\u8BB8\u591A\u5E74\u4EE5\u6765\uFF0C\u7A76\u7ADF\u8C01\u62E5\u6709\u7F8E\u8054\u50A8\u4E00\u76F4\u662F\u4E00\u4E2A\u8BB3\u83AB\u5982\u6DF1\u7684\u8BDD\u9898\u3002\u7F8E\u8054\u50A8\u5BF9\u80A1\u4E1C\u60C5\u51B5\u4E25\u5B88\u79D8\u5BC6\u3002\u8FD9\u4E2A\u79D8\u5BC6\u7EC8\u4E8E\u88AB\u300A\u7F8E\u8054\u50A8\u7684\u79D8\u5BC6\u300B\u4E00\u4E66\u7684\u4F5C\u8005\u5C24\u65AF\u5854\u65AF\u7ECF\u8FC7\u8FD1\u534A\u4E2A\u4E16\u7EAA\u7684\u7814\u7A76\u53D1\u73B0\u4E86\u3002"
-  },
-  {
-    startFrame: 390,
-    endFrame: 780,
-    text: "\u7F8E\u8054\u50A8\u7EBD\u7EA6\u94F6\u884C\u662F\u7F8E\u8054\u50A8\u7CFB\u7EDF\u7684\u5B9E\u9645\u63A7\u5236\u8005\u3002\u82B1\u65D7\u94F6\u884C\u62E5\u6709\u8FD11/4\u7684\u80A1\u4EFD\uFF0C\u5B83\u5B9E\u9645\u4E0A\u51B3\u5B9A\u7740\u7F8E\u8054\u50A8\u4E3B\u5E2D\u7684\u5019\u9009\u4EBA\uFF0C\u7F8E\u56FD\u603B\u7EDF\u7684\u4EFB\u547D\u53EA\u662F\u4E00\u679A\u6A61\u76AE\u56FE\u7AE0\u800C\u5DF2\u3002"
-  },
-  {
-    startFrame: 780,
-    endFrame: 1230,
-    text: "\u8FD96\u5BB6\u94F6\u884C\u5171\u6301\u670940%\u7684\u7F8E\u8054\u50A8\u7EBD\u7EA6\u94F6\u884C\u80A1\u4EFD\uFF0C\u52301983\u5E74\uFF0C\u4ED6\u4EEC\u603B\u5171\u62E5\u670953%\u7684\u80A1\u4EFD\u3002\u8FD9\u4E9B\u534E\u5C14\u8857\u7684\u94F6\u884C\u5BB6\u90FD\u4E0E\u4F26\u6566\u57CE\u7684\u7F57\u65AF\u67F4\u5C14\u5FB7\u5BB6\u65CF\u4FDD\u6301\u7740\u5BC6\u5207\u8054\u7CFB\u3002"
-  }
+  { startFrame: 0, endFrame: 480, text: "\u8BB8\u591A\u5E74\u4EE5\u6765\uFF0C\u7A76\u7ADF\u8C01\u62E5\u6709\u7F8E\u8054\u50A8\u4E00\u76F4\u662F\u4E00\u4E2A\u8BB3\u83AB\u5982\u6DF1\u7684\u8BDD\u9898\u3002\u7F8E\u8054\u50A8\u5BF9\u80A1\u4E1C\u60C5\u51B5\u4E25\u5B88\u79D8\u5BC6\u3002\u8FD9\u4E2A\u79D8\u5BC6\u7EC8\u4E8E\u88AB\u300A\u7F8E\u8054\u50A8\u7684\u79D8\u5BC6\u300B\u4E00\u4E66\u7684\u4F5C\u8005\u5C24\u65AF\u5854\u65AF\u7ECF\u8FC7\u8FD1\u534A\u4E2A\u4E16\u7EAA\u7684\u7814\u7A76\u53D1\u73B0\u4E86\u3002" },
+  { startFrame: 480, endFrame: 911, text: "\u7F8E\u8054\u50A8\u7EBD\u7EA6\u94F6\u884C\u662F\u7F8E\u8054\u50A8\u7CFB\u7EDF\u7684\u5B9E\u9645\u63A7\u5236\u8005\u3002\u82B1\u65D7\u94F6\u884C\u62E5\u6709\u8FD11/4\u7684\u80A1\u4EFD\uFF0C\u5B83\u5B9E\u9645\u4E0A\u51B3\u5B9A\u7740\u7F8E\u8054\u50A8\u4E3B\u5E2D\u7684\u5019\u9009\u4EBA\uFF0C\u7F8E\u56FD\u603B\u7EDF\u7684\u4EFB\u547D\u53EA\u662F\u4E00\u679A\u6A61\u76AE\u56FE\u7AE0\u800C\u5DF2\u3002" },
+  { startFrame: 911, endFrame: 1379, text: "\u8FD96\u5BB6\u94F6\u884C\u5171\u6301\u670940%\u7684\u7F8E\u8054\u50A8\u7EBD\u7EA6\u94F6\u884C\u80A1\u4EFD\uFF0C\u52301983\u5E74\uFF0C\u4ED6\u4EEC\u603B\u5171\u62E5\u670953%\u7684\u80A1\u4EFD\u3002\u8FD9\u4E9B\u534E\u5C14\u8857\u7684\u94F6\u884C\u5BB6\u90FD\u4E0E\u4F26\u6566\u57CE\u7684\u7F57\u65AF\u67F4\u5C14\u5FB7\u5BB6\u65CF\u4FDD\u6301\u7740\u5BC6\u5207\u8054\u7CFB\u3002" }
 ];
 const scene12Subs = [
-  {
-    startFrame: 0,
-    endFrame: 360,
-    text: "\u8054\u90A6\u54A8\u8BE2\u59D4\u5458\u4F1A\u662F\u4FDD\u7F57\xB7\u6C83\u4F2F\u683C\u7CBE\u5FC3\u8BBE\u8BA1\u7684\u4E00\u4E2A\u79D8\u5BC6\u7684\u9065\u63A7\u88C5\u7F6E\uFF0C\u4EE5\u6B64\u64CD\u63A7\u7F8E\u8054\u50A8\u8463\u4E8B\u4F1A\u3002\u51E0\u4E4E\u6CA1\u6709\u4EBA\u6CE8\u610F\u8FC7\u8FD9\u4E2A\u673A\u6784\u548C\u5B83\u7684\u8FD0\u4F5C\u3002"
-  },
-  {
-    startFrame: 360,
-    endFrame: 720,
-    text: "\u534E\u5C14\u88575\u5DE8\u5934\u6BCF\u5E744\u6B21\u4E0D\u8F9E\u52B3\u82E6\u5730\u8DD1\u5230\u534E\u76DB\u987F\uFF0C\u4E0D\u4F1A\u662F\u4EC5\u4EC5\u4E3A\u4E86\u548C\u8054\u50A8\u7684\u51E0\u4F4D\u8463\u4E8B\u559D\u559D\u5496\u5561\u3002\u4ED6\u4EEC\u4E8B\u5148\u77E5\u9053\u4EC0\u4E48\u65F6\u5019\u5236\u9020\u6050\u614C\u6765\u521B\u9020\u5BF9\u4ED6\u4EEC\u6700\u6709\u5229\u7684\u60C5\u51B5\u3002"
-  },
-  {
-    startFrame: 720,
-    endFrame: 1050,
-    text: "\u4ED6\u4EEC\u540C\u6837\u77E5\u9053\u4EC0\u4E48\u65F6\u5019\u505C\u6B62\u6050\u614C\u3002\u5F53\u4ED6\u4EEC\u63A7\u5236\u4E86\u91D1\u878D\u7684\u65F6\u5019\uFF0C\u901A\u8D27\u81A8\u80C0\u548C\u901A\u8D27\u7D27\u7F29\u5728\u5B9E\u73B0\u4ED6\u4EEC\u7684\u76EE\u7684\u65B9\u9762\u540C\u6837\u6709\u6548\u7387\u3002"
-  }
+  { startFrame: 0, endFrame: 366, text: "\u8054\u90A6\u54A8\u8BE2\u59D4\u5458\u4F1A\u662F\u4FDD\u7F57\xB7\u6C83\u4F2F\u683C\u7CBE\u5FC3\u8BBE\u8BA1\u7684\u4E00\u4E2A\u79D8\u5BC6\u7684\u9065\u63A7\u88C5\u7F6E\uFF0C\u4EE5\u6B64\u64CD\u63A7\u7F8E\u8054\u50A8\u8463\u4E8B\u4F1A\u3002\u51E0\u4E4E\u6CA1\u6709\u4EBA\u6CE8\u610F\u8FC7\u8FD9\u4E2A\u673A\u6784\u548C\u5B83\u7684\u8FD0\u4F5C\u3002" },
+  { startFrame: 366, endFrame: 776, text: "\u534E\u5C14\u88575\u5DE8\u5934\u6BCF\u5E744\u6B21\u4E0D\u8F9E\u52B3\u82E6\u5730\u8DD1\u5230\u534E\u76DB\u987F\uFF0C\u4E0D\u4F1A\u662F\u4EC5\u4EC5\u4E3A\u4E86\u548C\u8054\u50A8\u7684\u51E0\u4F4D\u8463\u4E8B\u559D\u559D\u5496\u5561\u3002\u4ED6\u4EEC\u4E8B\u5148\u77E5\u9053\u4EC0\u4E48\u65F6\u5019\u5236\u9020\u6050\u614C\u6765\u521B\u9020\u5BF9\u4ED6\u4EEC\u6700\u6709\u5229\u7684\u60C5\u51B5\u3002" },
+  { startFrame: 776, endFrame: 1104, text: "\u4ED6\u4EEC\u540C\u6837\u77E5\u9053\u4EC0\u4E48\u65F6\u5019\u505C\u6B62\u6050\u614C\u3002\u5F53\u4ED6\u4EEC\u63A7\u5236\u4E86\u91D1\u878D\u7684\u65F6\u5019\uFF0C\u901A\u8D27\u81A8\u80C0\u548C\u901A\u8D27\u7D27\u7F29\u5728\u5B9E\u73B0\u4ED6\u4EEC\u7684\u76EE\u7684\u65B9\u9762\u540C\u6837\u6709\u6548\u7387\u3002" }
 ];
 const scene13Subs = [
-  {
-    startFrame: 0,
-    endFrame: 300,
-    text: "\u5728\u5A01\u5C14\u900A\u603B\u7EDF\u53BB\u4E16\u4E4B\u524D\uFF0C\u4ED6\u627F\u8BA4\u81EA\u5DF1\u5728\u7F8E\u8054\u50A8\u7684\u95EE\u9898\u4E0A\u662F\u88AB'\u6B3A\u9A97'\u4E86\uFF0C\u4ED6\u5185\u759A\u5730\u8868\u793A\uFF1A'\u6211\u5728\u65E0\u610F\u4E4B\u4E2D\u6467\u6BC1\u4E86\u6211\u7684\u56FD\u5BB6\u3002'"
-  },
-  {
-    startFrame: 300,
-    endFrame: 570,
-    text: "\u4ECE1913\u5E74\u7B7E\u7F72\u6CD5\u6848\uFF0C\u52301919\u5E74\u8868\u8FBE\u540E\u6094\uFF0C\u4EC5\u4EC5\u8FC7\u53BB\u4E866\u5E74\u3002\u4E00\u4E2A\u56FD\u5BB6\u7684\u547D\u8FD0\uFF0C\u5C31\u8FD9\u6837\u88AB\u91D1\u94B1\u6743\u529B\u6240\u6539\u53D8\u3002"
-  },
-  {
-    startFrame: 570,
-    endFrame: 870,
-    text: "\u5F531914\u5E7410\u670825\u65E5\u7F8E\u8054\u50A8\u6B63\u5F0F\u5F00\u59CB\u8FD0\u4F5C\u65F6\uFF0C\u7B2C\u4E00\u6B21\u4E16\u754C\u5927\u6218\u7206\u53D1\u4E86\uFF0C\u53C8\u4E00\u4E2A\u5B8C\u7F8E\u7684\u65F6\u95F4'\u5DE7\u5408'\uFF0C\u7F8E\u8054\u50A8\u7684\u80A1\u4E1C\u4EEC\u6CE8\u5B9A\u8981\u5927\u53D1\u4E00\u7B14\u6A2A\u8D22\u4E86\uFF01"
-  }
+  { startFrame: 0, endFrame: 310, text: "\u5728\u5A01\u5C14\u900A\u603B\u7EDF\u53BB\u4E16\u4E4B\u524D\uFF0C\u4ED6\u627F\u8BA4\u81EA\u5DF1\u5728\u7F8E\u8054\u50A8\u7684\u95EE\u9898\u4E0A\u662F\u88AB'\u6B3A\u9A97'\u4E86\uFF0C\u4ED6\u5185\u759A\u5730\u8868\u793A\uFF1A'\u6211\u5728\u65E0\u610F\u4E4B\u4E2D\u6467\u6BC1\u4E86\u6211\u7684\u56FD\u5BB6\u3002'" },
+  { startFrame: 310, endFrame: 629, text: "\u4ECE1913\u5E74\u7B7E\u7F72\u6CD5\u6848\uFF0C\u52301919\u5E74\u8868\u8FBE\u540E\u6094\uFF0C\u4EC5\u4EC5\u8FC7\u53BB\u4E866\u5E74\u3002\u4E00\u4E2A\u56FD\u5BB6\u7684\u547D\u8FD0\uFF0C\u5C31\u8FD9\u6837\u88AB\u91D1\u94B1\u6743\u529B\u6240\u6539\u53D8\u3002" },
+  { startFrame: 629, endFrame: 985, text: "\u5F531914\u5E7410\u670825\u65E5\u7F8E\u8054\u50A8\u6B63\u5F0F\u5F00\u59CB\u8FD0\u4F5C\u65F6\uFF0C\u7B2C\u4E00\u6B21\u4E16\u754C\u5927\u6218\u7206\u53D1\u4E86\uFF0C\u53C8\u4E00\u4E2A\u5B8C\u7F8E\u7684\u65F6\u95F4'\u5DE7\u5408'\uFF0C\u7F8E\u8054\u50A8\u7684\u80A1\u4E1C\u4EEC\u6CE8\u5B9A\u8981\u5927\u53D1\u4E00\u7B14\u6A2A\u8D22\u4E86\uFF01" }
 ];
 const scene14Subs = [
-  {
-    startFrame: 0,
-    endFrame: 270,
-    text: "\u534E\u5C14\u88577\u4F4D\u5927\u8155\u662F\u5EFA\u7ACB\u7F8E\u8054\u50A8\u7684\u771F\u6B63\u5E55\u540E\u63A8\u52A8\u8005\uFF0C\u4ED6\u4EEC\u4E0E\u6B27\u6D32\u7F57\u65AF\u67F4\u5C14\u5FB7\u5BB6\u65CF\u7684\u79D8\u5BC6\u534F\u8C03\uFF0C\u6700\u7EC8\u5EFA\u7ACB\u4E86\u82F1\u683C\u5170\u94F6\u884C\u5728\u7F8E\u56FD\u7684\u7FFB\u7248\u3002"
-  },
-  {
-    startFrame: 270,
-    endFrame: 510,
-    text: "\u94F6\u884C\u5BB6\u901A\u8FC7\u7F8E\u8054\u50A8\u64CD\u7EB5\u7740\u7F8E\u56FD\u91D1\u878D\u547D\u8109\u3001\u5DE5\u5546\u4E1A\u547D\u8109\u548C\u653F\u6CBB\u547D\u8109\u30021913\u5E7412\u670823\u65E5\uFF0C\u7F8E\u56FD\u6C11\u9009\u653F\u5E9C\u7EC8\u4E8E\u88AB\u91D1\u94B1\u6743\u529B\u6240\u98A0\u8986\u3002"
-  }
+  { startFrame: 0, endFrame: 344, text: "\u534E\u5C14\u88577\u4F4D\u5927\u8155\u662F\u5EFA\u7ACB\u7F8E\u8054\u50A8\u7684\u771F\u6B63\u5E55\u540E\u63A8\u52A8\u8005\uFF0C\u4ED6\u4EEC\u4E0E\u6B27\u6D32\u7F57\u65AF\u67F4\u5C14\u5FB7\u5BB6\u65CF\u7684\u79D8\u5BC6\u534F\u8C03\uFF0C\u6700\u7EC8\u5EFA\u7ACB\u4E86\u82F1\u683C\u5170\u94F6\u884C\u5728\u7F8E\u56FD\u7684\u7FFB\u7248\u3002" },
+  { startFrame: 344, endFrame: 719, text: "\u94F6\u884C\u5BB6\u901A\u8FC7\u7F8E\u8054\u50A8\u64CD\u7EB5\u7740\u7F8E\u56FD\u91D1\u878D\u547D\u8109\u3001\u5DE5\u5546\u4E1A\u547D\u8109\u548C\u653F\u6CBB\u547D\u8109\u30021913\u5E7412\u670823\u65E5\uFF0C\u7F8E\u56FD\u6C11\u9009\u653F\u5E9C\u7EC8\u4E8E\u88AB\u91D1\u94B1\u6743\u529B\u6240\u98A0\u8986\u3002" }
 ];
 const episode04Subtitles = [
   ...episode04_scene01Subs.map((s) => ({
@@ -23889,34 +27152,34 @@ const SummarySceneSubtitles = scene14Subs;
 
 const Episode04Documentary_VOICE_DIR = "/assets/audio/voiceover/episode04/";
 const Episode04Documentary_SCENE_FRAMES = [
-  960,
-  // Scene 0: 32s - 开场：威尔逊的忏悔
+  971,
+  // Scene 0: 32.4s - 开场：威尔逊的忏悔
   2220,
-  // Scene 1: 74s - 美联储真相揭示
-  1980,
-  // Scene 2: 66s - 华尔街七大巨头
-  1650,
-  // Scene 3: 55s - 摩根家族崛起
-  1380,
-  // Scene 4: 46s - 洛克菲勒帝国
-  1680,
-  // Scene 5: 56s - 1907年银行危机
-  1950,
-  // Scene 6: 65s - 从金本位到法定货币
-  1380,
-  // Scene 7: 46s - 1912年大选
-  1590,
-  // Scene 8: 53s - B计划
-  1410,
-  // Scene 9: 47s - 法案通过
-  1230,
-  // Scene 10: 41s - 谁拥有美联储
-  1050,
-  // Scene 11: 35s - 隐形控制
-  870,
-  // Scene 12: 29s - 威尔逊的觉醒
-  510
-  // Scene 13: 17s - 总结
+  // Scene 1: 74.0s - 美联储真相揭示
+  1992,
+  // Scene 2: 66.4s - 华尔街七大巨头
+  1643,
+  // Scene 3: 54.8s - 摩根家族崛起
+  1390,
+  // Scene 4: 46.3s - 洛克菲勒帝国
+  1677,
+  // Scene 5: 55.9s - 1907年银行危机
+  1458,
+  // Scene 6: 48.6s - 从金本位到法定货币
+  1884,
+  // Scene 7: 62.8s - 1912年大选
+  1583,
+  // Scene 8: 52.8s - B计划
+  1583,
+  // Scene 9: 52.8s - 法案通过
+  1379,
+  // Scene 10: 46.0s - 谁拥有美联储
+  1104,
+  // Scene 11: 36.8s - 隐形控制
+  985,
+  // Scene 12: 32.8s - 威尔逊的觉醒
+  719
+  // Scene 13: 24.0s - 总结
 ];
 const Episode04Documentary_SCENE_OFFSETS = Episode04Documentary_SCENE_FRAMES.reduce((acc, frames, i) => {
   acc.push(i === 0 ? 0 : acc[i - 1] + Episode04Documentary_SCENE_FRAMES[i - 1]);
@@ -23974,7 +27237,7 @@ function Episode04Documentary_buildVoiceoverEntries() {
   for (const scene of sceneOffsets) {
     for (const sub of scene.subs) {
       entries.push({
-        src: `${Episode04Documentary_VOICE_DIR}voice_${String(fileIndex).padStart(4, "0")}.m4a`,
+        src: `${Episode04Documentary_VOICE_DIR}voice_${String(fileIndex).padStart(4, "0")}.mp3`,
         startFrame: scene.offset + sub.startFrame,
         durationFrames: sub.endFrame - sub.startFrame
       });
@@ -24156,3914 +27419,1322 @@ const Episode04Documentary = () => {
 };
 /* harmony default export */ const compositions_Episode04Documentary = ((/* unused pure expression or super */ null && (Episode04Documentary)));
 
-;// ./src/components/scenes/episode05/documentary/OpeningDocumentaryScene.tsx
-
+;// ./src/components/scenes/episode06/documentary/OpeningDocumentaryScene.tsx
 
 
 
 const OpeningDocumentaryScene = () => {
   const frame = (0,esm.useCurrentFrame)();
-  const bgOpacity = (0,esm.interpolate)(frame, [0, 45], [0, 1], {
+  const titleOpacity = (0,esm.interpolate)(frame, [0, 30], [0, 1], {
     extrapolateRight: "clamp"
   });
   const quoteOpacity = (0,esm.interpolate)(frame, [60, 120], [0, 1], {
     extrapolateRight: "clamp"
   });
-  const authorOpacity = (0,esm.interpolate)(frame, [150, 200], [0, 1], {
+  const warningOpacity = (0,esm.interpolate)(frame, [180, 240], [0, 1], {
     extrapolateRight: "clamp"
   });
-  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { background: "#0d1117" }, children: [
-    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { opacity: bgOpacity }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      ImageLayer,
-      {
-        src: "/assets/images/episode05/wwi-cemetery.jpg",
-        kenBurns: { panDirection: "zoom-in", intensity: "subtle" },
-        layer: { filter: "sepia", opacity: 0.5 },
-        startFrame: 0,
-        durationFrames: 300
-      }
-    ) }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(Vignette, { intensity: 0.8 }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(FilmGrain, { opacity: 0.1 }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      DocumentaryOverlay,
-      {
-        year: "1927",
-        title: "The Invisible Government",
-        subtitle: "A Warning Unheeded",
-        frame: frame - 30,
-        fadeInDuration: 45
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      "div",
-      {
-        style: {
-          position: "absolute",
-          top: "35%",
-          left: "50%",
-          transform: "translateX(-50%)",
-          opacity: quoteOpacity,
-          maxWidth: "80%"
-        },
-        children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
-          CinematicText,
-          {
-            text: '"The real threat to our republic is this invisible government..."',
-            fontSize: 28,
-            color: "#ECC94B",
-            frame: frame - 60,
-            fadeInDuration: 45
-          }
-        )
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      "div",
-      {
-        style: {
-          position: "absolute",
-          bottom: "25%",
-          left: "50%",
-          transform: "translateX(-50%)",
-          opacity: authorOpacity
-        },
-        children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+    esm.AbsoluteFill,
+    {
+      style: {
+        background: "radial-gradient(circle at center, #1a1a2e 0%, #0d1117 100%)"
+      },
+      children: [
+        /* @__PURE__ */ (0,jsx_runtime.jsx)(
           "div",
           {
             style: {
-              fontFamily: "Merriweather, serif",
-              fontSize: 18,
-              color: "#9ca3af",
-              fontStyle: "italic"
+              position: "absolute",
+              top: "20%",
+              left: "50%",
+              transform: "translateX(-50%)",
+              opacity: titleOpacity,
+              fontSize: 48,
+              fontWeight: "bold",
+              color: "#FFD700",
+              textShadow: "0 0 20px rgba(255, 215, 0, 0.5)"
             },
-            children: "\u2014 John Hylan, Mayor of New York, 1927"
+            children: "\u7B2C\u4E94\u7AE0\uFF1A\u5EC9\u4EF7\u8D27\u5E01\u7684\u65B0\u653F"
           }
-        )
-      }
-    )
-  ] });
-};
-/* harmony default export */ const documentary_OpeningDocumentaryScene = ((/* unused pure expression or super */ null && (OpeningDocumentaryScene)));
-
-;// ./src/components/scenes/episode05/documentary/NoFedNoWarDocumentaryScene.tsx
-
-
-
-
-const NoFedNoWarDocumentaryScene = () => {
-  const frame = (0,esm.useCurrentFrame)();
-  const bgOpacity = (0,esm.interpolate)(frame, [0, 45], [0, 1], {
-    extrapolateRight: "clamp"
-  });
-  const timelineOpacity = (0,esm.interpolate)(frame, [60, 120], [0, 1], {
-    extrapolateRight: "clamp"
-  });
-  const conclusionOpacity = (0,esm.interpolate)(frame, [180, 240], [0, 1], {
-    extrapolateRight: "clamp"
-  });
-  const scale = (0,esm.spring)({
-    fps: 30,
-    frame: frame - 60,
-    config: {
-      damping: 100,
-      stiffness: 200,
-      mass: 0.5
-    }
-  });
-  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { background: "#0d1117" }, children: [
-    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { opacity: bgOpacity }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      ImageLayer,
-      {
-        src: "/assets/images/episode05/wwi-soldier-reenactor.jpg",
-        kenBurns: { panDirection: "zoom-in", intensity: "moderate" },
-        layer: { filter: "sepia", opacity: 0.6 },
-        startFrame: 0,
-        durationFrames: 600
-      }
-    ) }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(Vignette, { intensity: 0.75 }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(FilmGrain, { opacity: 0.08 }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      DocumentaryOverlay,
-      {
-        year: "1914",
-        title: "The Fed and the War",
-        subtitle: "A Deadly Connection",
-        frame: frame - 30,
-        fadeInDuration: 45
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      "div",
-      {
-        style: {
-          position: "absolute",
-          top: "25%",
-          left: "10%",
-          right: "10%",
-          opacity: timelineOpacity,
-          transform: `scale(${scale})`
-        },
-        children: /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)(
           "div",
           {
             style: {
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center"
-            },
-            children: [
-              /* @__PURE__ */ (0,jsx_runtime.jsx)(TimelineItem, { year: "1913", event: "Fed Created", isHighlight: false }),
-              /* @__PURE__ */ (0,jsx_runtime.jsx)(TimelineArrow, {}),
-              /* @__PURE__ */ (0,jsx_runtime.jsx)(TimelineItem, { year: "1914", event: "WWI Begins", isHighlight: true }),
-              /* @__PURE__ */ (0,jsx_runtime.jsx)(TimelineArrow, {}),
-              /* @__PURE__ */ (0,jsx_runtime.jsx)(TimelineItem, { year: "1917", event: "US Enters War", isHighlight: true })
-            ]
-          }
-        )
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      "div",
-      {
-        style: {
-          position: "absolute",
-          bottom: "20%",
-          left: "50%",
-          transform: "translateX(-50%)",
-          opacity: conclusionOpacity
-        },
-        children: /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-          "div",
-          {
-            style: {
-              padding: "24px 40px",
-              background: "rgba(139, 0, 0, 0.85)",
-              border: "2px solid #ef4444",
-              borderRadius: 8,
+              position: "absolute",
+              top: "40%",
+              left: "10%",
+              right: "10%",
+              opacity: quoteOpacity,
+              fontSize: 28,
+              color: "#E0E0E0",
+              lineHeight: 1.6,
               textAlign: "center"
             },
             children: [
-              /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                "div",
-                {
-                  style: {
-                    fontFamily: "Cinzel, serif",
-                    fontSize: 36,
-                    color: "#ffd700",
-                    fontWeight: 700
-                  },
-                  children: "$30 BILLION"
-                }
-              ),
-              /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                "div",
-                {
-                  style: {
-                    fontFamily: "Merriweather, serif",
-                    fontSize: 14,
-                    color: "#e8e8e8",
-                    marginTop: 8
-                  },
-                  children: "Loans to Allies \u2014 Banker's Bonanza"
-                }
-              )
+              '"\u98A0\u8986\u8D44\u672C\u4E3B\u4E49\u5236\u5EA6\u6700\u597D\u7684\u529E\u6CD5\u5C31\u662F\u4F7F\u5176\u8D27\u5E01\u8D2C\u503C\u3002"',
+              /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
+              '"\u901A\u8FC7\u8FDE\u7EED\u7684\u901A\u8D27\u81A8\u80C0\u8FC7\u7A0B\uFF0C\u653F\u5E9C\u53EF\u4EE5\u79D8\u5BC6\u5730\u3001\u4E0D\u4E3A\u4EBA\u77E5\u5730\u6CA1\u6536\u516C\u6C11\u8D22\u5BCC\u7684\u4E00\u90E8\u5206\u3002"',
+              /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
+              "\u2014\u2014 \u51EF\u6069\u65AF\uFF0C1919\u5E74"
             ]
           }
-        )
-      }
-    )
-  ] });
-};
-const TimelineItem = ({ year, event, isHighlight }) => /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { textAlign: "center" }, children: [
-  /* @__PURE__ */ (0,jsx_runtime.jsx)(
-    "div",
-    {
-      style: {
-        fontFamily: "Cinzel, serif",
-        fontSize: isHighlight ? 28 : 20,
-        color: isHighlight ? "#ef4444" : "#ffd700",
-        fontWeight: 700
-      },
-      children: year
-    }
-  ),
-  /* @__PURE__ */ (0,jsx_runtime.jsx)(
-    "div",
-    {
-      style: {
-        fontFamily: "Merriweather, serif",
-        fontSize: 14,
-        color: isHighlight ? "#fff" : "#9ca3af",
-        marginTop: 4
-      },
-      children: event
-    }
-  )
-] });
-const TimelineArrow = () => /* @__PURE__ */ (0,jsx_runtime.jsx)(
-  "div",
-  {
-    style: {
-      color: "#ffd700",
-      fontSize: 24
-    },
-    children: "\u2192"
-  }
-);
-/* harmony default export */ const documentary_NoFedNoWarDocumentaryScene = ((/* unused pure expression or super */ null && (NoFedNoWarDocumentaryScene)));
-
-;// ./src/components/scenes/episode05/documentary/StrongFedDocumentaryScene.tsx
-
-
-
-
-const StrongFedDocumentaryScene = () => {
-  const frame = (0,esm.useCurrentFrame)();
-  const bgOpacity = (0,esm.interpolate)(frame, [0, 45], [0, 1], {
-    extrapolateRight: "clamp"
-  });
-  const profileOpacity = (0,esm.interpolate)(frame, [60, 120], [0, 1], {
-    extrapolateRight: "clamp"
-  });
-  const statsOpacity = (0,esm.interpolate)(frame, [150, 210], [0, 1], {
-    extrapolateRight: "clamp"
-  });
-  const debtScale = (0,esm.spring)({
-    fps: 30,
-    frame: frame - 150,
-    config: {
-      damping: 100,
-      stiffness: 200,
-      mass: 0.5
-    }
-  });
-  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { background: "#0d1117" }, children: [
-    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { opacity: bgOpacity }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      ImageLayer,
-      {
-        src: "/assets/images/episode05/historic-bank-facade.jpg",
-        kenBurns: { panDirection: "right", intensity: "moderate" },
-        layer: { filter: "vintage", opacity: 0.6 },
-        startFrame: 0,
-        durationFrames: 540
-      }
-    ) }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(Vignette, { intensity: 0.75 }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(FilmGrain, { opacity: 0.08 }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      DocumentaryOverlay,
-      {
-        year: "1914-1920",
-        title: "Benjamin Strong",
-        subtitle: "The Fed's True Master",
-        frame: frame - 30,
-        fadeInDuration: 45
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      "div",
-      {
-        style: {
-          position: "absolute",
-          top: "25%",
-          left: "8%",
-          opacity: profileOpacity
-        },
-        children: /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsx)(
           "div",
           {
             style: {
-              padding: "20px 28px",
-              background: "rgba(0,0,0,0.85)",
-              border: "2px solid #ffd700",
-              borderRadius: 8
+              position: "absolute",
+              bottom: "15%",
+              left: "50%",
+              transform: "translateX(-50%)",
+              opacity: warningOpacity,
+              fontSize: 24,
+              color: "#FF6347",
+              textShadow: "0 0 10px rgba(255, 99, 71, 0.5)"
             },
-            children: [
-              /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                "div",
-                {
-                  style: {
-                    fontFamily: "Cinzel, serif",
-                    fontSize: 14,
-                    color: "#ffd700",
-                    marginBottom: 12,
-                    letterSpacing: 2
-                  },
-                  children: "GOVERNOR"
-                }
-              ),
-              /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-                "div",
-                {
-                  style: {
-                    fontFamily: "Merriweather, serif",
-                    fontSize: 13,
-                    color: "#e8e8e8",
-                    lineHeight: 1.8
-                  },
-                  children: [
-                    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { children: "\u2022 NY Federal Reserve Bank" }),
-                    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { children: "\u2022 Morgan's chosen leader" }),
-                    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { children: "\u2022 Controlled entire Fed system" })
-                  ]
-                }
-              )
-            ]
+            children: "\u56FD\u9645\u94F6\u884C\u5BB6\u5982\u4F55\u901A\u8FC7\u5E9F\u9664\u91D1\u672C\u4F4D\u94FA\u5E73\u901A\u5F80\u7B2C\u4E8C\u6B21\u4E16\u754C\u5927\u6218\u7684\u9053\u8DEF"
           }
         )
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      "div",
-      {
-        style: {
-          position: "absolute",
-          bottom: "20%",
-          right: "8%",
-          opacity: statsOpacity,
-          transform: `scale(${debtScale})`
-        },
-        children: /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+      ]
+    }
+  );
+};
+/* harmony default export */ const documentary_OpeningDocumentaryScene = ((/* unused pure expression or super */ null && (OpeningDocumentaryScene)));
+
+;// ./src/components/scenes/episode06/documentary/KeynesDocumentaryScene.tsx
+
+
+
+const KeynesDocumentaryScene = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const titleOpacity = (0,esm.interpolate)(frame, [0, 30], [0, 1], {
+    extrapolateRight: "clamp"
+  });
+  const keynesScale = (0,esm.spring)({
+    frame: frame - 60,
+    fps: 30,
+    config: { damping: 12, stiffness: 80 }
+  });
+  const goldOpacity = (0,esm.interpolate)(frame, [180, 240], [0, 1], {
+    extrapolateRight: "clamp"
+  });
+  const reasonOpacity = (0,esm.interpolate)(frame, [300, 360], [0, 1], {
+    extrapolateRight: "clamp"
+  });
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+    esm.AbsoluteFill,
+    {
+      style: {
+        background: "radial-gradient(circle at center, #1a1a2e 0%, #0d1117 100%)"
+      },
+      children: [
+        /* @__PURE__ */ (0,jsx_runtime.jsx)(
           "div",
           {
             style: {
-              padding: "24px",
-              background: "rgba(139, 0, 0, 0.85)",
-              border: "2px solid #ef4444",
-              borderRadius: 8
+              position: "absolute",
+              top: "10%",
+              left: "50%",
+              transform: "translateX(-50%)",
+              opacity: titleOpacity,
+              fontSize: 40,
+              fontWeight: "bold",
+              color: "#C0C0C0"
+            },
+            children: '\u51EF\u6069\u65AF\u7684"\u5EC9\u4EF7\u8D27\u5E01"'
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              top: "25%",
+              left: "50%",
+              transform: `translateX(-50%) scale(${keynesScale})`,
+              fontSize: 36,
+              color: "#FFD700",
+              textAlign: "center"
             },
             children: [
-              /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                "div",
-                {
-                  style: {
-                    fontFamily: "Cinzel, serif",
-                    fontSize: 14,
-                    color: "#ef4444",
-                    marginBottom: 16,
-                    letterSpacing: 2
-                  },
-                  children: "US NATIONAL DEBT"
-                }
-              ),
-              /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { display: "flex", alignItems: "center", gap: 20 }, children: [
-                /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { textAlign: "center" }, children: [
-                  /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
-                    fontFamily: "Cinzel, serif",
-                    fontSize: 24,
-                    color: "#9ca3af",
-                    textDecoration: "line-through"
-                  }, children: "$1B" }),
-                  /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontFamily: "Merriweather, serif", fontSize: 11, color: "#718096" }, children: "1916" })
-                ] }),
-                /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { color: "#ffd700", fontSize: 28 }, children: "\u2192" }),
-                /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { textAlign: "center" }, children: [
-                  /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
-                    fontFamily: "Cinzel, serif",
-                    fontSize: 32,
-                    color: "#ef4444",
-                    fontWeight: 700
-                  }, children: "$25B" }),
-                  /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontFamily: "Merriweather, serif", fontSize: 11, color: "#9ca3af" }, children: "1920" })
-                ] })
-              ] }),
-              /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: {
-                fontFamily: "Merriweather, serif",
-                fontSize: 12,
-                color: "#ef4444",
-                marginTop: 12,
-                textAlign: "center"
-              }, children: "25x increase in 4 years" })
+              '"\u9EC4\u91D1\u662F\u91CE\u86EE\u7684\u9057\u8FF9"',
+              /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)("span", { style: { fontSize: 24, color: "#A0A0A0" }, children: "\u2014\u2014 \u51EF\u6069\u65AF" })
+            ]
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              top: "45%",
+              left: "10%",
+              right: "10%",
+              opacity: goldOpacity,
+              fontSize: 24,
+              color: "#E0E0E0",
+              lineHeight: 1.6,
+              textAlign: "center"
+            },
+            children: [
+              "\u5728\u4EBA\u7C7B\u957F\u8FBE5000\u5E74\u7684\u793E\u4F1A\u5B9E\u8DF5\u4E2D\uFF0C\u9EC4\u91D1\u88AB\u4E16\u4EBA\u516C\u8BA4\u662F\u8D22\u5BCC\u7684\u6700\u7EC8\u5F62\u5F0F\u3002",
+              /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
+              "\u5F53\u653F\u5E9C\u5F3A\u884C\u5265\u593A\u4EBA\u6C11\u5C06\u7EB8\u5E01\u5151\u6362\u9EC4\u91D1\u8FD9\u4E00\u6743\u529B\u7684\u65F6\u5019\uFF0C",
+              /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
+              "\u4E5F\u5C31\u4ECE\u6839\u672C\u4E0A\u5265\u593A\u4E86\u4EBA\u6C11\u6700\u57FA\u672C\u7684\u81EA\u7531\u3002"
+            ]
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              bottom: "15%",
+              left: "50%",
+              transform: "translateX(-50%)",
+              opacity: reasonOpacity,
+              fontSize: 22,
+              color: "#FF6347",
+              textAlign: "center"
+            },
+            children: [
+              "\u94F6\u884C\u5BB6\u9700\u8981\u5371\u673A\u548C\u8870\u9000\u6765\u5E9F\u9664\u91D1\u672C\u4F4D",
+              /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
+              "\u56E0\u4E3A\u6B63\u5E38\u60C5\u51B5\u4E0B\uFF0C\u4EBA\u6C11\u7EDD\u4E0D\u4F1A\u653E\u5F03\u4ED6\u4EEC\u7684\u9EC4\u91D1"
             ]
           }
         )
-      }
-    )
-  ] });
+      ]
+    }
+  );
 };
-/* harmony default export */ const documentary_StrongFedDocumentaryScene = ((/* unused pure expression or super */ null && (StrongFedDocumentaryScene)));
+/* harmony default export */ const documentary_KeynesDocumentaryScene = ((/* unused pure expression or super */ null && (KeynesDocumentaryScene)));
 
-;// ./src/components/scenes/episode05/documentary/WilsonWarDocumentaryScene.tsx
-
-
+;// ./src/components/scenes/episode06/documentary/Election1932DocumentaryScene.tsx
 
 
-const WilsonWarDocumentaryScene = () => {
+
+const Election1932DocumentaryScene = () => {
   const frame = (0,esm.useCurrentFrame)();
-  const bgOpacity = (0,esm.interpolate)(frame, [0, 45], [0, 1], { extrapolateRight: "clamp" });
-  const quoteOpacity = (0,esm.interpolate)(frame, [60, 120], [0, 1], { extrapolateRight: "clamp" });
-  const realityOpacity = (0,esm.interpolate)(frame, [150, 210], [0, 1], { extrapolateRight: "clamp" });
-  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { background: "#0d1117" }, children: [
-    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { opacity: bgOpacity }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      ImageLayer,
-      {
-        src: "/assets/images/episode05/wwi-grave-marker.jpg",
-        kenBurns: { panDirection: "zoom-in", intensity: "subtle" },
-        layer: { filter: "sepia", opacity: 0.5 },
-        startFrame: 0,
-        durationFrames: 540
-      }
-    ) }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(Vignette, { intensity: 0.75 }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(FilmGrain, { opacity: 0.08 }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      DocumentaryOverlay,
-      {
-        year: "1917",
-        title: "President Wilson",
-        subtitle: "The Road to War",
-        frame: frame - 30,
-        fadeInDuration: 45
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { position: "absolute", top: "25%", left: "50%", transform: "translateX(-50%)", opacity: quoteOpacity }, children: /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { padding: "30px 50px", background: "rgba(0,0,0,0.85)", border: "2px solid #3b82f6", borderRadius: 8, textAlign: "center" }, children: [
-      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontFamily: "Merriweather, serif", fontSize: 20, color: "#fff", fontStyle: "italic" }, children: '"We fight for democracy and moral principles"' }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontFamily: "Merriweather, serif", fontSize: 14, color: "#3b82f6", marginTop: 12 }, children: "\u2014 President Wilson" })
-    ] }) }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { position: "absolute", bottom: "20%", left: "50%", transform: "translateX(-50%)", opacity: realityOpacity }, children: /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { padding: "24px 40px", background: "rgba(139, 0, 0, 0.9)", border: "2px solid #ef4444", borderRadius: 8, textAlign: "center" }, children: [
-      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontFamily: "Cinzel, serif", fontSize: 14, color: "#ef4444", marginBottom: 12, letterSpacing: 2 }, children: "THE REALITY" }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontFamily: "Merriweather, serif", fontSize: 16, color: "#e8e8e8" }, children: "Protecting $30 billion in loans to the Allies" }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontFamily: "Merriweather, serif", fontSize: 14, color: "#9ca3af", marginTop: 8 }, children: "Morgan, Rockefeller, Warburg, Schiff \u2014 the puppet masters" })
-    ] }) })
-  ] });
-};
-/* harmony default export */ const documentary_WilsonWarDocumentaryScene = ((/* unused pure expression or super */ null && (WilsonWarDocumentaryScene)));
-
-;// ./src/components/scenes/episode05/documentary/WarProfiteersDocumentaryScene.tsx
-
-
-
-
-const WarProfiteersDocumentaryScene = () => {
-  const frame = (0,esm.useCurrentFrame)();
-  const bgOpacity = (0,esm.interpolate)(frame, [0, 45], [0, 1], { extrapolateRight: "clamp" });
-  const bankOpacity = (0,esm.interpolate)(frame, [60, 120], [0, 1], { extrapolateRight: "clamp" });
-  const profitOpacity = (0,esm.interpolate)(frame, [180, 240], [0, 1], { extrapolateRight: "clamp" });
-  const scale = (0,esm.spring)({
-    fps: 30,
-    frame: frame - 180,
-    config: { damping: 100, stiffness: 200, mass: 0.5 }
+  const titleOpacity = (0,esm.interpolate)(frame, [0, 30], [0, 1], {
+    extrapolateRight: "clamp"
   });
-  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { background: "#0d1117" }, children: [
-    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { opacity: bgOpacity }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      ImageLayer,
-      {
-        src: "/assets/images/episode05/wall-street-skyline.jpg",
-        kenBurns: { panDirection: "zoom-in", intensity: "moderate" },
-        layer: { filter: "vintage", opacity: 0.6 },
-        startFrame: 0,
-        durationFrames: 600
-      }
-    ) }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(Vignette, { intensity: 0.75 }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(FilmGrain, { opacity: 0.08 }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      DocumentaryOverlay,
-      {
-        year: "1914-1918",
-        title: "War Profiteers",
-        subtitle: "The Bankers' Bonanza",
-        frame: frame - 30,
-        fadeInDuration: 45
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { position: "absolute", top: "22%", left: "8%", right: "8%", opacity: bankOpacity }, children: /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { display: "flex", justifyContent: "space-between", gap: 16 }, children: [
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(ProfiteerCard, { name: "Paul Warburg", role: "Fed Vice Chair", note: "Brother: German Intel" }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(ProfiteerCard, { name: "Bernard Baruch", role: "War Industries", note: "$100B purchases/yr" }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(ProfiteerCard, { name: "Eugene Meyer", role: "War Finance Corp", note: "War bonds issued" })
-    ] }) }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { position: "absolute", bottom: "18%", left: "50%", transform: `translateX(-50%) scale(${scale})`, opacity: profitOpacity }, children: /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { padding: "30px 60px", background: "linear-gradient(135deg, rgba(139,0,0,0.9), rgba(0,0,0,0.9))", border: "3px solid #ffd700", borderRadius: 8, textAlign: "center" }, children: [
-      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontFamily: "Cinzel, serif", fontSize: 48, color: "#ffd700", fontWeight: 700 }, children: "$3 BILLION" }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontFamily: "Merriweather, serif", fontSize: 16, color: "#e8e8e8", marginTop: 8 }, children: "Morgan's fee from Allied loans alone" })
-    ] }) })
-  ] });
-};
-const ProfiteerCard = ({ name, role, note }) => /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { flex: 1, padding: "16px", background: "rgba(0,0,0,0.85)", border: "1px solid #ffd700", borderRadius: 8, textAlign: "center" }, children: [
-  /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontFamily: "Cinzel, serif", fontSize: 14, color: "#ffd700", marginBottom: 4 }, children: name }),
-  /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontFamily: "Merriweather, serif", fontSize: 11, color: "#e8e8e8", marginBottom: 4 }, children: role }),
-  /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontFamily: "Merriweather, serif", fontSize: 10, color: "#ef4444", fontStyle: "italic" }, children: note })
-] });
-/* harmony default export */ const documentary_WarProfiteersDocumentaryScene = ((/* unused pure expression or super */ null && (WarProfiteersDocumentaryScene)));
-
-;// ./src/components/scenes/episode05/documentary/VersaillesDocumentaryScene.tsx
-
-
-
-
-const VersaillesDocumentaryScene = () => {
-  const frame = (0,esm.useCurrentFrame)();
-  const bgOpacity = (0,esm.interpolate)(frame, [0, 45], [0, 1], { extrapolateRight: "clamp" });
-  const termsOpacity = (0,esm.interpolate)(frame, [60, 120], [0, 1], { extrapolateRight: "clamp" });
-  const fochOpacity = (0,esm.interpolate)(frame, [150, 210], [0, 1], { extrapolateRight: "clamp" });
-  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { background: "#0d1117" }, children: [
-    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { opacity: bgOpacity }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      ImageLayer,
-      {
-        src: "/assets/images/episode05/wwi-trenches-aerial.jpg",
-        kenBurns: { panDirection: "zoom-out", intensity: "moderate" },
-        layer: { filter: "sepia", opacity: 0.6 },
-        startFrame: 0,
-        durationFrames: 540
-      }
-    ) }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(Vignette, { intensity: 0.75 }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(FilmGrain, { opacity: 0.08 }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      DocumentaryOverlay,
-      {
-        year: "1919",
-        title: "Treaty of Versailles",
-        subtitle: "Seeds of the Next War",
-        frame: frame - 30,
-        fadeInDuration: 45
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { position: "absolute", top: "22%", left: "8%", opacity: termsOpacity }, children: /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { padding: "20px 28px", background: "rgba(0,0,0,0.85)", border: "2px solid #ffd700", borderRadius: 8 }, children: [
-      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontFamily: "Cinzel, serif", fontSize: 14, color: "#ffd700", marginBottom: 12, letterSpacing: 2 }, children: "TERMS ON GERMANY" }),
-      /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { fontFamily: "Merriweather, serif", fontSize: 13, color: "#e8e8e8", lineHeight: 1.8 }, children: [
-        /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { color: "#ef4444" }, children: "\u2022 13% territory lost" }),
-        /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { children: "\u2022 320 billion gold marks reparations" }),
-        /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { children: "\u2022 Army limited to 100,000 men" }),
-        /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { children: "\u2022 No submarines, aircraft, or tanks" })
-      ] })
-    ] }) }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { position: "absolute", bottom: "20%", left: "50%", transform: "translateX(-50%)", opacity: fochOpacity }, children: /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { padding: "24px 40px", background: "rgba(139, 0, 0, 0.85)", border: "2px solid #ef4444", borderRadius: 8, textAlign: "center" }, children: [
-      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontFamily: "Merriweather, serif", fontSize: 18, color: "#fff", fontStyle: "italic" }, children: '"This is not peace. It is an armistice for twenty years."' }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontFamily: "Merriweather, serif", fontSize: 14, color: "#ffd700", marginTop: 12 }, children: "\u2014 Marshal Foch" })
-    ] }) })
-  ] });
-};
-/* harmony default export */ const documentary_VersaillesDocumentaryScene = ((/* unused pure expression or super */ null && (VersaillesDocumentaryScene)));
-
-;// ./src/components/scenes/episode05/documentary/AgriculturalCrashDocumentaryScene.tsx
-
-
-
-
-const AgriculturalCrashDocumentaryScene = () => {
-  const frame = (0,esm.useCurrentFrame)();
-  const bgOpacity = (0,esm.interpolate)(frame, [0, 45], [0, 1], { extrapolateRight: "clamp" });
-  const termOpacity = (0,esm.interpolate)(frame, [60, 120], [0, 1], { extrapolateRight: "clamp" });
-  const statsOpacity = (0,esm.interpolate)(frame, [150, 210], [0, 1], { extrapolateRight: "clamp" });
-  const scale = (0,esm.spring)({
-    fps: 30,
+  const crisisOpacity = (0,esm.interpolate)(frame, [60, 120], [0, 1], {
+    extrapolateRight: "clamp"
+  });
+  const rooseveltScale = (0,esm.spring)({
     frame: frame - 150,
-    config: { damping: 100, stiffness: 200, mass: 0.5 }
-  });
-  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { background: "#0d1117" }, children: [
-    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { opacity: bgOpacity }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      ImageLayer,
-      {
-        src: "/assets/images/episode05/great_depression_bread_line_1_pexels.jpeg",
-        kenBurns: { panDirection: "zoom-in", intensity: "subtle" },
-        layer: { filter: "sepia", opacity: 0.7 },
-        startFrame: 0,
-        durationFrames: 540
-      }
-    ) }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(Vignette, { intensity: 0.8 }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(FilmGrain, { opacity: 0.1 }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      DocumentaryOverlay,
-      {
-        year: "1921",
-        title: "Shearing the Farmers",
-        subtitle: "The First Harvest",
-        frame: frame - 30,
-        fadeInDuration: 45
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { position: "absolute", top: "25%", left: "50%", transform: "translateX(-50%)", opacity: termOpacity }, children: /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { padding: "24px 40px", background: "rgba(0,0,0,0.85)", border: "2px solid #ffd700", borderRadius: 8, textAlign: "center" }, children: [
-      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontFamily: "Cinzel, serif", fontSize: 28, color: "#ffd700", letterSpacing: 4 }, children: '"\u526A\u7F8A\u6BDB"' }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontFamily: "Merriweather, serif", fontSize: 14, color: "#e8e8e8", marginTop: 12 }, children: "Acquire assets at a fraction of value after creating economic chaos" })
-    ] }) }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { position: "absolute", bottom: "18%", left: "50%", transform: `translateX(-50%) scale(${scale})`, opacity: statsOpacity }, children: /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { display: "flex", gap: 40 }, children: [
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(StatBox, { value: "-50%", label: "Farm Prices", color: "#ef4444" }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(StatBox, { value: "30%", label: "Farms Foreclosed", color: "#ef4444" }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(StatBox, { value: "Millions", label: "Acres Acquired", color: "#ffd700" })
-    ] }) })
-  ] });
-};
-const StatBox = ({ value, label, color }) => /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { padding: "20px 30px", background: "rgba(0,0,0,0.85)", border: `2px solid ${color}`, borderRadius: 8, textAlign: "center" }, children: [
-  /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontFamily: "Cinzel, serif", fontSize: 28, color, fontWeight: 700 }, children: value }),
-  /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontFamily: "Merriweather, serif", fontSize: 12, color: "#9ca3af", marginTop: 4 }, children: label })
-] });
-/* harmony default export */ const documentary_AgriculturalCrashDocumentaryScene = ((/* unused pure expression or super */ null && (AgriculturalCrashDocumentaryScene)));
-
-;// ./src/components/scenes/episode05/documentary/Conspiracy1927DocumentaryScene.tsx
-
-
-
-
-const Conspiracy1927DocumentaryScene = () => {
-  const frame = (0,esm.useCurrentFrame)();
-  const bgOpacity = (0,esm.interpolate)(frame, [0, 45], [0, 1], { extrapolateRight: "clamp" });
-  const playersOpacity = (0,esm.interpolate)(frame, [60, 120], [0, 1], { extrapolateRight: "clamp" });
-  const planOpacity = (0,esm.interpolate)(frame, [180, 240], [0, 1], { extrapolateRight: "clamp" });
-  const scale = (0,esm.spring)({
     fps: 30,
-    frame: frame - 180,
-    config: { damping: 100, stiffness: 200, mass: 0.5 }
+    config: { damping: 12, stiffness: 80 }
   });
-  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { background: "#0d1117" }, children: [
-    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { opacity: bgOpacity }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      ImageLayer,
-      {
-        src: "/assets/images/episode05/bank-vault-doors.jpg",
-        kenBurns: { panDirection: "zoom-in", intensity: "subtle" },
-        layer: { filter: "vintage", opacity: 0.7 },
-        startFrame: 0,
-        durationFrames: 600
-      }
-    ) }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(Vignette, { intensity: 0.8 }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(FilmGrain, { opacity: 0.1 }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      DocumentaryOverlay,
-      {
-        year: "1927",
-        title: "The Secret Meeting",
-        subtitle: "Long Island, New York",
-        frame: frame - 30,
-        fadeInDuration: 45
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { position: "absolute", top: "22%", left: "8%", right: "8%", opacity: playersOpacity }, children: /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { display: "flex", justifyContent: "center", gap: 24 }, children: [
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(PlayerCard, { name: "Montagu Norman", title: "Bank of England", country: "UK" }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(PlayerCard, { name: "Benjamin Strong", title: "NY Federal Reserve", country: "USA" }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(PlayerCard, { name: "Hjalmar Schacht", title: "Reichsbank", country: "Germany" })
-    ] }) }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { position: "absolute", bottom: "18%", left: "50%", transform: `translateX(-50%) scale(${scale})`, opacity: planOpacity }, children: /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { padding: "24px 40px", background: "rgba(139, 0, 0, 0.9)", border: "3px solid #ffd700", borderRadius: 8, textAlign: "center" }, children: [
-      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontFamily: "Cinzel, serif", fontSize: 14, color: "#ffd700", marginBottom: 12, letterSpacing: 2 }, children: "THE AGREEMENT" }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontFamily: "Merriweather, serif", fontSize: 16, color: "#e8e8e8" }, children: "Lower NY interest rates \u2192 Inflate the bubble \u2192 Pop it \u2192 Harvest" }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontFamily: "Merriweather, serif", fontSize: 13, color: "#ef4444", marginTop: 12 }, children: "$500 million in gold flowed to Europe" })
-    ] }) })
-  ] });
+  const missionOpacity = (0,esm.interpolate)(frame, [240, 300], [0, 1], {
+    extrapolateRight: "clamp"
+  });
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+    esm.AbsoluteFill,
+    {
+      style: {
+        background: "radial-gradient(circle at center, #1a0a0a 0%, #0d1117 100%)"
+      },
+      children: [
+        /* @__PURE__ */ (0,jsx_runtime.jsx)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              top: "10%",
+              left: "50%",
+              transform: "translateX(-50%)",
+              opacity: titleOpacity,
+              fontSize: 40,
+              fontWeight: "bold",
+              color: "#FF6347"
+            },
+            children: "1932\u5E74\u603B\u7EDF\u5927\u9009"
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              top: "25%",
+              left: "10%",
+              right: "10%",
+              opacity: crisisOpacity,
+              fontSize: 24,
+              color: "#E0E0E0",
+              lineHeight: 1.6,
+              textAlign: "center"
+            },
+            children: [
+              "1929\u5E74\u5927\u8427\u6761\u7206\u53D1\uFF0C\u7F8E\u56FD\u7ECF\u6D4E\u9677\u5165\u524D\u6240\u672A\u6709\u7684\u5371\u673A\u3002",
+              /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
+              "\u94F6\u884C\u5012\u95ED\u6F6E\u5E2D\u5377\u5168\u56FD\uFF0C\u4EBA\u6C11\u50A8\u84C4\u5316\u4E3A\u4E4C\u6709\u3002",
+              /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
+              "\u94F6\u884C\u5BB6\u4EEC\u9700\u8981\u4E00\u4E2A\u80FD\u591F\u6267\u884C\u4ED6\u4EEC\u610F\u5FD7\u7684\u4EBA\u3002"
+            ]
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: `translateX(-50%) scale(${rooseveltScale})`,
+              fontSize: 36,
+              color: "#FFD700",
+              textAlign: "center"
+            },
+            children: [
+              "\u4F5B\u5170\u514B\u6797\xB7\u5FB7\u5170\u8BFA\xB7\u7F57\u65AF\u798F",
+              /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)("span", { style: { fontSize: 20, color: "#A0A0A0" }, children: "\u88AB\u9009\u4E2D\u4E86" })
+            ]
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              bottom: "15%",
+              left: "50%",
+              transform: "translateX(-50%)",
+              opacity: missionOpacity,
+              fontSize: 22,
+              color: "#FF4500",
+              textAlign: "center"
+            },
+            children: [
+              "\u56FD\u9645\u94F6\u884C\u5BB6\u8D4B\u4E88\u7F57\u65AF\u798F\u4E00\u4E2A\u5386\u53F2\u4F7F\u547D\uFF1A",
+              /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
+              "\u5E9F\u9664\u91D1\u672C\u4F4D"
+            ]
+          }
+        )
+      ]
+    }
+  );
 };
-const PlayerCard = ({ name, title, country }) => /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { padding: "16px 24px", background: "rgba(0,0,0,0.85)", border: "2px solid #ffd700", borderRadius: 8, textAlign: "center" }, children: [
-  /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontFamily: "Cinzel, serif", fontSize: 14, color: "#ffd700" }, children: name }),
-  /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontFamily: "Merriweather, serif", fontSize: 11, color: "#e8e8e8", marginTop: 4 }, children: title }),
-  /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontFamily: "Merriweather, serif", fontSize: 10, color: "#9ca3af", marginTop: 4 }, children: country })
-] });
-/* harmony default export */ const documentary_Conspiracy1927DocumentaryScene = ((/* unused pure expression or super */ null && (Conspiracy1927DocumentaryScene)));
+/* harmony default export */ const documentary_Election1932DocumentaryScene = ((/* unused pure expression or super */ null && (Election1932DocumentaryScene)));
 
-;// ./src/components/scenes/episode05/documentary/Crash1929NewDocumentaryScene.tsx
+;// ./src/components/scenes/episode06/documentary/GoldStandardDocumentaryScene.tsx
 
 
 
-
-const Crash1929NewDocumentaryScene = () => {
+const GoldStandardDocumentaryScene = () => {
   const frame = (0,esm.useCurrentFrame)();
-  const bgOpacity = (0,esm.interpolate)(frame, [0, 45], [0, 1], { extrapolateRight: "clamp" });
-  const crashOpacity = (0,esm.interpolate)(frame, [90, 150], [0, 1], { extrapolateRight: "clamp" });
-  const statsOpacity = (0,esm.interpolate)(frame, [180, 240], [0, 1], { extrapolateRight: "clamp" });
-  const harvestOpacity = (0,esm.interpolate)(frame, [300, 360], [0, 1], { extrapolateRight: "clamp" });
-  const scale = (0,esm.spring)({
-    fps: 30,
-    frame: frame - 90,
-    config: { damping: 100, stiffness: 200, mass: 0.5 }
+  const titleOpacity = (0,esm.interpolate)(frame, [0, 30], [0, 1], {
+    extrapolateRight: "clamp"
   });
-  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { background: "#0d1117" }, children: [
-    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { opacity: bgOpacity }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      ImageLayer,
-      {
-        src: "/assets/images/episode05/1929_wall_street_crash_1_pexels.jpeg",
-        kenBurns: { panDirection: "zoom-in", intensity: "dramatic" },
-        layer: { filter: "sepia", opacity: 0.7 },
-        startFrame: 0,
-        durationFrames: 660
-      }
-    ) }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(Vignette, { intensity: 0.85 }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(FilmGrain, { opacity: 0.12 }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      DocumentaryOverlay,
-      {
-        year: "1929",
-        title: "Black Tuesday",
-        subtitle: "October 29 \u2014 The Bubble Bursts",
-        frame: frame - 30,
-        fadeInDuration: 45
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { position: "absolute", top: "28%", left: "50%", transform: `translateX(-50%) scale(${scale})`, opacity: crashOpacity }, children: /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { padding: "30px 60px", background: "rgba(139, 0, 0, 0.9)", border: "3px solid #ef4444", borderRadius: 8, textAlign: "center" }, children: [
-      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontFamily: "Cinzel, serif", fontSize: 56, color: "#ef4444", fontWeight: 700 }, children: "$160 BILLION" }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontFamily: "Merriweather, serif", fontSize: 18, color: "#e8e8e8", marginTop: 8 }, children: "Wealth Vanished in One Day" })
-    ] }) }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { position: "absolute", bottom: "28%", left: "50%", transform: "translateX(-50%)", opacity: statsOpacity }, children: /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { display: "flex", gap: 40 }, children: [
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(Crash1929NewDocumentaryScene_StatBox, { value: "-90%", label: "Stock Value", color: "#ef4444" }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(Crash1929NewDocumentaryScene_StatBox, { value: "8,812", label: "Banks Failed", color: "#ef4444" }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(Crash1929NewDocumentaryScene_StatBox, { value: "40%", label: "Wealth Lost", color: "#ffd700" })
-    ] }) }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { position: "absolute", bottom: "12%", left: "50%", transform: "translateX(-50%)", opacity: harvestOpacity }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontFamily: "Merriweather, serif", fontSize: 16, color: "#ffd700", fontStyle: "italic" }, children: '"Buy when blood is in the streets." \u2014 The harvest began.' }) })
-  ] });
+  const orderOpacity = (0,esm.interpolate)(frame, [60, 120], [0, 1], {
+    extrapolateRight: "clamp"
+  });
+  const confiscationOpacity = (0,esm.interpolate)(frame, [150, 210], [0, 1], {
+    extrapolateRight: "clamp"
+  });
+  const devaluationScale = (0,esm.spring)({
+    frame: frame - 270,
+    fps: 30,
+    config: { damping: 12, stiffness: 80 }
+  });
+  const resultOpacity = (0,esm.interpolate)(frame, [360, 420], [0, 1], {
+    extrapolateRight: "clamp"
+  });
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+    esm.AbsoluteFill,
+    {
+      style: {
+        background: "radial-gradient(circle at center, #2a1a0a 0%, #0d1117 100%)"
+      },
+      children: [
+        /* @__PURE__ */ (0,jsx_runtime.jsx)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              top: "8%",
+              left: "50%",
+              transform: "translateX(-50%)",
+              opacity: titleOpacity,
+              fontSize: 36,
+              fontWeight: "bold",
+              color: "#FFD700"
+            },
+            children: "1933\u5E744\u67085\u65E5\uFF1A\u6CA1\u6536\u9EC4\u91D1"
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              top: "20%",
+              left: "10%",
+              right: "10%",
+              opacity: orderOpacity,
+              fontSize: 22,
+              color: "#E0E0E0",
+              lineHeight: 1.6,
+              textAlign: "center"
+            },
+            children: [
+              "\u7F57\u65AF\u798F\u53D1\u5E03\u884C\u653F\u547D\u4EE4\uFF1A",
+              /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
+              "\u6240\u6709\u7F8E\u56FD\u516C\u6C11\u5FC5\u987B\u5C06\u9EC4\u91D1\u4EA4\u7ED9\u8054\u90A6\u50A8\u5907\u94F6\u884C\uFF0C\u6362\u53D6\u7EB8\u5E01\u3002"
+            ]
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsx)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              top: "38%",
+              left: "50%",
+              transform: "translateX(-50%)",
+              opacity: confiscationOpacity,
+              fontSize: 20,
+              color: "#FF6347",
+              textAlign: "center"
+            },
+            children: "\u8FDD\u8005\u5C06\u88AB\u5904\u4EE5\u6700\u9AD810\u5E74\u76D1\u7981\u548C1\u4E07\u7F8E\u5143\u7F5A\u6B3E"
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: `translateX(-50%) scale(${devaluationScale})`,
+              fontSize: 32,
+              color: "#FF4500",
+              textAlign: "center"
+            },
+            children: [
+              "1934\u5E741\u6708\uFF1A\u7F8E\u5143\u8D2C\u503C41%",
+              /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)("span", { style: { fontSize: 18, color: "#A0A0A0" }, children: "\u4ECE$20.67/\u76CE\u53F8 \u2192 $35/\u76CE\u53F8" })
+            ]
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              bottom: "12%",
+              left: "10%",
+              right: "10%",
+              opacity: resultOpacity,
+              fontSize: 20,
+              color: "#E0E0E0",
+              textAlign: "center"
+            },
+            children: [
+              "\u4EBA\u6C11\u624B\u4E2D\u7684\u7EB8\u5E01\u8D22\u5BCC\u88AB\u79D8\u5BC6\u5730\u5265\u593A\u4E86",
+              /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
+              "\u91D1\u672C\u4F4D\u88AB\u5E9F\u9664\u4E86\uFF0C\u901A\u5F80\u6218\u4E89\u7684\u9053\u8DEF\u88AB\u94FA\u5E73\u4E86"
+            ]
+          }
+        )
+      ]
+    }
+  );
 };
-const Crash1929NewDocumentaryScene_StatBox = ({ value, label, color }) => /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { padding: "16px 24px", background: "rgba(0,0,0,0.85)", border: `2px solid ${color}`, borderRadius: 8, textAlign: "center" }, children: [
-  /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontFamily: "Cinzel, serif", fontSize: 28, color, fontWeight: 700 }, children: value }),
-  /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontFamily: "Merriweather, serif", fontSize: 12, color: "#9ca3af", marginTop: 4 }, children: label })
-] });
-/* harmony default export */ const documentary_Crash1929NewDocumentaryScene = ((/* unused pure expression or super */ null && (Crash1929NewDocumentaryScene)));
+/* harmony default export */ const documentary_GoldStandardDocumentaryScene = ((/* unused pure expression or super */ null && (GoldStandardDocumentaryScene)));
 
-;// ./src/components/scenes/episode05/documentary/SummaryDocumentaryScene.tsx
+;// ./src/components/scenes/episode06/documentary/HitlerSelectedDocumentaryScene.tsx
 
+
+
+const HitlerSelectedDocumentaryScene = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const titleOpacity = (0,esm.interpolate)(frame, [0, 30], [0, 1], {
+    extrapolateRight: "clamp"
+  });
+  const germanyOpacity = (0,esm.interpolate)(frame, [60, 120], [0, 1], {
+    extrapolateRight: "clamp"
+  });
+  const selectionScale = (0,esm.spring)({
+    frame: frame - 150,
+    fps: 30,
+    config: { damping: 12, stiffness: 80 }
+  });
+  const investorsOpacity = (0,esm.interpolate)(frame, [240, 300], [0, 1], {
+    extrapolateRight: "clamp"
+  });
+  const purposeOpacity = (0,esm.interpolate)(frame, [360, 420], [0, 1], {
+    extrapolateRight: "clamp"
+  });
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+    esm.AbsoluteFill,
+    {
+      style: {
+        background: "radial-gradient(circle at center, #1a0a0a 0%, #0d1117 100%)"
+      },
+      children: [
+        /* @__PURE__ */ (0,jsx_runtime.jsx)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              top: "10%",
+              left: "50%",
+              transform: "translateX(-50%)",
+              opacity: titleOpacity,
+              fontSize: 36,
+              fontWeight: "bold",
+              color: "#8B0000"
+            },
+            children: '"\u98CE\u9669\u6295\u8D44"\u9009\u4E2D\u4E86\u5E0C\u7279\u52D2'
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              top: "25%",
+              left: "10%",
+              right: "10%",
+              opacity: germanyOpacity,
+              fontSize: 22,
+              color: "#E0E0E0",
+              lineHeight: 1.6,
+              textAlign: "center"
+            },
+            children: [
+              "\u5F53\u7F8E\u56FD\u6B63\u5728\u7ECF\u5386\u5927\u8427\u6761\u7684\u65F6\u5019\uFF0C",
+              /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
+              "\u5927\u6D0B\u5F7C\u5CB8\u7684\u5FB7\u56FD\u4E5F\u5728\u7ECF\u5386\u7740\u524D\u6240\u672A\u6709\u7684\u7ECF\u6D4E\u5371\u673A\u3002",
+              /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
+              "\u56FD\u9645\u94F6\u884C\u5BB6\u4EEC\u6B63\u5728\u5BFB\u627E\u4E00\u4E2A\u65B0\u7684\u4EE3\u7406\u4EBA\u3002"
+            ]
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              top: "48%",
+              left: "50%",
+              transform: `translateX(-50%) scale(${selectionScale})`,
+              fontSize: 28,
+              color: "#FF4500",
+              textAlign: "center"
+            },
+            children: [
+              "\u963F\u9053\u592B\xB7\u5E0C\u7279\u52D2",
+              /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)("span", { style: { fontSize: 18, color: "#A0A0A0" }, children: "\u8FDB\u5165\u4E86\u4ED6\u4EEC\u7684\u89C6\u91CE" })
+            ]
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsx)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              bottom: "25%",
+              left: "10%",
+              right: "10%",
+              opacity: investorsOpacity,
+              fontSize: 20,
+              color: "#C0C0C0",
+              textAlign: "center"
+            },
+            children: "JP\u6469\u6839\u3001\u6D1B\u514B\u83F2\u52D2\u3001\u798F\u7279\u7B49\u7F8E\u56FD\u5927\u8D22\u56E2\u90FD\u53C2\u4E0E\u5176\u4E2D"
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsx)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              bottom: "12%",
+              left: "50%",
+              transform: "translateX(-50%)",
+              opacity: purposeOpacity,
+              fontSize: 22,
+              color: "#FF6347"
+            },
+            children: '\u8FD9\u662F\u4E00\u7B14"\u98CE\u9669\u6295\u8D44"\uFF0C\u76EE\u7684\u662F\u5236\u9020\u4E00\u573A\u65B0\u7684\u6218\u4E89'
+          }
+        )
+      ]
+    }
+  );
+};
+/* harmony default export */ const documentary_HitlerSelectedDocumentaryScene = ((/* unused pure expression or super */ null && (HitlerSelectedDocumentaryScene)));
+
+;// ./src/components/scenes/episode06/documentary/WallStreetNaziDocumentaryScene.tsx
+
+
+
+const WallStreetNaziDocumentaryScene = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const titleOpacity = (0,esm.interpolate)(frame, [0, 30], [0, 1], {
+    extrapolateRight: "clamp"
+  });
+  const companiesOpacity = (0,esm.interpolate)(frame, [60, 120], [0, 1], {
+    extrapolateRight: "clamp"
+  });
+  const bisOpacity = (0,esm.interpolate)(frame, [180, 240], [0, 1], {
+    extrapolateRight: "clamp"
+  });
+  const warScale = (0,esm.spring)({
+    frame: frame - 300,
+    fps: 30,
+    config: { damping: 12, stiffness: 80 }
+  });
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+    esm.AbsoluteFill,
+    {
+      style: {
+        background: "radial-gradient(circle at center, #0a0a1a 0%, #0d1117 100%)"
+      },
+      children: [
+        /* @__PURE__ */ (0,jsx_runtime.jsx)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              top: "10%",
+              left: "50%",
+              transform: "translateX(-50%)",
+              opacity: titleOpacity,
+              fontSize: 36,
+              fontWeight: "bold",
+              color: "#4B0082"
+            },
+            children: "\u534E\u5C14\u8857\u8D44\u52A9\u4E0B\u7684\u7EB3\u7CB9\u5FB7\u56FD"
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              top: "25%",
+              left: "10%",
+              right: "10%",
+              opacity: companiesOpacity,
+              fontSize: 20,
+              color: "#E0E0E0",
+              lineHeight: 1.8,
+              textAlign: "center"
+            },
+            children: [
+              /* @__PURE__ */ (0,jsx_runtime.jsx)("span", { style: { color: "#FFD700" }, children: "\u6807\u51C6\u77F3\u6CB9" }),
+              "\uFF1A\u63D0\u4F9B\u56DB\u4E59\u57FA\u94C5\u6280\u672F\uFF0C\u7528\u4E8E\u822A\u7A7A\u71C3\u6599",
+              /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)("span", { style: { color: "#FFD700" }, children: "IBM" }),
+              "\uFF1A\u63D0\u4F9B\u6253\u5B54\u5361\u7247\u7CFB\u7EDF\uFF0C\u7528\u4E8E\u96C6\u4E2D\u8425\u7BA1\u7406",
+              /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)("span", { style: { color: "#FFD700" }, children: "\u798F\u7279\u6C7D\u8F66" }),
+              "\uFF1A\u4E3A\u7EB3\u7CB9\u751F\u4EA7\u519B\u7528\u5361\u8F66",
+              /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)("span", { style: { color: "#FFD700" }, children: "\u7F8E\u56FD\u94F6\u884C\u5BB6" }),
+              "\uFF1A\u901A\u8FC7\u56FD\u9645\u6E05\u7B97\u94F6\u884C\u63D0\u4F9B\u878D\u8D44"
+            ]
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              top: "55%",
+              left: "10%",
+              right: "10%",
+              opacity: bisOpacity,
+              fontSize: 20,
+              color: "#A0A0A0",
+              textAlign: "center"
+            },
+            children: [
+              "\u5373\u4F7F\u5728\u4E8C\u6218\u671F\u95F4\uFF0C\u8FD9\u4E9B\u91D1\u878D\u5F80\u6765\u4ECD\u5728\u7EE7\u7EED\u3002",
+              /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
+              "\u7F8E\u56FD\u548C\u82F1\u56FD\u7684\u94F6\u884C\u5BB6\u4E0E\u7EB3\u7CB9\u5FB7\u56FD\u94F6\u884C\u5BB6",
+              /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
+              "\u540C\u5750\u56FD\u9645\u6E05\u7B97\u94F6\u884C\u8463\u4E8B\u4F1A\u3002"
+            ]
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsx)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              bottom: "15%",
+              left: "50%",
+              transform: `translateX(-50%) scale(${warScale})`,
+              fontSize: 24,
+              color: "#FF4500"
+            },
+            children: "\u6218\u4E89\uFF0C\u5BF9\u4ED6\u4EEC\u6765\u8BF4\uFF0C\u53EA\u662F\u53E6\u4E00\u573A\u8D5A\u94B1\u7684\u751F\u610F"
+          }
+        )
+      ]
+    }
+  );
+};
+/* harmony default export */ const documentary_WallStreetNaziDocumentaryScene = ((/* unused pure expression or super */ null && (WallStreetNaziDocumentaryScene)));
+
+;// ./src/components/scenes/episode06/documentary/WarAndMoneyDocumentaryScene.tsx
+
+
+
+const WarAndMoneyDocumentaryScene = () => {
+  const frame = (0,esm.useCurrentFrame)();
+  const titleOpacity = (0,esm.interpolate)(frame, [0, 30], [0, 1], {
+    extrapolateRight: "clamp"
+  });
+  const moneyOpacity = (0,esm.interpolate)(frame, [60, 120], [0, 1], {
+    extrapolateRight: "clamp"
+  });
+  const printingScale = (0,esm.spring)({
+    frame: frame - 150,
+    fps: 30,
+    config: { damping: 12, stiffness: 80 }
+  });
+  const harvestOpacity = (0,esm.interpolate)(frame, [240, 300], [0, 1], {
+    extrapolateRight: "clamp"
+  });
+  const resultOpacity = (0,esm.interpolate)(frame, [360, 420], [0, 1], {
+    extrapolateRight: "clamp"
+  });
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+    esm.AbsoluteFill,
+    {
+      style: {
+        background: "radial-gradient(circle at center, #1a1a0a 0%, #0d1117 100%)"
+      },
+      children: [
+        /* @__PURE__ */ (0,jsx_runtime.jsx)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              top: "10%",
+              left: "50%",
+              transform: "translateX(-50%)",
+              opacity: titleOpacity,
+              fontSize: 36,
+              fontWeight: "bold",
+              color: "#FFD700"
+            },
+            children: "\u6602\u8D35\u7684\u6218\u4E89\u4E0E\u5EC9\u4EF7\u7684\u8D27\u5E01"
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              top: "25%",
+              left: "10%",
+              right: "10%",
+              opacity: moneyOpacity,
+              fontSize: 22,
+              color: "#E0E0E0",
+              lineHeight: 1.6,
+              textAlign: "center"
+            },
+            children: [
+              "\u5E9F\u9664\u91D1\u672C\u4F4D\u94FA\u5E73\u4E86\u901A\u5F80\u7B2C\u4E8C\u6B21\u4E16\u754C\u5927\u6218\u7684\u91D1\u878D\u5927\u9053\u3002",
+              /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
+              "\u6CA1\u6709\u91D1\u672C\u4F4D\u7684\u7EA6\u675F\uFF0C\u653F\u5E9C\u53EF\u4EE5\u65E0\u9650\u5370\u949E\u3002",
+              /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
+              "\u6218\u4E89\u9700\u8981\u5927\u91CF\u7684\u8D44\u91D1\uFF0C\u5EC9\u4EF7\u8D27\u5E01\u63D0\u4F9B\u4E86\u65E0\u9650\u7684\u5F39\u836F\u3002"
+            ]
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              top: "48%",
+              left: "50%",
+              transform: `translateX(-50%) scale(${printingScale})`,
+              fontSize: 28,
+              color: "#FF4500",
+              textAlign: "center"
+            },
+            children: [
+              "1939-1945\u5E74",
+              /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
+              "\u7F8E\u56FD\u8D27\u5E01\u4F9B\u5E94\u91CF\u589E\u52A0\u4E86",
+              /* @__PURE__ */ (0,jsx_runtime.jsx)("span", { style: { fontSize: 36, color: "#FFD700" }, children: "3\u500D" })
+            ]
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              bottom: "28%",
+              left: "10%",
+              right: "10%",
+              opacity: harvestOpacity,
+              fontSize: 20,
+              color: "#C0C0C0",
+              textAlign: "center"
+            },
+            children: [
+              "\u6218\u4E89\u7ED3\u675F\u540E\uFF0C\u56FD\u9645\u94F6\u884C\u5BB6\u7684\u6536\u83B7\u662F\u5DE8\u5927\u7684\uFF1A",
+              /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
+              "\u5E03\u96F7\u987F\u68EE\u6797\u4F53\u7CFB\u786E\u7ACB\u4E86\u7F8E\u5143\u7684\u9738\u6743\u5730\u4F4D"
+            ]
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsx)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              bottom: "12%",
+              left: "50%",
+              transform: "translateX(-50%)",
+              opacity: resultOpacity,
+              fontSize: 22,
+              color: "#FF6347"
+            },
+            children: "\u6602\u8D35\u7684\u6218\u4E89\u7531\u4EBA\u6C11\u627F\u62C5\u4EE3\u4EF7\uFF0C\u5EC9\u4EF7\u7684\u8D27\u5E01\u8BA9\u94F6\u884C\u5BB6\u83B7\u5229"
+          }
+        )
+      ]
+    }
+  );
+};
+/* harmony default export */ const documentary_WarAndMoneyDocumentaryScene = ((/* unused pure expression or super */ null && (WarAndMoneyDocumentaryScene)));
+
+;// ./src/components/scenes/episode06/documentary/SummaryDocumentaryScene.tsx
 
 
 
 const SummaryDocumentaryScene_SummaryDocumentaryScene = () => {
   const frame = (0,esm.useCurrentFrame)();
-  const bgOpacity = (0,esm.interpolate)(frame, [0, 45], [0, 1], { extrapolateRight: "clamp" });
-  const cycleOpacity = (0,esm.interpolate)(frame, [60, 120], [0, 1], { extrapolateRight: "clamp" });
-  const conclusionOpacity = (0,esm.interpolate)(frame, [180, 240], [0, 1], { extrapolateRight: "clamp" });
-  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { background: "#0d1117" }, children: [
-    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { opacity: bgOpacity }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      ImageLayer,
-      {
-        src: "/assets/images/episode05/financial-trading-screen.jpg",
-        kenBurns: { panDirection: "zoom-in", intensity: "subtle" },
-        layer: { filter: "vintage", opacity: 0.5 },
-        startFrame: 0,
-        durationFrames: 480
-      }
-    ) }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(Vignette, { intensity: 0.75 }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(FilmGrain, { opacity: 0.08 }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      DocumentaryOverlay,
-      {
-        year: "THE CYCLE",
-        title: "Harvest of the Century",
-        subtitle: "War, Recession, Consolidation",
-        frame: frame - 30,
-        fadeInDuration: 45
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { position: "absolute", top: "30%", left: "50%", transform: "translateX(-50%)", opacity: cycleOpacity }, children: /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { display: "flex", alignItems: "center", gap: 20 }, children: [
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(CycleStep, { text: "Create Problem" }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(CycleArrow, {}),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(CycleStep, { text: "Inflate Bubble" }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(CycleArrow, {}),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(CycleStep, { text: "Pop It" }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(CycleArrow, {}),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(CycleStep, { text: "Harvest Assets", isHighlight: true })
-    ] }) }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { position: "absolute", bottom: "22%", left: "50%", transform: "translateX(-50%)", opacity: conclusionOpacity }, children: /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { padding: "24px 40px", background: "rgba(0,0,0,0.85)", border: "2px solid #ffd700", borderRadius: 8, textAlign: "center" }, children: [
-      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontFamily: "Merriweather, serif", fontSize: 16, color: "#e8e8e8" }, children: "War and recession: the harvest cycle of international bankers" }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontFamily: "Cinzel, serif", fontSize: 20, color: "#ffd700", marginTop: 12, letterSpacing: 2 }, children: "It continues to this day." })
-    ] }) })
-  ] });
+  const titleOpacity = (0,esm.interpolate)(frame, [0, 30], [0, 1], {
+    extrapolateRight: "clamp"
+  });
+  const essenceOpacity = (0,esm.interpolate)(frame, [60, 120], [0, 1], {
+    extrapolateRight: "clamp"
+  });
+  const keynesOpacity = (0,esm.interpolate)(frame, [150, 210], [0, 1], {
+    extrapolateRight: "clamp"
+  });
+  const goldOpacity = (0,esm.interpolate)(frame, [240, 300], [0, 1], {
+    extrapolateRight: "clamp"
+  });
+  const warOpacity = (0,esm.interpolate)(frame, [330, 390], [0, 1], {
+    extrapolateRight: "clamp"
+  });
+  const truthScale = (0,esm.spring)({
+    frame: frame - 420,
+    fps: 30,
+    config: { damping: 12, stiffness: 80 }
+  });
+  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+    esm.AbsoluteFill,
+    {
+      style: {
+        background: "radial-gradient(circle at center, #1a1a2e 0%, #0d1117 100%)"
+      },
+      children: [
+        /* @__PURE__ */ (0,jsx_runtime.jsx)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              top: "10%",
+              left: "50%",
+              transform: "translateX(-50%)",
+              opacity: titleOpacity,
+              fontSize: 36,
+              fontWeight: "bold",
+              color: "#FFFFFF"
+            },
+            children: "\u603B\u7ED3\uFF1A\u5EC9\u4EF7\u8D27\u5E01\u7684\u771F\u76F8"
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              top: "25%",
+              left: "50%",
+              transform: "translateX(-50%)",
+              opacity: essenceOpacity,
+              fontSize: 22,
+              color: "#E0E0E0",
+              textAlign: "center"
+            },
+            children: [
+              "\u5EC9\u4EF7\u8D27\u5E01\u7684\u672C\u8D28\u662F\u4EC0\u4E48\uFF1F",
+              /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
+              "\u662F\u5265\u593A\u4EBA\u6C11\u7684\u7ECF\u6D4E\u81EA\u7531\uFF0C\u4E3A\u6218\u4E89\u94FA\u5E73\u9053\u8DEF\u3002"
+            ]
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsx)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              top: "38%",
+              left: "10%",
+              right: "10%",
+              opacity: keynesOpacity,
+              fontSize: 18,
+              color: "#C0C0C0",
+              textAlign: "center"
+            },
+            children: '\u51EF\u6069\u65AF\u7684"\u5EC9\u4EF7\u8D27\u5E01"\u7406\u8BBA\u6210\u4E3A\u94F6\u884C\u5BB6\u7684\u5DE5\u5177'
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsx)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              top: "48%",
+              left: "10%",
+              right: "10%",
+              opacity: goldOpacity,
+              fontSize: 18,
+              color: "#C0C0C0",
+              textAlign: "center"
+            },
+            children: "\u5E9F\u9664\u91D1\u672C\u4F4D\u662F\u56FD\u9645\u94F6\u884C\u5BB6\u7684\u767E\u5E74\u68A6\u60F3"
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsx)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              top: "58%",
+              left: "10%",
+              right: "10%",
+              opacity: warOpacity,
+              fontSize: 18,
+              color: "#C0C0C0",
+              textAlign: "center"
+            },
+            children: "\u800C\u6218\u4E89\uFF0C\u5219\u662F\u4ED6\u4EEC\u6536\u5272\u8D22\u5BCC\u7684\u6700\u4F73\u65F6\u673A"
+          }
+        ),
+        /* @__PURE__ */ (0,jsx_runtime.jsxs)(
+          "div",
+          {
+            style: {
+              position: "absolute",
+              bottom: "18%",
+              left: "50%",
+              transform: `translateX(-50%) scale(${truthScale})`,
+              fontSize: 28,
+              color: "#FFD700",
+              textShadow: "0 0 20px rgba(255, 215, 0, 0.5)"
+            },
+            children: [
+              "\u4EBA\u6C11\u88AB\u901A\u80C0\u5265\u593A\uFF0C\u56FD\u5BB6\u88AB\u503A\u52A1\u5974\u5F79",
+              /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
+              /* @__PURE__ */ (0,jsx_runtime.jsx)("span", { style: { fontSize: 24, color: "#FF6347" }, children: "\u8FD9\u5C31\u662F\u5EC9\u4EF7\u8D27\u5E01\u7684\u771F\u76F8" })
+            ]
+          }
+        )
+      ]
+    }
+  );
 };
-const CycleStep = ({ text, isHighlight }) => /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { padding: "12px 20px", background: isHighlight ? "rgba(139, 0, 0, 0.85)" : "rgba(0,0,0,0.85)", border: `2px solid ${isHighlight ? "#ffd700" : "#4a5568"}`, borderRadius: 8 }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontFamily: "Merriweather, serif", fontSize: 14, color: isHighlight ? "#ffd700" : "#e8e8e8", whiteSpace: "nowrap" }, children: text }) });
-const CycleArrow = () => /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { color: "#ffd700", fontSize: 20 }, children: "\u2192" });
-/* harmony default export */ const episode05_documentary_SummaryDocumentaryScene = ((/* unused pure expression or super */ null && (SummaryDocumentaryScene_SummaryDocumentaryScene)));
+/* harmony default export */ const episode06_documentary_SummaryDocumentaryScene = ((/* unused pure expression or super */ null && (SummaryDocumentaryScene_SummaryDocumentaryScene)));
 
-;// ./src/subtitles/episode05Documentary.ts
+;// ./src/subtitles/episode06.ts
 
-const episode05Documentary_openingSubs = [
+const episode06_openingSubs = [
   {
     startFrame: 0,
     endFrame: 150,
-    text: '"The real threat to our republic is this invisible government."',
-    translation: '"\u6211\u4EEC\u5171\u548C\u56FD\u7684\u771F\u6B63\u5A01\u80C1\u662F\u8FD9\u4E2A\u770B\u4E0D\u89C1\u7684\u653F\u5E9C\u3002"'
+    text: "\u5217\u5B81\u66FE\u8BF4\u8FC7\uFF1A\u98A0\u8986\u8D44\u672C\u4E3B\u4E49\u5236\u5EA6\u6700\u597D\u7684\u529E\u6CD5\u5C31\u662F\u4F7F\u5176\u8D27\u5E01\u8D2C\u503C\u3002"
   },
   {
     startFrame: 150,
     endFrame: 300,
-    text: "\u2014 John Hylan, Mayor of New York, 1927",
-    translation: "\u2014 \u7EA6\u7FF0\xB7\u6D77\u5170\uFF0C\u7EBD\u7EA6\u5E02\u5E02\u957F\uFF0C1927\u5E74"
-  }
-];
-const noFedNoWarSubs = [
-  {
-    startFrame: 0,
-    endFrame: 200,
-    text: "1914. Europe stood on the brink of war.",
-    translation: "1914\u5E74\u3002\u6B27\u6D32\u7AD9\u5728\u6218\u4E89\u8FB9\u7F18\u3002"
-  },
-  {
-    startFrame: 200,
-    endFrame: 400,
-    text: "But no major war was possible without financing.",
-    translation: "\u4F46\u6CA1\u6709\u8D44\u91D1\u652F\u6301\uFF0C\u5927\u89C4\u6A21\u6218\u4E89\u662F\u4E0D\u53EF\u80FD\u7684\u3002"
-  },
-  {
-    startFrame: 400,
-    endFrame: 600,
-    text: "Then came the Federal Reserve. December 23, 1913.",
-    translation: "\u7136\u540E\u7F8E\u8054\u50A8\u6765\u4E86\u30021913\u5E7412\u670823\u65E5\u3002"
-  },
-  {
-    startFrame: 600,
-    endFrame: 800,
-    text: "The war machine could finally be unleashed.",
-    translation: "\u6218\u4E89\u673A\u5668\u7EC8\u4E8E\u53EF\u4EE5\u88AB\u91CA\u653E\u4E86\u3002"
-  }
-];
-const strongFedSubs = [
-  {
-    startFrame: 0,
-    endFrame: 270,
-    text: "Benjamin Strong \u2014 the true master of the Fed.",
-    translation: "\u672C\u6770\u660E\xB7\u65AF\u7279\u6717\u2014\u2014\u7F8E\u8054\u50A8\u7684\u771F\u6B63\u4E3B\u4EBA\u3002"
-  },
-  {
-    startFrame: 270,
-    endFrame: 540,
-    text: "U.S. debt exploded from $1 billion to $25 billion in just 4 years.",
-    translation: "\u7F8E\u56FD\u56FD\u503A\u5728\u77ED\u77ED4\u5E74\u5185\u4ECE10\u4EBF\u7F8E\u5143\u66B4\u6DA8\u81F3250\u4EBF\u7F8E\u5143\u3002"
-  }
-];
-const wilsonWarSubs = [
-  {
-    startFrame: 0,
-    endFrame: 270,
-    text: '"We fight for democracy and moral principles." \u2014 Wilson',
-    translation: '"\u6211\u4EEC\u4E3A\u6C11\u4E3B\u548C\u9053\u5FB7\u539F\u5219\u800C\u6218\u3002" \u2014 \u5A01\u5C14\u900A'
-  },
-  {
-    startFrame: 270,
-    endFrame: 540,
-    text: "The reality: protecting $30 billion in loans to the Allies.",
-    translation: "\u771F\u76F8\uFF1A\u4FDD\u62A4\u5411\u534F\u7EA6\u56FD\u63D0\u4F9B\u7684300\u4EBF\u7F8E\u5143\u8D37\u6B3E\u3002"
-  }
-];
-const warProfiteersSubs = [
-  {
-    startFrame: 0,
-    endFrame: 300,
-    text: "Paul Warburg's brother: head of German intelligence.",
-    translation: "\u4FDD\u7F57\xB7\u6C83\u4F2F\u683C\u7684\u5144\u5F1F\uFF1A\u5FB7\u56FD\u60C5\u62A5\u90E8\u95E8\u9996\u8111\u3002"
+    text: "\u901A\u8FC7\u8FDE\u7EED\u7684\u901A\u8D27\u81A8\u80C0\u8FC7\u7A0B\uFF0C\u653F\u5E9C\u53EF\u4EE5\u79D8\u5BC6\u5730\u3001\u4E0D\u4E3A\u4EBA\u77E5\u5730\u6CA1\u6536\u516C\u6C11\u8D22\u5BCC\u7684\u4E00\u90E8\u5206\u3002"
   },
   {
     startFrame: 300,
-    endFrame: 600,
-    text: "Bankers on both sides. Profits from death.",
-    translation: "\u94F6\u884C\u5BB6\u5728\u4E24\u8FB9\u90FD\u6709\u3002\u4ECE\u6B7B\u4EA1\u4E2D\u83B7\u5229\u3002"
+    endFrame: 450,
+    text: "\u7528\u8FD9\u79CD\u529E\u6CD5\u53EF\u4EE5\u4EFB\u610F\u5265\u593A\u4EBA\u6C11\u7684\u8D22\u5BCC\uFF0C\u5728\u4F7F\u591A\u6570\u4EBA\u8D2B\u7A77\u7684\u8FC7\u7A0B\u4E2D\uFF0C\u5374\u4F7F\u5C11\u6570\u4EBA\u66B4\u5BCC\u3002"
+  },
+  { startFrame: 450, endFrame: 600, text: "\u2014\u2014\u51EF\u6069\u65AF\uFF0C1919\u5E74" },
+  { startFrame: 600, endFrame: 750, text: "\u7B2C\u4E94\u7AE0\uFF1A\u5EC9\u4EF7\u8D27\u5E01\u7684\u65B0\u653F" },
+  {
+    startFrame: 750,
+    endFrame: 900,
+    text: "\u56FD\u9645\u94F6\u884C\u5BB6\u5982\u4F55\u901A\u8FC7\u5E9F\u9664\u91D1\u672C\u4F4D\u94FA\u5E73\u901A\u5F80\u7B2C\u4E8C\u6B21\u4E16\u754C\u5927\u6218\u7684\u9053\u8DEF\u3002"
   }
 ];
-const versaillesSubs = [
+const keynesSubs = [
+  { startFrame: 0, endFrame: 180, text: "\u51EF\u6069\u65AF\u79F0\u9EC4\u91D1\u4E3A'\u91CE\u86EE\u7684\u9057\u8FF9'\u3002" },
   {
-    startFrame: 0,
-    endFrame: 270,
-    text: '"This is not peace. It is an armistice for twenty years."',
-    translation: '"\u8FD9\u4E0D\u662F\u548C\u5E73\u3002\u8FD9\u662F\u4E3A\u671F\u4E8C\u5341\u5E74\u7684\u4F11\u6218\u4E66\u3002"'
+    startFrame: 180,
+    endFrame: 360,
+    text: "\u4E3A\u4EC0\u4E48\u56FD\u9645\u94F6\u884C\u5BB6\u548C\u4ED6\u4EEC\u7684'\u5FA1\u7528'\u7406\u8BBA\u5BB6\u4EEC\u5982\u6B64\u538C\u6076\u9EC4\u91D1\uFF1F"
   },
   {
-    startFrame: 270,
+    startFrame: 360,
     endFrame: 540,
-    text: "\u2014 Marshal Foch. The seeds of WWII were sown.",
-    translation: "\u2014 \u798F\u7166\u5143\u5E05\u3002\u4E8C\u6218\u7684\u79CD\u5B50\u5DF2\u7ECF\u64AD\u4E0B\u3002"
-  }
-];
-const agriculturalCrashSubs = [
-  {
-    startFrame: 0,
-    endFrame: 270,
-    text: '1921: The first "shearing" operation.',
-    translation: '1921\u5E74\uFF1A\u7B2C\u4E00\u6B21"\u526A\u7F8A\u6BDB"\u884C\u52A8\u3002'
+    text: "\u5728\u4EBA\u7C7B\u957F\u8FBE5000\u5E74\u7684\u793E\u4F1A\u5B9E\u8DF5\u4E2D\uFF0C\u9EC4\u91D1\u88AB\u4E16\u4EBA\u516C\u8BA4\u662F\u8D22\u5BCC\u7684\u6700\u7EC8\u5F62\u5F0F\u3002"
   },
   {
-    startFrame: 270,
+    startFrame: 540,
+    endFrame: 720,
+    text: "\u4EBA\u6C11\u5BF9\u9EC4\u91D1\u4E0E\u8D22\u5BCC\u7684\u5FC5\u7136\u8054\u7CFB\u65E9\u5DF2\u6210\u4E3A\u751F\u6D3B\u4E2D\u7684\u81EA\u7136\u903B\u8F91\u3002"
+  },
+  {
+    startFrame: 720,
+    endFrame: 900,
+    text: "\u5F53\u653F\u5E9C\u5F3A\u884C\u5265\u593A\u4EBA\u6C11\u5C06\u7EB8\u5E01\u5151\u6362\u9EC4\u91D1\u8FD9\u4E00\u4E0E\u751F\u4FF1\u6765\u7684\u6743\u529B\u7684\u65F6\u5019\uFF0C"
+  },
+  {
+    startFrame: 900,
+    endFrame: 1080,
+    text: "\u4E5F\u5C31\u4ECE\u6839\u672C\u4E0A\u5265\u593A\u4E86\u4EBA\u6C11\u6700\u57FA\u672C\u7684\u81EA\u7531\u3002"
+  },
+  {
+    startFrame: 1080,
+    endFrame: 1260,
+    text: "\u56FD\u9645\u94F6\u884C\u5BB6\u4EEC\u975E\u5E38\u6E05\u695A\uFF0C\u9EC4\u91D1\u51B3\u4E0D\u662F\u666E\u901A\u7684\u8D35\u91D1\u5C5E\uFF0C"
+  },
+  {
+    startFrame: 1260,
+    endFrame: 1440,
+    text: "\u4ECE\u672C\u8D28\u4E0A\u770B\uFF0C\u9EC4\u91D1\u662F\u552F\u4E00\u7684\u3001\u9AD8\u5EA6\u654F\u611F\u7684\u3001\u6DF1\u8D1F\u5386\u53F2\u4F20\u627F\u7684'\u653F\u6CBB\u91D1\u5C5E'\u3002"
+  },
+  {
+    startFrame: 1440,
+    endFrame: 1620,
+    text: "\u5728\u6B63\u5E38\u7684\u793E\u4F1A\u72B6\u51B5\u4E0B\uFF0C\u5E9F\u9664\u91D1\u672C\u4F4D\u52BF\u5FC5\u5F15\u53D1\u4E25\u91CD\u7684\u793E\u4F1A\u52A8\u8361\uFF0C"
+  },
+  {
+    startFrame: 1620,
+    endFrame: 1800,
+    text: "\u53EA\u6709\u5728\u6781\u7AEF\u7279\u6B8A\u7684\u60C5\u5F62\u4E0B\uFF0C\u4EBA\u6C11\u88AB\u903C\u65E0\u5948\u624D\u4F1A\u88AB\u8FEB\u6682\u65F6\u653E\u5F03\u81EA\u5DF1\u4E0E\u751F\u4FF1\u6765\u7684\u6743\u529B\u3002"
+  }
+];
+const election1932Subs = [
+  {
+    startFrame: 0,
+    endFrame: 180,
+    text: "1929\u5E74\u5927\u8427\u6761\u7206\u53D1\uFF0C\u7F8E\u56FD\u7ECF\u6D4E\u9677\u5165\u524D\u6240\u672A\u6709\u7684\u5371\u673A\u3002"
+  },
+  {
+    startFrame: 180,
+    endFrame: 360,
+    text: "\u94F6\u884C\u5012\u95ED\u6F6E\u5E2D\u5377\u5168\u56FD\uFF0C\u4EBA\u6C11\u50A8\u84C4\u5316\u4E3A\u4E4C\u6709\u3002"
+  },
+  {
+    startFrame: 360,
     endFrame: 540,
-    text: "Farm prices collapsed. Banks acquired land for pennies.",
-    translation: "\u519C\u4EA7\u54C1\u4EF7\u683C\u66B4\u8DCC\u3002\u94F6\u884C\u4EE5\u4F4E\u4EF7\u6536\u8D2D\u571F\u5730\u3002"
+    text: "1932\u5E74\u603B\u7EDF\u5927\u9009\uFF0C\u94F6\u884C\u5BB6\u4EEC\u9700\u8981\u4E00\u4E2A\u80FD\u591F\u6267\u884C\u4ED6\u4EEC\u610F\u5FD7\u7684\u4EBA\u3002"
+  },
+  { startFrame: 540, endFrame: 720, text: "\u4F5B\u5170\u514B\u6797\xB7\u5FB7\u5170\u8BFA\xB7\u7F57\u65AF\u798F\u88AB\u9009\u4E2D\u4E86\u3002" },
+  {
+    startFrame: 720,
+    endFrame: 900,
+    text: "\u7F57\u65AF\u798F\u5BB6\u65CF\u4E0E\u534E\u5C14\u8857\u94F6\u884C\u5BB6\u6709\u7740\u6DF1\u539A\u7684\u6E0A\u6E90\u3002"
+  },
+  {
+    startFrame: 900,
+    endFrame: 1080,
+    text: "\u4ED6\u7684\u8205\u8205\u5F17\u96F7\u5FB7\u91CC\u514B\xB7\u5FB7\u62C9\u8BFA\u662F\u8054\u90A6\u50A8\u5907\u59D4\u5458\u4F1A\u7684\u6210\u5458\u3002"
+  },
+  {
+    startFrame: 1080,
+    endFrame: 1260,
+    text: "\u56FD\u9645\u94F6\u884C\u5BB6\u8D4B\u4E88\u7F57\u65AF\u798F\u4E00\u4E2A\u5386\u53F2\u4F7F\u547D\uFF1A\u5E9F\u9664\u91D1\u672C\u4F4D\u3002"
+  },
+  {
+    startFrame: 1260,
+    endFrame: 1440,
+    text: "\u8FD9\u662F\u6B63\u5E38\u72B6\u6001\u4E0B\u6781\u96BE\u5B9E\u73B0\u7684\u91CD\u5927\u53D8\u9769\u3002"
   }
 ];
-const conspiracy1927Subs = [
+const goldStandardSubs = [
+  { startFrame: 0, endFrame: 180, text: "1933\u5E743\u67084\u65E5\uFF0C\u7F57\u65AF\u798F\u5C31\u804C\u603B\u7EDF\u3002" },
   {
-    startFrame: 0,
-    endFrame: 300,
-    text: "1927. Secret meeting on Long Island.",
-    translation: "1927\u5E74\u3002\u957F\u5C9B\u4E0A\u7684\u79D8\u5BC6\u4F1A\u8BAE\u3002"
+    startFrame: 180,
+    endFrame: 360,
+    text: "\u4EC5\u4EC5\u4E00\u4E2A\u6708\u540E\uFF0C4\u67085\u65E5\uFF0C\u7F57\u65AF\u798F\u53D1\u5E03\u884C\u653F\u547D\u4EE4\uFF0C\u6CA1\u6536\u6C11\u95F4\u9EC4\u91D1\u3002"
   },
   {
-    startFrame: 300,
-    endFrame: 600,
-    text: "Norman, Strong, Schacht. The plan for 1929 was set.",
-    translation: "\u8BFA\u66FC\u3001\u65AF\u7279\u6717\u3001\u6C99\u8D6B\u7279\u30021929\u5E74\u7684\u8BA1\u5212\u5DF2\u7ECF\u5236\u5B9A\u3002"
+    startFrame: 360,
+    endFrame: 540,
+    text: "\u6240\u6709\u7F8E\u56FD\u516C\u6C11\u5FC5\u987B\u5C06\u9EC4\u91D1\u4EA4\u7ED9\u8054\u90A6\u50A8\u5907\u94F6\u884C\uFF0C\u6362\u53D6\u7EB8\u5E01\u3002"
+  },
+  {
+    startFrame: 540,
+    endFrame: 720,
+    text: "\u8FDD\u8005\u5C06\u88AB\u5904\u4EE5\u6700\u9AD810\u5E74\u76D1\u7981\u548C1\u4E07\u7F8E\u5143\u7F5A\u6B3E\u3002"
+  },
+  {
+    startFrame: 720,
+    endFrame: 900,
+    text: "1934\u5E741\u6708\uFF0C\u7F57\u65AF\u798F\u7B7E\u7F72\u300A\u9EC4\u91D1\u50A8\u5907\u6CD5\u300B\uFF0C\u5C06\u9EC4\u91D1\u4EF7\u683C\u4ECE\u6BCF\u76CE\u53F820.67\u7F8E\u5143\u63D0\u9AD8\u523035\u7F8E\u5143\u3002"
+  },
+  { startFrame: 900, endFrame: 1080, text: "\u4E00\u591C\u4E4B\u95F4\uFF0C\u7F8E\u5143\u8D2C\u503C\u4E8641%\u3002" },
+  {
+    startFrame: 1080,
+    endFrame: 1260,
+    text: "\u4EBA\u6C11\u624B\u4E2D\u7684\u7EB8\u5E01\u8D22\u5BCC\u88AB\u79D8\u5BC6\u5730\u5265\u593A\u4E86\u3002"
+  },
+  {
+    startFrame: 1260,
+    endFrame: 1440,
+    text: "\u91D1\u672C\u4F4D\u88AB\u5E9F\u9664\u4E86\uFF0C\u901A\u5F80\u6218\u4E89\u7684\u9053\u8DEF\u88AB\u94FA\u5E73\u4E86\u3002"
+  },
+  {
+    startFrame: 1440,
+    endFrame: 1620,
+    text: "\u56FD\u9645\u94F6\u884C\u5BB6\u4EEC\u7EC8\u4E8E\u5B9E\u73B0\u4E86\u4ED6\u4EEC\u591A\u5E74\u6765\u7684\u68A6\u60F3\u3002"
   }
 ];
-const crash1929Subs = [
+const hitlerSelectedSubs = [
+  { startFrame: 0, endFrame: 180, text: "\u5F53\u7F8E\u56FD\u6B63\u5728\u7ECF\u5386\u5927\u8427\u6761\u7684\u65F6\u5019\uFF0C" },
+  {
+    startFrame: 180,
+    endFrame: 360,
+    text: "\u5927\u6D0B\u5F7C\u5CB8\u7684\u5FB7\u56FD\u4E5F\u5728\u7ECF\u5386\u7740\u524D\u6240\u672A\u6709\u7684\u7ECF\u6D4E\u5371\u673A\u3002"
+  },
+  {
+    startFrame: 360,
+    endFrame: 540,
+    text: "\u56FD\u9645\u94F6\u884C\u5BB6\u4EEC\u6B63\u5728\u5BFB\u627E\u4E00\u4E2A\u65B0\u7684\u4EE3\u7406\u4EBA\u3002"
+  },
+  {
+    startFrame: 540,
+    endFrame: 720,
+    text: "\u4ED6\u4EEC\u9700\u8981\u4E00\u4E2A\u80FD\u591F\u6253\u7834\u6B27\u6D32\u5E73\u8861\u3001\u5236\u9020\u6DF7\u4E71\u7684\u4EBA\u3002"
+  },
+  { startFrame: 720, endFrame: 900, text: "\u963F\u9053\u592B\xB7\u5E0C\u7279\u52D2\u8FDB\u5165\u4E86\u4ED6\u4EEC\u7684\u89C6\u91CE\u3002" },
+  {
+    startFrame: 900,
+    endFrame: 1080,
+    text: "\u534E\u5C14\u8857\u94F6\u884C\u5BB6\u5F00\u59CB\u5411\u7EB3\u7CB9\u515A\u63D0\u4F9B\u8D44\u91D1\u652F\u6301\u3002"
+  },
+  {
+    startFrame: 1080,
+    endFrame: 1260,
+    text: "JP\u6469\u6839\u3001\u6D1B\u514B\u83F2\u52D2\u3001\u798F\u7279\u7B49\u7F8E\u56FD\u5927\u8D22\u56E2\u90FD\u53C2\u4E0E\u5176\u4E2D\u3002"
+  },
+  {
+    startFrame: 1260,
+    endFrame: 1440,
+    text: "\u8FD9\u662F\u4E00\u7B14'\u98CE\u9669\u6295\u8D44'\uFF0C\u76EE\u7684\u662F\u5236\u9020\u4E00\u573A\u65B0\u7684\u6218\u4E89\u3002"
+  }
+];
+const wallStreetNaziSubs = [
+  { startFrame: 0, endFrame: 180, text: "\u534E\u5C14\u8857\u5BF9\u7EB3\u7CB9\u5FB7\u56FD\u7684\u8D44\u52A9\u662F\u5168\u65B9\u4F4D\u7684\u3002" },
+  {
+    startFrame: 180,
+    endFrame: 360,
+    text: "\u6807\u51C6\u77F3\u6CB9\u516C\u53F8\u5411\u7EB3\u7CB9\u5FB7\u56FD\u63D0\u4F9B\u56DB\u4E59\u57FA\u94C5\u6280\u672F\uFF0C\u7528\u4E8E\u822A\u7A7A\u71C3\u6599\u3002"
+  },
+  {
+    startFrame: 360,
+    endFrame: 540,
+    text: "IBM\u4E3A\u7EB3\u7CB9\u5FB7\u56FD\u63D0\u4F9B\u6253\u5B54\u5361\u7247\u7CFB\u7EDF\uFF0C\u7528\u4E8E\u4EBA\u53E3\u666E\u67E5\u548C\u96C6\u4E2D\u8425\u7BA1\u7406\u3002"
+  },
+  {
+    startFrame: 540,
+    endFrame: 720,
+    text: "\u798F\u7279\u6C7D\u8F66\u516C\u53F8\u5728\u5FB7\u56FD\u8BBE\u6709\u5DE5\u5382\uFF0C\u4E3A\u7EB3\u7CB9\u751F\u4EA7\u519B\u7528\u5361\u8F66\u3002"
+  },
+  {
+    startFrame: 720,
+    endFrame: 900,
+    text: "\u7F8E\u56FD\u94F6\u884C\u5BB6\u901A\u8FC7\u56FD\u9645\u6E05\u7B97\u94F6\u884C\u4E3A\u7EB3\u7CB9\u5FB7\u56FD\u63D0\u4F9B\u878D\u8D44\u3002"
+  },
+  {
+    startFrame: 900,
+    endFrame: 1080,
+    text: "\u5373\u4F7F\u5728\u4E8C\u6218\u671F\u95F4\uFF0C\u8FD9\u4E9B\u91D1\u878D\u5F80\u6765\u4ECD\u5728\u7EE7\u7EED\u3002"
+  },
+  {
+    startFrame: 1080,
+    endFrame: 1260,
+    text: "\u7F8E\u56FD\u548C\u82F1\u56FD\u7684\u94F6\u884C\u5BB6\u4E0E\u7EB3\u7CB9\u5FB7\u56FD\u94F6\u884C\u5BB6\u540C\u5750\u56FD\u9645\u6E05\u7B97\u94F6\u884C\u8463\u4E8B\u4F1A\u3002"
+  },
+  {
+    startFrame: 1260,
+    endFrame: 1440,
+    text: "\u6218\u4E89\uFF0C\u5BF9\u4ED6\u4EEC\u6765\u8BF4\uFF0C\u53EA\u662F\u53E6\u4E00\u573A\u8D5A\u94B1\u7684\u751F\u610F\u3002"
+  }
+];
+const warAndMoneySubs = [
   {
     startFrame: 0,
-    endFrame: 220,
-    text: "October 29, 1929. Black Tuesday.",
-    translation: "1929\u5E7410\u670829\u65E5\u3002\u9ED1\u8272\u661F\u671F\u4E8C\u3002"
+    endFrame: 180,
+    text: "\u5E9F\u9664\u91D1\u672C\u4F4D\u94FA\u5E73\u4E86\u901A\u5F80\u7B2C\u4E8C\u6B21\u4E16\u754C\u5927\u6218\u7684\u91D1\u878D\u5927\u9053\u3002"
   },
   {
-    startFrame: 220,
-    endFrame: 440,
-    text: "$160 billion in wealth vanished overnight.",
-    translation: "1600\u4EBF\u7F8E\u5143\u8D22\u5BCC\u4E00\u591C\u4E4B\u95F4\u84B8\u53D1\u3002"
+    startFrame: 180,
+    endFrame: 360,
+    text: "\u6CA1\u6709\u91D1\u672C\u4F4D\u7684\u7EA6\u675F\uFF0C\u653F\u5E9C\u53EF\u4EE5\u65E0\u9650\u5370\u949E\u3002"
   },
   {
-    startFrame: 440,
-    endFrame: 660,
-    text: '"Buy when blood is in the streets." \u2014 The harvest began.',
-    translation: '"\u5F53\u8840\u6D41\u6210\u6CB3\u65F6\u4E70\u5165\u3002" \u2014 \u6536\u5272\u5F00\u59CB\u4E86\u3002'
+    startFrame: 360,
+    endFrame: 540,
+    text: "\u6218\u4E89\u9700\u8981\u5927\u91CF\u7684\u8D44\u91D1\uFF0C\u5EC9\u4EF7\u8D27\u5E01\u63D0\u4F9B\u4E86\u65E0\u9650\u7684\u5F39\u836F\u3002"
+  },
+  {
+    startFrame: 540,
+    endFrame: 720,
+    text: "\u4ECE1939\u5E74\u52301945\u5E74\uFF0C\u7F8E\u56FD\u7684\u8D27\u5E01\u4F9B\u5E94\u91CF\u589E\u52A0\u4E863\u500D\u3002"
+  },
+  {
+    startFrame: 720,
+    endFrame: 900,
+    text: "\u6218\u4E89\u7ED3\u675F\u540E\uFF0C\u56FD\u9645\u94F6\u884C\u5BB6\u7684\u6536\u83B7\u662F\u5DE8\u5927\u7684\u3002"
+  },
+  {
+    startFrame: 900,
+    endFrame: 1080,
+    text: "\u5E03\u96F7\u987F\u68EE\u6797\u4F53\u7CFB\u786E\u7ACB\u4E86\u7F8E\u5143\u7684\u9738\u6743\u5730\u4F4D\u3002"
+  },
+  {
+    startFrame: 1080,
+    endFrame: 1260,
+    text: "\u56FD\u9645\u8D27\u5E01\u57FA\u91D1\u7EC4\u7EC7\u548C\u4E16\u754C\u94F6\u884C\u6210\u4E3A\u65B0\u7684\u63A7\u5236\u5DE5\u5177\u3002"
+  },
+  {
+    startFrame: 1260,
+    endFrame: 1440,
+    text: "\u6602\u8D35\u7684\u6218\u4E89\u7531\u4EBA\u6C11\u627F\u62C5\u4EE3\u4EF7\uFF0C\u5EC9\u4EF7\u7684\u8D27\u5E01\u8BA9\u94F6\u884C\u5BB6\u83B7\u5229\u3002"
   }
 ];
 const summarySubs = [
+  { startFrame: 0, endFrame: 180, text: "\u5EC9\u4EF7\u8D27\u5E01\u7684\u672C\u8D28\u662F\u4EC0\u4E48\uFF1F" },
   {
-    startFrame: 0,
-    endFrame: 240,
-    text: "War, recession, consolidation of wealth.",
-    translation: "\u6218\u4E89\u3001\u8870\u9000\u3001\u8D22\u5BCC\u96C6\u4E2D\u3002"
+    startFrame: 180,
+    endFrame: 360,
+    text: "\u662F\u5265\u593A\u4EBA\u6C11\u7684\u7ECF\u6D4E\u81EA\u7531\uFF0C\u4E3A\u6218\u4E89\u94FA\u5E73\u9053\u8DEF\u3002"
   },
   {
-    startFrame: 240,
-    endFrame: 480,
-    text: "The harvest cycle continues to this day.",
-    translation: "\u6536\u5272\u5FAA\u73AF\u4E00\u76F4\u6301\u7EED\u5230\u4ECA\u5929\u3002"
-  }
+    startFrame: 360,
+    endFrame: 540,
+    text: "\u51EF\u6069\u65AF\u7684'\u5EC9\u4EF7\u8D27\u5E01'\u7406\u8BBA\u6210\u4E3A\u94F6\u884C\u5BB6\u7684\u5DE5\u5177\u3002"
+  },
+  {
+    startFrame: 540,
+    endFrame: 720,
+    text: "\u5E9F\u9664\u91D1\u672C\u4F4D\u662F\u56FD\u9645\u94F6\u884C\u5BB6\u7684\u767E\u5E74\u68A6\u60F3\u3002"
+  },
+  {
+    startFrame: 720,
+    endFrame: 900,
+    text: "\u800C\u6218\u4E89\uFF0C\u5219\u662F\u4ED6\u4EEC\u6536\u5272\u8D22\u5BCC\u7684\u6700\u4F73\u65F6\u673A\u3002"
+  },
+  { startFrame: 900, endFrame: 1080, text: "\u4EBA\u6C11\u88AB\u901A\u80C0\u5265\u593A\uFF0C\u56FD\u5BB6\u88AB\u503A\u52A1\u5974\u5F79\u3002" },
+  { startFrame: 1080, endFrame: 1260, text: "\u8FD9\u5C31\u662F\u5EC9\u4EF7\u8D27\u5E01\u7684\u771F\u76F8\u3002" }
 ];
-const episode05DocumentarySubtitles = [
-  ...episode05Documentary_openingSubs,
-  ...noFedNoWarSubs,
-  ...strongFedSubs,
-  ...wilsonWarSubs,
-  ...warProfiteersSubs,
-  ...versaillesSubs,
-  ...agriculturalCrashSubs,
-  ...conspiracy1927Subs,
-  ...crash1929Subs,
-  ...summarySubs
+const episode06_SCENE_FRAMES = [
+  900,
+  // Scene 0: 开场
+  1800,
+  // Scene 1: 凯恩斯
+  1440,
+  // Scene 2: 1932大选
+  1620,
+  // Scene 3: 废除金本位
+  1440,
+  // Scene 4: 选中希特勒
+  1440,
+  // Scene 5: 华尔街资助纳粹
+  1440,
+  // Scene 6: 战争与货币
+  1260
+  // Scene 7: 总结
 ];
-/* harmony default export */ const episode05Documentary = ((/* unused pure expression or super */ null && (episode05DocumentarySubtitles)));
-
-;// ./src/compositions/Episode05Documentary.tsx
-
-
-
-
-
-
-
-
-
-
-
-const Episode05Documentary_VOICE_DIR = "/assets/audio/voiceover/episode05/";
-const Episode05Documentary_SCENE_FRAMES = [
-  300,
-  // Scene 0: 10s
-  600,
-  // Scene 1: 20s
-  540,
-  // Scene 2: 18s
-  540,
-  // Scene 3: 18s
-  600,
-  // Scene 4: 20s
-  540,
-  // Scene 5: 18s
-  540,
-  // Scene 6: 18s
-  600,
-  // Scene 7: 20s
-  660,
-  // Scene 8: 22s
-  480
-  // Scene 9: 16s
-];
-const Episode05Documentary_SCENE_OFFSETS = Episode05Documentary_SCENE_FRAMES.reduce((acc, frames, i) => {
-  acc.push(i === 0 ? 0 : acc[i - 1] + Episode05Documentary_SCENE_FRAMES[i - 1]);
+const episode06_SCENE_OFFSETS = episode06_SCENE_FRAMES.reduce((acc, frames, i) => {
+  acc.push(i === 0 ? 0 : acc[i - 1] + episode06_SCENE_FRAMES[i - 1]);
   return acc;
 }, []);
-const Episode05Documentary_SCENE_THEMES = [
-  "revelation",
-  // Scene 0: 开场 - 揭示
-  "war",
-  // Scene 1: 一战
-  "finance",
-  // Scene 2: 金融
-  "tragedy",
-  // Scene 3: 悲剧
-  "finance",
-  // Scene 4: 银行家
-  "tragedy",
-  // Scene 5: 凡尔赛
-  "tragedy",
-  // Scene 6: 农业萧条
-  "revelation",
-  // Scene 7: 密谋
-  "tragedy",
-  // Scene 8: 崩盘
-  "revelation"
-  // Scene 9: 总结
-];
-const Episode05Documentary = () => {
-  const bgm = getEpisodeBGM("Episode05");
-  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { background: "#0d1117" }, children: [
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(VignetteOverlay, { intensity: 0.25, duration: 15 }),
-    bgm && /* @__PURE__ */ (0,jsx_runtime.jsx)(Audio_Audio, { ...bgm }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(VoiceoverMerged, { src: `${Episode05Documentary_VOICE_DIR}episode05_merged.m4a`, volume: 0.8 }),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { durationInFrames: Episode05Documentary_SCENE_FRAMES[0], children: [
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: Episode05Documentary_SCENE_THEMES[0], type: "enter", duration: 35, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
-        DramaticRevealShot,
-        {
-          revealMethod: "lightBurst",
-          revealDuration: 45,
-          accentColor: "#ffd700",
-          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(OpeningDocumentaryScene, {})
-        }
-      ) }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: episode05Documentary_openingSubs })
-    ] }),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: Episode05Documentary_SCENE_OFFSETS[1], durationInFrames: Episode05Documentary_SCENE_FRAMES[1], children: [
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: Episode05Documentary_SCENE_THEMES[1], type: "enter", duration: 30, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(NoFedNoWarDocumentaryScene, {}) }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: noFedNoWarSubs })
-    ] }),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: Episode05Documentary_SCENE_OFFSETS[2], durationInFrames: Episode05Documentary_SCENE_FRAMES[2], children: [
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: Episode05Documentary_SCENE_THEMES[2], type: "enter", duration: 35, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
-        CloseUpShot,
-        {
-          type: "object",
-          intensity: "subtle",
-          focusPosition: { x: 50, y: 40 },
-          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(StrongFedDocumentaryScene, {})
-        }
-      ) }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: strongFedSubs })
-    ] }),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: Episode05Documentary_SCENE_OFFSETS[3], durationInFrames: Episode05Documentary_SCENE_FRAMES[3], children: [
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: Episode05Documentary_SCENE_THEMES[3], type: "enter", duration: 35, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
-        DramaticRevealShot,
-        {
-          revealMethod: "dissolve",
-          revealDuration: 40,
-          accentColor: "#3b82f6",
-          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(WilsonWarDocumentaryScene, {})
-        }
-      ) }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: wilsonWarSubs })
-    ] }),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: Episode05Documentary_SCENE_OFFSETS[4], durationInFrames: Episode05Documentary_SCENE_FRAMES[4], children: [
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: Episode05Documentary_SCENE_THEMES[4], type: "enter", duration: 30, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(WarProfiteersDocumentaryScene, {}) }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: warProfiteersSubs })
-    ] }),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: Episode05Documentary_SCENE_OFFSETS[5], durationInFrames: Episode05Documentary_SCENE_FRAMES[5], children: [
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: Episode05Documentary_SCENE_THEMES[5], type: "enter", duration: 35, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(VersaillesDocumentaryScene, {}) }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: versaillesSubs })
-    ] }),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: Episode05Documentary_SCENE_OFFSETS[6], durationInFrames: Episode05Documentary_SCENE_FRAMES[6], children: [
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: Episode05Documentary_SCENE_THEMES[6], type: "enter", duration: 40, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
-        DramaticRevealShot,
-        {
-          revealMethod: "shatter",
-          revealDuration: 50,
-          accentColor: "#8B0000",
-          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(AgriculturalCrashDocumentaryScene, {})
-        }
-      ) }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: agriculturalCrashSubs })
-    ] }),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: Episode05Documentary_SCENE_OFFSETS[7], durationInFrames: Episode05Documentary_SCENE_FRAMES[7], children: [
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: Episode05Documentary_SCENE_THEMES[7], type: "enter", duration: 35, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(Conspiracy1927DocumentaryScene, {}) }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: conspiracy1927Subs })
-    ] }),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: Episode05Documentary_SCENE_OFFSETS[8], durationInFrames: Episode05Documentary_SCENE_FRAMES[8], children: [
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: Episode05Documentary_SCENE_THEMES[8], type: "enter", duration: 30, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
-        CloseUpShot,
-        {
-          type: "object",
-          intensity: "medium",
-          focusPosition: { x: 50, y: 45 },
-          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(Crash1929NewDocumentaryScene, {})
-        }
-      ) }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: crash1929Subs })
-    ] }),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: Episode05Documentary_SCENE_OFFSETS[9], durationInFrames: Episode05Documentary_SCENE_FRAMES[9], children: [
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: Episode05Documentary_SCENE_THEMES[9], type: "enter", duration: 45, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
-        DramaticRevealShot,
-        {
-          revealMethod: "zoom",
-          revealDuration: 60,
-          accentColor: "#ffd700",
-          lightRays: true,
-          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(SummaryDocumentaryScene_SummaryDocumentaryScene, {})
-        }
-      ) }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: summarySubs })
-    ] })
-  ] });
-};
-/* harmony default export */ const compositions_Episode05Documentary = ((/* unused pure expression or super */ null && (Episode05Documentary)));
-
-;// ./src/components/scenes/episode06/documentary/EliteClubsOpeningDocumentaryScene.tsx
-
-
-
-
-const EliteClubsOpeningDocumentaryScene = () => {
-  const frame = (0,esm.useCurrentFrame)();
-  const bgOpacity = (0,esm.interpolate)(frame, [0, 45], [0, 1], {
-    extrapolateRight: "clamp"
-  });
-  const titleOpacity = (0,esm.interpolate)(frame, [60, 120], [0, 1], {
-    extrapolateRight: "clamp"
-  });
-  const quoteOpacity = (0,esm.interpolate)(frame, [150, 210], [0, 1], {
-    extrapolateRight: "clamp"
-  });
-  const clubsOpacity = (0,esm.interpolate)(frame, [240, 300], [0, 1], {
-    extrapolateRight: "clamp"
-  });
-  const eliteClubs = [
-    { name: "CFR", year: "1921", desc: "Council on Foreign Relations" },
-    { name: "BIS", year: "1930", desc: "Bank for International Settlements" },
-    { name: "Bilderberg", year: "1954", desc: "Bilderberg Group" },
-    { name: "Trilateral", year: "1973", desc: "Trilateral Commission" }
-  ];
-  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { background: "#0d1117" }, children: [
-    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { opacity: bgOpacity }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      ImageLayer,
-      {
-        src: "/assets/images/ep06/ep06-elite-opening.jpg",
-        kenBurns: { panDirection: "zoom-in", intensity: "dramatic" },
-        layer: { filter: "vintage", opacity: 0.7 },
-        startFrame: 0,
-        durationFrames: 900
-      }
-    ) }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(Vignette, { intensity: 0.85 }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(FilmGrain, { opacity: 0.1 }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      DocumentaryOverlay,
-      {
-        year: "Episode 06",
-        title: "Elite Clubs that Rule the World",
-        subtitle: "\u7EDF\u6CBB\u4E16\u754C\u7684\u7CBE\u82F1\u4FF1\u4E50\u90E8",
-        frame: frame - 30,
-        fadeInDuration: 45
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      "div",
-      {
-        style: {
-          position: "absolute",
-          top: "25%",
-          left: "50%",
-          transform: "translateX(-50%)",
-          opacity: titleOpacity
-        },
-        children: /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-          "div",
-          {
-            style: {
-              padding: "30px 60px",
-              background: "rgba(0, 0, 0, 0.85)",
-              border: "3px solid #ffd700",
-              borderRadius: 8,
-              textAlign: "center"
-            },
-            children: [
-              /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                "div",
-                {
-                  style: {
-                    fontFamily: "Cinzel, serif",
-                    fontSize: 52,
-                    color: "#ffd700",
-                    fontWeight: 700,
-                    letterSpacing: 4
-                  },
-                  children: "THE HIDDEN HAND"
-                }
-              ),
-              /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                "div",
-                {
-                  style: {
-                    fontFamily: "Merriweather, serif",
-                    fontSize: 18,
-                    color: "#e8e8e8",
-                    marginTop: 16
-                  },
-                  children: "Behind every government, a shadow power"
-                }
-              )
-            ]
-          }
-        )
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-      "div",
-      {
-        style: {
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translateX(-50%)",
-          width: "80%",
-          opacity: quoteOpacity
-        },
-        children: [
-          /* @__PURE__ */ (0,jsx_runtime.jsx)(
-            "div",
-            {
-              style: {
-                fontFamily: "Merriweather, serif",
-                fontSize: 22,
-                color: "#e8e8e8",
-                textAlign: "center",
-                fontStyle: "italic",
-                lineHeight: 1.8,
-                borderLeft: "4px solid #ffd700",
-                borderRight: "4px solid #ffd700",
-                padding: "20px 40px"
-              },
-              children: '"The real rulers in Washington are invisible and exercise power from behind the scenes."'
-            }
-          ),
-          /* @__PURE__ */ (0,jsx_runtime.jsx)(
-            "div",
-            {
-              style: {
-                fontSize: 16,
-                color: "#ffd700",
-                textAlign: "center",
-                marginTop: 16,
-                letterSpacing: 2
-              },
-              children: "\u2014 Felix Frankfurter, Supreme Court Justice"
-            }
-          )
-        ]
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      "div",
-      {
-        style: {
-          position: "absolute",
-          bottom: "15%",
-          left: "50%",
-          transform: "translateX(-50%)",
-          opacity: clubsOpacity
-        },
-        children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
-          "div",
-          {
-            style: {
-              display: "flex",
-              gap: 30,
-              justifyContent: "center"
-            },
-            children: eliteClubs.map((club, index) => /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-              "div",
-              {
-                style: {
-                  padding: "16px 24px",
-                  background: "rgba(30, 58, 90, 0.9)",
-                  border: "2px solid #ffd700",
-                  borderRadius: 8,
-                  textAlign: "center"
-                },
-                children: [
-                  /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                    "div",
-                    {
-                      style: {
-                        fontFamily: "Cinzel, serif",
-                        fontSize: 24,
-                        color: "#ffd700",
-                        fontWeight: 700
-                      },
-                      children: club.name
-                    }
-                  ),
-                  /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-                    "div",
-                    {
-                      style: {
-                        fontSize: 12,
-                        color: "#9ca3af",
-                        marginTop: 4
-                      },
-                      children: [
-                        "Est. ",
-                        club.year
-                      ]
-                    }
-                  ),
-                  /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                    "div",
-                    {
-                      style: {
-                        fontSize: 11,
-                        color: "#e8e8e8",
-                        marginTop: 6
-                      },
-                      children: club.desc
-                    }
-                  )
-                ]
-              },
-              index
-            ))
-          }
-        )
-      }
-    )
-  ] });
-};
-/* harmony default export */ const documentary_EliteClubsOpeningDocumentaryScene = ((/* unused pure expression or super */ null && (EliteClubsOpeningDocumentaryScene)));
-
-;// ./src/components/scenes/episode06/documentary/HouseColonelDocumentaryScene.tsx
-
-
-
-
-const HouseColonelDocumentaryScene = () => {
-  const frame = (0,esm.useCurrentFrame)();
-  const bgOpacity = (0,esm.interpolate)(frame, [0, 45], [0, 1], {
-    extrapolateRight: "clamp"
-  });
-  const profileOpacity = (0,esm.interpolate)(frame, [60, 120], [0, 1], {
-    extrapolateRight: "clamp"
-  });
-  const influenceOpacity = (0,esm.interpolate)(frame, [150, 210], [0, 1], {
-    extrapolateRight: "clamp"
-  });
-  const quoteOpacity = (0,esm.interpolate)(frame, [240, 300], [0, 1], {
-    extrapolateRight: "clamp"
-  });
-  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { background: "#0d1117" }, children: [
-    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { opacity: bgOpacity }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      ImageLayer,
-      {
-        src: "/assets/images/ep06/ep06-house-colonel.jpg",
-        kenBurns: { panDirection: "right", intensity: "moderate" },
-        layer: { filter: "sepia", opacity: 0.65 },
-        startFrame: 0,
-        durationFrames: 900
-      }
-    ) }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(Vignette, { intensity: 0.8 }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(FilmGrain, { opacity: 0.08 }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      DocumentaryOverlay,
-      {
-        year: "1912-1919",
-        title: "Colonel Edward M. House",
-        subtitle: "The Silent Architect of Power",
-        frame: frame - 30,
-        fadeInDuration: 45
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      "div",
-      {
-        style: {
-          position: "absolute",
-          top: "25%",
-          left: "8%",
-          opacity: profileOpacity
-        },
-        children: /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-          "div",
-          {
-            style: {
-              padding: "24px",
-              background: "rgba(0, 0, 0, 0.85)",
-              border: "2px solid #ffd700",
-              borderRadius: 8,
-              width: "320px"
-            },
-            children: [
-              /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                "div",
-                {
-                  style: {
-                    fontFamily: "Cinzel, serif",
-                    fontSize: 18,
-                    color: "#ffd700",
-                    marginBottom: 16,
-                    letterSpacing: 2
-                  },
-                  children: "THE COLONEL"
-                }
-              ),
-              /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-                "div",
-                {
-                  style: {
-                    fontSize: 14,
-                    color: "#e8e8e8",
-                    lineHeight: 1.8
-                  },
-                  children: [
-                    /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { marginBottom: 8 }, children: [
-                      /* @__PURE__ */ (0,jsx_runtime.jsx)("span", { style: { color: "#22c55e" }, children: "Role:" }),
-                      " Wilson's closest advisor"
-                    ] }),
-                    /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { marginBottom: 8 }, children: [
-                      /* @__PURE__ */ (0,jsx_runtime.jsx)("span", { style: { color: "#22c55e" }, children: "Power:" }),
-                      " Never elected, but ruled"
-                    ] }),
-                    /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { marginBottom: 8 }, children: [
-                      /* @__PURE__ */ (0,jsx_runtime.jsx)("span", { style: { color: "#22c55e" }, children: "Nickname:" }),
-                      ' "Silent Partner"'
-                    ] }),
-                    /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { children: [
-                      /* @__PURE__ */ (0,jsx_runtime.jsx)("span", { style: { color: "#22c55e" }, children: "Mission:" }),
-                      " Create the Fed"
-                    ] })
-                  ]
-                }
-              )
-            ]
-          }
-        )
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      "div",
-      {
-        style: {
-          position: "absolute",
-          top: "25%",
-          right: "8%",
-          opacity: influenceOpacity
-        },
-        children: /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-          "div",
-          {
-            style: {
-              padding: "24px",
-              background: "rgba(139, 0, 0, 0.7)",
-              border: "2px solid #ef4444",
-              borderRadius: 8,
-              width: "340px"
-            },
-            children: [
-              /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                "div",
-                {
-                  style: {
-                    fontFamily: "Cinzel, serif",
-                    fontSize: 18,
-                    color: "#ef4444",
-                    marginBottom: 16,
-                    letterSpacing: 2
-                  },
-                  children: "HIDDEN INFLUENCE"
-                }
-              ),
-              /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-                "div",
-                {
-                  style: {
-                    fontSize: 14,
-                    color: "#e8e8e8",
-                    lineHeight: 1.8
-                  },
-                  children: [
-                    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { marginBottom: 8 }, children: "\u2022 Selected Wilson as President" }),
-                    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { marginBottom: 8 }, children: "\u2022 Orchestrated Fed creation" }),
-                    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { marginBottom: 8 }, children: "\u2022 Attended Jekyll Island meeting" }),
-                    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { marginBottom: 8 }, children: "\u2022 Shaped WWI policy" }),
-                    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { children: "\u2022 Founded CFR in 1921" })
-                  ]
-                }
-              )
-            ]
-          }
-        )
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      "div",
-      {
-        style: {
-          position: "absolute",
-          bottom: "18%",
-          left: "50%",
-          transform: "translateX(-50%)",
-          opacity: quoteOpacity
-        },
-        children: /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-          "div",
-          {
-            style: {
-              padding: "24px 40px",
-              background: "rgba(0, 0, 0, 0.85)",
-              borderLeft: "4px solid #ffd700",
-              maxWidth: "700px"
-            },
-            children: [
-              /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                "div",
-                {
-                  style: {
-                    fontFamily: "Merriweather, serif",
-                    fontSize: 18,
-                    color: "#e8e8e8",
-                    fontStyle: "italic",
-                    lineHeight: 1.7
-                  },
-                  children: '"Colonel House was the most powerful man in America, yet most Americans never knew his name."'
-                }
-              ),
-              /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                "div",
-                {
-                  style: {
-                    fontSize: 14,
-                    color: "#ffd700",
-                    marginTop: 12,
-                    letterSpacing: 1
-                  },
-                  children: "\u2014 Historical Record"
-                }
-              )
-            ]
-          }
-        )
-      }
-    )
-  ] });
-};
-/* harmony default export */ const documentary_HouseColonelDocumentaryScene = ((/* unused pure expression or super */ null && (HouseColonelDocumentaryScene)));
-
-;// ./src/components/scenes/episode06/documentary/CFRDocumentaryScene.tsx
-
-
-
-
-const CFRDocumentaryScene = () => {
-  const frame = (0,esm.useCurrentFrame)();
-  const bgOpacity = (0,esm.interpolate)(frame, [0, 45], [0, 1], {
-    extrapolateRight: "clamp"
-  });
-  const titleOpacity = (0,esm.interpolate)(frame, [60, 120], [0, 1], {
-    extrapolateRight: "clamp"
-  });
-  const membersOpacity = (0,esm.interpolate)(frame, [150, 210], [0, 1], {
-    extrapolateRight: "clamp"
-  });
-  const influenceOpacity = (0,esm.interpolate)(frame, [240, 300], [0, 1], {
-    extrapolateRight: "clamp"
-  });
-  const statsOpacity = (0,esm.interpolate)(frame, [330, 390], [0, 1], {
-    extrapolateRight: "clamp"
-  });
-  const notableMembers = [
-    "David Rockefeller",
-    "Henry Kissinger",
-    "Zbigniew Brzezinski",
-    "Alan Greenspan",
-    "George H.W. Bush",
-    "Dick Cheney"
-  ];
-  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { background: "#0d1117" }, children: [
-    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { opacity: bgOpacity }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      ImageLayer,
-      {
-        src: "/assets/images/ep06/ep06-cfr-meeting.jpg",
-        kenBurns: { panDirection: "zoom-in", intensity: "moderate" },
-        layer: { filter: "vintage", opacity: 0.7 },
-        startFrame: 0,
-        durationFrames: 900
-      }
-    ) }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(Vignette, { intensity: 0.8 }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(FilmGrain, { opacity: 0.1 }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      DocumentaryOverlay,
-      {
-        year: "1921",
-        title: "Council on Foreign Relations",
-        subtitle: "The Shadow Government's Think Tank",
-        frame: frame - 30,
-        fadeInDuration: 45
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      "div",
-      {
-        style: {
-          position: "absolute",
-          top: "22%",
-          left: "50%",
-          transform: "translateX(-50%)",
-          opacity: titleOpacity
-        },
-        children: /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-          "div",
-          {
-            style: {
-              padding: "20px 50px",
-              background: "rgba(0, 0, 0, 0.85)",
-              border: "3px solid #ffd700",
-              borderRadius: 8,
-              textAlign: "center"
-            },
-            children: [
-              /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                "div",
-                {
-                  style: {
-                    fontFamily: "Cinzel, serif",
-                    fontSize: 42,
-                    color: "#ffd700",
-                    fontWeight: 700,
-                    letterSpacing: 3
-                  },
-                  children: "CFR"
-                }
-              ),
-              /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                "div",
-                {
-                  style: {
-                    fontFamily: "Merriweather, serif",
-                    fontSize: 16,
-                    color: "#e8e8e8",
-                    marginTop: 8
-                  },
-                  children: "Council on Foreign Relations"
-                }
-              )
-            ]
-          }
-        )
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      "div",
-      {
-        style: {
-          position: "absolute",
-          top: "38%",
-          left: "5%",
-          opacity: membersOpacity
-        },
-        children: /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-          "div",
-          {
-            style: {
-              padding: "20px",
-              background: "rgba(30, 58, 90, 0.9)",
-              border: "2px solid #ffd700",
-              borderRadius: 8,
-              width: "280px"
-            },
-            children: [
-              /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                "div",
-                {
-                  style: {
-                    fontFamily: "Cinzel, serif",
-                    fontSize: 16,
-                    color: "#ffd700",
-                    marginBottom: 12,
-                    letterSpacing: 2
-                  },
-                  children: "NOTABLE MEMBERS"
-                }
-              ),
-              /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                "div",
-                {
-                  style: {
-                    fontSize: 13,
-                    color: "#e8e8e8",
-                    lineHeight: 1.9
-                  },
-                  children: notableMembers.map((member, index) => /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { children: [
-                    "\u2022 ",
-                    member
-                  ] }, index))
-                }
-              )
-            ]
-          }
-        )
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      "div",
-      {
-        style: {
-          position: "absolute",
-          top: "38%",
-          right: "5%",
-          opacity: influenceOpacity
-        },
-        children: /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-          "div",
-          {
-            style: {
-              padding: "20px",
-              background: "rgba(139, 0, 0, 0.7)",
-              border: "2px solid #ef4444",
-              borderRadius: 8,
-              width: "300px"
-            },
-            children: [
-              /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                "div",
-                {
-                  style: {
-                    fontFamily: "Cinzel, serif",
-                    fontSize: 16,
-                    color: "#ef4444",
-                    marginBottom: 12,
-                    letterSpacing: 2
-                  },
-                  children: "SPHERE OF INFLUENCE"
-                }
-              ),
-              /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-                "div",
-                {
-                  style: {
-                    fontSize: 13,
-                    color: "#e8e8e8",
-                    lineHeight: 1.8
-                  },
-                  children: [
-                    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { marginBottom: 8 }, children: "\u2022 Shapes US foreign policy" }),
-                    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { marginBottom: 8 }, children: "\u2022 Controls major media outlets" }),
-                    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { marginBottom: 8 }, children: "\u2022 Trains future leaders" }),
-                    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { marginBottom: 8 }, children: "\u2022 Publishes Foreign Affairs" }),
-                    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { children: "\u2022 Members in every administration" })
-                  ]
-                }
-              )
-            ]
-          }
-        )
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      "div",
-      {
-        style: {
-          position: "absolute",
-          bottom: "15%",
-          left: "50%",
-          transform: "translateX(-50%)",
-          opacity: statsOpacity
-        },
-        children: /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-          "div",
-          {
-            style: {
-              display: "flex",
-              gap: 50,
-              justifyContent: "center"
-            },
-            children: [
-              /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { textAlign: "center" }, children: [
-                /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                  "div",
-                  {
-                    style: {
-                      fontFamily: "Cinzel, serif",
-                      fontSize: 36,
-                      color: "#ffd700",
-                      fontWeight: 700
-                    },
-                    children: "5,000+"
-                  }
-                ),
-                /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                  "div",
-                  {
-                    style: {
-                      fontFamily: "Merriweather, serif",
-                      fontSize: 12,
-                      color: "#9ca3af",
-                      marginTop: 6
-                    },
-                    children: "Elite Members"
-                  }
-                )
-              ] }),
-              /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { textAlign: "center" }, children: [
-                /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                  "div",
-                  {
-                    style: {
-                      fontFamily: "Cinzel, serif",
-                      fontSize: 36,
-                      color: "#ef4444",
-                      fontWeight: 700
-                    },
-                    children: "100+"
-                  }
-                ),
-                /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                  "div",
-                  {
-                    style: {
-                      fontFamily: "Merriweather, serif",
-                      fontSize: 12,
-                      color: "#9ca3af",
-                      marginTop: 6
-                    },
-                    children: "Years of Influence"
-                  }
-                )
-              ] }),
-              /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { textAlign: "center" }, children: [
-                /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                  "div",
-                  {
-                    style: {
-                      fontFamily: "Cinzel, serif",
-                      fontSize: 36,
-                      color: "#22c55e",
-                      fontWeight: 700
-                    },
-                    children: "12"
-                  }
-                ),
-                /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                  "div",
-                  {
-                    style: {
-                      fontFamily: "Merriweather, serif",
-                      fontSize: 12,
-                      color: "#9ca3af",
-                      marginTop: 6
-                    },
-                    children: "CIA Directors"
-                  }
-                )
-              ] })
-            ]
-          }
-        )
-      }
-    )
-  ] });
-};
-/* harmony default export */ const documentary_CFRDocumentaryScene = ((/* unused pure expression or super */ null && (CFRDocumentaryScene)));
-
-;// ./src/components/scenes/episode06/documentary/BISDocumentaryScene.tsx
-
-
-
-
-const BISDocumentaryScene = () => {
-  const frame = (0,esm.useCurrentFrame)();
-  const bgOpacity = (0,esm.interpolate)(frame, [0, 45], [0, 1], {
-    extrapolateRight: "clamp"
-  });
-  const titleOpacity = (0,esm.interpolate)(frame, [60, 120], [0, 1], {
-    extrapolateRight: "clamp"
-  });
-  const functionsOpacity = (0,esm.interpolate)(frame, [150, 210], [0, 1], {
-    extrapolateRight: "clamp"
-  });
-  const secretsOpacity = (0,esm.interpolate)(frame, [240, 300], [0, 1], {
-    extrapolateRight: "clamp"
-  });
-  const statsOpacity = (0,esm.interpolate)(frame, [330, 390], [0, 1], {
-    extrapolateRight: "clamp"
-  });
-  const functions = [
-    { title: "Bank for Central Banks", icon: "\u{1F3E6}" },
-    { title: "Gold Settlement Hub", icon: "\u{1F947}" },
-    { title: "Policy Coordination", icon: "\u{1F91D}" },
-    { title: "Financial Intelligence", icon: "\u{1F4CA}" }
-  ];
-  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { background: "#0d1117" }, children: [
-    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { opacity: bgOpacity }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      ImageLayer,
-      {
-        src: "/assets/images/ep06/ep06-bis-documentary.jpg",
-        kenBurns: { panDirection: "zoom-in", intensity: "dramatic" },
-        layer: { filter: "sepia", opacity: 0.6 },
-        startFrame: 0,
-        durationFrames: 900
-      }
-    ) }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(Vignette, { intensity: 0.85 }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(FilmGrain, { opacity: 0.1 }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      DocumentaryOverlay,
-      {
-        year: "1930",
-        title: "Bank for International Settlements",
-        subtitle: "The Central Bank of Central Banks",
-        frame: frame - 30,
-        fadeInDuration: 45
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      "div",
-      {
-        style: {
-          position: "absolute",
-          top: "22%",
-          left: "50%",
-          transform: "translateX(-50%)",
-          opacity: titleOpacity
-        },
-        children: /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-          "div",
-          {
-            style: {
-              padding: "24px 50px",
-              background: "rgba(0, 0, 0, 0.9)",
-              border: "3px solid #ffd700",
-              borderRadius: 8,
-              textAlign: "center"
-            },
-            children: [
-              /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                "div",
-                {
-                  style: {
-                    fontFamily: "Cinzel, serif",
-                    fontSize: 48,
-                    color: "#ffd700",
-                    fontWeight: 700,
-                    letterSpacing: 4
-                  },
-                  children: "BIS"
-                }
-              ),
-              /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                "div",
-                {
-                  style: {
-                    fontFamily: "Merriweather, serif",
-                    fontSize: 14,
-                    color: "#e8e8e8",
-                    marginTop: 8
-                  },
-                  children: "Basel, Switzerland"
-                }
-              )
-            ]
-          }
-        )
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      "div",
-      {
-        style: {
-          position: "absolute",
-          top: "40%",
-          left: "5%",
-          opacity: functionsOpacity
-        },
-        children: /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-          "div",
-          {
-            style: {
-              padding: "20px",
-              background: "rgba(30, 58, 90, 0.9)",
-              border: "2px solid #ffd700",
-              borderRadius: 8,
-              width: "280px"
-            },
-            children: [
-              /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                "div",
-                {
-                  style: {
-                    fontFamily: "Cinzel, serif",
-                    fontSize: 16,
-                    color: "#ffd700",
-                    marginBottom: 16,
-                    letterSpacing: 2
-                  },
-                  children: "CORE FUNCTIONS"
-                }
-              ),
-              /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                "div",
-                {
-                  style: {
-                    display: "grid",
-                    gridTemplateColumns: "1fr 1fr",
-                    gap: "12px"
-                  },
-                  children: functions.map((func, index) => /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-                    "div",
-                    {
-                      style: {
-                        padding: "12px",
-                        background: "rgba(13, 17, 23, 0.7)",
-                        borderRadius: 6,
-                        textAlign: "center"
-                      },
-                      children: [
-                        /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { fontSize: 24 }, children: func.icon }),
-                        /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                          "div",
-                          {
-                            style: {
-                              fontSize: 11,
-                              color: "#e8e8e8",
-                              marginTop: 6
-                            },
-                            children: func.title
-                          }
-                        )
-                      ]
-                    },
-                    index
-                  ))
-                }
-              )
-            ]
-          }
-        )
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      "div",
-      {
-        style: {
-          position: "absolute",
-          top: "40%",
-          right: "5%",
-          opacity: secretsOpacity
-        },
-        children: /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-          "div",
-          {
-            style: {
-              padding: "20px",
-              background: "rgba(139, 0, 0, 0.75)",
-              border: "2px solid #ef4444",
-              borderRadius: 8,
-              width: "300px"
-            },
-            children: [
-              /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                "div",
-                {
-                  style: {
-                    fontFamily: "Cinzel, serif",
-                    fontSize: 16,
-                    color: "#ef4444",
-                    marginBottom: 12,
-                    letterSpacing: 2
-                  },
-                  children: "\u26A0\uFE0F SECRECY"
-                }
-              ),
-              /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-                "div",
-                {
-                  style: {
-                    fontSize: 13,
-                    color: "#e8e8e8",
-                    lineHeight: 1.8
-                  },
-                  children: [
-                    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { marginBottom: 8 }, children: "\u2022 No public accountability" }),
-                    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { marginBottom: 8 }, children: "\u2022 Immune from all laws" }),
-                    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { marginBottom: 8 }, children: "\u2022 Secret Basel meetings" }),
-                    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { marginBottom: 8 }, children: "\u2022 No press allowed" }),
-                    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { children: "\u2022 Minutes never published" })
-                  ]
-                }
-              )
-            ]
-          }
-        )
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      "div",
-      {
-        style: {
-          position: "absolute",
-          bottom: "15%",
-          left: "50%",
-          transform: "translateX(-50%)",
-          opacity: statsOpacity
-        },
-        children: /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-          "div",
-          {
-            style: {
-              display: "flex",
-              gap: 50,
-              justifyContent: "center"
-            },
-            children: [
-              /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { textAlign: "center" }, children: [
-                /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                  "div",
-                  {
-                    style: {
-                      fontFamily: "Cinzel, serif",
-                      fontSize: 36,
-                      color: "#ffd700",
-                      fontWeight: 700
-                    },
-                    children: "60+"
-                  }
-                ),
-                /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                  "div",
-                  {
-                    style: {
-                      fontFamily: "Merriweather, serif",
-                      fontSize: 12,
-                      color: "#9ca3af",
-                      marginTop: 6
-                    },
-                    children: "Central Banks"
-                  }
-                )
-              ] }),
-              /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { textAlign: "center" }, children: [
-                /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                  "div",
-                  {
-                    style: {
-                      fontFamily: "Cinzel, serif",
-                      fontSize: 36,
-                      color: "#ef4444",
-                      fontWeight: 700
-                    },
-                    children: "95+"
-                  }
-                ),
-                /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                  "div",
-                  {
-                    style: {
-                      fontFamily: "Merriweather, serif",
-                      fontSize: 12,
-                      color: "#9ca3af",
-                      marginTop: 6
-                    },
-                    children: "Years of Power"
-                  }
-                )
-              ] }),
-              /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { textAlign: "center" }, children: [
-                /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                  "div",
-                  {
-                    style: {
-                      fontFamily: "Cinzel, serif",
-                      fontSize: 36,
-                      color: "#22c55e",
-                      fontWeight: 700
-                    },
-                    children: "Immune"
-                  }
-                ),
-                /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                  "div",
-                  {
-                    style: {
-                      fontFamily: "Merriweather, serif",
-                      fontSize: 12,
-                      color: "#9ca3af",
-                      marginTop: 6
-                    },
-                    children: "From All Laws"
-                  }
-                )
-              ] })
-            ]
-          }
-        )
-      }
-    )
-  ] });
-};
-/* harmony default export */ const documentary_BISDocumentaryScene = ((/* unused pure expression or super */ null && (BISDocumentaryScene)));
-
-;// ./src/components/scenes/episode06/documentary/IMFWorldBankDocumentaryScene.tsx
-
-
-
-
-const IMFWorldBankDocumentaryScene = () => {
-  const frame = (0,esm.useCurrentFrame)();
-  const bgOpacity = (0,esm.interpolate)(frame, [0, 45], [0, 1], {
-    extrapolateRight: "clamp"
-  });
-  const titleOpacity = (0,esm.interpolate)(frame, [60, 120], [0, 1], {
-    extrapolateRight: "clamp"
-  });
-  const imfOpacity = (0,esm.interpolate)(frame, [150, 210], [0, 1], {
-    extrapolateRight: "clamp"
-  });
-  const wbOpacity = (0,esm.interpolate)(frame, [180, 240], [0, 1], {
-    extrapolateRight: "clamp"
-  });
-  const controlOpacity = (0,esm.interpolate)(frame, [270, 330], [0, 1], {
-    extrapolateRight: "clamp"
-  });
-  const statsOpacity = (0,esm.interpolate)(frame, [360, 420], [0, 1], {
-    extrapolateRight: "clamp"
-  });
-  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { background: "#0d1117" }, children: [
-    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { opacity: bgOpacity }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      ImageLayer,
-      {
-        src: "/assets/images/ep06/ep06-imf-documentary.jpg",
-        kenBurns: { panDirection: "left", intensity: "moderate" },
-        layer: { filter: "vintage", opacity: 0.65 },
-        startFrame: 0,
-        durationFrames: 900
-      }
-    ) }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(Vignette, { intensity: 0.8 }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(FilmGrain, { opacity: 0.08 }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      DocumentaryOverlay,
-      {
-        year: "1944",
-        title: "IMF & World Bank",
-        subtitle: "The Bretton Woods Twins",
-        frame: frame - 30,
-        fadeInDuration: 45
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      "div",
-      {
-        style: {
-          position: "absolute",
-          top: "20%",
-          left: "50%",
-          transform: "translateX(-50%)",
-          opacity: titleOpacity
-        },
-        children: /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-          "div",
-          {
-            style: {
-              display: "flex",
-              gap: 40
-            },
-            children: [
-              /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-                "div",
-                {
-                  style: {
-                    padding: "20px 40px",
-                    background: "rgba(0, 0, 0, 0.85)",
-                    border: "3px solid #ffd700",
-                    borderRadius: 8,
-                    textAlign: "center"
-                  },
-                  children: [
-                    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                      "div",
-                      {
-                        style: {
-                          fontFamily: "Cinzel, serif",
-                          fontSize: 36,
-                          color: "#ffd700",
-                          fontWeight: 700
-                        },
-                        children: "IMF"
-                      }
-                    ),
-                    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                      "div",
-                      {
-                        style: {
-                          fontSize: 12,
-                          color: "#e8e8e8",
-                          marginTop: 6
-                        },
-                        children: "International Monetary Fund"
-                      }
-                    )
-                  ]
-                }
-              ),
-              /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-                "div",
-                {
-                  style: {
-                    padding: "20px 40px",
-                    background: "rgba(0, 0, 0, 0.85)",
-                    border: "3px solid #22c55e",
-                    borderRadius: 8,
-                    textAlign: "center"
-                  },
-                  children: [
-                    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                      "div",
-                      {
-                        style: {
-                          fontFamily: "Cinzel, serif",
-                          fontSize: 36,
-                          color: "#22c55e",
-                          fontWeight: 700
-                        },
-                        children: "WB"
-                      }
-                    ),
-                    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                      "div",
-                      {
-                        style: {
-                          fontSize: 12,
-                          color: "#e8e8e8",
-                          marginTop: 6
-                        },
-                        children: "World Bank"
-                      }
-                    )
-                  ]
-                }
-              )
-            ]
-          }
-        )
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      "div",
-      {
-        style: {
-          position: "absolute",
-          top: "38%",
-          left: "5%",
-          opacity: imfOpacity
-        },
-        children: /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-          "div",
-          {
-            style: {
-              padding: "20px",
-              background: "rgba(30, 58, 90, 0.9)",
-              border: "2px solid #ffd700",
-              borderRadius: 8,
-              width: "280px"
-            },
-            children: [
-              /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                "div",
-                {
-                  style: {
-                    fontFamily: "Cinzel, serif",
-                    fontSize: 16,
-                    color: "#ffd700",
-                    marginBottom: 12,
-                    letterSpacing: 2
-                  },
-                  children: "IMF ROLE"
-                }
-              ),
-              /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-                "div",
-                {
-                  style: {
-                    fontSize: 13,
-                    color: "#e8e8e8",
-                    lineHeight: 1.8
-                  },
-                  children: [
-                    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { marginBottom: 8 }, children: "\u2022 Global monetary surveillance" }),
-                    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { marginBottom: 8 }, children: "\u2022 Emergency loans to nations" }),
-                    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { marginBottom: 8 }, children: "\u2022 Structural adjustment programs" }),
-                    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { children: "\u2022 Currency stabilization" })
-                  ]
-                }
-              )
-            ]
-          }
-        )
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      "div",
-      {
-        style: {
-          position: "absolute",
-          top: "38%",
-          right: "5%",
-          opacity: wbOpacity
-        },
-        children: /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-          "div",
-          {
-            style: {
-              padding: "20px",
-              background: "rgba(30, 58, 90, 0.9)",
-              border: "2px solid #22c55e",
-              borderRadius: 8,
-              width: "280px"
-            },
-            children: [
-              /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                "div",
-                {
-                  style: {
-                    fontFamily: "Cinzel, serif",
-                    fontSize: 16,
-                    color: "#22c55e",
-                    marginBottom: 12,
-                    letterSpacing: 2
-                  },
-                  children: "WORLD BANK ROLE"
-                }
-              ),
-              /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-                "div",
-                {
-                  style: {
-                    fontSize: 13,
-                    color: "#e8e8e8",
-                    lineHeight: 1.8
-                  },
-                  children: [
-                    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { marginBottom: 8 }, children: "\u2022 Development loans" }),
-                    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { marginBottom: 8 }, children: "\u2022 Infrastructure projects" }),
-                    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { marginBottom: 8 }, children: "\u2022 Poverty reduction programs" }),
-                    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { children: "\u2022 Technical assistance" })
-                  ]
-                }
-              )
-            ]
-          }
-        )
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      "div",
-      {
-        style: {
-          position: "absolute",
-          bottom: "28%",
-          left: "50%",
-          transform: "translateX(-50%)",
-          opacity: controlOpacity
-        },
-        children: /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-          "div",
-          {
-            style: {
-              padding: "20px 40px",
-              background: "rgba(139, 0, 0, 0.75)",
-              border: "2px solid #ef4444",
-              borderRadius: 8,
-              textAlign: "center"
-            },
-            children: [
-              /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                "div",
-                {
-                  style: {
-                    fontFamily: "Cinzel, serif",
-                    fontSize: 18,
-                    color: "#ef4444",
-                    marginBottom: 12,
-                    letterSpacing: 2
-                  },
-                  children: "\u26A0\uFE0F THE REAL AGENDA"
-                }
-              ),
-              /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                "div",
-                {
-                  style: {
-                    fontSize: 14,
-                    color: "#e8e8e8",
-                    lineHeight: 1.8
-                  },
-                  children: "Loans create debt \u2192 Debt creates control \u2192 Control creates dependency"
-                }
-              )
-            ]
-          }
-        )
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      "div",
-      {
-        style: {
-          position: "absolute",
-          bottom: "12%",
-          left: "50%",
-          transform: "translateX(-50%)",
-          opacity: statsOpacity
-        },
-        children: /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-          "div",
-          {
-            style: {
-              display: "flex",
-              gap: 50,
-              justifyContent: "center"
-            },
-            children: [
-              /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { textAlign: "center" }, children: [
-                /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                  "div",
-                  {
-                    style: {
-                      fontFamily: "Cinzel, serif",
-                      fontSize: 32,
-                      color: "#ffd700",
-                      fontWeight: 700
-                    },
-                    children: "190"
-                  }
-                ),
-                /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                  "div",
-                  {
-                    style: {
-                      fontFamily: "Merriweather, serif",
-                      fontSize: 12,
-                      color: "#9ca3af",
-                      marginTop: 6
-                    },
-                    children: "Member Countries"
-                  }
-                )
-              ] }),
-              /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { textAlign: "center" }, children: [
-                /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                  "div",
-                  {
-                    style: {
-                      fontFamily: "Cinzel, serif",
-                      fontSize: 32,
-                      color: "#ef4444",
-                      fontWeight: 700
-                    },
-                    children: "$1T+"
-                  }
-                ),
-                /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                  "div",
-                  {
-                    style: {
-                      fontFamily: "Merriweather, serif",
-                      fontSize: 12,
-                      color: "#9ca3af",
-                      marginTop: 6
-                    },
-                    children: "Loans Outstanding"
-                  }
-                )
-              ] }),
-              /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { textAlign: "center" }, children: [
-                /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                  "div",
-                  {
-                    style: {
-                      fontFamily: "Cinzel, serif",
-                      fontSize: 32,
-                      color: "#22c55e",
-                      fontWeight: 700
-                    },
-                    children: "US Veto"
-                  }
-                ),
-                /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                  "div",
-                  {
-                    style: {
-                      fontFamily: "Merriweather, serif",
-                      fontSize: 12,
-                      color: "#9ca3af",
-                      marginTop: 6
-                    },
-                    children: "De Facto Control"
-                  }
-                )
-              ] })
-            ]
-          }
-        )
-      }
-    )
-  ] });
-};
-/* harmony default export */ const documentary_IMFWorldBankDocumentaryScene = ((/* unused pure expression or super */ null && (IMFWorldBankDocumentaryScene)));
-
-;// ./src/components/scenes/episode06/documentary/BilderbergDocumentaryScene.tsx
-
-
-
-
-const BilderbergDocumentaryScene = () => {
-  const frame = (0,esm.useCurrentFrame)();
-  const bgOpacity = (0,esm.interpolate)(frame, [0, 45], [0, 1], {
-    extrapolateRight: "clamp"
-  });
-  const titleOpacity = (0,esm.interpolate)(frame, [60, 120], [0, 1], {
-    extrapolateRight: "clamp"
-  });
-  const secrecyOpacity = (0,esm.interpolate)(frame, [150, 210], [0, 1], {
-    extrapolateRight: "clamp"
-  });
-  const attendeesOpacity = (0,esm.interpolate)(frame, [240, 300], [0, 1], {
-    extrapolateRight: "clamp"
-  });
-  const agendaOpacity = (0,esm.interpolate)(frame, [330, 390], [0, 1], {
-    extrapolateRight: "clamp"
-  });
-  const notableAttendees = [
-    "Royalty & Politicians",
-    "Bank CEOs",
-    "Media Moguls",
-    "Tech Giants",
-    "Military Leaders",
-    "Academic Elites"
-  ];
-  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { background: "#0d1117" }, children: [
-    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { opacity: bgOpacity }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      ImageLayer,
-      {
-        src: "/assets/images/ep06/ep06-bilderberg-meeting.jpg",
-        kenBurns: { panDirection: "zoom-in", intensity: "dramatic" },
-        layer: { filter: "vintage", opacity: 0.7 },
-        startFrame: 0,
-        durationFrames: 900
-      }
-    ) }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(Vignette, { intensity: 0.85 }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(FilmGrain, { opacity: 0.1 }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      DocumentaryOverlay,
-      {
-        year: "1954",
-        title: "Bilderberg Group",
-        subtitle: "The World's Most Secretive Meeting",
-        frame: frame - 30,
-        fadeInDuration: 45
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      "div",
-      {
-        style: {
-          position: "absolute",
-          top: "22%",
-          left: "50%",
-          transform: "translateX(-50%)",
-          opacity: titleOpacity
-        },
-        children: /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-          "div",
-          {
-            style: {
-              padding: "24px 60px",
-              background: "rgba(0, 0, 0, 0.9)",
-              border: "3px solid #ffd700",
-              borderRadius: 8,
-              textAlign: "center"
-            },
-            children: [
-              /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                "div",
-                {
-                  style: {
-                    fontFamily: "Cinzel, serif",
-                    fontSize: 42,
-                    color: "#ffd700",
-                    fontWeight: 700,
-                    letterSpacing: 4
-                  },
-                  children: "BILDERBERG"
-                }
-              ),
-              /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                "div",
-                {
-                  style: {
-                    fontFamily: "Merriweather, serif",
-                    fontSize: 14,
-                    color: "#e8e8e8",
-                    marginTop: 8
-                  },
-                  children: "Hotel de Bilderberg, Oosterbeek, Netherlands"
-                }
-              )
-            ]
-          }
-        )
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      "div",
-      {
-        style: {
-          position: "absolute",
-          top: "40%",
-          left: "5%",
-          opacity: secrecyOpacity
-        },
-        children: /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-          "div",
-          {
-            style: {
-              padding: "20px",
-              background: "rgba(139, 0, 0, 0.75)",
-              border: "2px solid #ef4444",
-              borderRadius: 8,
-              width: "280px"
-            },
-            children: [
-              /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                "div",
-                {
-                  style: {
-                    fontFamily: "Cinzel, serif",
-                    fontSize: 16,
-                    color: "#ef4444",
-                    marginBottom: 12,
-                    letterSpacing: 2
-                  },
-                  children: "\u{1F512} RULES OF SECRECY"
-                }
-              ),
-              /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-                "div",
-                {
-                  style: {
-                    fontSize: 13,
-                    color: "#e8e8e8",
-                    lineHeight: 1.8
-                  },
-                  children: [
-                    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { marginBottom: 8 }, children: "\u2022 No press allowed inside" }),
-                    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { marginBottom: 8 }, children: "\u2022 No minutes recorded" }),
-                    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { marginBottom: 8 }, children: "\u2022 Chatham House Rule" }),
-                    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { marginBottom: 8 }, children: "\u2022 Identities protected" }),
-                    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { children: "\u2022 Location changes yearly" })
-                  ]
-                }
-              )
-            ]
-          }
-        )
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      "div",
-      {
-        style: {
-          position: "absolute",
-          top: "40%",
-          right: "5%",
-          opacity: attendeesOpacity
-        },
-        children: /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-          "div",
-          {
-            style: {
-              padding: "20px",
-              background: "rgba(30, 58, 90, 0.9)",
-              border: "2px solid #ffd700",
-              borderRadius: 8,
-              width: "280px"
-            },
-            children: [
-              /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                "div",
-                {
-                  style: {
-                    fontFamily: "Cinzel, serif",
-                    fontSize: 16,
-                    color: "#ffd700",
-                    marginBottom: 12,
-                    letterSpacing: 2
-                  },
-                  children: "WHO ATTENDS"
-                }
-              ),
-              /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                "div",
-                {
-                  style: {
-                    fontSize: 13,
-                    color: "#e8e8e8",
-                    lineHeight: 1.9
-                  },
-                  children: notableAttendees.map((attendee, index) => /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { children: [
-                    "\u2022 ",
-                    attendee
-                  ] }, index))
-                }
-              )
-            ]
-          }
-        )
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      "div",
-      {
-        style: {
-          position: "absolute",
-          bottom: "18%",
-          left: "50%",
-          transform: "translateX(-50%)",
-          opacity: agendaOpacity
-        },
-        children: /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-          "div",
-          {
-            style: {
-              padding: "20px 40px",
-              background: "rgba(0, 0, 0, 0.85)",
-              borderLeft: "4px solid #ffd700",
-              maxWidth: "700px"
-            },
-            children: [
-              /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                "div",
-                {
-                  style: {
-                    fontFamily: "Cinzel, serif",
-                    fontSize: 16,
-                    color: "#ffd700",
-                    marginBottom: 12,
-                    letterSpacing: 2
-                  },
-                  children: "HIDDEN AGENDA"
-                }
-              ),
-              /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                "div",
-                {
-                  style: {
-                    fontFamily: "Merriweather, serif",
-                    fontSize: 15,
-                    color: "#e8e8e8",
-                    lineHeight: 1.7
-                  },
-                  children: "Topics discussed: Global governance, monetary policy, geopolitical strategy, population control, and the future of democracy."
-                }
-              )
-            ]
-          }
-        )
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      "div",
-      {
-        style: {
-          position: "absolute",
-          bottom: "8%",
-          left: "50%",
-          transform: "translateX(-50%)",
-          opacity: agendaOpacity
-        },
-        children: /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-          "div",
-          {
-            style: {
-              display: "flex",
-              gap: 40,
-              justifyContent: "center"
-            },
-            children: [
-              /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { textAlign: "center" }, children: [
-                /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                  "div",
-                  {
-                    style: {
-                      fontFamily: "Cinzel, serif",
-                      fontSize: 28,
-                      color: "#ffd700",
-                      fontWeight: 700
-                    },
-                    children: "130"
-                  }
-                ),
-                /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                  "div",
-                  {
-                    style: {
-                      fontFamily: "Merriweather, serif",
-                      fontSize: 11,
-                      color: "#9ca3af",
-                      marginTop: 4
-                    },
-                    children: "Elite Attendees"
-                  }
-                )
-              ] }),
-              /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { textAlign: "center" }, children: [
-                /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                  "div",
-                  {
-                    style: {
-                      fontFamily: "Cinzel, serif",
-                      fontSize: 28,
-                      color: "#ef4444",
-                      fontWeight: 700
-                    },
-                    children: "70+"
-                  }
-                ),
-                /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                  "div",
-                  {
-                    style: {
-                      fontFamily: "Merriweather, serif",
-                      fontSize: 11,
-                      color: "#9ca3af",
-                      marginTop: 4
-                    },
-                    children: "Years of Meetings"
-                  }
-                )
-              ] }),
-              /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { textAlign: "center" }, children: [
-                /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                  "div",
-                  {
-                    style: {
-                      fontFamily: "Cinzel, serif",
-                      fontSize: 28,
-                      color: "#22c55e",
-                      fontWeight: 700
-                    },
-                    children: "Zero"
-                  }
-                ),
-                /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                  "div",
-                  {
-                    style: {
-                      fontFamily: "Merriweather, serif",
-                      fontSize: 11,
-                      color: "#9ca3af",
-                      marginTop: 4
-                    },
-                    children: "Public Records"
-                  }
-                )
-              ] })
-            ]
-          }
-        )
-      }
-    )
-  ] });
-};
-/* harmony default export */ const documentary_BilderbergDocumentaryScene = ((/* unused pure expression or super */ null && (BilderbergDocumentaryScene)));
-
-;// ./src/components/scenes/episode06/documentary/TrilateralCommissionDocumentaryScene.tsx
-
-
-
-
-const TrilateralCommissionDocumentaryScene = () => {
-  const frame = (0,esm.useCurrentFrame)();
-  const bgOpacity = (0,esm.interpolate)(frame, [0, 45], [0, 1], {
-    extrapolateRight: "clamp"
-  });
-  const titleOpacity = (0,esm.interpolate)(frame, [60, 120], [0, 1], {
-    extrapolateRight: "clamp"
-  });
-  const founderOpacity = (0,esm.interpolate)(frame, [150, 210], [0, 1], {
-    extrapolateRight: "clamp"
-  });
-  const regionsOpacity = (0,esm.interpolate)(frame, [240, 300], [0, 1], {
-    extrapolateRight: "clamp"
-  });
-  const influenceOpacity = (0,esm.interpolate)(frame, [330, 390], [0, 1], {
-    extrapolateRight: "clamp"
-  });
-  const statsOpacity = (0,esm.interpolate)(frame, [420, 480], [0, 1], {
-    extrapolateRight: "clamp"
-  });
-  const regions = [
-    { name: "North America", members: "US, Canada, Mexico", color: "#22c55e" },
-    { name: "Europe", members: "EU Nations", color: "#ffd700" },
-    {
-      name: "Asia-Pacific",
-      members: "Japan, Korea, Australia",
-      color: "#ef4444"
-    }
-  ];
-  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { background: "#0d1117" }, children: [
-    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { opacity: bgOpacity }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      ImageLayer,
-      {
-        src: "/assets/images/ep06/ep06-trilateral-global.jpg",
-        kenBurns: { panDirection: "zoom-in", intensity: "moderate" },
-        layer: { filter: "vintage", opacity: 0.65 },
-        startFrame: 0,
-        durationFrames: 900
-      }
-    ) }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(Vignette, { intensity: 0.8 }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(FilmGrain, { opacity: 0.08 }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      DocumentaryOverlay,
-      {
-        year: "1973",
-        title: "Trilateral Commission",
-        subtitle: "David Rockefeller's Global Vision",
-        frame: frame - 30,
-        fadeInDuration: 45
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      "div",
-      {
-        style: {
-          position: "absolute",
-          top: "20%",
-          left: "50%",
-          transform: "translateX(-50%)",
-          opacity: titleOpacity
-        },
-        children: /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-          "div",
-          {
-            style: {
-              padding: "24px 50px",
-              background: "rgba(0, 0, 0, 0.9)",
-              border: "3px solid #ffd700",
-              borderRadius: 8,
-              textAlign: "center"
-            },
-            children: [
-              /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                "div",
-                {
-                  style: {
-                    fontFamily: "Cinzel, serif",
-                    fontSize: 38,
-                    color: "#ffd700",
-                    fontWeight: 700,
-                    letterSpacing: 3
-                  },
-                  children: "TRILATERAL COMMISSION"
-                }
-              ),
-              /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                "div",
-                {
-                  style: {
-                    fontFamily: "Merriweather, serif",
-                    fontSize: 14,
-                    color: "#e8e8e8",
-                    marginTop: 8
-                  },
-                  children: "Three Regions, One Vision"
-                }
-              )
-            ]
-          }
-        )
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      "div",
-      {
-        style: {
-          position: "absolute",
-          top: "36%",
-          left: "5%",
-          opacity: founderOpacity
-        },
-        children: /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-          "div",
-          {
-            style: {
-              padding: "20px",
-              background: "rgba(30, 58, 90, 0.9)",
-              border: "2px solid #ffd700",
-              borderRadius: 8,
-              width: "280px"
-            },
-            children: [
-              /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                "div",
-                {
-                  style: {
-                    fontFamily: "Cinzel, serif",
-                    fontSize: 16,
-                    color: "#ffd700",
-                    marginBottom: 12,
-                    letterSpacing: 2
-                  },
-                  children: "FOUNDER"
-                }
-              ),
-              /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                "div",
-                {
-                  style: {
-                    fontSize: 18,
-                    color: "#e8e8e8",
-                    fontWeight: 600,
-                    marginBottom: 8
-                  },
-                  children: "David Rockefeller"
-                }
-              ),
-              /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                "div",
-                {
-                  style: {
-                    fontSize: 13,
-                    color: "#9ca3af",
-                    lineHeight: 1.7
-                  },
-                  children: '"We are on the verge of a global transformation. All we need is the right major crisis."'
-                }
-              )
-            ]
-          }
-        )
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      "div",
-      {
-        style: {
-          position: "absolute",
-          top: "36%",
-          right: "5%",
-          opacity: regionsOpacity
-        },
-        children: /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-          "div",
-          {
-            style: {
-              padding: "20px",
-              background: "rgba(0, 0, 0, 0.85)",
-              border: "2px solid #ffd700",
-              borderRadius: 8,
-              width: "300px"
-            },
-            children: [
-              /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                "div",
-                {
-                  style: {
-                    fontFamily: "Cinzel, serif",
-                    fontSize: 16,
-                    color: "#ffd700",
-                    marginBottom: 16,
-                    letterSpacing: 2
-                  },
-                  children: "THE THREE REGIONS"
-                }
-              ),
-              /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                "div",
-                {
-                  style: {
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: 12
-                  },
-                  children: regions.map((region, index) => /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-                    "div",
-                    {
-                      style: {
-                        padding: "12px",
-                        background: "rgba(30, 58, 90, 0.7)",
-                        borderRadius: 6,
-                        borderLeft: `4px solid ${region.color}`
-                      },
-                      children: [
-                        /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                          "div",
-                          {
-                            style: {
-                              fontSize: 14,
-                              color: "#e8e8e8",
-                              fontWeight: 600
-                            },
-                            children: region.name
-                          }
-                        ),
-                        /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                          "div",
-                          {
-                            style: {
-                              fontSize: 11,
-                              color: "#9ca3af",
-                              marginTop: 4
-                            },
-                            children: region.members
-                          }
-                        )
-                      ]
-                    },
-                    index
-                  ))
-                }
-              )
-            ]
-          }
-        )
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      "div",
-      {
-        style: {
-          position: "absolute",
-          bottom: "25%",
-          left: "50%",
-          transform: "translateX(-50%)",
-          opacity: influenceOpacity
-        },
-        children: /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-          "div",
-          {
-            style: {
-              padding: "20px 40px",
-              background: "rgba(139, 0, 0, 0.7)",
-              border: "2px solid #ef4444",
-              borderRadius: 8,
-              textAlign: "center"
-            },
-            children: [
-              /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                "div",
-                {
-                  style: {
-                    fontFamily: "Cinzel, serif",
-                    fontSize: 16,
-                    color: "#ef4444",
-                    marginBottom: 12,
-                    letterSpacing: 2
-                  },
-                  children: "POLITICAL INFLUENCE"
-                }
-              ),
-              /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-                "div",
-                {
-                  style: {
-                    fontSize: 14,
-                    color: "#e8e8e8",
-                    lineHeight: 1.8
-                  },
-                  children: [
-                    "Jimmy Carter's entire cabinet were Trilateral members",
-                    /* @__PURE__ */ (0,jsx_runtime.jsx)("br", {}),
-                    "Every administration since has included members"
-                  ]
-                }
-              )
-            ]
-          }
-        )
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      "div",
-      {
-        style: {
-          position: "absolute",
-          bottom: "10%",
-          left: "50%",
-          transform: "translateX(-50%)",
-          opacity: statsOpacity
-        },
-        children: /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-          "div",
-          {
-            style: {
-              display: "flex",
-              gap: 50,
-              justifyContent: "center"
-            },
-            children: [
-              /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { textAlign: "center" }, children: [
-                /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                  "div",
-                  {
-                    style: {
-                      fontFamily: "Cinzel, serif",
-                      fontSize: 32,
-                      color: "#ffd700",
-                      fontWeight: 700
-                    },
-                    children: "400+"
-                  }
-                ),
-                /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                  "div",
-                  {
-                    style: {
-                      fontFamily: "Merriweather, serif",
-                      fontSize: 12,
-                      color: "#9ca3af",
-                      marginTop: 6
-                    },
-                    children: "Elite Members"
-                  }
-                )
-              ] }),
-              /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { textAlign: "center" }, children: [
-                /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                  "div",
-                  {
-                    style: {
-                      fontFamily: "Cinzel, serif",
-                      fontSize: 32,
-                      color: "#ef4444",
-                      fontWeight: 700
-                    },
-                    children: "50+"
-                  }
-                ),
-                /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                  "div",
-                  {
-                    style: {
-                      fontFamily: "Merriweather, serif",
-                      fontSize: 12,
-                      color: "#9ca3af",
-                      marginTop: 6
-                    },
-                    children: "Years Active"
-                  }
-                )
-              ] }),
-              /* @__PURE__ */ (0,jsx_runtime.jsxs)("div", { style: { textAlign: "center" }, children: [
-                /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                  "div",
-                  {
-                    style: {
-                      fontFamily: "Cinzel, serif",
-                      fontSize: 32,
-                      color: "#22c55e",
-                      fontWeight: 700
-                    },
-                    children: "3"
-                  }
-                ),
-                /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                  "div",
-                  {
-                    style: {
-                      fontFamily: "Merriweather, serif",
-                      fontSize: 12,
-                      color: "#9ca3af",
-                      marginTop: 6
-                    },
-                    children: "Global Regions"
-                  }
-                )
-              ] })
-            ]
-          }
-        )
-      }
-    )
-  ] });
-};
-/* harmony default export */ const documentary_TrilateralCommissionDocumentaryScene = ((/* unused pure expression or super */ null && (TrilateralCommissionDocumentaryScene)));
-
-;// ./src/components/scenes/episode06/documentary/EliteClubsSummaryDocumentaryScene.tsx
-
-
-
-
-const EliteClubsSummaryDocumentaryScene = () => {
-  const frame = (0,esm.useCurrentFrame)();
-  const bgOpacity = (0,esm.interpolate)(frame, [0, 45], [0, 1], {
-    extrapolateRight: "clamp"
-  });
-  const titleOpacity = (0,esm.interpolate)(frame, [60, 120], [0, 1], {
-    extrapolateRight: "clamp"
-  });
-  const networkOpacity = (0,esm.interpolate)(frame, [150, 210], [0, 1], {
-    extrapolateRight: "clamp"
-  });
-  const conclusionOpacity = (0,esm.interpolate)(frame, [240, 300], [0, 1], {
-    extrapolateRight: "clamp"
-  });
-  const quoteOpacity = (0,esm.interpolate)(frame, [330, 390], [0, 1], {
-    extrapolateRight: "clamp"
-  });
-  const clubs = [
-    { name: "CFR", year: "1921", role: "Policy Shaping" },
-    { name: "BIS", year: "1930", role: "Financial Control" },
-    { name: "IMF/WB", year: "1944", role: "Global Debt" },
-    { name: "Bilderberg", year: "1954", role: "Elite Consensus" },
-    { name: "Trilateral", year: "1973", role: "Regional Unity" }
-  ];
-  return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { background: "#0d1117" }, children: [
-    /* @__PURE__ */ (0,jsx_runtime.jsx)("div", { style: { opacity: bgOpacity }, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      ImageLayer,
-      {
-        src: "/assets/images/ep06/ep06-trilateral-global.jpg",
-        kenBurns: { panDirection: "zoom-out", intensity: "dramatic" },
-        layer: { filter: "vintage", opacity: 0.6 },
-        startFrame: 0,
-        durationFrames: 900
-      }
-    ) }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(Vignette, { intensity: 0.85 }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(FilmGrain, { opacity: 0.1 }),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      DocumentaryOverlay,
-      {
-        year: "Summary",
-        title: "The Network of Power",
-        subtitle: "Connecting the Dots",
-        frame: frame - 30,
-        fadeInDuration: 45
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      "div",
-      {
-        style: {
-          position: "absolute",
-          top: "20%",
-          left: "50%",
-          transform: "translateX(-50%)",
-          opacity: titleOpacity
-        },
-        children: /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-          "div",
-          {
-            style: {
-              padding: "20px 50px",
-              background: "rgba(0, 0, 0, 0.9)",
-              border: "3px solid #ffd700",
-              borderRadius: 8,
-              textAlign: "center"
-            },
-            children: [
-              /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                "div",
-                {
-                  style: {
-                    fontFamily: "Cinzel, serif",
-                    fontSize: 36,
-                    color: "#ffd700",
-                    fontWeight: 700,
-                    letterSpacing: 3
-                  },
-                  children: "THE INVISIBLE GOVERNMENT"
-                }
-              ),
-              /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                "div",
-                {
-                  style: {
-                    fontFamily: "Merriweather, serif",
-                    fontSize: 14,
-                    color: "#e8e8e8",
-                    marginTop: 8
-                  },
-                  children: "Five Organizations, One Agenda"
-                }
-              )
-            ]
-          }
-        )
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      "div",
-      {
-        style: {
-          position: "absolute",
-          top: "35%",
-          left: "50%",
-          transform: "translateX(-50%)",
-          opacity: networkOpacity
-        },
-        children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
-          "div",
-          {
-            style: {
-              display: "flex",
-              gap: 16,
-              justifyContent: "center"
-            },
-            children: clubs.map((club, index) => /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-              "div",
-              {
-                style: {
-                  padding: "16px 20px",
-                  background: "rgba(30, 58, 90, 0.9)",
-                  border: "2px solid #ffd700",
-                  borderRadius: 8,
-                  textAlign: "center"
-                },
-                children: [
-                  /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                    "div",
-                    {
-                      style: {
-                        fontFamily: "Cinzel, serif",
-                        fontSize: 18,
-                        color: "#ffd700",
-                        fontWeight: 700
-                      },
-                      children: club.name
-                    }
-                  ),
-                  /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                    "div",
-                    {
-                      style: {
-                        fontSize: 11,
-                        color: "#9ca3af",
-                        marginTop: 4
-                      },
-                      children: club.year
-                    }
-                  ),
-                  /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                    "div",
-                    {
-                      style: {
-                        fontSize: 10,
-                        color: "#e8e8e8",
-                        marginTop: 6
-                      },
-                      children: club.role
-                    }
-                  )
-                ]
-              },
-              index
-            ))
-          }
-        )
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      "div",
-      {
-        style: {
-          position: "absolute",
-          bottom: "32%",
-          left: "50%",
-          transform: "translateX(-50%)",
-          opacity: conclusionOpacity
-        },
-        children: /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-          "div",
-          {
-            style: {
-              padding: "24px 40px",
-              background: "rgba(139, 0, 0, 0.75)",
-              border: "2px solid #ef4444",
-              borderRadius: 8,
-              textAlign: "center",
-              maxWidth: "800px"
-            },
-            children: [
-              /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                "div",
-                {
-                  style: {
-                    fontFamily: "Cinzel, serif",
-                    fontSize: 18,
-                    color: "#ef4444",
-                    marginBottom: 12,
-                    letterSpacing: 2
-                  },
-                  children: "THE PATTERN"
-                }
-              ),
-              /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                "div",
-                {
-                  style: {
-                    fontSize: 15,
-                    color: "#e8e8e8",
-                    lineHeight: 1.8
-                  },
-                  children: "Each organization serves a specific purpose in the global control structure. Together, they form an interconnected web of influence that shapes world events, monetary policy, and the future of humanity."
-                }
-              )
-            ]
-          }
-        )
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      "div",
-      {
-        style: {
-          position: "absolute",
-          bottom: "12%",
-          left: "50%",
-          transform: "translateX(-50%)",
-          opacity: quoteOpacity
-        },
-        children: /* @__PURE__ */ (0,jsx_runtime.jsxs)(
-          "div",
-          {
-            style: {
-              padding: "20px 40px",
-              background: "rgba(0, 0, 0, 0.85)",
-              borderLeft: "4px solid #ffd700",
-              maxWidth: "700px"
-            },
-            children: [
-              /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                "div",
-                {
-                  style: {
-                    fontFamily: "Merriweather, serif",
-                    fontSize: 18,
-                    color: "#e8e8e8",
-                    fontStyle: "italic",
-                    lineHeight: 1.7
-                  },
-                  children: '"The real truth of the matter is that a financial element in the large centers has owned the government since the days of Andrew Jackson."'
-                }
-              ),
-              /* @__PURE__ */ (0,jsx_runtime.jsx)(
-                "div",
-                {
-                  style: {
-                    fontSize: 14,
-                    color: "#ffd700",
-                    marginTop: 12,
-                    letterSpacing: 1
-                  },
-                  children: "\u2014 Franklin D. Roosevelt, 1933"
-                }
-              )
-            ]
-          }
-        )
-      }
-    )
-  ] });
-};
-/* harmony default export */ const documentary_EliteClubsSummaryDocumentaryScene = ((/* unused pure expression or super */ null && (EliteClubsSummaryDocumentaryScene)));
-
-;// ./src/subtitles/episode06.ts
-
-const scene00Subtitles = [
-  { startFrame: 0, endFrame: 120, text: "\u7B2C\u516D\u96C6\uFF1A\u7EDF\u6CBB\u4E16\u754C\u7684\u7CBE\u82F1\u4FF1\u4E50\u90E8" },
-  { startFrame: 120, endFrame: 300, text: "\u738B\u5EA7\u80CC\u540E\u7AD9\u7740\u9ED1\u6697\u7684\u6743\u529B" },
-  { startFrame: 300, endFrame: 480, text: "\u63A7\u5236\u7740\u4E16\u754C\u7684\u91D1\u878D\u547D\u8FD0\u3002" },
-  { startFrame: 480, endFrame: 660, text: "\u4ED6\u4EEC\u79D8\u5BC6\u805A\u4F1A\u3002\u4ED6\u4EEC\u5728\u9634\u5F71\u4E2D\u7B56\u5212\u3002" },
-  { startFrame: 660, endFrame: 840, text: "\u4ED6\u4EEC\u79F0\u81EA\u5DF1\u4E3A\u2026\u2026\u7CBE\u82F1\u3002" },
-  { startFrame: 840, endFrame: 1020, text: "\u4ECE\u534E\u76DB\u987F\u5230\u5DF4\u585E\u5C14\uFF0C\u4ECE\u5F7C\u5C14\u5FB7\u4F2F\u683C\u5230\u4E09\u8FB9\u59D4\u5458\u4F1A\u3002" },
-  { startFrame: 1020, endFrame: 1200, text: "\u6B22\u8FCE\u6765\u5230\u5168\u7403\u6CBB\u7406\u7684\u9690\u85CF\u4E16\u754C\u3002" }
-];
-const scene01Subtitles = [
-  { startFrame: 0, endFrame: 180, text: "\u7231\u5FB7\u534E\xB7\u8C6A\u65AF\u4E0A\u6821\u2014\u2014\u300C\u7CBE\u795E\u6559\u7236\u300D" },
-  { startFrame: 180, endFrame: 360, text: "1858-1944\u3002\u4F0D\u5FB7\u7F57\xB7\u5A01\u5C14\u900A\u603B\u7EDF\u7684\u987E\u95EE\u3002" },
-  { startFrame: 360, endFrame: 540, text: "\u8C6A\u65AF\u662F\u738B\u5EA7\u80CC\u540E\u7684\u771F\u6B63\u6743\u529B\u3002" },
-  { startFrame: 540, endFrame: 720, text: "\u5F53\u5A01\u5C14\u900A\u5750\u5728\u692D\u5706\u5F62\u529E\u516C\u5BA4\u65F6\uFF0C" },
-  { startFrame: 720, endFrame: 900, text: "\u8C6A\u65AF\u505A\u51FA\u4E86\u5B9E\u9645\u51B3\u7B56\u3002" },
-  { startFrame: 900, endFrame: 1080, text: "1912\u5E74\uFF0C\u4ED6\u5199\u4E86\u4E00\u672C\u795E\u79D8\u7684\u4E66\uFF1A" },
-  { startFrame: 1080, endFrame: 1260, text: "\u300A\u83F2\u5229\u6D66\xB7\u675C\uFF1A\u7BA1\u7406\u8005\u300B" },
-  { startFrame: 1260, endFrame: 1440, text: "\u8FD9\u672C\u4E66\u6982\u8FF0\u4E86\u4E16\u754C\u653F\u5E9C\u7684\u8BA1\u5212" },
-  { startFrame: 1440, endFrame: 1620, text: "\u901A\u8FC7\u91D1\u878D\u63A7\u5236\u6765\u5B9E\u73B0\u3002" },
-  { startFrame: 1620, endFrame: 1800, text: "\u65B0\u4E16\u754C\u79E9\u5E8F\u7684\u84DD\u56FE\u3002" }
-];
-const scene02Subtitles = [
-  { startFrame: 0, endFrame: 180, text: "\u5916\u4EA4\u534F\u4F1A\u2014\u2014\u7F8E\u56FD\u653F\u6CBB\u7CBE\u82F1\u7684\u300C\u4E2D\u592E\u515A\u6821\u300D" },
-  { startFrame: 180, endFrame: 360, text: "1921\u5E74\u6210\u7ACB\u4E8E\u7EBD\u7EA6\u3002" },
-  { startFrame: 360, endFrame: 540, text: "\u5916\u4EA4\u534F\u4F1A\u662F\u7F8E\u56FD\u6700\u6709\u5F71\u54CD\u529B\u7684\u653F\u7B56\u56E2\u4F53\u3002" },
-  { startFrame: 540, endFrame: 720, text: "11\u4F4D\u7F8E\u56FD\u603B\u7EDF\u66FE\u662F\u5176\u6210\u5458\u3002" },
-  { startFrame: 720, endFrame: 900, text: "8\u4F4D\u56FD\u52A1\u537F\u30026\u4F4D\u4E2D\u60C5\u5C40\u5C40\u957F\u3002" },
-  { startFrame: 900, endFrame: 1080, text: "\u8D85\u8FC720\u4F4D\u5A92\u4F53\u5927\u4EA8\u63A7\u5236\u7740\u8206\u8BBA\u3002" },
-  { startFrame: 1080, endFrame: 1260, text: "\u4ED6\u4EEC\u79F0\u4E4B\u4E3A\u300C\u5851\u9020\u7F8E\u56FD\u5916\u4EA4\u653F\u7B56\u300D\u3002" },
-  { startFrame: 1260, endFrame: 1440, text: "\u6279\u8BC4\u8005\u79F0\u4E4B\u4E3A\u5F71\u5B50\u653F\u5E9C\u3002" },
-  { startFrame: 1440, endFrame: 1620, text: "\u5916\u4EA4\u534F\u4F1A\u662F\u6700\u63A5\u8FD1" },
-  { startFrame: 1620, endFrame: 1800, text: "\u7F8E\u56FD\u7EDF\u6CBB\u7CBE\u82F1\u7F51\u7EDC\u7684\u5B58\u5728\u3002" },
-  { startFrame: 1800, endFrame: 2100, text: "\u5B83\u8D85\u8D8A\u515A\u6D3E\u653F\u6CBB\uFF0C\u8D85\u8D8A\u9009\u4E3E\u3002" }
-];
-const scene03Subtitles = [
-  { startFrame: 0, endFrame: 180, text: "\u56FD\u9645\u6E05\u7B97\u94F6\u884C\u2014\u2014\u300C\u94F6\u884C\u5BB6\u7684\u94F6\u884C\u300D" },
-  { startFrame: 180, endFrame: 360, text: "\u4F4D\u4E8E\u745E\u58EB\u5DF4\u585E\u5C14\u30021930\u5E74\u6210\u7ACB\u3002" },
-  { startFrame: 360, endFrame: 540, text: "\u4EC5\u7531\u5404\u56FD\u592E\u884C\u6240\u6709\u3002" },
-  { startFrame: 540, endFrame: 720, text: "\u5904\u7406\u56FD\u9645\u9EC4\u91D1\u7ED3\u7B97\u3002" },
-  { startFrame: 720, endFrame: 900, text: "\u534F\u8C03\u5168\u7403\u8D27\u5E01\u653F\u7B56\u3002" },
-  { startFrame: 900, endFrame: 1080, text: "\u6BCF\u5E74\u4E00\u6708\uFF0C\u5404\u56FD\u592E\u884C\u884C\u957F\u5728\u5DF4\u585E\u5C14\u805A\u4F1A\u3002" },
-  { startFrame: 1080, endFrame: 1260, text: "\u4E0D\u516C\u5E03\u4F1A\u8BAE\u8BB0\u5F55\u3002\u4E0D\u5141\u8BB8\u5A92\u4F53\u8FDB\u5165\u3002" },
-  { startFrame: 1260, endFrame: 1440, text: "\u8FD9\u5C31\u662F\u300C\u5DF4\u585E\u5C14\u4F1A\u8BAE\u300D\u2014\u2014" },
-  { startFrame: 1440, endFrame: 1620, text: "\u91D1\u878D\u754C\u6700\u9690\u79D8\u7684\u805A\u4F1A\u3002" },
-  { startFrame: 1620, endFrame: 1800, text: "\u56FD\u9645\u6E05\u7B97\u94F6\u884C\u662F\u4E16\u754C\u4E0A\u6700\u5F3A\u5927\u7684" },
-  { startFrame: 1800, endFrame: 1980, text: "\u94F6\u884C\u5BB6\u505A\u51FA\u5F71\u54CD\u6570\u5341\u4EBF\u4EBA\u7684\u51B3\u7B56\u7684\u5730\u65B9\u3002" },
-  { startFrame: 1980, endFrame: 2100, text: "\u900F\u660E\u5EA6\uFF1F\u96F6\u3002\u95EE\u8D23\u5236\uFF1F\u96F6\u3002" }
-];
-const scene04Subtitles = [
-  { startFrame: 0, endFrame: 180, text: "IMF\u4E0E\u4E16\u754C\u94F6\u884C\u2014\u2014\u7F8E\u5143\u9738\u6743\u7684\u5DE5\u5177" },
-  { startFrame: 180, endFrame: 360, text: "1944\u5E74\u6210\u7ACB\u4E8E\u5E03\u96F7\u987F\u68EE\u6797\u3002" },
-  { startFrame: 360, endFrame: 540, text: "IMF\u58F0\u79F0\u300C\u7A33\u5B9A\u300D\u8D27\u5E01\u3002" },
-  { startFrame: 540, endFrame: 720, text: "\u4E16\u754C\u94F6\u884C\u58F0\u79F0\u4FC3\u8FDB\u300C\u53D1\u5C55\u300D\u3002" },
-  { startFrame: 720, endFrame: 900, text: "\u4F46\u73B0\u5B9E\u622A\u7136\u4E0D\u540C\u3002" },
-  { startFrame: 900, endFrame: 1080, text: "\u6295\u7968\u6743\u57FA\u4E8E\u8D44\u91D1\u8D21\u732E\u3002" },
-  { startFrame: 1080, endFrame: 1260, text: "\u7F8E\u56FD\u62E5\u6709\u6709\u6548\u7684\u5426\u51B3\u6743\u3002" },
-  { startFrame: 1260, endFrame: 1440, text: "\u8D37\u6B3E\u9644\u5E26\u300C\u6761\u4EF6\u300D\u2014\u2014" },
-  { startFrame: 1440, endFrame: 1620, text: "\u79C1\u6709\u5316\u3001\u653E\u677E\u7BA1\u5236\u3001\u7D27\u7F29\u653F\u7B56\u3002" },
-  { startFrame: 1620, endFrame: 1800, text: "\u5C06\u56FD\u6709\u8D44\u4EA7\u51FA\u552E\u7ED9\u897F\u65B9\u516C\u53F8\u3002" },
-  { startFrame: 1800, endFrame: 1980, text: "\u5411\u5916\u56FD\u94F6\u884C\u5F00\u653E\u5E02\u573A\u3002" },
-  { startFrame: 1980, endFrame: 2100, text: "IMF\u4E0D\u662F\u91D1\u878D\u673A\u6784\u2014\u2014\u5B83\u662F\u653F\u6CBB\u5DE5\u5177\u3002" }
-];
-const scene05Subtitles = [
-  { startFrame: 0, endFrame: 180, text: "\u5F7C\u5C14\u5FB7\u4F2F\u683C\u4FF1\u4E50\u90E8\u2014\u2014\u6700\u9690\u79D8\u7684\u7CBE\u82F1\u4FF1\u4E50\u90E8" },
-  { startFrame: 180, endFrame: 360, text: "1954\u5E74\u6210\u7ACB\u4E8E\u8377\u5170\u3002" },
-  { startFrame: 360, endFrame: 540, text: "\u4EE5\u5F7C\u5C14\u5FB7\u4F2F\u683C\u9152\u5E97\u547D\u540D\u3002" },
-  { startFrame: 540, endFrame: 720, text: "\u6BCF\u5E74120-150\u540D\u7CBE\u82F1\u805A\u4F1A\u3002" },
-  { startFrame: 720, endFrame: 900, text: "\u53C2\u4E0E\u8005\u5FC5\u987B60\u5C81\u4EE5\u4E0A\u3002" },
-  { startFrame: 900, endFrame: 1080, text: "\u65E0\u8BB0\u5F55\u3002\u65E0\u5A92\u4F53\u3002\u7981\u8A00\u3002" },
-  { startFrame: 1080, endFrame: 1260, text: "\u8BAE\u9898\uFF1A\u5168\u7403\u7ECF\u6D4E\u3001\u4E16\u754C\u79E9\u5E8F\u3001\u5730\u7F18\u653F\u6CBB\u3002" },
-  { startFrame: 1260, endFrame: 1440, text: "\u5173\u952E\u6210\u5458\u5305\u62EC\u6234\u7EF4\xB7\u6D1B\u514B\u83F2\u52D2\u3001" },
-  { startFrame: 1440, endFrame: 1620, text: "\u4EA8\u5229\xB7\u57FA\u8F9B\u683C\u3001\u4E54\u6CBB\xB7\u7D22\u7F57\u65AF\u3002" },
-  { startFrame: 1620, endFrame: 1800, text: "\u5F7C\u5C14\u5FB7\u4F2F\u683C\u4FF1\u4E50\u90E8\u662F\u4E00\u4E2A\u79D8\u5BC6\u9634\u8C0B" }
-];
-const scene06Subtitles = [
-  { startFrame: 0, endFrame: 180, text: "\u4E09\u8FB9\u59D4\u5458\u4F1A\u2014\u2014\u4E16\u754C\u653F\u5E9C\u4E4B\u8DEF" },
-  { startFrame: 180, endFrame: 360, text: "1973\u5E74\u7531\u6234\u7EF4\xB7\u6D1B\u514B\u83F2\u52D2\u521B\u7ACB\u3002" },
-  { startFrame: 360, endFrame: 540, text: "\u534F\u8C03\u5317\u7F8E\u3001\u6B27\u6D32\u3001\u65E5\u672C\u3002" },
-  { startFrame: 540, endFrame: 720, text: "\u5179\u6BD4\u683C\u6D85\u592B\xB7\u5E03\u70ED\u6D25\u65AF\u57FA\u662F\u7B2C\u4E00\u4EFB\u6267\u884C\u4E3B\u4EFB\u3002" },
-  { startFrame: 720, endFrame: 900, text: "350\u591A\u540D\u5168\u7403\u7CBE\u82F1\u6210\u5458\u3002" },
-  { startFrame: 900, endFrame: 1080, text: "\u4ED6\u4EEC\u7684\u4F7F\u547D\uFF1A\u5EFA\u7ACB\u5168\u7403\u6CBB\u7406\u3002" },
-  { startFrame: 1080, endFrame: 1260, text: "\u4ED6\u4EEC\u53D1\u8D77\u4E86G7\u5CF0\u4F1A\u3002" },
-  { startFrame: 1260, endFrame: 1440, text: "\u4ED6\u4EEC\u5851\u9020\u56FD\u9645\u653F\u7B56\u534F\u8C03\u3002" },
-  { startFrame: 1440, endFrame: 1620, text: "\u4E09\u8FB9\u59D4\u5458\u4F1A\u662F\u4E16\u754C\u89C4\u5212\u7CBE\u82F1\u7684" },
-  { startFrame: 1620, endFrame: 1800, text: "\u53EF\u89C1\u5DE5\u5177\u3002" }
-];
-const scene07Subtitles = [
-  { startFrame: 0, endFrame: 180, text: "\u603B\u7ED3\u2014\u2014\u7CBE\u82F1\u4FF1\u4E50\u90E8\u7F51\u7EDC" },
-  { startFrame: 180, endFrame: 360, text: "\u4ECE\u8C6A\u65AF\u4E0A\u6821\u5230\u4E09\u8FB9\u59D4\u5458\u4F1A\uFF0C" },
-  { startFrame: 360, endFrame: 540, text: "\u4E00\u4E2A\u9690\u85CF\u7684\u7F51\u7EDC\u63A7\u5236\u7740\u5168\u7403\u4E8B\u52A1\u3002" },
-  { startFrame: 540, endFrame: 720, text: "\u8FD9\u4E9B\u4FF1\u4E50\u90E8\u8DE8\u8D8A\u56FD\u754C\u3001\u515A\u6D3E\u548C\u653F\u5E9C\u3002" },
-  { startFrame: 720, endFrame: 900, text: "\u5F62\u6210\u4E00\u4E2A\u9690\u79D8\u7684\u6743\u529B\u7ED3\u6784" },
-  { startFrame: 900, endFrame: 1080, text: "\u5F71\u54CD\u7740\u6570\u5341\u4EBF\u4EBA\u7684\u751F\u6D3B\u3002" },
-  { startFrame: 1080, endFrame: 1260, text: "\u77E5\u8BC6\u5C31\u662F\u529B\u91CF\u3002\u4FE1\u606F\u5C31\u662F\u529B\u91CF\u3002" },
-  { startFrame: 1260, endFrame: 1440, text: "\u4ED6\u4EEC\u63A7\u5236\u79D8\u8BC0\u5C31\u9690\u85CF\u5728\u4F17\u76EE\u777D\u777D\u4E4B\u4E0B\u3002" },
-  { startFrame: 1440, endFrame: 1500, text: "\u7406\u89E3\u662F\u6211\u4EEC\u552F\u4E00\u7684\u9632\u7EBF\u3002" }
-];
-const episode06Scenes = [
-  {
-    sceneName: "\u5F00\u573A",
-    sceneIndex: 0,
-    startFrame: 0,
-    endFrame: 1200,
-    subtitles: scene00Subtitles
-  },
-  {
-    sceneName: "\u8C6A\u65AF\u4E0A\u6821",
-    sceneIndex: 1,
-    startFrame: 1200,
-    endFrame: 3e3,
-    subtitles: scene01Subtitles
-  },
-  {
-    sceneName: "\u5916\u4EA4\u534F\u4F1A",
-    sceneIndex: 2,
-    startFrame: 3e3,
-    endFrame: 5100,
-    subtitles: scene02Subtitles
-  },
-  {
-    sceneName: "\u56FD\u9645\u6E05\u7B97\u94F6\u884C",
-    sceneIndex: 3,
-    startFrame: 5100,
-    endFrame: 7200,
-    subtitles: scene03Subtitles
-  },
-  {
-    sceneName: "IMF\u4E0E\u4E16\u754C\u94F6\u884C",
-    sceneIndex: 4,
-    startFrame: 7200,
-    endFrame: 9300,
-    subtitles: scene04Subtitles
-  },
-  {
-    sceneName: "\u5F7C\u5C14\u5FB7\u4F2F\u683C\u4FF1\u4E50\u90E8",
-    sceneIndex: 5,
-    startFrame: 9300,
-    endFrame: 11100,
-    subtitles: scene05Subtitles
-  },
-  {
-    sceneName: "\u4E09\u8FB9\u59D4\u5458\u4F1A",
-    sceneIndex: 6,
-    startFrame: 11100,
-    endFrame: 12900,
-    subtitles: scene06Subtitles
-  },
-  {
-    sceneName: "\u603B\u7ED3",
-    sceneIndex: 7,
-    startFrame: 12900,
-    endFrame: 14400,
-    subtitles: scene07Subtitles
-  }
-];
+const scene00Subtitles = (/* unused pure expression or super */ null && (episode06_openingSubs));
+const scene01Subtitles = (/* unused pure expression or super */ null && (keynesSubs));
+const scene02Subtitles = (/* unused pure expression or super */ null && (election1932Subs));
+const scene03Subtitles = (/* unused pure expression or super */ null && (goldStandardSubs));
+const scene04Subtitles = (/* unused pure expression or super */ null && (hitlerSelectedSubs));
+const scene05Subtitles = (/* unused pure expression or super */ null && (wallStreetNaziSubs));
+const scene06Subtitles = (/* unused pure expression or super */ null && (warAndMoneySubs));
+const scene07Subtitles = (/* unused pure expression or super */ null && (summarySubs));
 const episode06Subtitles = [
-  ...scene00Subtitles,
-  ...scene01Subtitles.map((s) => ({
+  ...episode06_openingSubs.map((s) => ({
     ...s,
-    startFrame: s.startFrame + 1200,
-    endFrame: s.endFrame + 1200
+    startFrame: s.startFrame + episode06_SCENE_OFFSETS[0],
+    endFrame: s.endFrame + episode06_SCENE_OFFSETS[0]
   })),
-  ...scene02Subtitles.map((s) => ({
+  ...keynesSubs.map((s) => ({
     ...s,
-    startFrame: s.startFrame + 3e3,
-    endFrame: s.endFrame + 3e3
+    startFrame: s.startFrame + episode06_SCENE_OFFSETS[1],
+    endFrame: s.endFrame + episode06_SCENE_OFFSETS[1]
   })),
-  ...scene03Subtitles.map((s) => ({
+  ...election1932Subs.map((s) => ({
     ...s,
-    startFrame: s.startFrame + 5100,
-    endFrame: s.endFrame + 5100
+    startFrame: s.startFrame + episode06_SCENE_OFFSETS[2],
+    endFrame: s.endFrame + episode06_SCENE_OFFSETS[2]
   })),
-  ...scene04Subtitles.map((s) => ({
+  ...goldStandardSubs.map((s) => ({
     ...s,
-    startFrame: s.startFrame + 7200,
-    endFrame: s.endFrame + 7200
+    startFrame: s.startFrame + episode06_SCENE_OFFSETS[3],
+    endFrame: s.endFrame + episode06_SCENE_OFFSETS[3]
   })),
-  ...scene05Subtitles.map((s) => ({
+  ...hitlerSelectedSubs.map((s) => ({
     ...s,
-    startFrame: s.startFrame + 9300,
-    endFrame: s.endFrame + 9300
+    startFrame: s.startFrame + episode06_SCENE_OFFSETS[4],
+    endFrame: s.endFrame + episode06_SCENE_OFFSETS[4]
   })),
-  ...scene06Subtitles.map((s) => ({
+  ...wallStreetNaziSubs.map((s) => ({
     ...s,
-    startFrame: s.startFrame + 11100,
-    endFrame: s.endFrame + 11100
+    startFrame: s.startFrame + episode06_SCENE_OFFSETS[5],
+    endFrame: s.endFrame + episode06_SCENE_OFFSETS[5]
   })),
-  ...scene07Subtitles.map((s) => ({
+  ...warAndMoneySubs.map((s) => ({
     ...s,
-    startFrame: s.startFrame + 12900,
-    endFrame: s.endFrame + 12900
+    startFrame: s.startFrame + episode06_SCENE_OFFSETS[6],
+    endFrame: s.endFrame + episode06_SCENE_OFFSETS[6]
+  })),
+  ...summarySubs.map((s) => ({
+    ...s,
+    startFrame: s.startFrame + episode06_SCENE_OFFSETS[7],
+    endFrame: s.endFrame + episode06_SCENE_OFFSETS[7]
   }))
 ];
-const getSceneSubtitles = (sceneIndex) => {
-  const scene = episode06Scenes.find((s) => s.sceneIndex === sceneIndex);
-  return scene == null ? void 0 : scene.subtitles;
-};
-const getSceneOffset = (sceneIndex) => {
-  const scene = episode06Scenes.find((s) => s.sceneIndex === sceneIndex);
-  return (scene == null ? void 0 : scene.startFrame) ?? 0;
-};
-const getSceneIndexAtFrame = (frame) => {
-  for (let i = episode06Scenes.length - 1; i >= 0; i--) {
-    if (frame >= episode06Scenes[i].startFrame) {
-      return i;
-    }
-  }
-  return 0;
-};
+/* harmony default export */ const episode06 = ((/* unused pure expression or super */ null && (episode06Subtitles)));
 
 ;// ./src/compositions/Episode06Documentary.tsx
 
@@ -28081,18 +28752,17 @@ const Episode06Documentary_VOICE_DIR = "/assets/audio/voiceover/episode06/";
 function Episode06Documentary_buildVoiceoverEntries() {
   const entries = [];
   let fileIndex = 0;
-  const fps = 30;
-  const sceneOffsets = [
-    { subs: scene00Subtitles, offset: 0 },
-    { subs: scene01Subtitles, offset: 40 * fps },
-    { subs: scene02Subtitles, offset: 100 * fps },
-    { subs: scene03Subtitles, offset: 170 * fps },
-    { subs: scene04Subtitles, offset: 240 * fps },
-    { subs: scene05Subtitles, offset: 310 * fps },
-    { subs: scene06Subtitles, offset: 370 * fps },
-    { subs: scene07Subtitles, offset: 430 * fps }
+  const sceneSubs = [
+    { subs: episode06_openingSubs, offset: episode06_SCENE_OFFSETS[0] },
+    { subs: keynesSubs, offset: episode06_SCENE_OFFSETS[1] },
+    { subs: election1932Subs, offset: episode06_SCENE_OFFSETS[2] },
+    { subs: goldStandardSubs, offset: episode06_SCENE_OFFSETS[3] },
+    { subs: hitlerSelectedSubs, offset: episode06_SCENE_OFFSETS[4] },
+    { subs: wallStreetNaziSubs, offset: episode06_SCENE_OFFSETS[5] },
+    { subs: warAndMoneySubs, offset: episode06_SCENE_OFFSETS[6] },
+    { subs: summarySubs, offset: episode06_SCENE_OFFSETS[7] }
   ];
-  for (const scene of sceneOffsets) {
+  for (const scene of sceneSubs) {
     for (const sub of scene.subs) {
       entries.push({
         src: `${Episode06Documentary_VOICE_DIR}voice_${String(fileIndex).padStart(4, "0")}.m4a`,
@@ -28105,127 +28775,127 @@ function Episode06Documentary_buildVoiceoverEntries() {
   return entries;
 }
 const Episode06Documentary_SCENE_THEMES = [
-  "mystery",
-  // Scene 0: 开场 - 精英俱乐部介绍
-  "ancient",
-  // Scene 1: 豪斯上校 - 历史
-  "conspiracy",
-  // Scene 2: 外交协会 - 阴谋
+  "revelation",
+  // Scene 0: 开场 - 凯恩斯的警告
   "finance",
-  // Scene 3: 国际清算银行 - 金融
+  // Scene 1: 凯恩斯的廉价货币理论
+  "conspiracy",
+  // Scene 2: 1932年总统大选
   "finance",
-  // Scene 4: IMF与世界银行 - 金融
+  // Scene 3: 废除金本位
   "conspiracy",
-  // Scene 5: 彼尔德伯格俱乐部 - 阴谋
+  // Scene 4: 华尔街选中希特勒
   "conspiracy",
-  // Scene 6: 三边委员会 - 阴谋
+  // Scene 5: 华尔街资助纳粹
+  "war",
+  // Scene 6: 战争与货币
   "revelation"
-  // Scene 7: 总结与警示 - 揭示
+  // Scene 7: 总结
 ];
 const Episode06Documentary = () => {
-  const { fps } = (0,esm.useVideoConfig)();
+  (0,esm.useVideoConfig)();
   const bgm = getEpisodeBGM("Episode06");
   const voiceoverEntries = Episode06Documentary_buildVoiceoverEntries();
   return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { background: "#0d1117" }, children: [
     /* @__PURE__ */ (0,jsx_runtime.jsx)(VignetteOverlay, { intensity: 0.25, duration: 15 }),
     bgm && /* @__PURE__ */ (0,jsx_runtime.jsx)(Audio_Audio, { ...bgm }),
     /* @__PURE__ */ (0,jsx_runtime.jsx)(Voiceover, { entries: voiceoverEntries, volume: 0.8 }),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { durationInFrames: 40 * fps, children: [
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: Episode06Documentary_SCENE_THEMES[0], type: "enter", duration: 40, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { durationInFrames: episode06_SCENE_FRAMES[0], children: [
+      /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: Episode06Documentary_SCENE_THEMES[0], type: "enter", duration: 45, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
         DramaticRevealShot,
         {
           revealMethod: "dissolve",
           revealDuration: 50,
-          accentColor: "#483D8B",
-          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(EliteClubsOpeningDocumentaryScene, {})
+          accentColor: "#4B0082",
+          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(OpeningDocumentaryScene, {})
         }
       ) }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: scene00Subtitles })
+      /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: episode06_openingSubs })
     ] }),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: 40 * fps, durationInFrames: 60 * fps, children: [
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: Episode06Documentary_SCENE_THEMES[1], type: "enter", duration: 35, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
-        DramaticRevealShot,
-        {
-          revealMethod: "zoom",
-          revealDuration: 45,
-          accentColor: "#8B4513",
-          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(HouseColonelDocumentaryScene, {})
-        }
-      ) }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: scene01Subtitles })
-    ] }),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: 100 * fps, durationInFrames: 70 * fps, children: [
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: Episode06Documentary_SCENE_THEMES[2], type: "enter", duration: 35, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
-        DramaticRevealShot,
-        {
-          revealMethod: "dissolve",
-          revealDuration: 40,
-          accentColor: "#2F4F4F",
-          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(CFRDocumentaryScene, {})
-        }
-      ) }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: scene02Subtitles })
-    ] }),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: 170 * fps, durationInFrames: 70 * fps, children: [
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: Episode06Documentary_SCENE_THEMES[3], type: "enter", duration: 30, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
-        CloseUpShot,
-        {
-          type: "object",
-          intensity: "subtle",
-          focusPosition: { x: 50, y: 40 },
-          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(BISDocumentaryScene, {})
-        }
-      ) }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: scene03Subtitles })
-    ] }),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: 240 * fps, durationInFrames: 70 * fps, children: [
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: Episode06Documentary_SCENE_THEMES[4], type: "enter", duration: 30, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: episode06_SCENE_OFFSETS[1], durationInFrames: episode06_SCENE_FRAMES[1], children: [
+      /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: Episode06Documentary_SCENE_THEMES[1], type: "enter", duration: 40, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
         CloseUpShot,
         {
           type: "object",
           intensity: "medium",
           focusPosition: { x: 50, y: 45 },
-          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(IMFWorldBankDocumentaryScene, {})
+          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(KeynesDocumentaryScene, {})
         }
       ) }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: scene04Subtitles })
+      /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: keynesSubs })
     ] }),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: 310 * fps, durationInFrames: 60 * fps, children: [
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: Episode06Documentary_SCENE_THEMES[5], type: "enter", duration: 35, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: episode06_SCENE_OFFSETS[2], durationInFrames: episode06_SCENE_FRAMES[2], children: [
+      /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: Episode06Documentary_SCENE_THEMES[2], type: "enter", duration: 35, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
+        DramaticRevealShot,
+        {
+          revealMethod: "zoom",
+          revealDuration: 45,
+          accentColor: "#8B4513",
+          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(Election1932DocumentaryScene, {})
+        }
+      ) }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: election1932Subs })
+    ] }),
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: episode06_SCENE_OFFSETS[3], durationInFrames: episode06_SCENE_FRAMES[3], children: [
+      /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: Episode06Documentary_SCENE_THEMES[3], type: "enter", duration: 35, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
+        DramaticRevealShot,
+        {
+          revealMethod: "shatter",
+          revealDuration: 50,
+          accentColor: "#FFD700",
+          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(GoldStandardDocumentaryScene, {})
+        }
+      ) }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: goldStandardSubs })
+    ] }),
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: episode06_SCENE_OFFSETS[4], durationInFrames: episode06_SCENE_FRAMES[4], children: [
+      /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: Episode06Documentary_SCENE_THEMES[4], type: "enter", duration: 40, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
         DramaticRevealShot,
         {
           revealMethod: "lightBurst",
-          revealDuration: 45,
-          accentColor: "#4B0082",
-          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(BilderbergDocumentaryScene, {})
+          revealDuration: 55,
+          accentColor: "#8B0000",
+          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(HitlerSelectedDocumentaryScene, {})
         }
       ) }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: scene05Subtitles })
+      /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: hitlerSelectedSubs })
     ] }),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: 370 * fps, durationInFrames: 60 * fps, children: [
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: Episode06Documentary_SCENE_THEMES[6], type: "enter", duration: 35, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: episode06_SCENE_OFFSETS[5], durationInFrames: episode06_SCENE_FRAMES[5], children: [
+      /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: Episode06Documentary_SCENE_THEMES[5], type: "enter", duration: 35, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
         CloseUpShot,
         {
           type: "object",
           intensity: "dramatic",
-          focusPosition: { x: 50, y: 45 },
-          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(TrilateralCommissionDocumentaryScene, {})
+          focusPosition: { x: 50, y: 40 },
+          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(WallStreetNaziDocumentaryScene, {})
         }
       ) }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: scene06Subtitles })
+      /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: wallStreetNaziSubs })
     ] }),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: 430 * fps, durationInFrames: 50 * fps, children: [
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: Episode06Documentary_SCENE_THEMES[7], type: "enter", duration: 45, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: episode06_SCENE_OFFSETS[6], durationInFrames: episode06_SCENE_FRAMES[6], children: [
+      /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: Episode06Documentary_SCENE_THEMES[6], type: "enter", duration: 45, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
+        DramaticRevealShot,
+        {
+          revealMethod: "shatter",
+          revealDuration: 60,
+          accentColor: "#DC143C",
+          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(WarAndMoneyDocumentaryScene, {})
+        }
+      ) }),
+      /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: warAndMoneySubs })
+    ] }),
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: episode06_SCENE_OFFSETS[7], durationInFrames: episode06_SCENE_FRAMES[7], children: [
+      /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: Episode06Documentary_SCENE_THEMES[7], type: "enter", duration: 50, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
         DramaticRevealShot,
         {
           revealMethod: "zoom",
           revealDuration: 60,
           accentColor: "#FFFFFF",
           lightRays: true,
-          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(EliteClubsSummaryDocumentaryScene, {})
+          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(SummaryDocumentaryScene_SummaryDocumentaryScene, {})
         }
       ) }),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: scene07Subtitles })
+      /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: summarySubs })
     ] })
   ] });
 };
@@ -29036,7 +29706,7 @@ const ColonelHouseDocumentaryScene = () => {
 
 
 
-const CFRDocumentaryScene_CFRDocumentaryScene = () => {
+const CFRDocumentaryScene = () => {
   const frame = (0,esm.useCurrentFrame)();
   const { fps } = (0,esm.useVideoConfig)();
   const bgKenBurns = {
@@ -29418,14 +30088,14 @@ const CFRDocumentaryScene_CFRDocumentaryScene = () => {
     )
   ] });
 };
-/* harmony default export */ const episode07_documentary_CFRDocumentaryScene = ((/* unused pure expression or super */ null && (CFRDocumentaryScene_CFRDocumentaryScene)));
+/* harmony default export */ const documentary_CFRDocumentaryScene = ((/* unused pure expression or super */ null && (CFRDocumentaryScene)));
 
 ;// ./src/components/scenes/episode07/documentary/BISDocumentaryScene.tsx
 
 
 
 
-const BISDocumentaryScene_BISDocumentaryScene = () => {
+const BISDocumentaryScene = () => {
   const frame = (0,esm.useCurrentFrame)();
   const bgKenBurns = {
     panDirection: "zoom-in",
@@ -29842,14 +30512,14 @@ const BISDocumentaryScene_BISDocumentaryScene = () => {
     )
   ] });
 };
-/* harmony default export */ const episode07_documentary_BISDocumentaryScene = ((/* unused pure expression or super */ null && (BISDocumentaryScene_BISDocumentaryScene)));
+/* harmony default export */ const documentary_BISDocumentaryScene = ((/* unused pure expression or super */ null && (BISDocumentaryScene)));
 
 ;// ./src/components/scenes/episode07/documentary/BilderbergDocumentaryScene.tsx
 
 
 
 
-const BilderbergDocumentaryScene_BilderbergDocumentaryScene = () => {
+const BilderbergDocumentaryScene = () => {
   const frame = (0,esm.useCurrentFrame)();
   const bgKenBurns = {
     panDirection: "zoom-in",
@@ -30209,7 +30879,7 @@ const BilderbergDocumentaryScene_BilderbergDocumentaryScene = () => {
     )
   ] });
 };
-/* harmony default export */ const episode07_documentary_BilderbergDocumentaryScene = ((/* unused pure expression or super */ null && (BilderbergDocumentaryScene_BilderbergDocumentaryScene)));
+/* harmony default export */ const documentary_BilderbergDocumentaryScene = ((/* unused pure expression or super */ null && (BilderbergDocumentaryScene)));
 
 ;// ./src/components/scenes/episode07/documentary/TrilateralDocumentaryScene.tsx
 
@@ -30675,91 +31345,111 @@ const TrilateralDocumentaryScene = () => {
 
 ;// ./src/subtitles/episode07.ts
 
+const episode07_SCENE_FRAMES = [
+  1322,
+  // Scene 0: 44.1s - 开场
+  1273,
+  // Scene 1: 42.4s - 布雷顿森林
+  1958,
+  // Scene 2: 65.3s - 豪斯上校
+  2172,
+  // Scene 3: 72.4s - 外交协会
+  2046,
+  // Scene 4: 68.2s - 国际清算银行
+  1279,
+  // Scene 5: 42.6s - 彼尔德伯格
+  1200
+  // Scene 6: 40.0s - 三边委员会
+];
+const episode07_SCENE_OFFSETS = episode07_SCENE_FRAMES.reduce((acc, frames, i) => {
+  acc.push(i === 0 ? 0 : acc[i - 1] + episode07_SCENE_FRAMES[i - 1]);
+  return acc;
+}, []);
 const episode07_openingSubs = [
-  { startFrame: 0, endFrame: 180, text: "\u5728\u6211\u4EEC\u7684\u751F\u6D3B\u4E2D\uFF0C'\u4E16\u754C\u653F\u5E9C'\u3001'\u4E16\u754C\u8D27\u5E01'\u4E4B\u7C7B\u7684\u8BCD\u6C47\u51FA\u73B0\u7684\u9891\u7387\u8D8A\u6765\u8D8A\u9AD8\u3002" },
-  { startFrame: 180, endFrame: 360, text: "\u5982\u679C\u6CA1\u6709\u76F8\u5173\u7684\u5386\u53F2\u80CC\u666F\uFF0C\u60A8\u5C06\u975E\u5E38\u53EF\u80FD\u628A\u8FD9\u6837\u7684\u63D0\u6CD5\u5F53\u6210\u666E\u901A\u7684\u65B0\u95FB\u7092\u4F5C\u3002" },
-  { startFrame: 360, endFrame: 540, text: "\u5176\u5B9E\uFF0C\u4E00\u4E2A\u5DE8\u5927\u7684\u8BA1\u5212\u6B63\u5728\u542F\u52A8\u3002" },
-  { startFrame: 540, endFrame: 720, text: "\u4EE4\u4EBA\u5FE7\u8651\u7684\u662F\uFF0C\u4E2D\u56FD\u5BF9\u6B64\u4ECD\u7136\u77E5\u4E4B\u751A\u5C11\u3002" },
-  { startFrame: 720, endFrame: 900, text: "1944\u5E747\u6708\uFF0C\u5F53\u6574\u4E2A\u6B27\u4E9A\u5927\u9646\u8FD8\u88AB\u6EE1\u5929\u7684\u70FD\u706B\u6240\u7B3C\u7F69\u3002" },
-  { startFrame: 900, endFrame: 1080, text: "\u6765\u81EA\u4E16\u754C\u5404\u5730\u768444\u4E2A\u56FD\u5BB6\u7684\u4EE3\u8868\u6765\u5230\u7F8E\u56FD\u65B0\u7F55\u5E03\u4EC0\u5C14\u5DDE\u7684\u8457\u540D\u5EA6\u5047\u80DC\u5730\u5E03\u96F7\u987F\u68EE\u6797\u3002" },
-  { startFrame: 1080, endFrame: 1260, text: "\u5546\u8BA8\u6218\u540E\u4E16\u754C\u7ECF\u6D4E\u65B0\u79E9\u5E8F\u7684\u84DD\u56FE\u3002" },
-  { startFrame: 1260, endFrame: 1440, text: "\u56FD\u9645\u94F6\u884C\u5BB6\u4EEC\u5F00\u59CB\u5B9E\u65BD\u4ED6\u4EEC\u7B56\u5212\u5DF2\u4E45\u7684\u8BA1\u5212\uFF1A\u63A7\u5236\u5168\u4E16\u754C\u7684\u8D27\u5E01\u53D1\u884C\uFF01" },
-  { startFrame: 1440, endFrame: 1800, text: "\u8FD9\u5C31\u662F\u6240\u8C13'\u65B0\u4E16\u754C\u79E9\u5E8F'\uFF01" }
+  { startFrame: 0, endFrame: 189, text: "\u5728\u6211\u4EEC\u7684\u751F\u6D3B\u4E2D\uFF0C'\u4E16\u754C\u653F\u5E9C'\u3001'\u4E16\u754C\u8D27\u5E01'\u4E4B\u7C7B\u7684\u8BCD\u6C47\u51FA\u73B0\u7684\u9891\u7387\u8D8A\u6765\u8D8A\u9AD8\u3002" },
+  { startFrame: 189, endFrame: 370, text: "\u5982\u679C\u6CA1\u6709\u76F8\u5173\u7684\u5386\u53F2\u80CC\u666F\uFF0C\u60A8\u5C06\u975E\u5E38\u53EF\u80FD\u628A\u8FD9\u6837\u7684\u63D0\u6CD5\u5F53\u6210\u666E\u901A\u7684\u65B0\u95FB\u7092\u4F5C\u3002" },
+  { startFrame: 370, endFrame: 466, text: "\u5176\u5B9E\uFF0C\u4E00\u4E2A\u5DE8\u5927\u7684\u8BA1\u5212\u6B63\u5728\u542F\u52A8\u3002" },
+  { startFrame: 466, endFrame: 587, text: "\u4EE4\u4EBA\u5FE7\u8651\u7684\u662F\uFF0C\u4E2D\u56FD\u5BF9\u6B64\u4ECD\u7136\u77E5\u4E4B\u751A\u5C11\u3002" },
+  { startFrame: 587, endFrame: 737, text: "1944\u5E747\u6708\uFF0C\u5F53\u6574\u4E2A\u6B27\u4E9A\u5927\u9646\u8FD8\u88AB\u6EE1\u5929\u7684\u70FD\u706B\u6240\u7B3C\u7F69\u3002" },
+  { startFrame: 737, endFrame: 967, text: "\u6765\u81EA\u4E16\u754C\u5404\u5730\u768444\u4E2A\u56FD\u5BB6\u7684\u4EE3\u8868\u6765\u5230\u7F8E\u56FD\u65B0\u7F55\u5E03\u4EC0\u5C14\u5DDE\u7684\u8457\u540D\u5EA6\u5047\u80DC\u5730\u5E03\u96F7\u987F\u68EE\u6797\u3002" },
+  { startFrame: 967, endFrame: 1068, text: "\u5546\u8BA8\u6218\u540E\u4E16\u754C\u7ECF\u6D4E\u65B0\u79E9\u5E8F\u7684\u84DD\u56FE\u3002" },
+  { startFrame: 1068, endFrame: 1249, text: "\u56FD\u9645\u94F6\u884C\u5BB6\u4EEC\u5F00\u59CB\u5B9E\u65BD\u4ED6\u4EEC\u7B56\u5212\u5DF2\u4E45\u7684\u8BA1\u5212\uFF1A\u63A7\u5236\u5168\u4E16\u754C\u7684\u8D27\u5E01\u53D1\u884C\uFF01" },
+  { startFrame: 1249, endFrame: 1322, text: "\u8FD9\u5C31\u662F\u6240\u8C13'\u65B0\u4E16\u754C\u79E9\u5E8F'\uFF01" }
 ];
 const brettonWoodsSubs = [
-  { startFrame: 0, endFrame: 180, text: "\u5E03\u96F7\u987F\u68EE\u6797\u4F53\u7CFB\u786E\u7ACB\u4E86\u7F8E\u5143\u7684\u4E16\u754C\u50A8\u5907\u8D27\u5E01\u5730\u4F4D\u3002" },
-  { startFrame: 180, endFrame: 360, text: "\u56FD\u9645\u8D27\u5E01\u57FA\u91D1\u7EC4\u7EC7\u548C\u4E16\u754C\u94F6\u884C\u5E94\u8FD0\u800C\u751F\u3002" },
-  { startFrame: 360, endFrame: 540, text: "\u6B64\u65F6\u7684\u56FD\u9645\u94F6\u884C\u5BB6\u4EEC\u5DF2\u7ECF\u5EFA\u7ACB\u8D77\u4E00\u7CFB\u5217\u6838\u5FC3\u7684\u7EC4\u7EC7\u673A\u6784\uFF1A\u82F1\u56FD\u7687\u5BB6\u56FD\u9645\u4E8B\u52A1\u534F\u4F1A\u3002" },
-  { startFrame: 540, endFrame: 720, text: "\u548C\u7F8E\u56FD\u5916\u4EA4\u534F\u4F1A\u3002" },
-  { startFrame: 720, endFrame: 900, text: "\u540E\u6765\uFF0C\u7531\u8FD9\u4E24\u4E2A\u6838\u5FC3\u673A\u6784\u53C8\u884D\u751F\u51FA\u4E24\u4E2A\u65B0\u7684\u5206\u652F\u3002" },
-  { startFrame: 900, endFrame: 1080, text: "\u7ECF\u6D4E\u9886\u57DF\u7531\u5F7C\u5C14\u5FB7\u4F2F\u683C\u4FF1\u4E50\u90E8\u6267\u638C\u5927\u653F\u65B9\u9488\u3002" },
-  { startFrame: 1080, endFrame: 1260, text: "\u8D1F\u8D23\u653F\u6CBB\u6302\u5E05\u7684\u662F\u4E09\u8FB9\u59D4\u5458\u4F1A\u3002" },
-  { startFrame: 1260, endFrame: 1440, text: "\u8FD9\u4E9B\u7EC4\u7EC7\u7684\u6700\u7EC8\u76EE\u7684\uFF0C\u5C31\u662F\u5EFA\u7ACB\u4E00\u4E2A\u7531\u6781\u5C11\u6570\u82F1\u7F8E\u7CBE\u82F1\u5206\u5B50\u6240\u7EDF\u6CBB\u7684\u4E16\u754C\u653F\u5E9C\u3002" },
-  { startFrame: 1440, endFrame: 1800, text: "\u5EFA\u7ACB\u6700\u7EC8\u7EDF\u4E00\u7684\u4E16\u754C\u8D27\u5E01\u53D1\u884C\u4F53\u7CFB\u3002\u8FD9\u5C31\u662F\u6240\u8C13'\u65B0\u4E16\u754C\u79E9\u5E8F'\uFF01" }
+  { startFrame: 0, endFrame: 133, text: "\u5E03\u96F7\u987F\u68EE\u6797\u4F53\u7CFB\u786E\u7ACB\u4E86\u7F8E\u5143\u7684\u4E16\u754C\u50A8\u5907\u8D27\u5E01\u5730\u4F4D\u3002" },
+  { startFrame: 133, endFrame: 257, text: "\u56FD\u9645\u8D27\u5E01\u57FA\u91D1\u7EC4\u7EC7\u548C\u4E16\u754C\u94F6\u884C\u5E94\u8FD0\u800C\u751F\u3002" },
+  { startFrame: 257, endFrame: 463, text: "\u6B64\u65F6\u7684\u56FD\u9645\u94F6\u884C\u5BB6\u4EEC\u5DF2\u7ECF\u5EFA\u7ACB\u8D77\u4E00\u7CFB\u5217\u6838\u5FC3\u7684\u7EC4\u7EC7\u673A\u6784\uFF1A\u82F1\u56FD\u7687\u5BB6\u56FD\u9645\u4E8B\u52A1\u534F\u4F1A\u3002" },
+  { startFrame: 463, endFrame: 526, text: "\u548C\u7F8E\u56FD\u5916\u4EA4\u534F\u4F1A\u3002" },
+  { startFrame: 526, endFrame: 664, text: "\u540E\u6765\uFF0C\u7531\u8FD9\u4E24\u4E2A\u6838\u5FC3\u673A\u6784\u53C8\u884D\u751F\u51FA\u4E24\u4E2A\u65B0\u7684\u5206\u652F\u3002" },
+  { startFrame: 664, endFrame: 794, text: "\u7ECF\u6D4E\u9886\u57DF\u7531\u5F7C\u5C14\u5FB7\u4F2F\u683C\u4FF1\u4E50\u90E8\u6267\u638C\u5927\u653F\u65B9\u9488\u3002" },
+  { startFrame: 794, endFrame: 892, text: "\u8D1F\u8D23\u653F\u6CBB\u6302\u5E05\u7684\u662F\u4E09\u8FB9\u59D4\u5458\u4F1A\u3002" },
+  { startFrame: 892, endFrame: 1102, text: "\u8FD9\u4E9B\u7EC4\u7EC7\u7684\u6700\u7EC8\u76EE\u7684\uFF0C\u5C31\u662F\u5EFA\u7ACB\u4E00\u4E2A\u7531\u6781\u5C11\u6570\u82F1\u7F8E\u7CBE\u82F1\u5206\u5B50\u6240\u7EDF\u6CBB\u7684\u4E16\u754C\u653F\u5E9C\u3002" },
+  { startFrame: 1102, endFrame: 1273, text: "\u5EFA\u7ACB\u6700\u7EC8\u7EDF\u4E00\u7684\u4E16\u754C\u8D27\u5E01\u53D1\u884C\u4F53\u7CFB\u3002\u8FD9\u5C31\u662F\u6240\u8C13'\u65B0\u4E16\u754C\u79E9\u5E8F'\uFF01" }
 ];
 const houseColonelSubs = [
-  { startFrame: 0, endFrame: 180, text: "\u7F8E\u56FD\u5916\u4EA4\u534F\u4F1A\u7684\u521B\u59CB\u4EBA\uFF0C\u7B2C\u4E00\u6B21\u4E16\u754C\u5927\u6218\u7ED3\u675F\u540E\u56FD\u9645\u8054\u76DF\u7684\u9996\u5021\u8005\u8C6A\u65AF\u4E0A\u6821\u5C31\u662F\u8FD9\u4E00\u8BA1\u5212\u5728\u7F8E\u56FD\u7684\u4E00\u4F4D\u91CD\u8981\u64CD\u76D8\u624B\u3002" },
-  { startFrame: 180, endFrame: 360, text: "\u8C6A\u65AF\u4E0A\u6821\u751F\u5728\u5FB7\u514B\u8428\u65AF\u5DDE\u7684\u4E00\u4E2A\u5BCC\u88D5\u7684\u94F6\u884C\u5BB6\u7684\u5BB6\u5EAD\u3002" },
-  { startFrame: 360, endFrame: 540, text: "\u8C6A\u65AF\u7684\u7236\u4EB2\uFF0C\u6258\u9A6C\u65AF\u5728\u7F8E\u56FD\u5185\u6218\u671F\u95F4\u662F\u6B27\u6D32\u7F57\u65AF\u67F4\u5C14\u5FB7\u5BB6\u65CF\u7684\u4EE3\u7406\u4EBA\u3002" },
-  { startFrame: 540, endFrame: 720, text: "1912\u5E74\uFF0C\u8C6A\u65AF\u53D1\u8868\u4E86\u4E00\u672C\u540E\u6765\u5F15\u8D77\u53F2\u5B66\u5BB6\u5F3A\u70C8\u5174\u8DA3\u7684\u533F\u540D\u5C0F\u8BF4\u300A\u83F2\u5229\u6D66\xB7\u675C\uFF1A\u7BA1\u7406\u8005\u300B\u3002" },
-  { startFrame: 720, endFrame: 900, text: "\u5728\u5C0F\u8BF4\u4E2D\uFF0C\u4ED6\u6784\u601D\u4E86\u4E00\u4E2A\u4EC1\u6148\u7684\u72EC\u88C1\u8005\u638C\u63E1\u4E86\u7F8E\u56FD\u4E24\u515A\u7684\u6743\u529B\u3002" },
-  { startFrame: 900, endFrame: 1080, text: "\u6210\u7ACB\u4E86\u4E2D\u592E\u94F6\u884C\uFF0C\u5B9E\u65BD\u4E86\u8054\u90A6\u7D2F\u8FDB\u6536\u5165\u6240\u5F97\u7A0E\uFF0C\u7EC4\u6210\u4E86\u56FD\u9645\u8054\u76DF\u3002" },
-  { startFrame: 1080, endFrame: 1260, text: "\u4ED6\u5728\u4E66\u4E2D\u6240'\u9884\u6D4B'\u7684\u672A\u6765\u4E16\u754C\u4E0E\u540E\u6765\u7F8E\u56FD\u6240\u53D1\u751F\u7684\u4E00\u5207\u662F\u5982\u6B64\u60CA\u4EBA\u7684\u76F8\u4F3C\u3002" },
-  { startFrame: 1260, endFrame: 1440, text: "1912\u5E74\u603B\u7EDF\u5927\u9009\u6C11\u4E3B\u515A\u5019\u9009\u4EBA\u5A01\u5C14\u900A\uFF0C\u5728\u534E\u5C14\u8857\u94F6\u884C\u5BB6\u4E3E\u884C\u7684\u5BB4\u4F1A\u4E0A\u3002" },
-  { startFrame: 1440, endFrame: 1800, text: "\u8C6A\u65AF\u5728\u653F\u6CBB\u5BB6\u548C\u94F6\u884C\u5BB6\u4E4B\u95F4\u8D77\u7740\u6C9F\u901A\u4E0E\u534F\u8C03\u7684\u4F5C\u7528\uFF0C\u5A01\u5C14\u900A\u5F53\u9009\u4E4B\u524D\uFF0C\u8C6A\u65AF\u5411\u91D1\u878D\u5927\u4F6C\u4EEC\u4FDD\u8BC1\u3002\u8C6A\u65AF\u4E0A\u6821\u5F88\u5FEB\u6210\u4E3A\u7CBE\u82F1\u5708\u5B50\u4E2D\u7684'\u7CBE\u795E\u6559\u7236'\u3002" }
+  { startFrame: 0, endFrame: 287, text: "\u7F8E\u56FD\u5916\u4EA4\u534F\u4F1A\u7684\u521B\u59CB\u4EBA\uFF0C\u7B2C\u4E00\u6B21\u4E16\u754C\u5927\u6218\u7ED3\u675F\u540E\u56FD\u9645\u8054\u76DF\u7684\u9996\u5021\u8005\u8C6A\u65AF\u4E0A\u6821\u5C31\u662F\u8FD9\u4E00\u8BA1\u5212\u5728\u7F8E\u56FD\u7684\u4E00\u4F4D\u91CD\u8981\u64CD\u76D8\u624B\u3002" },
+  { startFrame: 287, endFrame: 435, text: "\u8C6A\u65AF\u4E0A\u6821\u751F\u5728\u5FB7\u514B\u8428\u65AF\u5DDE\u7684\u4E00\u4E2A\u5BCC\u88D5\u7684\u94F6\u884C\u5BB6\u7684\u5BB6\u5EAD\u3002" },
+  { startFrame: 435, endFrame: 620, text: "\u8C6A\u65AF\u7684\u7236\u4EB2\uFF0C\u6258\u9A6C\u65AF\u5728\u7F8E\u56FD\u5185\u6218\u671F\u95F4\u662F\u6B27\u6D32\u7F57\u65AF\u67F4\u5C14\u5FB7\u5BB6\u65CF\u7684\u4EE3\u7406\u4EBA\u3002" },
+  { startFrame: 620, endFrame: 854, text: "1912\u5E74\uFF0C\u8C6A\u65AF\u53D1\u8868\u4E86\u4E00\u672C\u540E\u6765\u5F15\u8D77\u53F2\u5B66\u5BB6\u5F3A\u70C8\u5174\u8DA3\u7684\u533F\u540D\u5C0F\u8BF4\u300A\u83F2\u5229\u6D66\xB7\u675C\uFF1A\u7BA1\u7406\u8005\u300B\u3002" },
+  { startFrame: 854, endFrame: 1019, text: "\u5728\u5C0F\u8BF4\u4E2D\uFF0C\u4ED6\u6784\u601D\u4E86\u4E00\u4E2A\u4EC1\u6148\u7684\u72EC\u88C1\u8005\u638C\u63E1\u4E86\u7F8E\u56FD\u4E24\u515A\u7684\u6743\u529B\u3002" },
+  { startFrame: 1019, endFrame: 1193, text: "\u6210\u7ACB\u4E86\u4E2D\u592E\u94F6\u884C\uFF0C\u5B9E\u65BD\u4E86\u8054\u90A6\u7D2F\u8FDB\u6536\u5165\u6240\u5F97\u7A0E\uFF0C\u7EC4\u6210\u4E86\u56FD\u9645\u8054\u76DF\u3002" },
+  { startFrame: 1193, endFrame: 1392, text: "\u4ED6\u5728\u4E66\u4E2D\u6240'\u9884\u6D4B'\u7684\u672A\u6765\u4E16\u754C\u4E0E\u540E\u6765\u7F8E\u56FD\u6240\u53D1\u751F\u7684\u4E00\u5207\u662F\u5982\u6B64\u60CA\u4EBA\u7684\u76F8\u4F3C\u3002" },
+  { startFrame: 1392, endFrame: 1584, text: "1912\u5E74\u603B\u7EDF\u5927\u9009\u6C11\u4E3B\u515A\u5019\u9009\u4EBA\u5A01\u5C14\u900A\uFF0C\u5728\u534E\u5C14\u8857\u94F6\u884C\u5BB6\u4E3E\u884C\u7684\u5BB4\u4F1A\u4E0A\u3002" },
+  { startFrame: 1584, endFrame: 1958, text: "\u8C6A\u65AF\u5728\u653F\u6CBB\u5BB6\u548C\u94F6\u884C\u5BB6\u4E4B\u95F4\u8D77\u7740\u6C9F\u901A\u4E0E\u534F\u8C03\u7684\u4F5C\u7528\uFF0C\u5A01\u5C14\u900A\u5F53\u9009\u4E4B\u524D\uFF0C\u8C6A\u65AF\u5411\u91D1\u878D\u5927\u4F6C\u4EEC\u4FDD\u8BC1\u3002\u8C6A\u65AF\u4E0A\u6821\u5F88\u5FEB\u6210\u4E3A\u7CBE\u82F1\u5708\u5B50\u4E2D\u7684'\u7CBE\u795E\u6559\u7236'\u3002" }
 ];
 const cfrEliteSubs = [
-  { startFrame: 0, endFrame: 180, text: "\u5916\u4EA4\u534F\u4F1A\u5C31\u662F\u7F8E\u56FD\u7CBE\u82F1\u4EEC\u7684'\u4E2D\u592E\u515A\u6821'\u3002" },
-  { startFrame: 180, endFrame: 360, text: "\u7B2C\u4E8C\u6B21\u4E16\u754C\u5927\u6218\u4EE5\u6765\uFF0C\u9664\u4E863\u4EBA\u4F8B\u5916\uFF0C\u51E0\u4E4E\u6240\u6709\u603B\u7EDF\u5019\u9009\u4EBA\u90FD\u662F\u8BE5\u534F\u4F1A\u4F1A\u5458\u3002" },
-  { startFrame: 360, endFrame: 540, text: "\u4ECE1921\u5E74\u4EE5\u6765\uFF0C\u7EDD\u5927\u591A\u6570\u7684\u8D22\u653F\u90E8\u957F\u90FD\u7531\u8BE5\u534F\u4F1A\u5305\u529E\uFF0C\u827E\u68EE\u8C6A\u5A01\u5C14\u4EE5\u964D\u7684\u56FD\u5BB6\u5B89\u5168\u987E\u95EE\u57FA\u672C\u5C31\u662F\u7531\u8BE5\u534F\u4F1A\u5185\u5B9A\u3002" },
-  { startFrame: 540, endFrame: 720, text: "\u9664\u6B64\u4E4B\u5916\uFF0C\u5916\u4EA4\u534F\u4F1A\u8FD8\u4EA7\u751F\u4E8614\u4E2A\u56FD\u52A1\u537F\uFF0C11\u4E2A\u56FD\u9632\u90E8\u957F\uFF0C\u548C9\u4E2A\u4E2D\u592E\u60C5\u62A5\u5C40\u5C40\u957F\u3002" },
-  { startFrame: 720, endFrame: 900, text: "'\u4E00\u65E6\u5916\u4EA4\u534F\u4F1A\u7684\u6838\u5FC3\u6210\u5458\u51B3\u5B9A\u7F8E\u56FD\u653F\u5E9C\u7684\u67D0\u9879\u7279\u5B9A\u653F\u7B56\u540E\uFF0C\u5916\u4EA4\u534F\u4F1A\u89C4\u6A21\u5E9E\u5927\u7684\u7814\u7A76\u673A\u6784\u5C31\u5F00\u59CB\u5168\u901F\u8FD0\u8F6C\u3002'" },
-  { startFrame: 900, endFrame: 1080, text: "\u5916\u4EA4\u534F\u4F1A\u7684\u6210\u5458\u628A\u6301\u4E86CBS\u3001ABC\u3001NBC\u3001PBS\u7B49\u7535\u89C6\u7F51\u7EDC\uFF0C\u63A7\u5236\u4E86\u300A\u7EBD\u7EA6\u65F6\u62A5\u300B\u3001\u300A\u534E\u76DB\u987F\u90AE\u62A5\u300B\u3001\u300A\u534E\u5C14\u8857\u65E5\u62A5\u300B\u7B49\u5927\u62A5\u3002" },
-  { startFrame: 1080, endFrame: 1260, text: "\u5728\u6742\u5FD7\u9886\u57DF\uFF0C\u5916\u4EA4\u534F\u4F1A\u6210\u5458\u63A7\u5236\u7740\uFF1A\u300A\u65F6\u4EE3\u300B\u3001\u300A\u65B0\u95FB\u5468\u520A\u300B\u3001\u300A\u8D22\u5BCC\u300B\u3001\u300A\u751F\u6D3B\u300B\u7B49\u4E3B\u6D41\u6742\u5FD7\u3002" },
-  { startFrame: 1260, endFrame: 1440, text: "\u5728\u51FA\u7248\u9886\u57DF\uFF0C\u5916\u4EA4\u534F\u4F1A\u6210\u5458\u63A7\u5236\u7740\u8FC8\u514B\u7C73\u5170\u3001\u84DD\u5FB7\u3001\u897F\u8499\u8212\u65AF\u7279\u3001\u54C8\u6CE2\u5144\u5F1F\u7B49\u6700\u5927\u7684\u51FA\u7248\u516C\u53F8\u3002" },
-  { startFrame: 1440, endFrame: 1800, text: "\u7F8E\u56FD\u7684\u5185\u5916\u4E8B\u52A1\u7684\u51B3\u5B9A\u6743\u5DF2\u7ECF\u4E0D\u5728\u6C11\u4E3B\u4E0E\u5171\u548C\u4E24\u515A\u7684\u624B\u4E2D\uFF0C\u800C\u638C\u63E1\u5728\u8D85\u7EA7\u7CBE\u82F1\u4FF1\u4E50\u90E8\u7684\u5C0F\u5708\u5B50\u91CC\u3002" }
+  { startFrame: 0, endFrame: 113, text: "\u5916\u4EA4\u534F\u4F1A\u5C31\u662F\u7F8E\u56FD\u7CBE\u82F1\u4EEC\u7684'\u4E2D\u592E\u515A\u6821'\u3002" },
+  { startFrame: 113, endFrame: 307, text: "\u7B2C\u4E8C\u6B21\u4E16\u754C\u5927\u6218\u4EE5\u6765\uFF0C\u9664\u4E863\u4EBA\u4F8B\u5916\uFF0C\u51E0\u4E4E\u6240\u6709\u603B\u7EDF\u5019\u9009\u4EBA\u90FD\u662F\u8BE5\u534F\u4F1A\u4F1A\u5458\u3002" },
+  { startFrame: 307, endFrame: 596, text: "\u4ECE1921\u5E74\u4EE5\u6765\uFF0C\u7EDD\u5927\u591A\u6570\u7684\u8D22\u653F\u90E8\u957F\u90FD\u7531\u8BE5\u534F\u4F1A\u5305\u529E\uFF0C\u827E\u68EE\u8C6A\u5A01\u5C14\u4EE5\u964D\u7684\u56FD\u5BB6\u5B89\u5168\u987E\u95EE\u57FA\u672C\u5C31\u662F\u7531\u8BE5\u534F\u4F1A\u5185\u5B9A\u3002" },
+  { startFrame: 596, endFrame: 824, text: "\u9664\u6B64\u4E4B\u5916\uFF0C\u5916\u4EA4\u534F\u4F1A\u8FD8\u4EA7\u751F\u4E8614\u4E2A\u56FD\u52A1\u537F\uFF0C11\u4E2A\u56FD\u9632\u90E8\u957F\uFF0C\u548C9\u4E2A\u4E2D\u592E\u60C5\u62A5\u5C40\u5C40\u957F\u3002" },
+  { startFrame: 824, endFrame: 1107, text: "'\u4E00\u65E6\u5916\u4EA4\u534F\u4F1A\u7684\u6838\u5FC3\u6210\u5458\u51B3\u5B9A\u7F8E\u56FD\u653F\u5E9C\u7684\u67D0\u9879\u7279\u5B9A\u653F\u7B56\u540E\uFF0C\u5916\u4EA4\u534F\u4F1A\u89C4\u6A21\u5E9E\u5927\u7684\u7814\u7A76\u673A\u6784\u5C31\u5F00\u59CB\u5168\u901F\u8FD0\u8F6C\u3002'" },
+  { startFrame: 1107, endFrame: 1448, text: "\u5916\u4EA4\u534F\u4F1A\u7684\u6210\u5458\u628A\u6301\u4E86CBS\u3001ABC\u3001NBC\u3001PBS\u7B49\u7535\u89C6\u7F51\u7EDC\uFF0C\u63A7\u5236\u4E86\u300A\u7EBD\u7EA6\u65F6\u62A5\u300B\u3001\u300A\u534E\u76DB\u987F\u90AE\u62A5\u300B\u3001\u300A\u534E\u5C14\u8857\u65E5\u62A5\u300B\u7B49\u5927\u62A5\u3002" },
+  { startFrame: 1448, endFrame: 1671, text: "\u5728\u6742\u5FD7\u9886\u57DF\uFF0C\u5916\u4EA4\u534F\u4F1A\u6210\u5458\u63A7\u5236\u7740\uFF1A\u300A\u65F6\u4EE3\u300B\u3001\u300A\u65B0\u95FB\u5468\u520A\u300B\u3001\u300A\u8D22\u5BCC\u300B\u3001\u300A\u751F\u6D3B\u300B\u7B49\u4E3B\u6D41\u6742\u5FD7\u3002" },
+  { startFrame: 1671, endFrame: 1929, text: "\u5728\u51FA\u7248\u9886\u57DF\uFF0C\u5916\u4EA4\u534F\u4F1A\u6210\u5458\u63A7\u5236\u7740\u8FC8\u514B\u7C73\u5170\u3001\u84DD\u5FB7\u3001\u897F\u8499\u8212\u65AF\u7279\u3001\u54C8\u6CE2\u5144\u5F1F\u7B49\u6700\u5927\u7684\u51FA\u7248\u516C\u53F8\u3002" },
+  { startFrame: 1929, endFrame: 2172, text: "\u7F8E\u56FD\u7684\u5185\u5916\u4E8B\u52A1\u7684\u51B3\u5B9A\u6743\u5DF2\u7ECF\u4E0D\u5728\u6C11\u4E3B\u4E0E\u5171\u548C\u4E24\u515A\u7684\u624B\u4E2D\uFF0C\u800C\u638C\u63E1\u5728\u8D85\u7EA7\u7CBE\u82F1\u4FF1\u4E50\u90E8\u7684\u5C0F\u5708\u5B50\u91CC\u3002" }
 ];
 const bisSubs = [
-  { startFrame: 0, endFrame: 180, text: "\u56FD\u9645\u6E05\u7B97\u94F6\u884C\u662F'\u4E2D\u592E\u94F6\u884C\u5BB6\u7684\u94F6\u884C'\u3002" },
-  { startFrame: 180, endFrame: 360, text: "\u9664\u4E868\u6708\u548C10\u6708\uFF0C\u6BCF\u5E74\u670910\u6B21\u6765\u81EA\u4F26\u6566\u3001\u534E\u76DB\u987F\u548C\u4E1C\u4EAC\u7684\u4E00\u6279\u8863\u51A0\u695A\u695A\u795E\u79D8\u4EBA\u58EB\u6765\u5230\u745E\u58EB\u7684\u5DF4\u585E\u5C14\u3002" },
-  { startFrame: 360, endFrame: 540, text: "\u53EA\u6709\u90A3\u4E9B\u5236\u5B9A\u5404\u56FD\u6BCF\u65E5\u5229\u7387\u3001\u4FE1\u8D37\u89C4\u6A21\u3001\u548C\u8D27\u5E01\u4F9B\u5E94\u7684\u4E2D\u592E\u94F6\u884C\u5BB6\u624D\u6709\u8D44\u683C\u52A0\u5165\u3002" },
-  { startFrame: 540, endFrame: 720, text: "\u8FD9\u4E2A\u673A\u6784\u62E5\u6709400\u4EBF\u7F8E\u5143\u7684\u73B0\u91D1\uFF0C\u5404\u56FD\u653F\u5E9C\u503A\u5238\uFF0C\u548C\u76F8\u5F53\u4E8E\u4E16\u754C\u5916\u6C47\u50A8\u5907\u603B\u91CF10\uFF05\u7684\u9EC4\u91D1\u3002" },
-  { startFrame: 720, endFrame: 900, text: "\u5728\u7B2C\u4E8C\u6B21\u4E16\u754C\u5927\u6218\u671F\u95F4\uFF0C\u82F1\u56FD\u548C\u7F8E\u56FD\u7684\u56FD\u9645\u94F6\u884C\u5BB6\u6B63\u662F\u901A\u8FC7\u8FD9\u4E2A\u5E73\u53F0\u4E3A\u7EB3\u7CB9\u5FB7\u56FD\u63D0\u4F9B\u4E86\u5927\u91CF\u7684\u8D44\u91D1\u6276\u6301\u3002" },
-  { startFrame: 900, endFrame: 1080, text: "\u56FD\u9645\u6E05\u7B97\u94F6\u884C\u7684\u8463\u4E8B\u4F1A\u7ADF\u7136\u662F\u7531\u4EA4\u6218\u53CC\u65B9\u7684\u94F6\u884C\u5BB6\u6240\u7EC4\u6210\u3002" },
-  { startFrame: 1080, endFrame: 1260, text: "\u7F8E\u56FD\u7684\u6258\u9A6C\u65AF\xB7\u9EA6\u5947\u7ACB\u514B\u4E0E\u7EB3\u7CB9\u5FB7\u56FD\u5DE5\u4E1A\u6258\u62C9\u65AFI. G. Farben\u7684\u9996\u8111\u4EBA\u7269\u8D6B\u66FC\xB7\u65BD\u5BC6\u8328\u4E00\u8D77\u62C5\u4EFB\u8463\u4E8B\u3002" },
-  { startFrame: 1260, endFrame: 1440, text: "\u5B83\u7684\u8D26\u76EE\u4ECE1930\u5E74\u5230\u73B0\u5728\u768476\u5E74\u4E2D\u4ECE\u672A\u5411\u4EFB\u4F55\u653F\u5E9C\u516C\u5F00\u8FC7\u3002" },
-  { startFrame: 1440, endFrame: 1800, text: "\u8FD9\u624D\u662F\u771F\u6B63\u7684'\u6838\u5FC3\u4FF1\u4E50\u90E8'\uFF0C\u7531\u516D\u4E03\u4E2A\u4E2D\u592E\u94F6\u884C\u5BB6\u7EC4\u6210\uFF0C\u6700\u91CD\u8981\u7684\u7406\u5FF5\u5C31\u662F\u8981\u628A\u5404\u56FD\u653F\u5E9C\u575A\u51B3\u6392\u9664\u5728\u56FD\u9645\u8D27\u5E01\u51B3\u7B56\u8FC7\u7A0B\u4E4B\u5916\u3002" }
+  { startFrame: 0, endFrame: 101, text: "\u56FD\u9645\u6E05\u7B97\u94F6\u884C\u662F'\u4E2D\u592E\u94F6\u884C\u5BB6\u7684\u94F6\u884C'\u3002" },
+  { startFrame: 101, endFrame: 366, text: "\u9664\u4E868\u6708\u548C10\u6708\uFF0C\u6BCF\u5E74\u670910\u6B21\u6765\u81EA\u4F26\u6566\u3001\u534E\u76DB\u987F\u548C\u4E1C\u4EAC\u7684\u4E00\u6279\u8863\u51A0\u695A\u695A\u795E\u79D8\u4EBA\u58EB\u6765\u5230\u745E\u58EB\u7684\u5DF4\u585E\u5C14\u3002" },
+  { startFrame: 366, endFrame: 583, text: "\u53EA\u6709\u90A3\u4E9B\u5236\u5B9A\u5404\u56FD\u6BCF\u65E5\u5229\u7387\u3001\u4FE1\u8D37\u89C4\u6A21\u3001\u548C\u8D27\u5E01\u4F9B\u5E94\u7684\u4E2D\u592E\u94F6\u884C\u5BB6\u624D\u6709\u8D44\u683C\u52A0\u5165\u3002" },
+  { startFrame: 583, endFrame: 831, text: "\u8FD9\u4E2A\u673A\u6784\u62E5\u6709400\u4EBF\u7F8E\u5143\u7684\u73B0\u91D1\uFF0C\u5404\u56FD\u653F\u5E9C\u503A\u5238\uFF0C\u548C\u76F8\u5F53\u4E8E\u4E16\u754C\u5916\u6C47\u50A8\u5907\u603B\u91CF10\uFF05\u7684\u9EC4\u91D1\u3002" },
+  { startFrame: 831, endFrame: 1110, text: "\u5728\u7B2C\u4E8C\u6B21\u4E16\u754C\u5927\u6218\u671F\u95F4\uFF0C\u82F1\u56FD\u548C\u7F8E\u56FD\u7684\u56FD\u9645\u94F6\u884C\u5BB6\u6B63\u662F\u901A\u8FC7\u8FD9\u4E2A\u5E73\u53F0\u4E3A\u7EB3\u7CB9\u5FB7\u56FD\u63D0\u4F9B\u4E86\u5927\u91CF\u7684\u8D44\u91D1\u6276\u6301\u3002" },
+  { startFrame: 1110, endFrame: 1266, text: "\u56FD\u9645\u6E05\u7B97\u94F6\u884C\u7684\u8463\u4E8B\u4F1A\u7ADF\u7136\u662F\u7531\u4EA4\u6218\u53CC\u65B9\u7684\u94F6\u884C\u5BB6\u6240\u7EC4\u6210\u3002" },
+  { startFrame: 1266, endFrame: 1542, text: "\u7F8E\u56FD\u7684\u6258\u9A6C\u65AF\xB7\u9EA6\u5947\u7ACB\u514B\u4E0E\u7EB3\u7CB9\u5FB7\u56FD\u5DE5\u4E1A\u6258\u62C9\u65AFI. G. Farben\u7684\u9996\u8111\u4EBA\u7269\u8D6B\u66FC\xB7\u65BD\u5BC6\u8328\u4E00\u8D77\u62C5\u4EFB\u8463\u4E8B\u3002" },
+  { startFrame: 1542, endFrame: 1730, text: "\u5B83\u7684\u8D26\u76EE\u4ECE1930\u5E74\u5230\u73B0\u5728\u768476\u5E74\u4E2D\u4ECE\u672A\u5411\u4EFB\u4F55\u653F\u5E9C\u516C\u5F00\u8FC7\u3002" },
+  { startFrame: 1730, endFrame: 2046, text: "\u8FD9\u624D\u662F\u771F\u6B63\u7684'\u6838\u5FC3\u4FF1\u4E50\u90E8'\uFF0C\u7531\u516D\u4E03\u4E2A\u4E2D\u592E\u94F6\u884C\u5BB6\u7EC4\u6210\uFF0C\u6700\u91CD\u8981\u7684\u7406\u5FF5\u5C31\u662F\u8981\u628A\u5404\u56FD\u653F\u5E9C\u575A\u51B3\u6392\u9664\u5728\u56FD\u9645\u8D27\u5E01\u51B3\u7B56\u8FC7\u7A0B\u4E4B\u5916\u3002" }
 ];
 const bilderbergSubs = [
-  { startFrame: 0, endFrame: 180, text: "\u5F7C\u5C14\u5FB7\u4F2F\u683C\u4FF1\u4E50\u90E8\u6210\u7ACB\u4E8E1954\u5E74\u3002" },
-  { startFrame: 180, endFrame: 360, text: "\u540D\u79F0\u6765\u81EA\u8377\u5170\u7684\u5F7C\u5C14\u5FB7\u4F2F\u683C\u9152\u5E97\u3002" },
-  { startFrame: 360, endFrame: 540, text: "\u5B83\u6C47\u96C6\u4E86\u6B27\u6D32\u548C\u7F8E\u56FD\u6700\u6709\u6743\u52BF\u7684\u4EBA\u7269\u3002" },
-  { startFrame: 540, endFrame: 720, text: "\u56FD\u5BB6\u5143\u9996\u3001\u94F6\u884C\u5DE8\u5934\u3001\u77F3\u6CB9\u5927\u4EA8\u3001\u5A92\u4F53\u5927\u4EA8\u3002" },
-  { startFrame: 720, endFrame: 900, text: "\u4ED6\u4EEC\u6BCF\u5E74\u79D8\u5BC6\u4F1A\u9762\u4E00\u6B21\u3002\u6CA1\u6709\u5A92\u4F53\u5141\u8BB8\u8FDB\u5165\u3002\u6CA1\u6709\u516C\u5F00\u8BB0\u5F55\u3002" },
-  { startFrame: 900, endFrame: 1080, text: "1975\u5E74\u7684\u4F1A\u8BAE\u4E3B\u9898\u662F'\u897F\u65B9\u6B27\u6D32'\u548C'\u65E5\u672C\u65E5\u76CA\u589E\u957F\u7684\u89D2\u8272'\u3002" },
-  { startFrame: 1080, endFrame: 1260, text: "\u4E00\u5E74\u540E\uFF0C\u82F1\u56FD\u9009\u4E3E\u4E86\u6492\u5207\u5C14\u592B\u4EBA\u3002\u65E5\u672C\u7B7E\u7F72\u4E86\u5E7F\u573A\u534F\u8BAE\u3002" },
-  { startFrame: 1260, endFrame: 1440, text: "1986\u5E74\u4F1A\u8BAE\u8BA8\u8BBA\u4E86'\u7F8E\u82CF\u5173\u7CFB'\u548C'\u5168\u7403\u91D1\u878D\u4F53\u7CFB'\u3002" },
-  { startFrame: 1440, endFrame: 1800, text: "1989\u5E74\u67CF\u6797\u5899\u5012\u584C\u30021991\u5E74\u82CF\u8054\u89E3\u4F53\u3002\u8FD9\u4E9B\u7EDD\u975E\u5DE7\u5408\uFF01" }
+  { startFrame: 0, endFrame: 106, text: "\u5F7C\u5C14\u5FB7\u4F2F\u683C\u4FF1\u4E50\u90E8\u6210\u7ACB\u4E8E1954\u5E74\u3002" },
+  { startFrame: 106, endFrame: 202, text: "\u540D\u79F0\u6765\u81EA\u8377\u5170\u7684\u5F7C\u5C14\u5FB7\u4F2F\u683C\u9152\u5E97\u3002" },
+  { startFrame: 202, endFrame: 306, text: "\u5B83\u6C47\u96C6\u4E86\u6B27\u6D32\u548C\u7F8E\u56FD\u6700\u6709\u6743\u52BF\u7684\u4EBA\u7269\u3002" },
+  { startFrame: 306, endFrame: 436, text: "\u56FD\u5BB6\u5143\u9996\u3001\u94F6\u884C\u5DE8\u5934\u3001\u77F3\u6CB9\u5927\u4EA8\u3001\u5A92\u4F53\u5927\u4EA8\u3002" },
+  { startFrame: 436, endFrame: 622, text: "\u4ED6\u4EEC\u6BCF\u5E74\u79D8\u5BC6\u4F1A\u9762\u4E00\u6B21\u3002\u6CA1\u6709\u5A92\u4F53\u5141\u8BB8\u8FDB\u5165\u3002\u6CA1\u6709\u516C\u5F00\u8BB0\u5F55\u3002" },
+  { startFrame: 622, endFrame: 775, text: "1975\u5E74\u7684\u4F1A\u8BAE\u4E3B\u9898\u662F'\u897F\u65B9\u6B27\u6D32'\u548C'\u65E5\u672C\u65E5\u76CA\u589E\u957F\u7684\u89D2\u8272'\u3002" },
+  { startFrame: 775, endFrame: 938, text: "\u4E00\u5E74\u540E\uFF0C\u82F1\u56FD\u9009\u4E3E\u4E86\u6492\u5207\u5C14\u592B\u4EBA\u3002\u65E5\u672C\u7B7E\u7F72\u4E86\u5E7F\u573A\u534F\u8BAE\u3002" },
+  { startFrame: 938, endFrame: 1069, text: "1986\u5E74\u4F1A\u8BAE\u8BA8\u8BBA\u4E86'\u7F8E\u82CF\u5173\u7CFB'\u548C'\u5168\u7403\u91D1\u878D\u4F53\u7CFB'\u3002" },
+  { startFrame: 1069, endFrame: 1279, text: "1989\u5E74\u67CF\u6797\u5899\u5012\u584C\u30021991\u5E74\u82CF\u8054\u89E3\u4F53\u3002\u8FD9\u4E9B\u7EDD\u975E\u5DE7\u5408\uFF01" }
 ];
 const trilateralSubs = [
-  { startFrame: 0, endFrame: 180, text: "\u4E09\u8FB9\u59D4\u5458\u4F1A\u6210\u7ACB\u4E8E1973\u5E74\u3002" },
-  { startFrame: 180, endFrame: 360, text: "\u7531\u94F6\u884C\u5BB6\u5927\u536B\xB7\u6D1B\u514B\u83F2\u52D2\u548C\u5E03\u70ED\u6D25\u65AF\u57FA\u521B\u7ACB\u3002" },
-  { startFrame: 360, endFrame: 540, text: "\u6C47\u96C6\u4E86\u5317\u7F8E\u3001\u897F\u6B27\u548C\u65E5\u672C\u7684\u7CBE\u82F1\u3002" },
-  { startFrame: 540, endFrame: 720, text: "\u5409\u7C73\xB7\u5361\u7279\u5728\u7ECF\u4E09\u8FB9\u59D4\u5458\u4F1A\u5BA1\u67E5\u540E\u6210\u4E3A\u603B\u7EDF\u3002" },
-  { startFrame: 720, endFrame: 900, text: "\u4ED6\u4EFB\u547D\u4E8614\u540D\u4E09\u8FB9\u59D4\u5458\u4F1A\u6210\u5458\u62C5\u4EFB\u91CD\u8981\u804C\u4F4D\u3002" },
-  { startFrame: 900, endFrame: 1080, text: "\u524D\u4E16\u754C\u94F6\u884C\u9996\u5E2D\u7ECF\u6D4E\u5B66\u5BB6\u65AF\u8482\u683C\u5229\u8328\u63ED\u9732\u4E86\u4ED6\u4EEC\u7684\u65B9\u6CD5\u3002" },
-  { startFrame: 1080, endFrame: 1260, text: "'IMF\u7684\u51B3\u7B56\u662F\u79D8\u5BC6\u7684\u548C\u4E0D\u6C11\u4E3B\u7684\u3002IMF\u7684\u7ECF\u6D4E\u7597\u6CD5\u7ECF\u5E38\u4F7F\u95EE\u9898\u66F4\u52A0\u6076\u5316\u3002'" },
-  { startFrame: 1260, endFrame: 1440, text: "\u4ED6\u56E0\u4E3A\u8BF4\u771F\u8BDD\u800C\u88AB'\u5F3A\u5236\u9000\u4F11'\u4E86\u3002" },
-  { startFrame: 1440, endFrame: 1800, text: "\u7406\u89E3\u8FD9\u4E9B\u7CBE\u82F1\u7F51\u7EDC\u662F\u8D70\u5411\u91D1\u878D\u72EC\u7ACB\u7684\u7B2C\u4E00\u6B65\u3002" }
+  { startFrame: 0, endFrame: 95, text: "\u4E09\u8FB9\u59D4\u5458\u4F1A\u6210\u7ACB\u4E8E1973\u5E74\u3002" },
+  { startFrame: 95, endFrame: 227, text: "\u7531\u94F6\u884C\u5BB6\u5927\u536B\xB7\u6D1B\u514B\u83F2\u52D2\u548C\u5E03\u70ED\u6D25\u65AF\u57FA\u521B\u7ACB\u3002" },
+  { startFrame: 227, endFrame: 329, text: "\u6C47\u96C6\u4E86\u5317\u7F8E\u3001\u897F\u6B27\u548C\u65E5\u672C\u7684\u7CBE\u82F1\u3002" },
+  { startFrame: 329, endFrame: 467, text: "\u5409\u7C73\xB7\u5361\u7279\u5728\u7ECF\u4E09\u8FB9\u59D4\u5458\u4F1A\u5BA1\u67E5\u540E\u6210\u4E3A\u603B\u7EDF\u3002" },
+  { startFrame: 467, endFrame: 594, text: "\u4ED6\u4EFB\u547D\u4E8614\u540D\u4E09\u8FB9\u59D4\u5458\u4F1A\u6210\u5458\u62C5\u4EFB\u91CD\u8981\u804C\u4F4D\u3002" },
+  { startFrame: 594, endFrame: 752, text: "\u524D\u4E16\u754C\u94F6\u884C\u9996\u5E2D\u7ECF\u6D4E\u5B66\u5BB6\u65AF\u8482\u683C\u5229\u8328\u63ED\u9732\u4E86\u4ED6\u4EEC\u7684\u65B9\u6CD5\u3002" },
+  { startFrame: 752, endFrame: 977, text: "'IMF\u7684\u51B3\u7B56\u662F\u79D8\u5BC6\u7684\u548C\u4E0D\u6C11\u4E3B\u7684\u3002IMF\u7684\u7ECF\u6D4E\u7597\u6CD5\u7ECF\u5E38\u4F7F\u95EE\u9898\u66F4\u52A0\u6076\u5316\u3002'" },
+  { startFrame: 977, endFrame: 1075, text: "\u4ED6\u56E0\u4E3A\u8BF4\u771F\u8BDD\u800C\u88AB'\u5F3A\u5236\u9000\u4F11'\u4E86\u3002" },
+  { startFrame: 1075, endFrame: 1200, text: "\u7406\u89E3\u8FD9\u4E9B\u7CBE\u82F1\u7F51\u7EDC\u662F\u8D70\u5411\u91D1\u878D\u72EC\u7ACB\u7684\u7B2C\u4E00\u6B65\u3002" }
 ];
 const episode07Subtitles = [
-  ...episode07_openingSubs.map((s) => ({ ...s, startFrame: s.startFrame + 0, endFrame: s.endFrame + 0 })),
-  ...brettonWoodsSubs.map((s) => ({ ...s, startFrame: s.startFrame + 1800, endFrame: s.endFrame + 1800 })),
-  ...houseColonelSubs.map((s) => ({ ...s, startFrame: s.startFrame + 3600, endFrame: s.endFrame + 3600 })),
-  ...cfrEliteSubs.map((s) => ({ ...s, startFrame: s.startFrame + 5400, endFrame: s.endFrame + 5400 })),
-  ...bisSubs.map((s) => ({ ...s, startFrame: s.startFrame + 7200, endFrame: s.endFrame + 7200 })),
-  ...bilderbergSubs.map((s) => ({ ...s, startFrame: s.startFrame + 9e3, endFrame: s.endFrame + 9e3 })),
-  ...trilateralSubs.map((s) => ({ ...s, startFrame: s.startFrame + 10800, endFrame: s.endFrame + 10800 }))
+  ...episode07_openingSubs.map((s) => ({ ...s, startFrame: s.startFrame + episode07_SCENE_OFFSETS[0], endFrame: s.endFrame + episode07_SCENE_OFFSETS[0] })),
+  ...brettonWoodsSubs.map((s) => ({ ...s, startFrame: s.startFrame + episode07_SCENE_OFFSETS[1], endFrame: s.endFrame + episode07_SCENE_OFFSETS[1] })),
+  ...houseColonelSubs.map((s) => ({ ...s, startFrame: s.startFrame + episode07_SCENE_OFFSETS[2], endFrame: s.endFrame + episode07_SCENE_OFFSETS[2] })),
+  ...cfrEliteSubs.map((s) => ({ ...s, startFrame: s.startFrame + episode07_SCENE_OFFSETS[3], endFrame: s.endFrame + episode07_SCENE_OFFSETS[3] })),
+  ...bisSubs.map((s) => ({ ...s, startFrame: s.startFrame + episode07_SCENE_OFFSETS[4], endFrame: s.endFrame + episode07_SCENE_OFFSETS[4] })),
+  ...bilderbergSubs.map((s) => ({ ...s, startFrame: s.startFrame + episode07_SCENE_OFFSETS[5], endFrame: s.endFrame + episode07_SCENE_OFFSETS[5] })),
+  ...trilateralSubs.map((s) => ({ ...s, startFrame: s.startFrame + episode07_SCENE_OFFSETS[6], endFrame: s.endFrame + episode07_SCENE_OFFSETS[6] }))
 ];
 /* harmony default export */ const episode07 = ((/* unused pure expression or super */ null && (episode07Subtitles)));
 
@@ -30795,17 +31485,16 @@ const Episode07Documentary_SCENE_THEMES = [
 function Episode07Documentary_buildVoiceoverEntries() {
   const entries = [];
   let fileIndex = 0;
-  const fps = 30;
-  const sceneOffsets = [
-    { subs: episode07_openingSubs, offset: 0 },
-    { subs: brettonWoodsSubs, offset: 60 * fps },
-    { subs: houseColonelSubs, offset: 120 * fps },
-    { subs: cfrEliteSubs, offset: 180 * fps },
-    { subs: bisSubs, offset: 240 * fps },
-    { subs: bilderbergSubs, offset: 300 * fps },
-    { subs: trilateralSubs, offset: 360 * fps }
+  const sceneSubs = [
+    { subs: episode07_openingSubs, offset: episode07_SCENE_OFFSETS[0] },
+    { subs: brettonWoodsSubs, offset: episode07_SCENE_OFFSETS[1] },
+    { subs: houseColonelSubs, offset: episode07_SCENE_OFFSETS[2] },
+    { subs: cfrEliteSubs, offset: episode07_SCENE_OFFSETS[3] },
+    { subs: bisSubs, offset: episode07_SCENE_OFFSETS[4] },
+    { subs: bilderbergSubs, offset: episode07_SCENE_OFFSETS[5] },
+    { subs: trilateralSubs, offset: episode07_SCENE_OFFSETS[6] }
   ];
-  for (const scene of sceneOffsets) {
+  for (const scene of sceneSubs) {
     for (const sub of scene.subs) {
       entries.push({
         src: `${Episode07Documentary_VOICE_DIR}voice_${String(fileIndex).padStart(4, "0")}.m4a`,
@@ -30818,7 +31507,7 @@ function Episode07Documentary_buildVoiceoverEntries() {
   return entries;
 }
 const Episode07Documentary = () => {
-  const { fps } = (0,esm.useVideoConfig)();
+  (0,esm.useVideoConfig)();
   const bgm = getEpisodeBGM("Episode07");
   const voiceoverEntries = Episode07Documentary_buildVoiceoverEntries();
   return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { background: "#0d1117" }, children: [
@@ -30832,7 +31521,7 @@ const Episode07Documentary = () => {
         volume: 0.8
       }
     ),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { durationInFrames: 60 * fps, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { durationInFrames: episode07_SCENE_FRAMES[0], children: [
       /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: Episode07Documentary_SCENE_THEMES[0], type: "enter", duration: 45, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
         DramaticRevealShot,
         {
@@ -30844,7 +31533,7 @@ const Episode07Documentary = () => {
       ) }),
       /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: episode07_openingSubs })
     ] }),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: 60 * fps, durationInFrames: 60 * fps, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: episode07_SCENE_OFFSETS[1], durationInFrames: episode07_SCENE_FRAMES[1], children: [
       /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: Episode07Documentary_SCENE_THEMES[1], type: "enter", duration: 30, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
         CloseUpShot,
         {
@@ -30856,7 +31545,7 @@ const Episode07Documentary = () => {
       ) }),
       /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: brettonWoodsSubs })
     ] }),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: 120 * fps, durationInFrames: 60 * fps, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: episode07_SCENE_OFFSETS[2], durationInFrames: episode07_SCENE_FRAMES[2], children: [
       /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: Episode07Documentary_SCENE_THEMES[2], type: "enter", duration: 35, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
         DramaticRevealShot,
         {
@@ -30868,43 +31557,43 @@ const Episode07Documentary = () => {
       ) }),
       /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: houseColonelSubs })
     ] }),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: 180 * fps, durationInFrames: 60 * fps, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: episode07_SCENE_OFFSETS[3], durationInFrames: episode07_SCENE_FRAMES[3], children: [
       /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: Episode07Documentary_SCENE_THEMES[3], type: "enter", duration: 35, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
         CloseUpShot,
         {
           type: "face",
           intensity: "dramatic",
           focusPosition: { x: 50, y: 45 },
-          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(CFRDocumentaryScene_CFRDocumentaryScene, {})
+          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(CFRDocumentaryScene, {})
         }
       ) }),
       /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: cfrEliteSubs })
     ] }),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: 240 * fps, durationInFrames: 60 * fps, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: episode07_SCENE_OFFSETS[4], durationInFrames: episode07_SCENE_FRAMES[4], children: [
       /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: Episode07Documentary_SCENE_THEMES[4], type: "enter", duration: 30, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
         DramaticRevealShot,
         {
           revealMethod: "shatter",
           revealDuration: 40,
           accentColor: "#483D8B",
-          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(BISDocumentaryScene_BISDocumentaryScene, {})
+          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(BISDocumentaryScene, {})
         }
       ) }),
       /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: bisSubs })
     ] }),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: 300 * fps, durationInFrames: 60 * fps, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: episode07_SCENE_OFFSETS[5], durationInFrames: episode07_SCENE_FRAMES[5], children: [
       /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: Episode07Documentary_SCENE_THEMES[5], type: "enter", duration: 40, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
         DramaticRevealShot,
         {
           revealMethod: "zoom",
           revealDuration: 55,
           accentColor: "#4B0082",
-          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(BilderbergDocumentaryScene_BilderbergDocumentaryScene, {})
+          children: /* @__PURE__ */ (0,jsx_runtime.jsx)(BilderbergDocumentaryScene, {})
         }
       ) }),
       /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: bilderbergSubs })
     ] }),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: 360 * fps, durationInFrames: 60 * fps, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: episode07_SCENE_OFFSETS[6], durationInFrames: episode07_SCENE_FRAMES[6], children: [
       /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: Episode07Documentary_SCENE_THEMES[6], type: "enter", duration: 45, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
         DramaticRevealShot,
         {
@@ -34944,205 +35633,157 @@ const DollarFlawSummaryDocumentaryScene = () => {
 
 ;// ./src/subtitles/episode10.ts
 
-const episode10_OpeningScene = [
-  { startFrame: 0, endFrame: 90, text: "\u7B2C\u5341\u96C6\uFF1A\u7F8E\u5143\u6B7B\u7A74\u4E0E\u9EC4\u91D1\u4E00\u9633\u6307" },
-  { startFrame: 90, endFrame: 210, text: "\u8D27\u5E01\u5C31\u5176\u672C\u8D28\u800C\u8A00\uFF0C\u53EF\u5206\u4E3A\u503A\u52A1\u8D27\u5E01\u4E0E\u975E\u503A\u52A1\u8D27\u5E01\u4E24\u5927\u7C7B\u3002" },
-  { startFrame: 210, endFrame: 330, text: "\u503A\u52A1\u8D27\u5E01\u5C31\u662F\u5F53\u4ECA\u4E3B\u8981\u53D1\u8FBE\u56FD\u5BB6\u6240\u901A\u68B0\u7CFB\u7EDF\uFF0C\u5B83\u7684\u4E3B\u8981\u90E8\u5206\u662F\u7531\u653F\u5E9C\u3001\u516C\u53F8\u4EE5\u53CA\u79C1\u4EBA\u7684\u8D27\u5E01\u5316\u7684\u503A\u52A1\u6240\u6784\u6210\u3002" },
-  { startFrame: 330, endFrame: 450, text: "\u7F8E\u5143\u5C31\u662F\u5176\u4E2D\u6700\u5178\u578B\u7684\u4F8B\u5B50\u3002" },
-  { startFrame: 450, endFrame: 570, text: "\u7F8E\u5143\u5728\u503A\u52A1\u4EA7\u751F\u7684\u540C\u65F6\u88AB\u521B\u9020\u51FA\u6765\uFF0C\u5728\u503A\u52A1\u507F\u8FD8\u7684\u540C\u65F6\u88AB\u9500\u6BC1\u3002" },
-  { startFrame: 570, endFrame: 690, text: "\u6D41\u901A\u4E2D\u7684\u6BCF\u4E00\u4E2A\u7F8E\u5143\uFF0C\u90FD\u662F\u4E00\u5F20\u503A\u52A1\u6B20\u6761\uFF0C\u6BCF\u4E00\u5F20\u6B20\u6761\u5728\u6BCF\u4E00\u5929\u91CC\u90FD\u5728\u4EA7\u751F\u503A\u52A1\u5229\u606F\u3002" },
-  { startFrame: 690, endFrame: 810, text: "\u503A\u52A1\u7F8E\u5143\u7684\u5229\u606F\u662F\u539F\u6709\u8D27\u5E01\u603B\u91CF\u4E4B\u5916\u7684\u90E8\u5206\uFF0C\u5FC5\u7136\u8981\u6C42\u5728\u73B0\u6709\u8D27\u5E01\u603B\u91CF\u4E4B\u5916\u518D\u521B\u9020\u51FA\u65B0\u7684\u503A\u52A1\u7F8E\u5143\u3002" },
-  { startFrame: 810, endFrame: 900, text: "\u4EBA\u6C11\u501F\u94B1\u8D8A\u591A\uFF0C\u5C31\u5FC5\u987B\u501F\u66F4\u591A\u7684\u94B1\u3002\u503A\u52A1\u4E0E\u8D27\u5E01\u6B7B\u9501\u5728\u4E00\u8D77\u3002" }
+const episode10_SCENE_FRAMES = [
+  1460,
+  // Scene 0: 48.7s - Opening
+  2060,
+  // Scene 1: 68.6s - Fractional Reserve
+  2027,
+  // Scene 2: 67.6s - Debt Dollar
+  1618,
+  // Scene 3: 54.0s - Derivatives
+  1418,
+  // Scene 4: 47.2s - Fannie/Freddie
+  3342,
+  // Scene 5: 111.4s - Gold Prison
+  2205,
+  // Scene 6: 73.5s - Gold Counter
+  1191,
+  // Scene 7: 39.7s - Rothschild
+  1724
+  // Scene 8: 57.5s - Summary
+];
+const episode10_SCENE_OFFSETS = episode10_SCENE_FRAMES.reduce((acc, frames, i) => {
+  acc.push(i === 0 ? 0 : acc[i - 1] + episode10_SCENE_FRAMES[i - 1]);
+  return acc;
+}, []);
+const OpeningScene = [
+  { startFrame: 0, endFrame: 106, text: "\u7B2C\u5341\u96C6\uFF1A\u7F8E\u5143\u6B7B\u7A74\u4E0E\u9EC4\u91D1\u4E00\u9633\u6307" },
+  { startFrame: 106, endFrame: 269, text: "\u8D27\u5E01\u5C31\u5176\u672C\u8D28\u800C\u8A00\uFF0C\u53EF\u5206\u4E3A\u503A\u52A1\u8D27\u5E01\u4E0E\u975E\u503A\u52A1\u8D27\u5E01\u4E24\u5927\u7C7B\u3002" },
+  { startFrame: 269, endFrame: 551, text: "\u503A\u52A1\u8D27\u5E01\u5C31\u662F\u5F53\u4ECA\u4E3B\u8981\u53D1\u8FBE\u56FD\u5BB6\u6240\u901A\u68B0\u7CFB\u7EDF\uFF0C\u5B83\u7684\u4E3B\u8981\u90E8\u5206\u662F\u7531\u653F\u5E9C\u3001\u516C\u53F8\u4EE5\u53CA\u79C1\u4EBA\u7684\u8D27\u5E01\u5316\u7684\u503A\u52A1\u6240\u6784\u6210\u3002" },
+  { startFrame: 551, endFrame: 637, text: "\u7F8E\u5143\u5C31\u662F\u5176\u4E2D\u6700\u5178\u578B\u7684\u4F8B\u5B50\u3002" },
+  { startFrame: 637, endFrame: 803, text: "\u7F8E\u5143\u5728\u503A\u52A1\u4EA7\u751F\u7684\u540C\u65F6\u88AB\u521B\u9020\u51FA\u6765\uFF0C\u5728\u503A\u52A1\u507F\u8FD8\u7684\u540C\u65F6\u88AB\u9500\u6BC1\u3002" },
+  { startFrame: 803, endFrame: 1025, text: "\u6D41\u901A\u4E2D\u7684\u6BCF\u4E00\u4E2A\u7F8E\u5143\uFF0C\u90FD\u662F\u4E00\u5F20\u503A\u52A1\u6B20\u6761\uFF0C\u6BCF\u4E00\u5F20\u6B20\u6761\u5728\u6BCF\u4E00\u5929\u91CC\u90FD\u5728\u4EA7\u751F\u503A\u52A1\u5229\u606F\u3002" },
+  { startFrame: 1025, endFrame: 1279, text: "\u503A\u52A1\u7F8E\u5143\u7684\u5229\u606F\u662F\u539F\u6709\u8D27\u5E01\u603B\u91CF\u4E4B\u5916\u7684\u90E8\u5206\uFF0C\u5FC5\u7136\u8981\u6C42\u5728\u73B0\u6709\u8D27\u5E01\u603B\u91CF\u4E4B\u5916\u518D\u521B\u9020\u51FA\u65B0\u7684\u503A\u52A1\u7F8E\u5143\u3002" },
+  { startFrame: 1279, endFrame: 1460, text: "\u4EBA\u6C11\u501F\u94B1\u8D8A\u591A\uFF0C\u5C31\u5FC5\u987B\u501F\u66F4\u591A\u7684\u94B1\u3002\u503A\u52A1\u4E0E\u8D27\u5E01\u6B7B\u9501\u5728\u4E00\u8D77\u3002" }
 ];
 const FractionalReserveScene = [
-  { startFrame: 0, endFrame: 150, text: "\u6700\u65E9\u7684\u91D1\u5320\u94F6\u884C\u5BB6\u4EEC\u63D0\u4F9B\u7684\u662F\u7EAF\u7CB9\u7684\u91D1\u5E01\u5B58\u653E\u4E1A\u52A1\u3002" },
-  { startFrame: 150, endFrame: 300, text: "\u5F53\u50A8\u6237\u5C06\u91D1\u5E01\u4EA4\u7ED9\u94F6\u884C\u5BB6\u65F6\uFF0C\u94F6\u884C\u5BB6\u63D0\u4F9B\u6807\u51C6\u683C\u5F0F\u7684\u6536\u636E\u3002" },
-  { startFrame: 300, endFrame: 450, text: "\u8FD9\u4E9B\u6536\u636E\u5C31\u662F\u94F6\u884C\u5238\uFF0C\u8FD9\u4E9B\u91D1\u5E01\u7684\u884D\u751F\u7269\u9010\u6E10\u6210\u4E3A\u793E\u4F1A\u4EA4\u6613\u7684\u5A92\u4ECB\u3002" },
-  { startFrame: 450, endFrame: 600, text: "\u4E45\u800C\u4E45\u4E4B\uFF0C\u806A\u660E\u7684\u91D1\u5320\u94F6\u884C\u5BB6\u53D1\u73B0\u5E73\u65F6\u53EA\u6709\u5F88\u5C11\u7684\u50A8\u6237\u524D\u6765\u8981\u6C42\u5C06\u94F6\u884C\u5238\u5151\u6362\u6210\u91D1\u5E01\u3002" },
-  { startFrame: 600, endFrame: 750, text: "\u793E\u4F1A\u4E0A\u603B\u6709\u4E00\u4E9B\u4EBA\u6025\u9700\u7528\u94B1\uFF0C\u4E8E\u662F\u94F6\u884C\u5BB6\u5C31\u544A\u8BC9\u4ED6\u4EEC\u53EF\u4EE5\u5230\u94F6\u884C\u6765\u501F\u94B1\u3002" },
-  { startFrame: 750, endFrame: 900, text: "\u5F53\u501F\u94B1\u7684\u4EBA\u6765\u5230\u94F6\u884C\uFF0C\u94F6\u884C\u5BB6\u5C31\u7528\u591A\u5F00\u6536\u636E\u7684\u529E\u6CD5\uFF0C\u589E\u53D1\u94F6\u884C\u5238\u6765\u8FDB\u884C\u8D37\u6B3E\uFF0C\u5750\u6536\u5229\u606F\u3002" },
-  { startFrame: 900, endFrame: 1050, text: "\u53EA\u8981\u4E0D\u589E\u53D1\u5F97\u592A\u8FC7\u4EFD\uFF0C\u4E00\u822C\u4E0D\u4F1A\u5F15\u8D77\u50A8\u6237\u6000\u7591\u3002" },
-  { startFrame: 1050, endFrame: 1200, text: "\u957F\u671F\u7684\u7ECF\u9A8C\u8BF4\u660E\uFF0C\u589E\u53D1\u6BD4\u598210\u500D\u7684\u94F6\u884C\u5238\u662F\u5B89\u5168\u7684\u3002" },
-  { startFrame: 1200, endFrame: 1350, text: "\u8FD9\u5C31\u662F\u90E8\u5206\u50A8\u5907\u91D1\u4F53\u7CFB\u3002" },
-  { startFrame: 1350, endFrame: 1500, text: "\u90E8\u5206\u50A8\u5907\u91D1\u7CFB\u7EDF\u5929\u751F\u5C31\u6709\u6A21\u7CCA\u4E24\u79CD\u94F6\u884C\u670D\u52A1\u4EA7\u54C1\u754C\u9650\u7684\u51B2\u52A8\u3002" },
-  { startFrame: 1500, endFrame: 1650, text: "\u8FD9\u79CD\u6B20\u6761\u52A0\u8BB8\u8BFA\u7684\u94F6\u884C\u5238\u4E0E\u751F\u4FF1\u6765\u5C31\u5E26\u6709\u98CE\u9669\u7CFB\u6570\u548C\u901A\u8D27\u81A8\u80C0\u7684\u5929\u6027\u3002" },
-  { startFrame: 1650, endFrame: 1800, text: "1913\u5E74\uFF0C\u56FD\u9645\u94F6\u884C\u5BB6\u5728\u7F8E\u56FD\u7EC8\u4E8E\u6210\u529F\u5730\u5EFA\u7ACB\u4E86\u90E8\u5206\u51C6\u5907\u91D1\u4F53\u7CFB\u7684\u6977\u6A21\uFF1A\u7F8E\u8054\u50A8\u3002" }
+  { startFrame: 0, endFrame: 140, text: "\u6700\u65E9\u7684\u91D1\u5320\u94F6\u884C\u5BB6\u4EEC\u63D0\u4F9B\u7684\u662F\u7EAF\u7CB9\u7684\u91D1\u5E01\u5B58\u653E\u4E1A\u52A1\u3002" },
+  { startFrame: 140, endFrame: 301, text: "\u5F53\u50A8\u6237\u5C06\u91D1\u5E01\u4EA4\u7ED9\u94F6\u884C\u5BB6\u65F6\uFF0C\u94F6\u884C\u5BB6\u63D0\u4F9B\u6807\u51C6\u683C\u5F0F\u7684\u6536\u636E\u3002" },
+  { startFrame: 301, endFrame: 475, text: "\u8FD9\u4E9B\u6536\u636E\u5C31\u662F\u94F6\u884C\u5238\uFF0C\u8FD9\u4E9B\u91D1\u5E01\u7684\u884D\u751F\u7269\u9010\u6E10\u6210\u4E3A\u793E\u4F1A\u4EA4\u6613\u7684\u5A92\u4ECB\u3002" },
+  { startFrame: 475, endFrame: 702, text: "\u4E45\u800C\u4E45\u4E4B\uFF0C\u806A\u660E\u7684\u91D1\u5320\u94F6\u884C\u5BB6\u53D1\u73B0\u5E73\u65F6\u53EA\u6709\u5F88\u5C11\u7684\u50A8\u6237\u524D\u6765\u8981\u6C42\u5C06\u94F6\u884C\u5238\u5151\u6362\u6210\u91D1\u5E01\u3002" },
+  { startFrame: 702, endFrame: 894, text: "\u793E\u4F1A\u4E0A\u603B\u6709\u4E00\u4E9B\u4EBA\u6025\u9700\u7528\u94B1\uFF0C\u4E8E\u662F\u94F6\u884C\u5BB6\u5C31\u544A\u8BC9\u4ED6\u4EEC\u53EF\u4EE5\u5230\u94F6\u884C\u6765\u501F\u94B1\u3002" },
+  { startFrame: 894, endFrame: 1132, text: "\u5F53\u501F\u94B1\u7684\u4EBA\u6765\u5230\u94F6\u884C\uFF0C\u94F6\u884C\u5BB6\u5C31\u7528\u591A\u5F00\u6536\u636E\u7684\u529E\u6CD5\uFF0C\u589E\u53D1\u94F6\u884C\u5238\u6765\u8FDB\u884C\u8D37\u6B3E\uFF0C\u5750\u6536\u5229\u606F\u3002" },
+  { startFrame: 1132, endFrame: 1256, text: "\u53EA\u8981\u4E0D\u589E\u53D1\u5F97\u592A\u8FC7\u4EFD\uFF0C\u4E00\u822C\u4E0D\u4F1A\u5F15\u8D77\u50A8\u6237\u6000\u7591\u3002" },
+  { startFrame: 1256, endFrame: 1401, text: "\u957F\u671F\u7684\u7ECF\u9A8C\u8BF4\u660E\uFF0C\u589E\u53D1\u6BD4\u598210\u500D\u7684\u94F6\u884C\u5238\u662F\u5B89\u5168\u7684\u3002" },
+  { startFrame: 1401, endFrame: 1475, text: "\u8FD9\u5C31\u662F\u90E8\u5206\u50A8\u5907\u91D1\u4F53\u7CFB\u3002" },
+  { startFrame: 1475, endFrame: 1641, text: "\u90E8\u5206\u50A8\u5907\u91D1\u7CFB\u7EDF\u5929\u751F\u5C31\u6709\u6A21\u7CCA\u4E24\u79CD\u94F6\u884C\u670D\u52A1\u4EA7\u54C1\u754C\u9650\u7684\u51B2\u52A8\u3002" },
+  { startFrame: 1641, endFrame: 1843, text: "\u8FD9\u79CD\u6B20\u6761\u52A0\u8BB8\u8BFA\u7684\u94F6\u884C\u5238\u4E0E\u751F\u4FF1\u6765\u5C31\u5E26\u6709\u98CE\u9669\u7CFB\u6570\u548C\u901A\u8D27\u81A8\u80C0\u7684\u5929\u6027\u3002" },
+  { startFrame: 1843, endFrame: 2060, text: "1913\u5E74\uFF0C\u56FD\u9645\u94F6\u884C\u5BB6\u5728\u7F8E\u56FD\u7EC8\u4E8E\u6210\u529F\u5730\u5EFA\u7ACB\u4E86\u90E8\u5206\u51C6\u5907\u91D1\u4F53\u7CFB\u7684\u6977\u6A21\uFF1A\u7F8E\u8054\u50A8\u3002" }
 ];
 const DebtDollarScene = [
-  { startFrame: 0, endFrame: 180, text: "\u7F8E\u8054\u50A8\u7EBD\u7EA6\u94F6\u884C\u662F\u8FD9\u6837\u63CF\u8FF0\u7F8E\u5143\u7684\uFF1A" },
-  { startFrame: 180, endFrame: 360, text: "\u94F6\u884C\u5728\u501F\u6B3E\u4EBA\u627F\u8BFA\u8FD8\u94B1\u65F6\uFF0C\u4EA7\u751F\u51FA\u8D27\u5E01\u3002" },
-  { startFrame: 360, endFrame: 540, text: "\u94F6\u884C\u662F\u901A\u8FC7\u5C06\u8FD9\u4E9B\u79C1\u4EBA\u548C\u5546\u4E1A\u503A\u52A1\u8D27\u5E01\u5316\u6765\u521B\u9020\u91D1\u94B1\u7684\u3002" },
-  { startFrame: 540, endFrame: 720, text: "\u7F8E\u8054\u50A8\u829D\u52A0\u54E5\u94F6\u884C\u7684\u89E3\u91CA\u662F\uFF1A\u5728\u7F8E\u56FD\uFF0C\u65E0\u8BBA\u662F\u7EB8\u5E01\u8FD8\u662F\u94F6\u884C\u5B58\u6B3E\uFF0C\u90FD\u4E0D\u50CF\u5546\u54C1\u4E00\u6837\u5177\u6709\u5185\u5728\u4EF7\u503C\uFF0C\u7F8E\u5143\u4EC5\u4EC5\u662F\u4E00\u5F20\u7EB8\u3002" },
-  { startFrame: 720, endFrame: 900, text: "\u503A\u52A1\u7F8E\u5143\u662F\u600E\u6837\u70BC\u6210\u7684\uFF1A" },
-  { startFrame: 900, endFrame: 1080, text: "\u7B2C\u4E00\u6B65\uFF0C\u56FD\u4F1A\u6279\u51C6\u56FD\u503A\u53D1\u884C\u89C4\u6A21\uFF0C\u8D22\u653F\u90E8\u5C06\u56FD\u503A\u8BBE\u8BA1\u6210\u4E0D\u540C\u79CD\u7C7B\u7684\u503A\u5238\u3002" },
-  { startFrame: 1080, endFrame: 1260, text: "\u7B2C\u4E8C\u6B65\uFF1A\u7F8E\u8054\u50A8\u7167\u5355\u5168\u6536\uFF0C\u8FD9\u65F6\u7F8E\u8054\u50A8\u7684\u8D26\u76EE\u4E0A\u5C06\u8FD9\u4E9B\u56FD\u503A\u8BB0\u5F55\u5728\u8BC1\u5238\u8D44\u4EA7\u9879\u4E0B\u3002" },
-  { startFrame: 1260, endFrame: 1440, text: "\u5F53\u7F8E\u8054\u50A8\u83B7\u5F97\u4E86\u8FD9\u4E00\u8D44\u4EA7\u4E4B\u540E\uFF0C\u5C31\u53EF\u4EE5\u7528\u5B83\u4EA7\u751F\u4E00\u9879\u8D1F\u503A\uFF0C\u8FD9\u5C31\u662F\u7F8E\u8054\u50A8\u5370\u5236\u7684\u7F8E\u8054\u50A8\u652F\u7968\u3002\u8FD9\u662F\u65E0\u4E2D\u751F\u6709\u7684\u5173\u952E\u6B65\u9AA4\u3002" },
-  { startFrame: 1440, endFrame: 1620, text: "\u7B2C\u4E09\u6B65\uFF1A\u5546\u4E1A\u94F6\u884C\u50A8\u84C4\u5728\u94F6\u884C\u8D26\u76EE\u4E0A\u88AB\u91CD\u65B0\u5206\u7C7B\u4E3A\u94F6\u884C\u50A8\u5907\u3002\u5728\u90E8\u5206\u51C6\u5907\u91D1\u4F53\u7CFB\u4E4B\u4E0B\uFF0C\u7F8E\u8054\u50A8\u5141\u8BB8\u5546\u4E1A\u94F6\u884C\u53EA\u4FDD\u7559\u517610%\u7684\u50A8\u84C4\u505A\u50A8\u5907\u91D1\uFF0C\u800C\u5C0690%\u7684\u50A8\u84C4\u8D37\u51FA\u3002" },
-  { startFrame: 1620, endFrame: 1800, text: "\u8FD9\u5C31\u662F\u503A\u52A1\u8D27\u5E01\u5316\u7684\u5168\u8FC7\u7A0B\u3002" }
-];
-const DebtRiverScene = [
-  { startFrame: 0, endFrame: 180, text: "\u4ECE1913\u5E74\u52302001\u5E74\uFF0C" },
-  { startFrame: 180, endFrame: 360, text: "\u7F8E\u56FD\u572887\u5E74\u91CC\u4E00\u5171\u79EF\u7D2F\u4E866\u4E07\u4EBF\u7F8E\u5143\u7684\u56FD\u503A\u3002" },
-  { startFrame: 360, endFrame: 540, text: "\u800C\u4ECE2001\u5E74\u52302006\u5E74\uFF0C" },
-  { startFrame: 540, endFrame: 720, text: "\u77ED\u77ED\u76845\u5E74\u591A\u7684\u65F6\u95F4\u91CC\uFF0C\u7F8E\u56FD\u7ADF\u589E\u52A0\u4E86\u8FD13\u4E07\u4EBF\u7F8E\u5143\u7684\u56FD\u503A\uFF01" },
-  { startFrame: 720, endFrame: 900, text: "\u7F8E\u56FD\u8054\u90A6\u56FD\u503A\u603B\u91CF\u5DF2\u9AD8\u8FBE8\u4E078000\u4EBF\u7F8E\u5143\uFF0C\u5E76\u4EE5\u6BCF\u592925.5\u4EBF\u7684\u901F\u5EA6\u589E\u52A0\u7740\u3002" },
-  { startFrame: 900, endFrame: 1080, text: "44\u4E07\u4EBF\u7F8E\u5143\u8FD9\u4E9B\u503A\u52A1\u5E73\u644A\u5230\u6BCF\u4E00\u4E2A\u7F8E\u56FD\u4EBA\u8EAB\u4E0A\u9AD8\u8FBE\u8FD115\u4E07\u7F8E\u5143\u3002" },
-  { startFrame: 1080, endFrame: 1260, text: "\u4E00\u4E2A\u56DB\u53E3\u4E4B\u5BB6\u8981\u8D1F\u62C5\u8FD160\u4E07\u7F8E\u5143\u7684\u503A\u52A1\u3002" },
-  { startFrame: 1260, endFrame: 1440, text: "\u5728\u503A\u52A1\u8D27\u5E01\u4E4B\u4E0B\uFF0C\u7F8E\u56FD\u5C06\u6C38\u8FDC\u65E0\u6CD5\u507F\u8FD8\u56FD\u503A\u3001\u516C\u53F8\u548C\u79C1\u4EBA\u503A\u52A1\uFF0C\u56E0\u4E3A\u8FD8\u6E05\u503A\u52A1\u4E4B\u65E5\uFF0C\u4E5F\u6B63\u662F\u7F8E\u5143\u6D88\u5931\u4E4B\u65F6\u3002" },
-  { startFrame: 1440, endFrame: 1620, text: "\u7F8E\u56FD\u8054\u90A6\u653F\u5E9C\u7684\u5229\u606F\u652F\u51FA\u5DF2\u5728\u653F\u5E9C\u5F00\u652F\u4E2D\u9AD8\u5C45\u7B2C\u4E09\u4F4D\uFF0C\u4EC5\u6B21\u4E8E\u533B\u7597\u5065\u5EB7\u548C\u56FD\u9632\uFF0C\u6BCF\u5E74\u9AD8\u8FBE\u8FD14000\u4EBF\u7F8E\u5143\u3002" },
-  { startFrame: 1620, endFrame: 1800, text: "\u8FD9\u5C31\u662F\u503A\u52A1\u8D27\u5E01\u7684\u5FC5\u7136\u7ED3\u679C\u3002" }
+  { startFrame: 0, endFrame: 96, text: "\u7F8E\u8054\u50A8\u7EBD\u7EA6\u94F6\u884C\u662F\u8FD9\u6837\u63CF\u8FF0\u7F8E\u5143\u7684\uFF1A" },
+  { startFrame: 96, endFrame: 214, text: "\u94F6\u884C\u5728\u501F\u6B3E\u4EBA\u627F\u8BFA\u8FD8\u94B1\u65F6\uFF0C\u4EA7\u751F\u51FA\u8D27\u5E01\u3002" },
+  { startFrame: 214, endFrame: 374, text: "\u94F6\u884C\u662F\u901A\u8FC7\u5C06\u8FD9\u4E9B\u79C1\u4EBA\u548C\u5546\u4E1A\u503A\u52A1\u8D27\u5E01\u5316\u6765\u521B\u9020\u91D1\u94B1\u7684\u3002" },
+  { startFrame: 374, endFrame: 679, text: "\u7F8E\u8054\u50A8\u829D\u52A0\u54E5\u94F6\u884C\u7684\u89E3\u91CA\u662F\uFF1A\u5728\u7F8E\u56FD\uFF0C\u65E0\u8BBA\u662F\u7EB8\u5E01\u8FD8\u662F\u94F6\u884C\u5B58\u6B3E\uFF0C\u90FD\u4E0D\u50CF\u5546\u54C1\u4E00\u6837\u5177\u6709\u5185\u5728\u4EF7\u503C\uFF0C\u7F8E\u5143\u4EC5\u4EC5\u662F\u4E00\u5F20\u7EB8\u3002" },
+  { startFrame: 679, endFrame: 751, text: "\u503A\u52A1\u7F8E\u5143\u662F\u600E\u6837\u70BC\u6210\u7684\uFF1A" },
+  { startFrame: 751, endFrame: 943, text: "\u7B2C\u4E00\u6B65\uFF0C\u56FD\u4F1A\u6279\u51C6\u56FD\u503A\u53D1\u884C\u89C4\u6A21\uFF0C\u8D22\u653F\u90E8\u5C06\u56FD\u503A\u8BBE\u8BA1\u6210\u4E0D\u540C\u79CD\u7C7B\u7684\u503A\u5238\u3002" },
+  { startFrame: 943, endFrame: 1168, text: "\u7B2C\u4E8C\u6B65\uFF1A\u7F8E\u8054\u50A8\u7167\u5355\u5168\u6536\uFF0C\u8FD9\u65F6\u7F8E\u8054\u50A8\u7684\u8D26\u76EE\u4E0A\u5C06\u8FD9\u4E9B\u56FD\u503A\u8BB0\u5F55\u5728\u8BC1\u5238\u8D44\u4EA7\u9879\u4E0B\u3002" },
+  { startFrame: 1168, endFrame: 1475, text: "\u5F53\u7F8E\u8054\u50A8\u83B7\u5F97\u4E86\u8FD9\u4E00\u8D44\u4EA7\u4E4B\u540E\uFF0C\u5C31\u53EF\u4EE5\u7528\u5B83\u4EA7\u751F\u4E00\u9879\u8D1F\u503A\uFF0C\u8FD9\u5C31\u662F\u7F8E\u8054\u50A8\u5370\u5236\u7684\u7F8E\u8054\u50A8\u652F\u7968\u3002\u8FD9\u662F\u65E0\u4E2D\u751F\u6709\u7684\u5173\u952E\u6B65\u9AA4\u3002" },
+  { startFrame: 1475, endFrame: 1940, text: "\u7B2C\u4E09\u6B65\uFF1A\u5546\u4E1A\u94F6\u884C\u50A8\u84C4\u5728\u94F6\u884C\u8D26\u76EE\u4E0A\u88AB\u91CD\u65B0\u5206\u7C7B\u4E3A\u94F6\u884C\u50A8\u5907\u3002\u5728\u90E8\u5206\u51C6\u5907\u91D1\u4F53\u7CFB\u4E4B\u4E0B\uFF0C\u7F8E\u8054\u50A8\u5141\u8BB8\u5546\u4E1A\u94F6\u884C\u53EA\u4FDD\u7559\u517610%\u7684\u50A8\u84C4\u505A\u50A8\u5907\u91D1\uFF0C\u800C\u5C0690%\u7684\u50A8\u84C4\u8D37\u51FA\u3002" },
+  { startFrame: 1940, endFrame: 2027, text: "\u8FD9\u5C31\u662F\u503A\u52A1\u8D27\u5E01\u5316\u7684\u5168\u8FC7\u7A0B\u3002" }
 ];
 const DerivativesScene = [
-  { startFrame: 0, endFrame: 180, text: "\u8FD9\u4E9B\u5929\u6587\u6570\u5B57\u7684\u5229\u606F\u652F\u51FA\u5230\u54EA\u91CC\u53BB\u4E86\uFF1F" },
-  { startFrame: 180, endFrame: 360, text: "\u7A8D\u95E8\u5728\u4E8E\u5FC5\u987B\u6709\u5438\u7EB3\u5927\u91CF\u8D27\u5E01\u589E\u53D1\u7684\u53BB\u5904\uFF0C\u8FD9\u5C31\u662F\u8FD1\u5341\u51E0\u5E74\u6765\u7578\u5F62\u81A8\u80C0\u8D77\u6765\u7684\u91D1\u878D\u884D\u751F\u54C1\u5E02\u573A\u3002" },
-  { startFrame: 360, endFrame: 540, text: "20\u5E74\u524D\uFF0C\u5168\u4E16\u754C\u7684\u91D1\u878D\u884D\u751F\u4EA7\u54C1\u7684\u540D\u4E49\u4EF7\u503C\u603B\u989D\u51E0\u4E4E\u4E3A\u96F6\uFF0C" },
-  { startFrame: 540, endFrame: 720, text: "\u52302006\u5E74\uFF0C\u8FD9\u4E2A\u5E02\u573A\u7684\u603B\u89C4\u6A21\u5DF2\u7ECF\u8FBE\u5230370\u4E07\u4EBF\u7F8E\u5143\uFF01" },
-  { startFrame: 720, endFrame: 900, text: "\u76F8\u5F53\u4E8E\u5168\u4E16\u754C\u7684GDP\u603B\u548C\u76848\u500D\u591A\u3002" },
-  { startFrame: 900, endFrame: 1080, text: "\u91D1\u878D\u884D\u751F\u4EA7\u54C1\u7684\u672C\u8D28\u662F\u503A\u52A1\u3002\u5B83\u4EEC\u662F\u503A\u52A1\u7684\u6253\u5305\uFF0C\u662F\u503A\u52A1\u7684\u96C6\u5408\uFF0C\u662F\u503A\u52A1\u7684\u96C6\u88C5\u7BB1\u3002" },
-  { startFrame: 1080, endFrame: 1260, text: "\u5B83\u4EEC\u5438\u6536\u4E86\u591A\u4F59\u7684\u7F8E\u5143\uFF0C\u7EF4\u6301\u7740\u7F8E\u5143\u6CE1\u6CAB\u3002" },
-  { startFrame: 1260, endFrame: 1440, text: "\u4F46\u8FD9\u662F \u4E00\u4E2A\u968F\u65F6\u53EF\u80FD\u7206\u70B8\u7684\u5B9A\u65F6\u70B8\u5F39\u3002" },
-  { startFrame: 1440, endFrame: 1620, text: "\u4E00\u4E2A\u95EE\u9898\u5C31\u53EF\u80FD\u4F7F\u8FD9\u4E2A\u56FD\u9645\u91D1\u878D\u4F53\u7CFB\u5D29\u6E83\u3002" },
-  { startFrame: 1620, endFrame: 1800, text: "\u8FD9\u5C31\u662F\u7F8E\u5143\u7684\u6B7B\u7A74\u3002" }
+  { startFrame: 0, endFrame: 88, text: "\u8FD9\u4E9B\u5929\u6587\u6570\u5B57\u7684\u5229\u606F\u652F\u51FA\u5230\u54EA\u91CC\u53BB\u4E86\uFF1F" },
+  { startFrame: 88, endFrame: 218, text: "\u7A8D\u95E8\u5728\u4E8E\u5FC5\u987B\u6709\u5438\u7EB3\u5927\u91CF\u8D27\u5E01\u589E\u53D1\u7684\u53BB\u5904\uFF0C\u8FD9\u5C31\u662F\u8FD1\u5341\u51E0\u5E74\u6765\u7578\u5F62\u81A8\u80C0\u8D77\u6765\u7684\u91D1\u878D\u884D\u751F\u54C1\u5E02\u573A\u3002" },
+  { startFrame: 218, endFrame: 312, text: "20\u5E74\u524D\uFF0C\u5168\u4E16\u754C\u7684\u91D1\u878D\u884D\u751F\u4EA7\u54C1\u7684\u540D\u4E49\u4EF7\u503C\u603B\u989D\u51E0\u4E4E\u4E3A\u96F6\uFF0C" },
+  { startFrame: 312, endFrame: 468, text: "\u52302006\u5E74\uFF0C\u8FD9\u4E2A\u5E02\u573A\u7684\u603B\u89C4\u6A21\u5DF2\u7ECF\u8FBE\u5230370\u4E07\u4EBF\u7F8E\u5143\uFF01" },
+  { startFrame: 468, endFrame: 680, text: "\u76F8\u5F53\u4E8E\u5168\u4E16\u754C\u7684GDP\u603B\u548C\u76848\u500D\u591A\u3002" },
+  { startFrame: 680, endFrame: 859, text: "\u91D1\u878D\u884D\u751F\u4EA7\u54C1\u7684\u672C\u8D28\u662F\u503A\u52A1\u3002\u5B83\u4EEC\u662F\u503A\u52A1\u7684\u6253\u5305\uFF0C\u662F\u503A\u52A1\u7684\u96C6\u5408\uFF0C\u662F\u503A\u52A1\u7684\u96C6\u88C5\u7BB1\u3002" },
+  { startFrame: 859, endFrame: 974, text: "\u5B83\u4EEC\u5438\u6536\u4E86\u591A\u4F59\u7684\u7F8E\u5143\uFF0C\u7EF4\u6301\u7740\u7F8E\u5143\u6CE1\u6CAB\u3002" },
+  { startFrame: 974, endFrame: 1249, text: "\u4F46\u8FD9\u662F \u4E00\u4E2A\u968F\u65F6\u53EF\u80FD\u7206\u70B8\u7684\u5B9A\u65F6\u70B8\u5F39\u3002" },
+  { startFrame: 1249, endFrame: 1537, text: "\u4E00\u4E2A\u95EE\u9898\u5C31\u53EF\u80FD\u4F7F\u8FD9\u4E2A\u56FD\u9645\u91D1\u878D\u4F53\u7CFB\u5D29\u6E83\u3002" },
+  { startFrame: 1537, endFrame: 1618, text: "\u8FD9\u5C31\u662F\u7F8E\u5143\u7684\u6B7B\u7A74\u3002" }
 ];
 const FannieFreddieScene = [
-  { startFrame: 0, endFrame: 180, text: "\u653F\u5E9C\u7279\u8BB8\u673A\u6784\u5728\u8FD9\u91CC\u6307\u7F8E\u56FD\u653F\u5E9C\u7279\u8BB8\u6388\u6743\u7684\u6700\u5927\u7684\u4E24\u5BB6\u623F\u5730\u4EA7\u8D37\u6B3E\u7684\u516C\u53F8\uFF1A\u623F\u5229\u7F8E\u548C\u623F\u5730\u7F8E\u3002" },
-  { startFrame: 180, endFrame: 360, text: "\u8FD9\u4E24\u5BB6\u516C\u53F8\u8D1F\u8D23\u5EFA\u7ACB\u7F8E\u56FD\u623F\u5730\u4EA7\u8D37\u6B3E\u7684\u4E8C\u7EA7\u5E02\u573A\uFF0C\u5176\u53D1\u884C\u7684\u4EE5\u623F\u5730\u4EA7\u4E3A\u62B5\u62BC\u54C1\u7684\u503A\u5238\u603B\u989D\u9AD8\u8FBE4\u4E07\u4EBF\u7F8E\u5143\u3002" },
-  { startFrame: 360, endFrame: 540, text: "\u53EF\u4EE5\u4E0D\u7B97\u5938\u5F20\u5730\u8BF4\uFF0C\u8FD9\u4E24\u5BB6\u516C\u53F8\u7684\u503A\u5238\u5728\u4E00\u5B9A\u7A0B\u5EA6\u4E0A\u53D1\u6325\u7740\u7F8E\u56FD\u8D22\u653F\u90E8\u503A\u5238\u7684\u89D2\u8272\u3002" },
-  { startFrame: 540, endFrame: 720, text: "\u4ED6\u4EEC\u5B9E\u9645\u4E0A\u6210\u4E3A\u4E86\u7B2C\u4E8C\u7F8E\u8054\u50A8\uFF0C\u4E3A\u7F8E\u56FD\u94F6\u884C\u7CFB\u7EDF\u63D0\u4F9B\u5927\u91CF\u7684\u6D41\u52A8\u6027\u3002" },
-  { startFrame: 720, endFrame: 900, text: "\u5C24\u5176\u5728\u653F\u5E9C\u4E0D\u65B9\u4FBF\u7684\u65F6\u5019\u3002\u8FD9\u5C31\u9020\u6210\u4E86\u5728\u7F8E\u8054\u50A8\u8FDB\u884C\u4E8617\u6B21\u8FDE\u7EED\u5347\u606F\u4E4B\u540E\uFF0C\u91D1\u878D\u5E02\u573A\u4E0A\u4ECD\u7136\u5448\u73B0\u51FA\u6D41\u52A8\u6027\u6CDB\u6EE5\u3002GSE\u7684\u81EA\u6709\u8D44\u672C\u91D1\u5DF2\u7ECF\u4E0B\u964D\u5230\u6781\u5EA6\u5371\u9669\u76843.5%\u7684\u6C34\u5E73\u4E0A\u3002" },
-  { startFrame: 900, endFrame: 1080, text: "\u60F3\u8D77\u5F53\u5E74\u957F\u671F\u8D44\u672C\u7BA1\u7406\u57FA\u91D1\u5728\u4E16\u754C\u4E0A\u53F7\u79F0\u6700\u61C2\u7ECF\u6D4E\u7684\u5927\u5E08\u6307\u5BFC\u4E0B\uFF0C\u4E00\u4E2A\u4FC4\u7F57\u65AF\u503A\u52A1\u5371\u673A\u5C31\u4F7F\u8FD9\u4E2A\u56FD\u9645\u4EF0\u6155\u7684\u5B8C\u7F8E\u5BF9\u51B2\u57FA\u91D1\u9803\u523B\u4E4B\u95F4\u7070\u98DE\u70DF\u706D\u3002" },
-  { startFrame: 1080, endFrame: 1260, text: "\u8FD9\u5C31\u662F\u7CFB\u7EDF\u98CE\u9669\u3002" },
-  { startFrame: 1260, endFrame: 1440, text: "\u6574\u4E2A\u91D1\u878D\u4F53\u7CFB\u5F02\u5E38\u8106\u5F31\u3002" },
-  { startFrame: 1440, endFrame: 1620, text: "\u4E00\u4E2A\u706B\u661F\u5C31\u53EF\u80FD\u5F15\u53D1\u5168\u7403\u5927\u706B\u3002" },
-  { startFrame: 1620, endFrame: 1800, text: "\u9EC4\u91D1\u867D\u7136\u5DF2\u7ECF\u4E0D\u662F\u4E16\u754C\u8D27\u5E01\uFF0C\u53EF\u9EC4\u91D1\u59CB\u7EC8\u662F\u5236\u7EA6\u56FD\u9645\u94F6\u884C\u5BB6\u901A\u8FC7\u901A\u8D27\u81A8\u80C0\u52AB\u63A0\u4E16\u754C\u4EBA\u6C11\u8D22\u5BCC\u7684\u6700\u5927\u969C\u788D\u3002" }
+  { startFrame: 0, endFrame: 102, text: "\u653F\u5E9C\u7279\u8BB8\u673A\u6784\u5728\u8FD9\u91CC\u6307\u7F8E\u56FD\u653F\u5E9C\u7279\u8BB8\u6388\u6743\u7684\u6700\u5927\u7684\u4E24\u5BB6\u623F\u5730\u4EA7\u8D37\u6B3E\u7684\u516C\u53F8\uFF1A\u623F\u5229\u7F8E\u548C\u623F\u5730\u7F8E\u3002" },
+  { startFrame: 102, endFrame: 350, text: "\u8FD9\u4E24\u5BB6\u516C\u53F8\u8D1F\u8D23\u5EFA\u7ACB\u7F8E\u56FD\u623F\u5730\u4EA7\u8D37\u6B3E\u7684\u4E8C\u7EA7\u5E02\u573A\uFF0C\u5176\u53D1\u884C\u7684\u4EE5\u623F\u5730\u4EA7\u4E3A\u62B5\u62BC\u54C1\u7684\u503A\u5238\u603B\u989D\u9AD8\u8FBE4\u4E07\u4EBF\u7F8E\u5143\u3002" },
+  { startFrame: 350, endFrame: 512, text: "\u53EF\u4EE5\u4E0D\u7B97\u5938\u5F20\u5730\u8BF4\uFF0C\u8FD9\u4E24\u5BB6\u516C\u53F8\u7684\u503A\u5238\u5728\u4E00\u5B9A\u7A0B\u5EA6\u4E0A\u53D1\u6325\u7740\u7F8E\u56FD\u8D22\u653F\u90E8\u503A\u5238\u7684\u89D2\u8272\u3002" },
+  { startFrame: 512, endFrame: 670, text: "\u4ED6\u4EEC\u5B9E\u9645\u4E0A\u6210\u4E3A\u4E86\u7B2C\u4E8C\u7F8E\u8054\u50A8\uFF0C\u4E3A\u7F8E\u56FD\u94F6\u884C\u7CFB\u7EDF\u63D0\u4F9B\u5927\u91CF\u7684\u6D41\u52A8\u6027\u3002" },
+  { startFrame: 670, endFrame: 781, text: "\u5C24\u5176\u5728\u653F\u5E9C\u4E0D\u65B9\u4FBF\u7684\u65F6\u5019\u3002\u8FD9\u5C31\u9020\u6210\u4E86\u5728\u7F8E\u8054\u50A8\u8FDB\u884C\u4E8617\u6B21\u8FDE\u7EED\u5347\u606F\u4E4B\u540E\uFF0C\u91D1\u878D\u5E02\u573A\u4E0A\u4ECD\u7136\u5448\u73B0\u51FA\u6D41\u52A8\u6027\u6CDB\u6EE5\u3002GSE\u7684\u81EA\u6709\u8D44\u672C\u91D1\u5DF2\u7ECF\u4E0B\u964D\u5230\u6781\u5EA6\u5371\u9669\u76843.5%\u7684\u6C34\u5E73\u4E0A\u3002" },
+  { startFrame: 781, endFrame: 1014, text: "\u60F3\u8D77\u5F53\u5E74\u957F\u671F\u8D44\u672C\u7BA1\u7406\u57FA\u91D1\u5728\u4E16\u754C\u4E0A\u53F7\u79F0\u6700\u61C2\u7ECF\u6D4E\u7684\u5927\u5E08\u6307\u5BFC\u4E0B\uFF0C\u4E00\u4E2A\u4FC4\u7F57\u65AF\u503A\u52A1\u5371\u673A\u5C31\u4F7F\u8FD9\u4E2A\u56FD\u9645\u4EF0\u6155\u7684\u5B8C\u7F8E\u5BF9\u51B2\u57FA\u91D1\u9803\u523B\u4E4B\u95F4\u7070\u98DE\u70DF\u706D\u3002" },
+  { startFrame: 1014, endFrame: 1127, text: "\u8FD9\u5C31\u662F\u7CFB\u7EDF\u98CE\u9669\u3002" },
+  { startFrame: 1127, endFrame: 1238, text: "\u6574\u4E2A\u91D1\u878D\u4F53\u7CFB\u5F02\u5E38\u8106\u5F31\u3002" },
+  { startFrame: 1238, endFrame: 1352, text: "\u4E00\u4E2A\u706B\u661F\u5C31\u53EF\u80FD\u5F15\u53D1\u5168\u7403\u5927\u706B\u3002" },
+  { startFrame: 1352, endFrame: 1418, text: "\u9EC4\u91D1\u867D\u7136\u5DF2\u7ECF\u4E0D\u662F\u4E16\u754C\u8D27\u5E01\uFF0C\u53EF\u9EC4\u91D1\u59CB\u7EC8\u662F\u5236\u7EA6\u56FD\u9645\u94F6\u884C\u5BB6\u901A\u8FC7\u901A\u8D27\u81A8\u80C0\u52AB\u63A0\u4E16\u754C\u4EBA\u6C11\u8D22\u5BCC\u7684\u6700\u5927\u969C\u788D\u3002" }
 ];
 const GoldPrisonScene = [
-  { startFrame: 0, endFrame: 240, text: "\u9EC4\u91D1\u867D\u7136\u5DF2\u7ECF\u4E0D\u662F\u4E16\u754C\u8D27\u5E01\uFF0C" },
-  { startFrame: 240, endFrame: 480, text: "\u4F46\u9EC4\u91D1\u59CB\u7EC8\u662F\u5236\u7EA6\u56FD\u9645\u94F6\u884C\u5BB6\u901A\u8FC7\u901A\u8D27\u81A8\u80C0\u52AB\u63A0\u4E16\u754C\u4EBA\u6C11\u8D22\u5BCC\u7684\u6700\u5927\u969C\u788D\u3002" },
-  { startFrame: 480, endFrame: 720, text: "\u6700\u8BA9\u4EBA\u65E0\u6CD5\u7406\u89E3\u7684\u662F\u82F1\u683C\u5170\u94F6\u884C\u57281999\u5E745\u67087\u65E5\u608D\u7136\u5BA3\u5E03\u5356\u6389\u4E00\u534A\u7684\u9EC4\u91D1\u50A8\u5907\uFF08415\u5428\uFF09\u7684\u58F0\u660E\u4E86\u3002\u8FD9\u4E00\u77F3\u7834\u5929\u60CA\u7684\u6D88\u606F\u4F7F\u672C\u5DF2\u75B2\u8F6F\u7684\u56FD\u9645\u91D1\u4EF7\u72C2\u8DCC\u5230280\u7F8E\u5143\u4E00\u76CE\u53F8\u3002" },
-  { startFrame: 720, endFrame: 960, text: "\u4EBA\u4EEC\u4E0D\u7981\u72D0\u7591\uFF0C\u82F1\u683C\u5170\u94F6\u884C\u7A76\u7ADF\u8981\u5E72\u5417\uFF1F" },
-  { startFrame: 960, endFrame: 1200, text: "\u82F1\u683C\u5170\u94F6\u884C\u8FDD\u80CC\u57FA\u672C\u7684\u5546\u4E1A\u89C4\u5F8B\u884C\u4E8B\uFF0C\u53EA\u56E0\u4E3A\u4E00\u4EF6\u4E8B\uFF1A\u5B83\u6050\u60E7\u91D1\u4EF7\u6301\u7EED\u4E0A\u6DA8\uFF01" },
-  { startFrame: 1200, endFrame: 1440, text: "\u82F1\u683C\u5170\u94F6\u884C\u7684\u9EC4\u91D1\u5230\u54EA\u91CC\u53BB\u4E86\u5462\uFF1F\u539F\u6765\uFF0C\u65E9\u5DF2\u88AB\u79DF\u501F\u7ED9\u4E86\u91D1\u952D\u94F6\u884C\u5BB6\u4EEC\u3002" },
-  { startFrame: 1440, endFrame: 1680, text: "\u572890\u5E74\u4EE3\u521D\uFF0C\u56FD\u9645\u94F6\u884C\u5BB6\u5F00\u59CB\u63A8\u9500\u4E00\u79CD\u8BF4\u6CD5\uFF1A\u9EC4\u91D1\u653E\u5728\u4E2D\u592E\u94F6\u884C\u7684\u4ED3\u5E93\u91CC\uFF0C\u6CA1\u6709\u4EFB\u4F55\u5229\u606F\u6536\u5165\uFF0C" },
-  { startFrame: 1680, endFrame: 1920, text: "\u4E0D\u5982\u51FA\u79DF\u7ED9\u4FE1\u8A89\u597D\u7684\u91D1\u952D\u94F6\u884C\u5BB6\uFF0C\u5229\u606F\u53EF\u4EE5\u4F4E\u52301%\uFF0C\u4F46\u597D\u8F6C\u4E5F\u662F\u4E00\u7B14\u7A33\u5B9A\u7684\u6536\u5165\uFF0C\u679C\u7136\u6B64\u6CD5\u5728\u6B27\u6D32\u5F88\u5FEB\u851A\u7136\u6210\u98CE\u3002" },
-  { startFrame: 1920, endFrame: 2160, text: "JP\u6469\u6839\u516C\u53F8\u4E3A\u9996\u7684\u56FD\u9645\u94F6\u884C\u5BB6\u4EE5\u81EA\u5DF1\u826F\u597D\u4FE1\u8A89\u4ECE\u4E2D\u592E\u94F6\u884C\u624B\u4E2D\u4EE51%\u7684\u8D85\u4F4E\u5229\u606F\u501F\u6765\u9EC4\u91D1\uFF0C\u518D\u5230\u9EC4\u91D1\u5E02\u573A\u4E0A\u51FA\u552E\uFF0C\u62FF\u5230\u624B\u7684\u94B1\u8F6C\u624B\u5C31\u8D2D\u4E705%\u56DE\u62A5\u7387\u7684\u7F8E\u56FD\u56FD\u503A\uFF0C\u7A33\u54034%\u7684\u5229\u5DEE\uFF0C\u8FD9\u88AB\u79F0\u4E3A\u9EC4\u91D1\u5957\u5229\u4EA4\u6613\u3002" },
-  { startFrame: 2160, endFrame: 2400, text: "\u8FD9\u6837\u4E00\u6765\uFF0C\u629B\u552E\u4E2D\u592E\u94F6\u884C\u7684\u9EC4\u91D1\u65E2\u6253\u538B\u4E86\u9EC4\u91D1\u4EF7\u683C\uFF0C\u53C8\u5403\u5230\u4E86\u5229\u5DEE\u7684\u7F8E\u9910\uFF0C\u8FD8\u540C\u65F6\u523A\u6FC0\u4E86\u7F8E\u56FD\u56FD\u503A\u7684\u9700\u6C42\uFF0C\u538B\u4F4E\u4E86\u957F\u671F\u5229\u7387\uFF0C\u771F\u53EF\u8C13\u4E00\u7BAD\u6570\u96D5\u7684\u5999\u8BA1\u3002" },
-  { startFrame: 2400, endFrame: 2640, text: "1999\u5E74\u662F\u9EC4\u91D1\u6218\u573A\u7684\u91CD\u8981\u6218\u7565\u8F6C\u6298\u70B9\uFF0C\u5176\u610F\u4E49\u76F8\u5F53\u4E8E\u4E8C\u6218\u4E2D\u7684\u65AF\u5927\u6797\u683C\u52D2\u4FDD\u536B\u6218\u3002" },
-  { startFrame: 2640, endFrame: 2880, text: "\u4ECE\u6B64\u4EE5\u540E\uFF0C\u6253\u538B\u91D1\u4EF7\u7684\u4F01\u56FE\uFF0C\u518D\u4E5F\u672A\u80FD\u53D6\u5F97\u9EC4\u91D1\u6218\u573A\u7684\u6218\u7565\u4E3B\u52A8\u6743\u3002" },
-  { startFrame: 2880, endFrame: 3120, text: "\u9EC4\u91D1\u4EF7\u683C\u5F00\u59CB\u8FDB\u5165\u4E0A\u5347\u901A\u9053\u3002" },
-  { startFrame: 3120, endFrame: 3360, text: "\u9EC4\u91D1\u725B\u5E02\u5F00\u59CB\u4E86\u3002" },
-  { startFrame: 3360, endFrame: 3600, text: "\u8FD9\u5A01\u80C1\u5230\u7F8E\u5143\u9738\u6743\u4F53\u7CFB\u3002" }
+  { startFrame: 0, endFrame: 246, text: "\u9EC4\u91D1\u867D\u7136\u5DF2\u7ECF\u4E0D\u662F\u4E16\u754C\u8D27\u5E01\uFF0C" },
+  { startFrame: 246, endFrame: 521, text: "\u4F46\u9EC4\u91D1\u59CB\u7EC8\u662F\u5236\u7EA6\u56FD\u9645\u94F6\u884C\u5BB6\u901A\u8FC7\u901A\u8D27\u81A8\u80C0\u52AB\u63A0\u4E16\u754C\u4EBA\u6C11\u8D22\u5BCC\u7684\u6700\u5927\u969C\u788D\u3002" },
+  { startFrame: 521, endFrame: 735, text: "\u6700\u8BA9\u4EBA\u65E0\u6CD5\u7406\u89E3\u7684\u662F\u82F1\u683C\u5170\u94F6\u884C\u57281999\u5E745\u67087\u65E5\u608D\u7136\u5BA3\u5E03\u5356\u6389\u4E00\u534A\u7684\u9EC4\u91D1\u50A8\u5907\uFF08415\u5428\uFF09\u7684\u58F0\u660E\u4E86\u3002\u8FD9\u4E00\u77F3\u7834\u5929\u60CA\u7684\u6D88\u606F\u4F7F\u672C\u5DF2\u75B2\u8F6F\u7684\u56FD\u9645\u91D1\u4EF7\u72C2\u8DCC\u5230280\u7F8E\u5143\u4E00\u76CE\u53F8\u3002" },
+  { startFrame: 735, endFrame: 914, text: "\u4EBA\u4EEC\u4E0D\u7981\u72D0\u7591\uFF0C\u82F1\u683C\u5170\u94F6\u884C\u7A76\u7ADF\u8981\u5E72\u5417\uFF1F" },
+  { startFrame: 914, endFrame: 1391, text: "\u82F1\u683C\u5170\u94F6\u884C\u8FDD\u80CC\u57FA\u672C\u7684\u5546\u4E1A\u89C4\u5F8B\u884C\u4E8B\uFF0C\u53EA\u56E0\u4E3A\u4E00\u4EF6\u4E8B\uFF1A\u5B83\u6050\u60E7\u91D1\u4EF7\u6301\u7EED\u4E0A\u6DA8\uFF01" },
+  { startFrame: 1391, endFrame: 1757, text: "\u82F1\u683C\u5170\u94F6\u884C\u7684\u9EC4\u91D1\u5230\u54EA\u91CC\u53BB\u4E86\u5462\uFF1F\u539F\u6765\uFF0C\u65E9\u5DF2\u88AB\u79DF\u501F\u7ED9\u4E86\u91D1\u952D\u94F6\u884C\u5BB6\u4EEC\u3002" },
+  { startFrame: 1757, endFrame: 1818, text: "\u572890\u5E74\u4EE3\u521D\uFF0C\u56FD\u9645\u94F6\u884C\u5BB6\u5F00\u59CB\u63A8\u9500\u4E00\u79CD\u8BF4\u6CD5\uFF1A\u9EC4\u91D1\u653E\u5728\u4E2D\u592E\u94F6\u884C\u7684\u4ED3\u5E93\u91CC\uFF0C\u6CA1\u6709\u4EFB\u4F55\u5229\u606F\u6536\u5165\uFF0C" },
+  { startFrame: 1818, endFrame: 1896, text: "\u4E0D\u5982\u51FA\u79DF\u7ED9\u4FE1\u8A89\u597D\u7684\u91D1\u952D\u94F6\u884C\u5BB6\uFF0C\u5229\u606F\u53EF\u4EE5\u4F4E\u52301%\uFF0C\u4F46\u597D\u8F6C\u4E5F\u662F\u4E00\u7B14\u7A33\u5B9A\u7684\u6536\u5165\uFF0C\u679C\u7136\u6B64\u6CD5\u5728\u6B27\u6D32\u5F88\u5FEB\u851A\u7136\u6210\u98CE\u3002" },
+  { startFrame: 1896, endFrame: 1990, text: "JP\u6469\u6839\u516C\u53F8\u4E3A\u9996\u7684\u56FD\u9645\u94F6\u884C\u5BB6\u4EE5\u81EA\u5DF1\u826F\u597D\u4FE1\u8A89\u4ECE\u4E2D\u592E\u94F6\u884C\u624B\u4E2D\u4EE51%\u7684\u8D85\u4F4E\u5229\u606F\u501F\u6765\u9EC4\u91D1\uFF0C\u518D\u5230\u9EC4\u91D1\u5E02\u573A\u4E0A\u51FA\u552E\uFF0C\u62FF\u5230\u624B\u7684\u94B1\u8F6C\u624B\u5C31\u8D2D\u4E705%\u56DE\u62A5\u7387\u7684\u7F8E\u56FD\u56FD\u503A\uFF0C\u7A33\u54034%\u7684\u5229\u5DEE\uFF0C\u8FD9\u88AB\u79F0\u4E3A\u9EC4\u91D1\u5957\u5229\u4EA4\u6613\u3002" },
+  { startFrame: 1990, endFrame: 2263, text: "\u8FD9\u6837\u4E00\u6765\uFF0C\u629B\u552E\u4E2D\u592E\u94F6\u884C\u7684\u9EC4\u91D1\u65E2\u6253\u538B\u4E86\u9EC4\u91D1\u4EF7\u683C\uFF0C\u53C8\u5403\u5230\u4E86\u5229\u5DEE\u7684\u7F8E\u9910\uFF0C\u8FD8\u540C\u65F6\u523A\u6FC0\u4E86\u7F8E\u56FD\u56FD\u503A\u7684\u9700\u6C42\uFF0C\u538B\u4F4E\u4E86\u957F\u671F\u5229\u7387\uFF0C\u771F\u53EF\u8C13\u4E00\u7BAD\u6570\u96D5\u7684\u5999\u8BA1\u3002" },
+  { startFrame: 2263, endFrame: 2344, text: "1999\u5E74\u662F\u9EC4\u91D1\u6218\u573A\u7684\u91CD\u8981\u6218\u7565\u8F6C\u6298\u70B9\uFF0C\u5176\u610F\u4E49\u76F8\u5F53\u4E8E\u4E8C\u6218\u4E2D\u7684\u65AF\u5927\u6797\u683C\u52D2\u4FDD\u536B\u6218\u3002" },
+  { startFrame: 2344, endFrame: 2548, text: "\u4ECE\u6B64\u4EE5\u540E\uFF0C\u6253\u538B\u91D1\u4EF7\u7684\u4F01\u56FE\uFF0C\u518D\u4E5F\u672A\u80FD\u53D6\u5F97\u9EC4\u91D1\u6218\u573A\u7684\u6218\u7565\u4E3B\u52A8\u6743\u3002" },
+  { startFrame: 2548, endFrame: 3020, text: "\u9EC4\u91D1\u4EF7\u683C\u5F00\u59CB\u8FDB\u5165\u4E0A\u5347\u901A\u9053\u3002" },
+  { startFrame: 3020, endFrame: 3137, text: "\u9EC4\u91D1\u725B\u5E02\u5F00\u59CB\u4E86\u3002" },
+  { startFrame: 3137, endFrame: 3342, text: "\u8FD9\u5A01\u80C1\u5230\u7F8E\u5143\u9738\u6743\u4F53\u7CFB\u3002" }
 ];
 const GoldCounterScene = [
-  { startFrame: 0, endFrame: 240, text: "2004\u5E744\u670814\u65E5\uFF0C" },
-  { startFrame: 240, endFrame: 480, text: "\u7F57\u65AF\u67F4\u5C14\u5FB7\u5BB6\u65CF\u7A81\u7136\u5BA3\u5E03\u9000\u51FA\u4F26\u6566\u9EC4\u91D1\u5B9A\u4EF7\u4F53\u7CFB\uFF0C" },
-  { startFrame: 480, endFrame: 720, text: "\u8FD9\u4E00\u77F3\u7834\u5929\u60CA\u7684\u6D88\u606F\u7ACB\u523B\u9707\u64BC\u4E86\u5168\u4E16\u754C\u7684\u6295\u8D44\u8005\u3002" },
-  { startFrame: 720, endFrame: 960, text: "\u6234\u7EF4\xB7\u7F57\u65AF\u67F4\u5C14\u5FB7\u89E3\u91CA\u9053\uFF1A\u6211\u4EEC\u5728\u4F26\u6566\u5546\u54C1\u5E02\u573A\uFF08\u5305\u62EC\u9EC4\u91D1\uFF09\u4EA4\u6613\u7684\u6536\u5165\u5728\u8FC7\u53BB5\u5E74\u4E2D\u5DF2\u7ECF\u4E0B\u964D\u5230\u4E0D\u8DB3\u6211\u4EEC\u4E1A\u52A1\u603B\u6536\u5165\u76841%\uFF0C" },
-  { startFrame: 960, endFrame: 1200, text: "\u4ECE\u6218\u7565\u5206\u6790\u7684\u89D2\u5EA6\u770B\uFF0C\u9EC4\u91D1\u4EA4\u6613\u5DF2\u7ECF\u4E0D\u662F\u6211\u4EEC\u7684\u6838\u5FC3\u4E1A\u52A1\uFF0C\u6240\u4EE5\u6211\u4EEC\u9009\u62E9\u9000\u51FA\u8FD9\u4E2A\u5E02\u573A\u3002" },
-  { startFrame: 1200, endFrame: 1440, text: "\u53E6\u5916\u4E00\u79CD\u53EF\u80FD\u5C31\u662F\uFF1A\u9EC4\u91D1\u548C\u767D\u94F6\u7684\u4EF7\u683C\u6700\u7EC8\u5C06\u4F1A\u5931\u63A7\uFF0C" },
-  { startFrame: 1440, endFrame: 1680, text: "\u65E9\u65E9\u5730\u6458\u6E05\u4E0E\u9EC4\u91D1\u4E4B\u95F4\u7684\u4EFB\u4F55\u5173\u7CFB\uFF0C\u5982\u679C10\u5E74\u4EE5\u540E\uFF0C\u91D1\u94F6\u4EF7\u683C\u679C\u7136\u51FA\u4E86\u4EC0\u4E48\u95EE\u9898\uFF0C\u8C01\u4E5F\u602A\u4E0D\u5230\u7F57\u65AF\u67F4\u5C14\u5FB7\u5BB6\u65CF\u8EAB\u4E0A\u3002" },
-  { startFrame: 1680, endFrame: 1800, text: "\u65F6\u95F4\u4F1A\u8BC1\u660E\u4E00\u5207\u3002" }
+  { startFrame: 0, endFrame: 199, text: "2004\u5E744\u670814\u65E5\uFF0C" },
+  { startFrame: 199, endFrame: 447, text: "\u7F57\u65AF\u67F4\u5C14\u5FB7\u5BB6\u65CF\u7A81\u7136\u5BA3\u5E03\u9000\u51FA\u4F26\u6566\u9EC4\u91D1\u5B9A\u4EF7\u4F53\u7CFB\uFF0C" },
+  { startFrame: 447, endFrame: 768, text: "\u8FD9\u4E00\u77F3\u7834\u5929\u60CA\u7684\u6D88\u606F\u7ACB\u523B\u9707\u64BC\u4E86\u5168\u4E16\u754C\u7684\u6295\u8D44\u8005\u3002" },
+  { startFrame: 768, endFrame: 1322, text: "\u6234\u7EF4\xB7\u7F57\u65AF\u67F4\u5C14\u5FB7\u89E3\u91CA\u9053\uFF1A\u6211\u4EEC\u5728\u4F26\u6566\u5546\u54C1\u5E02\u573A\uFF08\u5305\u62EC\u9EC4\u91D1\uFF09\u4EA4\u6613\u7684\u6536\u5165\u5728\u8FC7\u53BB5\u5E74\u4E2D\u5DF2\u7ECF\u4E0B\u964D\u5230\u4E0D\u8DB3\u6211\u4EEC\u4E1A\u52A1\u603B\u6536\u5165\u76841%\uFF0C" },
+  { startFrame: 1322, endFrame: 1700, text: "\u4ECE\u6218\u7565\u5206\u6790\u7684\u89D2\u5EA6\u770B\uFF0C\u9EC4\u91D1\u4EA4\u6613\u5DF2\u7ECF\u4E0D\u662F\u6211\u4EEC\u7684\u6838\u5FC3\u4E1A\u52A1\uFF0C\u6240\u4EE5\u6211\u4EEC\u9009\u62E9\u9000\u51FA\u8FD9\u4E2A\u5E02\u573A\u3002" },
+  { startFrame: 1700, endFrame: 1932, text: "\u53E6\u5916\u4E00\u79CD\u53EF\u80FD\u5C31\u662F\uFF1A\u9EC4\u91D1\u548C\u767D\u94F6\u7684\u4EF7\u683C\u6700\u7EC8\u5C06\u4F1A\u5931\u63A7\uFF0C" },
+  { startFrame: 1932, endFrame: 2116, text: "\u65E9\u65E9\u5730\u6458\u6E05\u4E0E\u9EC4\u91D1\u4E4B\u95F4\u7684\u4EFB\u4F55\u5173\u7CFB\uFF0C\u5982\u679C10\u5E74\u4EE5\u540E\uFF0C\u91D1\u94F6\u4EF7\u683C\u679C\u7136\u51FA\u4E86\u4EC0\u4E48\u95EE\u9898\uFF0C\u8C01\u4E5F\u602A\u4E0D\u5230\u7F57\u65AF\u67F4\u5C14\u5FB7\u5BB6\u65CF\u8EAB\u4E0A\u3002" },
+  { startFrame: 2116, endFrame: 2205, text: "\u65F6\u95F4\u4F1A\u8BC1\u660E\u4E00\u5207\u3002" }
 ];
 const RothschildScene = [
-  { startFrame: 0, endFrame: 240, text: "\u4ECE\u4E0A\u4E16\u7EAA70\u5E74\u4EE3\u9EC4\u91D1\u906D\u5230\u8F6F\u7981\u5F00\u59CB\uFF0C\u4E16\u754C\u7684\u8BC1\u5238\u5E02\u573A\u548C\u5927\u5B97\u5546\u54C1\u5E02\u573A\u5448\u73B0\u51FA\u53CD\u5411\u5173\u7CFB\u3002" },
-  { startFrame: 240, endFrame: 480, text: "\u5927\u5B97\u5546\u54C1\u5E02\u573A\u6781\u4E3A\u706B\u66B4\u768470\u5E74\u4EE3\uFF0C\u4E5F\u6B63\u662F\u8BC1\u5238\u5E02\u573A\u8868\u73B0\u5947\u5DEE\u768410\u5E74\u3002" },
-  { startFrame: 480, endFrame: 720, text: "\u800C\u4ECE80\u5E74\u4EE3\u521D\u5F00\u59CB\u7684\u8BC1\u5238\u5E02\u573A18\u5E74\u5927\u725B\u5E02\uFF0C\u5219\u4EE3\u8868\u7740\u5927\u5B97\u5546\u54C1\u5E02\u573A\u718A\u6C14\u5F25\u6F2B\u7684\u65F6\u4EE3\u3002" },
-  { startFrame: 720, endFrame: 960, text: "\u800C\u4ECE2001\u5E74\u5F00\u59CB\uFF0C\u5927\u5B97\u5546\u54C1\u5E02\u573A\u5F00\u59CB\u4E86\u725B\u6C14\u51B2\u5929\u7684\u5F81\u9014\uFF0C\u4E0E\u6B64\u540C\u65F6\uFF0C\u80A1\u5E02\u3001\u503A\u5E02\u3001\u623F\u5730\u4EA7\u3001\u91D1\u878D\u884D\u751F\u5E02\u573A\u4E5F\u540C\u6B65\u72C2\u957F\u3002" },
-  { startFrame: 960, endFrame: 1200, text: "\u8868\u9762\u4E0A\u770B\u662F\u7F8E\u5143\u8D44\u4EA7\u589E\u503C\uFF0C\u5B9E\u9645\u4E0A\u662F\u503A\u52A1\u7F8E\u5143\u7684\u7206\u70B8\u6027\u6269\u5F20\u6240\u81F4\u3002" },
-  { startFrame: 1200, endFrame: 1440, text: "\u770B\u4F3C\u5E9E\u7136\u5927\u7269\u7684\u7F8E\u5143\u6CE1\u6CAB\u4F53\u7CFB\uFF0C\u5176\u81F4\u547D\u7684\u6B7B\u7A74\u5C31\u5728\u4FE1\u5FC3\u4E8C\u5B57\uFF0C" },
-  { startFrame: 1440, endFrame: 1680, text: "\u800C\u9EC4\u91D1\u5219\u662F\u70B9\u4E2D\u8FD9\u4E00\u547D\u95E8\u7684\u4E00\u9633\u6307\u3002" },
-  { startFrame: 1680, endFrame: 1800, text: "\u9EC4\u91D1\u4EF7\u683C\u4E0A\u6DA8\u5C06\u903C\u8FEB\u5229\u7387\u4E0A\u5347\uFF0C\u8FD9\u5C06\u5BFC\u81F4\u91D1\u878D\u884D\u751F\u54C1\u5E02\u573A\u5D29\u6E83\u3002" }
+  { startFrame: 0, endFrame: 59, text: "\u4ECE\u4E0A\u4E16\u7EAA70\u5E74\u4EE3\u9EC4\u91D1\u906D\u5230\u8F6F\u7981\u5F00\u59CB\uFF0C\u4E16\u754C\u7684\u8BC1\u5238\u5E02\u573A\u548C\u5927\u5B97\u5546\u54C1\u5E02\u573A\u5448\u73B0\u51FA\u53CD\u5411\u5173\u7CFB\u3002" },
+  { startFrame: 59, endFrame: 137, text: "\u5927\u5B97\u5546\u54C1\u5E02\u573A\u6781\u4E3A\u706B\u66B4\u768470\u5E74\u4EE3\uFF0C\u4E5F\u6B63\u662F\u8BC1\u5238\u5E02\u573A\u8868\u73B0\u5947\u5DEE\u768410\u5E74\u3002" },
+  { startFrame: 137, endFrame: 203, text: "\u800C\u4ECE80\u5E74\u4EE3\u521D\u5F00\u59CB\u7684\u8BC1\u5238\u5E02\u573A18\u5E74\u5927\u725B\u5E02\uFF0C\u5219\u4EE3\u8868\u7740\u5927\u5B97\u5546\u54C1\u5E02\u573A\u718A\u6C14\u5F25\u6F2B\u7684\u65F6\u4EE3\u3002" },
+  { startFrame: 203, endFrame: 344, text: "\u800C\u4ECE2001\u5E74\u5F00\u59CB\uFF0C\u5927\u5B97\u5546\u54C1\u5E02\u573A\u5F00\u59CB\u4E86\u725B\u6C14\u51B2\u5929\u7684\u5F81\u9014\uFF0C\u4E0E\u6B64\u540C\u65F6\uFF0C\u80A1\u5E02\u3001\u503A\u5E02\u3001\u623F\u5730\u4EA7\u3001\u91D1\u878D\u884D\u751F\u5E02\u573A\u4E5F\u540C\u6B65\u72C2\u957F\u3002" },
+  { startFrame: 344, endFrame: 478, text: "\u8868\u9762\u4E0A\u770B\u662F\u7F8E\u5143\u8D44\u4EA7\u589E\u503C\uFF0C\u5B9E\u9645\u4E0A\u662F\u503A\u52A1\u7F8E\u5143\u7684\u7206\u70B8\u6027\u6269\u5F20\u6240\u81F4\u3002" },
+  { startFrame: 478, endFrame: 806, text: "\u770B\u4F3C\u5E9E\u7136\u5927\u7269\u7684\u7F8E\u5143\u6CE1\u6CAB\u4F53\u7CFB\uFF0C\u5176\u81F4\u547D\u7684\u6B7B\u7A74\u5C31\u5728\u4FE1\u5FC3\u4E8C\u5B57\uFF0C" },
+  { startFrame: 806, endFrame: 1041, text: "\u800C\u9EC4\u91D1\u5219\u662F\u70B9\u4E2D\u8FD9\u4E00\u547D\u95E8\u7684\u4E00\u9633\u6307\u3002" },
+  { startFrame: 1041, endFrame: 1191, text: "\u9EC4\u91D1\u4EF7\u683C\u4E0A\u6DA8\u5C06\u903C\u8FEB\u5229\u7387\u4E0A\u5347\uFF0C\u8FD9\u5C06\u5BFC\u81F4\u91D1\u878D\u884D\u751F\u54C1\u5E02\u573A\u5D29\u6E83\u3002" }
 ];
 const SummaryScene = [
-  { startFrame: 0, endFrame: 240, text: "\u90E8\u5206\u50A8\u5907\u91D1\u5236\u5EA6\u52A0\u4E0A\u503A\u52A1\u8D27\u5E01\u4F53\u7CFB\uFF0C\u662F\u957F\u671F\u901A\u8D27\u81A8\u80C0\u7684\u5143\u51F6\uFF0C" },
-  { startFrame: 240, endFrame: 480, text: "\u5728\u503A\u52A1\u8D27\u5E01\u4E4B\u4E0B\uFF0C\u7F8E\u56FD\u5C06\u6C38\u8FDC\u65E0\u6CD5\u507F\u8FD8\u56FD\u503A\u4EE5\u53CA\u516C\u53F8\u548C\u79C1\u4EBA\u503A\u52A1\uFF0C\u56E0\u4E3A\u8FD8\u6E05\u4E4B\u65E5\uFF0C\u4E5F\u662F\u7F8E\u5143\u6D88\u5931\u4E4B\u65F6\u3002" },
-  { startFrame: 480, endFrame: 720, text: "\u8FD9\u4E2A\u95EE\u9898\u65E0\u89E3\u3002" },
-  { startFrame: 720, endFrame: 960, text: "\u5982\u679C\u4E2D\u56FD\u505C\u6B62\u5E73\u5747\u6BCF\u661F\u671F\u51E0\u5341\u4EBF\u7F8E\u5143\u56FD\u503A\u7684\u8D2D\u4E70\uFF0C\u7F8E\u56FD\u7ECF\u6D4E\u5C31\u4F1A\u6709\u5927\u9EBB\u70E6\uFF0C" },
-  { startFrame: 960, endFrame: 1200, text: "\u4F46\u662F\u7531\u4E8E\u5411\u7F8E\u56FD\u51FA\u53E3\u840E\u7F29\uFF0C\u4E2D\u56FD\u7ECF\u6D4E\u4E5F\u4F1A\u6709\u5927\u9EBB\u70E6\uFF0C\u53CC\u65B9\u5DF2\u7ECF\u9677\u5165\u91D1\u878D\u6050\u6016\u5E73\u8861\u7684\u72B6\u6001\u3002" },
-  { startFrame: 1200, endFrame: 1440, text: "\u9EC4\u91D1\u662F\u552F\u4E00\u7684\u89E3\u51B3\u65B9\u6848\u3002" },
-  { startFrame: 1440, endFrame: 1680, text: "\u5F53\u9EC4\u91D1\u4EF7\u683C\u5927\u5E45\u4E0A\u6DA8\u65F6\uFF0C\u7F8E\u5143\u9738\u6743\u5C31\u4F1A\u52A8\u6447\u3002" },
-  { startFrame: 1680, endFrame: 1800, text: "\u8FD9\u5C31\u662F\u7F8E\u5143\u7684\u6B7B\u7A74\u3002" }
+  { startFrame: 0, endFrame: 290, text: "\u90E8\u5206\u50A8\u5907\u91D1\u5236\u5EA6\u52A0\u4E0A\u503A\u52A1\u8D27\u5E01\u4F53\u7CFB\uFF0C\u662F\u957F\u671F\u901A\u8D27\u81A8\u80C0\u7684\u5143\u51F6\uFF0C" },
+  { startFrame: 290, endFrame: 350, text: "\u5728\u503A\u52A1\u8D27\u5E01\u4E4B\u4E0B\uFF0C\u7F8E\u56FD\u5C06\u6C38\u8FDC\u65E0\u6CD5\u507F\u8FD8\u56FD\u503A\u4EE5\u53CA\u516C\u53F8\u548C\u79C1\u4EBA\u503A\u52A1\uFF0C\u56E0\u4E3A\u8FD8\u6E05\u4E4B\u65E5\uFF0C\u4E5F\u662F\u7F8E\u5143\u6D88\u5931\u4E4B\u65F6\u3002" },
+  { startFrame: 350, endFrame: 603, text: "\u8FD9\u4E2A\u95EE\u9898\u65E0\u89E3\u3002" },
+  { startFrame: 603, endFrame: 789, text: "\u5982\u679C\u4E2D\u56FD\u505C\u6B62\u5E73\u5747\u6BCF\u661F\u671F\u51E0\u5341\u4EBF\u7F8E\u5143\u56FD\u503A\u7684\u8D2D\u4E70\uFF0C\u7F8E\u56FD\u7ECF\u6D4E\u5C31\u4F1A\u6709\u5927\u9EBB\u70E6\uFF0C" },
+  { startFrame: 789, endFrame: 1034, text: "\u4F46\u662F\u7531\u4E8E\u5411\u7F8E\u56FD\u51FA\u53E3\u840E\u7F29\uFF0C\u4E2D\u56FD\u7ECF\u6D4E\u4E5F\u4F1A\u6709\u5927\u9EBB\u70E6\uFF0C\u53CC\u65B9\u5DF2\u7ECF\u9677\u5165\u91D1\u878D\u6050\u6016\u5E73\u8861\u7684\u72B6\u6001\u3002" },
+  { startFrame: 1034, endFrame: 1376, text: "\u9EC4\u91D1\u662F\u552F\u4E00\u7684\u89E3\u51B3\u65B9\u6848\u3002" },
+  { startFrame: 1376, endFrame: 1557, text: "\u5F53\u9EC4\u91D1\u4EF7\u683C\u5927\u5E45\u4E0A\u6DA8\u65F6\uFF0C\u7F8E\u5143\u9738\u6743\u5C31\u4F1A\u52A8\u6447\u3002" },
+  { startFrame: 1557, endFrame: 1724, text: "\u8FD9\u5C31\u662F\u7F8E\u5143\u7684\u6B7B\u7A74\u3002" }
 ];
-const sceneOffsets = {
-  OpeningScene: 0,
-  FractionalReserveScene: 900,
-  DebtDollarScene: 2700,
-  DebtRiverScene: 4500,
-  DerivativesScene: 6300,
-  FannieFreddieScene: 8100,
-  GoldPrisonScene: 9900,
-  GoldCounterScene: 11700,
-  RothschildScene: 13500,
-  SummaryScene: 15300
-};
-const episode10Subtitles = [
-  // OpeningScene (offset: 0)
-  ...episode10_OpeningScene,
-  // FractionalReserveScene (offset: 900)
-  ...FractionalReserveScene.map((sub) => ({
-    ...sub,
-    startFrame: sub.startFrame + sceneOffsets.FractionalReserveScene,
-    endFrame: sub.endFrame + sceneOffsets.FractionalReserveScene
-  })),
-  // DebtDollarScene (offset: 2700)
-  ...DebtDollarScene.map((sub) => ({
-    ...sub,
-    startFrame: sub.startFrame + sceneOffsets.DebtDollarScene,
-    endFrame: sub.endFrame + sceneOffsets.DebtDollarScene
-  })),
-  // DebtRiverScene (offset: 4500)
-  ...DebtRiverScene.map((sub) => ({
-    ...sub,
-    startFrame: sub.startFrame + sceneOffsets.DebtRiverScene,
-    endFrame: sub.endFrame + sceneOffsets.DebtRiverScene
-  })),
-  // DerivativesScene (offset: 6300)
-  ...DerivativesScene.map((sub) => ({
-    ...sub,
-    startFrame: sub.startFrame + sceneOffsets.DerivativesScene,
-    endFrame: sub.endFrame + sceneOffsets.DerivativesScene
-  })),
-  // FannieFreddieScene (offset: 8100)
-  ...FannieFreddieScene.map((sub) => ({
-    ...sub,
-    startFrame: sub.startFrame + sceneOffsets.FannieFreddieScene,
-    endFrame: sub.endFrame + sceneOffsets.FannieFreddieScene
-  })),
-  // GoldPrisonScene (offset: 9900)
-  ...GoldPrisonScene.map((sub) => ({
-    ...sub,
-    startFrame: sub.startFrame + sceneOffsets.GoldPrisonScene,
-    endFrame: sub.endFrame + sceneOffsets.GoldPrisonScene
-  })),
-  // GoldCounterScene (offset: 11700)
-  ...GoldCounterScene.map((sub) => ({
-    ...sub,
-    startFrame: sub.startFrame + sceneOffsets.GoldCounterScene,
-    endFrame: sub.endFrame + sceneOffsets.GoldCounterScene
-  })),
-  // RothschildScene (offset: 13500)
-  ...RothschildScene.map((sub) => ({
-    ...sub,
-    startFrame: sub.startFrame + sceneOffsets.RothschildScene,
-    endFrame: sub.endFrame + sceneOffsets.RothschildScene
-  })),
-  // SummaryScene (offset: 15300)
-  ...SummaryScene.map((sub) => ({
-    ...sub,
-    startFrame: sub.startFrame + sceneOffsets.SummaryScene,
-    endFrame: sub.endFrame + sceneOffsets.SummaryScene
-  }))
-];
-const episode10_openingSubs = episode10_OpeningScene;
+const episode10_openingSubs = OpeningScene;
 const fractionalReserveSubs = FractionalReserveScene;
 const debtDollarSubs = DebtDollarScene;
-const debtRiverSubs = (/* unused pure expression or super */ null && (DebtRiverScene));
 const derivativesSubs = DerivativesScene;
 const fannieFreddieSubs = FannieFreddieScene;
 const goldPrisonSubs = GoldPrisonScene;
 const goldCounterSubs = GoldCounterScene;
 const rothschildSubs = RothschildScene;
 const episode10_summarySubs = SummaryScene;
+const episode10Subtitles = [
+  ...OpeningScene.map((s) => ({ ...s, startFrame: s.startFrame + episode10_SCENE_OFFSETS[0], endFrame: s.endFrame + episode10_SCENE_OFFSETS[0] })),
+  ...FractionalReserveScene.map((s) => ({ ...s, startFrame: s.startFrame + episode10_SCENE_OFFSETS[1], endFrame: s.endFrame + episode10_SCENE_OFFSETS[1] })),
+  ...DebtDollarScene.map((s) => ({ ...s, startFrame: s.startFrame + episode10_SCENE_OFFSETS[2], endFrame: s.endFrame + episode10_SCENE_OFFSETS[2] })),
+  ...DerivativesScene.map((s) => ({ ...s, startFrame: s.startFrame + episode10_SCENE_OFFSETS[3], endFrame: s.endFrame + episode10_SCENE_OFFSETS[3] })),
+  ...FannieFreddieScene.map((s) => ({ ...s, startFrame: s.startFrame + episode10_SCENE_OFFSETS[4], endFrame: s.endFrame + episode10_SCENE_OFFSETS[4] })),
+  ...GoldPrisonScene.map((s) => ({ ...s, startFrame: s.startFrame + episode10_SCENE_OFFSETS[5], endFrame: s.endFrame + episode10_SCENE_OFFSETS[5] })),
+  ...GoldCounterScene.map((s) => ({ ...s, startFrame: s.startFrame + episode10_SCENE_OFFSETS[6], endFrame: s.endFrame + episode10_SCENE_OFFSETS[6] })),
+  ...RothschildScene.map((s) => ({ ...s, startFrame: s.startFrame + episode10_SCENE_OFFSETS[7], endFrame: s.endFrame + episode10_SCENE_OFFSETS[7] })),
+  ...SummaryScene.map((s) => ({ ...s, startFrame: s.startFrame + episode10_SCENE_OFFSETS[8], endFrame: s.endFrame + episode10_SCENE_OFFSETS[8] }))
+];
 /* harmony default export */ const episode10 = ((/* unused pure expression or super */ null && (episode10Subtitles)));
 
 ;// ./src/compositions/Episode10Documentary.tsx
@@ -35181,19 +35822,18 @@ const Episode10Documentary_SCENE_THEMES = [
 function Episode10Documentary_buildVoiceoverEntries() {
   const entries = [];
   let fileIndex = 0;
-  const fps = 30;
-  const sceneOffsets = [
-    { subs: episode10_openingSubs, offset: 0 },
-    { subs: fractionalReserveSubs, offset: 30 * fps },
-    { subs: debtDollarSubs, offset: 90 * fps },
-    { subs: derivativesSubs, offset: 150 * fps },
-    { subs: fannieFreddieSubs, offset: 210 * fps },
-    { subs: goldPrisonSubs, offset: 270 * fps },
-    { subs: goldCounterSubs, offset: 330 * fps },
-    { subs: rothschildSubs, offset: 390 * fps },
-    { subs: episode10_summarySubs, offset: 450 * fps }
+  const sceneSubs = [
+    { subs: episode10_openingSubs, offset: episode10_SCENE_OFFSETS[0] },
+    { subs: fractionalReserveSubs, offset: episode10_SCENE_OFFSETS[1] },
+    { subs: debtDollarSubs, offset: episode10_SCENE_OFFSETS[2] },
+    { subs: derivativesSubs, offset: episode10_SCENE_OFFSETS[3] },
+    { subs: fannieFreddieSubs, offset: episode10_SCENE_OFFSETS[4] },
+    { subs: goldPrisonSubs, offset: episode10_SCENE_OFFSETS[5] },
+    { subs: goldCounterSubs, offset: episode10_SCENE_OFFSETS[6] },
+    { subs: rothschildSubs, offset: episode10_SCENE_OFFSETS[7] },
+    { subs: episode10_summarySubs, offset: episode10_SCENE_OFFSETS[8] }
   ];
-  for (const scene of sceneOffsets) {
+  for (const scene of sceneSubs) {
     for (const sub of scene.subs) {
       entries.push({
         src: `${Episode10Documentary_VOICE_DIR}voice_${String(fileIndex).padStart(4, "0")}.m4a`,
@@ -35206,7 +35846,7 @@ function Episode10Documentary_buildVoiceoverEntries() {
   return entries;
 }
 const Episode10Documentary = () => {
-  const { fps } = (0,esm.useVideoConfig)();
+  (0,esm.useVideoConfig)();
   const bgm = getEpisodeBGM("Episode10");
   const voiceoverEntries = Episode10Documentary_buildVoiceoverEntries();
   return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { background: "#0d1117" }, children: [
@@ -35220,7 +35860,7 @@ const Episode10Documentary = () => {
         volume: 0.8
       }
     ),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { durationInFrames: 30 * fps, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { durationInFrames: episode10_SCENE_FRAMES[0], children: [
       /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: Episode10Documentary_SCENE_THEMES[0], type: "enter", duration: 45, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
         DramaticRevealShot,
         {
@@ -35232,7 +35872,7 @@ const Episode10Documentary = () => {
       ) }),
       /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: episode10_openingSubs })
     ] }),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: 30 * fps, durationInFrames: 60 * fps, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: episode10_SCENE_OFFSETS[1], durationInFrames: episode10_SCENE_FRAMES[1], children: [
       /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: Episode10Documentary_SCENE_THEMES[1], type: "enter", duration: 30, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
         CloseUpShot,
         {
@@ -35244,7 +35884,7 @@ const Episode10Documentary = () => {
       ) }),
       /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: fractionalReserveSubs })
     ] }),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: 90 * fps, durationInFrames: 60 * fps, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: episode10_SCENE_OFFSETS[2], durationInFrames: episode10_SCENE_FRAMES[2], children: [
       /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: Episode10Documentary_SCENE_THEMES[2], type: "enter", duration: 35, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
         DramaticRevealShot,
         {
@@ -35256,7 +35896,7 @@ const Episode10Documentary = () => {
       ) }),
       /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: debtDollarSubs })
     ] }),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: 150 * fps, durationInFrames: 60 * fps, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: episode10_SCENE_OFFSETS[3], durationInFrames: episode10_SCENE_FRAMES[3], children: [
       /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: Episode10Documentary_SCENE_THEMES[3], type: "enter", duration: 35, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
         DramaticRevealShot,
         {
@@ -35268,7 +35908,7 @@ const Episode10Documentary = () => {
       ) }),
       /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: derivativesSubs })
     ] }),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: 210 * fps, durationInFrames: 60 * fps, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: episode10_SCENE_OFFSETS[4], durationInFrames: episode10_SCENE_FRAMES[4], children: [
       /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: Episode10Documentary_SCENE_THEMES[4], type: "enter", duration: 30, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
         CloseUpShot,
         {
@@ -35280,19 +35920,19 @@ const Episode10Documentary = () => {
       ) }),
       /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: fannieFreddieSubs })
     ] }),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: 270 * fps, durationInFrames: 60 * fps, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: episode10_SCENE_OFFSETS[5], durationInFrames: episode10_SCENE_FRAMES[5], children: [
       /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: Episode10Documentary_SCENE_THEMES[5], type: "enter", duration: 40, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
         DramaticRevealShot,
         {
-          revealMethod: "dissolve",
-          revealDuration: 50,
-          accentColor: "#FFD700",
+          revealMethod: "shatter",
+          revealDuration: 55,
+          accentColor: "#8B0000",
           children: /* @__PURE__ */ (0,jsx_runtime.jsx)(GoldPrisonDocumentaryScene, {})
         }
       ) }),
       /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: goldPrisonSubs })
     ] }),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: 330 * fps, durationInFrames: 60 * fps, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: episode10_SCENE_OFFSETS[6], durationInFrames: episode10_SCENE_FRAMES[6], children: [
       /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: Episode10Documentary_SCENE_THEMES[6], type: "enter", duration: 35, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
         DramaticRevealShot,
         {
@@ -35305,7 +35945,7 @@ const Episode10Documentary = () => {
       ) }),
       /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: goldCounterSubs })
     ] }),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: 390 * fps, durationInFrames: 60 * fps, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: episode10_SCENE_OFFSETS[7], durationInFrames: episode10_SCENE_FRAMES[7], children: [
       /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: Episode10Documentary_SCENE_THEMES[7], type: "enter", duration: 30, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
         CloseUpShot,
         {
@@ -35317,7 +35957,7 @@ const Episode10Documentary = () => {
       ) }),
       /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: rothschildSubs })
     ] }),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: 450 * fps, durationInFrames: 30 * fps, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: episode10_SCENE_OFFSETS[8], durationInFrames: episode10_SCENE_FRAMES[8], children: [
       /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: Episode10Documentary_SCENE_THEMES[8], type: "enter", duration: 45, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
         DramaticRevealShot,
         {
@@ -35903,142 +36543,133 @@ const GrandEndingDocumentaryScene = () => {
 
 ;// ./src/subtitles/episode11.ts
 
+const episode11_SCENE_FRAMES = [
+  1451,
+  // Scene 0: 48.4s - Opening
+  2126,
+  // Scene 1: 70.8s - Monetary Standard
+  2085,
+  // Scene 2: 69.5s - Gold Silver
+  1490,
+  // Scene 3: 49.6s - Debt Obesity
+  1066,
+  // Scene 4: 35.5s - Financial Air Force
+  4364,
+  // Scene 5: 145.4s - Strategy
+  1812,
+  // Scene 6: 60.4s - World Reserve
+  2376,
+  // Scene 7: 79.2s - Financial Risk
+  1042
+  // Scene 8: 34.7s - Ending
+];
+const episode11_SCENE_OFFSETS = episode11_SCENE_FRAMES.reduce((acc, frames, i) => {
+  acc.push(i === 0 ? 0 : acc[i - 1] + episode11_SCENE_FRAMES[i - 1]);
+  return acc;
+}, []);
 const episode11_OpeningSceneSubtitles = [
-  { startFrame: 0, endFrame: 90, text: "\u7B2C\u5341\u4E00\u96C6\uFF1A\u8C0B\u4E07\u4E16\u8005" },
-  { startFrame: 90, endFrame: 210, text: "1850\u5E74\uFF0C\u4F26\u6566\u6BEB\u65E0\u7591\u95EE\u7684\u662F\u4E16\u754C\u91D1\u878D\u4F53\u7CFB\u7684\u592A\u9633\uFF0C" },
-  { startFrame: 210, endFrame: 330, text: "1950\u5E74\uFF0C\u7EBD\u7EA6\u6210\u4E3A\u4E86\u5168\u7403\u8D22\u5BCC\u7684\u4E2D\u5FC3\uFF0C" },
-  { startFrame: 330, endFrame: 450, text: "2050\u5E74\uFF0C\u8C01\u5C06\u95EE\u9F0E\u56FD\u9645\u91D1\u878D\u9738\u4E3B\u7684\u5B9D\u5EA7\u5462\uFF1F" },
-  { startFrame: 450, endFrame: 570, text: "\u4EBA\u7C7B\u6709\u53F2\u4EE5\u6765\u7684\u7ECF\u9A8C\u8868\u660E\uFF0C\u5D1B\u8D77\u4E2D\u7684\u56FD\u5BB6\u6216\u5730\u533A\u603B\u662F\u4EE5\u66F4\u52A0\u65FA\u76DB\u7684\u751F\u4EA7\u529B\u521B\u9020\u51FA\u5DE8\u5927\u7684\u8D22\u5BCC\uFF0C" },
-  { startFrame: 570, endFrame: 690, text: "\u4E3A\u4E86\u4FDD\u62A4\u81EA\u5DF1\u7684\u8D22\u5BCC\u5728\u8D38\u6613\u4E2D\u4E0D\u88AB\u522B\u4EBA\u7A00\u91CA\u7684\u8D27\u5E01\u6240\u7A83\u53D6\uFF0C\u8FD9\u4E9B\u5730\u533A\u6709\u7740\u4FDD\u6301\u9AD8\u7EAF\u5EA6\u8D27\u5E01\u7684\u5185\u5728\u52A8\u529B\u3002" },
-  { startFrame: 690, endFrame: 810, text: "\u4E16\u754C\u7684\u8D22\u5BCC\u4ECE\u6765\u5C31\u662F\u81EA\u52A8\u6D41\u5411\u80FD\u591F\u4FDD\u62A4\u5176\u4EF7\u503C\u7684\u5730\u65B9\u3002" },
-  { startFrame: 810, endFrame: 900, text: "\u575A\u633A\u7A33\u5B9A\u7684\u8D27\u5E01\u53CD\u8FC7\u6765\u53C8\u6781\u5927\u5730\u4FC3\u8FDB\u4E86\u793E\u4F1A\u5206\u5DE5\u548C\u5E02\u573A\u8D44\u6E90\u7684\u5408\u7406\u5206\u5E03\uFF0C\u4ECE\u800C\u5F62\u6210\u66F4\u52A0\u6709\u6548\u7387\u7684\u7ECF\u6D4E\u7ED3\u6784\uFF0C\u521B\u9020\u51FA\u66F4\u591A\u7684\u8D22\u5BCC\u3002" }
+  { startFrame: 0, endFrame: 72, text: "\u7B2C\u5341\u4E00\u96C6\uFF1A\u8C0B\u4E07\u4E16\u8005" },
+  { startFrame: 72, endFrame: 220, text: "1850\u5E74\uFF0C\u4F26\u6566\u6BEB\u65E0\u7591\u95EE\u7684\u662F\u4E16\u754C\u91D1\u878D\u4F53\u7CFB\u7684\u592A\u9633\uFF0C" },
+  { startFrame: 220, endFrame: 339, text: "1950\u5E74\uFF0C\u7EBD\u7EA6\u6210\u4E3A\u4E86\u5168\u7403\u8D22\u5BCC\u7684\u4E2D\u5FC3\uFF0C" },
+  { startFrame: 339, endFrame: 466, text: "2050\u5E74\uFF0C\u8C01\u5C06\u95EE\u9F0E\u56FD\u9645\u91D1\u878D\u9738\u4E3B\u7684\u5B9D\u5EA7\u5462\uFF1F" },
+  { startFrame: 466, endFrame: 709, text: "\u4EBA\u7C7B\u6709\u53F2\u4EE5\u6765\u7684\u7ECF\u9A8C\u8868\u660E\uFF0C\u5D1B\u8D77\u4E2D\u7684\u56FD\u5BB6\u6216\u5730\u533A\u603B\u662F\u4EE5\u66F4\u52A0\u65FA\u76DB\u7684\u751F\u4EA7\u529B\u521B\u9020\u51FA\u5DE8\u5927\u7684\u8D22\u5BCC\uFF0C" },
+  { startFrame: 709, endFrame: 977, text: "\u4E3A\u4E86\u4FDD\u62A4\u81EA\u5DF1\u7684\u8D22\u5BCC\u5728\u8D38\u6613\u4E2D\u4E0D\u88AB\u522B\u4EBA\u7A00\u91CA\u7684\u8D27\u5E01\u6240\u7A83\u53D6\uFF0C\u8FD9\u4E9B\u5730\u533A\u6709\u7740\u4FDD\u6301\u9AD8\u7EAF\u5EA6\u8D27\u5E01\u7684\u5185\u5728\u52A8\u529B\u3002" },
+  { startFrame: 977, endFrame: 1127, text: "\u4E16\u754C\u7684\u8D22\u5BCC\u4ECE\u6765\u5C31\u662F\u81EA\u52A8\u6D41\u5411\u80FD\u591F\u4FDD\u62A4\u5176\u4EF7\u503C\u7684\u5730\u65B9\u3002" },
+  { startFrame: 1127, endFrame: 1451, text: "\u575A\u633A\u7A33\u5B9A\u7684\u8D27\u5E01\u53CD\u8FC7\u6765\u53C8\u6781\u5927\u5730\u4FC3\u8FDB\u4E86\u793E\u4F1A\u5206\u5DE5\u548C\u5E02\u573A\u8D44\u6E90\u7684\u5408\u7406\u5206\u5E03\uFF0C\u4ECE\u800C\u5F62\u6210\u66F4\u52A0\u6709\u6548\u7387\u7684\u7ECF\u6D4E\u7ED3\u6784\uFF0C\u521B\u9020\u51FA\u66F4\u591A\u7684\u8D22\u5BCC\u3002" }
 ];
 const MonetaryStandardSceneSubtitles = [
-  { startFrame: 0, endFrame: 180, text: "\u8D27\u5E01\u662F\u6574\u4E2A\u7ECF\u6D4E\u9886\u57DF\u6700\u57FA\u672C\u6700\u6838\u5FC3\u7684\u5EA6\u91CF\u8861\uFF0C" },
-  { startFrame: 180, endFrame: 360, text: "\u8D27\u5E01\u7684\u4F5C\u7528\u7C7B\u4F3C\u4E8E\u7269\u7406\u4E16\u754C\u4E2D\u7684\u5343\u514B\u3001\u7C73\u3001\u79D2\u7B49\u6700\u91CD\u8981\u7684\u5C3A\u5EA6\uFF0C" },
-  { startFrame: 360, endFrame: 540, text: "\u4E00\u4E2A\u6BCF\u5929\u90FD\u5728\u5267\u70C8\u52A8\u8361\u7684\u8D27\u5E01\u4F53\u7CFB\uFF0C\u5C31\u5982\u540C\u5343\u514B\u3001\u7C73\u3001\u79D2\u7684\u5B9A\u4E49\u65F6\u65F6\u523B\u523B\u90FD\u4E0D\u505C\u5730\u53D8\u5316\u4E00\u6837\u8352\u8C2C\u800C\u5371\u9669\u3002" },
-  { startFrame: 540, endFrame: 720, text: "\u4E00\u4E2A\u5DE5\u7A0B\u5E08\u624B\u4E2D\u7684\u5C3A\u5B50\u6BCF\u5929\u957F\u77ED\u90FD\u4E0D\u4E00\u6837\uFF0C\u4ED6\u8BE5\u600E\u4E48\u4FEE\u5EFA\u51E0\u5341\u5C42\u7684\u9AD8\u697C\u5462\uFF1F" },
-  { startFrame: 720, endFrame: 900, text: "\u5F53\u4ECA\u4E16\u754C\u7ECF\u6D4E\u7684\u6839\u672C\u95EE\u9898\u4E4B\u4E00\u5C31\u662F\u5728\u4E8E\u6CA1\u6709\u4E00\u4E2A\u7A33\u5B9A\u800C\u5408\u7406\u7684\u8D27\u5E01\u5EA6\u91CF\u8861\u6807\u51C6\uFF0C" },
-  { startFrame: 900, endFrame: 1080, text: "\u4ECE\u800C\u5BFC\u81F4\u653F\u5E9C\u65E0\u6CD5\u51C6\u786E\u6D4B\u7B97\u7ECF\u6D4E\u6D3B\u52A8\u7684\u89C4\u6A21\uFF0C\u516C\u53F8\u96BE\u4EE5\u6B63\u786E\u5730\u5224\u65AD\u957F\u671F\u6295\u8D44\u7684\u5408\u7406\u6027\uFF0C" },
-  { startFrame: 1080, endFrame: 1260, text: "\u4EBA\u6C11\u5BF9\u8D22\u5BCC\u7684\u4EFB\u4F55\u957F\u8FDC\u89C4\u5212\u4E27\u5931\u4E86\u5B89\u5168\u7684\u53C2\u7167\u7CFB\u3002\u8D27\u5E01\u5BF9\u7ECF\u6D4E\u7684\u4F5C\u7528\u5728\u94F6\u884C\u5BB6\u4EFB\u610F\u548C\u6B66\u65AD\u7684\u64CD\u63A7\u4E0B\uFF0C" },
-  { startFrame: 1260, endFrame: 1440, text: "\u5DF2\u7ECF\u4E25\u91CD\u626D\u66F2\u4E86\u5E02\u573A\u8D44\u6E90\u7684\u5408\u7406\u5206\u914D\u3002\u7F8E\u56FD\u7684\u7F8E\u5143\u4ECE1971\u5E74\u5B8C\u5168\u8131\u79BB\u9EC4\u91D1\u4E4B\u540E\uFF0C" },
-  { startFrame: 1440, endFrame: 1620, text: "\u5176\u8D2D\u4E70\u529B\u5DF2\u7ECF\u4E0B\u964D\u4E8694.4\uFF05\uFF0C\u4ECA\u5929\u7684\u4E00\u7F8E\u5143\u53EA\u503C70\u5E74\u4EE3\u521D\u76845.6\u7F8E\u5206\u3002" },
-  { startFrame: 1620, endFrame: 1800, text: "\u8FD9\u662F\u4E00\u79CD\u9690\u853D\u7684\u76D7\u7A83\uFF0C\u5B83\u901A\u8FC7\u4F7F\u8D27\u5E01\u8D2D\u4E70\u529B\u8D2C\u503C\u6765\u5B9E\u73B0\u793E\u4F1A\u8D22\u5BCC\u7684\u8F6C\u79FB\u3002" }
+  { startFrame: 0, endFrame: 132, text: "\u8D27\u5E01\u662F\u6574\u4E2A\u7ECF\u6D4E\u9886\u57DF\u6700\u57FA\u672C\u6700\u6838\u5FC3\u7684\u5EA6\u91CF\u8861\uFF0C" },
+  { startFrame: 132, endFrame: 307, text: "\u8D27\u5E01\u7684\u4F5C\u7528\u7C7B\u4F3C\u4E8E\u7269\u7406\u4E16\u754C\u4E2D\u7684\u5343\u514B\u3001\u7C73\u3001\u79D2\u7B49\u6700\u91CD\u8981\u7684\u5C3A\u5EA6\uFF0C" },
+  { startFrame: 307, endFrame: 589, text: "\u4E00\u4E2A\u6BCF\u5929\u90FD\u5728\u5267\u70C8\u52A8\u8361\u7684\u8D27\u5E01\u4F53\u7CFB\uFF0C\u5C31\u5982\u540C\u5343\u514B\u3001\u7C73\u3001\u79D2\u7684\u5B9A\u4E49\u65F6\u65F6\u523B\u523B\u90FD\u4E0D\u505C\u5730\u53D8\u5316\u4E00\u6837\u8352\u8C2C\u800C\u5371\u9669\u3002" },
+  { startFrame: 589, endFrame: 782, text: "\u4E00\u4E2A\u5DE5\u7A0B\u5E08\u624B\u4E2D\u7684\u5C3A\u5B50\u6BCF\u5929\u957F\u77ED\u90FD\u4E0D\u4E00\u6837\uFF0C\u4ED6\u8BE5\u600E\u4E48\u4FEE\u5EFA\u51E0\u5341\u5C42\u7684\u9AD8\u697C\u5462\uFF1F" },
+  { startFrame: 782, endFrame: 984, text: "\u5F53\u4ECA\u4E16\u754C\u7ECF\u6D4E\u7684\u6839\u672C\u95EE\u9898\u4E4B\u4E00\u5C31\u662F\u5728\u4E8E\u6CA1\u6709\u4E00\u4E2A\u7A33\u5B9A\u800C\u5408\u7406\u7684\u8D27\u5E01\u5EA6\u91CF\u8861\u6807\u51C6\uFF0C" },
+  { startFrame: 984, endFrame: 1208, text: "\u4ECE\u800C\u5BFC\u81F4\u653F\u5E9C\u65E0\u6CD5\u51C6\u786E\u6D4B\u7B97\u7ECF\u6D4E\u6D3B\u52A8\u7684\u89C4\u6A21\uFF0C\u516C\u53F8\u96BE\u4EE5\u6B63\u786E\u5730\u5224\u65AD\u957F\u671F\u6295\u8D44\u7684\u5408\u7406\u6027\uFF0C" },
+  { startFrame: 1208, endFrame: 1482, text: "\u4EBA\u6C11\u5BF9\u8D22\u5BCC\u7684\u4EFB\u4F55\u957F\u8FDC\u89C4\u5212\u4E27\u5931\u4E86\u5B89\u5168\u7684\u53C2\u7167\u7CFB\u3002\u8D27\u5E01\u5BF9\u7ECF\u6D4E\u7684\u4F5C\u7528\u5728\u94F6\u884C\u5BB6\u4EFB\u610F\u548C\u6B66\u65AD\u7684\u64CD\u63A7\u4E0B\uFF0C" },
+  { startFrame: 1482, endFrame: 1715, text: "\u5DF2\u7ECF\u4E25\u91CD\u626D\u66F2\u4E86\u5E02\u573A\u8D44\u6E90\u7684\u5408\u7406\u5206\u914D\u3002\u7F8E\u56FD\u7684\u7F8E\u5143\u4ECE1971\u5E74\u5B8C\u5168\u8131\u79BB\u9EC4\u91D1\u4E4B\u540E\uFF0C" },
+  { startFrame: 1715, endFrame: 1934, text: "\u5176\u8D2D\u4E70\u529B\u5DF2\u7ECF\u4E0B\u964D\u4E8694.4\uFF05\uFF0C\u4ECA\u5929\u7684\u4E00\u7F8E\u5143\u53EA\u503C70\u5E74\u4EE3\u521D\u76845.6\u7F8E\u5206\u3002" },
+  { startFrame: 1934, endFrame: 2126, text: "\u8FD9\u662F\u4E00\u79CD\u9690\u853D\u7684\u76D7\u7A83\uFF0C\u5B83\u901A\u8FC7\u4F7F\u8D27\u5E01\u8D2D\u4E70\u529B\u8D2C\u503C\u6765\u5B9E\u73B0\u793E\u4F1A\u8D22\u5BCC\u7684\u8F6C\u79FB\u3002" }
 ];
 const GoldSilverSceneSubtitles = [
-  { startFrame: 0, endFrame: 210, text: "\u9EC4\u91D1\u4E0E\u767D\u94F6\u5728\u5E02\u573A\u7684\u81EA\u7136\u8FDB\u5316\u8FC7\u7A0B\u4E2D\u6240\u5F62\u6210\u7684\u9AD8\u5EA6\u7A33\u5B9A\u7684\u4EF7\u683C\u4F53\u7CFB\uFF0C" },
-  { startFrame: 210, endFrame: 420, text: "\u53EF\u4EE5\u8BA9\u6240\u670920\u4E16\u7EAA\u4EE5\u6765\u7684\u5929\u624D\u7ECF\u6D4E\u89C4\u5212\u8005\u4EEC\u6C57\u989C\u3002" },
-  { startFrame: 420, endFrame: 630, text: "\u9EC4\u91D1\u548C\u767D\u94F6\u4F5C\u4E3A\u8D27\u5E01\u662F\u81EA\u7136\u8FDB\u5316\u7684\u4EA7\u7269\uFF0C" },
-  { startFrame: 630, endFrame: 840, text: "\u662F\u771F\u6B63\u5E02\u573A\u7ECF\u6D4E\u7684\u4EA7\u7269\uFF0C\u662F\u4EBA\u7C7B\u4FE1\u8D56\u7684\u8BDA\u5B9E\u7684\u8D27\u5E01\u3002" },
-  { startFrame: 840, endFrame: 1080, text: "1974\u5E747\u670813\u65E5\uFF0C\u300A\u7ECF\u6D4E\u5B66\u5BB6\u300B\u6742\u5FD7\u53D1\u8868\u4E86\u4E00\u4EFD\u4EE4\u4EBA\u9707\u60CA\u7684\u82F1\u56FD\u6574\u4E2A\u5DE5\u4E1A\u9769\u547D\u65F6\u4EE3\u7684\u7269\u4EF7\u7EDF\u8BA1\u62A5\u544A\u3002" },
-  { startFrame: 1080, endFrame: 1320, text: "\u4ECE1664\u5E74\u52301914\u5E74\u7684250\u5E74\u95F4\uFF0C\u5728\u91D1\u672C\u4F4D\u7684\u8FD0\u4F5C\u4E0B\uFF0C\u82F1\u56FD\u7684\u7269\u4EF7\u5728\u957F\u8FBE250\u5E74\u7684\u6F2B\u957F\u5C81\u6708\u4E2D\u4FDD\u6301\u7740\u5E73\u7A33\u800C\u7565\u5FAE\u4E0B\u964D\u7684\u8D8B\u52BF\u3002" },
-  { startFrame: 1320, endFrame: 1560, text: "\u5728\u91D1\u94F6\u672C\u4F4D\u4E4B\u4E0B\u7684\u7F8E\u56FD\uFF0C\u60C5\u51B5\u4E5F\u975E\u5E38\u7C7B\u4F3C\u30021787\u5E74\uFF0C\u7F8E\u56FD\u5BAA\u6CD5\u7B2C\u4E00\u7AE0\u7B2C\u516B\u8282\u6388\u6743\u56FD\u4F1A\u53D1\u884C\u548C\u5B9A\u4E49\u8D27\u5E01\u3002" },
-  { startFrame: 1560, endFrame: 1800, text: "1800\u5E74\uFF0C\u7F8E\u56FD\u7684\u7269\u4EF7\u6307\u6570\u7EA6\u4E3A102.2\uFF0C\u52301913\u5E74\u65F6\uFF0C\u7269\u4EF7\u4E0B\u964D\u523080.7\u3002\u5728\u6574\u4E2A\u7F8E\u56FD\u5DE5\u4E1A\u5316\u7684\u5DE8\u53D8\u65F6\u4EE3\uFF0C\u7269\u4EF7\u6CE2\u52A8\u5E45\u5EA6\u4E0D\u8D85\u8FC726\uFF05\uFF0C\u57281879\u5E74\u52301913\u5E74\u7684\u91D1\u672C\u4F4D\u65F6\u4EE3\uFF0C\u7269\u4EF7\u6CE2\u52A8\u5E45\u5EA6\u5C0F\u4E8E17\uFF05\u3002" }
+  { startFrame: 0, endFrame: 195, text: "\u9EC4\u91D1\u4E0E\u767D\u94F6\u5728\u5E02\u573A\u7684\u81EA\u7136\u8FDB\u5316\u8FC7\u7A0B\u4E2D\u6240\u5F62\u6210\u7684\u9AD8\u5EA6\u7A33\u5B9A\u7684\u4EF7\u683C\u4F53\u7CFB\uFF0C" },
+  { startFrame: 195, endFrame: 340, text: "\u53EF\u4EE5\u8BA9\u6240\u670920\u4E16\u7EAA\u4EE5\u6765\u7684\u5929\u624D\u7ECF\u6D4E\u89C4\u5212\u8005\u4EEC\u6C57\u989C\u3002" },
+  { startFrame: 340, endFrame: 458, text: "\u9EC4\u91D1\u548C\u767D\u94F6\u4F5C\u4E3A\u8D27\u5E01\u662F\u81EA\u7136\u8FDB\u5316\u7684\u4EA7\u7269\uFF0C" },
+  { startFrame: 458, endFrame: 593, text: "\u662F\u771F\u6B63\u5E02\u573A\u7ECF\u6D4E\u7684\u4EA7\u7269\uFF0C\u662F\u4EBA\u7C7B\u4FE1\u8D56\u7684\u8BDA\u5B9E\u7684\u8D27\u5E01\u3002" },
+  { startFrame: 593, endFrame: 855, text: "1974\u5E747\u670813\u65E5\uFF0C\u300A\u7ECF\u6D4E\u5B66\u5BB6\u300B\u6742\u5FD7\u53D1\u8868\u4E86\u4E00\u4EFD\u4EE4\u4EBA\u9707\u60CA\u7684\u82F1\u56FD\u6574\u4E2A\u5DE5\u4E1A\u9769\u547D\u65F6\u4EE3\u7684\u7269\u4EF7\u7EDF\u8BA1\u62A5\u544A\u3002" },
+  { startFrame: 855, endFrame: 1209, text: "\u4ECE1664\u5E74\u52301914\u5E74\u7684250\u5E74\u95F4\uFF0C\u5728\u91D1\u672C\u4F4D\u7684\u8FD0\u4F5C\u4E0B\uFF0C\u82F1\u56FD\u7684\u7269\u4EF7\u5728\u957F\u8FBE250\u5E74\u7684\u6F2B\u957F\u5C81\u6708\u4E2D\u4FDD\u6301\u7740\u5E73\u7A33\u800C\u7565\u5FAE\u4E0B\u964D\u7684\u8D8B\u52BF\u3002" },
+  { startFrame: 1209, endFrame: 1503, text: "\u5728\u91D1\u94F6\u672C\u4F4D\u4E4B\u4E0B\u7684\u7F8E\u56FD\uFF0C\u60C5\u51B5\u4E5F\u975E\u5E38\u7C7B\u4F3C\u30021787\u5E74\uFF0C\u7F8E\u56FD\u5BAA\u6CD5\u7B2C\u4E00\u7AE0\u7B2C\u516B\u8282\u6388\u6743\u56FD\u4F1A\u53D1\u884C\u548C\u5B9A\u4E49\u8D27\u5E01\u3002" },
+  { startFrame: 1503, endFrame: 2085, text: "1800\u5E74\uFF0C\u7F8E\u56FD\u7684\u7269\u4EF7\u6307\u6570\u7EA6\u4E3A102.2\uFF0C\u52301913\u5E74\u65F6\uFF0C\u7269\u4EF7\u4E0B\u964D\u523080.7\u3002\u5728\u6574\u4E2A\u7F8E\u56FD\u5DE5\u4E1A\u5316\u7684\u5DE8\u53D8\u65F6\u4EE3\uFF0C\u7269\u4EF7\u6CE2\u52A8\u5E45\u5EA6\u4E0D\u8D85\u8FC726\uFF05\uFF0C\u57281879\u5E74\u52301913\u5E74\u7684\u91D1\u672C\u4F4D\u65F6\u4EE3\uFF0C\u7269\u4EF7\u6CE2\u52A8\u5E45\u5EA6\u5C0F\u4E8E17\uFF05\u3002" }
 ];
 const DebtObesitySceneSubtitles = [
-  { startFrame: 0, endFrame: 240, text: "\u4EE5GDP\u589E\u52A0\u4E3A\u5BFC\u5411\u7684\u7ECF\u6D4E\u53D1\u5C55\u6A21\u5F0F\uFF0C" },
-  { startFrame: 240, endFrame: 480, text: "\u6070\u5982\u4EE5\u4F53\u91CD\u589E\u52A0\u4E3A\u5065\u5EB7\u6838\u5FC3\u4EFB\u52A1\u7684\u751F\u6D3B\u65B9\u5F0F\u3002" },
-  { startFrame: 480, endFrame: 720, text: "\u653F\u5E9C\u4EE5\u8D22\u653F\u8D64\u5B57\u62C9\u52A8\u7ECF\u6D4E\u589E\u957F\u7684\u653F\u7B56\uFF0C\u5C31\u597D\u6BD4\u662F\u9760\u6CE8\u5C04\u6FC0\u7D20\u6765\u523A\u6FC0\u4F53\u91CD\u589E\u52A0\u3002" },
-  { startFrame: 720, endFrame: 960, text: "\u800C\u503A\u52A1\u8D27\u5E01\u5462\uFF0C\u5C31\u662F\u589E\u751F\u51FA\u6765\u7684\u8102\u80AA\u3002\u4E00\u4E2A\u770B\u8D77\u6765\u8D8A\u6765\u8D8A\u8D8A\u81C3\u80BF\u7684\u4EBA\uFF0C\u771F\u7684\u975E\u5E38\u5065\u5EB7\uFF1F" },
-  { startFrame: 960, endFrame: 1230, text: "\u4E00\u79CD\u6A21\u5F0F\u5C31\u662F\u503A\u52A1\u62C9\u52A8\u578B\u7ECF\u6D4E\u589E\u957F\uFF0C\u56FD\u5BB6\u3001\u4F01\u4E1A\u548C\u4E2A\u4EBA\u5927\u91CF\u8D1F\u503A\uFF0C" },
-  { startFrame: 1230, endFrame: 1500, text: "\u8FD9\u4E9B\u503A\u52A1\u7ECF\u8FC7\u94F6\u884C\u7CFB\u7EDF\u7684\u8D27\u5E01\u5316\u4E4B\u540E\uFF0C\u5DE8\u989D\u503A\u52A1\u8D27\u5E01\u589E\u53D1\u4EA7\u751F\u4E86\u6CE1\u6CAB\u8D22\u5BCC\u611F\uFF0C\u8D27\u5E01\u8D2C\u503C\u65E0\u53EF\u907F\u514D\uFF0C" },
-  { startFrame: 1500, endFrame: 1800, text: "\u5E02\u573A\u8D44\u6E90\u914D\u7F6E\u88AB\u4EBA\u4E3A\u626D\u66F2\uFF0C\u8D2B\u5BCC\u5206\u5316\u65E5\u8D8B\u4E25\u91CD\uFF0C\u5176\u540E\u679C\u662F\u7ECF\u6D4E\u8102\u80AA\u5927\u91CF\u589E\u751F\u3002\u503A\u52A1\u9A71\u52A8\u578B\u7ECF\u6D4E\u72B9\u5982\u4F9D\u9760\u6CE8\u5C04\u6FC0\u7D20\u8FC5\u901F\u589E\u80A5\u3002" }
+  { startFrame: 0, endFrame: 104, text: "\u4EE5GDP\u589E\u52A0\u4E3A\u5BFC\u5411\u7684\u7ECF\u6D4E\u53D1\u5C55\u6A21\u5F0F\uFF0C" },
+  { startFrame: 104, endFrame: 230, text: "\u6070\u5982\u4EE5\u4F53\u91CD\u589E\u52A0\u4E3A\u5065\u5EB7\u6838\u5FC3\u4EFB\u52A1\u7684\u751F\u6D3B\u65B9\u5F0F\u3002" },
+  { startFrame: 230, endFrame: 463, text: "\u653F\u5E9C\u4EE5\u8D22\u653F\u8D64\u5B57\u62C9\u52A8\u7ECF\u6D4E\u589E\u957F\u7684\u653F\u7B56\uFF0C\u5C31\u597D\u6BD4\u662F\u9760\u6CE8\u5C04\u6FC0\u7D20\u6765\u523A\u6FC0\u4F53\u91CD\u589E\u52A0\u3002" },
+  { startFrame: 463, endFrame: 691, text: "\u800C\u503A\u52A1\u8D27\u5E01\u5462\uFF0C\u5C31\u662F\u589E\u751F\u51FA\u6765\u7684\u8102\u80AA\u3002\u4E00\u4E2A\u770B\u8D77\u6765\u8D8A\u6765\u8D8A\u8D8A\u81C3\u80BF\u7684\u4EBA\uFF0C\u771F\u7684\u975E\u5E38\u5065\u5EB7\uFF1F" },
+  { startFrame: 691, endFrame: 881, text: "\u4E00\u79CD\u6A21\u5F0F\u5C31\u662F\u503A\u52A1\u62C9\u52A8\u578B\u7ECF\u6D4E\u589E\u957F\uFF0C\u56FD\u5BB6\u3001\u4F01\u4E1A\u548C\u4E2A\u4EBA\u5927\u91CF\u8D1F\u503A\uFF0C" },
+  { startFrame: 881, endFrame: 1131, text: "\u8FD9\u4E9B\u503A\u52A1\u7ECF\u8FC7\u94F6\u884C\u7CFB\u7EDF\u7684\u8D27\u5E01\u5316\u4E4B\u540E\uFF0C\u5DE8\u989D\u503A\u52A1\u8D27\u5E01\u589E\u53D1\u4EA7\u751F\u4E86\u6CE1\u6CAB\u8D22\u5BCC\u611F\uFF0C\u8D27\u5E01\u8D2C\u503C\u65E0\u53EF\u907F\u514D\uFF0C" },
+  { startFrame: 1131, endFrame: 1490, text: "\u5E02\u573A\u8D44\u6E90\u914D\u7F6E\u88AB\u4EBA\u4E3A\u626D\u66F2\uFF0C\u8D2B\u5BCC\u5206\u5316\u65E5\u8D8B\u4E25\u91CD\uFF0C\u5176\u540E\u679C\u662F\u7ECF\u6D4E\u8102\u80AA\u5927\u91CF\u589E\u751F\u3002\u503A\u52A1\u9A71\u52A8\u578B\u7ECF\u6D4E\u72B9\u5982\u4F9D\u9760\u6CE8\u5C04\u6FC0\u7D20\u8FC5\u901F\u589E\u80A5\u3002" }
 ];
 const FinancialAirForceSceneSubtitles = [
-  { startFrame: 0, endFrame: 270, text: "\u4E16\u754C\u50A8\u5907\u8D27\u5E01\u5730\u4F4D\u662F\u6240\u6709\u4E3B\u6743\u56FD\u5BB6\u53D1\u884C\u8D27\u5E01\u7684\u6700\u9AD8\u5883\u754C\uFF0C" },
-  { startFrame: 270, endFrame: 540, text: "\u5B83\u4EE3\u8868\u7740\u65E0\u4E0E\u4F26\u6BD4\u7684\u6743\u5A01\uFF0C\u5B83\u62E5\u6709\u666E\u5929\u4E4B\u4E0B\u7684\u4FE1\u8D56\u3002" },
-  { startFrame: 540, endFrame: 810, text: "\u5BF9\u50A8\u5907\u8D27\u5E01\u56FD\u7684\u7ECF\u6D4E\u800C\u8A00\uFF0C\u5B83\u7684\u6CFD\u88AB\u5C06\u65E0\u8FDC\u5F17\u754C\u3002" },
-  { startFrame: 810, endFrame: 1080, text: "\u91D1\u878D\u884C\u4E1A\u5C31\u50CF\u4E00\u4E2A\u56FD\u5BB6\u7684\u6218\u7565\u7A7A\u519B\uFF0C\u6CA1\u6709\u7A7A\u4E2D\u6253\u51FB\u7684\u652F\u63F4\uFF0C" },
-  { startFrame: 1080, endFrame: 1350, text: "\u5730\u9762\u7684\u5404\u884C\u5404\u4E1A\u52BF\u5FC5\u9677\u5165\u4E0E\u5176\u4ED6\u56FD\u5BB6\u60E8\u70C8\u7684\u8089\u640F\u6218\uFF0C\u751A\u81F3\u81EA\u76F8\u6B8B\u6740\u3002" },
-  { startFrame: 1350, endFrame: 1620, text: "\u62FC\u4EF7\u683C\u4F4E\u5EC9\u3001\u62FC\u8D44\u6E90\u6D88\u8017\uFF0C\u62FC\u5DE5\u4F5C\u73AF\u5883\u6076\u52A3\u3002" },
-  { startFrame: 1620, endFrame: 1800, text: "\u8FD9\u5C31\u662F\u4E3A\u4EC0\u4E48\u4E2D\u56FD\u7684\u8D27\u5E01\u5FC5\u987B\u6210\u4E3A\u4E16\u754C\u50A8\u5907\u8D27\u5E01\u7684\u539F\u56E0\u3002" }
+  { startFrame: 0, endFrame: 156, text: "\u4E16\u754C\u50A8\u5907\u8D27\u5E01\u5730\u4F4D\u662F\u6240\u6709\u4E3B\u6743\u56FD\u5BB6\u53D1\u884C\u8D27\u5E01\u7684\u6700\u9AD8\u5883\u754C\uFF0C" },
+  { startFrame: 156, endFrame: 291, text: "\u5B83\u4EE3\u8868\u7740\u65E0\u4E0E\u4F26\u6BD4\u7684\u6743\u5A01\uFF0C\u5B83\u62E5\u6709\u666E\u5929\u4E4B\u4E0B\u7684\u4FE1\u8D56\u3002" },
+  { startFrame: 291, endFrame: 441, text: "\u5BF9\u50A8\u5907\u8D27\u5E01\u56FD\u7684\u7ECF\u6D4E\u800C\u8A00\uFF0C\u5B83\u7684\u6CFD\u88AB\u5C06\u65E0\u8FDC\u5F17\u754C\u3002" },
+  { startFrame: 441, endFrame: 593, text: "\u91D1\u878D\u884C\u4E1A\u5C31\u50CF\u4E00\u4E2A\u56FD\u5BB6\u7684\u6218\u7565\u7A7A\u519B\uFF0C\u6CA1\u6709\u7A7A\u4E2D\u6253\u51FB\u7684\u652F\u63F4\uFF0C" },
+  { startFrame: 593, endFrame: 785, text: "\u5730\u9762\u7684\u5404\u884C\u5404\u4E1A\u52BF\u5FC5\u9677\u5165\u4E0E\u5176\u4ED6\u56FD\u5BB6\u60E8\u70C8\u7684\u8089\u640F\u6218\uFF0C\u751A\u81F3\u81EA\u76F8\u6B8B\u6740\u3002" },
+  { startFrame: 785, endFrame: 917, text: "\u62FC\u4EF7\u683C\u4F4E\u5EC9\u3001\u62FC\u8D44\u6E90\u6D88\u8017\uFF0C\u62FC\u5DE5\u4F5C\u73AF\u5883\u6076\u52A3\u3002" },
+  { startFrame: 917, endFrame: 1066, text: "\u8FD9\u5C31\u662F\u4E3A\u4EC0\u4E48\u4E2D\u56FD\u7684\u8D27\u5E01\u5FC5\u987B\u6210\u4E3A\u4E16\u754C\u50A8\u5907\u8D27\u5E01\u7684\u539F\u56E0\u3002" }
 ];
 const StrategySceneSubtitles = [
-  // 高筑墙 (Build High Walls) - 帧 0-1800 relative to this scene
-  { startFrame: 0, endFrame: 270, text: "\u9AD8\u7B51\u5899\uFF1A\u8981\u5EFA\u7ACB\u5BF9\u5185\u91D1\u878D\u9632\u706B\u5899\u548C\u5BF9\u5916\u91D1\u878D\u9632\u6D2A\u5899\u4E24\u6761\u9632\u5FA1\u4F53\u7CFB\u3002" },
-  { startFrame: 270, endFrame: 540, text: "\u56FD\u9645\u94F6\u884C\u5BB6\u5373\u5C06\u5927\u4E3E\u6DF1\u5165\u4E2D\u56FD\u91D1\u878D\u8179\u5730\uFF0C\u4E2D\u56FD\u5DF2\u65E0\u9669\u53EF\u5B88\u3002" },
-  { startFrame: 540, endFrame: 810, text: "\u5916\u8D44\u94F6\u884C\u901A\u8FC7\u90E8\u5206\u51C6\u5907\u91D1\u5236\u5EA6\uFF0C\u5C06\u5927\u4E3E\u63A8\u8FDB\u4E2D\u56FD\u56FD\u5BB6\u3001\u4F01\u4E1A\u548C\u4E2A\u4EBA\u7684\u503A\u52A1\u7684\u8D27\u5E01\u5316\u8FDB\u7A0B\uFF0C" },
-  { startFrame: 810, endFrame: 1110, text: "\u8FD9\u4E9B\u5916\u8D44\u94F6\u884C\u589E\u53D1\u7684\u4FE1\u8D37\u4EBA\u6C11\u5E01\u5C06\u901A\u8FC7\u94F6\u884C\u652F\u7968\u3001\u94F6\u884C\u7968\u636E\u3001\u4FE1\u7528\u5361\u3001\u623F\u5730\u4EA7\u6309\u63ED\u8D37\u6B3E\u3001" },
-  { startFrame: 1110, endFrame: 1440, text: "\u4F01\u4E1A\u6D41\u52A8\u8D44\u91D1\u8D37\u6B3E\u3001\u91D1\u878D\u884D\u751F\u4EA7\u54C1\u7B49\u591A\u79CD\u65B9\u5F0F\u8FDB\u5165\u4E2D\u56FD\u7684\u7ECF\u6D4E\u4F53\u5185\u3002" },
-  { startFrame: 1440, endFrame: 1800, text: "\u4E2D\u56FD\u5BF9\u5185\u7684\u91D1\u878D\u9632\u706B\u5899\uFF0C\u65E8\u5728\u9632\u8303\u5916\u8D44\u94F6\u884C\u6076\u610F\u5236\u9020\u901A\u8D27\u81A8\u80C0\u63A8\u9AD8\u4E2D\u56FD\u8D44\u4EA7\u6CE1\u6CAB\u5316\uFF0C" },
-  // 广积粮 (Store Plenty of Grain) - 帧 1800-3600 relative
-  { startFrame: 1800, endFrame: 2070, text: "\u5E7F\u79EF\u7CAE\u5C31\u662F\u5B98\u6C11\u5E76\u4E3E\uFF0C\u5927\u5E45\u5EA6\u63D0\u9AD8\u4E2D\u56FD\u5B98\u65B9\u548C\u6C11\u95F4\u7684\u9EC4\u91D1\u767D\u94F6\u50A8\u5907\u3002" },
-  { startFrame: 2070, endFrame: 2340, text: "\u4E2D\u56FD\u5883\u5185\u7684\u6240\u6709\u91D1\u77FF\u548C\u94F6\u77FF\u8D44\u6E90\uFF0C\u5FC5\u987B\u4F5C\u4E3A\u6700\u91CD\u8981\u7684\u6218\u7565\u8D44\u4EA7\u52A0\u4EE5\u4E25\u5BC6\u4FDD\u62A4\uFF0C\u5E76\u9010\u6B65\u5B9E\u884C\u5168\u9762\u56FD\u6709\u5316\u3002" },
-  { startFrame: 2340, endFrame: 2610, text: "\u5728\u56FD\u9645\u4E0A\uFF0C\u5E94\u8BE5\u5927\u529B\u6536\u8D2D\u9EC4\u91D1\u548C\u767D\u94F6\u7684\u751F\u4EA7\u516C\u53F8\uFF0C" },
-  { startFrame: 2610, endFrame: 2880, text: "\u4F5C\u4E3A\u4E2D\u56FD\u672A\u6765\u9EC4\u91D1\u767D\u94F6\u8D44\u6E90\u7684\u8865\u5145\u3002\u4E2D\u56FD\u8D27\u5E01\u7684\u6539\u9769\u7684\u6700\u7EC8\u65B9\u5411\u5C31\u662F\u5EFA\u7ACB\u4E00\u5957\u7B26\u5408\u4E2D\u56FD\u56FD\u60C5\u7684\u9EC4\u91D1\u3001\u767D\u94F6\u652F\u6491\u4E0B\u7684\u53CC\u8F68\u5236\u8D27\u5E01\u4F53\u7CFB\uFF0C" },
-  { startFrame: 2880, endFrame: 3150, text: "\u5B9E\u73B0\u7A33\u5B9A\u7684\u8D27\u5E01\u5EA6\u91CF\u8861\uFF0C\u5B8C\u6210\u4F5C\u4E3A\u4E16\u754C\u4E3B\u8981\u50A8\u5907\u8D27\u5E01\u7684\u6218\u7565\u51C6\u5907\u3002" },
-  { startFrame: 3150, endFrame: 3420, text: "\u5982\u679C\u4E2D\u56FD\u653F\u5E9C\u4E0E\u4EBA\u6C11\u6BCF\u5E74\u4EE52000\u4EBF\u7F8E\u5143\u7684\u89C4\u6A21\u5403\u8FDB\u9EC4\u91D1\u7684\u8BDD\uFF0C\u5982\u679C\u4EE5650\u7F8E\u5143\u4E00\u76CE\u53F8\u7684\u4EF7\u683C\u8BA1\u7B97\uFF0C" },
-  { startFrame: 3420, endFrame: 3600, text: "\u4E2D\u56FD\u5C06\u53EF\u8D2D\u4E709500\u5428\u9EC4\u91D1\uFF0C\u76F8\u5F53\u4E8E\u4E00\u5E74\u4E70\u5149\u7F8E\u56FD\u6240\u6709\u7684\u9EC4\u91D1\u50A8\u5907\u3002\u6218\u5F79\u7684\u5F00\u59CB\u9636\u6BB5\uFF0C\u56FD\u9645\u94F6\u884C\u5BB6\u52BF\u5FC5\u901A\u8FC7\u91D1\u878D\u884D\u751F\u5DE5\u5177\u62FC\u547D\u538B\u5236\u9EC4\u91D1\u4EF7\u683C\u3002" },
-  // 缓称王 (Delay Kingship) - 帧 3600-5400 relative
-  { startFrame: 3600, endFrame: 3870, text: "\u7F13\u79F0\u738B\u5C31\u662F\u5FC5\u987B\u5145\u5206\u8003\u8651\u5230\u4E2D\u56FD\u81EA\u8EAB\u7684\u56F0\u96BE\u548C\u5C40\u9650\u3002" },
-  { startFrame: 3870, endFrame: 4140, text: "\u4E16\u754C\u5F3A\u56FD\u5D1B\u8D77\u65E0\u4E0D\u662F\u4EE5\u65E0\u4E0E\u4F26\u6BD4\u7684\u521B\u65B0\u80FD\u529B\u72EC\u6B65\u4E16\u754C\uFF0C" },
-  { startFrame: 4140, endFrame: 4410, text: "\u6240\u8C13\u5F3A\u56FD\u5C31\u662F\u80FD\u591F\u5927\u91CF\u751F\u4EA7\u51FA\u522B\u56FD\u65E0\u6CD5\u66FF\u4EE3\u7684\u5168\u65B0\u4EA7\u54C1\u548C\u5168\u65B0\u670D\u52A1\uFF0C" },
-  { startFrame: 4410, endFrame: 4680, text: "\u5927\u91CF\u5B55\u80B2\u51FA\u4E16\u754C\u9886\u5148\u7684\u6280\u672F\u4E0E\u79D1\u5B66\u521B\u65B0\uFF0C\u5927\u91CF\u4EA7\u751F\u5F15\u9886\u4E16\u754C\u6587\u660E\u65B9\u5411\u7684\u4F1F\u5927\u601D\u60F3\u548C\u7406\u5FF5\u3002" },
-  { startFrame: 4680, endFrame: 4950, text: "\u4E2D\u56FD\u76EE\u524D\u8FD8\u4EC5\u4EC5\u662F\u5728\u5927\u89C4\u6A21\u6A21\u4EFF\u897F\u65B9\u751F\u4EA7\u6280\u672F\u65B9\u9762\u5F88\u6709\u8FDB\u5C55\uFF0C" },
-  { startFrame: 4950, endFrame: 5220, text: "\u5728\u601D\u60F3\u7406\u5FF5\u4E0E\u79D1\u5B66\u6280\u672F\u521B\u65B0\u65B9\u9762\u8FD8\u5DEE\u4E4B\u751A\u8FDC\u3002\u5C24\u5176\u662F\u5728\u601D\u60F3\u6587\u5316\u9886\u57DF\uFF0C\u4E25\u91CD\u7F3A\u4E4F\u6587\u660E\u81EA\u4FE1\u5FC3\u3002" },
-  { startFrame: 5220, endFrame: 5400, text: "\u8FD9\u4E00\u5207\uFF0C\u4E0D\u662F\u4E00\u671D\u4E00\u5915\u5C31\u80FD\u89E3\u51B3\u7684\u95EE\u9898\u3002\u6240\u4EE5\u4E2D\u56FD\u53EA\u80FD\u5F90\u56FE\u7F13\u8FDB\u3002" }
+  { startFrame: 0, endFrame: 186, text: "\u9AD8\u7B51\u5899\uFF1A\u8981\u5EFA\u7ACB\u5BF9\u5185\u91D1\u878D\u9632\u706B\u5899\u548C\u5BF9\u5916\u91D1\u878D\u9632\u6D2A\u5899\u4E24\u6761\u9632\u5FA1\u4F53\u7CFB\u3002" },
+  { startFrame: 186, endFrame: 351, text: "\u56FD\u9645\u94F6\u884C\u5BB6\u5373\u5C06\u5927\u4E3E\u6DF1\u5165\u4E2D\u56FD\u91D1\u878D\u8179\u5730\uFF0C\u4E2D\u56FD\u5DF2\u65E0\u9669\u53EF\u5B88\u3002" },
+  { startFrame: 351, endFrame: 582, text: "\u5916\u8D44\u94F6\u884C\u901A\u8FC7\u90E8\u5206\u51C6\u5907\u91D1\u5236\u5EA6\uFF0C\u5C06\u5927\u4E3E\u63A8\u8FDB\u4E2D\u56FD\u56FD\u5BB6\u3001\u4F01\u4E1A\u548C\u4E2A\u4EBA\u7684\u503A\u52A1\u7684\u8D27\u5E01\u5316\u8FDB\u7A0B\uFF0C" },
+  { startFrame: 582, endFrame: 824, text: "\u8FD9\u4E9B\u5916\u8D44\u94F6\u884C\u589E\u53D1\u7684\u4FE1\u8D37\u4EBA\u6C11\u5E01\u5C06\u901A\u8FC7\u94F6\u884C\u652F\u7968\u3001\u94F6\u884C\u7968\u636E\u3001\u4FE1\u7528\u5361\u3001\u623F\u5730\u4EA7\u6309\u63ED\u8D37\u6B3E\u3001" },
+  { startFrame: 824, endFrame: 1007, text: "\u4F01\u4E1A\u6D41\u52A8\u8D44\u91D1\u8D37\u6B3E\u3001\u91D1\u878D\u884D\u751F\u4EA7\u54C1\u7B49\u591A\u79CD\u65B9\u5F0F\u8FDB\u5165\u4E2D\u56FD\u7684\u7ECF\u6D4E\u4F53\u5185\u3002" },
+  { startFrame: 1007, endFrame: 1245, text: "\u4E2D\u56FD\u5BF9\u5185\u7684\u91D1\u878D\u9632\u706B\u5899\uFF0C\u65E8\u5728\u9632\u8303\u5916\u8D44\u94F6\u884C\u6076\u610F\u5236\u9020\u901A\u8D27\u81A8\u80C0\u63A8\u9AD8\u4E2D\u56FD\u8D44\u4EA7\u6CE1\u6CAB\u5316\uFF0C" },
+  { startFrame: 1245, endFrame: 1437, text: "\u5E7F\u79EF\u7CAE\u5C31\u662F\u5B98\u6C11\u5E76\u4E3E\uFF0C\u5927\u5E45\u5EA6\u63D0\u9AD8\u4E2D\u56FD\u5B98\u65B9\u548C\u6C11\u95F4\u7684\u9EC4\u91D1\u767D\u94F6\u50A8\u5907\u3002" },
+  { startFrame: 1437, endFrame: 1713, text: "\u4E2D\u56FD\u5883\u5185\u7684\u6240\u6709\u91D1\u77FF\u548C\u94F6\u77FF\u8D44\u6E90\uFF0C\u5FC5\u987B\u4F5C\u4E3A\u6700\u91CD\u8981\u7684\u6218\u7565\u8D44\u4EA7\u52A0\u4EE5\u4E25\u5BC6\u4FDD\u62A4\uFF0C\u5E76\u9010\u6B65\u5B9E\u884C\u5168\u9762\u56FD\u6709\u5316\u3002" },
+  { startFrame: 1713, endFrame: 1852, text: "\u5728\u56FD\u9645\u4E0A\uFF0C\u5E94\u8BE5\u5927\u529B\u6536\u8D2D\u9EC4\u91D1\u548C\u767D\u94F6\u7684\u751F\u4EA7\u516C\u53F8\uFF0C" },
+  { startFrame: 1852, endFrame: 2194, text: "\u4F5C\u4E3A\u4E2D\u56FD\u672A\u6765\u9EC4\u91D1\u767D\u94F6\u8D44\u6E90\u7684\u8865\u5145\u3002\u4E2D\u56FD\u8D27\u5E01\u7684\u6539\u9769\u7684\u6700\u7EC8\u65B9\u5411\u5C31\u662F\u5EFA\u7ACB\u4E00\u5957\u7B26\u5408\u4E2D\u56FD\u56FD\u60C5\u7684\u9EC4\u91D1\u3001\u767D\u94F6\u652F\u6491\u4E0B\u7684\u53CC\u8F68\u5236\u8D27\u5E01\u4F53\u7CFB\uFF0C" },
+  { startFrame: 2194, endFrame: 2369, text: "\u5B9E\u73B0\u7A33\u5B9A\u7684\u8D27\u5E01\u5EA6\u91CF\u8861\uFF0C\u5B8C\u6210\u4F5C\u4E3A\u4E16\u754C\u4E3B\u8981\u50A8\u5907\u8D27\u5E01\u7684\u6218\u7565\u51C6\u5907\u3002" },
+  { startFrame: 2369, endFrame: 2627, text: "\u5982\u679C\u4E2D\u56FD\u653F\u5E9C\u4E0E\u4EBA\u6C11\u6BCF\u5E74\u4EE52000\u4EBF\u7F8E\u5143\u7684\u89C4\u6A21\u5403\u8FDB\u9EC4\u91D1\u7684\u8BDD\uFF0C\u5982\u679C\u4EE5650\u7F8E\u5143\u4E00\u76CE\u53F8\u7684\u4EF7\u683C\u8BA1\u7B97\uFF0C" },
+  { startFrame: 2627, endFrame: 3010, text: "\u4E2D\u56FD\u5C06\u53EF\u8D2D\u4E709500\u5428\u9EC4\u91D1\uFF0C\u76F8\u5F53\u4E8E\u4E00\u5E74\u4E70\u5149\u7F8E\u56FD\u6240\u6709\u7684\u9EC4\u91D1\u50A8\u5907\u3002\u6218\u5F79\u7684\u5F00\u59CB\u9636\u6BB5\uFF0C\u56FD\u9645\u94F6\u884C\u5BB6\u52BF\u5FC5\u901A\u8FC7\u91D1\u878D\u884D\u751F\u5DE5\u5177\u62FC\u547D\u538B\u5236\u9EC4\u91D1\u4EF7\u683C\u3002" },
+  { startFrame: 3010, endFrame: 3162, text: "\u7F13\u79F0\u738B\u5C31\u662F\u5FC5\u987B\u5145\u5206\u8003\u8651\u5230\u4E2D\u56FD\u81EA\u8EAB\u7684\u56F0\u96BE\u548C\u5C40\u9650\u3002" },
+  { startFrame: 3162, endFrame: 3310, text: "\u4E16\u754C\u5F3A\u56FD\u5D1B\u8D77\u65E0\u4E0D\u662F\u4EE5\u65E0\u4E0E\u4F26\u6BD4\u7684\u521B\u65B0\u80FD\u529B\u72EC\u6B65\u4E16\u754C\uFF0C" },
+  { startFrame: 3310, endFrame: 3502, text: "\u6240\u8C13\u5F3A\u56FD\u5C31\u662F\u80FD\u591F\u5927\u91CF\u751F\u4EA7\u51FA\u522B\u56FD\u65E0\u6CD5\u66FF\u4EE3\u7684\u5168\u65B0\u4EA7\u54C1\u548C\u5168\u65B0\u670D\u52A1\uFF0C" },
+  { startFrame: 3502, endFrame: 3737, text: "\u5927\u91CF\u5B55\u80B2\u51FA\u4E16\u754C\u9886\u5148\u7684\u6280\u672F\u4E0E\u79D1\u5B66\u521B\u65B0\uFF0C\u5927\u91CF\u4EA7\u751F\u5F15\u9886\u4E16\u754C\u6587\u660E\u65B9\u5411\u7684\u4F1F\u5927\u601D\u60F3\u548C\u7406\u5FF5\u3002" },
+  { startFrame: 3737, endFrame: 3904, text: "\u4E2D\u56FD\u76EE\u524D\u8FD8\u4EC5\u4EC5\u662F\u5728\u5927\u89C4\u6A21\u6A21\u4EFF\u897F\u65B9\u751F\u4EA7\u6280\u672F\u65B9\u9762\u5F88\u6709\u8FDB\u5C55\uFF0C" },
+  { startFrame: 3904, endFrame: 4171, text: "\u5728\u601D\u60F3\u7406\u5FF5\u4E0E\u79D1\u5B66\u6280\u672F\u521B\u65B0\u65B9\u9762\u8FD8\u5DEE\u4E4B\u751A\u8FDC\u3002\u5C24\u5176\u662F\u5728\u601D\u60F3\u6587\u5316\u9886\u57DF\uFF0C\u4E25\u91CD\u7F3A\u4E4F\u6587\u660E\u81EA\u4FE1\u5FC3\u3002" },
+  { startFrame: 4171, endFrame: 4364, text: "\u8FD9\u4E00\u5207\uFF0C\u4E0D\u662F\u4E00\u671D\u4E00\u5915\u5C31\u80FD\u89E3\u51B3\u7684\u95EE\u9898\u3002\u6240\u4EE5\u4E2D\u56FD\u53EA\u80FD\u5F90\u56FE\u7F13\u8FDB\u3002" }
 ];
 const WorldReserveSceneSubtitles = [
-  { startFrame: 0, endFrame: 270, text: "\u4E00\u4E2A\u5D1B\u8D77\u7684\u4E16\u754C\u5F3A\u56FD\uFF0C\u5176\u575A\u5B9E\u7684\u57FA\u77F3\u4E0D\u4F1A\u53EA\u6709\u9886\u5148\u7684\u79D1\u6280\u4E0E\u5F3A\u5927\u7684\u519B\u4E8B\u3002" },
-  { startFrame: 270, endFrame: 540, text: "\u53EA\u6709\u5F53\u5979\u5EFA\u7ACB\u8D77\u5177\u5907\u666E\u4E16\u516C\u4FE1\u529B\u7684\u8D27\u5E01\u4F53\u7CFB\u548C\u91D1\u878D\u7CFB\u7EDF\u65F6\uFF0C" },
-  { startFrame: 540, endFrame: 810, text: "\u624D\u80FD\u5728\u4E16\u754C\u6C11\u65CF\u4E4B\u6797\u4E2D\u7ACB\u4E8E\u4E0D\u8D25\u4E4B\u5730\u3002" },
-  { startFrame: 810, endFrame: 1080, text: "\u8D27\u5E01\u65E0\u53EF\u7F6E\u7591\u662F\u4EBA\u7C7B\u793E\u4F1A\u7ECF\u6D4E\u673A\u4F53\u7684\u8840\u6DB2\u3002\u80FD\u591F\u6267\u638C\u548C\u4EBA\u4F9B\u5E94\u8840\u6E90\u8005\uFF0C\u81EA\u7136\u5360\u636E\u4E86\u5148\u673A\u52A8\u6027\u5F3A\u52BF\u3002" },
-  { startFrame: 1080, endFrame: 1350, text: "\u8FD9\u5957\u5B8C\u5907\u800C\u575A\u5B9E\u7684\u4F53\u7CFB\u5E94\u8BE5\u662F\u4EE5\u591A\u5143\u5316\u80CC\u666F\u4E3A\u652F\u6491\u7684\uFF0C\u800C\u5F53\u524D\u4EC5\u9760\u5F3A\u52B2\u51FA\u53E3\u5927\u91CF\u6362\u6C47\uFF0C\u7D27\u76EF\u7F8E\u5143\u8D85\u91CF\u8D2D\u4E70\u7F8E\u56FD\u56FD\u503A\u7684\u5355\u4E00\u6218\u672F\u8D8A\u6765\u8D8A\u663E\u9732\u51FA\u81F4\u4F7F\u4F24\u3002" },
-  { startFrame: 1350, endFrame: 1620, text: "\u4E00\u56FD\u591A\u5143\u5316\u826F\u6027\u5FAA\u73AF\u7684\u8D27\u5E01\u91D1\u878D\u4F53\u7CFB\u7684\u5177\u4F53\u89E3\u6784\uFF0C\u6211\u4EEC\u5728\u672C\u4E66\u4E2D\uFF0C\u53EA\u662F\u96C6\u4E2D\u601D\u7D22\u4E00\u79CD\u8BBE\u60F3\u2014\u2014\u5728\u591A\u5143\u5316\u80CC\u666F\u4E2D\u6CE8\u5165\u91D1\u94F6\u5143\u7D20\u3002" },
-  { startFrame: 1620, endFrame: 1800, text: "\u76D6\u56E0\u91D1\u94F6\u5386\u7ECF\u5343\u5E74\u5386\u53F2\u6DD8\u6C99\uFF0C\u5DF2\u5177\u5907\u5929\u7136\u7684\u516C\u4FE1\u5EA6\u548C\u65E0\u53EF\u5339\u654C\u7684\u53D7\u63A5\u6027\u8D28\uFF0C\u4EE5\u91D1\u94F6\u80CC\u4E66\u7684\u8D27\u5E01\u4F53\u5236\uFF0C\u4E0D\u53EF\u4E0D\u8C13\u4E00\u6761\u901A\u5411\u4E16\u754C\u50A8\u5907\u8D27\u5E01\u5730\u4F4D\u7684\u6377\u5F84\u3002" }
+  { startFrame: 0, endFrame: 194, text: "\u4E00\u4E2A\u5D1B\u8D77\u7684\u4E16\u754C\u5F3A\u56FD\uFF0C\u5176\u575A\u5B9E\u7684\u57FA\u77F3\u4E0D\u4F1A\u53EA\u6709\u9886\u5148\u7684\u79D1\u6280\u4E0E\u5F3A\u5927\u7684\u519B\u4E8B\u3002" },
+  { startFrame: 194, endFrame: 352, text: "\u53EA\u6709\u5F53\u5979\u5EFA\u7ACB\u8D77\u5177\u5907\u666E\u4E16\u516C\u4FE1\u529B\u7684\u8D27\u5E01\u4F53\u7CFB\u548C\u91D1\u878D\u7CFB\u7EDF\u65F6\uFF0C" },
+  { startFrame: 352, endFrame: 460, text: "\u624D\u80FD\u5728\u4E16\u754C\u6C11\u65CF\u4E4B\u6797\u4E2D\u7ACB\u4E8E\u4E0D\u8D25\u4E4B\u5730\u3002" },
+  { startFrame: 460, endFrame: 730, text: "\u8D27\u5E01\u65E0\u53EF\u7F6E\u7591\u662F\u4EBA\u7C7B\u793E\u4F1A\u7ECF\u6D4E\u673A\u4F53\u7684\u8840\u6DB2\u3002\u80FD\u591F\u6267\u638C\u548C\u4EBA\u4F9B\u5E94\u8840\u6E90\u8005\uFF0C\u81EA\u7136\u5360\u636E\u4E86\u5148\u673A\u52A8\u6027\u5F3A\u52BF\u3002" },
+  { startFrame: 730, endFrame: 1123, text: "\u8FD9\u5957\u5B8C\u5907\u800C\u575A\u5B9E\u7684\u4F53\u7CFB\u5E94\u8BE5\u662F\u4EE5\u591A\u5143\u5316\u80CC\u666F\u4E3A\u652F\u6491\u7684\uFF0C\u800C\u5F53\u524D\u4EC5\u9760\u5F3A\u52B2\u51FA\u53E3\u5927\u91CF\u6362\u6C47\uFF0C\u7D27\u76EF\u7F8E\u5143\u8D85\u91CF\u8D2D\u4E70\u7F8E\u56FD\u56FD\u503A\u7684\u5355\u4E00\u6218\u672F\u8D8A\u6765\u8D8A\u663E\u9732\u51FA\u81F4\u4F7F\u4F24\u3002" },
+  { startFrame: 1123, endFrame: 1438, text: "\u4E00\u56FD\u591A\u5143\u5316\u826F\u6027\u5FAA\u73AF\u7684\u8D27\u5E01\u91D1\u878D\u4F53\u7CFB\u7684\u5177\u4F53\u89E3\u6784\uFF0C\u6211\u4EEC\u5728\u672C\u4E66\u4E2D\uFF0C\u53EA\u662F\u96C6\u4E2D\u601D\u7D22\u4E00\u79CD\u8BBE\u60F3\u2014\u2014\u5728\u591A\u5143\u5316\u80CC\u666F\u4E2D\u6CE8\u5165\u91D1\u94F6\u5143\u7D20\u3002" },
+  { startFrame: 1438, endFrame: 1812, text: "\u76D6\u56E0\u91D1\u94F6\u5386\u7ECF\u5343\u5E74\u5386\u53F2\u6DD8\u6C99\uFF0C\u5DF2\u5177\u5907\u5929\u7136\u7684\u516C\u4FE1\u5EA6\u548C\u65E0\u53EF\u5339\u654C\u7684\u53D7\u63A5\u6027\u8D28\uFF0C\u4EE5\u91D1\u94F6\u80CC\u4E66\u7684\u8D27\u5E01\u4F53\u5236\uFF0C\u4E0D\u53EF\u4E0D\u8C13\u4E00\u6761\u901A\u5411\u4E16\u754C\u50A8\u5907\u8D27\u5E01\u5730\u4F4D\u7684\u6377\u5F84\u3002" }
 ];
 const FinancialRiskSceneSubtitles = [
-  { startFrame: 0, endFrame: 270, text: "\u65E9\u57282006\u5E74\u5E95\uFF0C\u4E2D\u56FD\u5C06\u5168\u9762\u5F00\u653E\u91D1\u878D\u9886\u57DF\uFF0C" },
-  { startFrame: 270, endFrame: 540, text: "\u56FD\u9645\u94F6\u884C\u5BB6\u4EEC\u65E9\u5DF2\u78E8\u5200\u970D\u970D\uFF0C\u4E00\u573A\u4E0D\u89C1\u785D\u70DF\u7684\u8D27\u5E01\u6218\u4E89\u5DF2\u7ECF\u8FEB\u5728\u7709\u776B\u4E86\u3002" },
-  { startFrame: 540, endFrame: 810, text: "\u8FD9\u4E00\u6B21\uFF0C\u4EBA\u4EEC\u770B\u4E0D\u89C1\u6D0B\u67AA\u6D0B\u70AE\uFF0C\u4E5F\u542C\u4E0D\u5230\u6218\u573A\u6495\u6740\uFF0C" },
-  { startFrame: 810, endFrame: 1080, text: "\u4F46\u8FD9\u573A\u6218\u4E89\u7684\u6700\u540E\u7ED3\u5C40\u5C06\u6CE8\u5B9A\u4E2D\u56FD\u672A\u6765\u7684\u547D\u8FD0\u3002" },
-  { startFrame: 1080, endFrame: 1350, text: "\u56FD\u9645\u94F6\u884C\u5BB6\u5927\u4E3E\u8FDB\u5165\u4E2D\u56FD\u7684\u6839\u672C\u6218\u7565\u76EE\u7684\u6709\u4E24\u4E2A\uFF0C" },
-  { startFrame: 1350, endFrame: 1620, text: "\u63A7\u5236\u4E2D\u56FD\u7684\u8D27\u5E01\u53D1\u884C\u6743\uFF0C\u548C\u5236\u9020\u4E2D\u56FD\u7ECF\u6D4E\u7684\u6709\u63A7\u5236\u7684\u89E3\u4F53\uFF0C" },
-  { startFrame: 1620, endFrame: 1800, text: "\u6700\u7EC8\u4E3A\u5EFA\u7ACB\u4E00\u4E2A\u7531\u4F26\u6566\uFF0D\u534E\u513F\u8857\u8F74\u5FC3\u4E3B\u5BFC\u4E0B\u7684\u4E16\u754C\u653F\u5E9C\u548C\u4E16\u754C\u8D27\u5E01\u626B\u5E73\u6700\u540E\u4E00\u4E2A\u969C\u788D\u3002" },
-  { startFrame: 1800, endFrame: 2070, text: "\u5728\u63A2\u8BA8\u4E2D\u56FD\u91D1\u878D\u5F00\u653E\u7684\u98CE\u9669\u95EE\u9898\u65F6\uFF0C" },
-  { startFrame: 2070, endFrame: 2340, text: "\u5927\u591A\u6570\u5B66\u8005\u548C\u51B3\u7B56\u8005\u5173\u6CE8\u7684\u662F\u6218\u672F\u5C42\u9762\u4E0A\u7684\u98CE\u9669\uFF0C" },
-  { startFrame: 2340, endFrame: 2610, text: "\u5176\u5B9E\uFF0C\u91D1\u878D\u5F00\u653E\u7684\u6700\u5927\u98CE\u9669\u6E90\u81EA\u6218\u7565\u5C42\u9762\uFF0C" },
-  { startFrame: 2610, endFrame: 2880, text: "\u5373\u91D1\u878D\u5F00\u653E\u7684\u672C\u8D28\u5B9E\u9645\u4E0A\u662F\u4E00\u573A\u8D27\u5E01\u6218\u4E89\uFF0C\u7F3A\u4E4F\u6218\u4E89\u7684\u610F\u8BC6\u548C\u51C6\u5907\u662F\u4E2D\u56FD\u5F53\u524D\u6700\u5927\u7684\u98CE\u9669\uFF01" },
-  { startFrame: 2880, endFrame: 3150, text: "\u5916\u8D44\u94F6\u884C\u4EEC\u4F1A\u5F15\u8FDB\u5927\u91CF\u4EE4\u4EBA\u773C\u82B1\u7F2D\u4E71\u7684\u521B\u65B0\u91D1\u878D\u4EA7\u54C1\uFF0C" },
-  { startFrame: 3150, endFrame: 3420, text: "\u4EE5\u5404\u79CD\u65B9\u5F0F\u521B\u9020\u503A\u52A1\u5DE5\u5177\u5E76\u4F7F\u4E4B\u8D27\u5E01\u5316\uFF0C\u8FD9\u5C31\u662F\u8D27\u5E01\u7684\u7C7B\u4F3C\u7269\u6D41\u52A8\u6027\u3002" },
-  { startFrame: 3420, endFrame: 3600, text: "\u8FD9\u4E9B\u91D1\u878D\u8D27\u5E01\u5B8C\u5168\u5177\u5907\u5B9E\u4F53\u7ECF\u6D4E\u9886\u57DF\u8D27\u5E01\u7684\u8D2D\u4E70\u529B\uFF0C\u4ECE\u8FD9\u4E2A\u610F\u4E49\u4E0A\u8BF4\uFF0C\u5916\u8D44\u94F6\u884C\u5C06\u53C2\u4E0E\u4E2D\u56FD\u4EBA\u6C11\u5E01\u7684\u8D27\u5E01\u53D1\u884C\u3002" }
+  { startFrame: 0, endFrame: 134, text: "\u65E9\u57282006\u5E74\u5E95\uFF0C\u4E2D\u56FD\u5C06\u5168\u9762\u5F00\u653E\u91D1\u878D\u9886\u57DF\uFF0C" },
+  { startFrame: 134, endFrame: 333, text: "\u56FD\u9645\u94F6\u884C\u5BB6\u4EEC\u65E9\u5DF2\u78E8\u5200\u970D\u970D\uFF0C\u4E00\u573A\u4E0D\u89C1\u785D\u70DF\u7684\u8D27\u5E01\u6218\u4E89\u5DF2\u7ECF\u8FEB\u5728\u7709\u776B\u4E86\u3002" },
+  { startFrame: 333, endFrame: 473, text: "\u8FD9\u4E00\u6B21\uFF0C\u4EBA\u4EEC\u770B\u4E0D\u89C1\u6D0B\u67AA\u6D0B\u70AE\uFF0C\u4E5F\u542C\u4E0D\u5230\u6218\u573A\u6495\u6740\uFF0C" },
+  { startFrame: 473, endFrame: 609, text: "\u4F46\u8FD9\u573A\u6218\u4E89\u7684\u6700\u540E\u7ED3\u5C40\u5C06\u6CE8\u5B9A\u4E2D\u56FD\u672A\u6765\u7684\u547D\u8FD0\u3002" },
+  { startFrame: 609, endFrame: 739, text: "\u56FD\u9645\u94F6\u884C\u5BB6\u5927\u4E3E\u8FDB\u5165\u4E2D\u56FD\u7684\u6839\u672C\u6218\u7565\u76EE\u7684\u6709\u4E24\u4E2A\uFF0C" },
+  { startFrame: 739, endFrame: 906, text: "\u63A7\u5236\u4E2D\u56FD\u7684\u8D27\u5E01\u53D1\u884C\u6743\uFF0C\u548C\u5236\u9020\u4E2D\u56FD\u7ECF\u6D4E\u7684\u6709\u63A7\u5236\u7684\u89E3\u4F53\uFF0C" },
+  { startFrame: 906, endFrame: 1137, text: "\u6700\u7EC8\u4E3A\u5EFA\u7ACB\u4E00\u4E2A\u7531\u4F26\u6566\uFF0D\u534E\u513F\u8857\u8F74\u5FC3\u4E3B\u5BFC\u4E0B\u7684\u4E16\u754C\u653F\u5E9C\u548C\u4E16\u754C\u8D27\u5E01\u626B\u5E73\u6700\u540E\u4E00\u4E2A\u969C\u788D\u3002" },
+  { startFrame: 1137, endFrame: 1239, text: "\u5728\u63A2\u8BA8\u4E2D\u56FD\u91D1\u878D\u5F00\u653E\u7684\u98CE\u9669\u95EE\u9898\u65F6\uFF0C" },
+  { startFrame: 1239, endFrame: 1379, text: "\u5927\u591A\u6570\u5B66\u8005\u548C\u51B3\u7B56\u8005\u5173\u6CE8\u7684\u662F\u6218\u672F\u5C42\u9762\u4E0A\u7684\u98CE\u9669\uFF0C" },
+  { startFrame: 1379, endFrame: 1503, text: "\u5176\u5B9E\uFF0C\u91D1\u878D\u5F00\u653E\u7684\u6700\u5927\u98CE\u9669\u6E90\u81EA\u6218\u7565\u5C42\u9762\uFF0C" },
+  { startFrame: 1503, endFrame: 1745, text: "\u5373\u91D1\u878D\u5F00\u653E\u7684\u672C\u8D28\u5B9E\u9645\u4E0A\u662F\u4E00\u573A\u8D27\u5E01\u6218\u4E89\uFF0C\u7F3A\u4E4F\u6218\u4E89\u7684\u610F\u8BC6\u548C\u51C6\u5907\u662F\u4E2D\u56FD\u5F53\u524D\u6700\u5927\u7684\u98CE\u9669\uFF01" },
+  { startFrame: 1745, endFrame: 1899, text: "\u5916\u8D44\u94F6\u884C\u4EEC\u4F1A\u5F15\u8FDB\u5927\u91CF\u4EE4\u4EBA\u773C\u82B1\u7F2D\u4E71\u7684\u521B\u65B0\u91D1\u878D\u4EA7\u54C1\uFF0C" },
+  { startFrame: 1899, endFrame: 2091, text: "\u4EE5\u5404\u79CD\u65B9\u5F0F\u521B\u9020\u503A\u52A1\u5DE5\u5177\u5E76\u4F7F\u4E4B\u8D27\u5E01\u5316\uFF0C\u8FD9\u5C31\u662F\u8D27\u5E01\u7684\u7C7B\u4F3C\u7269\u6D41\u52A8\u6027\u3002" },
+  { startFrame: 2091, endFrame: 2376, text: "\u8FD9\u4E9B\u91D1\u878D\u8D27\u5E01\u5B8C\u5168\u5177\u5907\u5B9E\u4F53\u7ECF\u6D4E\u9886\u57DF\u8D27\u5E01\u7684\u8D2D\u4E70\u529B\uFF0C\u4ECE\u8FD9\u4E2A\u610F\u4E49\u4E0A\u8BF4\uFF0C\u5916\u8D44\u94F6\u884C\u5C06\u53C2\u4E0E\u4E2D\u56FD\u4EBA\u6C11\u5E01\u7684\u8D27\u5E01\u53D1\u884C\u3002" }
 ];
 const EndingSceneSubtitles = [
-  { startFrame: 0, endFrame: 270, text: "\u2605\u5F53\u4ECA\u4E16\u754C\u7ECF\u6D4E\u7684\u6839\u672C\u95EE\u9898\u4E4B\u4E00\uFF0C\u5C31\u5728\u4E8E\u6CA1\u6709\u4E00\u4E2A\u7A33\u5B9A\u800C\u5408\u7406\u7684\u8D27\u5E01\u5EA6\u91CF\u8861\u6807\u51C6\u3002" },
-  { startFrame: 270, endFrame: 540, text: "\u8D27\u5E01\u5BF9\u7ECF\u6D4E\u7684\u4F5C\u7528\u5728\u94F6\u884C\u5BB6\u4EFB\u610F\u548C\u6B66\u65AD\u7684\u64CD\u63A7\u4E0B\uFF0C\u5DF2\u7ECF\u4E25\u91CD\u626D\u66F2\u4E86\u5E02\u573A\u8D44\u6E90\u7684\u5408\u7406\u5206\u914D\u3002" },
-  { startFrame: 540, endFrame: 810, text: "\u2605\u9EC4\u91D1\u548C\u767D\u94F6\u4F5C\u4E3A\u8D27\u5E01\u662F\u81EA\u7136\u8FDB\u5316\u7684\u4EA7\u7269\uFF0C" },
-  { startFrame: 810, endFrame: 900, text: "\u662F\u771F\u6B63\u5E02\u573A\u7ECF\u6D4E\u7684\u4EA7\u7269\uFF0C\u662F\u4EBA\u7C7B\u4F9D\u8D56\u7684\u8BDA\u5B9E\u7684\u8D27\u5E01\u3002\u2605\u4E2D\u56FD\u5E94\u5EFA\u7ACB\u5BF9\u5185\u91D1\u878D\u9632\u706B\u5899\u548C\u5BF9\u5916\u91D1\u878D\u9632\u6D2A\u5899\u4E24\u6761\u9632\u5FA1\u4F53\u7CFB\uFF0C\u540C\u65F6\u5B98\u6C11\u5E76\u4E3E\uFF0C\u5927\u5E45\u5EA6\u63D0\u9AD8\u4E2D\u56FD\u5B98\u65B9\u548C\u6C11\u95F4\u7684\u9EC4\u91D1\u767D\u94F6\u50A8\u5907\uFF0C\u5F90\u56FE\u7F13\u8FDB\u3002" }
+  { startFrame: 0, endFrame: 200, text: "\u2605\u5F53\u4ECA\u4E16\u754C\u7ECF\u6D4E\u7684\u6839\u672C\u95EE\u9898\u4E4B\u4E00\uFF0C\u5C31\u5728\u4E8E\u6CA1\u6709\u4E00\u4E2A\u7A33\u5B9A\u800C\u5408\u7406\u7684\u8D27\u5E01\u5EA6\u91CF\u8861\u6807\u51C6\u3002" },
+  { startFrame: 200, endFrame: 424, text: "\u8D27\u5E01\u5BF9\u7ECF\u6D4E\u7684\u4F5C\u7528\u5728\u94F6\u884C\u5BB6\u4EFB\u610F\u548C\u6B66\u65AD\u7684\u64CD\u63A7\u4E0B\uFF0C\u5DF2\u7ECF\u4E25\u91CD\u626D\u66F2\u4E86\u5E02\u573A\u8D44\u6E90\u7684\u5408\u7406\u5206\u914D\u3002" },
+  { startFrame: 424, endFrame: 542, text: "\u2605\u9EC4\u91D1\u548C\u767D\u94F6\u4F5C\u4E3A\u8D27\u5E01\u662F\u81EA\u7136\u8FDB\u5316\u7684\u4EA7\u7269\uFF0C" },
+  { startFrame: 542, endFrame: 1042, text: "\u662F\u771F\u6B63\u5E02\u573A\u7ECF\u6D4E\u7684\u4EA7\u7269\uFF0C\u662F\u4EBA\u7C7B\u4F9D\u8D56\u7684\u8BDA\u5B9E\u7684\u8D27\u5E01\u3002\u2605\u4E2D\u56FD\u5E94\u5EFA\u7ACB\u5BF9\u5185\u91D1\u878D\u9632\u706B\u5899\u548C\u5BF9\u5916\u91D1\u878D\u9632\u6D2A\u5899\u4E24\u6761\u9632\u5FA1\u4F53\u7CFB\uFF0C\u540C\u65F6\u5B98\u6C11\u5E76\u4E3E\uFF0C\u5927\u5E45\u5EA6\u63D0\u9AD8\u4E2D\u56FD\u5B98\u65B9\u548C\u6C11\u95F4\u7684\u9EC4\u91D1\u767D\u94F6\u50A8\u5907\uFF0C\u5F90\u56FE\u7F13\u8FDB\u3002" }
 ];
-const episode11_SCENE_OFFSETS = {
-  OpeningScene: 0,
-  MonetaryStandardScene: 900,
-  GoldSilverScene: 2700,
-  DebtObesityScene: 4500,
-  FinancialAirForceScene: 6300,
-  StrategyScene: 8100,
-  WorldReserveScene: 13500,
-  FinancialRiskScene: 15300,
-  EndingScene: 18900
-};
-function mergeSceneSubtitles(sceneSubtitles, frameOffset) {
-  return sceneSubtitles.map((subtitle) => ({
-    ...subtitle,
-    startFrame: subtitle.startFrame + frameOffset,
-    endFrame: subtitle.endFrame + frameOffset
-  }));
-}
-const episode11Subtitles = [
-  ...mergeSceneSubtitles(episode11_OpeningSceneSubtitles, episode11_SCENE_OFFSETS.OpeningScene),
-  ...mergeSceneSubtitles(MonetaryStandardSceneSubtitles, episode11_SCENE_OFFSETS.MonetaryStandardScene),
-  ...mergeSceneSubtitles(GoldSilverSceneSubtitles, episode11_SCENE_OFFSETS.GoldSilverScene),
-  ...mergeSceneSubtitles(DebtObesitySceneSubtitles, episode11_SCENE_OFFSETS.DebtObesityScene),
-  ...mergeSceneSubtitles(FinancialAirForceSceneSubtitles, episode11_SCENE_OFFSETS.FinancialAirForceScene),
-  ...mergeSceneSubtitles(StrategySceneSubtitles, episode11_SCENE_OFFSETS.StrategyScene),
-  ...mergeSceneSubtitles(WorldReserveSceneSubtitles, episode11_SCENE_OFFSETS.WorldReserveScene),
-  ...mergeSceneSubtitles(FinancialRiskSceneSubtitles, episode11_SCENE_OFFSETS.FinancialRiskScene),
-  ...mergeSceneSubtitles(EndingSceneSubtitles, episode11_SCENE_OFFSETS.EndingScene)
-];
-const episode11SceneOffsets = (/* unused pure expression or super */ null && (episode11_SCENE_OFFSETS));
 const episode11_openingSubs = episode11_OpeningSceneSubtitles;
 const monetaryStandardSubs = MonetaryStandardSceneSubtitles;
 const goldSilverSubs = GoldSilverSceneSubtitles;
@@ -36048,6 +36679,18 @@ const strategySubs = StrategySceneSubtitles;
 const worldReserveSubs = WorldReserveSceneSubtitles;
 const financialRiskSubs = FinancialRiskSceneSubtitles;
 const episode11_endingSubs = EndingSceneSubtitles;
+const episode11Subtitles = [
+  ...episode11_OpeningSceneSubtitles.map((s) => ({ ...s, startFrame: s.startFrame + episode11_SCENE_OFFSETS[0], endFrame: s.endFrame + episode11_SCENE_OFFSETS[0] })),
+  ...MonetaryStandardSceneSubtitles.map((s) => ({ ...s, startFrame: s.startFrame + episode11_SCENE_OFFSETS[1], endFrame: s.endFrame + episode11_SCENE_OFFSETS[1] })),
+  ...GoldSilverSceneSubtitles.map((s) => ({ ...s, startFrame: s.startFrame + episode11_SCENE_OFFSETS[2], endFrame: s.endFrame + episode11_SCENE_OFFSETS[2] })),
+  ...DebtObesitySceneSubtitles.map((s) => ({ ...s, startFrame: s.startFrame + episode11_SCENE_OFFSETS[3], endFrame: s.endFrame + episode11_SCENE_OFFSETS[3] })),
+  ...FinancialAirForceSceneSubtitles.map((s) => ({ ...s, startFrame: s.startFrame + episode11_SCENE_OFFSETS[4], endFrame: s.endFrame + episode11_SCENE_OFFSETS[4] })),
+  ...StrategySceneSubtitles.map((s) => ({ ...s, startFrame: s.startFrame + episode11_SCENE_OFFSETS[5], endFrame: s.endFrame + episode11_SCENE_OFFSETS[5] })),
+  ...WorldReserveSceneSubtitles.map((s) => ({ ...s, startFrame: s.startFrame + episode11_SCENE_OFFSETS[6], endFrame: s.endFrame + episode11_SCENE_OFFSETS[6] })),
+  ...FinancialRiskSceneSubtitles.map((s) => ({ ...s, startFrame: s.startFrame + episode11_SCENE_OFFSETS[7], endFrame: s.endFrame + episode11_SCENE_OFFSETS[7] })),
+  ...EndingSceneSubtitles.map((s) => ({ ...s, startFrame: s.startFrame + episode11_SCENE_OFFSETS[8], endFrame: s.endFrame + episode11_SCENE_OFFSETS[8] }))
+];
+/* harmony default export */ const episode11 = ((/* unused pure expression or super */ null && (episode11Subtitles)));
 
 ;// ./src/compositions/Episode11Documentary.tsx
 
@@ -36085,19 +36728,18 @@ const Episode11Documentary_SCENE_THEMES = [
 function Episode11Documentary_buildVoiceoverEntries() {
   const entries = [];
   let fileIndex = 0;
-  const fps = 30;
-  const sceneOffsets = [
-    { subs: episode11_openingSubs, offset: 0 },
-    { subs: monetaryStandardSubs, offset: 30 * fps },
-    { subs: goldSilverSubs, offset: 90 * fps },
-    { subs: debtObesitySubs, offset: 150 * fps },
-    { subs: financialAirForceSubs, offset: 210 * fps },
-    { subs: strategySubs, offset: 270 * fps },
-    { subs: worldReserveSubs, offset: 330 * fps },
-    { subs: financialRiskSubs, offset: 390 * fps },
-    { subs: episode11_endingSubs, offset: 450 * fps }
+  const sceneSubs = [
+    { subs: episode11_openingSubs, offset: episode11_SCENE_OFFSETS[0] },
+    { subs: monetaryStandardSubs, offset: episode11_SCENE_OFFSETS[1] },
+    { subs: goldSilverSubs, offset: episode11_SCENE_OFFSETS[2] },
+    { subs: debtObesitySubs, offset: episode11_SCENE_OFFSETS[3] },
+    { subs: financialAirForceSubs, offset: episode11_SCENE_OFFSETS[4] },
+    { subs: strategySubs, offset: episode11_SCENE_OFFSETS[5] },
+    { subs: worldReserveSubs, offset: episode11_SCENE_OFFSETS[6] },
+    { subs: financialRiskSubs, offset: episode11_SCENE_OFFSETS[7] },
+    { subs: episode11_endingSubs, offset: episode11_SCENE_OFFSETS[8] }
   ];
-  for (const scene of sceneOffsets) {
+  for (const scene of sceneSubs) {
     for (const sub of scene.subs) {
       entries.push({
         src: `${Episode11Documentary_VOICE_DIR}voice_${String(fileIndex).padStart(4, "0")}.m4a`,
@@ -36110,7 +36752,7 @@ function Episode11Documentary_buildVoiceoverEntries() {
   return entries;
 }
 const Episode11Documentary = () => {
-  const { fps } = (0,esm.useVideoConfig)();
+  (0,esm.useVideoConfig)();
   const bgm = getEpisodeBGM("Episode11");
   const voiceoverEntries = Episode11Documentary_buildVoiceoverEntries();
   return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { background: "#0d1117" }, children: [
@@ -36124,7 +36766,7 @@ const Episode11Documentary = () => {
         volume: 0.8
       }
     ),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { durationInFrames: 30 * fps, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { durationInFrames: episode11_SCENE_FRAMES[0], children: [
       /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: Episode11Documentary_SCENE_THEMES[0], type: "enter", duration: 45, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
         DramaticRevealShot,
         {
@@ -36137,7 +36779,7 @@ const Episode11Documentary = () => {
       ) }),
       /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: episode11_openingSubs })
     ] }),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: 30 * fps, durationInFrames: 60 * fps, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: episode11_SCENE_OFFSETS[1], durationInFrames: episode11_SCENE_FRAMES[1], children: [
       /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: Episode11Documentary_SCENE_THEMES[1], type: "enter", duration: 40, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
         DramaticRevealShot,
         {
@@ -36149,7 +36791,7 @@ const Episode11Documentary = () => {
       ) }),
       /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: monetaryStandardSubs })
     ] }),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: 90 * fps, durationInFrames: 60 * fps, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: episode11_SCENE_OFFSETS[2], durationInFrames: episode11_SCENE_FRAMES[2], children: [
       /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: Episode11Documentary_SCENE_THEMES[2], type: "enter", duration: 30, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
         CloseUpShot,
         {
@@ -36161,7 +36803,7 @@ const Episode11Documentary = () => {
       ) }),
       /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: goldSilverSubs })
     ] }),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: 150 * fps, durationInFrames: 60 * fps, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: episode11_SCENE_OFFSETS[3], durationInFrames: episode11_SCENE_FRAMES[3], children: [
       /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: Episode11Documentary_SCENE_THEMES[3], type: "enter", duration: 35, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
         DramaticRevealShot,
         {
@@ -36173,7 +36815,7 @@ const Episode11Documentary = () => {
       ) }),
       /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: debtObesitySubs })
     ] }),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: 210 * fps, durationInFrames: 60 * fps, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: episode11_SCENE_OFFSETS[4], durationInFrames: episode11_SCENE_FRAMES[4], children: [
       /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: Episode11Documentary_SCENE_THEMES[4], type: "enter", duration: 30, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
         DramaticRevealShot,
         {
@@ -36185,7 +36827,7 @@ const Episode11Documentary = () => {
       ) }),
       /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: financialAirForceSubs })
     ] }),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: 270 * fps, durationInFrames: 60 * fps, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: episode11_SCENE_OFFSETS[5], durationInFrames: episode11_SCENE_FRAMES[5], children: [
       /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: Episode11Documentary_SCENE_THEMES[5], type: "enter", duration: 35, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
         DramaticRevealShot,
         {
@@ -36197,7 +36839,7 @@ const Episode11Documentary = () => {
       ) }),
       /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: strategySubs })
     ] }),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: 330 * fps, durationInFrames: 60 * fps, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: episode11_SCENE_OFFSETS[6], durationInFrames: episode11_SCENE_FRAMES[6], children: [
       /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: Episode11Documentary_SCENE_THEMES[6], type: "enter", duration: 30, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
         CloseUpShot,
         {
@@ -36209,7 +36851,7 @@ const Episode11Documentary = () => {
       ) }),
       /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: worldReserveSubs })
     ] }),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: 390 * fps, durationInFrames: 60 * fps, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: episode11_SCENE_OFFSETS[7], durationInFrames: episode11_SCENE_FRAMES[7], children: [
       /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: Episode11Documentary_SCENE_THEMES[7], type: "enter", duration: 40, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
         DramaticRevealShot,
         {
@@ -36221,7 +36863,7 @@ const Episode11Documentary = () => {
       ) }),
       /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: financialRiskSubs })
     ] }),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: 450 * fps, durationInFrames: 30 * fps, children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: episode11_SCENE_OFFSETS[8], durationInFrames: episode11_SCENE_FRAMES[8], children: [
       /* @__PURE__ */ (0,jsx_runtime.jsx)(ThemedTransition, { theme: Episode11Documentary_SCENE_THEMES[8], type: "enter", duration: 45, children: /* @__PURE__ */ (0,jsx_runtime.jsx)(
         DramaticRevealShot,
         {
@@ -36237,6 +36879,183 @@ const Episode11Documentary = () => {
   ] });
 };
 /* harmony default export */ const compositions_Episode11Documentary = ((/* unused pure expression or super */ null && (Episode11Documentary)));
+
+;// ./src/subtitles/trailer.ts
+
+const trailer_SCENE_FRAMES = [
+  365,
+  // Scene 0: 开场 12.2s
+  603,
+  // Scene 1: 问题 20.1s
+  449,
+  // Scene 2: 危机 15.0s
+  356,
+  // Scene 3: 中国 11.9s
+  336
+  // Scene 4: 预告 11.2s
+];
+const trailer_SCENE_OFFSETS = trailer_SCENE_FRAMES.reduce((acc, frames, i) => {
+  acc.push(i === 0 ? 0 : acc[i - 1] + trailer_SCENE_FRAMES[i - 1]);
+  return acc;
+}, []);
+const trailer_scene01Subs = [
+  {
+    startFrame: 0,
+    endFrame: 48,
+    // 1.6s
+    text: "\u8D27\u5E01\u6218\u4E89\u3002"
+  },
+  {
+    startFrame: 48,
+    endFrame: 151,
+    // 5.0s
+    text: "\u6218\u4E89\u5DF2\u7ECF\u5F00\u59CB\uFF0C\u867D\u7136\u770B\u4E0D\u89C1\u785D\u70DF\u3002"
+  },
+  {
+    startFrame: 151,
+    endFrame: 252,
+    // 8.4s
+    text: "\u8FD9\u573A\u6218\u4E89\uFF0C\u5173\u4E4E\u6BCF\u4E00\u4E2A\u4EBA\u7684\u8D22\u5BCC\u3002"
+  },
+  {
+    startFrame: 252,
+    endFrame: 365,
+    // 12.2s
+    text: "\u8FD9\u4E0D\u662F\u9884\u8A00\uFF0C\u800C\u662F\u6B63\u5728\u53D1\u751F\u7684\u73B0\u5B9E\u3002"
+  }
+];
+const trailer_scene02Subs = [
+  {
+    startFrame: 0,
+    endFrame: 151,
+    // 5.0s
+    text: "\u4E3A\u4EC0\u4E48\u4E16\u754C\u4F1A\u91C7\u53D6\u8FD9\u79CD\u5FC5\u7136\u5BFC\u81F4\u5371\u673A\u7684\u503A\u52A1\u8D27\u5E01\u5236\u5EA6\uFF1F"
+  },
+  {
+    startFrame: 151,
+    endFrame: 317,
+    // 10.6s
+    text: "\u5230\u5E95\u662F\u4EC0\u4E48\u6837\u7684\u7279\u6B8A\u5229\u76CA\u96C6\u56E2\u5DE6\u53F3\u7740\u8D27\u5E01\u5236\u5EA6\u7684\u5EFA\u7ACB\u548C\u6F14\u5316\uFF1F"
+  },
+  {
+    startFrame: 317,
+    endFrame: 457,
+    // 15.2s
+    text: "\u4ED6\u4EEC\u53C8\u662F\u5982\u4F55\u4ECE\u653F\u5E9C\u624B\u4E2D\u593A\u53D6\u4E86\u8D27\u5E01\u53D1\u884C\u5927\u6743\uFF1F"
+  },
+  {
+    startFrame: 457,
+    endFrame: 603,
+    // 20.1s
+    text: "\u8FD9\u4E9B\u95EE\u9898\u7684\u7B54\u6848\uFF0C\u5C06\u63ED\u793A\u4E16\u754C\u7ECF\u6D4E\u7684\u771F\u6B63\u8FD0\u884C\u903B\u8F91\u3002"
+  }
+];
+const trailer_scene03Subs = [
+  {
+    startFrame: 0,
+    endFrame: 103,
+    // 3.4s
+    text: "2008\u5E74\u5E2D\u5377\u5168\u7403\u7684\u91D1\u878D\u5371\u673A\uFF0C"
+  },
+  {
+    startFrame: 103,
+    endFrame: 267,
+    // 8.9s
+    text: "\u6839\u6E90\u5728\u4E8E\u5168\u4E16\u754C\u7684\u8D27\u5E01\u5927\u53A6\u5EFA\u7ACB\u5728\u7F8E\u56FD\u7684\u503A\u52A1\u6C99\u6EE9\u4E4B\u4E0A\u3002"
+  },
+  {
+    startFrame: 267,
+    endFrame: 350,
+    // 11.7s
+    text: "\u7F8E\u5143\u5371\u673A\u6CE2\u53CA\u6574\u4E2A\u4E16\u754C\uFF0C"
+  },
+  {
+    startFrame: 350,
+    endFrame: 449,
+    // 15.0s
+    text: "\u800C\u66F4\u5927\u7684\u5371\u673A\u8FD8\u5728\u915D\u917F\u4E4B\u4E2D\u3002"
+  }
+];
+const trailer_scene04Subs = [
+  {
+    startFrame: 0,
+    endFrame: 74,
+    // 2.5s
+    text: "\u8D77\u822A\u7684\u4E2D\u56FD\u7ECF\u6D4E\u822A\u6BCD\uFF0C"
+  },
+  {
+    startFrame: 74,
+    endFrame: 131,
+    // 4.4s
+    text: "\u4F1A\u4E00\u5E06\u98CE\u987A\u5417\uFF1F"
+  },
+  {
+    startFrame: 131,
+    endFrame: 249,
+    // 8.3s
+    text: "\u770B\u4E0D\u89C1\u785D\u70DF\u7684\u91D1\u878D\u6218\u4E89\u5A01\u80C1\u65E5\u76CA\u52A0\u5267\u3002"
+  },
+  {
+    startFrame: 249,
+    endFrame: 356,
+    // 11.9s
+    text: "\u4E2D\u56FD\u5C06\u5982\u4F55\u5E94\u5BF9\u8FD9\u573A\u65E0\u5F62\u7684\u6218\u4E89\uFF1F"
+  }
+];
+const trailer_scene05Subs = [
+  {
+    startFrame: 0,
+    endFrame: 84,
+    // 2.8s
+    text: "11\u96C6\u8282\u76EE\u4E3A\u4F60\u63ED\u793A\u771F\u76F8\u3002"
+  },
+  {
+    startFrame: 84,
+    endFrame: 175,
+    // 5.8s
+    text: "\u4ECE\u7F57\u65AF\u67F4\u5C14\u5FB7\u5230\u7F8E\u8054\u50A8\uFF0C"
+  },
+  {
+    startFrame: 175,
+    endFrame: 257,
+    // 8.6s
+    text: "\u4ECE\u4E00\u6218\u5230\u4E9A\u6D32\u91D1\u878D\u5371\u673A\uFF0C"
+  },
+  {
+    startFrame: 257,
+    endFrame: 336,
+    // 11.2s
+    text: "\u8D27\u5E01\u6218\u4E89\uFF0C\u656C\u8BF7\u671F\u5F85\u3002"
+  }
+];
+const trailerSubtitles = [
+  ...trailer_scene01Subs.map((s) => ({
+    ...s,
+    startFrame: s.startFrame + trailer_SCENE_OFFSETS[0],
+    endFrame: s.endFrame + trailer_SCENE_OFFSETS[0]
+  })),
+  ...trailer_scene02Subs.map((s) => ({
+    ...s,
+    startFrame: s.startFrame + trailer_SCENE_OFFSETS[1],
+    endFrame: s.endFrame + trailer_SCENE_OFFSETS[1]
+  })),
+  ...trailer_scene03Subs.map((s) => ({
+    ...s,
+    startFrame: s.startFrame + trailer_SCENE_OFFSETS[2],
+    endFrame: s.endFrame + trailer_SCENE_OFFSETS[2]
+  })),
+  ...trailer_scene04Subs.map((s) => ({
+    ...s,
+    startFrame: s.startFrame + trailer_SCENE_OFFSETS[3],
+    endFrame: s.endFrame + trailer_SCENE_OFFSETS[3]
+  })),
+  ...trailer_scene05Subs.map((s) => ({
+    ...s,
+    startFrame: s.startFrame + trailer_SCENE_OFFSETS[4],
+    endFrame: s.endFrame + trailer_SCENE_OFFSETS[4]
+  }))
+];
+/* harmony default export */ const trailer = ((/* unused pure expression or super */ null && (trailerSubtitles)));
 
 ;// ./src/compositions/TrailerDocumentary.tsx
 
@@ -36274,14 +37093,14 @@ const TRANSITION_CONFIGS = [
   { enter: 20, reveal: 30 }
   // Scene 4: 336帧 → 过渡占 50帧 (15%)
 ];
-function TrailerDocumentary_buildTrailerVoiceoverEntries() {
+function buildTrailerVoiceoverEntries() {
   const entries = [];
   const sceneSubs = [
-    { subs: scene01Subs, offset: SCENE_OFFSETS[0] },
-    { subs: scene02Subs, offset: SCENE_OFFSETS[1] },
-    { subs: scene03Subs, offset: SCENE_OFFSETS[2] },
-    { subs: scene04Subs, offset: SCENE_OFFSETS[3] },
-    { subs: scene05Subs, offset: SCENE_OFFSETS[4] }
+    { subs: trailer_scene01Subs, offset: trailer_SCENE_OFFSETS[0] },
+    { subs: trailer_scene02Subs, offset: trailer_SCENE_OFFSETS[1] },
+    { subs: trailer_scene03Subs, offset: trailer_SCENE_OFFSETS[2] },
+    { subs: trailer_scene04Subs, offset: trailer_SCENE_OFFSETS[3] },
+    { subs: trailer_scene05Subs, offset: trailer_SCENE_OFFSETS[4] }
   ];
   let globalIndex = 0;
   for (let i = 0; i < sceneSubs.length; i++) {
@@ -36300,12 +37119,12 @@ function TrailerDocumentary_buildTrailerVoiceoverEntries() {
 const TrailerDocumentary = () => {
   (0,esm.useVideoConfig)();
   const bgm = getEpisodeBGM("Trailer");
-  const voiceoverEntries = TrailerDocumentary_buildTrailerVoiceoverEntries();
+  const voiceoverEntries = buildTrailerVoiceoverEntries();
   return /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.AbsoluteFill, { style: { background: "#0d1117" }, children: [
     /* @__PURE__ */ (0,jsx_runtime.jsx)(VignetteOverlay, { intensity: 0.25, duration: 15 }),
     bgm && /* @__PURE__ */ (0,jsx_runtime.jsx)(Audio_Audio, { ...bgm }),
     /* @__PURE__ */ (0,jsx_runtime.jsx)(Voiceover, { entries: voiceoverEntries, volume: 0.8 }),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { durationInFrames: SCENE_FRAMES[0], children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { durationInFrames: trailer_SCENE_FRAMES[0], children: [
       /* @__PURE__ */ (0,jsx_runtime.jsx)(
         ThemedTransition,
         {
@@ -36318,14 +37137,14 @@ const TrailerDocumentary = () => {
               revealMethod: "zoom",
               revealDuration: TRANSITION_CONFIGS[0].reveal,
               accentColor: "#FFD700",
-              children: /* @__PURE__ */ (0,jsx_runtime.jsx)(TrailerDocumentary_OpeningDocumentaryScene, { durationFrames: SCENE_FRAMES[0] })
+              children: /* @__PURE__ */ (0,jsx_runtime.jsx)(TrailerDocumentary_OpeningDocumentaryScene, { durationFrames: trailer_SCENE_FRAMES[0] })
             }
           )
         }
       ),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: scene01Subs })
+      /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: trailer_scene01Subs })
     ] }),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: SCENE_OFFSETS[1], durationInFrames: SCENE_FRAMES[1], children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: trailer_SCENE_OFFSETS[1], durationInFrames: trailer_SCENE_FRAMES[1], children: [
       /* @__PURE__ */ (0,jsx_runtime.jsx)(
         ThemedTransition,
         {
@@ -36338,15 +37157,15 @@ const TrailerDocumentary = () => {
               type: "object",
               intensity: "subtle",
               focusPosition: { x: 50, y: 40 },
-              duration: SCENE_FRAMES[1],
-              children: /* @__PURE__ */ (0,jsx_runtime.jsx)(QuestionDocumentaryScene, { durationFrames: SCENE_FRAMES[1] })
+              duration: trailer_SCENE_FRAMES[1],
+              children: /* @__PURE__ */ (0,jsx_runtime.jsx)(QuestionDocumentaryScene, { durationFrames: trailer_SCENE_FRAMES[1] })
             }
           )
         }
       ),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: scene02Subs })
+      /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: trailer_scene02Subs })
     ] }),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: SCENE_OFFSETS[2], durationInFrames: SCENE_FRAMES[2], children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: trailer_SCENE_OFFSETS[2], durationInFrames: trailer_SCENE_FRAMES[2], children: [
       /* @__PURE__ */ (0,jsx_runtime.jsx)(
         ThemedTransition,
         {
@@ -36359,14 +37178,14 @@ const TrailerDocumentary = () => {
               revealMethod: "lightBurst",
               revealDuration: TRANSITION_CONFIGS[2].reveal,
               accentColor: "#E53E3E",
-              children: /* @__PURE__ */ (0,jsx_runtime.jsx)(CrisisDocumentaryScene, { durationFrames: SCENE_FRAMES[2] })
+              children: /* @__PURE__ */ (0,jsx_runtime.jsx)(CrisisDocumentaryScene, { durationFrames: trailer_SCENE_FRAMES[2] })
             }
           )
         }
       ),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: scene03Subs })
+      /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: trailer_scene03Subs })
     ] }),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: SCENE_OFFSETS[3], durationInFrames: SCENE_FRAMES[3], children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: trailer_SCENE_OFFSETS[3], durationInFrames: trailer_SCENE_FRAMES[3], children: [
       /* @__PURE__ */ (0,jsx_runtime.jsx)(
         ThemedTransition,
         {
@@ -36379,15 +37198,15 @@ const TrailerDocumentary = () => {
               type: "object",
               intensity: "medium",
               focusPosition: { x: 50, y: 50 },
-              duration: SCENE_FRAMES[3],
-              children: /* @__PURE__ */ (0,jsx_runtime.jsx)(ChinaDocumentaryScene, { durationFrames: SCENE_FRAMES[3] })
+              duration: trailer_SCENE_FRAMES[3],
+              children: /* @__PURE__ */ (0,jsx_runtime.jsx)(ChinaDocumentaryScene, { durationFrames: trailer_SCENE_FRAMES[3] })
             }
           )
         }
       ),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: scene04Subs })
+      /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: trailer_scene04Subs })
     ] }),
-    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: SCENE_OFFSETS[4], durationInFrames: SCENE_FRAMES[4], children: [
+    /* @__PURE__ */ (0,jsx_runtime.jsxs)(esm.Sequence, { from: trailer_SCENE_OFFSETS[4], durationInFrames: trailer_SCENE_FRAMES[4], children: [
       /* @__PURE__ */ (0,jsx_runtime.jsx)(
         ThemedTransition,
         {
@@ -36400,12 +37219,12 @@ const TrailerDocumentary = () => {
               revealMethod: "dissolve",
               revealDuration: TRANSITION_CONFIGS[4].reveal,
               accentColor: "#FFD700",
-              children: /* @__PURE__ */ (0,jsx_runtime.jsx)(ComingSoonDocumentaryScene, { durationFrames: SCENE_FRAMES[4] })
+              children: /* @__PURE__ */ (0,jsx_runtime.jsx)(ComingSoonDocumentaryScene, { durationFrames: trailer_SCENE_FRAMES[4] })
             }
           )
         }
       ),
-      /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: scene05Subs })
+      /* @__PURE__ */ (0,jsx_runtime.jsx)(Subtitles, { subtitles: trailer_scene05Subs })
     ] })
   ] });
 };
@@ -40296,57 +41115,8 @@ const Episode05NewDocumentary = () => {
 
 
 
-
-
-
-
 const RemotionRoot = () => {
   return /* @__PURE__ */ (0,jsx_runtime.jsxs)(jsx_runtime.Fragment, { children: [
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      esm.Composition,
-      {
-        id: "HelloWorld",
-        component: HelloWorld,
-        durationInFrames: 150,
-        fps: 30,
-        width: 1920,
-        height: 1080,
-        schema: myCompSchema,
-        defaultProps: {
-          titleText: "Welcome to Remotion",
-          titleColor: "#000000",
-          logoColor1: "#91EAE4",
-          logoColor2: "#86A8E7"
-        }
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      esm.Composition,
-      {
-        id: "OnlyLogo",
-        component: Logo,
-        durationInFrames: 150,
-        fps: 30,
-        width: 1920,
-        height: 1080,
-        schema: myCompSchema2,
-        defaultProps: {
-          logoColor1: "#91dAE2",
-          logoColor2: "#86A8E7"
-        }
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      esm.Composition,
-      {
-        id: "Trailer",
-        component: Trailer,
-        durationInFrames: 75 * 30,
-        fps: 30,
-        width: 1920,
-        height: 1080
-      }
-    ),
     /* @__PURE__ */ (0,jsx_runtime.jsx)(
       esm.Composition,
       {
@@ -40386,17 +41156,6 @@ const RemotionRoot = () => {
         id: "Episode04Documentary",
         component: Episode04Documentary,
         durationInFrames: 840 * 30,
-        fps: 30,
-        width: 1920,
-        height: 1080
-      }
-    ),
-    /* @__PURE__ */ (0,jsx_runtime.jsx)(
-      esm.Composition,
-      {
-        id: "Episode05Documentary",
-        component: Episode05Documentary,
-        durationInFrames: 900 * 30,
         fps: 30,
         width: 1920,
         height: 1080
@@ -58749,66 +59508,6 @@ if (typeof window !== "undefined") {
   };
   window.remotion_setBundleMode = setBundleModeAndUpdate;
 }
-
-
-
-/***/ },
-
-/***/ 761
-(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   ZodZypesInternals: () => (/* binding */ ZodZypesInternals),
-/* harmony export */   zColor: () => (/* binding */ zColor),
-/* harmony export */   zMatrix: () => (/* binding */ zMatrix),
-/* harmony export */   zTextarea: () => (/* binding */ zTextarea)
-/* harmony export */ });
-/* harmony import */ var remotion_no_react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(9382);
-/* harmony import */ var zod__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4476);
-// src/z-color.ts
-
-
-var REMOTION_COLOR_BRAND = "__remotion-color";
-var parseColor = (value) => {
-  const colored = remotion_no_react__WEBPACK_IMPORTED_MODULE_0__.NoReactInternals.processColor(value).toString(16).padStart(8, "0");
-  const opacity = parseInt(colored.slice(0, 2), 16);
-  const r = parseInt(colored.slice(2, 4), 16);
-  const g = parseInt(colored.slice(4, 6), 16);
-  const b = parseInt(colored.slice(6, 8), 16);
-  return { a: opacity, r, g, b };
-};
-var zColor = () => zod__WEBPACK_IMPORTED_MODULE_1__.z.string().refine((value) => {
-  try {
-    parseColor(value);
-    return true;
-  } catch {
-    return false;
-  }
-}, { message: "Invalid color" }).describe(REMOTION_COLOR_BRAND);
-
-// src/z-matrix.ts
-
-var REMOTION_MATRIX_BRAND = "__remotion-matrix";
-var zMatrix = () => zod__WEBPACK_IMPORTED_MODULE_1__.z.array(zod__WEBPACK_IMPORTED_MODULE_1__.z.number().step(0.01)).refine((value) => {
-  const count = value.length;
-  const root = Math.sqrt(count);
-  return Number.isInteger(root) && root > 0;
-}, { message: "Invalid matrix, must be a square matrix" }).describe(REMOTION_MATRIX_BRAND);
-
-// src/z-textarea.ts
-
-var REMOTION_TEXTAREA_BRAND = "__remotion-textarea";
-var zTextarea = () => zod__WEBPACK_IMPORTED_MODULE_1__.z.string().describe(REMOTION_TEXTAREA_BRAND);
-
-// src/index.ts
-var ZodZypesInternals = {
-  parseColor,
-  REMOTION_COLOR_BRAND,
-  REMOTION_TEXTAREA_BRAND,
-  REMOTION_MATRIX_BRAND
-};
 
 
 
@@ -88709,4131 +89408,6 @@ var NoReactInternals = {
 
 
 
-/***/ },
-
-/***/ 4476
-(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   BRAND: () => (/* binding */ BRAND),
-/* harmony export */   DIRTY: () => (/* binding */ DIRTY),
-/* harmony export */   EMPTY_PATH: () => (/* binding */ EMPTY_PATH),
-/* harmony export */   INVALID: () => (/* binding */ INVALID),
-/* harmony export */   NEVER: () => (/* binding */ NEVER),
-/* harmony export */   OK: () => (/* binding */ OK),
-/* harmony export */   ParseStatus: () => (/* binding */ ParseStatus),
-/* harmony export */   Schema: () => (/* binding */ ZodType),
-/* harmony export */   ZodAny: () => (/* binding */ ZodAny),
-/* harmony export */   ZodArray: () => (/* binding */ ZodArray),
-/* harmony export */   ZodBigInt: () => (/* binding */ ZodBigInt),
-/* harmony export */   ZodBoolean: () => (/* binding */ ZodBoolean),
-/* harmony export */   ZodBranded: () => (/* binding */ ZodBranded),
-/* harmony export */   ZodCatch: () => (/* binding */ ZodCatch),
-/* harmony export */   ZodDate: () => (/* binding */ ZodDate),
-/* harmony export */   ZodDefault: () => (/* binding */ ZodDefault),
-/* harmony export */   ZodDiscriminatedUnion: () => (/* binding */ ZodDiscriminatedUnion),
-/* harmony export */   ZodEffects: () => (/* binding */ ZodEffects),
-/* harmony export */   ZodEnum: () => (/* binding */ ZodEnum),
-/* harmony export */   ZodError: () => (/* binding */ ZodError),
-/* harmony export */   ZodFirstPartyTypeKind: () => (/* binding */ ZodFirstPartyTypeKind),
-/* harmony export */   ZodFunction: () => (/* binding */ ZodFunction),
-/* harmony export */   ZodIntersection: () => (/* binding */ ZodIntersection),
-/* harmony export */   ZodIssueCode: () => (/* binding */ ZodIssueCode),
-/* harmony export */   ZodLazy: () => (/* binding */ ZodLazy),
-/* harmony export */   ZodLiteral: () => (/* binding */ ZodLiteral),
-/* harmony export */   ZodMap: () => (/* binding */ ZodMap),
-/* harmony export */   ZodNaN: () => (/* binding */ ZodNaN),
-/* harmony export */   ZodNativeEnum: () => (/* binding */ ZodNativeEnum),
-/* harmony export */   ZodNever: () => (/* binding */ ZodNever),
-/* harmony export */   ZodNull: () => (/* binding */ ZodNull),
-/* harmony export */   ZodNullable: () => (/* binding */ ZodNullable),
-/* harmony export */   ZodNumber: () => (/* binding */ ZodNumber),
-/* harmony export */   ZodObject: () => (/* binding */ ZodObject),
-/* harmony export */   ZodOptional: () => (/* binding */ ZodOptional),
-/* harmony export */   ZodParsedType: () => (/* binding */ ZodParsedType),
-/* harmony export */   ZodPipeline: () => (/* binding */ ZodPipeline),
-/* harmony export */   ZodPromise: () => (/* binding */ ZodPromise),
-/* harmony export */   ZodReadonly: () => (/* binding */ ZodReadonly),
-/* harmony export */   ZodRecord: () => (/* binding */ ZodRecord),
-/* harmony export */   ZodSchema: () => (/* binding */ ZodType),
-/* harmony export */   ZodSet: () => (/* binding */ ZodSet),
-/* harmony export */   ZodString: () => (/* binding */ ZodString),
-/* harmony export */   ZodSymbol: () => (/* binding */ ZodSymbol),
-/* harmony export */   ZodTransformer: () => (/* binding */ ZodEffects),
-/* harmony export */   ZodTuple: () => (/* binding */ ZodTuple),
-/* harmony export */   ZodType: () => (/* binding */ ZodType),
-/* harmony export */   ZodUndefined: () => (/* binding */ ZodUndefined),
-/* harmony export */   ZodUnion: () => (/* binding */ ZodUnion),
-/* harmony export */   ZodUnknown: () => (/* binding */ ZodUnknown),
-/* harmony export */   ZodVoid: () => (/* binding */ ZodVoid),
-/* harmony export */   addIssueToContext: () => (/* binding */ addIssueToContext),
-/* harmony export */   any: () => (/* binding */ anyType),
-/* harmony export */   array: () => (/* binding */ arrayType),
-/* harmony export */   bigint: () => (/* binding */ bigIntType),
-/* harmony export */   boolean: () => (/* binding */ booleanType),
-/* harmony export */   coerce: () => (/* binding */ coerce),
-/* harmony export */   custom: () => (/* binding */ custom),
-/* harmony export */   date: () => (/* binding */ dateType),
-/* harmony export */   "default": () => (/* binding */ z),
-/* harmony export */   defaultErrorMap: () => (/* binding */ errorMap),
-/* harmony export */   discriminatedUnion: () => (/* binding */ discriminatedUnionType),
-/* harmony export */   effect: () => (/* binding */ effectsType),
-/* harmony export */   "enum": () => (/* binding */ enumType),
-/* harmony export */   "function": () => (/* binding */ functionType),
-/* harmony export */   getErrorMap: () => (/* binding */ getErrorMap),
-/* harmony export */   getParsedType: () => (/* binding */ getParsedType),
-/* harmony export */   "instanceof": () => (/* binding */ instanceOfType),
-/* harmony export */   intersection: () => (/* binding */ intersectionType),
-/* harmony export */   isAborted: () => (/* binding */ isAborted),
-/* harmony export */   isAsync: () => (/* binding */ isAsync),
-/* harmony export */   isDirty: () => (/* binding */ isDirty),
-/* harmony export */   isValid: () => (/* binding */ isValid),
-/* harmony export */   late: () => (/* binding */ late),
-/* harmony export */   lazy: () => (/* binding */ lazyType),
-/* harmony export */   literal: () => (/* binding */ literalType),
-/* harmony export */   makeIssue: () => (/* binding */ makeIssue),
-/* harmony export */   map: () => (/* binding */ mapType),
-/* harmony export */   nan: () => (/* binding */ nanType),
-/* harmony export */   nativeEnum: () => (/* binding */ nativeEnumType),
-/* harmony export */   never: () => (/* binding */ neverType),
-/* harmony export */   "null": () => (/* binding */ nullType),
-/* harmony export */   nullable: () => (/* binding */ nullableType),
-/* harmony export */   number: () => (/* binding */ numberType),
-/* harmony export */   object: () => (/* binding */ objectType),
-/* harmony export */   objectUtil: () => (/* binding */ objectUtil),
-/* harmony export */   oboolean: () => (/* binding */ oboolean),
-/* harmony export */   onumber: () => (/* binding */ onumber),
-/* harmony export */   optional: () => (/* binding */ optionalType),
-/* harmony export */   ostring: () => (/* binding */ ostring),
-/* harmony export */   pipeline: () => (/* binding */ pipelineType),
-/* harmony export */   preprocess: () => (/* binding */ preprocessType),
-/* harmony export */   promise: () => (/* binding */ promiseType),
-/* harmony export */   quotelessJson: () => (/* binding */ quotelessJson),
-/* harmony export */   record: () => (/* binding */ recordType),
-/* harmony export */   set: () => (/* binding */ setType),
-/* harmony export */   setErrorMap: () => (/* binding */ setErrorMap),
-/* harmony export */   strictObject: () => (/* binding */ strictObjectType),
-/* harmony export */   string: () => (/* binding */ stringType),
-/* harmony export */   symbol: () => (/* binding */ symbolType),
-/* harmony export */   transformer: () => (/* binding */ effectsType),
-/* harmony export */   tuple: () => (/* binding */ tupleType),
-/* harmony export */   undefined: () => (/* binding */ undefinedType),
-/* harmony export */   union: () => (/* binding */ unionType),
-/* harmony export */   unknown: () => (/* binding */ unknownType),
-/* harmony export */   util: () => (/* binding */ util),
-/* harmony export */   "void": () => (/* binding */ voidType),
-/* harmony export */   z: () => (/* binding */ z)
-/* harmony export */ });
-var util;
-(function (util) {
-    util.assertEqual = (val) => val;
-    function assertIs(_arg) { }
-    util.assertIs = assertIs;
-    function assertNever(_x) {
-        throw new Error();
-    }
-    util.assertNever = assertNever;
-    util.arrayToEnum = (items) => {
-        const obj = {};
-        for (const item of items) {
-            obj[item] = item;
-        }
-        return obj;
-    };
-    util.getValidEnumValues = (obj) => {
-        const validKeys = util.objectKeys(obj).filter((k) => typeof obj[obj[k]] !== "number");
-        const filtered = {};
-        for (const k of validKeys) {
-            filtered[k] = obj[k];
-        }
-        return util.objectValues(filtered);
-    };
-    util.objectValues = (obj) => {
-        return util.objectKeys(obj).map(function (e) {
-            return obj[e];
-        });
-    };
-    util.objectKeys = typeof Object.keys === "function" // eslint-disable-line ban/ban
-        ? (obj) => Object.keys(obj) // eslint-disable-line ban/ban
-        : (object) => {
-            const keys = [];
-            for (const key in object) {
-                if (Object.prototype.hasOwnProperty.call(object, key)) {
-                    keys.push(key);
-                }
-            }
-            return keys;
-        };
-    util.find = (arr, checker) => {
-        for (const item of arr) {
-            if (checker(item))
-                return item;
-        }
-        return undefined;
-    };
-    util.isInteger = typeof Number.isInteger === "function"
-        ? (val) => Number.isInteger(val) // eslint-disable-line ban/ban
-        : (val) => typeof val === "number" && isFinite(val) && Math.floor(val) === val;
-    function joinValues(array, separator = " | ") {
-        return array
-            .map((val) => (typeof val === "string" ? `'${val}'` : val))
-            .join(separator);
-    }
-    util.joinValues = joinValues;
-    util.jsonStringifyReplacer = (_, value) => {
-        if (typeof value === "bigint") {
-            return value.toString();
-        }
-        return value;
-    };
-})(util || (util = {}));
-var objectUtil;
-(function (objectUtil) {
-    objectUtil.mergeShapes = (first, second) => {
-        return {
-            ...first,
-            ...second, // second overwrites first
-        };
-    };
-})(objectUtil || (objectUtil = {}));
-const ZodParsedType = util.arrayToEnum([
-    "string",
-    "nan",
-    "number",
-    "integer",
-    "float",
-    "boolean",
-    "date",
-    "bigint",
-    "symbol",
-    "function",
-    "undefined",
-    "null",
-    "array",
-    "object",
-    "unknown",
-    "promise",
-    "void",
-    "never",
-    "map",
-    "set",
-]);
-const getParsedType = (data) => {
-    const t = typeof data;
-    switch (t) {
-        case "undefined":
-            return ZodParsedType.undefined;
-        case "string":
-            return ZodParsedType.string;
-        case "number":
-            return isNaN(data) ? ZodParsedType.nan : ZodParsedType.number;
-        case "boolean":
-            return ZodParsedType.boolean;
-        case "function":
-            return ZodParsedType.function;
-        case "bigint":
-            return ZodParsedType.bigint;
-        case "symbol":
-            return ZodParsedType.symbol;
-        case "object":
-            if (Array.isArray(data)) {
-                return ZodParsedType.array;
-            }
-            if (data === null) {
-                return ZodParsedType.null;
-            }
-            if (data.then &&
-                typeof data.then === "function" &&
-                data.catch &&
-                typeof data.catch === "function") {
-                return ZodParsedType.promise;
-            }
-            if (typeof Map !== "undefined" && data instanceof Map) {
-                return ZodParsedType.map;
-            }
-            if (typeof Set !== "undefined" && data instanceof Set) {
-                return ZodParsedType.set;
-            }
-            if (typeof Date !== "undefined" && data instanceof Date) {
-                return ZodParsedType.date;
-            }
-            return ZodParsedType.object;
-        default:
-            return ZodParsedType.unknown;
-    }
-};
-
-const ZodIssueCode = util.arrayToEnum([
-    "invalid_type",
-    "invalid_literal",
-    "custom",
-    "invalid_union",
-    "invalid_union_discriminator",
-    "invalid_enum_value",
-    "unrecognized_keys",
-    "invalid_arguments",
-    "invalid_return_type",
-    "invalid_date",
-    "invalid_string",
-    "too_small",
-    "too_big",
-    "invalid_intersection_types",
-    "not_multiple_of",
-    "not_finite",
-]);
-const quotelessJson = (obj) => {
-    const json = JSON.stringify(obj, null, 2);
-    return json.replace(/"([^"]+)":/g, "$1:");
-};
-class ZodError extends Error {
-    constructor(issues) {
-        super();
-        this.issues = [];
-        this.addIssue = (sub) => {
-            this.issues = [...this.issues, sub];
-        };
-        this.addIssues = (subs = []) => {
-            this.issues = [...this.issues, ...subs];
-        };
-        const actualProto = new.target.prototype;
-        if (Object.setPrototypeOf) {
-            // eslint-disable-next-line ban/ban
-            Object.setPrototypeOf(this, actualProto);
-        }
-        else {
-            this.__proto__ = actualProto;
-        }
-        this.name = "ZodError";
-        this.issues = issues;
-    }
-    get errors() {
-        return this.issues;
-    }
-    format(_mapper) {
-        const mapper = _mapper ||
-            function (issue) {
-                return issue.message;
-            };
-        const fieldErrors = { _errors: [] };
-        const processError = (error) => {
-            for (const issue of error.issues) {
-                if (issue.code === "invalid_union") {
-                    issue.unionErrors.map(processError);
-                }
-                else if (issue.code === "invalid_return_type") {
-                    processError(issue.returnTypeError);
-                }
-                else if (issue.code === "invalid_arguments") {
-                    processError(issue.argumentsError);
-                }
-                else if (issue.path.length === 0) {
-                    fieldErrors._errors.push(mapper(issue));
-                }
-                else {
-                    let curr = fieldErrors;
-                    let i = 0;
-                    while (i < issue.path.length) {
-                        const el = issue.path[i];
-                        const terminal = i === issue.path.length - 1;
-                        if (!terminal) {
-                            curr[el] = curr[el] || { _errors: [] };
-                            // if (typeof el === "string") {
-                            //   curr[el] = curr[el] || { _errors: [] };
-                            // } else if (typeof el === "number") {
-                            //   const errorArray: any = [];
-                            //   errorArray._errors = [];
-                            //   curr[el] = curr[el] || errorArray;
-                            // }
-                        }
-                        else {
-                            curr[el] = curr[el] || { _errors: [] };
-                            curr[el]._errors.push(mapper(issue));
-                        }
-                        curr = curr[el];
-                        i++;
-                    }
-                }
-            }
-        };
-        processError(this);
-        return fieldErrors;
-    }
-    toString() {
-        return this.message;
-    }
-    get message() {
-        return JSON.stringify(this.issues, util.jsonStringifyReplacer, 2);
-    }
-    get isEmpty() {
-        return this.issues.length === 0;
-    }
-    flatten(mapper = (issue) => issue.message) {
-        const fieldErrors = {};
-        const formErrors = [];
-        for (const sub of this.issues) {
-            if (sub.path.length > 0) {
-                fieldErrors[sub.path[0]] = fieldErrors[sub.path[0]] || [];
-                fieldErrors[sub.path[0]].push(mapper(sub));
-            }
-            else {
-                formErrors.push(mapper(sub));
-            }
-        }
-        return { formErrors, fieldErrors };
-    }
-    get formErrors() {
-        return this.flatten();
-    }
-}
-ZodError.create = (issues) => {
-    const error = new ZodError(issues);
-    return error;
-};
-
-const errorMap = (issue, _ctx) => {
-    let message;
-    switch (issue.code) {
-        case ZodIssueCode.invalid_type:
-            if (issue.received === ZodParsedType.undefined) {
-                message = "Required";
-            }
-            else {
-                message = `Expected ${issue.expected}, received ${issue.received}`;
-            }
-            break;
-        case ZodIssueCode.invalid_literal:
-            message = `Invalid literal value, expected ${JSON.stringify(issue.expected, util.jsonStringifyReplacer)}`;
-            break;
-        case ZodIssueCode.unrecognized_keys:
-            message = `Unrecognized key(s) in object: ${util.joinValues(issue.keys, ", ")}`;
-            break;
-        case ZodIssueCode.invalid_union:
-            message = `Invalid input`;
-            break;
-        case ZodIssueCode.invalid_union_discriminator:
-            message = `Invalid discriminator value. Expected ${util.joinValues(issue.options)}`;
-            break;
-        case ZodIssueCode.invalid_enum_value:
-            message = `Invalid enum value. Expected ${util.joinValues(issue.options)}, received '${issue.received}'`;
-            break;
-        case ZodIssueCode.invalid_arguments:
-            message = `Invalid function arguments`;
-            break;
-        case ZodIssueCode.invalid_return_type:
-            message = `Invalid function return type`;
-            break;
-        case ZodIssueCode.invalid_date:
-            message = `Invalid date`;
-            break;
-        case ZodIssueCode.invalid_string:
-            if (typeof issue.validation === "object") {
-                if ("includes" in issue.validation) {
-                    message = `Invalid input: must include "${issue.validation.includes}"`;
-                    if (typeof issue.validation.position === "number") {
-                        message = `${message} at one or more positions greater than or equal to ${issue.validation.position}`;
-                    }
-                }
-                else if ("startsWith" in issue.validation) {
-                    message = `Invalid input: must start with "${issue.validation.startsWith}"`;
-                }
-                else if ("endsWith" in issue.validation) {
-                    message = `Invalid input: must end with "${issue.validation.endsWith}"`;
-                }
-                else {
-                    util.assertNever(issue.validation);
-                }
-            }
-            else if (issue.validation !== "regex") {
-                message = `Invalid ${issue.validation}`;
-            }
-            else {
-                message = "Invalid";
-            }
-            break;
-        case ZodIssueCode.too_small:
-            if (issue.type === "array")
-                message = `Array must contain ${issue.exact ? "exactly" : issue.inclusive ? `at least` : `more than`} ${issue.minimum} element(s)`;
-            else if (issue.type === "string")
-                message = `String must contain ${issue.exact ? "exactly" : issue.inclusive ? `at least` : `over`} ${issue.minimum} character(s)`;
-            else if (issue.type === "number")
-                message = `Number must be ${issue.exact
-                    ? `exactly equal to `
-                    : issue.inclusive
-                        ? `greater than or equal to `
-                        : `greater than `}${issue.minimum}`;
-            else if (issue.type === "date")
-                message = `Date must be ${issue.exact
-                    ? `exactly equal to `
-                    : issue.inclusive
-                        ? `greater than or equal to `
-                        : `greater than `}${new Date(Number(issue.minimum))}`;
-            else
-                message = "Invalid input";
-            break;
-        case ZodIssueCode.too_big:
-            if (issue.type === "array")
-                message = `Array must contain ${issue.exact ? `exactly` : issue.inclusive ? `at most` : `less than`} ${issue.maximum} element(s)`;
-            else if (issue.type === "string")
-                message = `String must contain ${issue.exact ? `exactly` : issue.inclusive ? `at most` : `under`} ${issue.maximum} character(s)`;
-            else if (issue.type === "number")
-                message = `Number must be ${issue.exact
-                    ? `exactly`
-                    : issue.inclusive
-                        ? `less than or equal to`
-                        : `less than`} ${issue.maximum}`;
-            else if (issue.type === "bigint")
-                message = `BigInt must be ${issue.exact
-                    ? `exactly`
-                    : issue.inclusive
-                        ? `less than or equal to`
-                        : `less than`} ${issue.maximum}`;
-            else if (issue.type === "date")
-                message = `Date must be ${issue.exact
-                    ? `exactly`
-                    : issue.inclusive
-                        ? `smaller than or equal to`
-                        : `smaller than`} ${new Date(Number(issue.maximum))}`;
-            else
-                message = "Invalid input";
-            break;
-        case ZodIssueCode.custom:
-            message = `Invalid input`;
-            break;
-        case ZodIssueCode.invalid_intersection_types:
-            message = `Intersection results could not be merged`;
-            break;
-        case ZodIssueCode.not_multiple_of:
-            message = `Number must be a multiple of ${issue.multipleOf}`;
-            break;
-        case ZodIssueCode.not_finite:
-            message = "Number must be finite";
-            break;
-        default:
-            message = _ctx.defaultError;
-            util.assertNever(issue);
-    }
-    return { message };
-};
-
-let overrideErrorMap = errorMap;
-function setErrorMap(map) {
-    overrideErrorMap = map;
-}
-function getErrorMap() {
-    return overrideErrorMap;
-}
-
-const makeIssue = (params) => {
-    const { data, path, errorMaps, issueData } = params;
-    const fullPath = [...path, ...(issueData.path || [])];
-    const fullIssue = {
-        ...issueData,
-        path: fullPath,
-    };
-    let errorMessage = "";
-    const maps = errorMaps
-        .filter((m) => !!m)
-        .slice()
-        .reverse();
-    for (const map of maps) {
-        errorMessage = map(fullIssue, { data, defaultError: errorMessage }).message;
-    }
-    return {
-        ...issueData,
-        path: fullPath,
-        message: issueData.message || errorMessage,
-    };
-};
-const EMPTY_PATH = [];
-function addIssueToContext(ctx, issueData) {
-    const issue = makeIssue({
-        issueData: issueData,
-        data: ctx.data,
-        path: ctx.path,
-        errorMaps: [
-            ctx.common.contextualErrorMap,
-            ctx.schemaErrorMap,
-            getErrorMap(),
-            errorMap, // then global default map
-        ].filter((x) => !!x),
-    });
-    ctx.common.issues.push(issue);
-}
-class ParseStatus {
-    constructor() {
-        this.value = "valid";
-    }
-    dirty() {
-        if (this.value === "valid")
-            this.value = "dirty";
-    }
-    abort() {
-        if (this.value !== "aborted")
-            this.value = "aborted";
-    }
-    static mergeArray(status, results) {
-        const arrayValue = [];
-        for (const s of results) {
-            if (s.status === "aborted")
-                return INVALID;
-            if (s.status === "dirty")
-                status.dirty();
-            arrayValue.push(s.value);
-        }
-        return { status: status.value, value: arrayValue };
-    }
-    static async mergeObjectAsync(status, pairs) {
-        const syncPairs = [];
-        for (const pair of pairs) {
-            syncPairs.push({
-                key: await pair.key,
-                value: await pair.value,
-            });
-        }
-        return ParseStatus.mergeObjectSync(status, syncPairs);
-    }
-    static mergeObjectSync(status, pairs) {
-        const finalObject = {};
-        for (const pair of pairs) {
-            const { key, value } = pair;
-            if (key.status === "aborted")
-                return INVALID;
-            if (value.status === "aborted")
-                return INVALID;
-            if (key.status === "dirty")
-                status.dirty();
-            if (value.status === "dirty")
-                status.dirty();
-            if (key.value !== "__proto__" &&
-                (typeof value.value !== "undefined" || pair.alwaysSet)) {
-                finalObject[key.value] = value.value;
-            }
-        }
-        return { status: status.value, value: finalObject };
-    }
-}
-const INVALID = Object.freeze({
-    status: "aborted",
-});
-const DIRTY = (value) => ({ status: "dirty", value });
-const OK = (value) => ({ status: "valid", value });
-const isAborted = (x) => x.status === "aborted";
-const isDirty = (x) => x.status === "dirty";
-const isValid = (x) => x.status === "valid";
-const isAsync = (x) => typeof Promise !== "undefined" && x instanceof Promise;
-
-var errorUtil;
-(function (errorUtil) {
-    errorUtil.errToObj = (message) => typeof message === "string" ? { message } : message || {};
-    errorUtil.toString = (message) => typeof message === "string" ? message : message === null || message === void 0 ? void 0 : message.message;
-})(errorUtil || (errorUtil = {}));
-
-class ParseInputLazyPath {
-    constructor(parent, value, path, key) {
-        this._cachedPath = [];
-        this.parent = parent;
-        this.data = value;
-        this._path = path;
-        this._key = key;
-    }
-    get path() {
-        if (!this._cachedPath.length) {
-            if (this._key instanceof Array) {
-                this._cachedPath.push(...this._path, ...this._key);
-            }
-            else {
-                this._cachedPath.push(...this._path, this._key);
-            }
-        }
-        return this._cachedPath;
-    }
-}
-const handleResult = (ctx, result) => {
-    if (isValid(result)) {
-        return { success: true, data: result.value };
-    }
-    else {
-        if (!ctx.common.issues.length) {
-            throw new Error("Validation failed but no issues detected.");
-        }
-        return {
-            success: false,
-            get error() {
-                if (this._error)
-                    return this._error;
-                const error = new ZodError(ctx.common.issues);
-                this._error = error;
-                return this._error;
-            },
-        };
-    }
-};
-function processCreateParams(params) {
-    if (!params)
-        return {};
-    const { errorMap, invalid_type_error, required_error, description } = params;
-    if (errorMap && (invalid_type_error || required_error)) {
-        throw new Error(`Can't use "invalid_type_error" or "required_error" in conjunction with custom error map.`);
-    }
-    if (errorMap)
-        return { errorMap: errorMap, description };
-    const customMap = (iss, ctx) => {
-        if (iss.code !== "invalid_type")
-            return { message: ctx.defaultError };
-        if (typeof ctx.data === "undefined") {
-            return { message: required_error !== null && required_error !== void 0 ? required_error : ctx.defaultError };
-        }
-        return { message: invalid_type_error !== null && invalid_type_error !== void 0 ? invalid_type_error : ctx.defaultError };
-    };
-    return { errorMap: customMap, description };
-}
-class ZodType {
-    constructor(def) {
-        /** Alias of safeParseAsync */
-        this.spa = this.safeParseAsync;
-        this._def = def;
-        this.parse = this.parse.bind(this);
-        this.safeParse = this.safeParse.bind(this);
-        this.parseAsync = this.parseAsync.bind(this);
-        this.safeParseAsync = this.safeParseAsync.bind(this);
-        this.spa = this.spa.bind(this);
-        this.refine = this.refine.bind(this);
-        this.refinement = this.refinement.bind(this);
-        this.superRefine = this.superRefine.bind(this);
-        this.optional = this.optional.bind(this);
-        this.nullable = this.nullable.bind(this);
-        this.nullish = this.nullish.bind(this);
-        this.array = this.array.bind(this);
-        this.promise = this.promise.bind(this);
-        this.or = this.or.bind(this);
-        this.and = this.and.bind(this);
-        this.transform = this.transform.bind(this);
-        this.brand = this.brand.bind(this);
-        this.default = this.default.bind(this);
-        this.catch = this.catch.bind(this);
-        this.describe = this.describe.bind(this);
-        this.pipe = this.pipe.bind(this);
-        this.readonly = this.readonly.bind(this);
-        this.isNullable = this.isNullable.bind(this);
-        this.isOptional = this.isOptional.bind(this);
-    }
-    get description() {
-        return this._def.description;
-    }
-    _getType(input) {
-        return getParsedType(input.data);
-    }
-    _getOrReturnCtx(input, ctx) {
-        return (ctx || {
-            common: input.parent.common,
-            data: input.data,
-            parsedType: getParsedType(input.data),
-            schemaErrorMap: this._def.errorMap,
-            path: input.path,
-            parent: input.parent,
-        });
-    }
-    _processInputParams(input) {
-        return {
-            status: new ParseStatus(),
-            ctx: {
-                common: input.parent.common,
-                data: input.data,
-                parsedType: getParsedType(input.data),
-                schemaErrorMap: this._def.errorMap,
-                path: input.path,
-                parent: input.parent,
-            },
-        };
-    }
-    _parseSync(input) {
-        const result = this._parse(input);
-        if (isAsync(result)) {
-            throw new Error("Synchronous parse encountered promise.");
-        }
-        return result;
-    }
-    _parseAsync(input) {
-        const result = this._parse(input);
-        return Promise.resolve(result);
-    }
-    parse(data, params) {
-        const result = this.safeParse(data, params);
-        if (result.success)
-            return result.data;
-        throw result.error;
-    }
-    safeParse(data, params) {
-        var _a;
-        const ctx = {
-            common: {
-                issues: [],
-                async: (_a = params === null || params === void 0 ? void 0 : params.async) !== null && _a !== void 0 ? _a : false,
-                contextualErrorMap: params === null || params === void 0 ? void 0 : params.errorMap,
-            },
-            path: (params === null || params === void 0 ? void 0 : params.path) || [],
-            schemaErrorMap: this._def.errorMap,
-            parent: null,
-            data,
-            parsedType: getParsedType(data),
-        };
-        const result = this._parseSync({ data, path: ctx.path, parent: ctx });
-        return handleResult(ctx, result);
-    }
-    async parseAsync(data, params) {
-        const result = await this.safeParseAsync(data, params);
-        if (result.success)
-            return result.data;
-        throw result.error;
-    }
-    async safeParseAsync(data, params) {
-        const ctx = {
-            common: {
-                issues: [],
-                contextualErrorMap: params === null || params === void 0 ? void 0 : params.errorMap,
-                async: true,
-            },
-            path: (params === null || params === void 0 ? void 0 : params.path) || [],
-            schemaErrorMap: this._def.errorMap,
-            parent: null,
-            data,
-            parsedType: getParsedType(data),
-        };
-        const maybeAsyncResult = this._parse({ data, path: ctx.path, parent: ctx });
-        const result = await (isAsync(maybeAsyncResult)
-            ? maybeAsyncResult
-            : Promise.resolve(maybeAsyncResult));
-        return handleResult(ctx, result);
-    }
-    refine(check, message) {
-        const getIssueProperties = (val) => {
-            if (typeof message === "string" || typeof message === "undefined") {
-                return { message };
-            }
-            else if (typeof message === "function") {
-                return message(val);
-            }
-            else {
-                return message;
-            }
-        };
-        return this._refinement((val, ctx) => {
-            const result = check(val);
-            const setError = () => ctx.addIssue({
-                code: ZodIssueCode.custom,
-                ...getIssueProperties(val),
-            });
-            if (typeof Promise !== "undefined" && result instanceof Promise) {
-                return result.then((data) => {
-                    if (!data) {
-                        setError();
-                        return false;
-                    }
-                    else {
-                        return true;
-                    }
-                });
-            }
-            if (!result) {
-                setError();
-                return false;
-            }
-            else {
-                return true;
-            }
-        });
-    }
-    refinement(check, refinementData) {
-        return this._refinement((val, ctx) => {
-            if (!check(val)) {
-                ctx.addIssue(typeof refinementData === "function"
-                    ? refinementData(val, ctx)
-                    : refinementData);
-                return false;
-            }
-            else {
-                return true;
-            }
-        });
-    }
-    _refinement(refinement) {
-        return new ZodEffects({
-            schema: this,
-            typeName: ZodFirstPartyTypeKind.ZodEffects,
-            effect: { type: "refinement", refinement },
-        });
-    }
-    superRefine(refinement) {
-        return this._refinement(refinement);
-    }
-    optional() {
-        return ZodOptional.create(this, this._def);
-    }
-    nullable() {
-        return ZodNullable.create(this, this._def);
-    }
-    nullish() {
-        return this.nullable().optional();
-    }
-    array() {
-        return ZodArray.create(this, this._def);
-    }
-    promise() {
-        return ZodPromise.create(this, this._def);
-    }
-    or(option) {
-        return ZodUnion.create([this, option], this._def);
-    }
-    and(incoming) {
-        return ZodIntersection.create(this, incoming, this._def);
-    }
-    transform(transform) {
-        return new ZodEffects({
-            ...processCreateParams(this._def),
-            schema: this,
-            typeName: ZodFirstPartyTypeKind.ZodEffects,
-            effect: { type: "transform", transform },
-        });
-    }
-    default(def) {
-        const defaultValueFunc = typeof def === "function" ? def : () => def;
-        return new ZodDefault({
-            ...processCreateParams(this._def),
-            innerType: this,
-            defaultValue: defaultValueFunc,
-            typeName: ZodFirstPartyTypeKind.ZodDefault,
-        });
-    }
-    brand() {
-        return new ZodBranded({
-            typeName: ZodFirstPartyTypeKind.ZodBranded,
-            type: this,
-            ...processCreateParams(this._def),
-        });
-    }
-    catch(def) {
-        const catchValueFunc = typeof def === "function" ? def : () => def;
-        return new ZodCatch({
-            ...processCreateParams(this._def),
-            innerType: this,
-            catchValue: catchValueFunc,
-            typeName: ZodFirstPartyTypeKind.ZodCatch,
-        });
-    }
-    describe(description) {
-        const This = this.constructor;
-        return new This({
-            ...this._def,
-            description,
-        });
-    }
-    pipe(target) {
-        return ZodPipeline.create(this, target);
-    }
-    readonly() {
-        return ZodReadonly.create(this);
-    }
-    isOptional() {
-        return this.safeParse(undefined).success;
-    }
-    isNullable() {
-        return this.safeParse(null).success;
-    }
-}
-const cuidRegex = /^c[^\s-]{8,}$/i;
-const cuid2Regex = /^[a-z][a-z0-9]*$/;
-const ulidRegex = /[0-9A-HJKMNP-TV-Z]{26}/;
-// const uuidRegex =
-//   /^([a-f0-9]{8}-[a-f0-9]{4}-[1-5][a-f0-9]{3}-[a-f0-9]{4}-[a-f0-9]{12}|00000000-0000-0000-0000-000000000000)$/i;
-const uuidRegex = /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/i;
-// from https://stackoverflow.com/a/46181/1550155
-// old version: too slow, didn't support unicode
-// const emailRegex = /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))$/i;
-//old email regex
-// const emailRegex = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@((?!-)([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{1,})[^-<>()[\].,;:\s@"]$/i;
-// eslint-disable-next-line
-// const emailRegex =
-//   /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[(((25[0-5])|(2[0-4][0-9])|(1[0-9]{2})|([0-9]{1,2}))\.){3}((25[0-5])|(2[0-4][0-9])|(1[0-9]{2})|([0-9]{1,2}))\])|(\[IPv6:(([a-f0-9]{1,4}:){7}|::([a-f0-9]{1,4}:){0,6}|([a-f0-9]{1,4}:){1}:([a-f0-9]{1,4}:){0,5}|([a-f0-9]{1,4}:){2}:([a-f0-9]{1,4}:){0,4}|([a-f0-9]{1,4}:){3}:([a-f0-9]{1,4}:){0,3}|([a-f0-9]{1,4}:){4}:([a-f0-9]{1,4}:){0,2}|([a-f0-9]{1,4}:){5}:([a-f0-9]{1,4}:){0,1})([a-f0-9]{1,4}|(((25[0-5])|(2[0-4][0-9])|(1[0-9]{2})|([0-9]{1,2}))\.){3}((25[0-5])|(2[0-4][0-9])|(1[0-9]{2})|([0-9]{1,2})))\])|([A-Za-z0-9]([A-Za-z0-9-]*[A-Za-z0-9])*(\.[A-Za-z]{2,})+))$/;
-// const emailRegex =
-//   /^[a-zA-Z0-9\.\!\#\$\%\&\'\*\+\/\=\?\^\_\`\{\|\}\~\-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
-// const emailRegex =
-//   /^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/i;
-const emailRegex = /^(?!\.)(?!.*\.\.)([A-Z0-9_+-\.]*)[A-Z0-9_+-]@([A-Z0-9][A-Z0-9\-]*\.)+[A-Z]{2,}$/i;
-// const emailRegex =
-//   /^[a-z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-z0-9-]+(?:\.[a-z0-9\-]+)*$/i;
-// from https://thekevinscott.com/emojis-in-javascript/#writing-a-regular-expression
-const emojiRegex = /^(\p{Extended_Pictographic}|\p{Emoji_Component})+$/u;
-const ipv4Regex = /^(((25[0-5])|(2[0-4][0-9])|(1[0-9]{2})|([0-9]{1,2}))\.){3}((25[0-5])|(2[0-4][0-9])|(1[0-9]{2})|([0-9]{1,2}))$/;
-const ipv6Regex = /^(([a-f0-9]{1,4}:){7}|::([a-f0-9]{1,4}:){0,6}|([a-f0-9]{1,4}:){1}:([a-f0-9]{1,4}:){0,5}|([a-f0-9]{1,4}:){2}:([a-f0-9]{1,4}:){0,4}|([a-f0-9]{1,4}:){3}:([a-f0-9]{1,4}:){0,3}|([a-f0-9]{1,4}:){4}:([a-f0-9]{1,4}:){0,2}|([a-f0-9]{1,4}:){5}:([a-f0-9]{1,4}:){0,1})([a-f0-9]{1,4}|(((25[0-5])|(2[0-4][0-9])|(1[0-9]{2})|([0-9]{1,2}))\.){3}((25[0-5])|(2[0-4][0-9])|(1[0-9]{2})|([0-9]{1,2})))$/;
-// Adapted from https://stackoverflow.com/a/3143231
-const datetimeRegex = (args) => {
-    if (args.precision) {
-        if (args.offset) {
-            return new RegExp(`^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{${args.precision}}(([+-]\\d{2}(:?\\d{2})?)|Z)$`);
-        }
-        else {
-            return new RegExp(`^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{${args.precision}}Z$`);
-        }
-    }
-    else if (args.precision === 0) {
-        if (args.offset) {
-            return new RegExp(`^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(([+-]\\d{2}(:?\\d{2})?)|Z)$`);
-        }
-        else {
-            return new RegExp(`^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$`);
-        }
-    }
-    else {
-        if (args.offset) {
-            return new RegExp(`^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(([+-]\\d{2}(:?\\d{2})?)|Z)$`);
-        }
-        else {
-            return new RegExp(`^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?Z$`);
-        }
-    }
-};
-function isValidIP(ip, version) {
-    if ((version === "v4" || !version) && ipv4Regex.test(ip)) {
-        return true;
-    }
-    if ((version === "v6" || !version) && ipv6Regex.test(ip)) {
-        return true;
-    }
-    return false;
-}
-class ZodString extends ZodType {
-    constructor() {
-        super(...arguments);
-        this._regex = (regex, validation, message) => this.refinement((data) => regex.test(data), {
-            validation,
-            code: ZodIssueCode.invalid_string,
-            ...errorUtil.errToObj(message),
-        });
-        /**
-         * @deprecated Use z.string().min(1) instead.
-         * @see {@link ZodString.min}
-         */
-        this.nonempty = (message) => this.min(1, errorUtil.errToObj(message));
-        this.trim = () => new ZodString({
-            ...this._def,
-            checks: [...this._def.checks, { kind: "trim" }],
-        });
-        this.toLowerCase = () => new ZodString({
-            ...this._def,
-            checks: [...this._def.checks, { kind: "toLowerCase" }],
-        });
-        this.toUpperCase = () => new ZodString({
-            ...this._def,
-            checks: [...this._def.checks, { kind: "toUpperCase" }],
-        });
-    }
-    _parse(input) {
-        if (this._def.coerce) {
-            input.data = String(input.data);
-        }
-        const parsedType = this._getType(input);
-        if (parsedType !== ZodParsedType.string) {
-            const ctx = this._getOrReturnCtx(input);
-            addIssueToContext(ctx, {
-                code: ZodIssueCode.invalid_type,
-                expected: ZodParsedType.string,
-                received: ctx.parsedType,
-            }
-            //
-            );
-            return INVALID;
-        }
-        const status = new ParseStatus();
-        let ctx = undefined;
-        for (const check of this._def.checks) {
-            if (check.kind === "min") {
-                if (input.data.length < check.value) {
-                    ctx = this._getOrReturnCtx(input, ctx);
-                    addIssueToContext(ctx, {
-                        code: ZodIssueCode.too_small,
-                        minimum: check.value,
-                        type: "string",
-                        inclusive: true,
-                        exact: false,
-                        message: check.message,
-                    });
-                    status.dirty();
-                }
-            }
-            else if (check.kind === "max") {
-                if (input.data.length > check.value) {
-                    ctx = this._getOrReturnCtx(input, ctx);
-                    addIssueToContext(ctx, {
-                        code: ZodIssueCode.too_big,
-                        maximum: check.value,
-                        type: "string",
-                        inclusive: true,
-                        exact: false,
-                        message: check.message,
-                    });
-                    status.dirty();
-                }
-            }
-            else if (check.kind === "length") {
-                const tooBig = input.data.length > check.value;
-                const tooSmall = input.data.length < check.value;
-                if (tooBig || tooSmall) {
-                    ctx = this._getOrReturnCtx(input, ctx);
-                    if (tooBig) {
-                        addIssueToContext(ctx, {
-                            code: ZodIssueCode.too_big,
-                            maximum: check.value,
-                            type: "string",
-                            inclusive: true,
-                            exact: true,
-                            message: check.message,
-                        });
-                    }
-                    else if (tooSmall) {
-                        addIssueToContext(ctx, {
-                            code: ZodIssueCode.too_small,
-                            minimum: check.value,
-                            type: "string",
-                            inclusive: true,
-                            exact: true,
-                            message: check.message,
-                        });
-                    }
-                    status.dirty();
-                }
-            }
-            else if (check.kind === "email") {
-                if (!emailRegex.test(input.data)) {
-                    ctx = this._getOrReturnCtx(input, ctx);
-                    addIssueToContext(ctx, {
-                        validation: "email",
-                        code: ZodIssueCode.invalid_string,
-                        message: check.message,
-                    });
-                    status.dirty();
-                }
-            }
-            else if (check.kind === "emoji") {
-                if (!emojiRegex.test(input.data)) {
-                    ctx = this._getOrReturnCtx(input, ctx);
-                    addIssueToContext(ctx, {
-                        validation: "emoji",
-                        code: ZodIssueCode.invalid_string,
-                        message: check.message,
-                    });
-                    status.dirty();
-                }
-            }
-            else if (check.kind === "uuid") {
-                if (!uuidRegex.test(input.data)) {
-                    ctx = this._getOrReturnCtx(input, ctx);
-                    addIssueToContext(ctx, {
-                        validation: "uuid",
-                        code: ZodIssueCode.invalid_string,
-                        message: check.message,
-                    });
-                    status.dirty();
-                }
-            }
-            else if (check.kind === "cuid") {
-                if (!cuidRegex.test(input.data)) {
-                    ctx = this._getOrReturnCtx(input, ctx);
-                    addIssueToContext(ctx, {
-                        validation: "cuid",
-                        code: ZodIssueCode.invalid_string,
-                        message: check.message,
-                    });
-                    status.dirty();
-                }
-            }
-            else if (check.kind === "cuid2") {
-                if (!cuid2Regex.test(input.data)) {
-                    ctx = this._getOrReturnCtx(input, ctx);
-                    addIssueToContext(ctx, {
-                        validation: "cuid2",
-                        code: ZodIssueCode.invalid_string,
-                        message: check.message,
-                    });
-                    status.dirty();
-                }
-            }
-            else if (check.kind === "ulid") {
-                if (!ulidRegex.test(input.data)) {
-                    ctx = this._getOrReturnCtx(input, ctx);
-                    addIssueToContext(ctx, {
-                        validation: "ulid",
-                        code: ZodIssueCode.invalid_string,
-                        message: check.message,
-                    });
-                    status.dirty();
-                }
-            }
-            else if (check.kind === "url") {
-                try {
-                    new URL(input.data);
-                }
-                catch (_a) {
-                    ctx = this._getOrReturnCtx(input, ctx);
-                    addIssueToContext(ctx, {
-                        validation: "url",
-                        code: ZodIssueCode.invalid_string,
-                        message: check.message,
-                    });
-                    status.dirty();
-                }
-            }
-            else if (check.kind === "regex") {
-                check.regex.lastIndex = 0;
-                const testResult = check.regex.test(input.data);
-                if (!testResult) {
-                    ctx = this._getOrReturnCtx(input, ctx);
-                    addIssueToContext(ctx, {
-                        validation: "regex",
-                        code: ZodIssueCode.invalid_string,
-                        message: check.message,
-                    });
-                    status.dirty();
-                }
-            }
-            else if (check.kind === "trim") {
-                input.data = input.data.trim();
-            }
-            else if (check.kind === "includes") {
-                if (!input.data.includes(check.value, check.position)) {
-                    ctx = this._getOrReturnCtx(input, ctx);
-                    addIssueToContext(ctx, {
-                        code: ZodIssueCode.invalid_string,
-                        validation: { includes: check.value, position: check.position },
-                        message: check.message,
-                    });
-                    status.dirty();
-                }
-            }
-            else if (check.kind === "toLowerCase") {
-                input.data = input.data.toLowerCase();
-            }
-            else if (check.kind === "toUpperCase") {
-                input.data = input.data.toUpperCase();
-            }
-            else if (check.kind === "startsWith") {
-                if (!input.data.startsWith(check.value)) {
-                    ctx = this._getOrReturnCtx(input, ctx);
-                    addIssueToContext(ctx, {
-                        code: ZodIssueCode.invalid_string,
-                        validation: { startsWith: check.value },
-                        message: check.message,
-                    });
-                    status.dirty();
-                }
-            }
-            else if (check.kind === "endsWith") {
-                if (!input.data.endsWith(check.value)) {
-                    ctx = this._getOrReturnCtx(input, ctx);
-                    addIssueToContext(ctx, {
-                        code: ZodIssueCode.invalid_string,
-                        validation: { endsWith: check.value },
-                        message: check.message,
-                    });
-                    status.dirty();
-                }
-            }
-            else if (check.kind === "datetime") {
-                const regex = datetimeRegex(check);
-                if (!regex.test(input.data)) {
-                    ctx = this._getOrReturnCtx(input, ctx);
-                    addIssueToContext(ctx, {
-                        code: ZodIssueCode.invalid_string,
-                        validation: "datetime",
-                        message: check.message,
-                    });
-                    status.dirty();
-                }
-            }
-            else if (check.kind === "ip") {
-                if (!isValidIP(input.data, check.version)) {
-                    ctx = this._getOrReturnCtx(input, ctx);
-                    addIssueToContext(ctx, {
-                        validation: "ip",
-                        code: ZodIssueCode.invalid_string,
-                        message: check.message,
-                    });
-                    status.dirty();
-                }
-            }
-            else {
-                util.assertNever(check);
-            }
-        }
-        return { status: status.value, value: input.data };
-    }
-    _addCheck(check) {
-        return new ZodString({
-            ...this._def,
-            checks: [...this._def.checks, check],
-        });
-    }
-    email(message) {
-        return this._addCheck({ kind: "email", ...errorUtil.errToObj(message) });
-    }
-    url(message) {
-        return this._addCheck({ kind: "url", ...errorUtil.errToObj(message) });
-    }
-    emoji(message) {
-        return this._addCheck({ kind: "emoji", ...errorUtil.errToObj(message) });
-    }
-    uuid(message) {
-        return this._addCheck({ kind: "uuid", ...errorUtil.errToObj(message) });
-    }
-    cuid(message) {
-        return this._addCheck({ kind: "cuid", ...errorUtil.errToObj(message) });
-    }
-    cuid2(message) {
-        return this._addCheck({ kind: "cuid2", ...errorUtil.errToObj(message) });
-    }
-    ulid(message) {
-        return this._addCheck({ kind: "ulid", ...errorUtil.errToObj(message) });
-    }
-    ip(options) {
-        return this._addCheck({ kind: "ip", ...errorUtil.errToObj(options) });
-    }
-    datetime(options) {
-        var _a;
-        if (typeof options === "string") {
-            return this._addCheck({
-                kind: "datetime",
-                precision: null,
-                offset: false,
-                message: options,
-            });
-        }
-        return this._addCheck({
-            kind: "datetime",
-            precision: typeof (options === null || options === void 0 ? void 0 : options.precision) === "undefined" ? null : options === null || options === void 0 ? void 0 : options.precision,
-            offset: (_a = options === null || options === void 0 ? void 0 : options.offset) !== null && _a !== void 0 ? _a : false,
-            ...errorUtil.errToObj(options === null || options === void 0 ? void 0 : options.message),
-        });
-    }
-    regex(regex, message) {
-        return this._addCheck({
-            kind: "regex",
-            regex: regex,
-            ...errorUtil.errToObj(message),
-        });
-    }
-    includes(value, options) {
-        return this._addCheck({
-            kind: "includes",
-            value: value,
-            position: options === null || options === void 0 ? void 0 : options.position,
-            ...errorUtil.errToObj(options === null || options === void 0 ? void 0 : options.message),
-        });
-    }
-    startsWith(value, message) {
-        return this._addCheck({
-            kind: "startsWith",
-            value: value,
-            ...errorUtil.errToObj(message),
-        });
-    }
-    endsWith(value, message) {
-        return this._addCheck({
-            kind: "endsWith",
-            value: value,
-            ...errorUtil.errToObj(message),
-        });
-    }
-    min(minLength, message) {
-        return this._addCheck({
-            kind: "min",
-            value: minLength,
-            ...errorUtil.errToObj(message),
-        });
-    }
-    max(maxLength, message) {
-        return this._addCheck({
-            kind: "max",
-            value: maxLength,
-            ...errorUtil.errToObj(message),
-        });
-    }
-    length(len, message) {
-        return this._addCheck({
-            kind: "length",
-            value: len,
-            ...errorUtil.errToObj(message),
-        });
-    }
-    get isDatetime() {
-        return !!this._def.checks.find((ch) => ch.kind === "datetime");
-    }
-    get isEmail() {
-        return !!this._def.checks.find((ch) => ch.kind === "email");
-    }
-    get isURL() {
-        return !!this._def.checks.find((ch) => ch.kind === "url");
-    }
-    get isEmoji() {
-        return !!this._def.checks.find((ch) => ch.kind === "emoji");
-    }
-    get isUUID() {
-        return !!this._def.checks.find((ch) => ch.kind === "uuid");
-    }
-    get isCUID() {
-        return !!this._def.checks.find((ch) => ch.kind === "cuid");
-    }
-    get isCUID2() {
-        return !!this._def.checks.find((ch) => ch.kind === "cuid2");
-    }
-    get isULID() {
-        return !!this._def.checks.find((ch) => ch.kind === "ulid");
-    }
-    get isIP() {
-        return !!this._def.checks.find((ch) => ch.kind === "ip");
-    }
-    get minLength() {
-        let min = null;
-        for (const ch of this._def.checks) {
-            if (ch.kind === "min") {
-                if (min === null || ch.value > min)
-                    min = ch.value;
-            }
-        }
-        return min;
-    }
-    get maxLength() {
-        let max = null;
-        for (const ch of this._def.checks) {
-            if (ch.kind === "max") {
-                if (max === null || ch.value < max)
-                    max = ch.value;
-            }
-        }
-        return max;
-    }
-}
-ZodString.create = (params) => {
-    var _a;
-    return new ZodString({
-        checks: [],
-        typeName: ZodFirstPartyTypeKind.ZodString,
-        coerce: (_a = params === null || params === void 0 ? void 0 : params.coerce) !== null && _a !== void 0 ? _a : false,
-        ...processCreateParams(params),
-    });
-};
-// https://stackoverflow.com/questions/3966484/why-does-modulus-operator-return-fractional-number-in-javascript/31711034#31711034
-function floatSafeRemainder(val, step) {
-    const valDecCount = (val.toString().split(".")[1] || "").length;
-    const stepDecCount = (step.toString().split(".")[1] || "").length;
-    const decCount = valDecCount > stepDecCount ? valDecCount : stepDecCount;
-    const valInt = parseInt(val.toFixed(decCount).replace(".", ""));
-    const stepInt = parseInt(step.toFixed(decCount).replace(".", ""));
-    return (valInt % stepInt) / Math.pow(10, decCount);
-}
-class ZodNumber extends ZodType {
-    constructor() {
-        super(...arguments);
-        this.min = this.gte;
-        this.max = this.lte;
-        this.step = this.multipleOf;
-    }
-    _parse(input) {
-        if (this._def.coerce) {
-            input.data = Number(input.data);
-        }
-        const parsedType = this._getType(input);
-        if (parsedType !== ZodParsedType.number) {
-            const ctx = this._getOrReturnCtx(input);
-            addIssueToContext(ctx, {
-                code: ZodIssueCode.invalid_type,
-                expected: ZodParsedType.number,
-                received: ctx.parsedType,
-            });
-            return INVALID;
-        }
-        let ctx = undefined;
-        const status = new ParseStatus();
-        for (const check of this._def.checks) {
-            if (check.kind === "int") {
-                if (!util.isInteger(input.data)) {
-                    ctx = this._getOrReturnCtx(input, ctx);
-                    addIssueToContext(ctx, {
-                        code: ZodIssueCode.invalid_type,
-                        expected: "integer",
-                        received: "float",
-                        message: check.message,
-                    });
-                    status.dirty();
-                }
-            }
-            else if (check.kind === "min") {
-                const tooSmall = check.inclusive
-                    ? input.data < check.value
-                    : input.data <= check.value;
-                if (tooSmall) {
-                    ctx = this._getOrReturnCtx(input, ctx);
-                    addIssueToContext(ctx, {
-                        code: ZodIssueCode.too_small,
-                        minimum: check.value,
-                        type: "number",
-                        inclusive: check.inclusive,
-                        exact: false,
-                        message: check.message,
-                    });
-                    status.dirty();
-                }
-            }
-            else if (check.kind === "max") {
-                const tooBig = check.inclusive
-                    ? input.data > check.value
-                    : input.data >= check.value;
-                if (tooBig) {
-                    ctx = this._getOrReturnCtx(input, ctx);
-                    addIssueToContext(ctx, {
-                        code: ZodIssueCode.too_big,
-                        maximum: check.value,
-                        type: "number",
-                        inclusive: check.inclusive,
-                        exact: false,
-                        message: check.message,
-                    });
-                    status.dirty();
-                }
-            }
-            else if (check.kind === "multipleOf") {
-                if (floatSafeRemainder(input.data, check.value) !== 0) {
-                    ctx = this._getOrReturnCtx(input, ctx);
-                    addIssueToContext(ctx, {
-                        code: ZodIssueCode.not_multiple_of,
-                        multipleOf: check.value,
-                        message: check.message,
-                    });
-                    status.dirty();
-                }
-            }
-            else if (check.kind === "finite") {
-                if (!Number.isFinite(input.data)) {
-                    ctx = this._getOrReturnCtx(input, ctx);
-                    addIssueToContext(ctx, {
-                        code: ZodIssueCode.not_finite,
-                        message: check.message,
-                    });
-                    status.dirty();
-                }
-            }
-            else {
-                util.assertNever(check);
-            }
-        }
-        return { status: status.value, value: input.data };
-    }
-    gte(value, message) {
-        return this.setLimit("min", value, true, errorUtil.toString(message));
-    }
-    gt(value, message) {
-        return this.setLimit("min", value, false, errorUtil.toString(message));
-    }
-    lte(value, message) {
-        return this.setLimit("max", value, true, errorUtil.toString(message));
-    }
-    lt(value, message) {
-        return this.setLimit("max", value, false, errorUtil.toString(message));
-    }
-    setLimit(kind, value, inclusive, message) {
-        return new ZodNumber({
-            ...this._def,
-            checks: [
-                ...this._def.checks,
-                {
-                    kind,
-                    value,
-                    inclusive,
-                    message: errorUtil.toString(message),
-                },
-            ],
-        });
-    }
-    _addCheck(check) {
-        return new ZodNumber({
-            ...this._def,
-            checks: [...this._def.checks, check],
-        });
-    }
-    int(message) {
-        return this._addCheck({
-            kind: "int",
-            message: errorUtil.toString(message),
-        });
-    }
-    positive(message) {
-        return this._addCheck({
-            kind: "min",
-            value: 0,
-            inclusive: false,
-            message: errorUtil.toString(message),
-        });
-    }
-    negative(message) {
-        return this._addCheck({
-            kind: "max",
-            value: 0,
-            inclusive: false,
-            message: errorUtil.toString(message),
-        });
-    }
-    nonpositive(message) {
-        return this._addCheck({
-            kind: "max",
-            value: 0,
-            inclusive: true,
-            message: errorUtil.toString(message),
-        });
-    }
-    nonnegative(message) {
-        return this._addCheck({
-            kind: "min",
-            value: 0,
-            inclusive: true,
-            message: errorUtil.toString(message),
-        });
-    }
-    multipleOf(value, message) {
-        return this._addCheck({
-            kind: "multipleOf",
-            value: value,
-            message: errorUtil.toString(message),
-        });
-    }
-    finite(message) {
-        return this._addCheck({
-            kind: "finite",
-            message: errorUtil.toString(message),
-        });
-    }
-    safe(message) {
-        return this._addCheck({
-            kind: "min",
-            inclusive: true,
-            value: Number.MIN_SAFE_INTEGER,
-            message: errorUtil.toString(message),
-        })._addCheck({
-            kind: "max",
-            inclusive: true,
-            value: Number.MAX_SAFE_INTEGER,
-            message: errorUtil.toString(message),
-        });
-    }
-    get minValue() {
-        let min = null;
-        for (const ch of this._def.checks) {
-            if (ch.kind === "min") {
-                if (min === null || ch.value > min)
-                    min = ch.value;
-            }
-        }
-        return min;
-    }
-    get maxValue() {
-        let max = null;
-        for (const ch of this._def.checks) {
-            if (ch.kind === "max") {
-                if (max === null || ch.value < max)
-                    max = ch.value;
-            }
-        }
-        return max;
-    }
-    get isInt() {
-        return !!this._def.checks.find((ch) => ch.kind === "int" ||
-            (ch.kind === "multipleOf" && util.isInteger(ch.value)));
-    }
-    get isFinite() {
-        let max = null, min = null;
-        for (const ch of this._def.checks) {
-            if (ch.kind === "finite" ||
-                ch.kind === "int" ||
-                ch.kind === "multipleOf") {
-                return true;
-            }
-            else if (ch.kind === "min") {
-                if (min === null || ch.value > min)
-                    min = ch.value;
-            }
-            else if (ch.kind === "max") {
-                if (max === null || ch.value < max)
-                    max = ch.value;
-            }
-        }
-        return Number.isFinite(min) && Number.isFinite(max);
-    }
-}
-ZodNumber.create = (params) => {
-    return new ZodNumber({
-        checks: [],
-        typeName: ZodFirstPartyTypeKind.ZodNumber,
-        coerce: (params === null || params === void 0 ? void 0 : params.coerce) || false,
-        ...processCreateParams(params),
-    });
-};
-class ZodBigInt extends ZodType {
-    constructor() {
-        super(...arguments);
-        this.min = this.gte;
-        this.max = this.lte;
-    }
-    _parse(input) {
-        if (this._def.coerce) {
-            input.data = BigInt(input.data);
-        }
-        const parsedType = this._getType(input);
-        if (parsedType !== ZodParsedType.bigint) {
-            const ctx = this._getOrReturnCtx(input);
-            addIssueToContext(ctx, {
-                code: ZodIssueCode.invalid_type,
-                expected: ZodParsedType.bigint,
-                received: ctx.parsedType,
-            });
-            return INVALID;
-        }
-        let ctx = undefined;
-        const status = new ParseStatus();
-        for (const check of this._def.checks) {
-            if (check.kind === "min") {
-                const tooSmall = check.inclusive
-                    ? input.data < check.value
-                    : input.data <= check.value;
-                if (tooSmall) {
-                    ctx = this._getOrReturnCtx(input, ctx);
-                    addIssueToContext(ctx, {
-                        code: ZodIssueCode.too_small,
-                        type: "bigint",
-                        minimum: check.value,
-                        inclusive: check.inclusive,
-                        message: check.message,
-                    });
-                    status.dirty();
-                }
-            }
-            else if (check.kind === "max") {
-                const tooBig = check.inclusive
-                    ? input.data > check.value
-                    : input.data >= check.value;
-                if (tooBig) {
-                    ctx = this._getOrReturnCtx(input, ctx);
-                    addIssueToContext(ctx, {
-                        code: ZodIssueCode.too_big,
-                        type: "bigint",
-                        maximum: check.value,
-                        inclusive: check.inclusive,
-                        message: check.message,
-                    });
-                    status.dirty();
-                }
-            }
-            else if (check.kind === "multipleOf") {
-                if (input.data % check.value !== BigInt(0)) {
-                    ctx = this._getOrReturnCtx(input, ctx);
-                    addIssueToContext(ctx, {
-                        code: ZodIssueCode.not_multiple_of,
-                        multipleOf: check.value,
-                        message: check.message,
-                    });
-                    status.dirty();
-                }
-            }
-            else {
-                util.assertNever(check);
-            }
-        }
-        return { status: status.value, value: input.data };
-    }
-    gte(value, message) {
-        return this.setLimit("min", value, true, errorUtil.toString(message));
-    }
-    gt(value, message) {
-        return this.setLimit("min", value, false, errorUtil.toString(message));
-    }
-    lte(value, message) {
-        return this.setLimit("max", value, true, errorUtil.toString(message));
-    }
-    lt(value, message) {
-        return this.setLimit("max", value, false, errorUtil.toString(message));
-    }
-    setLimit(kind, value, inclusive, message) {
-        return new ZodBigInt({
-            ...this._def,
-            checks: [
-                ...this._def.checks,
-                {
-                    kind,
-                    value,
-                    inclusive,
-                    message: errorUtil.toString(message),
-                },
-            ],
-        });
-    }
-    _addCheck(check) {
-        return new ZodBigInt({
-            ...this._def,
-            checks: [...this._def.checks, check],
-        });
-    }
-    positive(message) {
-        return this._addCheck({
-            kind: "min",
-            value: BigInt(0),
-            inclusive: false,
-            message: errorUtil.toString(message),
-        });
-    }
-    negative(message) {
-        return this._addCheck({
-            kind: "max",
-            value: BigInt(0),
-            inclusive: false,
-            message: errorUtil.toString(message),
-        });
-    }
-    nonpositive(message) {
-        return this._addCheck({
-            kind: "max",
-            value: BigInt(0),
-            inclusive: true,
-            message: errorUtil.toString(message),
-        });
-    }
-    nonnegative(message) {
-        return this._addCheck({
-            kind: "min",
-            value: BigInt(0),
-            inclusive: true,
-            message: errorUtil.toString(message),
-        });
-    }
-    multipleOf(value, message) {
-        return this._addCheck({
-            kind: "multipleOf",
-            value,
-            message: errorUtil.toString(message),
-        });
-    }
-    get minValue() {
-        let min = null;
-        for (const ch of this._def.checks) {
-            if (ch.kind === "min") {
-                if (min === null || ch.value > min)
-                    min = ch.value;
-            }
-        }
-        return min;
-    }
-    get maxValue() {
-        let max = null;
-        for (const ch of this._def.checks) {
-            if (ch.kind === "max") {
-                if (max === null || ch.value < max)
-                    max = ch.value;
-            }
-        }
-        return max;
-    }
-}
-ZodBigInt.create = (params) => {
-    var _a;
-    return new ZodBigInt({
-        checks: [],
-        typeName: ZodFirstPartyTypeKind.ZodBigInt,
-        coerce: (_a = params === null || params === void 0 ? void 0 : params.coerce) !== null && _a !== void 0 ? _a : false,
-        ...processCreateParams(params),
-    });
-};
-class ZodBoolean extends ZodType {
-    _parse(input) {
-        if (this._def.coerce) {
-            input.data = Boolean(input.data);
-        }
-        const parsedType = this._getType(input);
-        if (parsedType !== ZodParsedType.boolean) {
-            const ctx = this._getOrReturnCtx(input);
-            addIssueToContext(ctx, {
-                code: ZodIssueCode.invalid_type,
-                expected: ZodParsedType.boolean,
-                received: ctx.parsedType,
-            });
-            return INVALID;
-        }
-        return OK(input.data);
-    }
-}
-ZodBoolean.create = (params) => {
-    return new ZodBoolean({
-        typeName: ZodFirstPartyTypeKind.ZodBoolean,
-        coerce: (params === null || params === void 0 ? void 0 : params.coerce) || false,
-        ...processCreateParams(params),
-    });
-};
-class ZodDate extends ZodType {
-    _parse(input) {
-        if (this._def.coerce) {
-            input.data = new Date(input.data);
-        }
-        const parsedType = this._getType(input);
-        if (parsedType !== ZodParsedType.date) {
-            const ctx = this._getOrReturnCtx(input);
-            addIssueToContext(ctx, {
-                code: ZodIssueCode.invalid_type,
-                expected: ZodParsedType.date,
-                received: ctx.parsedType,
-            });
-            return INVALID;
-        }
-        if (isNaN(input.data.getTime())) {
-            const ctx = this._getOrReturnCtx(input);
-            addIssueToContext(ctx, {
-                code: ZodIssueCode.invalid_date,
-            });
-            return INVALID;
-        }
-        const status = new ParseStatus();
-        let ctx = undefined;
-        for (const check of this._def.checks) {
-            if (check.kind === "min") {
-                if (input.data.getTime() < check.value) {
-                    ctx = this._getOrReturnCtx(input, ctx);
-                    addIssueToContext(ctx, {
-                        code: ZodIssueCode.too_small,
-                        message: check.message,
-                        inclusive: true,
-                        exact: false,
-                        minimum: check.value,
-                        type: "date",
-                    });
-                    status.dirty();
-                }
-            }
-            else if (check.kind === "max") {
-                if (input.data.getTime() > check.value) {
-                    ctx = this._getOrReturnCtx(input, ctx);
-                    addIssueToContext(ctx, {
-                        code: ZodIssueCode.too_big,
-                        message: check.message,
-                        inclusive: true,
-                        exact: false,
-                        maximum: check.value,
-                        type: "date",
-                    });
-                    status.dirty();
-                }
-            }
-            else {
-                util.assertNever(check);
-            }
-        }
-        return {
-            status: status.value,
-            value: new Date(input.data.getTime()),
-        };
-    }
-    _addCheck(check) {
-        return new ZodDate({
-            ...this._def,
-            checks: [...this._def.checks, check],
-        });
-    }
-    min(minDate, message) {
-        return this._addCheck({
-            kind: "min",
-            value: minDate.getTime(),
-            message: errorUtil.toString(message),
-        });
-    }
-    max(maxDate, message) {
-        return this._addCheck({
-            kind: "max",
-            value: maxDate.getTime(),
-            message: errorUtil.toString(message),
-        });
-    }
-    get minDate() {
-        let min = null;
-        for (const ch of this._def.checks) {
-            if (ch.kind === "min") {
-                if (min === null || ch.value > min)
-                    min = ch.value;
-            }
-        }
-        return min != null ? new Date(min) : null;
-    }
-    get maxDate() {
-        let max = null;
-        for (const ch of this._def.checks) {
-            if (ch.kind === "max") {
-                if (max === null || ch.value < max)
-                    max = ch.value;
-            }
-        }
-        return max != null ? new Date(max) : null;
-    }
-}
-ZodDate.create = (params) => {
-    return new ZodDate({
-        checks: [],
-        coerce: (params === null || params === void 0 ? void 0 : params.coerce) || false,
-        typeName: ZodFirstPartyTypeKind.ZodDate,
-        ...processCreateParams(params),
-    });
-};
-class ZodSymbol extends ZodType {
-    _parse(input) {
-        const parsedType = this._getType(input);
-        if (parsedType !== ZodParsedType.symbol) {
-            const ctx = this._getOrReturnCtx(input);
-            addIssueToContext(ctx, {
-                code: ZodIssueCode.invalid_type,
-                expected: ZodParsedType.symbol,
-                received: ctx.parsedType,
-            });
-            return INVALID;
-        }
-        return OK(input.data);
-    }
-}
-ZodSymbol.create = (params) => {
-    return new ZodSymbol({
-        typeName: ZodFirstPartyTypeKind.ZodSymbol,
-        ...processCreateParams(params),
-    });
-};
-class ZodUndefined extends ZodType {
-    _parse(input) {
-        const parsedType = this._getType(input);
-        if (parsedType !== ZodParsedType.undefined) {
-            const ctx = this._getOrReturnCtx(input);
-            addIssueToContext(ctx, {
-                code: ZodIssueCode.invalid_type,
-                expected: ZodParsedType.undefined,
-                received: ctx.parsedType,
-            });
-            return INVALID;
-        }
-        return OK(input.data);
-    }
-}
-ZodUndefined.create = (params) => {
-    return new ZodUndefined({
-        typeName: ZodFirstPartyTypeKind.ZodUndefined,
-        ...processCreateParams(params),
-    });
-};
-class ZodNull extends ZodType {
-    _parse(input) {
-        const parsedType = this._getType(input);
-        if (parsedType !== ZodParsedType.null) {
-            const ctx = this._getOrReturnCtx(input);
-            addIssueToContext(ctx, {
-                code: ZodIssueCode.invalid_type,
-                expected: ZodParsedType.null,
-                received: ctx.parsedType,
-            });
-            return INVALID;
-        }
-        return OK(input.data);
-    }
-}
-ZodNull.create = (params) => {
-    return new ZodNull({
-        typeName: ZodFirstPartyTypeKind.ZodNull,
-        ...processCreateParams(params),
-    });
-};
-class ZodAny extends ZodType {
-    constructor() {
-        super(...arguments);
-        // to prevent instances of other classes from extending ZodAny. this causes issues with catchall in ZodObject.
-        this._any = true;
-    }
-    _parse(input) {
-        return OK(input.data);
-    }
-}
-ZodAny.create = (params) => {
-    return new ZodAny({
-        typeName: ZodFirstPartyTypeKind.ZodAny,
-        ...processCreateParams(params),
-    });
-};
-class ZodUnknown extends ZodType {
-    constructor() {
-        super(...arguments);
-        // required
-        this._unknown = true;
-    }
-    _parse(input) {
-        return OK(input.data);
-    }
-}
-ZodUnknown.create = (params) => {
-    return new ZodUnknown({
-        typeName: ZodFirstPartyTypeKind.ZodUnknown,
-        ...processCreateParams(params),
-    });
-};
-class ZodNever extends ZodType {
-    _parse(input) {
-        const ctx = this._getOrReturnCtx(input);
-        addIssueToContext(ctx, {
-            code: ZodIssueCode.invalid_type,
-            expected: ZodParsedType.never,
-            received: ctx.parsedType,
-        });
-        return INVALID;
-    }
-}
-ZodNever.create = (params) => {
-    return new ZodNever({
-        typeName: ZodFirstPartyTypeKind.ZodNever,
-        ...processCreateParams(params),
-    });
-};
-class ZodVoid extends ZodType {
-    _parse(input) {
-        const parsedType = this._getType(input);
-        if (parsedType !== ZodParsedType.undefined) {
-            const ctx = this._getOrReturnCtx(input);
-            addIssueToContext(ctx, {
-                code: ZodIssueCode.invalid_type,
-                expected: ZodParsedType.void,
-                received: ctx.parsedType,
-            });
-            return INVALID;
-        }
-        return OK(input.data);
-    }
-}
-ZodVoid.create = (params) => {
-    return new ZodVoid({
-        typeName: ZodFirstPartyTypeKind.ZodVoid,
-        ...processCreateParams(params),
-    });
-};
-class ZodArray extends ZodType {
-    _parse(input) {
-        const { ctx, status } = this._processInputParams(input);
-        const def = this._def;
-        if (ctx.parsedType !== ZodParsedType.array) {
-            addIssueToContext(ctx, {
-                code: ZodIssueCode.invalid_type,
-                expected: ZodParsedType.array,
-                received: ctx.parsedType,
-            });
-            return INVALID;
-        }
-        if (def.exactLength !== null) {
-            const tooBig = ctx.data.length > def.exactLength.value;
-            const tooSmall = ctx.data.length < def.exactLength.value;
-            if (tooBig || tooSmall) {
-                addIssueToContext(ctx, {
-                    code: tooBig ? ZodIssueCode.too_big : ZodIssueCode.too_small,
-                    minimum: (tooSmall ? def.exactLength.value : undefined),
-                    maximum: (tooBig ? def.exactLength.value : undefined),
-                    type: "array",
-                    inclusive: true,
-                    exact: true,
-                    message: def.exactLength.message,
-                });
-                status.dirty();
-            }
-        }
-        if (def.minLength !== null) {
-            if (ctx.data.length < def.minLength.value) {
-                addIssueToContext(ctx, {
-                    code: ZodIssueCode.too_small,
-                    minimum: def.minLength.value,
-                    type: "array",
-                    inclusive: true,
-                    exact: false,
-                    message: def.minLength.message,
-                });
-                status.dirty();
-            }
-        }
-        if (def.maxLength !== null) {
-            if (ctx.data.length > def.maxLength.value) {
-                addIssueToContext(ctx, {
-                    code: ZodIssueCode.too_big,
-                    maximum: def.maxLength.value,
-                    type: "array",
-                    inclusive: true,
-                    exact: false,
-                    message: def.maxLength.message,
-                });
-                status.dirty();
-            }
-        }
-        if (ctx.common.async) {
-            return Promise.all([...ctx.data].map((item, i) => {
-                return def.type._parseAsync(new ParseInputLazyPath(ctx, item, ctx.path, i));
-            })).then((result) => {
-                return ParseStatus.mergeArray(status, result);
-            });
-        }
-        const result = [...ctx.data].map((item, i) => {
-            return def.type._parseSync(new ParseInputLazyPath(ctx, item, ctx.path, i));
-        });
-        return ParseStatus.mergeArray(status, result);
-    }
-    get element() {
-        return this._def.type;
-    }
-    min(minLength, message) {
-        return new ZodArray({
-            ...this._def,
-            minLength: { value: minLength, message: errorUtil.toString(message) },
-        });
-    }
-    max(maxLength, message) {
-        return new ZodArray({
-            ...this._def,
-            maxLength: { value: maxLength, message: errorUtil.toString(message) },
-        });
-    }
-    length(len, message) {
-        return new ZodArray({
-            ...this._def,
-            exactLength: { value: len, message: errorUtil.toString(message) },
-        });
-    }
-    nonempty(message) {
-        return this.min(1, message);
-    }
-}
-ZodArray.create = (schema, params) => {
-    return new ZodArray({
-        type: schema,
-        minLength: null,
-        maxLength: null,
-        exactLength: null,
-        typeName: ZodFirstPartyTypeKind.ZodArray,
-        ...processCreateParams(params),
-    });
-};
-function deepPartialify(schema) {
-    if (schema instanceof ZodObject) {
-        const newShape = {};
-        for (const key in schema.shape) {
-            const fieldSchema = schema.shape[key];
-            newShape[key] = ZodOptional.create(deepPartialify(fieldSchema));
-        }
-        return new ZodObject({
-            ...schema._def,
-            shape: () => newShape,
-        });
-    }
-    else if (schema instanceof ZodArray) {
-        return new ZodArray({
-            ...schema._def,
-            type: deepPartialify(schema.element),
-        });
-    }
-    else if (schema instanceof ZodOptional) {
-        return ZodOptional.create(deepPartialify(schema.unwrap()));
-    }
-    else if (schema instanceof ZodNullable) {
-        return ZodNullable.create(deepPartialify(schema.unwrap()));
-    }
-    else if (schema instanceof ZodTuple) {
-        return ZodTuple.create(schema.items.map((item) => deepPartialify(item)));
-    }
-    else {
-        return schema;
-    }
-}
-class ZodObject extends ZodType {
-    constructor() {
-        super(...arguments);
-        this._cached = null;
-        /**
-         * @deprecated In most cases, this is no longer needed - unknown properties are now silently stripped.
-         * If you want to pass through unknown properties, use `.passthrough()` instead.
-         */
-        this.nonstrict = this.passthrough;
-        // extend<
-        //   Augmentation extends ZodRawShape,
-        //   NewOutput extends util.flatten<{
-        //     [k in keyof Augmentation | keyof Output]: k extends keyof Augmentation
-        //       ? Augmentation[k]["_output"]
-        //       : k extends keyof Output
-        //       ? Output[k]
-        //       : never;
-        //   }>,
-        //   NewInput extends util.flatten<{
-        //     [k in keyof Augmentation | keyof Input]: k extends keyof Augmentation
-        //       ? Augmentation[k]["_input"]
-        //       : k extends keyof Input
-        //       ? Input[k]
-        //       : never;
-        //   }>
-        // >(
-        //   augmentation: Augmentation
-        // ): ZodObject<
-        //   extendShape<T, Augmentation>,
-        //   UnknownKeys,
-        //   Catchall,
-        //   NewOutput,
-        //   NewInput
-        // > {
-        //   return new ZodObject({
-        //     ...this._def,
-        //     shape: () => ({
-        //       ...this._def.shape(),
-        //       ...augmentation,
-        //     }),
-        //   }) as any;
-        // }
-        /**
-         * @deprecated Use `.extend` instead
-         *  */
-        this.augment = this.extend;
-    }
-    _getCached() {
-        if (this._cached !== null)
-            return this._cached;
-        const shape = this._def.shape();
-        const keys = util.objectKeys(shape);
-        return (this._cached = { shape, keys });
-    }
-    _parse(input) {
-        const parsedType = this._getType(input);
-        if (parsedType !== ZodParsedType.object) {
-            const ctx = this._getOrReturnCtx(input);
-            addIssueToContext(ctx, {
-                code: ZodIssueCode.invalid_type,
-                expected: ZodParsedType.object,
-                received: ctx.parsedType,
-            });
-            return INVALID;
-        }
-        const { status, ctx } = this._processInputParams(input);
-        const { shape, keys: shapeKeys } = this._getCached();
-        const extraKeys = [];
-        if (!(this._def.catchall instanceof ZodNever &&
-            this._def.unknownKeys === "strip")) {
-            for (const key in ctx.data) {
-                if (!shapeKeys.includes(key)) {
-                    extraKeys.push(key);
-                }
-            }
-        }
-        const pairs = [];
-        for (const key of shapeKeys) {
-            const keyValidator = shape[key];
-            const value = ctx.data[key];
-            pairs.push({
-                key: { status: "valid", value: key },
-                value: keyValidator._parse(new ParseInputLazyPath(ctx, value, ctx.path, key)),
-                alwaysSet: key in ctx.data,
-            });
-        }
-        if (this._def.catchall instanceof ZodNever) {
-            const unknownKeys = this._def.unknownKeys;
-            if (unknownKeys === "passthrough") {
-                for (const key of extraKeys) {
-                    pairs.push({
-                        key: { status: "valid", value: key },
-                        value: { status: "valid", value: ctx.data[key] },
-                    });
-                }
-            }
-            else if (unknownKeys === "strict") {
-                if (extraKeys.length > 0) {
-                    addIssueToContext(ctx, {
-                        code: ZodIssueCode.unrecognized_keys,
-                        keys: extraKeys,
-                    });
-                    status.dirty();
-                }
-            }
-            else if (unknownKeys === "strip") ;
-            else {
-                throw new Error(`Internal ZodObject error: invalid unknownKeys value.`);
-            }
-        }
-        else {
-            // run catchall validation
-            const catchall = this._def.catchall;
-            for (const key of extraKeys) {
-                const value = ctx.data[key];
-                pairs.push({
-                    key: { status: "valid", value: key },
-                    value: catchall._parse(new ParseInputLazyPath(ctx, value, ctx.path, key) //, ctx.child(key), value, getParsedType(value)
-                    ),
-                    alwaysSet: key in ctx.data,
-                });
-            }
-        }
-        if (ctx.common.async) {
-            return Promise.resolve()
-                .then(async () => {
-                const syncPairs = [];
-                for (const pair of pairs) {
-                    const key = await pair.key;
-                    syncPairs.push({
-                        key,
-                        value: await pair.value,
-                        alwaysSet: pair.alwaysSet,
-                    });
-                }
-                return syncPairs;
-            })
-                .then((syncPairs) => {
-                return ParseStatus.mergeObjectSync(status, syncPairs);
-            });
-        }
-        else {
-            return ParseStatus.mergeObjectSync(status, pairs);
-        }
-    }
-    get shape() {
-        return this._def.shape();
-    }
-    strict(message) {
-        errorUtil.errToObj;
-        return new ZodObject({
-            ...this._def,
-            unknownKeys: "strict",
-            ...(message !== undefined
-                ? {
-                    errorMap: (issue, ctx) => {
-                        var _a, _b, _c, _d;
-                        const defaultError = (_c = (_b = (_a = this._def).errorMap) === null || _b === void 0 ? void 0 : _b.call(_a, issue, ctx).message) !== null && _c !== void 0 ? _c : ctx.defaultError;
-                        if (issue.code === "unrecognized_keys")
-                            return {
-                                message: (_d = errorUtil.errToObj(message).message) !== null && _d !== void 0 ? _d : defaultError,
-                            };
-                        return {
-                            message: defaultError,
-                        };
-                    },
-                }
-                : {}),
-        });
-    }
-    strip() {
-        return new ZodObject({
-            ...this._def,
-            unknownKeys: "strip",
-        });
-    }
-    passthrough() {
-        return new ZodObject({
-            ...this._def,
-            unknownKeys: "passthrough",
-        });
-    }
-    // const AugmentFactory =
-    //   <Def extends ZodObjectDef>(def: Def) =>
-    //   <Augmentation extends ZodRawShape>(
-    //     augmentation: Augmentation
-    //   ): ZodObject<
-    //     extendShape<ReturnType<Def["shape"]>, Augmentation>,
-    //     Def["unknownKeys"],
-    //     Def["catchall"]
-    //   > => {
-    //     return new ZodObject({
-    //       ...def,
-    //       shape: () => ({
-    //         ...def.shape(),
-    //         ...augmentation,
-    //       }),
-    //     }) as any;
-    //   };
-    extend(augmentation) {
-        return new ZodObject({
-            ...this._def,
-            shape: () => ({
-                ...this._def.shape(),
-                ...augmentation,
-            }),
-        });
-    }
-    /**
-     * Prior to zod@1.0.12 there was a bug in the
-     * inferred type of merged objects. Please
-     * upgrade if you are experiencing issues.
-     */
-    merge(merging) {
-        const merged = new ZodObject({
-            unknownKeys: merging._def.unknownKeys,
-            catchall: merging._def.catchall,
-            shape: () => ({
-                ...this._def.shape(),
-                ...merging._def.shape(),
-            }),
-            typeName: ZodFirstPartyTypeKind.ZodObject,
-        });
-        return merged;
-    }
-    // merge<
-    //   Incoming extends AnyZodObject,
-    //   Augmentation extends Incoming["shape"],
-    //   NewOutput extends {
-    //     [k in keyof Augmentation | keyof Output]: k extends keyof Augmentation
-    //       ? Augmentation[k]["_output"]
-    //       : k extends keyof Output
-    //       ? Output[k]
-    //       : never;
-    //   },
-    //   NewInput extends {
-    //     [k in keyof Augmentation | keyof Input]: k extends keyof Augmentation
-    //       ? Augmentation[k]["_input"]
-    //       : k extends keyof Input
-    //       ? Input[k]
-    //       : never;
-    //   }
-    // >(
-    //   merging: Incoming
-    // ): ZodObject<
-    //   extendShape<T, ReturnType<Incoming["_def"]["shape"]>>,
-    //   Incoming["_def"]["unknownKeys"],
-    //   Incoming["_def"]["catchall"],
-    //   NewOutput,
-    //   NewInput
-    // > {
-    //   const merged: any = new ZodObject({
-    //     unknownKeys: merging._def.unknownKeys,
-    //     catchall: merging._def.catchall,
-    //     shape: () =>
-    //       objectUtil.mergeShapes(this._def.shape(), merging._def.shape()),
-    //     typeName: ZodFirstPartyTypeKind.ZodObject,
-    //   }) as any;
-    //   return merged;
-    // }
-    setKey(key, schema) {
-        return this.augment({ [key]: schema });
-    }
-    // merge<Incoming extends AnyZodObject>(
-    //   merging: Incoming
-    // ): //ZodObject<T & Incoming["_shape"], UnknownKeys, Catchall> = (merging) => {
-    // ZodObject<
-    //   extendShape<T, ReturnType<Incoming["_def"]["shape"]>>,
-    //   Incoming["_def"]["unknownKeys"],
-    //   Incoming["_def"]["catchall"]
-    // > {
-    //   // const mergedShape = objectUtil.mergeShapes(
-    //   //   this._def.shape(),
-    //   //   merging._def.shape()
-    //   // );
-    //   const merged: any = new ZodObject({
-    //     unknownKeys: merging._def.unknownKeys,
-    //     catchall: merging._def.catchall,
-    //     shape: () =>
-    //       objectUtil.mergeShapes(this._def.shape(), merging._def.shape()),
-    //     typeName: ZodFirstPartyTypeKind.ZodObject,
-    //   }) as any;
-    //   return merged;
-    // }
-    catchall(index) {
-        return new ZodObject({
-            ...this._def,
-            catchall: index,
-        });
-    }
-    pick(mask) {
-        const shape = {};
-        util.objectKeys(mask).forEach((key) => {
-            if (mask[key] && this.shape[key]) {
-                shape[key] = this.shape[key];
-            }
-        });
-        return new ZodObject({
-            ...this._def,
-            shape: () => shape,
-        });
-    }
-    omit(mask) {
-        const shape = {};
-        util.objectKeys(this.shape).forEach((key) => {
-            if (!mask[key]) {
-                shape[key] = this.shape[key];
-            }
-        });
-        return new ZodObject({
-            ...this._def,
-            shape: () => shape,
-        });
-    }
-    /**
-     * @deprecated
-     */
-    deepPartial() {
-        return deepPartialify(this);
-    }
-    partial(mask) {
-        const newShape = {};
-        util.objectKeys(this.shape).forEach((key) => {
-            const fieldSchema = this.shape[key];
-            if (mask && !mask[key]) {
-                newShape[key] = fieldSchema;
-            }
-            else {
-                newShape[key] = fieldSchema.optional();
-            }
-        });
-        return new ZodObject({
-            ...this._def,
-            shape: () => newShape,
-        });
-    }
-    required(mask) {
-        const newShape = {};
-        util.objectKeys(this.shape).forEach((key) => {
-            if (mask && !mask[key]) {
-                newShape[key] = this.shape[key];
-            }
-            else {
-                const fieldSchema = this.shape[key];
-                let newField = fieldSchema;
-                while (newField instanceof ZodOptional) {
-                    newField = newField._def.innerType;
-                }
-                newShape[key] = newField;
-            }
-        });
-        return new ZodObject({
-            ...this._def,
-            shape: () => newShape,
-        });
-    }
-    keyof() {
-        return createZodEnum(util.objectKeys(this.shape));
-    }
-}
-ZodObject.create = (shape, params) => {
-    return new ZodObject({
-        shape: () => shape,
-        unknownKeys: "strip",
-        catchall: ZodNever.create(),
-        typeName: ZodFirstPartyTypeKind.ZodObject,
-        ...processCreateParams(params),
-    });
-};
-ZodObject.strictCreate = (shape, params) => {
-    return new ZodObject({
-        shape: () => shape,
-        unknownKeys: "strict",
-        catchall: ZodNever.create(),
-        typeName: ZodFirstPartyTypeKind.ZodObject,
-        ...processCreateParams(params),
-    });
-};
-ZodObject.lazycreate = (shape, params) => {
-    return new ZodObject({
-        shape,
-        unknownKeys: "strip",
-        catchall: ZodNever.create(),
-        typeName: ZodFirstPartyTypeKind.ZodObject,
-        ...processCreateParams(params),
-    });
-};
-class ZodUnion extends ZodType {
-    _parse(input) {
-        const { ctx } = this._processInputParams(input);
-        const options = this._def.options;
-        function handleResults(results) {
-            // return first issue-free validation if it exists
-            for (const result of results) {
-                if (result.result.status === "valid") {
-                    return result.result;
-                }
-            }
-            for (const result of results) {
-                if (result.result.status === "dirty") {
-                    // add issues from dirty option
-                    ctx.common.issues.push(...result.ctx.common.issues);
-                    return result.result;
-                }
-            }
-            // return invalid
-            const unionErrors = results.map((result) => new ZodError(result.ctx.common.issues));
-            addIssueToContext(ctx, {
-                code: ZodIssueCode.invalid_union,
-                unionErrors,
-            });
-            return INVALID;
-        }
-        if (ctx.common.async) {
-            return Promise.all(options.map(async (option) => {
-                const childCtx = {
-                    ...ctx,
-                    common: {
-                        ...ctx.common,
-                        issues: [],
-                    },
-                    parent: null,
-                };
-                return {
-                    result: await option._parseAsync({
-                        data: ctx.data,
-                        path: ctx.path,
-                        parent: childCtx,
-                    }),
-                    ctx: childCtx,
-                };
-            })).then(handleResults);
-        }
-        else {
-            let dirty = undefined;
-            const issues = [];
-            for (const option of options) {
-                const childCtx = {
-                    ...ctx,
-                    common: {
-                        ...ctx.common,
-                        issues: [],
-                    },
-                    parent: null,
-                };
-                const result = option._parseSync({
-                    data: ctx.data,
-                    path: ctx.path,
-                    parent: childCtx,
-                });
-                if (result.status === "valid") {
-                    return result;
-                }
-                else if (result.status === "dirty" && !dirty) {
-                    dirty = { result, ctx: childCtx };
-                }
-                if (childCtx.common.issues.length) {
-                    issues.push(childCtx.common.issues);
-                }
-            }
-            if (dirty) {
-                ctx.common.issues.push(...dirty.ctx.common.issues);
-                return dirty.result;
-            }
-            const unionErrors = issues.map((issues) => new ZodError(issues));
-            addIssueToContext(ctx, {
-                code: ZodIssueCode.invalid_union,
-                unionErrors,
-            });
-            return INVALID;
-        }
-    }
-    get options() {
-        return this._def.options;
-    }
-}
-ZodUnion.create = (types, params) => {
-    return new ZodUnion({
-        options: types,
-        typeName: ZodFirstPartyTypeKind.ZodUnion,
-        ...processCreateParams(params),
-    });
-};
-/////////////////////////////////////////////////////
-/////////////////////////////////////////////////////
-//////////                                 //////////
-//////////      ZodDiscriminatedUnion      //////////
-//////////                                 //////////
-/////////////////////////////////////////////////////
-/////////////////////////////////////////////////////
-const getDiscriminator = (type) => {
-    if (type instanceof ZodLazy) {
-        return getDiscriminator(type.schema);
-    }
-    else if (type instanceof ZodEffects) {
-        return getDiscriminator(type.innerType());
-    }
-    else if (type instanceof ZodLiteral) {
-        return [type.value];
-    }
-    else if (type instanceof ZodEnum) {
-        return type.options;
-    }
-    else if (type instanceof ZodNativeEnum) {
-        // eslint-disable-next-line ban/ban
-        return Object.keys(type.enum);
-    }
-    else if (type instanceof ZodDefault) {
-        return getDiscriminator(type._def.innerType);
-    }
-    else if (type instanceof ZodUndefined) {
-        return [undefined];
-    }
-    else if (type instanceof ZodNull) {
-        return [null];
-    }
-    else {
-        return null;
-    }
-};
-class ZodDiscriminatedUnion extends ZodType {
-    _parse(input) {
-        const { ctx } = this._processInputParams(input);
-        if (ctx.parsedType !== ZodParsedType.object) {
-            addIssueToContext(ctx, {
-                code: ZodIssueCode.invalid_type,
-                expected: ZodParsedType.object,
-                received: ctx.parsedType,
-            });
-            return INVALID;
-        }
-        const discriminator = this.discriminator;
-        const discriminatorValue = ctx.data[discriminator];
-        const option = this.optionsMap.get(discriminatorValue);
-        if (!option) {
-            addIssueToContext(ctx, {
-                code: ZodIssueCode.invalid_union_discriminator,
-                options: Array.from(this.optionsMap.keys()),
-                path: [discriminator],
-            });
-            return INVALID;
-        }
-        if (ctx.common.async) {
-            return option._parseAsync({
-                data: ctx.data,
-                path: ctx.path,
-                parent: ctx,
-            });
-        }
-        else {
-            return option._parseSync({
-                data: ctx.data,
-                path: ctx.path,
-                parent: ctx,
-            });
-        }
-    }
-    get discriminator() {
-        return this._def.discriminator;
-    }
-    get options() {
-        return this._def.options;
-    }
-    get optionsMap() {
-        return this._def.optionsMap;
-    }
-    /**
-     * The constructor of the discriminated union schema. Its behaviour is very similar to that of the normal z.union() constructor.
-     * However, it only allows a union of objects, all of which need to share a discriminator property. This property must
-     * have a different value for each object in the union.
-     * @param discriminator the name of the discriminator property
-     * @param types an array of object schemas
-     * @param params
-     */
-    static create(discriminator, options, params) {
-        // Get all the valid discriminator values
-        const optionsMap = new Map();
-        // try {
-        for (const type of options) {
-            const discriminatorValues = getDiscriminator(type.shape[discriminator]);
-            if (!discriminatorValues) {
-                throw new Error(`A discriminator value for key \`${discriminator}\` could not be extracted from all schema options`);
-            }
-            for (const value of discriminatorValues) {
-                if (optionsMap.has(value)) {
-                    throw new Error(`Discriminator property ${String(discriminator)} has duplicate value ${String(value)}`);
-                }
-                optionsMap.set(value, type);
-            }
-        }
-        return new ZodDiscriminatedUnion({
-            typeName: ZodFirstPartyTypeKind.ZodDiscriminatedUnion,
-            discriminator,
-            options,
-            optionsMap,
-            ...processCreateParams(params),
-        });
-    }
-}
-function mergeValues(a, b) {
-    const aType = getParsedType(a);
-    const bType = getParsedType(b);
-    if (a === b) {
-        return { valid: true, data: a };
-    }
-    else if (aType === ZodParsedType.object && bType === ZodParsedType.object) {
-        const bKeys = util.objectKeys(b);
-        const sharedKeys = util
-            .objectKeys(a)
-            .filter((key) => bKeys.indexOf(key) !== -1);
-        const newObj = { ...a, ...b };
-        for (const key of sharedKeys) {
-            const sharedValue = mergeValues(a[key], b[key]);
-            if (!sharedValue.valid) {
-                return { valid: false };
-            }
-            newObj[key] = sharedValue.data;
-        }
-        return { valid: true, data: newObj };
-    }
-    else if (aType === ZodParsedType.array && bType === ZodParsedType.array) {
-        if (a.length !== b.length) {
-            return { valid: false };
-        }
-        const newArray = [];
-        for (let index = 0; index < a.length; index++) {
-            const itemA = a[index];
-            const itemB = b[index];
-            const sharedValue = mergeValues(itemA, itemB);
-            if (!sharedValue.valid) {
-                return { valid: false };
-            }
-            newArray.push(sharedValue.data);
-        }
-        return { valid: true, data: newArray };
-    }
-    else if (aType === ZodParsedType.date &&
-        bType === ZodParsedType.date &&
-        +a === +b) {
-        return { valid: true, data: a };
-    }
-    else {
-        return { valid: false };
-    }
-}
-class ZodIntersection extends ZodType {
-    _parse(input) {
-        const { status, ctx } = this._processInputParams(input);
-        const handleParsed = (parsedLeft, parsedRight) => {
-            if (isAborted(parsedLeft) || isAborted(parsedRight)) {
-                return INVALID;
-            }
-            const merged = mergeValues(parsedLeft.value, parsedRight.value);
-            if (!merged.valid) {
-                addIssueToContext(ctx, {
-                    code: ZodIssueCode.invalid_intersection_types,
-                });
-                return INVALID;
-            }
-            if (isDirty(parsedLeft) || isDirty(parsedRight)) {
-                status.dirty();
-            }
-            return { status: status.value, value: merged.data };
-        };
-        if (ctx.common.async) {
-            return Promise.all([
-                this._def.left._parseAsync({
-                    data: ctx.data,
-                    path: ctx.path,
-                    parent: ctx,
-                }),
-                this._def.right._parseAsync({
-                    data: ctx.data,
-                    path: ctx.path,
-                    parent: ctx,
-                }),
-            ]).then(([left, right]) => handleParsed(left, right));
-        }
-        else {
-            return handleParsed(this._def.left._parseSync({
-                data: ctx.data,
-                path: ctx.path,
-                parent: ctx,
-            }), this._def.right._parseSync({
-                data: ctx.data,
-                path: ctx.path,
-                parent: ctx,
-            }));
-        }
-    }
-}
-ZodIntersection.create = (left, right, params) => {
-    return new ZodIntersection({
-        left: left,
-        right: right,
-        typeName: ZodFirstPartyTypeKind.ZodIntersection,
-        ...processCreateParams(params),
-    });
-};
-class ZodTuple extends ZodType {
-    _parse(input) {
-        const { status, ctx } = this._processInputParams(input);
-        if (ctx.parsedType !== ZodParsedType.array) {
-            addIssueToContext(ctx, {
-                code: ZodIssueCode.invalid_type,
-                expected: ZodParsedType.array,
-                received: ctx.parsedType,
-            });
-            return INVALID;
-        }
-        if (ctx.data.length < this._def.items.length) {
-            addIssueToContext(ctx, {
-                code: ZodIssueCode.too_small,
-                minimum: this._def.items.length,
-                inclusive: true,
-                exact: false,
-                type: "array",
-            });
-            return INVALID;
-        }
-        const rest = this._def.rest;
-        if (!rest && ctx.data.length > this._def.items.length) {
-            addIssueToContext(ctx, {
-                code: ZodIssueCode.too_big,
-                maximum: this._def.items.length,
-                inclusive: true,
-                exact: false,
-                type: "array",
-            });
-            status.dirty();
-        }
-        const items = [...ctx.data]
-            .map((item, itemIndex) => {
-            const schema = this._def.items[itemIndex] || this._def.rest;
-            if (!schema)
-                return null;
-            return schema._parse(new ParseInputLazyPath(ctx, item, ctx.path, itemIndex));
-        })
-            .filter((x) => !!x); // filter nulls
-        if (ctx.common.async) {
-            return Promise.all(items).then((results) => {
-                return ParseStatus.mergeArray(status, results);
-            });
-        }
-        else {
-            return ParseStatus.mergeArray(status, items);
-        }
-    }
-    get items() {
-        return this._def.items;
-    }
-    rest(rest) {
-        return new ZodTuple({
-            ...this._def,
-            rest,
-        });
-    }
-}
-ZodTuple.create = (schemas, params) => {
-    if (!Array.isArray(schemas)) {
-        throw new Error("You must pass an array of schemas to z.tuple([ ... ])");
-    }
-    return new ZodTuple({
-        items: schemas,
-        typeName: ZodFirstPartyTypeKind.ZodTuple,
-        rest: null,
-        ...processCreateParams(params),
-    });
-};
-class ZodRecord extends ZodType {
-    get keySchema() {
-        return this._def.keyType;
-    }
-    get valueSchema() {
-        return this._def.valueType;
-    }
-    _parse(input) {
-        const { status, ctx } = this._processInputParams(input);
-        if (ctx.parsedType !== ZodParsedType.object) {
-            addIssueToContext(ctx, {
-                code: ZodIssueCode.invalid_type,
-                expected: ZodParsedType.object,
-                received: ctx.parsedType,
-            });
-            return INVALID;
-        }
-        const pairs = [];
-        const keyType = this._def.keyType;
-        const valueType = this._def.valueType;
-        for (const key in ctx.data) {
-            pairs.push({
-                key: keyType._parse(new ParseInputLazyPath(ctx, key, ctx.path, key)),
-                value: valueType._parse(new ParseInputLazyPath(ctx, ctx.data[key], ctx.path, key)),
-            });
-        }
-        if (ctx.common.async) {
-            return ParseStatus.mergeObjectAsync(status, pairs);
-        }
-        else {
-            return ParseStatus.mergeObjectSync(status, pairs);
-        }
-    }
-    get element() {
-        return this._def.valueType;
-    }
-    static create(first, second, third) {
-        if (second instanceof ZodType) {
-            return new ZodRecord({
-                keyType: first,
-                valueType: second,
-                typeName: ZodFirstPartyTypeKind.ZodRecord,
-                ...processCreateParams(third),
-            });
-        }
-        return new ZodRecord({
-            keyType: ZodString.create(),
-            valueType: first,
-            typeName: ZodFirstPartyTypeKind.ZodRecord,
-            ...processCreateParams(second),
-        });
-    }
-}
-class ZodMap extends ZodType {
-    get keySchema() {
-        return this._def.keyType;
-    }
-    get valueSchema() {
-        return this._def.valueType;
-    }
-    _parse(input) {
-        const { status, ctx } = this._processInputParams(input);
-        if (ctx.parsedType !== ZodParsedType.map) {
-            addIssueToContext(ctx, {
-                code: ZodIssueCode.invalid_type,
-                expected: ZodParsedType.map,
-                received: ctx.parsedType,
-            });
-            return INVALID;
-        }
-        const keyType = this._def.keyType;
-        const valueType = this._def.valueType;
-        const pairs = [...ctx.data.entries()].map(([key, value], index) => {
-            return {
-                key: keyType._parse(new ParseInputLazyPath(ctx, key, ctx.path, [index, "key"])),
-                value: valueType._parse(new ParseInputLazyPath(ctx, value, ctx.path, [index, "value"])),
-            };
-        });
-        if (ctx.common.async) {
-            const finalMap = new Map();
-            return Promise.resolve().then(async () => {
-                for (const pair of pairs) {
-                    const key = await pair.key;
-                    const value = await pair.value;
-                    if (key.status === "aborted" || value.status === "aborted") {
-                        return INVALID;
-                    }
-                    if (key.status === "dirty" || value.status === "dirty") {
-                        status.dirty();
-                    }
-                    finalMap.set(key.value, value.value);
-                }
-                return { status: status.value, value: finalMap };
-            });
-        }
-        else {
-            const finalMap = new Map();
-            for (const pair of pairs) {
-                const key = pair.key;
-                const value = pair.value;
-                if (key.status === "aborted" || value.status === "aborted") {
-                    return INVALID;
-                }
-                if (key.status === "dirty" || value.status === "dirty") {
-                    status.dirty();
-                }
-                finalMap.set(key.value, value.value);
-            }
-            return { status: status.value, value: finalMap };
-        }
-    }
-}
-ZodMap.create = (keyType, valueType, params) => {
-    return new ZodMap({
-        valueType,
-        keyType,
-        typeName: ZodFirstPartyTypeKind.ZodMap,
-        ...processCreateParams(params),
-    });
-};
-class ZodSet extends ZodType {
-    _parse(input) {
-        const { status, ctx } = this._processInputParams(input);
-        if (ctx.parsedType !== ZodParsedType.set) {
-            addIssueToContext(ctx, {
-                code: ZodIssueCode.invalid_type,
-                expected: ZodParsedType.set,
-                received: ctx.parsedType,
-            });
-            return INVALID;
-        }
-        const def = this._def;
-        if (def.minSize !== null) {
-            if (ctx.data.size < def.minSize.value) {
-                addIssueToContext(ctx, {
-                    code: ZodIssueCode.too_small,
-                    minimum: def.minSize.value,
-                    type: "set",
-                    inclusive: true,
-                    exact: false,
-                    message: def.minSize.message,
-                });
-                status.dirty();
-            }
-        }
-        if (def.maxSize !== null) {
-            if (ctx.data.size > def.maxSize.value) {
-                addIssueToContext(ctx, {
-                    code: ZodIssueCode.too_big,
-                    maximum: def.maxSize.value,
-                    type: "set",
-                    inclusive: true,
-                    exact: false,
-                    message: def.maxSize.message,
-                });
-                status.dirty();
-            }
-        }
-        const valueType = this._def.valueType;
-        function finalizeSet(elements) {
-            const parsedSet = new Set();
-            for (const element of elements) {
-                if (element.status === "aborted")
-                    return INVALID;
-                if (element.status === "dirty")
-                    status.dirty();
-                parsedSet.add(element.value);
-            }
-            return { status: status.value, value: parsedSet };
-        }
-        const elements = [...ctx.data.values()].map((item, i) => valueType._parse(new ParseInputLazyPath(ctx, item, ctx.path, i)));
-        if (ctx.common.async) {
-            return Promise.all(elements).then((elements) => finalizeSet(elements));
-        }
-        else {
-            return finalizeSet(elements);
-        }
-    }
-    min(minSize, message) {
-        return new ZodSet({
-            ...this._def,
-            minSize: { value: minSize, message: errorUtil.toString(message) },
-        });
-    }
-    max(maxSize, message) {
-        return new ZodSet({
-            ...this._def,
-            maxSize: { value: maxSize, message: errorUtil.toString(message) },
-        });
-    }
-    size(size, message) {
-        return this.min(size, message).max(size, message);
-    }
-    nonempty(message) {
-        return this.min(1, message);
-    }
-}
-ZodSet.create = (valueType, params) => {
-    return new ZodSet({
-        valueType,
-        minSize: null,
-        maxSize: null,
-        typeName: ZodFirstPartyTypeKind.ZodSet,
-        ...processCreateParams(params),
-    });
-};
-class ZodFunction extends ZodType {
-    constructor() {
-        super(...arguments);
-        this.validate = this.implement;
-    }
-    _parse(input) {
-        const { ctx } = this._processInputParams(input);
-        if (ctx.parsedType !== ZodParsedType.function) {
-            addIssueToContext(ctx, {
-                code: ZodIssueCode.invalid_type,
-                expected: ZodParsedType.function,
-                received: ctx.parsedType,
-            });
-            return INVALID;
-        }
-        function makeArgsIssue(args, error) {
-            return makeIssue({
-                data: args,
-                path: ctx.path,
-                errorMaps: [
-                    ctx.common.contextualErrorMap,
-                    ctx.schemaErrorMap,
-                    getErrorMap(),
-                    errorMap,
-                ].filter((x) => !!x),
-                issueData: {
-                    code: ZodIssueCode.invalid_arguments,
-                    argumentsError: error,
-                },
-            });
-        }
-        function makeReturnsIssue(returns, error) {
-            return makeIssue({
-                data: returns,
-                path: ctx.path,
-                errorMaps: [
-                    ctx.common.contextualErrorMap,
-                    ctx.schemaErrorMap,
-                    getErrorMap(),
-                    errorMap,
-                ].filter((x) => !!x),
-                issueData: {
-                    code: ZodIssueCode.invalid_return_type,
-                    returnTypeError: error,
-                },
-            });
-        }
-        const params = { errorMap: ctx.common.contextualErrorMap };
-        const fn = ctx.data;
-        if (this._def.returns instanceof ZodPromise) {
-            // Would love a way to avoid disabling this rule, but we need
-            // an alias (using an arrow function was what caused 2651).
-            // eslint-disable-next-line @typescript-eslint/no-this-alias
-            const me = this;
-            return OK(async function (...args) {
-                const error = new ZodError([]);
-                const parsedArgs = await me._def.args
-                    .parseAsync(args, params)
-                    .catch((e) => {
-                    error.addIssue(makeArgsIssue(args, e));
-                    throw error;
-                });
-                const result = await Reflect.apply(fn, this, parsedArgs);
-                const parsedReturns = await me._def.returns._def.type
-                    .parseAsync(result, params)
-                    .catch((e) => {
-                    error.addIssue(makeReturnsIssue(result, e));
-                    throw error;
-                });
-                return parsedReturns;
-            });
-        }
-        else {
-            // Would love a way to avoid disabling this rule, but we need
-            // an alias (using an arrow function was what caused 2651).
-            // eslint-disable-next-line @typescript-eslint/no-this-alias
-            const me = this;
-            return OK(function (...args) {
-                const parsedArgs = me._def.args.safeParse(args, params);
-                if (!parsedArgs.success) {
-                    throw new ZodError([makeArgsIssue(args, parsedArgs.error)]);
-                }
-                const result = Reflect.apply(fn, this, parsedArgs.data);
-                const parsedReturns = me._def.returns.safeParse(result, params);
-                if (!parsedReturns.success) {
-                    throw new ZodError([makeReturnsIssue(result, parsedReturns.error)]);
-                }
-                return parsedReturns.data;
-            });
-        }
-    }
-    parameters() {
-        return this._def.args;
-    }
-    returnType() {
-        return this._def.returns;
-    }
-    args(...items) {
-        return new ZodFunction({
-            ...this._def,
-            args: ZodTuple.create(items).rest(ZodUnknown.create()),
-        });
-    }
-    returns(returnType) {
-        return new ZodFunction({
-            ...this._def,
-            returns: returnType,
-        });
-    }
-    implement(func) {
-        const validatedFunc = this.parse(func);
-        return validatedFunc;
-    }
-    strictImplement(func) {
-        const validatedFunc = this.parse(func);
-        return validatedFunc;
-    }
-    static create(args, returns, params) {
-        return new ZodFunction({
-            args: (args
-                ? args
-                : ZodTuple.create([]).rest(ZodUnknown.create())),
-            returns: returns || ZodUnknown.create(),
-            typeName: ZodFirstPartyTypeKind.ZodFunction,
-            ...processCreateParams(params),
-        });
-    }
-}
-class ZodLazy extends ZodType {
-    get schema() {
-        return this._def.getter();
-    }
-    _parse(input) {
-        const { ctx } = this._processInputParams(input);
-        const lazySchema = this._def.getter();
-        return lazySchema._parse({ data: ctx.data, path: ctx.path, parent: ctx });
-    }
-}
-ZodLazy.create = (getter, params) => {
-    return new ZodLazy({
-        getter: getter,
-        typeName: ZodFirstPartyTypeKind.ZodLazy,
-        ...processCreateParams(params),
-    });
-};
-class ZodLiteral extends ZodType {
-    _parse(input) {
-        if (input.data !== this._def.value) {
-            const ctx = this._getOrReturnCtx(input);
-            addIssueToContext(ctx, {
-                received: ctx.data,
-                code: ZodIssueCode.invalid_literal,
-                expected: this._def.value,
-            });
-            return INVALID;
-        }
-        return { status: "valid", value: input.data };
-    }
-    get value() {
-        return this._def.value;
-    }
-}
-ZodLiteral.create = (value, params) => {
-    return new ZodLiteral({
-        value: value,
-        typeName: ZodFirstPartyTypeKind.ZodLiteral,
-        ...processCreateParams(params),
-    });
-};
-function createZodEnum(values, params) {
-    return new ZodEnum({
-        values,
-        typeName: ZodFirstPartyTypeKind.ZodEnum,
-        ...processCreateParams(params),
-    });
-}
-class ZodEnum extends ZodType {
-    _parse(input) {
-        if (typeof input.data !== "string") {
-            const ctx = this._getOrReturnCtx(input);
-            const expectedValues = this._def.values;
-            addIssueToContext(ctx, {
-                expected: util.joinValues(expectedValues),
-                received: ctx.parsedType,
-                code: ZodIssueCode.invalid_type,
-            });
-            return INVALID;
-        }
-        if (this._def.values.indexOf(input.data) === -1) {
-            const ctx = this._getOrReturnCtx(input);
-            const expectedValues = this._def.values;
-            addIssueToContext(ctx, {
-                received: ctx.data,
-                code: ZodIssueCode.invalid_enum_value,
-                options: expectedValues,
-            });
-            return INVALID;
-        }
-        return OK(input.data);
-    }
-    get options() {
-        return this._def.values;
-    }
-    get enum() {
-        const enumValues = {};
-        for (const val of this._def.values) {
-            enumValues[val] = val;
-        }
-        return enumValues;
-    }
-    get Values() {
-        const enumValues = {};
-        for (const val of this._def.values) {
-            enumValues[val] = val;
-        }
-        return enumValues;
-    }
-    get Enum() {
-        const enumValues = {};
-        for (const val of this._def.values) {
-            enumValues[val] = val;
-        }
-        return enumValues;
-    }
-    extract(values) {
-        return ZodEnum.create(values);
-    }
-    exclude(values) {
-        return ZodEnum.create(this.options.filter((opt) => !values.includes(opt)));
-    }
-}
-ZodEnum.create = createZodEnum;
-class ZodNativeEnum extends ZodType {
-    _parse(input) {
-        const nativeEnumValues = util.getValidEnumValues(this._def.values);
-        const ctx = this._getOrReturnCtx(input);
-        if (ctx.parsedType !== ZodParsedType.string &&
-            ctx.parsedType !== ZodParsedType.number) {
-            const expectedValues = util.objectValues(nativeEnumValues);
-            addIssueToContext(ctx, {
-                expected: util.joinValues(expectedValues),
-                received: ctx.parsedType,
-                code: ZodIssueCode.invalid_type,
-            });
-            return INVALID;
-        }
-        if (nativeEnumValues.indexOf(input.data) === -1) {
-            const expectedValues = util.objectValues(nativeEnumValues);
-            addIssueToContext(ctx, {
-                received: ctx.data,
-                code: ZodIssueCode.invalid_enum_value,
-                options: expectedValues,
-            });
-            return INVALID;
-        }
-        return OK(input.data);
-    }
-    get enum() {
-        return this._def.values;
-    }
-}
-ZodNativeEnum.create = (values, params) => {
-    return new ZodNativeEnum({
-        values: values,
-        typeName: ZodFirstPartyTypeKind.ZodNativeEnum,
-        ...processCreateParams(params),
-    });
-};
-class ZodPromise extends ZodType {
-    unwrap() {
-        return this._def.type;
-    }
-    _parse(input) {
-        const { ctx } = this._processInputParams(input);
-        if (ctx.parsedType !== ZodParsedType.promise &&
-            ctx.common.async === false) {
-            addIssueToContext(ctx, {
-                code: ZodIssueCode.invalid_type,
-                expected: ZodParsedType.promise,
-                received: ctx.parsedType,
-            });
-            return INVALID;
-        }
-        const promisified = ctx.parsedType === ZodParsedType.promise
-            ? ctx.data
-            : Promise.resolve(ctx.data);
-        return OK(promisified.then((data) => {
-            return this._def.type.parseAsync(data, {
-                path: ctx.path,
-                errorMap: ctx.common.contextualErrorMap,
-            });
-        }));
-    }
-}
-ZodPromise.create = (schema, params) => {
-    return new ZodPromise({
-        type: schema,
-        typeName: ZodFirstPartyTypeKind.ZodPromise,
-        ...processCreateParams(params),
-    });
-};
-class ZodEffects extends ZodType {
-    innerType() {
-        return this._def.schema;
-    }
-    sourceType() {
-        return this._def.schema._def.typeName === ZodFirstPartyTypeKind.ZodEffects
-            ? this._def.schema.sourceType()
-            : this._def.schema;
-    }
-    _parse(input) {
-        const { status, ctx } = this._processInputParams(input);
-        const effect = this._def.effect || null;
-        const checkCtx = {
-            addIssue: (arg) => {
-                addIssueToContext(ctx, arg);
-                if (arg.fatal) {
-                    status.abort();
-                }
-                else {
-                    status.dirty();
-                }
-            },
-            get path() {
-                return ctx.path;
-            },
-        };
-        checkCtx.addIssue = checkCtx.addIssue.bind(checkCtx);
-        if (effect.type === "preprocess") {
-            const processed = effect.transform(ctx.data, checkCtx);
-            if (ctx.common.issues.length) {
-                return {
-                    status: "dirty",
-                    value: ctx.data,
-                };
-            }
-            if (ctx.common.async) {
-                return Promise.resolve(processed).then((processed) => {
-                    return this._def.schema._parseAsync({
-                        data: processed,
-                        path: ctx.path,
-                        parent: ctx,
-                    });
-                });
-            }
-            else {
-                return this._def.schema._parseSync({
-                    data: processed,
-                    path: ctx.path,
-                    parent: ctx,
-                });
-            }
-        }
-        if (effect.type === "refinement") {
-            const executeRefinement = (acc
-            // effect: RefinementEffect<any>
-            ) => {
-                const result = effect.refinement(acc, checkCtx);
-                if (ctx.common.async) {
-                    return Promise.resolve(result);
-                }
-                if (result instanceof Promise) {
-                    throw new Error("Async refinement encountered during synchronous parse operation. Use .parseAsync instead.");
-                }
-                return acc;
-            };
-            if (ctx.common.async === false) {
-                const inner = this._def.schema._parseSync({
-                    data: ctx.data,
-                    path: ctx.path,
-                    parent: ctx,
-                });
-                if (inner.status === "aborted")
-                    return INVALID;
-                if (inner.status === "dirty")
-                    status.dirty();
-                // return value is ignored
-                executeRefinement(inner.value);
-                return { status: status.value, value: inner.value };
-            }
-            else {
-                return this._def.schema
-                    ._parseAsync({ data: ctx.data, path: ctx.path, parent: ctx })
-                    .then((inner) => {
-                    if (inner.status === "aborted")
-                        return INVALID;
-                    if (inner.status === "dirty")
-                        status.dirty();
-                    return executeRefinement(inner.value).then(() => {
-                        return { status: status.value, value: inner.value };
-                    });
-                });
-            }
-        }
-        if (effect.type === "transform") {
-            if (ctx.common.async === false) {
-                const base = this._def.schema._parseSync({
-                    data: ctx.data,
-                    path: ctx.path,
-                    parent: ctx,
-                });
-                if (!isValid(base))
-                    return base;
-                const result = effect.transform(base.value, checkCtx);
-                if (result instanceof Promise) {
-                    throw new Error(`Asynchronous transform encountered during synchronous parse operation. Use .parseAsync instead.`);
-                }
-                return { status: status.value, value: result };
-            }
-            else {
-                return this._def.schema
-                    ._parseAsync({ data: ctx.data, path: ctx.path, parent: ctx })
-                    .then((base) => {
-                    if (!isValid(base))
-                        return base;
-                    return Promise.resolve(effect.transform(base.value, checkCtx)).then((result) => ({ status: status.value, value: result }));
-                });
-            }
-        }
-        util.assertNever(effect);
-    }
-}
-ZodEffects.create = (schema, effect, params) => {
-    return new ZodEffects({
-        schema,
-        typeName: ZodFirstPartyTypeKind.ZodEffects,
-        effect,
-        ...processCreateParams(params),
-    });
-};
-ZodEffects.createWithPreprocess = (preprocess, schema, params) => {
-    return new ZodEffects({
-        schema,
-        effect: { type: "preprocess", transform: preprocess },
-        typeName: ZodFirstPartyTypeKind.ZodEffects,
-        ...processCreateParams(params),
-    });
-};
-class ZodOptional extends ZodType {
-    _parse(input) {
-        const parsedType = this._getType(input);
-        if (parsedType === ZodParsedType.undefined) {
-            return OK(undefined);
-        }
-        return this._def.innerType._parse(input);
-    }
-    unwrap() {
-        return this._def.innerType;
-    }
-}
-ZodOptional.create = (type, params) => {
-    return new ZodOptional({
-        innerType: type,
-        typeName: ZodFirstPartyTypeKind.ZodOptional,
-        ...processCreateParams(params),
-    });
-};
-class ZodNullable extends ZodType {
-    _parse(input) {
-        const parsedType = this._getType(input);
-        if (parsedType === ZodParsedType.null) {
-            return OK(null);
-        }
-        return this._def.innerType._parse(input);
-    }
-    unwrap() {
-        return this._def.innerType;
-    }
-}
-ZodNullable.create = (type, params) => {
-    return new ZodNullable({
-        innerType: type,
-        typeName: ZodFirstPartyTypeKind.ZodNullable,
-        ...processCreateParams(params),
-    });
-};
-class ZodDefault extends ZodType {
-    _parse(input) {
-        const { ctx } = this._processInputParams(input);
-        let data = ctx.data;
-        if (ctx.parsedType === ZodParsedType.undefined) {
-            data = this._def.defaultValue();
-        }
-        return this._def.innerType._parse({
-            data,
-            path: ctx.path,
-            parent: ctx,
-        });
-    }
-    removeDefault() {
-        return this._def.innerType;
-    }
-}
-ZodDefault.create = (type, params) => {
-    return new ZodDefault({
-        innerType: type,
-        typeName: ZodFirstPartyTypeKind.ZodDefault,
-        defaultValue: typeof params.default === "function"
-            ? params.default
-            : () => params.default,
-        ...processCreateParams(params),
-    });
-};
-class ZodCatch extends ZodType {
-    _parse(input) {
-        const { ctx } = this._processInputParams(input);
-        // newCtx is used to not collect issues from inner types in ctx
-        const newCtx = {
-            ...ctx,
-            common: {
-                ...ctx.common,
-                issues: [],
-            },
-        };
-        const result = this._def.innerType._parse({
-            data: newCtx.data,
-            path: newCtx.path,
-            parent: {
-                ...newCtx,
-            },
-        });
-        if (isAsync(result)) {
-            return result.then((result) => {
-                return {
-                    status: "valid",
-                    value: result.status === "valid"
-                        ? result.value
-                        : this._def.catchValue({
-                            get error() {
-                                return new ZodError(newCtx.common.issues);
-                            },
-                            input: newCtx.data,
-                        }),
-                };
-            });
-        }
-        else {
-            return {
-                status: "valid",
-                value: result.status === "valid"
-                    ? result.value
-                    : this._def.catchValue({
-                        get error() {
-                            return new ZodError(newCtx.common.issues);
-                        },
-                        input: newCtx.data,
-                    }),
-            };
-        }
-    }
-    removeCatch() {
-        return this._def.innerType;
-    }
-}
-ZodCatch.create = (type, params) => {
-    return new ZodCatch({
-        innerType: type,
-        typeName: ZodFirstPartyTypeKind.ZodCatch,
-        catchValue: typeof params.catch === "function" ? params.catch : () => params.catch,
-        ...processCreateParams(params),
-    });
-};
-class ZodNaN extends ZodType {
-    _parse(input) {
-        const parsedType = this._getType(input);
-        if (parsedType !== ZodParsedType.nan) {
-            const ctx = this._getOrReturnCtx(input);
-            addIssueToContext(ctx, {
-                code: ZodIssueCode.invalid_type,
-                expected: ZodParsedType.nan,
-                received: ctx.parsedType,
-            });
-            return INVALID;
-        }
-        return { status: "valid", value: input.data };
-    }
-}
-ZodNaN.create = (params) => {
-    return new ZodNaN({
-        typeName: ZodFirstPartyTypeKind.ZodNaN,
-        ...processCreateParams(params),
-    });
-};
-const BRAND = Symbol("zod_brand");
-class ZodBranded extends ZodType {
-    _parse(input) {
-        const { ctx } = this._processInputParams(input);
-        const data = ctx.data;
-        return this._def.type._parse({
-            data,
-            path: ctx.path,
-            parent: ctx,
-        });
-    }
-    unwrap() {
-        return this._def.type;
-    }
-}
-class ZodPipeline extends ZodType {
-    _parse(input) {
-        const { status, ctx } = this._processInputParams(input);
-        if (ctx.common.async) {
-            const handleAsync = async () => {
-                const inResult = await this._def.in._parseAsync({
-                    data: ctx.data,
-                    path: ctx.path,
-                    parent: ctx,
-                });
-                if (inResult.status === "aborted")
-                    return INVALID;
-                if (inResult.status === "dirty") {
-                    status.dirty();
-                    return DIRTY(inResult.value);
-                }
-                else {
-                    return this._def.out._parseAsync({
-                        data: inResult.value,
-                        path: ctx.path,
-                        parent: ctx,
-                    });
-                }
-            };
-            return handleAsync();
-        }
-        else {
-            const inResult = this._def.in._parseSync({
-                data: ctx.data,
-                path: ctx.path,
-                parent: ctx,
-            });
-            if (inResult.status === "aborted")
-                return INVALID;
-            if (inResult.status === "dirty") {
-                status.dirty();
-                return {
-                    status: "dirty",
-                    value: inResult.value,
-                };
-            }
-            else {
-                return this._def.out._parseSync({
-                    data: inResult.value,
-                    path: ctx.path,
-                    parent: ctx,
-                });
-            }
-        }
-    }
-    static create(a, b) {
-        return new ZodPipeline({
-            in: a,
-            out: b,
-            typeName: ZodFirstPartyTypeKind.ZodPipeline,
-        });
-    }
-}
-class ZodReadonly extends ZodType {
-    _parse(input) {
-        const result = this._def.innerType._parse(input);
-        if (isValid(result)) {
-            result.value = Object.freeze(result.value);
-        }
-        return result;
-    }
-}
-ZodReadonly.create = (type, params) => {
-    return new ZodReadonly({
-        innerType: type,
-        typeName: ZodFirstPartyTypeKind.ZodReadonly,
-        ...processCreateParams(params),
-    });
-};
-const custom = (check, params = {}, 
-/*
- * @deprecated
- *
- * Pass `fatal` into the params object instead:
- *
- * ```ts
- * z.string().custom((val) => val.length > 5, { fatal: false })
- * ```
- *
- */
-fatal) => {
-    if (check)
-        return ZodAny.create().superRefine((data, ctx) => {
-            var _a, _b;
-            if (!check(data)) {
-                const p = typeof params === "function"
-                    ? params(data)
-                    : typeof params === "string"
-                        ? { message: params }
-                        : params;
-                const _fatal = (_b = (_a = p.fatal) !== null && _a !== void 0 ? _a : fatal) !== null && _b !== void 0 ? _b : true;
-                const p2 = typeof p === "string" ? { message: p } : p;
-                ctx.addIssue({ code: "custom", ...p2, fatal: _fatal });
-            }
-        });
-    return ZodAny.create();
-};
-const late = {
-    object: ZodObject.lazycreate,
-};
-var ZodFirstPartyTypeKind;
-(function (ZodFirstPartyTypeKind) {
-    ZodFirstPartyTypeKind["ZodString"] = "ZodString";
-    ZodFirstPartyTypeKind["ZodNumber"] = "ZodNumber";
-    ZodFirstPartyTypeKind["ZodNaN"] = "ZodNaN";
-    ZodFirstPartyTypeKind["ZodBigInt"] = "ZodBigInt";
-    ZodFirstPartyTypeKind["ZodBoolean"] = "ZodBoolean";
-    ZodFirstPartyTypeKind["ZodDate"] = "ZodDate";
-    ZodFirstPartyTypeKind["ZodSymbol"] = "ZodSymbol";
-    ZodFirstPartyTypeKind["ZodUndefined"] = "ZodUndefined";
-    ZodFirstPartyTypeKind["ZodNull"] = "ZodNull";
-    ZodFirstPartyTypeKind["ZodAny"] = "ZodAny";
-    ZodFirstPartyTypeKind["ZodUnknown"] = "ZodUnknown";
-    ZodFirstPartyTypeKind["ZodNever"] = "ZodNever";
-    ZodFirstPartyTypeKind["ZodVoid"] = "ZodVoid";
-    ZodFirstPartyTypeKind["ZodArray"] = "ZodArray";
-    ZodFirstPartyTypeKind["ZodObject"] = "ZodObject";
-    ZodFirstPartyTypeKind["ZodUnion"] = "ZodUnion";
-    ZodFirstPartyTypeKind["ZodDiscriminatedUnion"] = "ZodDiscriminatedUnion";
-    ZodFirstPartyTypeKind["ZodIntersection"] = "ZodIntersection";
-    ZodFirstPartyTypeKind["ZodTuple"] = "ZodTuple";
-    ZodFirstPartyTypeKind["ZodRecord"] = "ZodRecord";
-    ZodFirstPartyTypeKind["ZodMap"] = "ZodMap";
-    ZodFirstPartyTypeKind["ZodSet"] = "ZodSet";
-    ZodFirstPartyTypeKind["ZodFunction"] = "ZodFunction";
-    ZodFirstPartyTypeKind["ZodLazy"] = "ZodLazy";
-    ZodFirstPartyTypeKind["ZodLiteral"] = "ZodLiteral";
-    ZodFirstPartyTypeKind["ZodEnum"] = "ZodEnum";
-    ZodFirstPartyTypeKind["ZodEffects"] = "ZodEffects";
-    ZodFirstPartyTypeKind["ZodNativeEnum"] = "ZodNativeEnum";
-    ZodFirstPartyTypeKind["ZodOptional"] = "ZodOptional";
-    ZodFirstPartyTypeKind["ZodNullable"] = "ZodNullable";
-    ZodFirstPartyTypeKind["ZodDefault"] = "ZodDefault";
-    ZodFirstPartyTypeKind["ZodCatch"] = "ZodCatch";
-    ZodFirstPartyTypeKind["ZodPromise"] = "ZodPromise";
-    ZodFirstPartyTypeKind["ZodBranded"] = "ZodBranded";
-    ZodFirstPartyTypeKind["ZodPipeline"] = "ZodPipeline";
-    ZodFirstPartyTypeKind["ZodReadonly"] = "ZodReadonly";
-})(ZodFirstPartyTypeKind || (ZodFirstPartyTypeKind = {}));
-const instanceOfType = (
-// const instanceOfType = <T extends new (...args: any[]) => any>(
-cls, params = {
-    message: `Input not instance of ${cls.name}`,
-}) => custom((data) => data instanceof cls, params);
-const stringType = ZodString.create;
-const numberType = ZodNumber.create;
-const nanType = ZodNaN.create;
-const bigIntType = ZodBigInt.create;
-const booleanType = ZodBoolean.create;
-const dateType = ZodDate.create;
-const symbolType = ZodSymbol.create;
-const undefinedType = ZodUndefined.create;
-const nullType = ZodNull.create;
-const anyType = ZodAny.create;
-const unknownType = ZodUnknown.create;
-const neverType = ZodNever.create;
-const voidType = ZodVoid.create;
-const arrayType = ZodArray.create;
-const objectType = ZodObject.create;
-const strictObjectType = ZodObject.strictCreate;
-const unionType = ZodUnion.create;
-const discriminatedUnionType = ZodDiscriminatedUnion.create;
-const intersectionType = ZodIntersection.create;
-const tupleType = ZodTuple.create;
-const recordType = ZodRecord.create;
-const mapType = ZodMap.create;
-const setType = ZodSet.create;
-const functionType = ZodFunction.create;
-const lazyType = ZodLazy.create;
-const literalType = ZodLiteral.create;
-const enumType = ZodEnum.create;
-const nativeEnumType = ZodNativeEnum.create;
-const promiseType = ZodPromise.create;
-const effectsType = ZodEffects.create;
-const optionalType = ZodOptional.create;
-const nullableType = ZodNullable.create;
-const preprocessType = ZodEffects.createWithPreprocess;
-const pipelineType = ZodPipeline.create;
-const ostring = () => stringType().optional();
-const onumber = () => numberType().optional();
-const oboolean = () => booleanType().optional();
-const coerce = {
-    string: ((arg) => ZodString.create({ ...arg, coerce: true })),
-    number: ((arg) => ZodNumber.create({ ...arg, coerce: true })),
-    boolean: ((arg) => ZodBoolean.create({
-        ...arg,
-        coerce: true,
-    })),
-    bigint: ((arg) => ZodBigInt.create({ ...arg, coerce: true })),
-    date: ((arg) => ZodDate.create({ ...arg, coerce: true })),
-};
-const NEVER = INVALID;
-
-var z = /*#__PURE__*/Object.freeze({
-    __proto__: null,
-    defaultErrorMap: errorMap,
-    setErrorMap: setErrorMap,
-    getErrorMap: getErrorMap,
-    makeIssue: makeIssue,
-    EMPTY_PATH: EMPTY_PATH,
-    addIssueToContext: addIssueToContext,
-    ParseStatus: ParseStatus,
-    INVALID: INVALID,
-    DIRTY: DIRTY,
-    OK: OK,
-    isAborted: isAborted,
-    isDirty: isDirty,
-    isValid: isValid,
-    isAsync: isAsync,
-    get util () { return util; },
-    get objectUtil () { return objectUtil; },
-    ZodParsedType: ZodParsedType,
-    getParsedType: getParsedType,
-    ZodType: ZodType,
-    ZodString: ZodString,
-    ZodNumber: ZodNumber,
-    ZodBigInt: ZodBigInt,
-    ZodBoolean: ZodBoolean,
-    ZodDate: ZodDate,
-    ZodSymbol: ZodSymbol,
-    ZodUndefined: ZodUndefined,
-    ZodNull: ZodNull,
-    ZodAny: ZodAny,
-    ZodUnknown: ZodUnknown,
-    ZodNever: ZodNever,
-    ZodVoid: ZodVoid,
-    ZodArray: ZodArray,
-    ZodObject: ZodObject,
-    ZodUnion: ZodUnion,
-    ZodDiscriminatedUnion: ZodDiscriminatedUnion,
-    ZodIntersection: ZodIntersection,
-    ZodTuple: ZodTuple,
-    ZodRecord: ZodRecord,
-    ZodMap: ZodMap,
-    ZodSet: ZodSet,
-    ZodFunction: ZodFunction,
-    ZodLazy: ZodLazy,
-    ZodLiteral: ZodLiteral,
-    ZodEnum: ZodEnum,
-    ZodNativeEnum: ZodNativeEnum,
-    ZodPromise: ZodPromise,
-    ZodEffects: ZodEffects,
-    ZodTransformer: ZodEffects,
-    ZodOptional: ZodOptional,
-    ZodNullable: ZodNullable,
-    ZodDefault: ZodDefault,
-    ZodCatch: ZodCatch,
-    ZodNaN: ZodNaN,
-    BRAND: BRAND,
-    ZodBranded: ZodBranded,
-    ZodPipeline: ZodPipeline,
-    ZodReadonly: ZodReadonly,
-    custom: custom,
-    Schema: ZodType,
-    ZodSchema: ZodType,
-    late: late,
-    get ZodFirstPartyTypeKind () { return ZodFirstPartyTypeKind; },
-    coerce: coerce,
-    any: anyType,
-    array: arrayType,
-    bigint: bigIntType,
-    boolean: booleanType,
-    date: dateType,
-    discriminatedUnion: discriminatedUnionType,
-    effect: effectsType,
-    'enum': enumType,
-    'function': functionType,
-    'instanceof': instanceOfType,
-    intersection: intersectionType,
-    lazy: lazyType,
-    literal: literalType,
-    map: mapType,
-    nan: nanType,
-    nativeEnum: nativeEnumType,
-    never: neverType,
-    'null': nullType,
-    nullable: nullableType,
-    number: numberType,
-    object: objectType,
-    oboolean: oboolean,
-    onumber: onumber,
-    optional: optionalType,
-    ostring: ostring,
-    pipeline: pipelineType,
-    preprocess: preprocessType,
-    promise: promiseType,
-    record: recordType,
-    set: setType,
-    strictObject: strictObjectType,
-    string: stringType,
-    symbol: symbolType,
-    transformer: effectsType,
-    tuple: tupleType,
-    'undefined': undefinedType,
-    union: unionType,
-    unknown: unknownType,
-    'void': voidType,
-    NEVER: NEVER,
-    ZodIssueCode: ZodIssueCode,
-    quotelessJson: quotelessJson,
-    ZodError: ZodError
-});
-
-
-
-
 /***/ }
 
 /******/ 	});
@@ -93139,7 +89713,7 @@ var z = /*#__PURE__*/Object.freeze({
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module is referenced by other modules so it can't be inlined
 /******/ 	__webpack_require__(6507);
-/******/ 	__webpack_require__(6164);
+/******/ 	__webpack_require__(3907);
 /******/ 	__webpack_require__(3610);
 /******/ 	var __webpack_exports__ = __webpack_require__(3482);
 /******/ 	

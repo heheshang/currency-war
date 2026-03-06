@@ -33,22 +33,15 @@ export const Audio: React.FC<AudioProps> = ({
   loop = false,
 }) => {
   if (!src) {
-    console.error("Audio component requires a src prop");
     return null;
   }
 
-  if (volume < 0 || volume > 1) {
-    console.warn(
-      `Audio volume ${volume} is out of range [0.0, 1.0]. Clamping to valid range.`,
-    );
-    volume = Math.max(0, Math.min(1, volume));
-  }
-
+  const clampedVolume = Math.max(0, Math.min(1, volume));
   // Convert relative path to staticFile path for local assets
   // e.g., "/assets/audio/bgm/music.mp3" -> staticFile("assets/audio/bgm/music.mp3")
   const audioSrc = src.startsWith("/") ? staticFile(src.slice(1)) : src;
 
-  return <RemotionAudio src={audioSrc} volume={volume} loop={loop} />;
+  return <RemotionAudio src={audioSrc} volume={clampedVolume} loop={loop} />;
 };
 
 export default Audio;

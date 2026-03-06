@@ -1,7 +1,5 @@
 import React from "react";
 import { useCurrentFrame, interpolate } from "remotion";
-import { useSubtitleSync } from "../hooks";
-import type { SubtitleEntry } from "../subtitles/index";
 
 export type { SubtitleEntry };
 export {
@@ -136,20 +134,3 @@ export const SubtitleIndicator: React.FC<SubtitleIndicatorProps> = ({
   );
 };
 
-interface SyncedSubtitleProps {
-  subtitles: SubtitleEntry[];
-  children: React.ReactNode;
-}
-
-export const SyncedSubtitle: React.FC<SyncedSubtitleProps> = ({
-  subtitles,
-  children,
-}) => {
-  const { currentSubtitle, fadeOpacity } = useSubtitleSync({ subtitles });
-
-  if (!currentSubtitle) {
-    return null;
-  }
-
-  return <div style={{ opacity: fadeOpacity }}>{children}</div>;
-};
