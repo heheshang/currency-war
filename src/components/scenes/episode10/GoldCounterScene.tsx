@@ -27,10 +27,13 @@ const AnimatedCounter: React.FC<{
     config: { damping: 15 },
   });
 
+  // Use value for scaling the animated result
+  const displayValue = value * animatedValue;
+
   return (
     <span style={style}>
       {prefix}
-      {animatedValue.toFixed(decimals)}
+      {displayValue.toFixed(decimals)}
       {suffix}
     </span>
   );
@@ -89,14 +92,13 @@ const FlowingArrows: React.FC<{
 
 // Strategy step card
 const StrategyCard: React.FC<{
-  step: number;
   title: string;
   subtitle: string;
   color: string;
   bgColor: string;
   delay: number;
   icon: string;
-}> = ({ step, title, subtitle, color, bgColor, delay, icon }) => {
+}> = ({ title, subtitle, color, bgColor, delay, icon }) => {
   const frame = useCurrentFrame();
   const opacity = interpolate(frame, [delay, delay + 30], [0, 1]);
   const scale = interpolate(frame, [delay, delay + 30], [0.8, 1]);
@@ -280,7 +282,6 @@ export const GoldCounterScene: React.FC = () => {
 
         {/* Step 1 */}
         <StrategyCard
-          step={1}
           title="1. 'Rent' Gold at 1% Interest"
           subtitle={'以1%利息"租借"黄金'}
           color="#fbbf24"
@@ -296,7 +297,6 @@ export const GoldCounterScene: React.FC = () => {
 
         {/* Step 2 */}
         <StrategyCard
-          step={2}
           title="2. Sell Gold, Buy US Bonds at 5%"
           subtitle={"出售黄金，买入5%收益的美国债券"}
           color="#ef4444"

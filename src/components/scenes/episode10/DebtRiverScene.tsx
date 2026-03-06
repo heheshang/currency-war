@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { AbsoluteFill, useCurrentFrame, interpolate } from "remotion";
+import { AbsoluteFill, useCurrentFrame, interpolate, random } from "remotion";
 
 // Typewriter text component
 const TypewriterText: React.FC<{
@@ -131,6 +131,7 @@ const PulsingWarning: React.FC<{
         boxShadow: "0 0 30px rgba(239, 68, 68, 0.4)",
       }}
     >
+      {children}
       <style>{`
         @keyframes warningPulse {
           0%, 100% { box-shadow: 0 0 20px rgba(239, 68, 68, 0.3); }
@@ -183,12 +184,12 @@ const DebtParticles: React.FC = () => {
   const particles = useMemo(() => {
     return Array.from({ length: 20 }, (_, i) => ({
       id: i,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
-      speed: 0.1 + Math.random() * 0.3,
-      size: 8 + Math.random() * 12,
+      x: random(frame * (i + 1)) * 100,
+      y: random(frame * (i + 2)) * 100,
+      speed: 0.1 + random(frame * (i + 3)) * 0.3,
+      size: 8 + random(frame * (i + 4)) * 12,
     }));
-  }, []);
+  }, [frame]);
 
   return (
     <div

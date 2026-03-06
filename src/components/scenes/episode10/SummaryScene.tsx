@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { AbsoluteFill, useCurrentFrame, interpolate } from "remotion";
+import { AbsoluteFill, useCurrentFrame, interpolate, random } from "remotion";
 
 // Summary item card
 const SummaryItem: React.FC<{
@@ -40,12 +40,12 @@ const FloatingParticles: React.FC = () => {
   const particles = useMemo(() => {
     return Array.from({ length: 20 }, (_, i) => ({
       id: i,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
-      size: 2 + Math.random() * 3,
-      speed: 0.1 + Math.random() * 0.3,
+      x: random(frame * (i + 1)) * 100,
+      y: random(frame * (i + 2)) * 100,
+      size: 2 + random(frame * (i + 3)) * 3,
+      speed: 0.1 + random(frame * (i + 4)) * 0.3,
     }));
-  }, []);
+  }, [frame]);
 
   return (
     <div

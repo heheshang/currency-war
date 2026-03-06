@@ -2,18 +2,22 @@ import "./index.css";
 import { Composition } from "remotion";
 import { HelloWorld, myCompSchema } from "./HelloWorld";
 import { Logo, myCompSchema2 } from "./HelloWorld/Logo";
-import { Episode01 } from "./compositions/Episode01";
-import { Episode02 } from "./compositions/Episode02";
-import { Episode03 } from "./compositions/Episode03";
-import { Episode07 } from "./compositions/Episode07";
-import { Episode04 } from "./compositions/Episode04";
-import { Episode05 } from "./compositions/Episode05";
-import { Episode06 } from "./compositions/Episode06";
-import { Episode08 } from "./compositions/Episode08";
-import { Episode09 } from "./compositions/Episode09";
-import { Episode10 } from "./compositions/Episode10";
-import { Episode11 } from "./compositions/Episode11";
 import { Trailer } from "./compositions/Trailer";
+
+// Documentary-style compositions
+import { Episode01Documentary } from "./compositions/Episode01Documentary";
+import { Episode02Documentary } from "./compositions/Episode02Documentary";
+import { Episode03Documentary } from "./compositions/Episode03Documentary";
+import { Episode04Documentary } from "./compositions/Episode04Documentary";
+import { Episode05Documentary } from "./compositions/Episode05Documentary";
+import { Episode06Documentary } from "./compositions/Episode06Documentary";
+import { Episode07Documentary } from "./compositions/Episode07Documentary";
+import { Episode08Documentary } from "./compositions/Episode08Documentary";
+import { Episode09Documentary } from "./compositions/Episode09Documentary";
+import { Episode10Documentary } from "./compositions/Episode10Documentary";
+import { Episode11Documentary } from "./compositions/Episode11Documentary";
+import { TrailerDocumentary } from "./compositions/TrailerDocumentary";
+import { Episode05NewDocumentary } from "./compositions/Episode05NewDocumentary";
 
 // Each <Composition> is an entry in the sidebar!
 
@@ -55,120 +59,117 @@ export const RemotionRoot: React.FC = () => {
         }}
       />
 
-      {/* Episode01 - 第1集：序幕 - 货币的本质 */}
-      <Composition
-        id="Episode01"
-        component={Episode01}
-        durationInFrames={360 * 30} // 6 minutes @ 30fps
-        fps={30}
-        width={1920}
-        height={1080}
-      />
-
-      {/* Episode02 - 第2集：罗斯柴尔德家族："大道无形"的世界首富 */}
-      <Composition
-        id="Episode02"
-        component={Episode02}
-        durationInFrames={780 * 30} // 13 minutes @ 30fps
-        fps={30}
-        width={1920}
-        height={1080}
-      />
-
-      {/* Episode03 - 第3集：滑铁卢战役 - 信息与金钱的战争 */}
-      <Composition
-        id="Episode03"
-        component={Episode03}
-        durationInFrames={360 * 30} // 6 minutes @ 30fps
-        fps={30}
-        width={1920}
-        height={1080}
-      />
-
-      {/* Episode07 - 第7集：美联储成立 - 哲基尔岛密谋 */}
-      <Composition
-        id="Episode07"
-        component={Episode07}
-        durationInFrames={480 * 30} // 8 minutes @ 30fps
-        fps={30}
-        width={1920}
-        height={1080}
-      />
-
-      {/* Episode04 - 第4集：美联储——私有的中央银行 */}
-      <Composition
-        id="Episode04"
-        component={Episode04}
-        durationInFrames={840 * 30} // 14 minutes @ 30fps
-        fps={30}
-        width={1920}
-        height={1080}
-      />
-      {/* Episode05 - 第5集：一战与大衰退——国际银行家的"丰收时节" */}
-      <Composition
-        id="Episode05"
-        component={Episode05}
-        durationInFrames={900 * 30} // 15 minutes @ 30fps
-        fps={30}
-        width={1920}
-        height={1080}
-      />
-
-      {/* Episode06 - 第6集：统治世界的精英俱乐部 */}
-      <Composition
-        id="Episode06"
-        component={Episode06}
-        durationInFrames={480 * 30} // 8 minutes @ 30fps
-        fps={30}
-        width={1920}
-        height={1080}
-      />
-
-      {/* Episode08 - 第8集：诚实货币的最后抗争 */}
-      <Composition
-        id="Episode08"
-        component={Episode08}
-        durationInFrames={660 * 30} // 11 minutes @ 30fps
-        fps={30}
-        width={1920}
-        height={1080}
-      />
-
-      {/* Episode09 - 第9集：不宣而战的货币战争 */}
-      <Composition
-        id="Episode09"
-        component={Episode09}
-        durationInFrames={660 * 30} // 11 minutes @ 30fps
-        fps={30}
-        width={1920}
-        height={1080}
-      />
-
-      {/* Episode10 - 第10集：美元死穴与黄金一阳指 */}
-      <Composition
-        id="Episode10"
-        component={Episode10}
-        durationInFrames={600 * 30} // 10 minutes @ 30fps
-        fps={30}
-        width={1920}
-        height={1080}
-      />
-
-      {/* Episode11 - 第11集：谋万世者 */}
-      <Composition
-        id="Episode11"
-        component={Episode11}
-        durationInFrames={660 * 30} // 11 minutes @ 30fps
-        fps={30}
-        width={1920}
-        height={1080}
-      />
-
       {/* Trailer - 货币战争预告片 */}
       <Composition
         id="Trailer"
         component={Trailer}
         durationInFrames={75 * 30} // 75 seconds @ 30fps
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+
+      {/* Documentary-style Episodes */}
+      <Composition
+        id="Episode01Documentary"
+        component={Episode01Documentary}
+        durationInFrames={10557} // 351.9秒 @ 30fps (基于实际配音时长)
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="Episode02Documentary"
+        component={Episode02Documentary}
+        durationInFrames={12066} // 402.2秒 @ 30fps (基于实际配音时长)
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="Episode03Documentary"
+        component={Episode03Documentary}
+        durationInFrames={13122} // 437.4秒 @ 30fps (基于实际配音时长)
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="Episode04Documentary"
+        component={Episode04Documentary}
+        durationInFrames={840 * 30}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="Episode05Documentary"
+        component={Episode05Documentary}
+        durationInFrames={900 * 30}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="Episode06Documentary"
+        component={Episode06Documentary}
+        durationInFrames={480 * 30}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="Episode07Documentary"
+        component={Episode07Documentary}
+        durationInFrames={420 * 30}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="Episode08Documentary"
+        component={Episode08Documentary}
+        durationInFrames={660 * 30}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="Episode09Documentary"
+        component={Episode09Documentary}
+        durationInFrames={420 * 30}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="Episode10Documentary"
+        component={Episode10Documentary}
+        durationInFrames={540 * 30}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="Episode11Documentary"
+        component={Episode11Documentary}
+        durationInFrames={540 * 30}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="TrailerDocumentary"
+        component={TrailerDocumentary}
+        durationInFrames={2250} // 75秒 @ 30fps
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="Episode05NewDocumentary"
+        component={Episode05NewDocumentary}
+        durationInFrames={350 * 30} // 350秒 @ 30fps
         fps={30}
         width={1920}
         height={1080}

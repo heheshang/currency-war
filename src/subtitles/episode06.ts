@@ -1,673 +1,394 @@
 /**
- * 主题：统治世界的精英俱乐部
+ * Episode06 字幕 - 廉价货币的新政
  *
- * 重构说明：
- * - 每个Scene有独立的字幕数组，从相对帧0开始
- * - 提供统一的 episode06Subtitles 数组用于兼容
+ * 基于《货币战争》book1-第五章：廉价货币的新政
+ *
+ * 场景划分：
+ * - Scene 0: 开场 - 凯恩斯的警告
+ * - Scene 1: 凯恩斯的"廉价货币"理论
+ * - Scene 2: 1932年总统大选
+ * - Scene 3: 罗斯福与废除金本位
+ * - Scene 4: 华尔街选中希特勒
+ * - Scene 5: 华尔街资助纳粹德国
+ * - Scene 6: 昂贵的战争与廉价的货币
+ * - Scene 7: 总结
  */
 import { SubtitleEntry } from "./index";
 
 // ========== Scene 0: 开场 ==========
-// 帧范围: 0-1200 (0-40秒)
-export const scene00Subtitles: SubtitleEntry[] = [
+export const openingSubs: SubtitleEntry[] = [
   {
     startFrame: 0,
-    endFrame: 120,
-    text: "Episode 06: Ruling Elite Clubs",
-    translation: "第六集：统治世界的精英俱乐部",
+    endFrame: 150,
+    text: "列宁曾说过：颠覆资本主义制度最好的办法就是使其货币贬值。",
   },
   {
-    startFrame: 120,
+    startFrame: 150,
     endFrame: 300,
-    text: "Behind the throne stands a shadowy power",
-    translation: "王座背后站着黑暗的权力",
+    text: "通过连续的通货膨胀过程，政府可以秘密地、不为人知地没收公民财富的一部分。",
   },
   {
     startFrame: 300,
-    endFrame: 480,
-    text: "that controls the world's financial destiny.",
-    translation: "控制着世界的金融命运。",
+    endFrame: 450,
+    text: "用这种办法可以任意剥夺人民的财富，在使多数人贫穷的过程中，却使少数人暴富。",
   },
+  { startFrame: 450, endFrame: 600, text: "——凯恩斯，1919年" },
+  { startFrame: 600, endFrame: 750, text: "第五章：廉价货币的新政" },
   {
-    startFrame: 480,
-    endFrame: 660,
-    text: "They meet in secret. They plan in shadows.",
-    translation: "他们秘密聚会。他们在阴影中策划。",
-  },
-  {
-    startFrame: 660,
-    endFrame: 840,
-    text: "They call themselves... the elite.",
-    translation: "他们称自己为……精英。",
-  },
-  {
-    startFrame: 840,
-    endFrame: 1020,
-    text: "From Washington to Basel, from Bilderberg to Trilateral.",
-    translation: "从华盛顿到巴塞尔，从彼尔德伯格到三边委员会。",
-  },
-  {
-    startFrame: 1020,
-    endFrame: 1200,
-    text: "Welcome to the hidden world of global governance.",
-    translation: "欢迎来到全球治理的隐藏世界。",
+    startFrame: 750,
+    endFrame: 900,
+    text: "国际银行家如何通过废除金本位铺平通往第二次世界大战的道路。",
   },
 ];
 
-// ========== Scene 1: 豪斯上校 ==========
-// 帧范围: 1200-3000 (40-100秒)
-export const scene01Subtitles: SubtitleEntry[] = [
-  {
-    startFrame: 0,
-    endFrame: 180,
-    text: "Colonel Edward House — The Spiritual Godfather",
-    translation: "爱德华·豪斯上校——「精神教父」",
-  },
+// ========== Scene 1: 凯恩斯的廉价货币 ==========
+export const keynesSubs: SubtitleEntry[] = [
+  { startFrame: 0, endFrame: 180, text: "凯恩斯称黄金为'野蛮的遗迹'。" },
   {
     startFrame: 180,
     endFrame: 360,
-    text: "1858-1944. Advisor to President Woodrow Wilson.",
-    translation: "1858-1944。伍德罗·威尔逊总统的顾问。",
+    text: "为什么国际银行家和他们的'御用'理论家们如此厌恶黄金？",
   },
   {
     startFrame: 360,
     endFrame: 540,
-    text: "House was the power behind the throne.",
-    translation: "豪斯是王座背后的真正权力。",
+    text: "在人类长达5000年的社会实践中，黄金被世人公认是财富的最终形式。",
   },
   {
     startFrame: 540,
     endFrame: 720,
-    text: "While Wilson sat in the Oval Office,",
-    translation: "当威尔逊坐在椭圆形办公室时，",
+    text: "人民对黄金与财富的必然联系早已成为生活中的自然逻辑。",
   },
   {
     startFrame: 720,
     endFrame: 900,
-    text: "House made the actual decisions.",
-    translation: "豪斯做出了实际决策。",
+    text: "当政府强行剥夺人民将纸币兑换黄金这一与生俱来的权力的时候，",
   },
   {
     startFrame: 900,
     endFrame: 1080,
-    text: "In 1912, he wrote a mysterious book:",
-    translation: "1912年，他写了一本神秘的书：",
+    text: "也就从根本上剥夺了人民最基本的自由。",
   },
   {
     startFrame: 1080,
     endFrame: 1260,
-    text: "\"Philip Dru: Administrator\"",
-    translation: "《菲利浦·杜：管理者》",
+    text: "国际银行家们非常清楚，黄金决不是普通的贵金属，",
   },
   {
     startFrame: 1260,
     endFrame: 1440,
-    text: "The book outlined a plan for world government",
-    translation: "这本书概述了世界政府的计划",
+    text: "从本质上看，黄金是唯一的、高度敏感的、深负历史传承的'政治金属'。",
   },
   {
     startFrame: 1440,
     endFrame: 1620,
-    text: "through financial control.",
-    translation: "通过金融控制来实现。",
+    text: "在正常的社会状况下，废除金本位势必引发严重的社会动荡，",
   },
   {
     startFrame: 1620,
     endFrame: 1800,
-    text: "The blueprint for a New World Order.",
-    translation: "新世界秩序的蓝图。",
+    text: "只有在极端特殊的情形下，人民被逼无奈才会被迫暂时放弃自己与生俱来的权力。",
   },
 ];
 
-// ========== Scene 2: 外交协会 ==========
-// 帧范围: 3000-5100 (100-170秒)
-export const scene02Subtitles: SubtitleEntry[] = [
+// ========== Scene 2: 1932年总统大选 ==========
+export const election1932Subs: SubtitleEntry[] = [
   {
     startFrame: 0,
     endFrame: 180,
-    text: "Council on Foreign Relations — The Central Party School",
-    translation: "外交协会——美国政治精英的「中央党校」",
+    text: "1929年大萧条爆发，美国经济陷入前所未有的危机。",
   },
   {
     startFrame: 180,
     endFrame: 360,
-    text: "Founded in 1921, New York City.",
-    translation: "1921年成立于纽约。",
+    text: "银行倒闭潮席卷全国，人民储蓄化为乌有。",
   },
   {
     startFrame: 360,
     endFrame: 540,
-    text: "The CFR is the most powerful policy group in America.",
-    translation: "外交协会是美国最有影响力的政策团体。",
+    text: "1932年总统大选，银行家们需要一个能够执行他们意志的人。",
   },
-  {
-    startFrame: 540,
-    endFrame: 720,
-    text: "11 U.S. Presidents have been members.",
-    translation: "11位美国总统曾是其成员。",
-  },
+  { startFrame: 540, endFrame: 720, text: "佛兰克林·德兰诺·罗斯福被选中了。" },
   {
     startFrame: 720,
     endFrame: 900,
-    text: "8 Secretaries of State. 6 CIA Directors.",
-    translation: "8位国务卿。6位中情局局长。",
+    text: "罗斯福家族与华尔街银行家有着深厚的渊源。",
   },
   {
     startFrame: 900,
     endFrame: 1080,
-    text: "Over 20 media moguls control the narrative.",
-    translation: "超过20位媒体大亨控制着舆论。",
+    text: "他的舅舅弗雷德里克·德拉诺是联邦储备委员会的成员。",
   },
   {
     startFrame: 1080,
     endFrame: 1260,
-    text: "They call it \"shaping U.S. foreign policy.\"",
-    translation: "他们称之为「塑造美国外交政策」。",
+    text: "国际银行家赋予罗斯福一个历史使命：废除金本位。",
   },
   {
     startFrame: 1260,
     endFrame: 1440,
-    text: "Critics call it a shadow government.",
-    translation: "批评者称之为影子政府。",
+    text: "这是正常状态下极难实现的重大变革。",
+  },
+];
+
+// ========== Scene 3: 废除金本位 ==========
+export const goldStandardSubs: SubtitleEntry[] = [
+  { startFrame: 0, endFrame: 180, text: "1933年3月4日，罗斯福就职总统。" },
+  {
+    startFrame: 180,
+    endFrame: 360,
+    text: "仅仅一个月后，4月5日，罗斯福发布行政命令，没收民间黄金。",
+  },
+  {
+    startFrame: 360,
+    endFrame: 540,
+    text: "所有美国公民必须将黄金交给联邦储备银行，换取纸币。",
+  },
+  {
+    startFrame: 540,
+    endFrame: 720,
+    text: "违者将被处以最高10年监禁和1万美元罚款。",
+  },
+  {
+    startFrame: 720,
+    endFrame: 900,
+    text: "1934年1月，罗斯福签署《黄金储备法》，将黄金价格从每盎司20.67美元提高到35美元。",
+  },
+  { startFrame: 900, endFrame: 1080, text: "一夜之间，美元贬值了41%。" },
+  {
+    startFrame: 1080,
+    endFrame: 1260,
+    text: "人民手中的纸币财富被秘密地剥夺了。",
+  },
+  {
+    startFrame: 1260,
+    endFrame: 1440,
+    text: "金本位被废除了，通往战争的道路被铺平了。",
   },
   {
     startFrame: 1440,
     endFrame: 1620,
-    text: "The CFR is the closest thing to a",
-    translation: "外交协会是最接近",
-  },
-  {
-    startFrame: 1620,
-    endFrame: 1800,
-    text: "ruling elite network in America.",
-    translation: "美国统治精英网络的存在。",
-  },
-  {
-    startFrame: 1800,
-    endFrame: 2100,
-    text: "It operates above party politics, above elections.",
-    translation: "它超越党派政治，超越选举。",
+    text: "国际银行家们终于实现了他们多年来的梦想。",
   },
 ];
 
-// ========== Scene 3: 国际清算银行 ==========
-// 帧范围: 5100-7200 (170-240秒)
-export const scene03Subtitles: SubtitleEntry[] = [
+// ========== Scene 4: 华尔街选中希特勒 ==========
+export const hitlerSelectedSubs: SubtitleEntry[] = [
+  { startFrame: 0, endFrame: 180, text: "当美国正在经历大萧条的时候，" },
+  {
+    startFrame: 180,
+    endFrame: 360,
+    text: "大洋彼岸的德国也在经历着前所未有的经济危机。",
+  },
+  {
+    startFrame: 360,
+    endFrame: 540,
+    text: "国际银行家们正在寻找一个新的代理人。",
+  },
+  {
+    startFrame: 540,
+    endFrame: 720,
+    text: "他们需要一个能够打破欧洲平衡、制造混乱的人。",
+  },
+  { startFrame: 720, endFrame: 900, text: "阿道夫·希特勒进入了他们的视野。" },
+  {
+    startFrame: 900,
+    endFrame: 1080,
+    text: "华尔街银行家开始向纳粹党提供资金支持。",
+  },
+  {
+    startFrame: 1080,
+    endFrame: 1260,
+    text: "JP摩根、洛克菲勒、福特等美国大财团都参与其中。",
+  },
+  {
+    startFrame: 1260,
+    endFrame: 1440,
+    text: "这是一笔'风险投资'，目的是制造一场新的战争。",
+  },
+];
+
+// ========== Scene 5: 华尔街资助纳粹 ==========
+export const wallStreetNaziSubs: SubtitleEntry[] = [
+  { startFrame: 0, endFrame: 180, text: "华尔街对纳粹德国的资助是全方位的。" },
+  {
+    startFrame: 180,
+    endFrame: 360,
+    text: "标准石油公司向纳粹德国提供四乙基铅技术，用于航空燃料。",
+  },
+  {
+    startFrame: 360,
+    endFrame: 540,
+    text: "IBM为纳粹德国提供打孔卡片系统，用于人口普查和集中营管理。",
+  },
+  {
+    startFrame: 540,
+    endFrame: 720,
+    text: "福特汽车公司在德国设有工厂，为纳粹生产军用卡车。",
+  },
+  {
+    startFrame: 720,
+    endFrame: 900,
+    text: "美国银行家通过国际清算银行为纳粹德国提供融资。",
+  },
+  {
+    startFrame: 900,
+    endFrame: 1080,
+    text: "即使在二战期间，这些金融往来仍在继续。",
+  },
+  {
+    startFrame: 1080,
+    endFrame: 1260,
+    text: "美国和英国的银行家与纳粹德国银行家同坐国际清算银行董事会。",
+  },
+  {
+    startFrame: 1260,
+    endFrame: 1440,
+    text: "战争，对他们来说，只是另一场赚钱的生意。",
+  },
+];
+
+// ========== Scene 6: 昂贵的战争与廉价的货币 ==========
+export const warAndMoneySubs: SubtitleEntry[] = [
   {
     startFrame: 0,
     endFrame: 180,
-    text: "Bank for International Settlements — The Bank of Bankers",
-    translation: "国际清算银行——「银行家的银行」",
+    text: "废除金本位铺平了通往第二次世界大战的金融大道。",
   },
   {
     startFrame: 180,
     endFrame: 360,
-    text: "Located in Basel, Switzerland. Founded in 1930.",
-    translation: "位于瑞士巴塞尔。1930年成立。",
+    text: "没有金本位的约束，政府可以无限印钞。",
   },
   {
     startFrame: 360,
     endFrame: 540,
-    text: "Owned exclusively by central banks.",
-    translation: "仅由各国央行所有。",
+    text: "战争需要大量的资金，廉价货币提供了无限的弹药。",
   },
   {
     startFrame: 540,
     endFrame: 720,
-    text: "It handles international gold settlements.",
-    translation: "处理国际黄金结算。",
+    text: "从1939年到1945年，美国的货币供应量增加了3倍。",
   },
   {
     startFrame: 720,
     endFrame: 900,
-    text: "It coordinates global monetary policy.",
-    translation: "协调全球货币政策。",
+    text: "战争结束后，国际银行家的收获是巨大的。",
   },
   {
     startFrame: 900,
     endFrame: 1080,
-    text: "Every January, central bank governors meet in Basel.",
-    translation: "每年一月，各国央行行长在巴塞尔聚会。",
+    text: "布雷顿森林体系确立了美元的霸权地位。",
   },
   {
     startFrame: 1080,
     endFrame: 1260,
-    text: "No minutes are published. No press allowed.",
-    translation: "不公布会议记录。不允许媒体进入。",
+    text: "国际货币基金组织和世界银行成为新的控制工具。",
   },
   {
     startFrame: 1260,
     endFrame: 1440,
-    text: "These are the \"Basel Meetings\" —",
-    translation: "这就是「巴塞尔会议」——",
-  },
-  {
-    startFrame: 1440,
-    endFrame: 1620,
-    text: "the most secretive gathering in finance.",
-    translation: "金融界最隐秘的聚会。",
-  },
-  {
-    startFrame: 1620,
-    endFrame: 1800,
-    text: "The BIS is where the world's most powerful",
-    translation: "国际清算银行是世界上最强大的",
-  },
-  {
-    startFrame: 1800,
-    endFrame: 1980,
-    text: "bankers make decisions affecting billions.",
-    translation: "银行家做出影响数十亿人的决策的地方。",
-  },
-  {
-    startFrame: 1980,
-    endFrame: 2100,
-    text: "Transparency? None. Accountability? Zero.",
-    translation: "透明度？零。问责制？零。",
-  },
-];
-
-// ========== Scene 4: IMF与世界银行 ==========
-// 帧范围: 7200-9300 (240-310秒)
-export const scene04Subtitles: SubtitleEntry[] = [
-  {
-    startFrame: 0,
-    endFrame: 180,
-    text: "IMF & World Bank — Tools of Dollar Hegemony",
-    translation: "IMF与世界银行——美元霸权的工具",
-  },
-  {
-    startFrame: 180,
-    endFrame: 360,
-    text: "Created at Bretton Woods, 1944.",
-    translation: "1944年成立于布雷顿森林。",
-  },
-  {
-    startFrame: 360,
-    endFrame: 540,
-    text: "The IMF claims to \"stabilize\" currencies.",
-    translation: "IMF声称「稳定」货币。",
-  },
-  {
-    startFrame: 540,
-    endFrame: 720,
-    text: "The World Bank claims to promote \"development.\"",
-    translation: "世界银行声称促进「发展」。",
-  },
-  {
-    startFrame: 720,
-    endFrame: 900,
-    text: "But reality is different.",
-    translation: "但现实截然不同。",
-  },
-  {
-    startFrame: 900,
-    endFrame: 1080,
-    text: "Voting power is based on financial contributions.",
-    translation: "投票权基于资金贡献。",
-  },
-  {
-    startFrame: 1080,
-    endFrame: 1260,
-    text: "The U.S. holds effective veto power.",
-    translation: "美国拥有有效的否决权。",
-  },
-  {
-    startFrame: 1260,
-    endFrame: 1440,
-    text: "Loans come with \"conditions\" —",
-    translation: "贷款附带「条件」——",
-  },
-  {
-    startFrame: 1440,
-    endFrame: 1620,
-    text: "Privatization, deregulation, austerity.",
-    translation: "私有化、放松管制、紧缩政策。",
-  },
-  {
-    startFrame: 1620,
-    endFrame: 1800,
-    text: "Sell state assets to Western corporations.",
-    translation: "将国有资产出售给西方公司。",
-  },
-  {
-    startFrame: 1800,
-    endFrame: 1980,
-    text: "Open markets to foreign banks.",
-    translation: "向外国银行开放市场。",
-  },
-  {
-    startFrame: 1980,
-    endFrame: 2100,
-    text: "The IMF is not financial — it's political.",
-    translation: "IMF不是金融机构——它是政治工具。",
-  },
-];
-
-// ========== Scene 5: 彼尔德伯格俱乐部 ==========
-// 帧范围: 9300-11100 (310-370秒)
-export const scene05Subtitles: SubtitleEntry[] = [
-  {
-    startFrame: 0,
-    endFrame: 180,
-    text: "Bilderberg Club — The Most Secretive Elite",
-    translation: "彼尔德伯格俱乐部——最隐秘的精英俱乐部",
-  },
-  {
-    startFrame: 180,
-    endFrame: 360,
-    text: "Founded in 1954, Netherlands.",
-    translation: "1954年成立于荷兰。",
-  },
-  {
-    startFrame: 360,
-    endFrame: 540,
-    text: "Named after Hotel de Bilderberg.",
-    translation: "以彼尔德伯格酒店命名。",
-  },
-  {
-    startFrame: 540,
-    endFrame: 720,
-    text: "120-150 elites meet annually.",
-    translation: "每年120-150名精英聚会。",
-  },
-  {
-    startFrame: 720,
-    endFrame: 900,
-    text: "Participants must be 60+ years old.",
-    translation: "参与者必须60岁以上。",
-  },
-  {
-    startFrame: 900,
-    endFrame: 1080,
-    text: "No minutes. No press. No chatter.",
-    translation: "无记录。无媒体。禁言。",
-  },
-  {
-    startFrame: 1080,
-    endFrame: 1260,
-    text: "Topics: Global economy, world order, geopolitics.",
-    translation: "议题：全球经济、世界秩序、地缘政治。",
-  },
-  {
-    startFrame: 1260,
-    endFrame: 1440,
-    text: "Key members include David Rockefeller,",
-    translation: "关键成员包括戴维·洛克菲勒、",
-  },
-  {
-    startFrame: 1440,
-    endFrame: 1620,
-    text: "Henry Kissinger, George Soros.",
-    translation: "亨利·基辛格、乔治·索罗斯。",
-  },
-  {
-    startFrame: 1620,
-    endFrame: 1800,
-    text: "The Bilderberg Group is a secret conspiracy",
-    translation: "彼尔德伯格俱乐部是一个秘密阴谋",
-  },
-];
-
-// ========== Scene 6: 三边委员会 ==========
-// 帧范围: 11100-12900 (370-430秒)
-export const scene06Subtitles: SubtitleEntry[] = [
-  {
-    startFrame: 0,
-    endFrame: 180,
-    text: "Trilateral Commission — The Road to World Government",
-    translation: "三边委员会——世界政府之路",
-  },
-  {
-    startFrame: 180,
-    endFrame: 360,
-    text: "Founded in 1973 by David Rockefeller.",
-    translation: "1973年由戴维·洛克菲勒创立。",
-  },
-  {
-    startFrame: 360,
-    endFrame: 540,
-    text: "Coordinates North America, Europe, Japan.",
-    translation: "协调北美、欧洲、日本。",
-  },
-  {
-    startFrame: 540,
-    endFrame: 720,
-    text: "Zbigniew Brzezinski was first Executive Director.",
-    translation: "兹比格涅夫·布热津斯基是第一任执行主任。",
-  },
-  {
-    startFrame: 720,
-    endFrame: 900,
-    text: "350+ global elites in membership.",
-    translation: "350多名全球精英成员。",
-  },
-  {
-    startFrame: 900,
-    endFrame: 1080,
-    text: "Their mission: Build global governance.",
-    translation: "他们的使命：建立全球治理。",
-  },
-  {
-    startFrame: 1080,
-    endFrame: 1260,
-    text: "They initiated the G7 summits.",
-    translation: "他们发起了G7峰会。",
-  },
-  {
-    startFrame: 1260,
-    endFrame: 1440,
-    text: "They shape international policy coordination.",
-    translation: "他们塑造国际政策协调。",
-  },
-  {
-    startFrame: 1440,
-    endFrame: 1620,
-    text: "The Trilateral Commission is the visible instrument",
-    translation: "三边委员会是世界规划精英的",
-  },
-  {
-    startFrame: 1620,
-    endFrame: 1800,
-    text: "of a world planner elite.",
-    translation: "可见工具。",
+    text: "昂贵的战争由人民承担代价，廉价的货币让银行家获利。",
   },
 ];
 
 // ========== Scene 7: 总结 ==========
-// 帧范围: 12900-14400 (430-480秒)
-export const scene07Subtitles: SubtitleEntry[] = [
-  {
-    startFrame: 0,
-    endFrame: 180,
-    text: "Summary — The Elite Club Network",
-    translation: "总结——精英俱乐部网络",
-  },
+export const summarySubs: SubtitleEntry[] = [
+  { startFrame: 0, endFrame: 180, text: "廉价货币的本质是什么？" },
   {
     startFrame: 180,
     endFrame: 360,
-    text: "From Colonel House to Trilateral Commission,",
-    translation: "从豪斯上校到三边委员会，",
+    text: "是剥夺人民的经济自由，为战争铺平道路。",
   },
   {
     startFrame: 360,
     endFrame: 540,
-    text: "a hidden network controls global affairs.",
-    translation: "一个隐藏的网络控制着全球事务。",
+    text: "凯恩斯的'廉价货币'理论成为银行家的工具。",
   },
   {
     startFrame: 540,
     endFrame: 720,
-    text: "These clubs cross borders, parties, and governments.",
-    translation: "这些俱乐部跨越国界、党派和政府。",
+    text: "废除金本位是国际银行家的百年梦想。",
   },
   {
     startFrame: 720,
     endFrame: 900,
-    text: "They form a shadowy power structure",
-    translation: "形成一个隐秘的权力结构",
+    text: "而战争，则是他们收割财富的最佳时机。",
   },
-  {
-    startFrame: 900,
-    endFrame: 1080,
-    text: "that affects billions of lives.",
-    translation: "影响着数十亿人的生活。",
-  },
-  {
-    startFrame: 1080,
-    endFrame: 1260,
-    text: "Knowledge is power. Information is power.",
-    translation: "知识就是力量。信息就是力量。",
-  },
-  {
-    startFrame: 1260,
-    endFrame: 1440,
-    text: "The secret of their control is hidden in plain sight.",
-    translation: "他们控制秘诀就隐藏在众目睽睽之下。",
-  },
-  {
-    startFrame: 1440,
-    endFrame: 1500,
-    text: "Understanding is our only defense.",
-    translation: "理解是我们唯一的防线。",
-  },
+  { startFrame: 900, endFrame: 1080, text: "人民被通胀剥夺，国家被债务奴役。" },
+  { startFrame: 1080, endFrame: 1260, text: "这就是廉价货币的真相。" },
 ];
 
-// ========== 场景定义 ==========
-export interface SceneSubtitles {
-  sceneName: string;
-  sceneIndex: number;
-  startFrame: number;
-  endFrame: number;
-  subtitles: SubtitleEntry[];
-}
-
-export const episode06Scenes: SceneSubtitles[] = [
-  {
-    sceneName: "开场",
-    sceneIndex: 0,
-    startFrame: 0,
-    endFrame: 1200,
-    subtitles: scene00Subtitles,
-  },
-  {
-    sceneName: "豪斯上校",
-    sceneIndex: 1,
-    startFrame: 1200,
-    endFrame: 3000,
-    subtitles: scene01Subtitles,
-  },
-  {
-    sceneName: "外交协会",
-    sceneIndex: 2,
-    startFrame: 3000,
-    endFrame: 5100,
-    subtitles: scene02Subtitles,
-  },
-  {
-    sceneName: "国际清算银行",
-    sceneIndex: 3,
-    startFrame: 5100,
-    endFrame: 7200,
-    subtitles: scene03Subtitles,
-  },
-  {
-    sceneName: "IMF与世界银行",
-    sceneIndex: 4,
-    startFrame: 7200,
-    endFrame: 9300,
-    subtitles: scene04Subtitles,
-  },
-  {
-    sceneName: "彼尔德伯格俱乐部",
-    sceneIndex: 5,
-    startFrame: 9300,
-    endFrame: 11100,
-    subtitles: scene05Subtitles,
-  },
-  {
-    sceneName: "三边委员会",
-    sceneIndex: 6,
-    startFrame: 11100,
-    endFrame: 12900,
-    subtitles: scene06Subtitles,
-  },
-  {
-    sceneName: "总结",
-    sceneIndex: 7,
-    startFrame: 12900,
-    endFrame: 14400,
-    subtitles: scene07Subtitles,
-  },
+// ========== 场景帧数配置 ==========
+export const SCENE_FRAMES = [
+  900, // Scene 0: 开场
+  1800, // Scene 1: 凯恩斯
+  1440, // Scene 2: 1932大选
+  1620, // Scene 3: 废除金本位
+  1440, // Scene 4: 选中希特勒
+  1440, // Scene 5: 华尔街资助纳粹
+  1440, // Scene 6: 战争与货币
+  1260, // Scene 7: 总结
 ];
 
-// ========== 兼容：合并的字幕数组 ==========
-// 将所有场景字幕按全局帧偏移合并，用于向后兼容
+// 累计偏移量
+export const SCENE_OFFSETS = SCENE_FRAMES.reduce((acc: number[], frames, i) => {
+  acc.push(i === 0 ? 0 : acc[i - 1] + SCENE_FRAMES[i - 1]);
+  return acc;
+}, []);
+
+// 别名导出（兼容旧代码）
+export const scene00Subtitles = openingSubs;
+export const scene01Subtitles = keynesSubs;
+export const scene02Subtitles = election1932Subs;
+export const scene03Subtitles = goldStandardSubs;
+export const scene04Subtitles = hitlerSelectedSubs;
+export const scene05Subtitles = wallStreetNaziSubs;
+export const scene06Subtitles = warAndMoneySubs;
+export const scene07Subtitles = summarySubs;
+
+// 合并所有字幕
 export const episode06Subtitles: SubtitleEntry[] = [
-  ...scene00Subtitles,
-  ...scene01Subtitles.map((s) => ({
+  ...openingSubs.map((s) => ({
     ...s,
-    startFrame: s.startFrame + 1200,
-    endFrame: s.endFrame + 1200,
+    startFrame: s.startFrame + SCENE_OFFSETS[0],
+    endFrame: s.endFrame + SCENE_OFFSETS[0],
   })),
-  ...scene02Subtitles.map((s) => ({
+  ...keynesSubs.map((s) => ({
     ...s,
-    startFrame: s.startFrame + 3000,
-    endFrame: s.endFrame + 3000,
+    startFrame: s.startFrame + SCENE_OFFSETS[1],
+    endFrame: s.endFrame + SCENE_OFFSETS[1],
   })),
-  ...scene03Subtitles.map((s) => ({
+  ...election1932Subs.map((s) => ({
     ...s,
-    startFrame: s.startFrame + 5100,
-    endFrame: s.endFrame + 5100,
+    startFrame: s.startFrame + SCENE_OFFSETS[2],
+    endFrame: s.endFrame + SCENE_OFFSETS[2],
   })),
-  ...scene04Subtitles.map((s) => ({
+  ...goldStandardSubs.map((s) => ({
     ...s,
-    startFrame: s.startFrame + 7200,
-    endFrame: s.endFrame + 7200,
+    startFrame: s.startFrame + SCENE_OFFSETS[3],
+    endFrame: s.endFrame + SCENE_OFFSETS[3],
   })),
-  ...scene05Subtitles.map((s) => ({
+  ...hitlerSelectedSubs.map((s) => ({
     ...s,
-    startFrame: s.startFrame + 9300,
-    endFrame: s.endFrame + 9300,
+    startFrame: s.startFrame + SCENE_OFFSETS[4],
+    endFrame: s.endFrame + SCENE_OFFSETS[4],
   })),
-  ...scene06Subtitles.map((s) => ({
+  ...wallStreetNaziSubs.map((s) => ({
     ...s,
-    startFrame: s.startFrame + 11100,
-    endFrame: s.endFrame + 11100,
+    startFrame: s.startFrame + SCENE_OFFSETS[5],
+    endFrame: s.endFrame + SCENE_OFFSETS[5],
   })),
-  ...scene07Subtitles.map((s) => ({
+  ...warAndMoneySubs.map((s) => ({
     ...s,
-    startFrame: s.startFrame + 12900,
-    endFrame: s.endFrame + 12900,
+    startFrame: s.startFrame + SCENE_OFFSETS[6],
+    endFrame: s.endFrame + SCENE_OFFSETS[6],
+  })),
+  ...summarySubs.map((s) => ({
+    ...s,
+    startFrame: s.startFrame + SCENE_OFFSETS[7],
+    endFrame: s.endFrame + SCENE_OFFSETS[7],
   })),
 ];
 
-// ========== 辅助函数 ==========
-
-/**
- * 获取指定场景的字幕数组
- */
-export const getSceneSubtitles = (sceneIndex: number): SubtitleEntry[] | undefined => {
-  const scene = episode06Scenes.find((s) => s.sceneIndex === sceneIndex);
-  return scene?.subtitles;
-};
-
-/**
- * 获取指定场景的全局帧偏移
- */
-export const getSceneOffset = (sceneIndex: number): number => {
-  const scene = episode06Scenes.find((s) => s.sceneIndex === sceneIndex);
-  return scene?.startFrame ?? 0;
-};
-
-/**
- * 获取指定帧所在的场景索引
- */
-export const getSceneIndexAtFrame = (frame: number): number => {
-  for (let i = episode06Scenes.length - 1; i >= 0; i--) {
-    if (frame >= episode06Scenes[i].startFrame) {
-      return i;
-    }
-  }
-  return 0;
-};
+export default episode06Subtitles;

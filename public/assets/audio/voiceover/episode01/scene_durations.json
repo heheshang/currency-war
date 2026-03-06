@@ -1,0 +1,58 @@
+[
+  {
+    "scene": 1,
+    "title": "货币大厦的危机",
+    "file": "voice_0000.mp3",
+    "estimated": 45,
+    "actual": 32.1
+  },
+  {
+    "scene": 2,
+    "title": "黄金的终极地位",
+    "file": "voice_0001.mp3",
+    "estimated": 50,
+    "actual": 48.0
+  },
+  {
+    "scene": 3,
+    "title": "债务货币的陷阱",
+    "file": "voice_0002.mp3",
+    "estimated": 55,
+    "actual": 55.6
+  },
+  {
+    "scene": 4,
+    "title": "预言成真",
+    "file": "voice_0003.mp3",
+    "estimated": 50,
+    "actual": 43.4
+  },
+  {
+    "scene": 5,
+    "title": "中国经济航母起航",
+    "file": "voice_0004.mp3",
+    "estimated": 40,
+    "actual": 27.9
+  },
+  {
+    "scene": 6,
+    "title": "看不见硝烟的战场",
+    "file": "voice_0005.mp3",
+    "estimated": 50,
+    "actual": 46.7
+  },
+  {
+    "scene": 7,
+    "title": "历史的警示",
+    "file": "voice_0006.mp3",
+    "estimated": 45,
+    "actual": 27.8
+  },
+  {
+    "scene": 8,
+    "title": "战争已经开始",
+    "file": "voice_0007.mp3",
+    "estimated": 35,
+    "actual": 21.0
+  }
+]

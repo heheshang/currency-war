@@ -1,0 +1,142 @@
+[
+  {
+    "id": "0-1",
+    "scene": 0,
+    "text": "货币战争。",
+    "notes": "沉稳有力，标题感",
+    "outputFile": "voice_0000.m4a"
+  },
+  {
+    "id": "0-2",
+    "scene": 0,
+    "text": "战争已经开始，虽然看不见硝烟。",
+    "notes": "略带神秘感",
+    "outputFile": "voice_0001.m4a"
+  },
+  {
+    "id": "0-3",
+    "scene": 0,
+    "text": "这场战争，关乎每一个人的财富。",
+    "notes": "警示语气",
+    "outputFile": "voice_0002.m4a"
+  },
+  {
+    "id": "0-4",
+    "scene": 0,
+    "text": "这不是预言，而是正在发生的现实。",
+    "notes": "语气坚定",
+    "outputFile": "voice_0003.m4a"
+  },
+  {
+    "id": "1-1",
+    "scene": 1,
+    "text": "为什么世界会采取这种必然导致危机的债务货币制度？",
+    "notes": "设问语气",
+    "outputFile": "voice_0004.m4a"
+  },
+  {
+    "id": "1-2",
+    "scene": 1,
+    "text": "到底是什么样的特殊利益集团左右着货币制度的建立和演化？",
+    "notes": "追问语气",
+    "outputFile": "voice_0005.m4a"
+  },
+  {
+    "id": "1-3",
+    "scene": 1,
+    "text": "他们又是如何从政府手中夺取了货币发行大权？",
+    "notes": "进一步追问",
+    "outputFile": "voice_0006.m4a"
+  },
+  {
+    "id": "1-4",
+    "scene": 1,
+    "text": "这些问题的答案，将揭示世界经济的真正运行逻辑。",
+    "notes": "揭示感",
+    "outputFile": "voice_0007.m4a"
+  },
+  {
+    "id": "2-1",
+    "scene": 2,
+    "text": "2008年席卷全球的金融危机，",
+    "notes": "引入事件",
+    "outputFile": "voice_0008.m4a"
+  },
+  {
+    "id": "2-2",
+    "scene": 2,
+    "text": "根源在于全世界的货币大厦建立在美国的债务沙滩之上。",
+    "notes": "强调'债务沙滩'",
+    "outputFile": "voice_0009.m4a"
+  },
+  {
+    "id": "2-3",
+    "scene": 2,
+    "text": "美元危机波及整个世界，",
+    "notes": "警示",
+    "outputFile": "voice_0010.m4a"
+  },
+  {
+    "id": "2-4",
+    "scene": 2,
+    "text": "而更大的危机还在酝酿之中。",
+    "notes": "悬念感",
+    "outputFile": "voice_0011.m4a"
+  },
+  {
+    "id": "3-1",
+    "scene": 3,
+    "text": "起航的中国经济航母，",
+    "notes": "宏大感",
+    "outputFile": "voice_0012.m4a"
+  },
+  {
+    "id": "3-2",
+    "scene": 3,
+    "text": "会一帆风顺吗？",
+    "notes": "设问",
+    "outputFile": "voice_0013.m4a"
+  },
+  {
+    "id": "3-3",
+    "scene": 3,
+    "text": "看不见硝烟的金融战争威胁日益加剧。",
+    "notes": "警示",
+    "outputFile": "voice_0014.m4a"
+  },
+  {
+    "id": "3-4",
+    "scene": 3,
+    "text": "中国将如何应对这场无形的战争？",
+    "notes": "追问，悬念",
+    "outputFile": "voice_0015.m4a"
+  },
+  {
+    "id": "4-1",
+    "scene": 4,
+    "text": "11集节目为你揭示真相。",
+    "notes": "承诺感",
+    "outputFile": "voice_0016.m4a"
+  },
+  {
+    "id": "4-2",
+    "scene": 4,
+    "text": "从罗斯柴尔德到美联储，",
+    "notes": "列举",
+    "outputFile": "voice_0017.m4a"
+  },
+  {
+    "id": "4-3",
+    "scene": 4,
+    "text": "从一战到亚洲金融危机，",
+    "notes": "继续列举",
+    "outputFile": "voice_0018.m4a"
+  },
+  {
+    "id": "4-4",
+    "scene": 4,
+    "text": "货币战争，敬请期待。",
+    "notes": "结束感，期待",
+    "outputFile": "voice_0019.m4a"
+  }
+]

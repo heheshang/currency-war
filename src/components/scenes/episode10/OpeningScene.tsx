@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { AbsoluteFill, useCurrentFrame, interpolate } from "remotion";
+import { AbsoluteFill, useCurrentFrame, interpolate, random } from "remotion";
 
 // Static star positions with animation delay
 const STAR_POSITIONS = [
@@ -50,13 +50,13 @@ const GoldParticles: React.FC<{ count?: number }> = ({ count = 20 }) => {
   const particles = useMemo(() => {
     return Array.from({ length: count }, (_, i) => ({
       id: i,
-      left: Math.random() * 100,
-      top: Math.random() * 100,
-      size: 1 + Math.random() * 3,
-      speed: 0.2 + Math.random() * 0.5,
-      delay: Math.random() * 30,
+      left: random(frame * (i + 1)) * 100,
+      top: random(frame * (i + 2)) * 100,
+      size: 1 + random(frame * (i + 3)) * 3,
+      speed: 0.2 + random(frame * (i + 4)) * 0.5,
+      delay: random(frame * (i + 5)) * 30,
     }));
-  }, [count]);
+  }, [count, frame]);
 
   return (
     <div style={{ position: "absolute", inset: 0, overflow: "hidden" }}>

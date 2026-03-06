@@ -27,10 +27,13 @@ const AnimatedCounter: React.FC<{
     config: { damping: 15 },
   });
 
+  // Use value for scaling the animated result
+  const displayValue = value * animatedValue;
+
   return (
     <span style={style}>
       {prefix}
-      {animatedValue.toFixed(decimals)}
+      {displayValue.toFixed(decimals)}
       {suffix}
     </span>
   );

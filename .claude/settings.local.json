@@ -11,7 +11,9 @@
       "mcp__web-search-prime__webSearchPrime",
       "Bash(powershell:*)",
       "Bash(git add:*)",
-      "Bash(bun:*)"
+      "Bash(bun:*)",
+      "Bash(grep:*)",
+      "Bash(__NEW_LINE_392ba50f850b0725__ echo:*)"
     ]
   },
   "outputStyle": "Explanatory"

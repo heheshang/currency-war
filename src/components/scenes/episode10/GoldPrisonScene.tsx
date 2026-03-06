@@ -44,7 +44,7 @@ const GoldBarStack: React.FC = () => {
         gap: 8,
       }}
     >
-      {bars.map((b, i) => {
+      {bars.map((b) => {
         const opacity = interpolate(frame, [b.delay, b.delay + 20], [0, 1]);
         const y = interpolate(frame, [b.delay, b.delay + 30], [50, 0]);
 

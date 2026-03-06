@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { AbsoluteFill, useCurrentFrame, interpolate } from "remotion";
+import { AbsoluteFill, useCurrentFrame, interpolate, random } from "remotion";
 
 // Typewriter text component
 const TypewriterText: React.FC<{
@@ -31,9 +31,9 @@ const MoneyFlow: React.FC<{ direction?: "left" | "right" }> = ({
       id: i,
       y: 35 + (i % 5) * 10,
       delay: i * 8,
-      speed: 0.3 + Math.random() * 0.3,
+      speed: 0.3 + random(frame * (i + 1)) * 0.3,
     }));
-  }, []);
+  }, [frame]);
 
   return (
     <div

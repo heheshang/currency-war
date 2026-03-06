@@ -1,8 +1,8 @@
 import React from "react";
 import { useCurrentFrame, interpolate } from "remotion";
-
-// Import and re-export subtitle types and data from separate episode files
+import { useSubtitleSync } from "../hooks";
 import type { SubtitleEntry } from "../subtitles/index";
+
 export type { SubtitleEntry };
 export {
   episode01Subtitles,
@@ -15,7 +15,9 @@ export {
 
 interface SubtitlesProps {
   subtitles: SubtitleEntry[];
-  offset?: number; // 全局偏移帧数（用于在 Sequence 中使用）
+  offset?: number;
+  fadeInDuration?: number;
+  fadeOutDuration?: number;
 }
 
 const subtitleStyle: React.CSSProperties = {
@@ -39,21 +41,15 @@ const translationStyle: React.CSSProperties = {
   fontStyle: "italic",
 };
 
-/**
- * Subtitles - 字幕组件
- *
- * 根据当前帧显示相应的字幕
- */
 export const Subtitles: React.FC<SubtitlesProps> = ({
   subtitles,
   offset = 0,
+  fadeInDuration = 15,
+  fadeOutDuration = 15,
 }) => {
   const frame = useCurrentFrame();
-
-  // 计算实际帧数（考虑偏移）
   const actualFrame = frame + offset;
 
-  // 查找当前应该显示的字幕
   const currentSubtitle = subtitles.find(
     (sub) => actualFrame >= sub.startFrame && actualFrame < sub.endFrame,
   );
@@ -62,14 +58,10 @@ export const Subtitles: React.FC<SubtitlesProps> = ({
     return null;
   }
 
-  // 计算淡入淡出效果
-  const fadeInDuration = 15; // 帧数
-  const fadeOutDuration = 15; // 帧数
   const duration = currentSubtitle.endFrame - currentSubtitle.startFrame;
-
-  let opacity = 1;
   const timeInSubtitle = actualFrame - currentSubtitle.startFrame;
 
+  let opacity = 1;
   if (timeInSubtitle < fadeInDuration) {
     opacity = interpolate(timeInSubtitle, [0, fadeInDuration], [0, 1]);
   } else if (timeInSubtitle > duration - fadeOutDuration) {
@@ -92,5 +84,72 @@ export const Subtitles: React.FC<SubtitlesProps> = ({
   );
 };
 
-// Note: All episode subtitle data has been moved to src/subtitles/
-// Import from '../subtitles/index' or use the re-exports above
+interface SubtitleIndicatorProps {
+  subtitles: SubtitleEntry[];
+  position?: "top" | "bottom";
+  height?: number;
+}
+
+export const SubtitleIndicator: React.FC<SubtitleIndicatorProps> = ({
+  subtitles,
+  position = "top",
+  height = 4,
+}) => {
+  const frame = useCurrentFrame();
+  const totalSubtitles = subtitles.length;
+
+  if (totalSubtitles === 0) return null;
+
+  const currentIndex = subtitles.findIndex(
+    (sub) => frame >= sub.startFrame && frame < sub.endFrame,
+  );
+
+  return (
+    <div
+      style={{
+        position: "absolute",
+        [position]: 0,
+        left: 0,
+        right: 0,
+        height,
+        background: "rgba(0, 0, 0, 0.3)",
+        display: "flex",
+        zIndex: 100,
+      }}
+    >
+      {subtitles.map((_, index) => (
+        <div
+          key={index}
+          style={{
+            flex: 1,
+            background:
+              index < currentIndex
+                ? "#48BB78"
+                : index === currentIndex
+                  ? "#ECC94B"
+                  : "rgba(255, 255, 255, 0.2)",
+            borderRight: "1px solid rgba(0, 0, 0, 0.3)",
+          }}
+        />
+      ))}
+    </div>
+  );
+};
+
+interface SyncedSubtitleProps {
+  subtitles: SubtitleEntry[];
+  children: React.ReactNode;
+}
+
+export const SyncedSubtitle: React.FC<SyncedSubtitleProps> = ({
+  subtitles,
+  children,
+}) => {
+  const { currentSubtitle, fadeOpacity } = useSubtitleSync({ subtitles });
+
+  if (!currentSubtitle) {
+    return null;
+  }
+
+  return <div style={{ opacity: fadeOpacity }}>{children}</div>;
+};
