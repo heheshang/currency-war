@@ -36,7 +36,6 @@ const StrategyCard: React.FC<{
         textAlign: "center",
         opacity: progress,
         transform: `translateY(${slideY}px) scale(${scale * pulse})`,
-        transition: "transform 0.3s ease",
         boxShadow: `0 0 ${20 * progress}px ${color}30`,
       }}
     >

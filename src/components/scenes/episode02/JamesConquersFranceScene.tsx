@@ -470,7 +470,6 @@ const JamesConquersFranceScene: React.FC = () => {
                     width: "100%",
                     height: `${getBondPrice()}%`,
                     background: `linear-gradient(to top, #ef4444, #f87171)`,
-                    transition: "height 0.5s",
                   }}
                 />
                 {/* Price label */}

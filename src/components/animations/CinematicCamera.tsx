@@ -5,7 +5,7 @@
  */
 
 import React from "react";
-import { useCurrentFrame, interpolate, random } from "remotion";
+import { useCurrentFrame, useVideoConfig, interpolate, spring, random } from "remotion";
 
 export type CameraMovementType =
   | "pan"        // 平移镜头
@@ -256,29 +256,43 @@ interface MultiFocusContainerProps {
 export const MultiFocusContainer: React.FC<MultiFocusContainerProps> = ({
   children,
   currentFocus,
-  transitionDuration = 30,
   blurAmount = 5,
 }) => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+
   return (
     <div style={{ position: "absolute", inset: 0 }}>
       {React.Children.map(children, (child, index) => {
         const isFocused = index === currentFocus;
-        const isTransitioning = Math.abs(index - currentFocus) <= 1;
 
-        // 计算模糊和缩放
-        const blur = isFocused ? 0 : isTransitioning ? blurAmount * 0.5 : blurAmount;
-        const scale = isFocused ? 1 : isTransitioning ? 0.95 : 0.9;
-        const opacity = isFocused ? 1 : isTransitioning ? 0.5 : 0.2;
+        // Use spring for smooth transitions (Remotion best practice)
+        const focusSpring = spring({
+          frame,
+          fps,
+          config: {
+            damping: 20,
+            stiffness: 100,
+            mass: 0.5,
+          },
+          from: isFocused ? 0 : 1,
+          to: isFocused ? 1 : 0,
+        });
+
+        // Calculate blur and scale using spring value
+        const blur = interpolate(focusSpring, [0, 1], [blurAmount, 0]);
+        const scale = interpolate(focusSpring, [0, 1], [0.9, 1]);
+        const opacity = interpolate(focusSpring, [0, 1], [0.2, 1]);
 
         return (
           <div
+            key={index}
             style={{
               position: "absolute",
               inset: 0,
               filter: `blur(${blur}px)`,
               transform: `scale(${scale})`,
               opacity,
-              transition: `all ${transitionDuration / 30}s ease-in-out`,
               willChange: "filter, transform, opacity",
             }}
           >

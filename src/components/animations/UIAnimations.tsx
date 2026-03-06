@@ -785,7 +785,6 @@ export const AnimatedBar: React.FC<AnimatedBarProps> = ({
             background: `linear-gradient(90deg, ${color} 0%, ${color}cc 100%)`,
             borderRadius: height / 2,
             boxShadow: `0 0 10px ${color}, 0 0 20px ${color}50`,
-            transition: "width 0.1s ease-out",
           }}
         />
       </div>

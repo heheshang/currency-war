@@ -211,7 +211,6 @@ export const MonetaryStandardScene: React.FC = () => {
                 color: item.color,
                 opacity: unitFadeIn,
                 transform: `translateY(${20 * (1 - unitFadeIn)}px)`,
-                transition: "transform 0.3s ease",
               }}
             >
               <PulsingCircle delay={item.delay} color={item.color} size={20} />

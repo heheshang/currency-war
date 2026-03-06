@@ -616,7 +616,6 @@ export const RhythmController: React.FC<RhythmControllerProps> = ({
         style={{
           position: "absolute",
           inset: 0,
-          transition: "transform 0.1s ease-out",
           ...getActionStyle(),
         }}
       >

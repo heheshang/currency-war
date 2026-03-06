@@ -21,7 +21,8 @@ const SCENES: { [episode: string]: { name: string; exportName: string }[] } = {
     { name: "威尔逊的觉醒", exportName: "scene13Subs" },
     { name: "总结", exportName: "scene14Subs" },
   ],
-  episode07: [
+  episode07: [],
+};
 
 function getAudioDuration(filePath: string): number {
   try {
@@ -34,6 +35,7 @@ function getAudioDuration(filePath: string): number {
     return 0;
   }
 }
+
 
 function getVoiceFiles(episode: string): string[] {
   const dir = `public/assets/audio/voiceover/${episode}`;

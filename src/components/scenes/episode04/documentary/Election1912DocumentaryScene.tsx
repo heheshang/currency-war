@@ -245,7 +245,6 @@ export const Election1912DocumentaryScene: React.FC = () => {
                     height: 20,
                     background: candidate.color,
                     borderRadius: 4,
-                    transition: "width 0.3s",
                   }}
                 />
                 <div

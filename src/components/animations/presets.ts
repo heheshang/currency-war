@@ -411,6 +411,7 @@ export const animationPresets = {
     speaking: narratorSpeaking,
     emphatic: narratorEmphatic,
   },
+  // eslint-disable-next-line @remotion/non-pure-animation
   transition: {
     fade: sceneTransitionFade,
     slide: sceneTransitionSlide,

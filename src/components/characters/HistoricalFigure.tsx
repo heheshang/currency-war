@@ -125,7 +125,6 @@ export const HistoricalFigure: React.FC<HistoricalFigureProps> = ({
         opacity,
         zIndex: 10,
         filter: glowEffect ? `drop-shadow(0 0 ${glowAnimation}px ${glowColor})` : "none",
-        transition: "filter 0.1s ease-out",
       }}
     >
       {/* Outer decorative frame */}
@@ -263,7 +262,6 @@ export const HistoricalFigure: React.FC<HistoricalFigureProps> = ({
                   background: "rgba(0, 0, 0, 0.6)",
                   borderRadius: "50%",
                   boxShadow: "0 0 20px rgba(0,0,0,0.8)",
-                  transition: "all 0.1s ease-out",
                 }}
               />
             </div>

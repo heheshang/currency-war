@@ -186,11 +186,9 @@ export const RackFocusReveal: React.FC<RackFocusRevealProps> = ({
               filter: `blur(${blur}px)`,
               transform: `scale(${scale})`,
               opacity: opacity * transitionProgress,
-              transition: `all ${transitionDuration / 30}s ease-out`,
             }}
           >
             {point.content}
-
             {/* 焦点标签 */}
             {point.label && isActive && (
               <div
@@ -232,7 +230,6 @@ export const RackFocusReveal: React.FC<RackFocusRevealProps> = ({
               height: 8,
               borderRadius: 4,
               background: index === activeIndex ? "#FFD700" : "#666",
-              transition: "all 0.3s ease",
             }}
           />
         ))}
