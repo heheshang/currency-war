@@ -1,1063 +1,224 @@
 /**
- * Episode 04: The Federal Reserve - Subtitle System
- *
- * This file contains scene-specific subtitle arrays with relative frame offsets.
- * Each scene's subtitles start from frame 0 relative to that scene.
- *
- * Scene Structure (based on frame offsets):
- * - OpeningScene: 0-900 (30s) - Wilson's Regret
- * - JekyllIslandScene: 900-2700 (60s) - Secret Meeting
- * - WallStreetTycoonsScene: 2700-4500 (60s) - 7 Tycoons
- * - MorganRiseScene: 4500-6300 (60s) - Morgan Family Rise
- * - RockefellerEmpireScene: 6300-8100 (60s) - Rockefeller Empire
- * - Panic1907Scene: 8100-9900 (60s) - 1907 Panic
- * - GoldToFiatScene: 9900-11700 (60s) - Gold Standard to Fiat
- * - Election1912Scene: 11700-13500 (60s) - 1912 Election
- * - PlanBScene: 13500-15300 (60s) - Two Schemes
- * - ActPassesScene: 15300-17100 (60s) - Act Passage
- * - WhoOwnsFedScene: 17100-18900 (60s) - Who Owns The Fed
- * - HiddenControlScene: 18900-20700 (60s) - Hidden Control
- * - WilsonRealizationScene: 20700-22500 (60s) - Wilson's Realization
- * - SummaryScene: 22500-24300 (30s) - Summary
+ * Episode04 字幕 - 基于实际配音时长
+ * 生成日期：2026-03-06
+ * 总时长：686.3秒 = 20588帧 (@30fps)
  */
-
 import { SubtitleEntry } from "./index";
 
-// =============================================================================
-// Scene 0: OpeningScene - Wilson's Regret (frames 0-900, 30 seconds)
-// =============================================================================
-
-export const OpeningSceneSubtitles: SubtitleEntry[] = [
-  {
-    startFrame: 0,
-    endFrame: 180,
-    text: "Episode 4: The Federal Reserve",
-    translation: "第四集：美联储",
-  },
-  {
-    startFrame: 180,
-    endFrame: 360,
-    text: '"A great industrial nation is controlled by its system of credit."',
-    translation: '"一个伟大的工业国家被信用系统牢牢地控制着。"',
-  },
-  {
-    startFrame: 360,
-    endFrame: 540,
-    text: "Our system of credit is concentrated.",
-    translation: "这个信用系统高度地集中。",
-  },
-  {
-    startFrame: 540,
-    endFrame: 720,
-    text: "The growth of the nation, and all our activities, are in the hands of a few men.",
-    translation: "国家的发展和我们所有的活动完全掌握在少数人手中。",
-  },
-  {
-    startFrame: 720,
-    endFrame: 900,
-    text: "— Woodrow Wilson, 28th U.S. President",
-    translation: "—— 伍德罗·威尔逊，美国第28任总统",
-  },
+export const SCENE_FRAMES = [
+  971, // Scene 0: 32.4s
+  2220, // Scene 1: 74.0s
+  1992, // Scene 2: 66.4s
+  1643, // Scene 3: 54.8s
+  1390, // Scene 4: 46.3s
+  1677, // Scene 5: 55.9s
+  1458, // Scene 6: 48.6s
+  1884, // Scene 7: 62.8s
+  1583, // Scene 8: 52.8s
+  1583, // Scene 9: 52.8s
+  1379, // Scene 10: 46.0s
+  1104, // Scene 11: 36.8s
+  985, // Scene 12: 32.8s
+  719, // Scene 13: 24.0s
 ];
 
-// =============================================================================
-// Scene 1: JekyllIslandScene - Secret Meeting on Jekyll Island (frames 900-2700, 60 seconds)
-// =============================================================================
+export const SCENE_OFFSETS = SCENE_FRAMES.reduce((acc: number[], frames, i) => {
+  acc.push(i === 0 ? 0 : acc[i - 1] + SCENE_FRAMES[i - 1]);
+  return acc;
+}, []);
 
-export const JekyllIslandSceneSubtitles: SubtitleEntry[] = [
-  {
-    startFrame: 0,
-    endFrame: 150,
-    text: "November 22, 1910. A sealed train car leaves New York.",
-    translation: "1910年11月22日。一节密封的火车车厢离开纽约。",
-  },
-  {
-    startFrame: 150,
-    endFrame: 300,
-    text: "Destination: Jekyll Island, Georgia.",
-    translation: "目的地：佐治亚州的哲基尔岛。",
-  },
-  {
-    startFrame: 300,
-    endFrame: 450,
-    text: "Mission: Draft the Federal Reserve Act.",
-    translation: "任务：起草《联邦储备法案》。",
-  },
-  {
-    startFrame: 450,
-    endFrame: 600,
-    text: "Not a single journalist allowed within 50 miles.",
-    translation: "50英里范围内不允许任何记者出现。",
-  },
-  {
-    startFrame: 600,
-    endFrame: 750,
-    text: "The 7 men who met in secret:",
-    translation: "秘密会面的7个人：",
-  },
-  {
-    startFrame: 750,
-    endFrame: 900,
-    text: "Nelson Aldrich - Senator, Rockefeller's grandfather",
-    translation: "尼尔森·奥尔德里奇——参议员，洛克菲勒的外祖父",
-  },
-  {
-    startFrame: 900,
-    endFrame: 1050,
-    text: "Paul Warburg - Fed's chief architect, Rothschild's agent",
-    translation: "保罗·沃伯格——美联储总设计师，罗斯柴尔德代理人",
-  },
-  {
-    startFrame: 1050,
-    endFrame: 1230,
-    text: "Frank Vanderlip, Henry Davison, Charles Norton, Benjamin Strong, Piatt Andrew",
-    translation: "弗兰克·范德利普、亨利·戴维森、查尔斯·诺顿、本杰明·斯特朗、派亚特·安德鲁",
-  },
-  {
-    startFrame: 1230,
-    endFrame: 1410,
-    text: "9 days of secret meetings. The plan that would change America forever.",
-    translation: "9天的秘密会议。将永远改变美国的计划。",
-  },
-  {
-    startFrame: 1410,
-    endFrame: 1590,
-    text: "The name 'Federal Reserve' was chosen to hide the truth.",
-    translation: "选择'联邦储备'这个名字是为了掩盖真相。",
-  },
-  {
-    startFrame: 1590,
-    endFrame: 1800,
-    text: "It was a central bank in everything but name.",
-    translation: "除了名称之外，它具备一切中央银行的特征。",
-  },
+// Scene 0: 开场：威尔逊的忏悔
+export const scene01Subs: SubtitleEntry[] = [
+  { startFrame: 0, endFrame: 377, text: "一个伟大的工业国家被信用系统牢牢地控制着，这个信用系统高度地集中。这个国家的发展和我们所有的经济活动完全掌握在少数人手中。" },
+  { startFrame: 377, endFrame: 854, text: "我们已经陷于最糟糕的统治之下，一种世界上最完全、最彻底的控制。政府不再有自由的意见，不再拥有司法定罪权，而是在极少数拥有支配权的人的意见和强迫之下运作的政府。" },
+  { startFrame: 854, endFrame: 971, text: "——伍德罗·威尔逊，美国第28任总统" },
 ];
 
-// =============================================================================
-// Scene 2: WallStreetTycoonsScene - Wall Street's 7 Tycoons (frames 2700-4500, 60 seconds)
-// =============================================================================
-
-export const WallStreetTycoonsSceneSubtitles: SubtitleEntry[] = [
-  {
-    startFrame: 0,
-    endFrame: 180,
-    text: "Wall Street's 7 Tycoons controlled America.",
-    translation: "华尔街的7巨头控制着美国。",
-  },
-  {
-    startFrame: 180,
-    endFrame: 360,
-    text: "J.P. Morgan Group. Standard Oil City Bank Group.",
-    translation: "J.P.摩根集团。标准石油城市银行集团。",
-  },
-  {
-    startFrame: 360,
-    endFrame: 540,
-    text: '"The seven men control most of America\'s basic industries and resources."',
-    translation: '"这7个人控制着美国大部分基础工业和资源。"',
-  },
-  {
-    startFrame: 540,
-    endFrame: 720,
-    text: "— John Moody, Founder of Moody's, 1911",
-    translation: "—— 约翰·穆迪，穆迪投资评估体系创始人，1911年",
-  },
-  {
-    startFrame: 720,
-    endFrame: 930,
-    text: "All connected to the Rothschild family of London.",
-    translation: "所有人都与伦敦的罗斯柴尔德家族有联系。",
-  },
-  {
-    startFrame: 930,
-    endFrame: 1140,
-    text: "The invisible hand behind American finance.",
-    translation: "美国金融背后的看不见的手。",
-  },
-  {
-    startFrame: 1140,
-    endFrame: 1350,
-    text: "What appeared to be competition... was actually cooperation.",
-    translation: "表面上的竞争……实际上是合作。",
-  },
-  {
-    startFrame: 1350,
-    endFrame: 1560,
-    text: "Morgan, Rockefeller, Kuhn Loeb... all worked together.",
-    translation: "摩根、洛克菲勒、库恩雷波……都在一起工作。",
-  },
-  {
-    startFrame: 1560,
-    endFrame: 1830,
-    text: "Their real bosses sat in London and Paris.",
-    translation: "他们真正的老板坐在伦敦和巴黎。",
-  },
-  {
-    startFrame: 1830,
-    endFrame: 2040,
-    text: "The Rothschilds had waited nearly 100 years for this moment.",
-    translation: "罗斯柴尔德家族等待这一刻已近100年。",
-  },
-  {
-    startFrame: 2040,
-    endFrame: 2250,
-    text: "The Bank of England model... finally replicated in America.",
-    translation: "英格兰银行模式……终于在美国复制成功。",
-  },
+// Scene 1: 美联储真相揭示
+export const scene02Subs: SubtitleEntry[] = [
+  { startFrame: 0, endFrame: 436, text: "不算夸张地说，直到今天，中国可能也没有几个经济学家知道美联储其实是私有的中央银行。所谓'联邦储备银行'，其实既不是'联邦'，更没有'储备'，也算不上'银行'。" },
+  { startFrame: 436, endFrame: 847, text: "美国政府根本没有货币发行权！美国政府要想得到美元，就必须将美国人民的未来税收抵押给私有的美联储，由美联储来发行'美联储券'，这就是'美元'。" },
+  { startFrame: 847, endFrame: 1316, text: "1910年11月22日夜，纽约城外一节完全密封的火车车厢里，所有的车窗全部被窗帘严密地遮挡住，列车缓缓向南驶去。车厢里坐着的全是美国最重要的银行家。" },
+  { startFrame: 1316, endFrame: 1783, text: "佐治亚州的哲基尔岛是一群美国超级富豪拥有的冬季度假胜地。以J. P. 摩根为首的大腕们成立了一个打猎俱乐部，地球上1/6的财富聚集在这个俱乐部会员的手中。" },
+  { startFrame: 1783, endFrame: 2220, text: "这些重要人物来到这个偏僻的小岛，他们的主要任务是起草一份重要的文件：《联邦储备法案》。保罗·沃伯格是银行运作方面的高手，自然成为文件的主要起草者。" },
 ];
 
-// =============================================================================
-// Scene 3: MorganRiseScene - The Rise of Morgan Family (frames 4500-6300, 60 seconds)
-// =============================================================================
-
-export const MorganRiseSceneSubtitles: SubtitleEntry[] = [
-  {
-    startFrame: 0,
-    endFrame: 210,
-    text: "The Rise of the Morgan Family",
-    translation: "摩根家族的兴起",
-  },
-  {
-    startFrame: 210,
-    endFrame: 420,
-    text: "George Peabody arrived in London in 1835.",
-    translation: "1835年，乔治·皮博迪来到伦敦。",
-  },
-  {
-    startFrame: 420,
-    endFrame: 630,
-    text: "A dry goods merchant... who became a merchant banker.",
-    translation: "一个干货商人……成为了承兑银行家。",
-  },
-  {
-    startFrame: 630,
-    endFrame: 840,
-    text: "Then came an invitation from Nathan Rothschild himself.",
-    translation: "然后收到了内森·罗斯柴尔德本人的邀请。",
-  },
-  {
-    startFrame: 840,
-    endFrame: 1050,
-    text: "Peabody became Rothschild's secret PR agent in America.",
-    translation: "皮博迪成为罗斯柴尔德在美国的秘密公关代理人。",
-  },
-  {
-    startFrame: 1050,
-    endFrame: 1260,
-    text: "1857: The engineered crisis. The Bank of England's 'rescue'.",
-    translation: "1857年：人为制造的危机。英格兰银行的'救援'。",
-  },
-  {
-    startFrame: 1260,
-    endFrame: 1470,
-    text: "£80,000 'emergency credit'... at the perfect moment.",
-    translation: "80万英镑的'紧急信用额度'……在完美的时机。",
-  },
-  {
-    startFrame: 1470,
-    endFrame: 1680,
-    text: "Peabody bought distressed American bonds during panic.",
-    translation: "皮博迪在恐慌中大量买进被抛售的美国债券。",
-  },
-  {
-    startFrame: 1680,
-    endFrame: 1890,
-    text: "When economy recovered... he became supremely wealthy.",
-    translation: "当经济复苏后……他成为超级富豪。",
-  },
-  {
-    startFrame: 1890,
-    endFrame: 2100,
-    text: "Junius Morgan inherited it all. J.P. Morgan continued the legacy.",
-    translation: "朱尼厄斯·摩根继承了一切。J.P.摩根延续了这一传统。",
-  },
+// Scene 2: 华尔街七大巨头
+export const scene03Subs: SubtitleEntry[] = [
+  { startFrame: 0, endFrame: 548, text: "华尔街的7个人现在控制了美国大部分基础工业和资源。其中J. P. 摩根、詹姆斯·希尔、乔治·贝克属于摩根集团；约翰·洛克菲勒、威廉·洛克菲勒属于标准石油城市银行集团。" },
+  { startFrame: 548, endFrame: 1097, text: "摩根银行的前身是英国乔治·皮博迪公司。乔治·皮博迪被内森·罗斯柴尔德邀请做秘密公关代理人。在罗斯柴尔德家族策动的1857年经济危机中，乔治·皮博迪一举成为超级富豪。" },
+  { startFrame: 1097, endFrame: 1561, text: "老约翰·洛克菲勒在美国历史上是一个颇有争议的人物。自从得到克里夫兰国家城市银行的一批种子贷款后，他毫不留情地消灭竞争对手，最终完全垄断了美国石油行业。" },
+  { startFrame: 1561, endFrame: 1992, text: "罗斯柴尔德家族派出他们在美国最重要的金融战略家雅各布·希夫。希夫带来了洛克菲勒想都不敢想的空前支持，洛克菲勒很快就成了名副其实的'石油大王'。" },
 ];
 
-// =============================================================================
-// Scene 4: RockefellerEmpireScene - The Rockefeller Empire (frames 6300-8100, 60 seconds)
-// =============================================================================
-
-export const RockefellerEmpireSceneSubtitles: SubtitleEntry[] = [
-  {
-    startFrame: 0,
-    endFrame: 210,
-    text: "The Rockefeller Empire",
-    translation: "洛克菲勒帝国",
-  },
-  {
-    startFrame: 210,
-    endFrame: 420,
-    text: "1870: Standard Oil founded.",
-    translation: "1870年：标准石油公司成立。",
-  },
-  {
-    startFrame: 420,
-    endFrame: 630,
-    text: "Then came Jacob Schiff... Rothschild's agent.",
-    translation: "然后雅各布·希夫来了……罗斯柴尔德的代理人。",
-  },
-  {
-    startFrame: 630,
-    endFrame: 840,
-    text: "With Rothschild controlling 95% of American railways...",
-    translation: "罗斯柴尔德控制了美国95%的铁路运力……",
-  },
-  {
-    startFrame: 840,
-    endFrame: 1050,
-    text: "Schiff devised a railroad rebate scheme for Rockefeller.",
-    translation: "希夫为洛克菲勒设计了铁路运费折扣计划。",
-  },
-  {
-    startFrame: 1050,
-    endFrame: 1260,
-    text: "Competitors couldn't survive the discounted shipping.",
-    translation: "竞争对手无法在折扣运输下生存。",
-  },
-  {
-    startFrame: 1260,
-    endFrame: 1470,
-    text: "Rockefeller's tactics: Cash buyout offers, then price wars.",
-    translation: "洛克菲勒的策略：现金收购要约，然后价格战。",
-  },
-  {
-    startFrame: 1470,
-    endFrame: 1680,
-    text: "If that failed... violent sabotage. Arson. Assault.",
-    translation: "如果还不行……暴力破坏。纵火。袭击。",
-  },
-  {
-    startFrame: 1680,
-    endFrame: 1890,
-    text: "The Rockefellers were mere front men.",
-    translation: "洛克菲勒家族只是前台人物。",
-  },
-  {
-    startFrame: 1890,
-    endFrame: 2100,
-    text: "The real power behind them: The House of Rothschild.",
-    translation: "他们背后的真正力量：罗斯柴尔德家族。",
-  },
+// Scene 3: 摩根家族崛起
+export const scene04Subs: SubtitleEntry[] = [
+  { startFrame: 0, endFrame: 374, text: "摩根银行的前身是英国乔治·皮博迪公司。乔治·皮博迪原是美国巴尔的摩的一个干货商，在发了一些小财之后，于1835年来到英国伦敦闯世界。" },
+  { startFrame: 374, endFrame: 743, text: "乔治·皮博迪一生没有子嗣，庞大的产业无人继承。后来，朱尼厄斯的儿子J. P. 摩根接掌了公司，他将美国的分支改名为J. P. 摩根公司。" },
+  { startFrame: 743, endFrame: 1187, text: "1901年，J. P. 摩根以5亿美元的天价收购了卡内基的钢铁公司，并组建了世界上第一家市值超过10亿美元的巨无霸——美国钢铁公司。" },
+  { startFrame: 1187, endFrame: 1643, text: "1899年，J. P. 摩根已经被指派为罗斯柴尔德家族在美国利益的首席代理人。" },
 ];
 
-// =============================================================================
-// Scene 5: Panic1907Scene - 1907 Panic (frames 8100-9900, 60 seconds)
-// =============================================================================
-
-export const Panic1907SceneSubtitles: SubtitleEntry[] = [
-  {
-    startFrame: 0,
-    endFrame: 210,
-    text: "1907 Panic - The Precursor",
-    translation: "1907年恐慌——前奏",
-  },
-  {
-    startFrame: 210,
-    endFrame: 420,
-    text: "A panic scientifically engineered to create demand for central bank.",
-    translation: "一场科学设计的恐慌，为中央银行创造需求。",
-  },
-  {
-    startFrame: 420,
-    endFrame: 630,
-    text: "October 1907: Rumors spread. Knickerbocker Trust failing.",
-    translation: "1907年10月：谣言传播。尼克伯克信托公司即将破产。",
-  },
-  {
-    startFrame: 630,
-    endFrame: 840,
-    text: "Bank runs spread across New York. Stock exchange nearly closed.",
-    translation: "银行挤兑蔓延纽约。证交所几乎停盘。",
-  },
-  {
-    startFrame: 840,
-    endFrame: 1050,
-    text: "J.P. Morgan 'saves the day' with $25 million.",
-    translation: "J.P.摩根用2500万美元'拯救了局面'。",
-  },
-  {
-    startFrame: 1050,
-    endFrame: 1260,
-    text: "The real prize: Tennessee Coal and Iron Company.",
-    translation: "真正的奖品：田纳西矿业和制铁公司。",
-  },
-  {
-    startFrame: 1260,
-    endFrame: 1470,
-    text: "Value: $1 billion. Morgan's cost: $45 million.",
-    translation: "价值：10亿美元。摩根的成本：4500万美元。",
-  },
-  {
-    startFrame: 1470,
-    endFrame: 1680,
-    text: "A 2,000% return on investment.",
-    translation: "2000%的投资回报率。",
-  },
-  {
-    startFrame: 1680,
-    endFrame: 1800,
-    text: "Create the problem. Offer the solution. Acquire assets.",
-    translation: "制造问题。提供解决方案。收购资产。",
-  },
+// Scene 4: 洛克菲勒帝国
+export const scene05Subs: SubtitleEntry[] = [
+  { startFrame: 0, endFrame: 390, text: "老约翰·洛克菲勒在美国历史上是一个颇有争议的人物，被人们冠以'最冷酷无情的人'。他的名字自然和大名鼎鼎的标准石油公司密不可分。" },
+  { startFrame: 390, endFrame: 974, text: "自从得到克里夫兰国家城市银行的一批种子贷款后，他好像一下子找到了感觉，尤其是在恶意竞争方面展现出超乎常人的想象力。他毫不留情地消灭竞争对手，最终完全垄断了美国石油行业。" },
+  { startFrame: 974, endFrame: 1390, text: "罗斯柴尔德家族一直煞费苦心想控制日益强大的美国。洛克菲勒的所作所为，让罗斯柴尔德家族眼前一亮。" },
 ];
 
-// =============================================================================
-// Scene 6: GoldToFiatScene - From Gold Standard to Fiat Money (frames 9900-11700, 60 seconds)
-// =============================================================================
-
-export const GoldToFiatSceneSubtitles: SubtitleEntry[] = [
-  {
-    startFrame: 0,
-    endFrame: 210,
-    text: "From Gold Standard to Fiat Money",
-    translation: "从金本位到法定货币",
-  },
-  {
-    startFrame: 210,
-    endFrame: 420,
-    text: "The Great Shift in banker worldview.",
-    translation: "银行家世界观的大转变。",
-  },
-  {
-    startFrame: 420,
-    endFrame: 630,
-    text: "Old System: Money backed by gold. Limited supply.",
-    translation: "旧系统：货币由黄金背书。供应有限。",
-  },
-  {
-    startFrame: 630,
-    endFrame: 840,
-    text: "Bankers opposed inflation. It hurt their interest income.",
-    translation: "银行家反对通货膨胀。它损害了他们的利息收入。",
-  },
-  {
-    startFrame: 840,
-    endFrame: 1050,
-    text: "New System: Money backed by nothing. Unlimited supply.",
-    translation: "新系统：货币没有任何背书。无限供应。",
-  },
-  {
-    startFrame: 1050,
-    endFrame: 1260,
-    text: "Bankers CREATE inflation to steal wealth.",
-    translation: "银行家制造通货膨胀来窃取财富。",
-  },
-  {
-    startFrame: 1260,
-    endFrame: 1470,
-    text: "Inflation is MORE profitable than interest!",
-    translation: "通货膨胀比利息更有利可图！",
-  },
-  {
-    startFrame: 1470,
-    endFrame: 1680,
-    text: '"By this method, the government can secretly confiscate wealth."',
-    translation: '"用这个办法，政府可以秘密地没收人民的财富。"',
-  },
-  {
-    startFrame: 1680,
-    endFrame: 1800,
-    text: "— John Maynard Keynes",
-    translation: "—— 约翰·梅纳德·凯恩斯",
-  },
+// Scene 5: 1907年银行危机
+export const scene06Subs: SubtitleEntry[] = [
+  { startFrame: 0, endFrame: 428, text: "为了扭转对美国银行家不利的态势，一场巨大的金融危机开始被构想出来。1907年1月，保罗发表了题为'我们银行系统的缺点和需要'的文章。" },
+  { startFrame: 428, endFrame: 834, text: "雅各布·希夫在纽约商会宣称：除非我们拥有一个足以控制信用资源的中央银行，否则我们将经历一场前所未有而且影响深远的金融危机。" },
+  { startFrame: 834, endFrame: 1260, text: "1907年10月，纽约突然开始广泛传言美国第三大信托公司尼克伯克即将破产。惊恐万状的存款市民在各个信托公司门口彻夜排队等候取出他们的存款。" },
+  { startFrame: 1260, endFrame: 1677, text: "摩根此时以救世主的面目出现。他用4500万美元的超低价吃下田纳西矿业和制铁公司，而该公司的潜在价值按照约翰·穆迪的评估，至少在10亿美元左右。" },
 ];
 
-// =============================================================================
-// Scene 7: Election1912Scene - The 1912 Election (frames 11700-13500, 60 seconds)
-// =============================================================================
-
-export const Election1912SceneSubtitles: SubtitleEntry[] = [
-  {
-    startFrame: 0,
-    endFrame: 210,
-    text: "The 1912 Election",
-    translation: "1912年大选",
-  },
-  {
-    startFrame: 210,
-    endFrame: 420,
-    text: "Before election: Wilson fiercely opposed banking monopoly.",
-    translation: "大选前：威尔逊强烈反对银行垄断。",
-  },
-  {
-    startFrame: 420,
-    endFrame: 630,
-    text: "Refused to share stage with Senator Aldrich.",
-    translation: "拒绝与奥尔德里奇参议员同台。",
-  },
-  {
-    startFrame: 630,
-    endFrame: 840,
-    text: "Bankers' strategy: Fund Wilson through Cleveland Dodge.",
-    translation: "银行家的策略：通过克里夫兰·道奇资助威尔逊。",
-  },
-  {
-    startFrame: 840,
-    endFrame: 1050,
-    text: "Run Roosevelt to split Republican vote.",
-    translation: "让老罗斯福参选来分散共和党选票。",
-  },
-  {
-    startFrame: 1050,
-    endFrame: 1260,
-    text: "Wilson wins with only 41.8% of popular vote.",
-    translation: "威尔逊仅以41.8%的普选票获胜。",
-  },
-  {
-    startFrame: 1260,
-    endFrame: 1470,
-    text: '"The governor of Princeton will become Governor of New Jersey."',
-    translation: '"普林斯顿的校长将会成为新泽西州的州长。"',
-  },
-  {
-    startFrame: 1470,
-    endFrame: 1680,
-    text: '"He will not complete his term."',
-    translation: '"他不会完成他的任期。"',
-  },
-  {
-    startFrame: 1680,
-    endFrame: 1800,
-    text: "— Rabbi Wise, 1910",
-    translation: "—— 拉比·怀斯，1910年",
-  },
+// Scene 6: 从金本位到法定货币
+export const scene07Subs: SubtitleEntry[] = [
+  { startFrame: 0, endFrame: 471, text: "19世纪末以来，国际银行家对金钱的认识再一次实现重大飞跃。原有的英格兰银行模式，即以国债作为抵押来发行货币，财富积累得太慢。" },
+  { startFrame: 471, endFrame: 977, text: "法定货币彻底摆脱了黄金和白银对贷款总量的刚性制约。当银行家逐渐明白通过无限制地增加货币供应来获得的收益远比通货膨胀带来的贷款利息损失要大得多时，他们随即成为法定货币最热烈的拥护者。" },
+  { startFrame: 977, endFrame: 1458, text: "凯恩斯就通货膨胀的评价可谓一针见血：用这个办法，政府可以秘密和难以察觉地没收人民的财富，100万人中也很难有一个人能够发现这种偷窃行为。" },
 ];
 
-// =============================================================================
-// Scene 8: PlanBScene - Plan B: Two Schemes (frames 13500-15300, 60 seconds)
-// =============================================================================
-
-export const PlanBSceneSubtitles: SubtitleEntry[] = [
-  {
-    startFrame: 0,
-    endFrame: 210,
-    text: "Plan B - The Two Schemes",
-    translation: "B计划——两套方案",
-  },
-  {
-    startFrame: 210,
-    endFrame: 420,
-    text: "Plan A: Aldrich Plan. Openly Republican.",
-    translation: "A计划：奥尔德里奇计划。公开支持共和党。",
-  },
-  {
-    startFrame: 420,
-    endFrame: 630,
-    text: "Deliberately unpopular to draw opposition fire.",
-    translation: "故意不受欢迎，以吸引反对派的火力。",
-  },
-  {
-    startFrame: 630,
-    endFrame: 840,
-    text: "Plan B: Glass-Owen Act. 'Democratic opposition'.",
-    translation: "B计划：格拉斯-欧文法案。'民主党的反对'。",
-  },
-  {
-    startFrame: 840,
-    endFrame: 1050,
-    text: "Promised to break banking monopoly.",
-    translation: "承诺打破银行垄断。",
-  },
-  {
-    startFrame: 1050,
-    endFrame: 1260,
-    text: "Both plans created by the same bankers!",
-    translation: "两份计划都由同一批银行家创造！",
-  },
-  {
-    startFrame: 1260,
-    endFrame: 1470,
-    text: "Republicans oppose 'Democratic' bill.",
-    translation: "共和党人反对'民主党的'法案。",
-  },
-  {
-    startFrame: 1470,
-    endFrame: 1680,
-    text: "Democrats oppose 'Republican' bill.",
-    translation: "民主党人反对'共和党的'法案。",
-  },
-  {
-    startFrame: 1680,
-    endFrame: 1800,
-    text: "Bankers secretly support BOTH.",
-    translation: "银行家秘密支持双方。",
-  },
+// Scene 7: 1912年大选
+export const scene08Subs: SubtitleEntry[] = [
+  { startFrame: 0, endFrame: 505, text: "普林斯顿大学校长伍德罗·威尔逊是一位著名的反对金融垄断的活跃分子。银行家们正是看中了威尔逊的单纯而容易被利用的特点，准备在他身上投下重金。" },
+  { startFrame: 505, endFrame: 985, text: "纽约国家城市银行的董事克里夫兰·道奇是威尔逊在普林斯顿的大学同学。在华尔街大佬们的扶持下，威尔逊于1910年当选新泽西州的州长。" },
+  { startFrame: 985, endFrame: 1416, text: "威尔逊挑战的是时任总统塔夫特。正当踌躇满志准备连任的塔夫特表示不准备对奥尔德里奇法案开绿灯时，老罗斯福突然横刀杀出，严重侵蚀塔夫特的选票。" },
+  { startFrame: 1416, endFrame: 1884, text: "三个竞选人背后全都是银行家在支持，只不过银行家在三个人中间暗地偏向最具可控制性的威尔逊。老罗斯福果然重创塔夫特，威尔逊顺利当选。" },
 ];
 
-// =============================================================================
-// Scene 9: ActPassesScene - December 1913: The Act Passes (frames 15300-17100, 60 seconds)
-// =============================================================================
-
-export const ActPassesSceneSubtitles: SubtitleEntry[] = [
-  {
-    startFrame: 0,
-    endFrame: 210,
-    text: "December 1913. The Act Passes.",
-    translation: "1913年12月。法案通过。",
-  },
-  {
-    startFrame: 210,
-    endFrame: 420,
-    text: "December 20, Saturday: Conference meets all day",
-    translation: "12月20日，星期六：会议全天进行",
-  },
-  {
-    startFrame: 420,
-    endFrame: 630,
-    text: "December 21, Sunday: Continues meeting (unprecedented)",
-    translation: "12月21日，星期日：继续会议（史无前例）",
-  },
-  {
-    startFrame: 630,
-    endFrame: 840,
-    text: "December 22, Monday: 1:30 AM - Differences resolved",
-    translation: "12月22日，星期一：凌晨1点30分——分歧解决",
-  },
-  {
-    startFrame: 840,
-    endFrame: 1050,
-    text: "4:30 AM - Final document sent to print",
-    translation: "凌晨4点30分——最终文件送交打印",
-  },
-  {
-    startFrame: 1050,
-    endFrame: 1260,
-    text: "7:00 AM - Final proofread. 2:00 PM - On desks",
-    translation: "早上7点——最终校稿。下午2点——放在桌上",
-  },
-  {
-    startFrame: 1260,
-    endFrame: 1470,
-    text: "4:00 PM - Session begins. 6:00 PM - Most at dinner",
-    translation: "下午4点——会议开始。下午6点——大多数人去吃晚饭",
-  },
-  {
-    startFrame: 1470,
-    endFrame: 1680,
-    text: "7:30 PM - 20-minute speech, then debate",
-    translation: "晚上7点30分——20分钟演讲，然后辩论",
-  },
-  {
-    startFrame: 1680,
-    endFrame: 1890,
-    text: "11:00 PM - House passes: 298 to 60",
-    translation: "晚上11点——众议院通过：298对60票",
-  },
-  {
-    startFrame: 1890,
-    endFrame: 2100,
-    text: "December 23: Senate passes: 43 to 25 (27 absent!)",
-    translation: "12月23日：参议院通过：43对25票（27人缺席！）",
-  },
-  {
-    startFrame: 2100,
-    endFrame: 2310,
-    text: "Wilson signs within ONE HOUR",
-    translation: "威尔逊在一小时内签署",
-  },
-  {
-    startFrame: 2310,
-    endFrame: 2400,
-    text: "The Crime: Passed when opponents away for Christmas",
-    translation: "罪行：当反对者去过圣诞节不在时通过",
-  },
+// Scene 8: B计划
+export const scene09Subs: SubtitleEntry[] = [
+  { startFrame: 0, endFrame: 391, text: "银行巨头们在哲基尔岛的策划十分机密，他们准备了两份计划。第一份由奥尔德里奇参议员主持，负责佯攻。另一份B计划才是真正的主攻方向，这就是后来的《美联储法案》。" },
+  { startFrame: 391, endFrame: 812, text: "1913年12月20日星期六的晚上，参众两院召开联席会议。保罗·沃伯格瞧准了这一千载难逢的时机，发动了一场闪电战。21日星期天全天继续开会，不解决问题决不休会。" },
+  { startFrame: 812, endFrame: 1216, text: "22日凌晨4点30分，最后文件被送交打印。下午2点，打印好的文件放在了议员的办公桌上。下午6点，最后联席会议报告提交，此时大多数议员已经去吃晚饭了。" },
+  { startFrame: 1216, endFrame: 1583, text: "23日，圣诞节前两天，参议院表决以43对25票通过了《美联储法案》。威尔逊总统在参议院通过法案仅一小时，就正式签署了该法案。华尔街和伦敦金融城顿时一片欢腾。" },
 ];
 
-// =============================================================================
-// Scene 10: WhoOwnsFedScene - Who Owns The Fed (frames 17100-18900, 60 seconds)
-// =============================================================================
-
-export const WhoOwnsFedSceneSubtitles: SubtitleEntry[] = [
-  {
-    startFrame: 0,
-    endFrame: 210,
-    text: "Who Owns The Fed?",
-    translation: "谁拥有美联储？",
-  },
-  {
-    startFrame: 210,
-    endFrame: 420,
-    text: "Federal Reserve Bank of New York: 203,053 shares total",
-    translation: "美联储纽约银行：总共203,053股",
-  },
-  {
-    startFrame: 420,
-    endFrame: 630,
-    text: "Major shareholders in 1914:",
-    translation: "1914年主要股东：",
-  },
-  {
-    startFrame: 630,
-    endFrame: 840,
-    text: "National City Bank (Rockefeller/Kuhn Loeb) - 30,000 shares",
-    translation: "纽约国家城市银行（洛克菲勒/库恩雷波）——30,000股",
-  },
-  {
-    startFrame: 840,
-    endFrame: 1050,
-    text: "First National Bank (J.P. Morgan) - 15,000 shares",
-    translation: "纽约第一国家银行（J.P.摩根）——15,000股",
-  },
-  {
-    startFrame: 1050,
-    endFrame: 1260,
-    text: "National Bank of Commerce (Warburg) - 21,000 shares",
-    translation: "纽约国家商业银行（沃伯格）——21,000股",
-  },
-  {
-    startFrame: 1260,
-    endFrame: 1470,
-    text: "These 6 banks: 40% ownership (53% by 1983)",
-    translation: "这6家银行：40%所有权（到1983年为53%）",
-  },
-  {
-    startFrame: 1470,
-    endFrame: 1680,
-    text: "The Fed is: NOT federal. NO reserves. NOT a bank.",
-    translation: "美联储是：不是联邦的。没有储备。不是银行。",
-  },
-  {
-    startFrame: 1680,
-    endFrame: 1890,
-    text: "Every Federal Reserve Note = Debt owed to the Fed",
-    translation: "每一张美联储券 = 欠美联储的债务",
-  },
-  {
-    startFrame: 1890,
-    endFrame: 2100,
-    text: "Private credit monopoly that issues America's money.",
-    translation: "发行美国货币的私人信用垄断组织。",
-  },
+// Scene 9: 法案通过
+export const scene10Subs: SubtitleEntry[] = [
+  { startFrame: 0, endFrame: 391, text: "林德伯格议员在这一天对众议院发表演讲：这个法案授权了地球上最大的信用。当总统签署这个法案后，金钱权力这个看不见的政府将被合法化。" },
+  { startFrame: 391, endFrame: 812, text: "这个金钱权力将能够最终控制国会。国会最大的犯罪就是它的货币系统法案。两党的头头和秘密会议再一次剥夺了人民从自己的政府得到益处的机会。" },
+  { startFrame: 812, endFrame: 1216, text: "经过与美国政府100多年的激烈较量，国际银行家终于达到了他们的目的，彻底控制了美国的国家货币发行权，英格兰银行的模式终于在美国被复制成功了。" },
+  { startFrame: 1216, endFrame: 1583, text: "1913年12月23日，美国民选政府终于被金钱权力所颠覆。一个更加隐蔽、更加复杂的金融帝国，从此开始主宰美国的命运。" },
 ];
 
-// =============================================================================
-// Scene 11: HiddenControlScene - The Hidden Control (frames 18900-20700, 60 seconds)
-// =============================================================================
-
-export const HiddenControlSceneSubtitles: SubtitleEntry[] = [
-  {
-    startFrame: 0,
-    endFrame: 210,
-    text: "The Hidden Control",
-    translation: "隐藏的控制",
-  },
-  {
-    startFrame: 210,
-    endFrame: 420,
-    text: "PUBLIC VIEW: President appoints → Senate confirms → Board",
-    translation: "公众认为：总统任命 → 参议院确认 → 董事会",
-  },
-  {
-    startFrame: 420,
-    endFrame: 630,
-    text: "REALITY: 12 Regional Bank Directors → Federal Advisory Council",
-    translation: "现实：12家地区银行董事 → 联邦咨询委员会",
-  },
-  {
-    startFrame: 630,
-    endFrame: 840,
-    text: "Council 'advises' → Board. Board always obeys.",
-    translation: "委员会'建议' → 董事会。董事会总是服从。",
-  },
-  {
-    startFrame: 840,
-    endFrame: 1050,
-    text: "5 Wall Street giants dominate the Council.",
-    translation: "华尔街5巨头主导咨询委员会。",
-  },
-  {
-    startFrame: 1050,
-    endFrame: 1260,
-    text: "Who can say 'no' to men who control your bank's survival?",
-    translation: "谁能对控制你银行生存的人说'不'？",
-  },
-  {
-    startFrame: 1260,
-    endFrame: 1470,
-    text: "Paul Warburg's masterpiece: A hidden remote control device.",
-    translation: "保罗·沃伯格的杰作：一个隐藏的遥控装置。",
-  },
-  {
-    startFrame: 1470,
-    endFrame: 1680,
-    text: "Perfect illusion of democracy. Complete control.",
-    translation: "完美的民主幻觉。完全的控制。",
-  },
-  {
-    startFrame: 1680,
-    endFrame: 1800,
-    text: "The Federal Advisory Council: Unknown to most Americans.",
-    translation: "联邦咨询委员会：大多数美国人不知道。",
-  },
+// Scene 10: 谁拥有美联储
+export const scene11Subs: SubtitleEntry[] = [
+  { startFrame: 0, endFrame: 480, text: "许多年以来，究竟谁拥有美联储一直是一个讳莫如深的话题。美联储对股东情况严守秘密。这个秘密终于被《美联储的秘密》一书的作者尤斯塔斯经过近半个世纪的研究发现了。" },
+  { startFrame: 480, endFrame: 911, text: "美联储纽约银行是美联储系统的实际控制者。花旗银行拥有近1/4的股份，它实际上决定着美联储主席的候选人，美国总统的任命只是一枚橡皮图章而已。" },
+  { startFrame: 911, endFrame: 1379, text: "这6家银行共持有40%的美联储纽约银行股份，到1983年，他们总共拥有53%的股份。这些华尔街的银行家都与伦敦城的罗斯柴尔德家族保持着密切联系。" },
 ];
 
-// =============================================================================
-// Scene 12: WilsonRealizationScene - Wilson's Realization (frames 20700-22500, 60 seconds)
-// =============================================================================
-
-export const WilsonRealizationSceneSubtitles: SubtitleEntry[] = [
-  {
-    startFrame: 0,
-    endFrame: 210,
-    text: "Wilson's Realization",
-    translation: "威尔逊的醒悟",
-  },
-  {
-    startFrame: 210,
-    endFrame: 420,
-    text: "Before he died, Woodrow Wilson admitted:",
-    translation: "威尔逊总统去世前承认：",
-  },
-  {
-    startFrame: 420,
-    endFrame: 630,
-    text: '"I have unwittingly ruined my country."',
-    translation: '"我在无意之中摧毁了我的国家。"',
-  },
-  {
-    startFrame: 630,
-    endFrame: 840,
-    text: "He realized he had been deceived.",
-    translation: "他意识到自己被欺骗了。",
-  },
-  {
-    startFrame: 840,
-    endFrame: 1050,
-    text: "The Federal Reserve was NOT what he believed.",
-    translation: "美联储不是他所相信的那样。",
-  },
-  {
-    startFrame: 1050,
-    endFrame: 1260,
-    text: "The 'people's bank' was a private monopoly.",
-    translation: "'人民的银行'是一个私人垄断组织。",
-  },
-  {
-    startFrame: 1260,
-    endFrame: 1470,
-    text: "Government does NOT issue dollars.",
-    translation: "政府不发行美元。",
-  },
-  {
-    startFrame: 1470,
-    endFrame: 1680,
-    text: "Every dollar in your pocket = debt + interest owed to bankers.",
-    translation: "你口袋里的每一美元 = 欠银行家的债务 + 利息。",
-  },
+// Scene 11: 隐形控制
+export const scene12Subs: SubtitleEntry[] = [
+  { startFrame: 0, endFrame: 366, text: "联邦咨询委员会是保罗·沃伯格精心设计的一个秘密的遥控装置，以此操控美联储董事会。几乎没有人注意过这个机构和它的运作。" },
+  { startFrame: 366, endFrame: 776, text: "华尔街5巨头每年4次不辞劳苦地跑到华盛顿，不会是仅仅为了和联储的几位董事喝喝咖啡。他们事先知道什么时候制造恐慌来创造对他们最有利的情况。" },
+  { startFrame: 776, endFrame: 1104, text: "他们同样知道什么时候停止恐慌。当他们控制了金融的时候，通货膨胀和通货紧缩在实现他们的目的方面同样有效率。" },
 ];
 
-// =============================================================================
-// Scene 13: SummaryScene - Episode Summary (frames 22500-24300, 30 seconds)
-// =============================================================================
-
-export const SummarySceneSubtitles: SubtitleEntry[] = [
-  {
-    startFrame: 0,
-    endFrame: 210,
-    text: "Episode 04: Key Takeaways",
-    translation: "第4集：关键要点",
-  },
-  {
-    startFrame: 210,
-    endFrame: 420,
-    text: "1. The Federal Reserve Act was drafted in secret on Jekyll Island",
-    translation: "1. 《美联储法案》在哲基尔岛秘密起草",
-  },
-  {
-    startFrame: 420,
-    endFrame: 630,
-    text: "2. 7 Wall Street tycoons conspired with European bankers",
-    translation: "2. 7位华尔街巨头与欧洲银行家密谋",
-  },
-  {
-    startFrame: 630,
-    endFrame: 840,
-    text: "3. The 1907 panic was engineered to create demand",
-    translation: "3. 1907年恐慌是人为制造的",
-  },
-  {
-    startFrame: 840,
-    endFrame: 900,
-    text: "The Fed is privately owned, NOT federal.",
-    translation: "美联储是私有的，不是联邦的。",
-  },
+// Scene 12: 威尔逊的觉醒
+export const scene13Subs: SubtitleEntry[] = [
+  { startFrame: 0, endFrame: 310, text: "在威尔逊总统去世之前，他承认自己在美联储的问题上是被'欺骗'了，他内疚地表示：'我在无意之中摧毁了我的国家。'" },
+  { startFrame: 310, endFrame: 629, text: "从1913年签署法案，到1919年表达后悔，仅仅过去了6年。一个国家的命运，就这样被金钱权力所改变。" },
+  { startFrame: 629, endFrame: 985, text: "当1914年10月25日美联储正式开始运作时，第一次世界大战爆发了，又一个完美的时间'巧合'，美联储的股东们注定要大发一笔横财了！" },
 ];
 
-// =============================================================================
-// Scene 14: WilsonQuoteScene - Additional Wilson Quote (frames 24300-25200, 30 seconds)
-// =============================================================================
-
-export const WilsonQuoteSceneSubtitles: SubtitleEntry[] = [
-  {
-    startFrame: 0,
-    endFrame: 150,
-    text: '"I have unwittingly ruined my country."',
-    translation: '"我在无意之中摧毁了我的国家。"',
-  },
+// Scene 13: 总结
+export const scene14Subs: SubtitleEntry[] = [
+  { startFrame: 0, endFrame: 344, text: "华尔街7位大腕是建立美联储的真正幕后推动者，他们与欧洲罗斯柴尔德家族的秘密协调，最终建立了英格兰银行在美国的翻版。" },
+  { startFrame: 344, endFrame: 719, text: "银行家通过美联储操纵着美国金融命脉、工商业命脉和政治命脉。1913年12月23日，美国民选政府终于被金钱权力所颠覆。" },
 ];
 
-// =============================================================================
-// Combined Episode 04 Subtitles (Backward Compatibility)
-// =============================================================================
-
-/**
- * Combined episode subtitles with absolute frame offsets.
- * This array maintains backward compatibility with the old format.
- */
 export const episode04Subtitles: SubtitleEntry[] = [
-  // Scene 0: OpeningScene (frames 0-900)
-  ...OpeningSceneSubtitles.map((sub) => ({
-    ...sub,
-    startFrame: sub.startFrame + 0,
-    endFrame: sub.endFrame + 0,
+  ...scene01Subs.map((s) => ({
+    ...s,
+    startFrame: s.startFrame + SCENE_OFFSETS[0],
+    endFrame: s.endFrame + SCENE_OFFSETS[0],
   })),
-  {
-    startFrame: 900,
-    endFrame: 1050,
-    text: '"I have unwittingly ruined my country."',
-    translation: '"我在无意之中摧毁了我的国家。"',
-  },
-
-  // Scene 1: JekyllIslandScene (frames 1050-2850)
-  ...JekyllIslandSceneSubtitles.map((sub) => ({
-    ...sub,
-    startFrame: sub.startFrame + 1050,
-    endFrame: sub.endFrame + 1050,
+  ...scene02Subs.map((s) => ({
+    ...s,
+    startFrame: s.startFrame + SCENE_OFFSETS[1],
+    endFrame: s.endFrame + SCENE_OFFSETS[1],
   })),
-
-  // Scene 2: WallStreetTycoonsScene (frames 2850-5100)
-  ...WallStreetTycoonsSceneSubtitles.map((sub) => ({
-    ...sub,
-    startFrame: sub.startFrame + 2850,
-    endFrame: sub.endFrame + 2850,
+  ...scene03Subs.map((s) => ({
+    ...s,
+    startFrame: s.startFrame + SCENE_OFFSETS[2],
+    endFrame: s.endFrame + SCENE_OFFSETS[2],
   })),
-
-  // Scene 3: MorganRiseScene (frames 5100-7200)
-  ...MorganRiseSceneSubtitles.map((sub) => ({
-    ...sub,
-    startFrame: sub.startFrame + 5100,
-    endFrame: sub.endFrame + 5100,
+  ...scene04Subs.map((s) => ({
+    ...s,
+    startFrame: s.startFrame + SCENE_OFFSETS[3],
+    endFrame: s.endFrame + SCENE_OFFSETS[3],
   })),
-
-  // Scene 4: RockefellerEmpireScene (frames 7200-9300)
-  ...RockefellerEmpireSceneSubtitles.map((sub) => ({
-    ...sub,
-    startFrame: sub.startFrame + 7200,
-    endFrame: sub.endFrame + 7200,
+  ...scene05Subs.map((s) => ({
+    ...s,
+    startFrame: s.startFrame + SCENE_OFFSETS[4],
+    endFrame: s.endFrame + SCENE_OFFSETS[4],
   })),
-
-  // Scene 5: Panic1907Scene (frames 9300-11100)
-  ...Panic1907SceneSubtitles.map((sub) => ({
-    ...sub,
-    startFrame: sub.startFrame + 9300,
-    endFrame: sub.endFrame + 9300,
+  ...scene06Subs.map((s) => ({
+    ...s,
+    startFrame: s.startFrame + SCENE_OFFSETS[5],
+    endFrame: s.endFrame + SCENE_OFFSETS[5],
   })),
-
-  // Scene 6: GoldToFiatScene (frames 11100-12900)
-  ...GoldToFiatSceneSubtitles.map((sub) => ({
-    ...sub,
-    startFrame: sub.startFrame + 11100,
-    endFrame: sub.endFrame + 11100,
+  ...scene07Subs.map((s) => ({
+    ...s,
+    startFrame: s.startFrame + SCENE_OFFSETS[6],
+    endFrame: s.endFrame + SCENE_OFFSETS[6],
   })),
-
-  // Scene 7: Election1912Scene (frames 12900-14700)
-  ...Election1912SceneSubtitles.map((sub) => ({
-    ...sub,
-    startFrame: sub.startFrame + 12900,
-    endFrame: sub.endFrame + 12900,
+  ...scene08Subs.map((s) => ({
+    ...s,
+    startFrame: s.startFrame + SCENE_OFFSETS[7],
+    endFrame: s.endFrame + SCENE_OFFSETS[7],
   })),
-
-  // Scene 8: PlanBScene (frames 14700-16500)
-  ...PlanBSceneSubtitles.map((sub) => ({
-    ...sub,
-    startFrame: sub.startFrame + 14700,
-    endFrame: sub.endFrame + 14700,
+  ...scene09Subs.map((s) => ({
+    ...s,
+    startFrame: s.startFrame + SCENE_OFFSETS[8],
+    endFrame: s.endFrame + SCENE_OFFSETS[8],
   })),
-
-  // Scene 9: ActPassesScene (frames 16500-18900)
-  ...ActPassesSceneSubtitles.map((sub) => ({
-    ...sub,
-    startFrame: sub.startFrame + 16500,
-    endFrame: sub.endFrame + 16500,
+  ...scene10Subs.map((s) => ({
+    ...s,
+    startFrame: s.startFrame + SCENE_OFFSETS[9],
+    endFrame: s.endFrame + SCENE_OFFSETS[9],
   })),
-
-  // Scene 10: WhoOwnsFedScene (frames 18900-21000)
-  ...WhoOwnsFedSceneSubtitles.map((sub) => ({
-    ...sub,
-    startFrame: sub.startFrame + 18900,
-    endFrame: sub.endFrame + 18900,
+  ...scene11Subs.map((s) => ({
+    ...s,
+    startFrame: s.startFrame + SCENE_OFFSETS[10],
+    endFrame: s.endFrame + SCENE_OFFSETS[10],
   })),
-
-  // Scene 11: HiddenControlScene (frames 21000-22800)
-  ...HiddenControlSceneSubtitles.map((sub) => ({
-    ...sub,
-    startFrame: sub.startFrame + 21000,
-    endFrame: sub.endFrame + 21000,
+  ...scene12Subs.map((s) => ({
+    ...s,
+    startFrame: s.startFrame + SCENE_OFFSETS[11],
+    endFrame: s.endFrame + SCENE_OFFSETS[11],
   })),
-
-  // Scene 12: WilsonRealizationScene (frames 22800-24300)
-  ...WilsonRealizationSceneSubtitles.map((sub) => ({
-    ...sub,
-    startFrame: sub.startFrame + 22800,
-    endFrame: sub.endFrame + 22800,
+  ...scene13Subs.map((s) => ({
+    ...s,
+    startFrame: s.startFrame + SCENE_OFFSETS[12],
+    endFrame: s.endFrame + SCENE_OFFSETS[12],
   })),
-
-  // Scene 13: SummaryScene (frames 24300-25200)
-  ...SummarySceneSubtitles.map((sub) => ({
-    ...sub,
-    startFrame: sub.startFrame + 24300,
-    endFrame: sub.endFrame + 24300,
+  ...scene14Subs.map((s) => ({
+    ...s,
+    startFrame: s.startFrame + SCENE_OFFSETS[13],
+    endFrame: s.endFrame + SCENE_OFFSETS[13],
   })),
 ];
 
-// =============================================================================
-// Scene Duration Constants (for reference)
-// =============================================================================
+export default episode04Subtitles;
 
-/**
- * Scene durations in frames (30 fps)
- * Each scene is approximately 60 seconds (1800 frames) except:
- * - OpeningScene: 30 seconds (900 frames)
- * - SummaryScene: 30 seconds (900 frames)
- */
-export const EPISODE_04_SCENE_DURATIONS = {
-  OpeningScene: 900,           // 30s
-  JekyllIslandScene: 1800,      // 60s
-  WallStreetTycoonsScene: 1800, // 60s
-  MorganRiseScene: 1800,        // 60s
-  RockefellerEmpireScene: 1800, // 60s
-  Panic1907Scene: 1800,        // 60s
-  GoldToFiatScene: 1800,       // 60s
-  Election1912Scene: 1800,     // 60s
-  PlanBScene: 1800,            // 60s
-  ActPassesScene: 2400,        // 80s
-  WhoOwnsFedScene: 2100,       // 70s
-  HiddenControlScene: 1800,     // 60s
-  WilsonRealizationScene: 1680, // 56s
-  SummaryScene: 900,            // 30s
-} as const;
-
-// =============================================================================
-// Export All Scene Subtitles
-// =============================================================================
-
-/**
- * All scene subtitle arrays for direct import
- */
-export const episode04SceneSubtitles = {
-  OpeningScene: OpeningSceneSubtitles,
-  JekyllIslandScene: JekyllIslandSceneSubtitles,
-  WallStreetTycoonsScene: WallStreetTycoonsSceneSubtitles,
-  MorganRiseScene: MorganRiseSceneSubtitles,
-  RockefellerEmpireScene: RockefellerEmpireSceneSubtitles,
-  Panic1907Scene: Panic1907SceneSubtitles,
-  GoldToFiatScene: GoldToFiatSceneSubtitles,
-  Election1912Scene: Election1912SceneSubtitles,
-  PlanBScene: PlanBSceneSubtitles,
-  ActPassesScene: ActPassesSceneSubtitles,
-  WhoOwnsFedScene: WhoOwnsFedSceneSubtitles,
-  HiddenControlScene: HiddenControlSceneSubtitles,
-  WilsonRealizationScene: WilsonRealizationSceneSubtitles,
-  SummaryScene: SummarySceneSubtitles,
-  WilsonQuoteScene: WilsonQuoteSceneSubtitles,
-} as const;
+// Backward compatibility
+export const OpeningSceneSubtitles = scene01Subs;
+export const JekyllIslandSceneSubtitles = scene02Subs;
+export const WallStreetTycoonsSceneSubtitles = scene03Subs;
+export const MorganRiseSceneSubtitles = scene04Subs;
+export const RockefellerEmpireSceneSubtitles = scene05Subs;
+export const Panic1907SceneSubtitles = scene06Subs;
+export const GoldToFiatSceneSubtitles = scene07Subs;
+export const Election1912SceneSubtitles = scene08Subs;
+export const PlanBSceneSubtitles = scene09Subs;
+export const ActPassesSceneSubtitles = scene10Subs;
+export const WhoOwnsFedSceneSubtitles = scene11Subs;
+export const HiddenControlSceneSubtitles = scene12Subs;
+export const WilsonRealizationSceneSubtitles = scene13Subs;
+export const SummarySceneSubtitles = scene14Subs;
